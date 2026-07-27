@@ -4,6 +4,7 @@ import path from 'node:path'
 import test from 'node:test'
 import { fileURLToPath } from 'node:url'
 import { createServer } from 'vite'
+import { ref } from 'vue'
 
 const rendererDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const publicDir = path.join(rendererDir, 'public')
@@ -45,6 +46,43 @@ test('parses Mercenary Warrant details and a complete copied item', async () => 
     await Data.init('en')
     const { parseClipboard } = await vite.ssrLoadModule('/src/parser/index.ts')
     const { parseMercenaryWarrantDetails } = await vite.ssrLoadModule('/src/parser/mercenary-warrant.ts')
+    const { MERCENARY_BUILD_SKILL_IDS } = await vite.ssrLoadModule('/src/assets/data/mercenary-build-skills.ts')
+    const { selectMercenaryStat } = await vite.ssrLoadModule('/src/web/price-check/filters/mercenary-picker-state.ts')
+
+    assert.equal(Object.keys(MERCENARY_BUILD_SKILL_IDS).length, 63)
+    const mappedSkillIds = new Set()
+    for (const groups of Object.values(MERCENARY_BUILD_SKILL_IDS)) {
+      for (const kind of ['primary', 'secondary', 'utility']) {
+        assert.ok(groups[kind].length > 0)
+        for (const id of groups[kind]) mappedSkillIds.add(id)
+      }
+    }
+    assert.equal(mappedSkillIds.size, 268)
+    assert.ok(MERCENARY_BUILD_SKILL_IDS.MeleeAOEMarauderPhysSlam)
+    assert.ok(MERCENARY_BUILD_SKILL_IDS.ChaosMinionWitchInstabilityNoble)
+
+    const selectedStats = []
+    const pickerQuery = ref('first')
+    const showSuggestions = ref(false)
+    selectMercenaryStat(
+      { id: 'mercenary.skill_first', text: 'First Skill', kind: 'skill' },
+      stat => selectedStats.push(stat),
+      pickerQuery,
+      showSuggestions)
+    assert.equal(pickerQuery.value, '')
+    assert.equal(showSuggestions.value, true)
+
+    pickerQuery.value = 'second'
+    selectMercenaryStat(
+      { id: 'mercenary.skill_second', text: 'Second Skill', kind: 'skill' },
+      stat => selectedStats.push(stat),
+      pickerQuery,
+      showSuggestions)
+    assert.deepEqual(selectedStats.map(stat => stat.tradeId[0]), [
+      'mercenary.skill_first',
+      'mercenary.skill_second'
+    ])
+    assert.equal(showSuggestions.value, true)
 
     for (const fixture of [
       { lang: 'en', lines: ['Build: Earthshaker', 'Mercenary Level: 83'], expected: { build: 'Earthshaker', level: 83 } },

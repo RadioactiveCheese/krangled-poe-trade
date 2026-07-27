@@ -37,6 +37,11 @@
     "mercenary": {
       "hidden_stats": "複製的契約書文字不包含技能與輔助技能。請加入遊戲內傭兵詳細資訊面板中顯示的項目。",
       "filter_placeholder": "新增傭兵技能或輔助技能...",
+      "support_placeholder": "新增傭兵輔助技能...",
+      "available_skills": "{0} 可用技能",
+      "primary": "主要",
+      "secondary": "次要",
+      "utility": "輔助",
       "skill": "技能",
       "support": "輔助",
       "level": "傭兵等級",

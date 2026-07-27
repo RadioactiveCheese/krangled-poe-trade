@@ -334,6 +334,11 @@
   "mercenary": {
     "hidden_stats": "Copied Warrant text omits skills and supports. Add the ones shown in the in-game Mercenary details panel.",
     "filter_placeholder": "Add a Mercenary skill or support...",
+    "support_placeholder": "Add a Mercenary support...",
+    "available_skills": "Skills available to {0}",
+    "primary": "Primary",
+    "secondary": "Secondary",
+    "utility": "Utility",
     "skill": "Skill",
     "support": "Support",
     "level": "Mercenary Level",

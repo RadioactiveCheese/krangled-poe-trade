@@ -1,7 +1,10 @@
 import { Host } from '@/web/background/IPC'
 import { getTradeEndpoint } from './common'
-import { FilterTag, StatFilter } from '../filters/interfaces'
 import { AppConfig } from '@/web/Config'
+import {
+  MERCENARY_BUILD_SKILL_IDS,
+  MercenaryBuildSkillIds
+} from '@/assets/data/mercenary-build-skills'
 
 export type MercenaryTradeStatKind = 'skill' | 'support'
 
@@ -14,7 +17,10 @@ export interface MercenaryTradeStat {
 export interface MercenaryTradeData {
   builds: Map<string, string>
   stats: MercenaryTradeStat[]
+  skillsByBuild: Map<string, MercenaryBuildSkills>
 }
+
+export type MercenaryBuildSkills = Record<keyof MercenaryBuildSkillIds, MercenaryTradeStat[]>
 
 interface TradeDataGroup<T> {
   id: string
@@ -55,19 +61,6 @@ export function loadMercenaryTradeData (): Promise<MercenaryTradeData> {
 
 export function resolveMercenaryBuildTradeId (build: string): string | undefined {
   return loaded.get(`${getTradeEndpoint()}:${AppConfig().language}`)?.builds.get(build)
-}
-
-export function createMercenaryStatFilter (stat: MercenaryTradeStat): StatFilter {
-  return {
-    tradeId: [stat.id],
-    statRef: stat.id,
-    text: stat.text,
-    tag: stat.kind === 'skill'
-      ? FilterTag.MercenarySkill
-      : FilterTag.MercenarySupport,
-    sources: [],
-    disabled: false
-  }
 }
 
 async function requestMercenaryTradeData (
@@ -113,7 +106,28 @@ async function requestMercenaryTradeData (
     return kind ? [{ id: entry.id, text: entry.text, kind }] : []
   })
 
-  return { builds, stats: tradeStats }
+  const statsById = new Map(tradeStats.map(stat => [stat.id, stat]))
+  const skillsByBuild = new Map<string, MercenaryBuildSkills>()
+  for (const [buildName, tradeBuildId] of builds) {
+    const skillIds = MERCENARY_BUILD_SKILL_IDS[tradeBuildId]
+    if (!skillIds) continue
+
+    const groups: MercenaryBuildSkills = { primary: [], secondary: [], utility: [] }
+    let complete = true
+    for (const kind of ['primary', 'secondary', 'utility'] as const) {
+      for (const id of skillIds[kind]) {
+        const stat = statsById.get(id)
+        if (!stat) {
+          complete = false
+          break
+        }
+        groups[kind].push(stat)
+      }
+    }
+    if (complete) skillsByBuild.set(buildName, groups)
+  }
+
+  return { builds, stats: tradeStats, skillsByBuild }
 }
 
 function extractMercenaryBuild (text: string): string | undefined {

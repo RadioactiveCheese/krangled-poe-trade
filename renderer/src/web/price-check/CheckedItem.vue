@@ -10,6 +10,7 @@
       :filters="itemFilters" />
     <mercenary-filters v-if="item.mercenary"
       :stats="itemStats"
+      :build="item.mercenary.build"
       @add="addMercenaryStat"
       @remove="removeMercenaryStat" />
     <filters-block
