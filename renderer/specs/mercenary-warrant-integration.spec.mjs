@@ -48,6 +48,13 @@ test('parses Mercenary Warrant details and a complete copied item', async () => 
     const { parseMercenaryWarrantDetails } = await vite.ssrLoadModule('/src/parser/mercenary-warrant.ts')
     const { MERCENARY_BUILD_SKILL_IDS } = await vite.ssrLoadModule('/src/assets/data/mercenary-build-skills.ts')
     const { selectMercenaryStat } = await vite.ssrLoadModule('/src/web/price-check/filters/mercenary-picker-state.ts')
+    const {
+      createMercenaryBuildQueryType,
+      isMercenaryInfamousActive,
+      selectMercenaryBuildVariantTradeId,
+      toggleMercenaryBuild,
+      toggleMercenaryInfamous
+    } = await vite.ssrLoadModule('/src/web/price-check/filters/mercenary-build-filter.ts')
 
     assert.equal(Object.keys(MERCENARY_BUILD_SKILL_IDS).length, 63)
     const mappedSkillIds = new Set()
@@ -60,6 +67,44 @@ test('parses Mercenary Warrant details and a complete copied item', async () => 
     assert.equal(mappedSkillIds.size, 268)
     assert.ok(MERCENARY_BUILD_SKILL_IDS.MeleeAOEMarauderPhysSlam)
     assert.ok(MERCENARY_BUILD_SKILL_IDS.ChaosMinionWitchInstabilityNoble)
+
+    const reanimatorVariant = {
+      baseName: 'Reanimator',
+      normalTradeId: 'ChaosMinionWitchInstability',
+      infamousTradeId: 'ChaosMinionWitchInstabilityNoble',
+      isInfamous: true
+    }
+    const buildFilter = {
+      value: 'Infamous Reanimator',
+      disabled: false
+    }
+    assert.equal(isMercenaryInfamousActive(buildFilter, reanimatorVariant), true)
+    assert.equal(selectMercenaryBuildVariantTradeId(reanimatorVariant), 'ChaosMinionWitchInstabilityNoble')
+
+    toggleMercenaryInfamous(buildFilter, reanimatorVariant)
+    assert.deepEqual(buildFilter, {
+      value: 'Infamous Reanimator',
+      disabled: false,
+      infamous: false
+    })
+    assert.equal(selectMercenaryBuildVariantTradeId(reanimatorVariant, buildFilter.infamous), 'ChaosMinionWitchInstability')
+
+    toggleMercenaryBuild(buildFilter)
+    assert.equal(buildFilter.disabled, true)
+    assert.equal(buildFilter.infamous, false)
+    assert.equal(
+      createMercenaryBuildQueryType(buildFilter, undefined, 'Mercenary Warrant'),
+      'Mercenary Warrant')
+
+    toggleMercenaryInfamous(buildFilter, reanimatorVariant)
+    assert.equal(buildFilter.disabled, false)
+    assert.equal(buildFilter.infamous, true)
+    toggleMercenaryBuild(buildFilter)
+    assert.equal(buildFilter.disabled, true)
+    assert.equal(buildFilter.infamous, false)
+    toggleMercenaryBuild(buildFilter)
+    assert.equal(buildFilter.disabled, false)
+    assert.equal(buildFilter.infamous, false)
 
     const selectedStats = []
     const pickerQuery = ref('first')

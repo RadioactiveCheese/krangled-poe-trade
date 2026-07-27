@@ -51,10 +51,12 @@ export function createFilters (
       baseTypeTrade: t(opts, item.info)
     }
     filters.discriminator = {
-      value: item.mercenary.build,
       trade: 'mercenary_warrant'
     }
-    filters.mercenaryBuild = item.mercenary.build
+    filters.mercenaryBuild = {
+      value: item.mercenary.build,
+      disabled: false
+    }
     filters.itemLevel = {
       value: item.mercenary.level,
       disabled: false

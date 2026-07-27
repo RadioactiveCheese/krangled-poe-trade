@@ -10,6 +10,7 @@ import { ModifierType } from '@/parser/modifiers'
 import { Cache } from './Cache'
 import { DisplayItem, FetchItem, findPropertyValue, parseFetchResult } from './trade-tooltip'
 import { resolveMercenaryBuildTradeId } from './mercenary-trade-data'
+import { createMercenaryBuildQueryType } from '../filters/mercenary-build-filter'
 
 export type { DisplayItem, DisplayItemLine, DisplaySocket } from './trade-tooltip'
 
@@ -290,11 +291,18 @@ export function createTradeRequest (filters: ItemFilters, stats: StatFilter[]) {
   }
 
   if (filters.mercenaryBuild) {
-    const tradeId = resolveMercenaryBuildTradeId(filters.mercenaryBuild)
-    if (!tradeId) {
-      throw new Error(`Unknown Mercenary build: ${filters.mercenaryBuild}`)
+    const tradeId = filters.mercenaryBuild.disabled
+      ? undefined
+      : resolveMercenaryBuildTradeId(
+          filters.mercenaryBuild.value,
+          filters.mercenaryBuild.infamous)
+    if (!filters.mercenaryBuild.disabled && !tradeId) {
+      throw new Error(`Unknown Mercenary build: ${filters.mercenaryBuild.value}`)
     }
-    query.type = { discriminator: 'mercenary_warrant', option: tradeId }
+    query.type = createMercenaryBuildQueryType(
+      filters.mercenaryBuild,
+      tradeId,
+      activeSearch.baseTypeTrade || activeSearch.baseType)
   } else if (activeSearch.baseTypeTrade) {
     query.type = nameToQuery(activeSearch.baseTypeTrade, filters)
   } else if (activeSearch.baseType) {

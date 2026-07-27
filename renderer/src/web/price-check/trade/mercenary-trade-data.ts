@@ -5,6 +5,7 @@ import {
   MERCENARY_BUILD_SKILL_IDS,
   MercenaryBuildSkillIds
 } from '@/assets/data/mercenary-build-skills'
+import { selectMercenaryBuildVariantTradeId } from '../filters/mercenary-build-filter'
 
 export type MercenaryTradeStatKind = 'skill' | 'support'
 
@@ -18,9 +19,17 @@ export interface MercenaryTradeData {
   builds: Map<string, string>
   stats: MercenaryTradeStat[]
   skillsByBuild: Map<string, MercenaryBuildSkills>
+  buildVariants: Map<string, MercenaryBuildVariant>
 }
 
 export type MercenaryBuildSkills = Record<keyof MercenaryBuildSkillIds, MercenaryTradeStat[]>
+
+export interface MercenaryBuildVariant {
+  baseName: string
+  normalTradeId: string
+  infamousTradeId?: string
+  isInfamous: boolean
+}
 
 interface TradeDataGroup<T> {
   id: string
@@ -59,8 +68,12 @@ export function loadMercenaryTradeData (): Promise<MercenaryTradeData> {
   return request
 }
 
-export function resolveMercenaryBuildTradeId (build: string): string | undefined {
-  return loaded.get(`${getTradeEndpoint()}:${AppConfig().language}`)?.builds.get(build)
+export function resolveMercenaryBuildTradeId (build: string, infamous?: boolean): string | undefined {
+  const data = loaded.get(`${getTradeEndpoint()}:${AppConfig().language}`)
+  if (infamous == null) return data?.builds.get(build)
+
+  const variant = data?.buildVariants.get(build)
+  return variant && selectMercenaryBuildVariantTradeId(variant, infamous)
 }
 
 async function requestMercenaryTradeData (
@@ -88,13 +101,34 @@ async function requestMercenaryTradeData (
   const mercenaryEntries = stats.result.find(group => group.id === 'mercenary')?.entries ?? []
 
   const builds = new Map<string, string>()
+  const buildNamesById = new Map<string, string>()
   for (const itemData of [items, localizedItems]) {
     const mapEntries = itemData?.result.find(group => group.id === 'map')?.entries ?? []
     for (const entry of mapEntries) {
       if (entry.disc !== 'mercenary_warrant' || !entry.text) continue
       const build = extractMercenaryBuild(entry.text)
-      if (build) builds.set(build, entry.type)
+      if (build) {
+        builds.set(build, entry.type)
+        buildNamesById.set(entry.type, build)
+      }
     }
+  }
+
+  const buildVariants = new Map<string, MercenaryBuildVariant>()
+  for (const [buildName, tradeId] of builds) {
+    const normalTradeId = tradeId.endsWith('Noble')
+      ? tradeId.slice(0, -'Noble'.length)
+      : tradeId
+    const baseName = buildNamesById.get(normalTradeId)
+    if (!baseName) continue
+
+    const infamousTradeId = `${normalTradeId}Noble`
+    buildVariants.set(buildName, {
+      baseName,
+      normalTradeId,
+      infamousTradeId: buildNamesById.has(infamousTradeId) ? infamousTradeId : undefined,
+      isInfamous: tradeId === infamousTradeId
+    })
   }
 
   const tradeStats = mercenaryEntries.flatMap<MercenaryTradeStat>(entry => {
@@ -127,7 +161,7 @@ async function requestMercenaryTradeData (
     if (complete) skillsByBuild.set(buildName, groups)
   }
 
-  return { builds, stats: tradeStats, skillsByBuild }
+  return { builds, stats: tradeStats, skillsByBuild, buildVariants }
 }
 
 function extractMercenaryBuild (text: string): string | undefined {

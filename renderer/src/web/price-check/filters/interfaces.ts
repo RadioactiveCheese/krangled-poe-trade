@@ -23,7 +23,11 @@ export interface ItemFilters {
     value?: string
     trade: string
   }
-  mercenaryBuild?: string
+  mercenaryBuild?: {
+    value: string
+    disabled: boolean
+    infamous?: boolean
+  }
   rarity?: {
     value: string
     disabled: boolean

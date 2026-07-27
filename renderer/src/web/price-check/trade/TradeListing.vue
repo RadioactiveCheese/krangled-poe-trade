@@ -162,10 +162,10 @@ function useTradeApi () {
       fetchResults.value = _fetchResults
 
       const _searchId = searchId
-      if (filters.mercenaryBuild) {
+      if (filters.mercenaryBuild && !filters.mercenaryBuild.disabled) {
         const mercenaryData = await loadMercenaryTradeData()
-        if (!mercenaryData.builds.has(filters.mercenaryBuild)) {
-          throw new Error(`Unknown Mercenary build: ${filters.mercenaryBuild}`)
+        if (!mercenaryData.builds.has(filters.mercenaryBuild.value)) {
+          throw new Error(`Unknown Mercenary build: ${filters.mercenaryBuild.value}`)
         }
       }
       const request = createTradeRequest(filters, stats)
@@ -242,8 +242,12 @@ export default defineComponent({
     const expandedResultId = shallowRef<string | null>(null)
 
     const showBrowser = inject<(url: string) => void>('builtin-browser')!
-    const canCreateTradeLink = computed(() =>
-      !props.item.mercenary || Boolean(resolveMercenaryBuildTradeId(props.filters.mercenaryBuild!)))
+    const canCreateTradeLink = computed(() => {
+      const build = props.filters.mercenaryBuild
+      return !props.item.mercenary ||
+        build?.disabled ||
+        Boolean(build && resolveMercenaryBuildTradeId(build.value, build.infamous))
+    })
 
     function makeTradeLink () {
       return (searchResult.value)

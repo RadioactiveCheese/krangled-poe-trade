@@ -341,6 +341,7 @@
     "utility": "Utility",
     "skill": "Skill",
     "support": "Support",
+    "infamous": "Infamous",
     "level": "Mercenary Level",
     "loading": "Loading Mercenary trade filters...",
     "load_error": "Could not load Mercenary trade filters: {0}",
