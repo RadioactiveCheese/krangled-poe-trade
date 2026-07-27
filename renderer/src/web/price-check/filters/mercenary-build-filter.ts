@@ -40,5 +40,4 @@ export function toggleMercenaryInfamous (
 
 export function toggleMercenaryBuild (filter: MercenaryBuildFilter): void {
   filter.disabled = !filter.disabled
-  if (filter.disabled) filter.infamous = false
 }

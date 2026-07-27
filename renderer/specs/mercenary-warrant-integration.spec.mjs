@@ -101,10 +101,12 @@ test('parses Mercenary Warrant details and a complete copied item', async () => 
     assert.equal(buildFilter.infamous, true)
     toggleMercenaryBuild(buildFilter)
     assert.equal(buildFilter.disabled, true)
-    assert.equal(buildFilter.infamous, false)
+    assert.equal(buildFilter.infamous, true)
+    assert.equal(isMercenaryInfamousActive(buildFilter, reanimatorVariant), false)
     toggleMercenaryBuild(buildFilter)
     assert.equal(buildFilter.disabled, false)
-    assert.equal(buildFilter.infamous, false)
+    assert.equal(buildFilter.infamous, true)
+    assert.equal(isMercenaryInfamousActive(buildFilter, reanimatorVariant), true)
 
     const selectedStats = []
     const pickerQuery = ref('first')

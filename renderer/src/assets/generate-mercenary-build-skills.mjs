@@ -31,7 +31,7 @@ const [poedbHtml, items, stats] = await Promise.all([
 
 const poedbBuilds = parsePoedbBuilds(poedbHtml)
 const tradeBuilds = items.result
-  .flatMap(group => group.entries)
+  .flatMap(group => group.entries ?? [])
   .filter(entry => entry.disc === 'mercenary_warrant')
   .map(entry => ({
     name: extractBuildName(entry.text),

@@ -1,14 +1,9 @@
 import type { Ref } from 'vue'
 import { FilterTag, StatFilter } from './interfaces'
-
-interface MercenaryPickerStat {
-  id: string
-  text: string
-  kind: 'skill' | 'support'
-}
+import type { MercenaryTradeStat } from '../trade/mercenary-trade-data'
 
 export function selectMercenaryStat (
-  stat: MercenaryPickerStat,
+  stat: MercenaryTradeStat,
   emit: (filter: StatFilter) => void,
   query: Ref<string>,
   showSuggestions: Ref<boolean>
