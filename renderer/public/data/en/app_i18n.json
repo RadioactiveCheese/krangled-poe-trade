@@ -340,7 +340,9 @@
     "loading": "Loading Mercenary trade filters...",
     "load_error": "Could not load Mercenary trade filters: {0}",
     "no_matches": "No matching Mercenary skill or support.",
-    "remove_filter": "Remove filter"
+    "remove_filter": "Remove filter",
+    "retry": "Retry",
+    "loadout": "Mercenary loadout"
   },
   "price_check": {
     "name": "Price check",

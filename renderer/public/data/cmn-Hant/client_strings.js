@@ -21,6 +21,8 @@ export default {
   RARITY: '稀有度: ',
   ITEM_CLASS: '物品種類: ',
   ITEM_LEVEL: '物品等級: ',
+  MERCENARY_BUILD: '流派',
+  MERCENARY_LEVEL: '傭兵等級',
   CORPSE_LEVEL: '屍體等級: ',
   TALISMAN_TIER: '魔符階級: ',
   GEM_LEVEL: '等級: ',

@@ -291,9 +291,10 @@ export function createTradeRequest (filters: ItemFilters, stats: StatFilter[]) {
 
   if (filters.mercenaryBuild) {
     const tradeId = resolveMercenaryBuildTradeId(filters.mercenaryBuild)
-    query.type = tradeId
-      ? { discriminator: 'mercenary_warrant', option: tradeId }
-      : (activeSearch.baseTypeTrade ?? activeSearch.baseType)
+    if (!tradeId) {
+      throw new Error(`Unknown Mercenary build: ${filters.mercenaryBuild}`)
+    }
+    query.type = { discriminator: 'mercenary_warrant', option: tradeId }
   } else if (activeSearch.baseTypeTrade) {
     query.type = nameToQuery(activeSearch.baseTypeTrade, filters)
   } else if (activeSearch.baseType) {

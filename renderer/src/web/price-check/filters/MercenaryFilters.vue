@@ -6,7 +6,7 @@
         v-model="query"
         class="w-full rounded bg-gray-800 px-2 py-1"
         :placeholder="t('mercenary.filter_placeholder')"
-        @focus="showSuggestions = true"
+        @focus="openSuggestions"
         @blur="closeSuggestions"
         @keydown.enter.prevent="addFirstMatch">
       <div
@@ -26,7 +26,7 @@
     <div v-if="loading" class="pt-2 text-gray-500">{{ t('mercenary.loading') }}</div>
     <div v-else-if="error" class="flex items-center gap-2 pt-2 text-red-400">
       <span>{{ t('mercenary.load_error', [error]) }}</span>
-      <button type="button" class="btn" @click="loadOptions">{{ t('Retry') }}</button>
+      <button type="button" class="btn" @click="loadOptions">{{ t('mercenary.retry') }}</button>
     </div>
     <div v-else-if="query && showSuggestions && !matchingStats.length" class="pt-2 text-gray-500">
       {{ t('mercenary.no_matches') }}
@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, ref, shallowRef } from 'vue'
+import { computed, defineComponent, onUnmounted, PropType, ref, shallowRef } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { StatFilter, FilterTag } from './interfaces'
 import {
@@ -64,12 +64,14 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props) {
+  emits: ['add', 'remove'],
+  setup (props, { emit }) {
     const query = ref('')
     const showSuggestions = ref(false)
     const loading = ref(true)
     const error = ref<string | null>(null)
     const availableStats = shallowRef<MercenaryTradeStat[]>([])
+    let closeSuggestionsTimer: number | undefined
 
     function loadOptions () {
       loading.value = true
@@ -96,15 +98,36 @@ export default defineComponent({
     })
 
     function addStat (stat: MercenaryTradeStat) {
-      props.stats.push(createMercenaryStatFilter(stat))
+      emit('add', createMercenaryStatFilter(stat))
       query.value = ''
       showSuggestions.value = false
     }
 
     function removeStat (stat: StatFilter) {
-      const index = props.stats.indexOf(stat)
-      if (index !== -1) props.stats.splice(index, 1)
+      emit('remove', stat)
     }
+
+    function clearCloseSuggestionsTimer () {
+      if (closeSuggestionsTimer !== undefined) {
+        window.clearTimeout(closeSuggestionsTimer)
+        closeSuggestionsTimer = undefined
+      }
+    }
+
+    function openSuggestions () {
+      clearCloseSuggestionsTimer()
+      showSuggestions.value = true
+    }
+
+    function closeSuggestions () {
+      clearCloseSuggestionsTimer()
+      closeSuggestionsTimer = window.setTimeout(() => {
+        showSuggestions.value = false
+        closeSuggestionsTimer = undefined
+      }, 100)
+    }
+
+    onUnmounted(clearCloseSuggestionsTimer)
 
     const { t } = useI18n()
     return {
@@ -118,12 +141,11 @@ export default defineComponent({
       matchingStats,
       addStat,
       removeStat,
+      openSuggestions,
       addFirstMatch () {
         if (matchingStats.value[0]) addStat(matchingStats.value[0])
       },
-      closeSuggestions () {
-        window.setTimeout(() => { showSuggestions.value = false }, 100)
-      },
+      closeSuggestions,
       kindLabel (stat: StatFilter) {
         return t(stat.tag === FilterTag.MercenarySkill
           ? 'mercenary.skill'

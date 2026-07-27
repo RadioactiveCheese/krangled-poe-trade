@@ -329,7 +329,9 @@
     "loading": "용병 거래 필터 불러오는 중...",
     "load_error": "용병 거래 필터를 불러오지 못했습니다: {0}",
     "no_matches": "일치하는 용병 스킬 또는 보조 스킬이 없습니다.",
-    "remove_filter": "필터 제거"
+    "remove_filter": "필터 제거",
+    "retry": "다시 시도",
+    "loadout": "용병 스킬 구성"
   },
   "price_check": {
     "name": "Price check",

@@ -129,6 +129,8 @@ export interface TranslationDict {
   RARITY: string
   ITEM_CLASS: string
   ITEM_LEVEL: string
+  MERCENARY_BUILD: string
+  MERCENARY_LEVEL: string
   CORPSE_LEVEL: string
   TALISMAN_TIER: string
   GEM_LEVEL: string

@@ -21,6 +21,8 @@ export default {
   RARITY: 'Редкость: ',
   ITEM_CLASS: 'Класс предмета: ',
   ITEM_LEVEL: 'Уровень предмета: ',
+  MERCENARY_BUILD: 'Билд',
+  MERCENARY_LEVEL: 'Уровень наёмника',
   CORPSE_LEVEL: 'Уровень трупа: ',
   TALISMAN_TIER: 'Уровень талисмана: ',
   GEM_LEVEL: 'Уровень: ',

@@ -72,7 +72,7 @@
                           {{ support.name }} <span class="text-gray-500">T{{ support.tier }}</span>
                         </span>
                       </div>
-                    </div>
+
                   </div>
                 </td>
               </tr>
@@ -87,7 +87,7 @@
     <p>Error: {{ error }}</p>
     <template #actions>
       <button class="btn" @click="execSearch">{{ t('Retry') }}</button>
-      <button class="btn" @click="openTradeLink">{{ t('Browser') }}</button>
+      <button v-if="canCreateTradeLink" class="btn" @click="openTradeLink">{{ t('Browser') }}</button>
     </template>
   </ui-error-box>
 </template>
@@ -106,7 +106,7 @@ import { artificialSlowdown } from './artificial-slowdown'
 import OnlineFilter from './OnlineFilter.vue'
 import TradeLinks from './TradeLinks.vue'
 import TradeItem from './TradeItem.vue'
-import { loadMercenaryTradeData } from './mercenary-trade-data'
+import { loadMercenaryTradeData, resolveMercenaryBuildTradeId } from './mercenary-trade-data'
 
 const slowdown = artificialSlowdown(900)
 
@@ -242,6 +242,8 @@ export default defineComponent({
     const expandedResultId = shallowRef<string | null>(null)
 
     const showBrowser = inject<(url: string) => void>('builtin-browser')!
+    const canCreateTradeLink = computed(() =>
+      !props.item.mercenary || Boolean(resolveMercenaryBuildTradeId(props.filters.mercenaryBuild!)))
 
     function makeTradeLink () {
       return (searchResult.value)
@@ -273,6 +275,7 @@ export default defineComponent({
       }),
       execSearch: () => { search(props.filters, props.stats) },
       error,
+      canCreateTradeLink,
       showSeller: computed(() => widget.value.showSeller),
       makeTradeLink,
       openTradeLink () {

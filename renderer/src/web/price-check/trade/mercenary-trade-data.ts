@@ -41,7 +41,7 @@ export function loadMercenaryTradeData (): Promise<MercenaryTradeData> {
   const cacheKey = `${endpoint}:${AppConfig().language}`
   let request = cache.get(cacheKey)
   if (!request) {
-    request = requestMercenaryTradeData(endpoint, languageEndpoint()).then(data => {
+    request = requestMercenaryTradeData(endpoint, languageEndpoint(endpoint)).then(data => {
       loaded.set(cacheKey, data)
       return data
     }).catch(error => {
@@ -120,11 +120,12 @@ function extractMercenaryBuild (text: string): string | undefined {
   return text.match(/\(([^()]*)\)$/u)?.[1].trim()
 }
 
-function languageEndpoint (): string {
+function languageEndpoint (fallback: string): string {
   switch (AppConfig().language) {
     case 'en': return 'www.pathofexile.com'
     case 'ru': return 'ru.pathofexile.com'
     case 'cmn-Hant': return 'pathofexile.tw'
     case 'ko': return 'poe.kakaogames.com'
+    default: return fallback
   }
 }

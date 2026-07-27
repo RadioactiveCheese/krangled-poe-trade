@@ -43,6 +43,8 @@
       "loading": "正在載入傭兵交易篩選...",
       "load_error": "無法載入傭兵交易篩選：{0}",
       "no_matches": "找不到符合的傭兵技能或輔助技能。",
-      "remove_filter": "移除篩選"
+      "remove_filter": "移除篩選",
+      "retry": "重試",
+      "loadout": "傭兵技能配置"
     }
 }

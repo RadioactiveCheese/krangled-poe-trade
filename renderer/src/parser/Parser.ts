@@ -281,10 +281,10 @@ function parseMap (section: string[], item: ParsedItem) {
 function parseMercenaryWarrant (section: string[], item: ParsedItem): SectionParseResult {
   if (item.info.refName !== 'Mercenary Warrant') return 'PARSER_SKIPPED'
 
-  const details = parseMercenaryWarrantDetails(section)
-  if (!details) return 'SECTION_SKIPPED'
+  const mercenary = parseMercenaryWarrantDetails(section, _$)
+  if (!mercenary) return 'SECTION_SKIPPED'
 
-  item.mercenary = details
+  item.mercenary = mercenary
   return 'SECTION_PARSED'
 }
 
