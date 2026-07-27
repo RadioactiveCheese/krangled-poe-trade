@@ -6,7 +6,7 @@
     "dev": "vite",
     "lint": "eslint --ext .ts,.vue src",
     "pretest": "npm run make-index-files",
-    "test": "vitest run && node --test specs/mercenary-warrant-integration.spec.mjs",
+    "test": "vitest run --exclude specs/mercenary-warrant-integration.spec.mjs && node --test specs/mercenary-warrant-integration.spec.mjs",
     "build": "vue-tsc --noEmit && vite build",
     "generate-mercenary-build-skills": "node src/assets/generate-mercenary-build-skills.mjs",
     "make-index-files": "node src/assets/make-index-files.mjs",

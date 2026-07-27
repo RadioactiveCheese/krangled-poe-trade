@@ -63,7 +63,7 @@ const props = defineProps<{
   showGemLevel: boolean
   showQuality: boolean
   showSeller: PriceCheckWidget['showSeller']
-  mercenaryExpanded: boolean
+  mercenaryExpanded?: boolean
 }>()
 
 const emit = defineEmits<{

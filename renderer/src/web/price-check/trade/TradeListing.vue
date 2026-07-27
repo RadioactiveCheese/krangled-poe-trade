@@ -72,7 +72,7 @@
                           {{ support.name }} <span class="text-gray-500">T{{ support.tier }}</span>
                         </span>
                       </div>
-
+                    </div>
                   </div>
                 </td>
               </tr>
