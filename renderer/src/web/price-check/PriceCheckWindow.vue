@@ -62,6 +62,17 @@
           :item="item.value" :click-position="clickPosition" />
         <rate-limiter-state class="pointer-events-auto" />
       </div>
+      <div v-if="itemPreview && item?.isOk() && item.value.mercenary"
+        class="flex grow min-h-0 overflow-hidden"
+        :class="clickPosition === 'inventory' ? 'justify-end' : 'justify-start'">
+        <img
+          :src="itemPreview.dataUrl"
+          :width="itemPreview.width"
+          :height="itemPreview.height"
+          class="block h-full max-w-full object-contain object-top"
+          alt=""
+          draggable="false">
+      </div>
     </div>
   </div>
 </template>
@@ -88,6 +99,7 @@ import ItemQuickPrice from '@/web/ui/ItemQuickPrice.vue'
 import { PriceCheckWidget, WidgetManager, WidgetSpec } from '../overlay/interfaces'
 
 type ParseError = { name: string; message: string; rawText: ParsedItem['rawText'] }
+type ItemPreview = { dataUrl: string; width: number; height: number }
 
 export default defineComponent({
   widget: {
@@ -148,6 +160,7 @@ export default defineComponent({
     })
 
     const item = shallowRef<null | Result<ParsedItem, ParseError>>(null)
+    const itemPreview = shallowRef<ItemPreview | null>(null)
     const advancedCheck = shallowRef(false)
     const checkPosition = shallowRef({ x: 1, y: 1 })
 
@@ -177,6 +190,7 @@ export default defineComponent({
         })
       }
       closeBrowser()
+      itemPreview.value = e.itemPreview ?? null
       wm.show(props.config.wmId)
       checkPosition.value = e.position
       advancedCheck.value = e.focusOverlay
@@ -288,6 +302,7 @@ export default defineComponent({
       showCheckPos,
       checkPosition,
       item,
+      itemPreview,
       advancedCheck,
       handleIdentification,
       overlayKey,

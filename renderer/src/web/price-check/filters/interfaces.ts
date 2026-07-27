@@ -23,6 +23,7 @@ export interface ItemFilters {
     value?: string
     trade: string
   }
+  mercenaryBuild?: string
   rarity?: {
     value: string
     disabled: boolean
@@ -185,5 +186,7 @@ export enum FilterTag {
   Unveiled = 'explicit-veiled',
   Incursion = 'explicit-incursion',
   Infamous = 'explicit-infamous',
-  Essence = 'explicit-essence'
+  Essence = 'explicit-essence',
+  MercenarySkill = 'mercenary-skill',
+  MercenarySupport = 'mercenary-support'
 }

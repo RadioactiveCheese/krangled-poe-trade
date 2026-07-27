@@ -1,4 +1,4 @@
-import { screen, globalShortcut } from 'electron'
+import { screen, globalShortcut, nativeImage } from 'electron'
 import { uIOhook, UiohookKey, UiohookWheelEvent } from 'uiohook-napi'
 import { isModKey, KeyToElectron, mergeTwoHotkeys } from '../../../ipc/KeyToCode'
 import { typeInChat, stashSearch } from './text-box'
@@ -160,10 +160,20 @@ export class Shortcuts {
 
           this.clipboard.readItemText()
             .then(clipboard => {
+              const itemPreview = (action.target === 'price-check')
+                ? this.captureMercenaryWarrantPreview(clipboard, pressPosition)
+                : undefined
+
               this.areaTracker.removeListeners()
               this.server.sendEventTo('last-active', {
                 name: 'MAIN->CLIENT::item-text',
-                payload: { target: action.target, clipboard, position: pressPosition, focusOverlay: Boolean(action.focusOverlay) }
+                payload: {
+                  target: action.target,
+                  clipboard,
+                  position: pressPosition,
+                  focusOverlay: Boolean(action.focusOverlay),
+                  itemPreview
+                }
               })
               if (action.focusOverlay && this.overlay.wasUsedRecently) {
                 this.overlay.assertOverlayActive()
@@ -211,6 +221,55 @@ export class Shortcuts {
   private unregister () {
     globalShortcut.unregisterAll()
   }
+
+  private captureMercenaryWarrantPreview (
+    clipboard: string,
+    pressPosition: { x: number, y: number }
+  ) {
+    if (process.platform !== 'win32' || !isMercenaryWarrantClipboard(clipboard)) return
+
+    try {
+      const bounds = this.poeWindow.bounds
+      const width = Math.round(bounds.width)
+      const height = Math.round(bounds.height)
+      const panelWidth = Math.round(this.poeWindow.uiSidebarWidth)
+      if (width <= 0 || height <= 0 || panelWidth >= width) return
+
+      const screenshot = this.poeWindow.screenshot()
+      if (screenshot.length < width * height * 4) return
+
+      const maxPreviewWidth = width - panelWidth
+      const previewWidth = Math.min(Math.round(height * 0.72), maxPreviewWidth)
+      const cursorOnRight = pressPosition.x > bounds.x + bounds.width / 2
+      const x = cursorOnRight
+        ? Math.max(0, width - panelWidth - previewWidth)
+        : Math.min(panelWidth, width - previewWidth)
+
+      const preview = nativeImage
+        .createFromBitmap(screenshot, { width, height })
+        .crop({ x, y: 0, width: previewWidth, height })
+      if (preview.isEmpty()) return
+
+      return {
+        dataUrl: preview.toDataURL(),
+        width: previewWidth,
+        height
+      }
+    } catch {
+      return undefined
+    }
+  }
+}
+
+const MERCENARY_WARRANT_NAMES = new Set([
+  'Mercenary Warrant',
+  'Наёмничья расписка',
+  '용병 소환장',
+  '傭兵契約書'
+])
+
+function isMercenaryWarrantClipboard (clipboard: string) {
+  return clipboard.split('\n').some(line => MERCENARY_WARRANT_NAMES.has(line.trim()))
 }
 
 function pressKeysToCopyItemText (pressedModKeys: string[] = [], showModsKey: string) {

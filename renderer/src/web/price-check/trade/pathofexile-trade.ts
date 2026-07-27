@@ -1,4 +1,4 @@
-import { ItemInfluence, ItemCategory } from '@/parser'
+import { ItemInfluence, ItemCategory, MercenarySkill } from '@/parser'
 import { ItemFilters, StatFilter, INTERNAL_TRADE_IDS, InternalTradeId } from '../filters/interfaces'
 import { setProperty as propSet } from 'dot-prop'
 import { DateTime } from 'luxon'
@@ -9,6 +9,7 @@ import { RateLimiter } from './RateLimiter'
 import { ModifierType } from '@/parser/modifiers'
 import { Cache } from './Cache'
 import { DisplayItem, FetchItem, findPropertyValue, parseFetchResult } from './trade-tooltip'
+import { resolveMercenaryBuildTradeId } from './mercenary-trade-data'
 
 export type { DisplayItem, DisplayItemLine, DisplaySocket } from './trade-tooltip'
 
@@ -214,7 +215,7 @@ export interface SearchResult {
 
 interface FetchResult {
   id: string
-  item: FetchItem
+  item: FetchItem & { mercenarySkills?: MercenarySkill[] }
   listing: {
     indexed: string
     price?: {
@@ -234,6 +235,7 @@ export interface PricingResult {
   corrupted?: boolean
   quality?: string
   level?: string
+  mercenarySkills?: MercenarySkill[]
   relativeDate: string
   priceAmount: number
   priceCurrency: string
@@ -287,7 +289,12 @@ export function createTradeRequest (filters: ItemFilters, stats: StatFilter[]) {
     query.name = nameToQuery(activeSearch.name, filters)
   }
 
-  if (activeSearch.baseTypeTrade) {
+  if (filters.mercenaryBuild) {
+    const tradeId = resolveMercenaryBuildTradeId(filters.mercenaryBuild)
+    query.type = tradeId
+      ? { discriminator: 'mercenary_warrant', option: tradeId }
+      : (activeSearch.baseTypeTrade ?? activeSearch.baseType)
+  } else if (activeSearch.baseTypeTrade) {
     query.type = nameToQuery(activeSearch.baseTypeTrade, filters)
   } else if (activeSearch.baseType) {
     query.type = nameToQuery(activeSearch.baseType, filters)
@@ -678,6 +685,7 @@ function toPricingResult (result: FetchResult, opts: { accountName: string }): P
     corrupted: result.item.corrupted,
     quality: findPropertyValue(result.item, 6),
     level: findPropertyValue(result.item, 5),
+    mercenarySkills: result.item.mercenarySkills,
     relativeDate: DateTime.fromISO(result.listing.indexed).toRelative({ style: 'short' }) ?? '',
     priceAmount: result.listing.price?.amount ?? 0,
     priceCurrency: result.listing.price?.currency ?? 'no price',

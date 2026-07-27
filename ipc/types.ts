@@ -149,6 +149,11 @@ type IpcItemText =
     item?: unknown
     position: { x: number, y: number }
     focusOverlay: boolean
+    itemPreview?: {
+      dataUrl: string
+      width: number
+      height: number
+    }
   }>
 
 type IpcOcrText =

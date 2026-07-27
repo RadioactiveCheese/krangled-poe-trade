@@ -18,7 +18,7 @@
       <filter-btn-logical v-if="filters.discriminator?.value" readonly
         :filter="{ disabled: false }" :text="filters.discriminator.value" />
       <filter-btn-numeric v-if="filters.itemLevel"
-        :filter="filters.itemLevel" :name="t('item.item_level')" />
+        :filter="filters.itemLevel" :name="item.mercenary ? t('mercenary.level') : t('item.item_level')" />
       <filter-btn-numeric v-if="filters.stackSize"
         :filter="filters.stackSize" :name="t('item.stock')" />
       <filter-btn-numeric v-if="filters.whiteSockets"

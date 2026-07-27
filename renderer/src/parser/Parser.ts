@@ -14,6 +14,7 @@ import { IncursionRoom, ParsedItem, ItemInfluence, ItemRarity } from './ParsedIt
 import { magicBasetype } from './magic-name'
 import { isModInfoLine, groupLinesByMod, parseModInfoLine, parseModType, ModifierInfo, ParsedModifier, ENCHANT_LINE, SCOURGE_LINE, IMPLICIT_LINE } from './advanced-mod-desc'
 import { calcPropPercentile, QUALITY_STATS } from './calc-q20'
+import { parseMercenaryWarrantDetails } from './mercenary-warrant'
 
 type SectionParseResult =
   | 'SECTION_PARSED'
@@ -40,6 +41,8 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseVaalGemName,
   { virtual: findInDatabase },
   // -----------
+  parseMercenaryWarrant,
+  { virtual: validateMercenaryWarrant },
   parseItemLevel,
   parseTalismanTier,
   parseGem,
@@ -273,6 +276,22 @@ function parseMap (section: string[], item: ParsedItem) {
   }
 
   return isParsed
+}
+
+function parseMercenaryWarrant (section: string[], item: ParsedItem): SectionParseResult {
+  if (item.info.refName !== 'Mercenary Warrant') return 'PARSER_SKIPPED'
+
+  const details = parseMercenaryWarrantDetails(section)
+  if (!details) return 'SECTION_SKIPPED'
+
+  item.mercenary = details
+  return 'SECTION_PARSED'
+}
+
+function validateMercenaryWarrant (item: ParsedItem): Result<never, string> | void {
+  if (item.info.refName === 'Mercenary Warrant' && !item.mercenary) {
+    return err('item.unknown')
+  }
 }
 
 function parseBlightedMap (item: ParsedItem) {

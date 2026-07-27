@@ -8,10 +8,11 @@
     <price-trend v-else
       :item="item"
       :filters="itemFilters" />
+    <mercenary-filters v-if="item.mercenary" :stats="itemStats" />
     <filters-block
       ref="filtersComponent"
       :filters="itemFilters"
-      :stats="itemStats"
+      :stats="item.mercenary ? [] : itemStats"
       :item="item"
       :presets="presets"
       @preset="selectPreset"
@@ -64,6 +65,7 @@ import { AppConfig } from '@/web/Config'
 import { FilterPreset } from './filters/interfaces'
 import { PriceCheckWidget } from '../overlay/interfaces'
 import { useLeagues } from '@/web/background/Leagues'
+import MercenaryFilters from './filters/MercenaryFilters.vue'
 
 let _showSupportLinksCounter = 0
 
@@ -76,6 +78,7 @@ export default defineComponent({
     TradeLinks,
     PriceTrend,
     FiltersBlock,
+    MercenaryFilters,
     FilterName,
     StackValue
   },

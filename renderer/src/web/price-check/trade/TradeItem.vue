@@ -5,6 +5,16 @@
     @mouseleave="handleMouseLeave"
   >
     <td class="px-2 whitespace-nowrap">
+      <button v-if="result.mercenarySkills?.length"
+        type="button"
+        class="mr-1 text-gray-500"
+        :aria-label="t('mercenary.loadout')"
+        :aria-expanded="mercenaryExpanded"
+        :aria-controls="`${result.id}-mercenary-details`"
+        @click="emit('toggle-mercenary')">
+        <i class="fas"
+          :class="mercenaryExpanded ? 'fa-chevron-down' : 'fa-chevron-right'" />
+      </button>
       <span :class="{ 'line-through': result.priceCurrency === 'exalted' }">{{ result.priceAmount }} {{ result.priceCurrency }}</span>
       <span v-if="result.listedTimes > 2" class="rounded px-1 text-gray-800 bg-gray-400 ml-1 -mr-2"><span class="font-sans">×</span> {{ result.listedTimes }}</span>
       <span v-else-if="!result.hasFee" :class="$style.stashListing">
@@ -53,6 +63,11 @@ const props = defineProps<{
   showGemLevel: boolean
   showQuality: boolean
   showSeller: PriceCheckWidget['showSeller']
+  mercenaryExpanded: boolean
+}>()
+
+const emit = defineEmits<{
+  (e: 'toggle-mercenary'): void
 }>()
 
 const { t } = useI18nNs('trade_result')

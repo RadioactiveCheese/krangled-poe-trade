@@ -1,4 +1,5 @@
 export type { ParsedItem } from './ParsedItem'
+export type { MercenarySkill, MercenarySupport } from './ParsedItem'
 export { ItemRarity, ItemInfluence } from './ParsedItem'
 export { parseClipboard } from './Parser'
 export { ItemCategory } from './meta'
