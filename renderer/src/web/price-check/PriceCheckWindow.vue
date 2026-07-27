@@ -5,8 +5,13 @@
     'flex-row': clickPosition === 'stash',
     'flex-row-reverse': clickPosition === 'inventory'
   }">
-    <div v-if="!isBrowserShown" class="layout-column shrink-0"
+    <div v-if="!isBrowserShown" class="layout-column shrink-0 overflow-hidden"
       style="width: var(--game-panel);">
+      <img v-if="itemPreview && item?.isOk() && item.value.mercenary"
+        :src="itemPreview.dataUrl"
+        class="block w-full h-full object-fill"
+        alt=""
+        draggable="false">
     </div>
     <div id="price-window" class="layout-column shrink-0 text-gray-200 pointer-events-auto" style="width: 28.75rem;">
       <AppTitleBar @close="closePriceCheck" @click="openLeagueSelection" :title="title">
@@ -61,17 +66,6 @@
         <related-items v-if="item?.isOk()" class="pointer-events-auto"
           :item="item.value" :click-position="clickPosition" />
         <rate-limiter-state class="pointer-events-auto" />
-      </div>
-      <div v-if="itemPreview && item?.isOk() && item.value.mercenary"
-        class="flex grow min-h-0 overflow-hidden"
-        :class="clickPosition === 'inventory' ? 'justify-end' : 'justify-start'">
-        <img
-          :src="itemPreview.dataUrl"
-          :width="itemPreview.width"
-          :height="itemPreview.height"
-          class="block h-full max-w-full object-contain object-top"
-          alt=""
-          draggable="false">
       </div>
     </div>
   </div>

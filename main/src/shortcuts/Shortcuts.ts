@@ -241,8 +241,8 @@ export class Shortcuts {
       const bounds = this.poeWindow.bounds
       const width = Math.round(bounds.width)
       const height = Math.round(bounds.height)
-      const panelWidth = Math.round(this.poeWindow.uiSidebarWidth)
-      if (width <= 0 || height <= 0 || panelWidth >= width) return
+      const panelWidth = Math.min(Math.round(this.poeWindow.uiSidebarWidth), width)
+      if (width <= 0 || height <= 0 || panelWidth <= 0) return
 
       const screenshot = this.poeWindow.screenshot()
       if (screenshot.length < width * height * 4) return
@@ -267,20 +267,16 @@ export class Shortcuts {
 
     try {
       const { bitmap, width, height, panelWidth, cursorOnRight } = snapshot
-      const maxPreviewWidth = width - panelWidth
-      const previewWidth = Math.min(Math.round(height * 0.72), maxPreviewWidth)
-      const x = cursorOnRight
-        ? Math.max(0, width - panelWidth - previewWidth)
-        : Math.min(panelWidth, width - previewWidth)
+      const x = cursorOnRight ? width - panelWidth : 0
 
       const preview = nativeImage
         .createFromBitmap(bitmap, { width, height })
-        .crop({ x, y: 0, width: previewWidth, height })
+        .crop({ x, y: 0, width: panelWidth, height })
       if (preview.isEmpty()) return
 
       return {
         dataUrl: preview.toDataURL(),
-        width: previewWidth,
+        width: panelWidth,
         height
       }
     } catch {
