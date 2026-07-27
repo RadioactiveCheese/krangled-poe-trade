@@ -13,6 +13,13 @@ import type { GameConfig } from '../host-files/GameConfig'
 import type { ServerEvents } from '../server'
 
 type UiohookKeyT = keyof typeof UiohookKey
+type ItemPreviewSnapshot = {
+  bitmap: ReturnType<GameWindow['screenshot']>
+  width: number
+  height: number
+  panelWidth: number
+  cursorOnRight: boolean
+}
 const UiohookToName = Object.fromEntries(Object.entries(UiohookKey).map(([k, v]) => ([v, k])))
 
 export class Shortcuts {
@@ -157,11 +164,14 @@ export class Shortcuts {
           const { action } = entry
 
           const pressPosition = screen.getCursorScreenPoint()
+          const previewSnapshot = (action.target === 'price-check')
+            ? this.captureItemPreviewSnapshot(pressPosition)
+            : undefined
 
           this.clipboard.readItemText()
             .then(clipboard => {
               const itemPreview = (action.target === 'price-check')
-                ? this.captureMercenaryWarrantPreview(clipboard, pressPosition)
+                ? this.createMercenaryWarrantPreview(clipboard, previewSnapshot)
                 : undefined
 
               this.areaTracker.removeListeners()
@@ -222,11 +232,10 @@ export class Shortcuts {
     globalShortcut.unregisterAll()
   }
 
-  private captureMercenaryWarrantPreview (
-    clipboard: string,
+  private captureItemPreviewSnapshot (
     pressPosition: { x: number, y: number }
-  ) {
-    if (process.platform !== 'win32' || !isMercenaryWarrantClipboard(clipboard)) return
+  ): ItemPreviewSnapshot | undefined {
+    if (process.platform !== 'win32') return
 
     try {
       const bounds = this.poeWindow.bounds
@@ -238,15 +247,34 @@ export class Shortcuts {
       const screenshot = this.poeWindow.screenshot()
       if (screenshot.length < width * height * 4) return
 
+      return {
+        bitmap: screenshot,
+        width,
+        height,
+        panelWidth,
+        cursorOnRight: pressPosition.x > bounds.x + bounds.width / 2
+      }
+    } catch {
+      return undefined
+    }
+  }
+
+  private createMercenaryWarrantPreview (
+    clipboard: string,
+    snapshot: ItemPreviewSnapshot | undefined
+  ) {
+    if (!snapshot || !isMercenaryWarrantClipboard(clipboard)) return
+
+    try {
+      const { bitmap, width, height, panelWidth, cursorOnRight } = snapshot
       const maxPreviewWidth = width - panelWidth
       const previewWidth = Math.min(Math.round(height * 0.72), maxPreviewWidth)
-      const cursorOnRight = pressPosition.x > bounds.x + bounds.width / 2
       const x = cursorOnRight
         ? Math.max(0, width - panelWidth - previewWidth)
         : Math.min(panelWidth, width - previewWidth)
 
       const preview = nativeImage
-        .createFromBitmap(screenshot, { width, height })
+        .createFromBitmap(bitmap, { width, height })
         .crop({ x, y: 0, width: previewWidth, height })
       if (preview.isEmpty()) return
 
