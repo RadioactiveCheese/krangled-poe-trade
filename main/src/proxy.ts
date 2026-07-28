@@ -53,18 +53,21 @@ export class HttpProxy {
       req.pipe(proxyReq as unknown as NodeJS.WritableStream)
     })
 
-    session.defaultSession.webRequest.onHeadersReceived((details, next) => {
-      // Cloudflare sets cookies with Partitioned attribute, however `net.request` API
-      // doesn't provide a way to specify partition key, so we simply remove it.
-      const cookies = details.responseHeaders?.['set-cookie']
-      if (cookies) {
-        details.responseHeaders!['set-cookie'] = cookies.map(cookie => {
-          return cookie.split(';')
-            .filter(part => part.trim().toLowerCase() !== 'partitioned')
-            .join(';')
-        })
+    session.defaultSession.webRequest.onHeadersReceived(
+      { urls: PROXY_HOSTS.map(entry => `https://${entry.host}/*`) },
+      (details, next) => {
+        // Cloudflare sets cookies with Partitioned attribute, however `net.request` API
+        // doesn't provide a way to specify partition key, so we simply remove it.
+        const cookies = details.responseHeaders?.['set-cookie']
+        if (cookies) {
+          details.responseHeaders!['set-cookie'] = cookies.map(cookie => {
+            return cookie.split(';')
+              .filter(part => part.trim().toLowerCase() !== 'partitioned')
+              .join(';')
+          })
+        }
+        next({ responseHeaders: details.responseHeaders })
       }
-      next({ responseHeaders: details.responseHeaders })
-    })
+    )
   }
 }
