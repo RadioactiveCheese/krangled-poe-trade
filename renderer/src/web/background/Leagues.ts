@@ -13,6 +13,18 @@ interface ApiLeague {
   rules: Array<{ id: string }>
 }
 
+function isApiLeague (value: unknown): value is ApiLeague {
+  if (typeof value !== 'object' || value === null) return false
+  const league = value as { id?: unknown, rules?: unknown }
+
+  return typeof league.id === 'string' &&
+    Array.isArray(league.rules) &&
+    league.rules.every(rule =>
+      typeof rule === 'object' &&
+      rule !== null &&
+      typeof (rule as { id?: unknown }).id === 'string')
+}
+
 interface League {
   id: string
   isPopular: boolean
@@ -53,8 +65,10 @@ export const useLeagues = createGlobalState(() => {
       const response = await Host.proxy(`${poeWebApi()}/api/leagues?type=main&realm=pc`)
       if (!response.ok) throw new Error(JSON.stringify(Object.fromEntries(response.headers)))
       const data: unknown = await response.json()
-      if (!Array.isArray(data)) throw new Error('Invalid league response')
-      const leagues = data as ApiLeague[]
+      if (!Array.isArray(data) || !data.every(isApiLeague)) {
+        throw new Error('Invalid league response')
+      }
+      const leagues = data
 
       tradeLeagues.value = leagues
         .filter(league =>
