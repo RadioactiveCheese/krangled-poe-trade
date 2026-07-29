@@ -2,8 +2,34 @@
 
 import { describe, expect, it } from 'vitest'
 import { ItemCategory, ItemRarity, type ParsedItem } from '@/parser'
+import { resolveChartArea, resolveChartShape } from '@/parser/chart'
 import { createFilters } from '@/web/price-check/filters/create-item-filters'
 import { createTradeRequest } from '@/web/price-check/trade/pathofexile-trade'
+
+const TRADITIONAL_CHINESE_CHART_AREAS = [
+  ['深海平原', 'Sandy Seabed Chart', 'AbyssalPlain'],
+  ['定錨點', 'Sandy Seabed Chart', 'Anchorfield'],
+  ['危機海淵', 'Sandy Seabed Chart', 'HazardousDepths'],
+  ['感染潛水球', 'Sandy Seabed Chart', 'InfestedBathyspheres'],
+  ['奇夏拉安眠地', 'Sandy Seabed Chart', 'KisharasRest'],
+  ['失落遺跡', 'Coral Forest Chart', 'LostRuins'],
+  ['遠洋深淵', 'Coral Forest Chart', 'PelagicAbyss'],
+  ['海洋之柱', 'Coral Forest Chart', 'SeaPillars'],
+  ['海底幽林', 'Coral Forest Chart', 'UnderseaGroves'],
+  ['海洋王的領域', 'Coral Reef Chart', 'BrineKingsDomain'],
+  ['蛤蜊之架', 'Coral Reef Chart', 'ClamInfestedShelf'],
+  ['潛水沙洲', 'Coral Reef Chart', 'DivingShoals'],
+  ['海底山脊', 'Coral Reef Chart', 'SeafloorRidges'],
+  ['沉沒圖騰', 'Coral Reef Chart', 'SunkenTotems']
+] as const
+
+const TRADITIONAL_CHINESE_CHART_SHAPES = [
+  ['終點', '1'],
+  ['轉角', '2'],
+  ['直線', '3'],
+  ['交界處', '4'],
+  ['十字口', '5']
+] as const
 
 function chartItem (): ParsedItem {
   return {
@@ -24,7 +50,8 @@ function chartItem (): ParsedItem {
       areaId: 'HazardousDepths',
       shape: 'Junction',
       shapeId: '4',
-      sulphur: 75
+      sulphur: 75,
+      gold: 30
     },
     map: {
       tier: undefined,
@@ -67,5 +94,20 @@ describe('Chart trade query', () => {
     expect(request.query.filters.map_filters?.filters.area_level?.min).toBe(83)
     expect(request.query.filters.map_filters?.filters.chart_shape?.option).toBe('4')
     expect(request.query.filters.map_filters?.filters.chart_sulphur?.min).toBe(75)
+    expect(request.query.filters.map_filters?.filters.map_gold?.min).toBe(30)
   })
+
+  it.each(TRADITIONAL_CHINESE_CHART_AREAS)(
+    'resolves Traditional Chinese chart area %s',
+    (areaName, baseType, areaId) => {
+      expect(resolveChartArea(areaName, baseType)).toBe(areaId)
+    }
+  )
+
+  it.each(TRADITIONAL_CHINESE_CHART_SHAPES)(
+    'resolves Traditional Chinese chart shape %s',
+    (shape, shapeId) => {
+      expect(resolveChartShape(shape)).toBe(shapeId)
+    }
+  )
 })

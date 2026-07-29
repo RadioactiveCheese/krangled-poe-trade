@@ -1,9 +1,31 @@
 export const CHART_SHAPE_OPTIONS = {
+  // English
   End: '1',
   Corner: '2',
   Straight: '3',
   Junction: '4',
-  Crossing: '5'
+  Crossing: '5',
+
+  // Russian
+  Конец: '1',
+  Угол: '2',
+  Прямая: '3',
+  Развилка: '4',
+  Перекресток: '5',
+
+  // Korean
+  종료: '1',
+  모서리: '2',
+  직선: '3',
+  접점: '4',
+  교차: '5',
+
+  // Traditional Chinese
+  終點: '1',
+  轉角: '2',
+  直線: '3',
+  交界處: '4',
+  十字口: '5'
 } as const
 
 export type ChartShape = keyof typeof CHART_SHAPE_OPTIONS
@@ -60,7 +82,23 @@ const CHART_AREAS: Record<string, ChartArea> = {
   '바다 기둥': { baseType: 'Coral Forest Chart', option: 'SeaPillars' },
   '해저 마루': { baseType: 'Coral Reef Chart', option: 'SeafloorRidges' },
   '가라앉은 토템': { baseType: 'Coral Reef Chart', option: 'SunkenTotems' },
-  '바다 밑 숲': { baseType: 'Coral Forest Chart', option: 'UnderseaGroves' }
+  '바다 밑 숲': { baseType: 'Coral Forest Chart', option: 'UnderseaGroves' },
+
+  // Traditional Chinese
+  '深海平原': { baseType: 'Sandy Seabed Chart', option: 'AbyssalPlain' },
+  '定錨點': { baseType: 'Sandy Seabed Chart', option: 'Anchorfield' },
+  '海洋王的領域': { baseType: 'Coral Reef Chart', option: 'BrineKingsDomain' },
+  '蛤蜊之架': { baseType: 'Coral Reef Chart', option: 'ClamInfestedShelf' },
+  '潛水沙洲': { baseType: 'Coral Reef Chart', option: 'DivingShoals' },
+  '危機海淵': { baseType: 'Sandy Seabed Chart', option: 'HazardousDepths' },
+  '感染潛水球': { baseType: 'Sandy Seabed Chart', option: 'InfestedBathyspheres' },
+  '奇夏拉安眠地': { baseType: 'Sandy Seabed Chart', option: 'KisharasRest' },
+  '失落遺跡': { baseType: 'Coral Forest Chart', option: 'LostRuins' },
+  '遠洋深淵': { baseType: 'Coral Forest Chart', option: 'PelagicAbyss' },
+  '海洋之柱': { baseType: 'Coral Forest Chart', option: 'SeaPillars' },
+  '海底山脊': { baseType: 'Coral Reef Chart', option: 'SeafloorRidges' },
+  '沉沒圖騰': { baseType: 'Coral Reef Chart', option: 'SunkenTotems' },
+  '海底幽林': { baseType: 'Coral Forest Chart', option: 'UnderseaGroves' }
 }
 
 export function resolveChartArea (areaName: string, baseType: string): string | undefined {
