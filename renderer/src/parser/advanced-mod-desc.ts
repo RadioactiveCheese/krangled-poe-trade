@@ -13,7 +13,7 @@ export interface ParsedModifier {
 
 export interface ModifierInfo {
   type: ModifierType
-  generation?: 'suffix' | 'prefix' | 'corrupted' | 'eldritch' | 'foulborn'
+  generation?: 'suffix' | 'prefix' | 'corrupted' | 'eldritch' | 'foulborn' | 'vestigial'
   name?: string
   tier?: number
   rank?: number
@@ -78,6 +78,9 @@ export function parseModInfoLine (line: string): ModifierInfo {
         generation = 'corrupted'; break
       case _$.FOULBORN_MODIFIER:
         generation = 'foulborn'; break
+      case _$.VESTIGIAL_MODIFIER:
+        type = ModifierType.Implicit
+        generation = 'vestigial'; break
     }
 
     name = match.groups!.name ?? undefined

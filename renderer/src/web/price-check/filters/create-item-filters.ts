@@ -418,6 +418,12 @@ export function createFilters (
     }
   }
 
+  if (item.rarity === ItemRarity.Unique || item.isVestigial) {
+    filters.vestigial = {
+      value: Boolean(item.isVestigial)
+    }
+  }
+
   if (item.category === ItemCategory.HeistContract) {
     if (item.rarity !== ItemRarity.Unique) {
       filters.areaLevel = {
