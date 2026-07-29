@@ -13,7 +13,7 @@ export interface ParsedModifier {
 
 export interface ModifierInfo {
   type: ModifierType
-  generation?: 'suffix' | 'prefix' | 'corrupted' | 'eldritch' | 'foulborn'
+  generation?: 'suffix' | 'prefix' | 'corrupted' | 'eldritch' | 'foulborn' | 'vestigial'
   name?: string
   tier?: number
   rank?: number
@@ -53,7 +53,13 @@ export function parseModInfoLine (line: string): ModifierInfo {
       throw new Error('Invalid regex for mod info line')
     }
 
-    switch (match.groups!.type) {
+    const modifierType = match.groups!.type
+    if (_$.VESTIGIAL_MODIFIER !== undefined && modifierType === _$.VESTIGIAL_MODIFIER) {
+      type = ModifierType.Implicit
+      generation = 'vestigial'
+    }
+
+    switch (modifierType) {
       case _$.IMPLICIT_MODIFIER:
       case _$.CORRUPTED_IMPLICIT:
         type = ModifierType.Implicit; break
@@ -65,7 +71,7 @@ export function parseModInfoLine (line: string): ModifierInfo {
         type = ModifierType.Crafted; break
     }
 
-    switch (match.groups!.type) {
+    switch (modifierType) {
       case _$.PREFIX_MODIFIER:
       case _$.FRACTURED_PREFIX:
       case _$.CRAFTED_PREFIX:

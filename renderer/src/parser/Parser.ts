@@ -34,6 +34,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseUnidentified,
   { virtual: parseSuperior },
   { virtual: parseFoulborn },
+  { virtual: parseVestigial },
   parseSynthesised,
   parseCategoryByHelpText,
   { virtual: parseMapTier },
@@ -877,6 +878,21 @@ function parseFoulborn (item: ParserState) {
     item.name = _$.FOULBORN_NAME.exec(item.name)![1]
     item.isFoulborn = true
   }
+}
+
+function parseVestigial (item: ParserState) {
+  if (item.rarity !== ItemRarity.Unique) return
+
+  const name = item.baseType ?? item.name
+  const match = _$.VESTIGIAL_NAME.exec(name)
+  if (!match) return
+
+  if (item.baseType) {
+    item.baseType = match[1]
+  } else {
+    item.name = match[1]
+  }
+  item.isVestigial = true
 }
 
 function parseCategoryByHelpText (section: string[], item: ParsedItem) {

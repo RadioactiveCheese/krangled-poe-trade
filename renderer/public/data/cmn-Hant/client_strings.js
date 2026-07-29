@@ -125,6 +125,7 @@ export default {
   UNMODIFIABLE: '不可調整的',
   FOULBORN_NAME: /^穢生 (.*)$/,
   FOULBORN_MODIFIER: 'Foulborn Unique Modifier',
+  VESTIGIAL_NAME: /^殘存 (.*)$/,
   // ---
   CHAT_SYSTEM: /^: (?<body>.+)$/,
   CHAT_TRADE: /^\$(?:<(?<guild_tag>.+?)> )?(?<char_name>.+?): (?<body>.+)$/,
