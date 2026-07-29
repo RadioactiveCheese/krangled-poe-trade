@@ -881,6 +881,8 @@ function parseFoulborn (item: ParserState) {
 }
 
 function parseVestigial (item: ParserState) {
+  if (item.rarity !== ItemRarity.Unique) return
+
   const name = item.baseType ?? item.name
   const match = _$.VESTIGIAL_NAME.exec(name)
   if (!match) return

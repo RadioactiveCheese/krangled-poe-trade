@@ -418,7 +418,7 @@ export function createFilters (
     }
   }
 
-  if (item.rarity === ItemRarity.Unique || item.isVestigial) {
+  if (item.rarity === ItemRarity.Unique) {
     filters.vestigial = {
       value: Boolean(item.isVestigial)
     }

@@ -53,7 +53,13 @@ export function parseModInfoLine (line: string): ModifierInfo {
       throw new Error('Invalid regex for mod info line')
     }
 
-    switch (match.groups!.type) {
+    const modifierType = match.groups!.type
+    if (_$.VESTIGIAL_MODIFIER !== undefined && modifierType === _$.VESTIGIAL_MODIFIER) {
+      type = ModifierType.Implicit
+      generation = 'vestigial'
+    }
+
+    switch (modifierType) {
       case _$.IMPLICIT_MODIFIER:
       case _$.CORRUPTED_IMPLICIT:
         type = ModifierType.Implicit; break
@@ -65,7 +71,7 @@ export function parseModInfoLine (line: string): ModifierInfo {
         type = ModifierType.Crafted; break
     }
 
-    switch (match.groups!.type) {
+    switch (modifierType) {
       case _$.PREFIX_MODIFIER:
       case _$.FRACTURED_PREFIX:
       case _$.CRAFTED_PREFIX:
@@ -78,9 +84,6 @@ export function parseModInfoLine (line: string): ModifierInfo {
         generation = 'corrupted'; break
       case _$.FOULBORN_MODIFIER:
         generation = 'foulborn'; break
-      case _$.VESTIGIAL_MODIFIER:
-        type = ModifierType.Implicit
-        generation = 'vestigial'; break
     }
 
     name = match.groups!.name ?? undefined
