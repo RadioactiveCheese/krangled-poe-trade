@@ -21,6 +21,8 @@ export default {
   RARITY: '아이템 희귀도: ',
   ITEM_CLASS: '아이템 종류: ',
   ITEM_LEVEL: '아이템 레벨: ',
+  MERCENARY_BUILD: '빌드',
+  MERCENARY_LEVEL: '용병 레벨',
   CORPSE_LEVEL: '시신 레벨: ',
   TALISMAN_TIER: '부적 등급: ',
   GEM_LEVEL: '레벨: ',

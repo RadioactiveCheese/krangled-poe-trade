@@ -25,7 +25,7 @@
               <div class="px-2">{{ t(':stock') }}</div>
             </th>
             <th v-if="filters.itemLevel" :class="$style.tableHeading">
-              <div class="px-2">{{ t(':item_level') }}</div>
+              <div class="px-2">{{ item.mercenary ? t('mercenary.level') : t(':item_level') }}</div>
             </th>
             <th v-if="item.category === 'Gem'" :class="$style.tableHeading">
               <div class="px-2">{{ t(':gem_level') }}</div>
@@ -48,16 +48,35 @@
             <tr v-if="!result" :key="idx">
               <td colspan="100" class="text-transparent">***</td>
             </tr>
-            <trade-item
-              v-else
-              :key="result.id"
-              :result="result"
-              :show-stock="Boolean(item.stackSize)"
-              :show-item-level="Boolean(filters.itemLevel)"
-              :show-gem-level="item.category === 'Gem'"
-              :show-quality="Boolean(filters.quality || item.category === 'Gem')"
-              :show-seller="showSeller"
-            />
+            <template v-else>
+              <trade-item
+                :key="result.id"
+                :result="result"
+                :show-stock="Boolean(item.stackSize)"
+                :show-item-level="Boolean(filters.itemLevel)"
+                :show-gem-level="item.category === 'Gem'"
+                :show-quality="Boolean(filters.quality || item.category === 'Gem')"
+                :show-seller="showSeller"
+                :mercenary-expanded="expandedResultId === result.id"
+                @toggle-mercenary="toggleMercenaryDetails(result)"
+              />
+              <tr v-if="expandedResultId === result.id" :key="`${result.id}-mercenary`">
+                <td :id="`${result.id}-mercenary-details`" colspan="100" class="bg-gray-900 px-3 py-2">
+                  <div v-for="skill in result.mercenarySkills" :key="skill.hash" class="mb-2 flex last:mb-0">
+                    <img :src="skill.icon" class="mr-2 h-8 w-8 shrink-0" alt="">
+                    <div class="min-w-0">
+                      <div class="text-gray-200">{{ skill.name }}</div>
+                      <div v-if="skill.supports?.length" class="flex flex-wrap gap-1 text-xs text-gray-400">
+                        <span v-for="support in skill.supports" :key="support.hash"
+                          class="rounded bg-gray-800 px-1">
+                          {{ support.name }} <span class="text-gray-500">T{{ support.tier }}</span>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </template>
           </template>
         </tbody>
       </table>
@@ -68,7 +87,7 @@
     <p>Error: {{ error }}</p>
     <template #actions>
       <button class="btn" @click="execSearch">{{ t('Retry') }}</button>
-      <button class="btn" @click="openTradeLink">{{ t('Browser') }}</button>
+      <button v-if="canCreateTradeLink" class="btn" @click="openTradeLink">{{ t('Browser') }}</button>
     </template>
   </ui-error-box>
 </template>
@@ -87,6 +106,7 @@ import { artificialSlowdown } from './artificial-slowdown'
 import OnlineFilter from './OnlineFilter.vue'
 import TradeLinks from './TradeLinks.vue'
 import TradeItem from './TradeItem.vue'
+import { loadMercenaryTradeData, resolveMercenaryBuildTradeId } from './mercenary-trade-data'
 
 const slowdown = artificialSlowdown(900)
 
@@ -105,7 +125,7 @@ function useTradeApi () {
     const out: Array<PricingResult & { listedTimes: number }> = []
     for (const result of fetchResults.value) {
       if (result == null) break
-      if (out.length === 0 || result.hasFee) {
+      if (out.length === 0 || result.hasFee || result.mercenarySkills) {
         out.push({ listedTimes: 1, ...result })
         continue
       }
@@ -142,6 +162,12 @@ function useTradeApi () {
       fetchResults.value = _fetchResults
 
       const _searchId = searchId
+      if (filters.mercenaryBuild && !filters.mercenaryBuild.disabled) {
+        const mercenaryData = await loadMercenaryTradeData()
+        if (!mercenaryData.builds.has(filters.mercenaryBuild.value)) {
+          throw new Error(`Unknown Mercenary build: ${filters.mercenaryBuild.value}`)
+        }
+      }
       const request = createTradeRequest(filters, stats)
       const _searchResult = await requestTradeResultList(request, filters.trade.league)
       if (_searchId !== searchId) {
@@ -213,8 +239,15 @@ export default defineComponent({
     }, { immediate: true })
 
     const { error, searchResult, groupedResults, search } = useTradeApi()
+    const expandedResultId = shallowRef<string | null>(null)
 
     const showBrowser = inject<(url: string) => void>('builtin-browser')!
+    const canCreateTradeLink = computed(() => {
+      const build = props.filters.mercenaryBuild
+      return !props.item.mercenary ||
+        build?.disabled ||
+        Boolean(build && resolveMercenaryBuildTradeId(build.value, build.infamous))
+    })
 
     function makeTradeLink () {
       return (searchResult.value)
@@ -227,6 +260,11 @@ export default defineComponent({
     return {
       t,
       list: searchResult,
+      expandedResultId,
+      toggleMercenaryDetails (result: PricingResult) {
+        if (!result.mercenarySkills?.length) return
+        expandedResultId.value = expandedResultId.value === result.id ? null : result.id
+      },
       groupedResults: computed(() => {
         if (!slowdown.isReady.value) {
           return Array<undefined>(SHOW_RESULTS)
@@ -241,6 +279,7 @@ export default defineComponent({
       }),
       execSearch: () => { search(props.filters, props.stats) },
       error,
+      canCreateTradeLink,
       showSeller: computed(() => widget.value.showSeller),
       makeTradeLink,
       openTradeLink () {

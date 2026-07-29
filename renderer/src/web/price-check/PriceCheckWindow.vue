@@ -5,8 +5,13 @@
     'flex-row': clickPosition === 'stash',
     'flex-row-reverse': clickPosition === 'inventory'
   }">
-    <div v-if="!isBrowserShown" class="layout-column shrink-0"
+    <div v-if="!isBrowserShown" class="layout-column shrink-0 overflow-hidden"
       style="width: var(--game-panel);">
+      <img v-if="itemPreview && item?.isOk() && item.value.mercenary"
+        :src="itemPreview.dataUrl"
+        class="block w-full h-full object-fill"
+        alt=""
+        draggable="false">
     </div>
     <div id="price-window" class="layout-column shrink-0 text-gray-200 pointer-events-auto" style="width: 28.75rem;">
       <AppTitleBar @close="closePriceCheck" @click="openLeagueSelection" :title="title">
@@ -88,6 +93,7 @@ import ItemQuickPrice from '@/web/ui/ItemQuickPrice.vue'
 import { PriceCheckWidget, WidgetManager, WidgetSpec } from '../overlay/interfaces'
 
 type ParseError = { name: string; message: string; rawText: ParsedItem['rawText'] }
+type ItemPreview = { dataUrl: string; width: number; height: number }
 
 export default defineComponent({
   widget: {
@@ -148,6 +154,7 @@ export default defineComponent({
     })
 
     const item = shallowRef<null | Result<ParsedItem, ParseError>>(null)
+    const itemPreview = shallowRef<ItemPreview | null>(null)
     const advancedCheck = shallowRef(false)
     const checkPosition = shallowRef({ x: 1, y: 1 })
 
@@ -177,6 +184,7 @@ export default defineComponent({
         })
       }
       closeBrowser()
+      itemPreview.value = e.itemPreview ?? null
       wm.show(props.config.wmId)
       checkPosition.value = e.position
       advancedCheck.value = e.focusOverlay
@@ -288,6 +296,7 @@ export default defineComponent({
       showCheckPos,
       checkPosition,
       item,
+      itemPreview,
       advancedCheck,
       handleIdentification,
       overlayKey,

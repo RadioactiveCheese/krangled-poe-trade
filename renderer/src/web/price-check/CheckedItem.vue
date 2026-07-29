@@ -8,10 +8,15 @@
     <price-trend v-else
       :item="item"
       :filters="itemFilters" />
+    <mercenary-filters v-if="item.mercenary"
+      :stats="itemStats"
+      :build="item.mercenary.build"
+      @add="addMercenaryStat"
+      @remove="removeMercenaryStat" />
     <filters-block
       ref="filtersComponent"
       :filters="itemFilters"
-      :stats="itemStats"
+      :stats="item.mercenary ? [] : itemStats"
       :item="item"
       :presets="presets"
       @preset="selectPreset"
@@ -31,7 +36,7 @@
       <div class="flex w-40" @mouseenter="handleSearchMouseenter">
         <button class="btn" @click="doSearch = true" style="min-width: 5rem;">{{ t('Search') }}</button>
       </div>
-      <trade-links v-if="tradeAPI === 'trade'"
+      <trade-links v-if="tradeAPI === 'trade' && !item.mercenary"
         :get-link="makeTradeLink" />
     </div>
     <stack-value :filters="itemFilters" :item="item"/>
@@ -61,9 +66,10 @@ import StackValue from './stack-value/StackValue.vue'
 import FilterName from './filters/FilterName.vue'
 import { CATEGORY_TO_TRADE_ID, createTradeRequest } from './trade/pathofexile-trade'
 import { AppConfig } from '@/web/Config'
-import { FilterPreset } from './filters/interfaces'
+import { FilterPreset, StatFilter } from './filters/interfaces'
 import { PriceCheckWidget } from '../overlay/interfaces'
 import { useLeagues } from '@/web/background/Leagues'
+import MercenaryFilters from './filters/MercenaryFilters.vue'
 
 let _showSupportLinksCounter = 0
 
@@ -76,6 +82,7 @@ export default defineComponent({
     TradeLinks,
     PriceTrend,
     FiltersBlock,
+    MercenaryFilters,
     FilterName,
     StackValue
   },
@@ -222,6 +229,15 @@ export default defineComponent({
 
     const { t } = useI18n()
 
+    function addMercenaryStat (stat: StatFilter) {
+      itemStats.value.push(stat)
+    }
+
+    function removeMercenaryStat (stat: StatFilter) {
+      const index = itemStats.value.indexOf(stat)
+      if (index !== -1) itemStats.value.splice(index, 1)
+    }
+
     return {
       t,
       itemFilters,
@@ -233,6 +249,8 @@ export default defineComponent({
       showPredictedPrice,
       show,
       handleSearchMouseenter,
+      addMercenaryStat,
+      removeMercenaryStat,
       showSupportLinks,
       presets: computed(() => presets.value.presets.map(preset =>
         ({ id: preset.id, active: (preset.id === presets.value.active) }))),

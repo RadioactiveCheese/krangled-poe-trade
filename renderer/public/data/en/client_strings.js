@@ -21,6 +21,8 @@ export default {
   RARITY: 'Rarity: ',
   ITEM_CLASS: 'Item Class: ',
   ITEM_LEVEL: 'Item Level: ',
+  MERCENARY_BUILD: 'Build',
+  MERCENARY_LEVEL: 'Mercenary Level',
   CORPSE_LEVEL: 'Corpse Level: ',
   TALISMAN_TIER: 'Talisman Tier: ',
   GEM_LEVEL: 'Level: ',

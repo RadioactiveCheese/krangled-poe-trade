@@ -15,10 +15,25 @@
         :filter="filters.sentinelCharge" :name="t('item.sentinel_charge')" />
       <filter-btn-logical v-if="filters.mapBlighted" readonly
         :filter="{ disabled: false }" :text="filters.mapBlighted.value" />
-      <filter-btn-logical v-if="filters.discriminator?.value" readonly
+      <filter-btn-logical v-if="filters.discriminator?.value && !filters.mercenaryBuild" readonly
         :filter="{ disabled: false }" :text="filters.discriminator.value" />
+      <template v-if="filters.mercenaryBuild && mercenaryBuildVariant">
+        <filter-btn-logical v-if="mercenaryBuildVariant.infamousTradeId" controlled
+          :filter="filters.mercenaryBuild"
+          :active="mercenaryInfamousActive"
+          text="mercenary.infamous"
+          @toggle="handleToggleMercenaryInfamous" />
+        <filter-btn-logical controlled raw
+          :filter="filters.mercenaryBuild"
+          :active="!filters.mercenaryBuild.disabled"
+          :text="mercenaryBuildVariant.baseName"
+          @toggle="handleToggleMercenaryBuild" />
+      </template>
+      <filter-btn-logical v-else-if="filters.mercenaryBuild" readonly raw
+        :filter="filters.mercenaryBuild"
+        :text="filters.mercenaryBuild.value" />
       <filter-btn-numeric v-if="filters.itemLevel"
-        :filter="filters.itemLevel" :name="t('item.item_level')" />
+        :filter="filters.itemLevel" :name="item.mercenary ? t('mercenary.level') : t('item.item_level')" />
       <filter-btn-numeric v-if="filters.stackSize"
         :filter="filters.stackSize" :name="t('item.stock')" />
       <filter-btn-numeric v-if="filters.whiteSockets"
@@ -99,6 +114,16 @@ import FilterBtnLogical from './FilterBtnLogical.vue'
 import UnknownModifier from './UnknownModifier.vue'
 import { ItemFilters, StatFilter } from './interfaces'
 import { ParsedItem, ItemRarity, ItemCategory } from '@/parser'
+import {
+  loadMercenaryTradeData,
+  type MercenaryBuildVariant,
+  type MercenaryTradeData
+} from '../trade/mercenary-trade-data'
+import {
+  isMercenaryInfamousActive,
+  toggleMercenaryBuild,
+  toggleMercenaryInfamous
+} from './mercenary-build-filter'
 
 export default defineComponent({
   name: 'FiltersBlock',
@@ -132,11 +157,51 @@ export default defineComponent({
     const statsVisibility = shallowReactive({ disabled: false })
     const showHidden = shallowRef(false)
     const showFilterSources = shallowRef(false)
+    const mercenaryTradeData = shallowRef<MercenaryTradeData>()
 
     watch(() => props.item, () => {
       showHidden.value = false
       statsVisibility.disabled = false
     })
+
+    watch(() => props.item.mercenary?.build, async (build) => {
+      mercenaryTradeData.value = undefined
+      if (!build) return
+
+      try {
+        const data = await loadMercenaryTradeData()
+        if (props.item.mercenary?.build === build) mercenaryTradeData.value = data
+      } catch {
+        // MercenaryFilters displays the retryable metadata-loading error.
+      }
+    }, { immediate: true })
+
+    const mercenaryBuildVariant = computed<MercenaryBuildVariant | undefined>(() => {
+      const build = props.filters.mercenaryBuild?.value
+      return build ? mercenaryTradeData.value?.buildVariants.get(build) : undefined
+    })
+
+    const mercenaryInfamousActive = computed(() => {
+      const filter = props.filters.mercenaryBuild
+      const variant = mercenaryBuildVariant.value
+      if (!filter || !variant || filter.disabled) return false
+      return isMercenaryInfamousActive(filter, variant)
+    })
+
+    function handleToggleMercenaryInfamous () {
+      const filter = props.filters.mercenaryBuild
+      const variant = mercenaryBuildVariant.value
+      if (!filter || !variant) return
+
+      toggleMercenaryInfamous(filter, variant)
+    }
+
+    function handleToggleMercenaryBuild () {
+      const filter = props.filters.mercenaryBuild
+      if (!filter) return
+
+      toggleMercenaryBuild(filter)
+    }
 
     const showUnknownMods = computed(() =>
       props.item.unknownModifiers.length &&
@@ -151,6 +216,10 @@ export default defineComponent({
       statsVisibility,
       showHidden,
       showFilterSources,
+      mercenaryBuildVariant,
+      mercenaryInfamousActive,
+      handleToggleMercenaryInfamous,
+      handleToggleMercenaryBuild,
       totalSelectedMods: computed(() => {
         return props.stats.filter(stat => !stat.disabled).length
       }),

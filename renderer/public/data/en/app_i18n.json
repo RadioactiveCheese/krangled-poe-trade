@@ -331,6 +331,25 @@
     "debug_hotkeys": "Record all key presses",
     "use_intl_site": "Force the English version of the site"
   },
+  "mercenary": {
+    "hidden_stats": "Copied Warrant text omits skills and supports. Add the ones shown in the in-game Mercenary details panel.",
+    "filter_placeholder": "Add a Mercenary skill or support...",
+    "support_placeholder": "Add a Mercenary support...",
+    "available_skills": "Skills available to {0}",
+    "primary": "Primary",
+    "secondary": "Secondary",
+    "utility": "Utility",
+    "skill": "Skill",
+    "support": "Support",
+    "infamous": "Infamous",
+    "level": "Mercenary Level",
+    "loading": "Loading Mercenary trade filters...",
+    "load_error": "Could not load Mercenary trade filters: {0}",
+    "no_matches": "No matching Mercenary skill or support.",
+    "remove_filter": "Remove filter",
+    "retry": "Retry",
+    "loadout": "Mercenary loadout"
+  },
   "price_check": {
     "name": "Price check",
     "hotkey" :"Auto-hide Mode",

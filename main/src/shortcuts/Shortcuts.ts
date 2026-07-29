@@ -1,4 +1,4 @@
-import { screen, globalShortcut } from 'electron'
+import { screen, globalShortcut, nativeImage } from 'electron'
 import { uIOhook, UiohookKey, UiohookWheelEvent } from 'uiohook-napi'
 import { isModKey, KeyToElectron, mergeTwoHotkeys } from '../../../ipc/KeyToCode'
 import { typeInChat, stashSearch } from './text-box'
@@ -13,6 +13,13 @@ import type { GameConfig } from '../host-files/GameConfig'
 import type { ServerEvents } from '../server'
 
 type UiohookKeyT = keyof typeof UiohookKey
+type ItemPreviewSnapshot = {
+  bitmap: ReturnType<GameWindow['screenshot']>
+  width: number
+  height: number
+  panelWidth: number
+  cursorOnRight: boolean
+}
 const UiohookToName = Object.fromEntries(Object.entries(UiohookKey).map(([k, v]) => ([v, k])))
 
 export class Shortcuts {
@@ -157,13 +164,26 @@ export class Shortcuts {
           const { action } = entry
 
           const pressPosition = screen.getCursorScreenPoint()
+          const previewSnapshot = (action.target === 'price-check')
+            ? this.captureItemPreviewSnapshot(pressPosition)
+            : undefined
 
           this.clipboard.readItemText()
             .then(clipboard => {
+              const itemPreview = (action.target === 'price-check')
+                ? this.createMercenaryWarrantPreview(clipboard, previewSnapshot)
+                : undefined
+
               this.areaTracker.removeListeners()
               this.server.sendEventTo('last-active', {
                 name: 'MAIN->CLIENT::item-text',
-                payload: { target: action.target, clipboard, position: pressPosition, focusOverlay: Boolean(action.focusOverlay) }
+                payload: {
+                  target: action.target,
+                  clipboard,
+                  position: pressPosition,
+                  focusOverlay: Boolean(action.focusOverlay),
+                  itemPreview
+                }
               })
               if (action.focusOverlay && this.overlay.wasUsedRecently) {
                 this.overlay.assertOverlayActive()
@@ -211,6 +231,69 @@ export class Shortcuts {
   private unregister () {
     globalShortcut.unregisterAll()
   }
+
+  private captureItemPreviewSnapshot (
+    pressPosition: { x: number, y: number }
+  ): ItemPreviewSnapshot | undefined {
+    if (process.platform !== 'win32') return
+
+    try {
+      const bounds = this.poeWindow.bounds
+      const width = Math.round(bounds.width)
+      const height = Math.round(bounds.height)
+      const panelWidth = Math.min(Math.round(this.poeWindow.uiSidebarWidth), width)
+      if (width <= 0 || height <= 0 || panelWidth <= 0) return
+
+      const screenshot = this.poeWindow.screenshot()
+      if (screenshot.length < width * height * 4) return
+
+      return {
+        bitmap: screenshot,
+        width,
+        height,
+        panelWidth,
+        cursorOnRight: pressPosition.x > bounds.x + bounds.width / 2
+      }
+    } catch {
+      return undefined
+    }
+  }
+
+  private createMercenaryWarrantPreview (
+    clipboard: string,
+    snapshot: ItemPreviewSnapshot | undefined
+  ) {
+    if (!snapshot || !isMercenaryWarrantClipboard(clipboard)) return
+
+    try {
+      const { bitmap, width, height, panelWidth, cursorOnRight } = snapshot
+      const x = cursorOnRight ? width - panelWidth : 0
+
+      const preview = nativeImage
+        .createFromBitmap(bitmap, { width, height })
+        .crop({ x, y: 0, width: panelWidth, height })
+      if (preview.isEmpty()) return
+
+      return {
+        dataUrl: preview.toDataURL(),
+        width: panelWidth,
+        height
+      }
+    } catch {
+      return undefined
+    }
+  }
+}
+
+const MERCENARY_WARRANT_NAMES = new Set([
+  'Mercenary Warrant',
+  'Наёмничья расписка',
+  '용병 소환장',
+  '傭兵契約書'
+])
+
+function isMercenaryWarrantClipboard (clipboard: string) {
+  return clipboard.split('\n').some(line => MERCENARY_WARRANT_NAMES.has(line.trim()))
 }
 
 function pressKeysToCopyItemText (pressedModKeys: string[] = [], showModsKey: string) {

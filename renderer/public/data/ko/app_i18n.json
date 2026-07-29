@@ -320,6 +320,25 @@
     "show_overlay_ready": "Show a notification when the Overlay detects a PoE window",
     "debug_hotkeys": "모든 키 스트로크 기록"
   },
+  "mercenary": {
+    "hidden_stats": "복사한 소환장 텍스트에는 스킬과 보조 스킬이 포함되지 않습니다. 게임 내 용병 상세 정보에 표시된 항목을 추가하세요.",
+    "filter_placeholder": "용병 스킬 또는 보조 스킬 추가...",
+    "support_placeholder": "용병 보조 스킬 추가...",
+    "available_skills": "{0} 사용 가능 스킬",
+    "primary": "주요",
+    "secondary": "보조",
+    "utility": "유틸리티",
+    "skill": "스킬",
+    "support": "보조",
+    "infamous": "악명 높은",
+    "level": "용병 레벨",
+    "loading": "용병 거래 필터 불러오는 중...",
+    "load_error": "용병 거래 필터를 불러오지 못했습니다: {0}",
+    "no_matches": "일치하는 용병 스킬 또는 보조 스킬이 없습니다.",
+    "remove_filter": "필터 제거",
+    "retry": "다시 시도",
+    "loadout": "용병 스킬 구성"
+  },
   "price_check": {
     "name": "Price check",
     "hotkey" :"Auto-hide Mode",

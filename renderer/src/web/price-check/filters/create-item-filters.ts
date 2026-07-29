@@ -45,6 +45,25 @@ export function createFilters (
     }
   }
 
+  if (item.mercenary) {
+    filters.searchExact = {
+      baseType: item.info.name,
+      baseTypeTrade: t(opts, item.info)
+    }
+    filters.discriminator = {
+      trade: 'mercenary_warrant'
+    }
+    filters.mercenaryBuild = {
+      value: item.mercenary.build,
+      disabled: false
+    }
+    filters.itemLevel = {
+      value: item.mercenary.level,
+      disabled: false
+    }
+    return filters
+  }
+
   if (item.category === ItemCategory.Gem) {
     return createGemFilters(item, filters, opts)
   }
