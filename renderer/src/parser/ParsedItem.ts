@@ -2,6 +2,7 @@ import type { ModifierType, StatCalculated } from './modifiers'
 import type { ParsedModifier } from './advanced-mod-desc'
 import type { BaseType } from '@/assets/data'
 import { ItemCategory } from './meta'
+import type { ChartShape } from './chart'
 
 export enum ItemRarity {
   Normal = 'Normal',
@@ -56,6 +57,14 @@ export interface ParsedItem {
     moreScarabs?: number
     moreCurrency?: number
     moreDivCards?: number
+  }
+  chart?: {
+    areaName: string
+    areaId?: string
+    shape?: ChartShape | string
+    shapeId?: string
+    sulphur?: number
+    gold?: number
   }
   gemLevel?: number
   imbuedGem?: boolean

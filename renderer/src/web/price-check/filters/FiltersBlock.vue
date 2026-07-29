@@ -9,6 +9,12 @@
         :filter="{ disabled: false }" :text="t('item.map_foil_reward', [filters.mapCompletionReward.name])" />
       <filter-btn-numeric v-if="filters.areaLevel"
         :filter="filters.areaLevel" :name="t('item.area_level')" />
+      <filter-btn-logical v-if="filters.chartShape" raw
+        :filter="filters.chartShape" :text="t('item.chart_shape', [filters.chartShape.name])" />
+      <filter-btn-numeric v-if="filters.chartSulphur"
+        :filter="filters.chartSulphur" :name="t('item.chart_sulphur')" />
+      <filter-btn-numeric v-if="filters.chartGold"
+        :filter="filters.chartGold" :name="t('item.chart_gold')" />
       <filter-btn-numeric v-if="filters.heistWingsRevealed"
         :filter="filters.heistWingsRevealed" :name="t('item.heist_wings_revealed')" />
       <filter-btn-numeric v-if="filters.sentinelCharge"

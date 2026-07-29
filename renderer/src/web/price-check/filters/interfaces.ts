@@ -22,6 +22,7 @@ export interface ItemFilters {
   discriminator?: {
     value?: string
     trade: string
+    option?: string
   }
   mercenaryBuild?: {
     value: string
@@ -86,6 +87,13 @@ export interface ItemFilters {
     disabled: boolean
   }
   areaLevel?: FilterNumeric
+  chartShape?: {
+    value: string
+    name: string
+    disabled: boolean
+  }
+  chartSulphur?: FilterNumeric
+  chartGold?: FilterNumeric
   heistWingsRevealed?: FilterNumeric
   sentinelCharge?: FilterNumeric
   trade: {

@@ -55,6 +55,7 @@ export const CATEGORY_TO_TRADE_ID = new Map([
   [ItemCategory.Tincture, 'tincture'],
   [ItemCategory.Charm, 'azmeri.charm'],
   [ItemCategory.Idol, 'idol'],
+  [ItemCategory.Chart, 'chart'],
   [ItemCategory.Graft, 'graft']
 ])
 
@@ -168,6 +169,9 @@ interface TradeRequest {
           map_iiq?: FilterRange
           map_iir?: FilterRange
           map_packsize?: FilterRange
+          chart_shape?: { option?: string }
+          chart_sulphur?: FilterRange
+          map_gold?: FilterRange
           map_blighted?: FilterBoolean
           map_uberblighted?: FilterBoolean
           area_level?: FilterRange
@@ -400,6 +404,17 @@ export function createTradeRequest (filters: ItemFilters, stats: StatFilter[]) {
     if (filters.areaLevel.max) {
       propSet(query.filters, 'map_filters.filters.area_level.max', filters.areaLevel.max)
     }
+  }
+
+  const { chartShape, chartSulphur, chartGold } = filters
+  if (chartShape && !chartShape.disabled) {
+    propSet(query.filters, 'map_filters.filters.chart_shape.option', chartShape.value)
+  }
+  if (chartSulphur && !chartSulphur.disabled) {
+    propSet(query.filters, 'map_filters.filters.chart_sulphur.min', chartSulphur.value)
+  }
+  if (chartGold && !chartGold.disabled) {
+    propSet(query.filters, 'map_filters.filters.map_gold.min', chartGold.value)
   }
 
   if (filters.heistWingsRevealed && !filters.heistWingsRevealed.disabled) {
@@ -759,7 +774,8 @@ function nameToQuery (name: string, filters: ItemFilters) {
   } else {
     return {
       discriminator: filters.discriminator.trade,
-      option: name
+      option:
+        filters.discriminator.option ?? name
     }
   }
 }

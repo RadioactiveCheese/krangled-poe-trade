@@ -49,8 +49,9 @@ export default {
 <script setup lang="ts">
 import { computed, inject, ref } from 'vue'
 import { MainProcess } from '@/web/background/IPC'
-import { ItemCategory, ItemRarity, parseClipboard, ParsedItem } from '@/parser'
+import { parseClipboard, ParsedItem } from '@/parser'
 import { registerActions } from './hotkeyable-actions'
+import { isMapLikeItem } from '../map-check/is-map-like'
 import type { WidgetManager } from '../overlay/interfaces'
 
 import Widget from '../overlay/Widget.vue'
@@ -98,13 +99,6 @@ const anchor = computed(() => {
 })
 
 const isMapLike = computed(() => {
-  if (!item.value) return false
-  const { category, rarity, info: { refName } } = item.value
-  return (
-    (category === ItemCategory.Map && rarity !== ItemRarity.Unique) ||
-    category === ItemCategory.HeistContract ||
-    category === ItemCategory.HeistBlueprint ||
-    category === ItemCategory.Invitation ||
-    refName === 'Expedition Logbook')
+  return item.value ? isMapLikeItem(item.value) : false
 })
 </script>
