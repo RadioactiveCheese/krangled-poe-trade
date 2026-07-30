@@ -150,6 +150,7 @@ test('charts are accepted by the Map Check tool and expose their dangerous modif
   assert.equal(runtime.isMapLikeItem(item), true)
 
   const prepared = runtime.prepareMapStats(item)
+  assert.ok(!prepared.some(entry => entry.matcher.includes('Voyage Modifier will be revealed')))
   assert.ok(prepared.some(entry => entry.matcher.includes('maximum Resistances')))
   assert.ok(prepared.some(entry => entry.matcher.includes('more Monster Life')))
 })

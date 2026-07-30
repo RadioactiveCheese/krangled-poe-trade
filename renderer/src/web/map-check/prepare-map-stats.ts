@@ -7,8 +7,14 @@ export interface PreparedStat {
   roll?: number
 }
 
+const HIDDEN_MAP_CHECK_STATS = new Set([
+  'Voyage Modifier will be revealed once Charted'
+])
+
 export function prepareMapStats (item: ParsedItem): PreparedStat[] {
-  return item.statsByType.map(calc => {
+  const visibleStats = item.statsByType.filter(calc => !HIDDEN_MAP_CHECK_STATS.has(calc.stat.ref))
+
+  return visibleStats.map(calc => {
     const roll = statSourcesTotal(calc.sources)
     const translation = translateStatWithRoll(calc, roll)
 
