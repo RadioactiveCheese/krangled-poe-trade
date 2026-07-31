@@ -72,7 +72,35 @@ entry once the parent package stops needing it:
   to pretty-print HTML in test output.
 - `renderer`: `nopt@^8` / `abbrev@^3` — `js-beautify@2` pulls `nopt@10`, whose
   `engines` field excludes odd-numbered Node releases and produces `EBADENGINE`
-  warnings for anyone on Node 23/25. Both are only used by the `js-beautify` CLI.
+  warnings for anyone on Node 23/25. Both are only reachable from the
+  `js-beautify` CLI, which nothing here invokes; the programmatic API that
+  `@vue/test-utils` uses never touches them. Pinning a major below what
+  `js-beautify@2` declares is nonetheless a downgrade, so it was checked by
+  hand: `npx js-beautify`, including the `--brace-style` path that exercises
+  `js-beautify`'s custom `nopt.typeDefs` and `nopt.clean` calls, works on
+  `nopt@8.1.0`. Drop both overrides if the CLI ever starts misbehaving.
+
+# Why `electron-builder` is pinned exactly
+
+`main/package.json` pins `electron-builder` to an exact version rather than a
+caret range. `build/app-builder-lib+<version>.patch` is generated against one
+specific `app-builder-lib` release, and `patch-package` matches on package name
+only — against a *different* version it either fails outright or, worse, applies
+with nothing but a warning. This repo previously carried a `26.8.1` patch under
+an `^26.9.0` range and sat in that second state.
+
+Bumping `electron-builder` is therefore a two-step change: edit the exact
+version, then regenerate the patch.
+
+```sh
+cd main
+# after changing the version and running npm install
+npx patch-package app-builder-lib --patch-dir build
+git rm build/app-builder-lib+<old version>.patch
+```
+
+`build/apprun-patch.test.mjs` re-asserts the patched AppRun script at AppImage
+build time, so a silently dropped patch fails the Linux release build.
 
 `tailwindcss@3` also reached the deprecated `glob@10` through `sucrase@3.35.0`;
 `sucrase@3.35.1` swapped it for `tinyglobby`, so a lockfile refresh was enough.
