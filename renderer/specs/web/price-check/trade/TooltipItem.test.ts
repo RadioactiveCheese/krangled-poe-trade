@@ -78,6 +78,12 @@ describe('Trade listing tooltip header caps', () => {
     expect(caps.map(cap => cap.attributes('data-symbol'))).toEqual(['veiled', 'veiled'])
   })
 
+  it('marks items with Hinekora\'s Lock applied with the foresight emblem', () => {
+    const caps = mountTooltip([], undefined, ['foresight']).findAll('[data-testid="header-cap"]')
+    expect(caps.map(cap => cap.attributes('data-symbol'))).toEqual(['foresight', 'foresight'])
+    expect(caps[0].find('img').attributes('src')).toBe('/images/item-symbols/foresight.png')
+  })
+
   it('renders no caps when the API reports no influence or symbols', () => {
     expect(mountTooltip([]).findAll('[data-testid="header-cap"]')).toHaveLength(0)
   })
@@ -130,6 +136,33 @@ describe('Trade listing tooltip modifier lines', () => {
     const [numeric, word] = wrapper.findAll('[data-testid="modifier-line"]')
     expect(numeric.find('.text-poe-tier-prefix').text()).toBe('P1')
     expect(word.text()).toContain('Greater Intangibility')
+  })
+
+  it('draws title bands behind Intangibility and Memories values, with the memory icon', () => {
+    const result = {
+      displayItem: {
+        title: ['Fixture Mantle', 'Vaal Regalia'],
+        rarity: 'Rare',
+        frameType: 2,
+        influences: [],
+        nameBlock: [
+          { text: 'Intangibility: ', value: '12%', color: TradeNumberColors.Augmented },
+          { text: 'Memories: ', value: '3', color: TradeNumberColors.Augmented },
+          { text: 'Quality: ', value: '+20%', color: TradeNumberColors.Augmented }
+        ]
+      }
+    } as unknown as PricingResult
+    const wrapper = mount(TooltipItem, {
+      props: { result },
+      global: { stubs: { UiDetailedItemImg: true } }
+    })
+
+    const [intangibility, memories, quality] = wrapper.findAll('[data-testid="modifier-line"]')
+    expect(intangibility.attributes('style')).toContain('/images/item-display/intangibility-title.png')
+    expect(intangibility.find('img').exists()).toBe(false)
+    expect(memories.attributes('style')).toContain('/images/item-display/memory-title.png')
+    expect(memories.find('img').attributes('src')).toBe('/images/item-display/memory-icon.png')
+    expect(quality.attributes('style')).toBeUndefined()
   })
 
   it('renders unrevealed veiled mods as the ornament image instead of text', () => {

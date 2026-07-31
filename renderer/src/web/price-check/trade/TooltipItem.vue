@@ -37,6 +37,7 @@
               data-testid="modifier-line"
               :data-mod-influence="line.influence"
               class="grid grid-cols-[3.25rem_1fr_3.25rem] items-center"
+              :style="valueBandStyle(line)"
             >
               <span
                 class="text-xs text-left pl-0.5"
@@ -56,6 +57,13 @@
                 >{{ inlineTier(line) + ' ' }}</span>
                 <span :class="line.influence ? $style[`influence-${line.influence}`] : line.value != null ? 'text-gray-400' : $style[`number-color-${line.color}`]">{{ line.text }}</span>
                 <span v-if="line.value != null" :class="line.influence ? $style[`influence-${line.influence}`] : $style[`number-color-${line.color}`]">{{ line.value }}</span>
+                <img
+                  v-if="valueBandIcon(line)"
+                  :src="valueBandIcon(line)"
+                  alt=""
+                  class="inline-block h-4 align-text-bottom ml-1"
+                  draggable="false"
+                >
               </span>
               <span />
             </div>
@@ -78,6 +86,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import type { CSSProperties } from 'vue'
 import type { PricingResult } from './pathofexile-trade'
 import type { DisplayInfluence, DisplayItemLine } from './trade-tooltip'
 import UiDetailedItemImg from '@/web/ui/UiDetailedItemImg.vue'
@@ -100,6 +109,7 @@ const INFLUENCE_CAPS: Record<DisplayInfluence, { label: string, icon: string }> 
 }
 
 const ITEM_SYMBOL_CAPS: Record<string, { label: string, icon: string }> = {
+  foresight: { label: 'Foresight (Hinekora\'s Lock)', icon: '/images/item-symbols/foresight.png' },
   synthesised: { label: 'Synthesised', icon: '/images/item-symbols/synthesised.png' },
   veiled: { label: 'Veiled', icon: '/images/item-symbols/veiled.png' }
 }
@@ -177,6 +187,29 @@ function tierClass (line: DisplayItemLine): string {
   if (line.tier.startsWith('P')) return 'text-poe-tier-prefix'
   if (line.tier.startsWith('S')) return 'text-poe-tier-suffix'
   return 'text-poe-tier-neutral'
+}
+
+/* Certain named values carry the game's own chrome: a title band drawn
+   behind the row, and for Memories a crystal icon beside the value. */
+const VALUE_BANDS: Array<{ match: RegExp, art: string, icon?: string }> = [
+  { match: /^Intangibility\b/, art: '/images/item-display/intangibility-title.png' },
+  { match: /^Memories\b/, art: '/images/item-display/memory-title.png', icon: '/images/item-display/memory-icon.png' }
+]
+function valueBand (line: DisplayItemLine): { art: string, icon?: string } | undefined {
+  return VALUE_BANDS.find(band => band.match.test(line.text))
+}
+function valueBandStyle (line: DisplayItemLine): CSSProperties | undefined {
+  const band = valueBand(line)
+  if (!band) return undefined
+  return {
+    backgroundImage: `url(${band.art})`,
+    backgroundSize: '100% 100%',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center'
+  }
+}
+function valueBandIcon (line: DisplayItemLine): string | undefined {
+  return valueBand(line)?.icon
 }
 
 /* The ornate strip IS the unrevealed modifier — it replaces the text row.

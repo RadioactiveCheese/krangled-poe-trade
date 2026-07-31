@@ -95,8 +95,9 @@ const CLASSIC_INFLUENCES: Array<{
 ]
 
 /* Item-state markers that share the two header-cap slots with influence
-   emblems (influence takes precedence). */
-export type DisplayItemSymbol = 'synthesised' | 'veiled'
+   emblems (influence takes precedence). 'foresight' marks an item with
+   Hinekora's Lock applied. */
+export type DisplayItemSymbol = 'foresight' | 'synthesised' | 'veiled'
 
 export interface DisplayItem {
   title: string[]
@@ -139,6 +140,7 @@ export interface FetchItem {
   synthesised?: boolean
   fractured?: boolean
   replica?: boolean
+  foreseeing?: boolean
   influences?: Record<string, boolean>
   searing?: boolean
   tangled?: boolean
@@ -435,6 +437,7 @@ function buildItemProps (itemLevel: number | undefined, requirements: TradeDataL
 
 function buildItemSymbols (item: FetchItem): DisplayItemSymbol[] | undefined {
   const symbols: DisplayItemSymbol[] = []
+  if (item.foreseeing) symbols.push('foresight')
   if (item.synthesised) symbols.push('synthesised')
   if (item.veiledMods?.length) symbols.push('veiled')
   return symbols.length ? symbols : undefined
