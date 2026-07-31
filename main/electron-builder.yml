@@ -21,7 +21,10 @@ extraMetadata:
 nsis:
   oneClick: false
   allowToChangeInstallationDirectory: true
+  installerIcon: "build/icons/icon.ico"
+  uninstallerIcon: "build/icons/icon.ico"
 win:
+  icon: "build/icons/icon.ico"
   target:
   - "nsis"
   - "portable"
