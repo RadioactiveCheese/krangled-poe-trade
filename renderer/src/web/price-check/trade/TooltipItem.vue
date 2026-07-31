@@ -32,20 +32,20 @@
         <template v-for="(section, index) in sections" :key="section.key">
           <div v-if="section.content?.length">
             <div
-              v-for="(line, lineIndex) in section.content"
+              v-for="({ line, veiledArt, bandStyle, bandIcon }, lineIndex) in section.content"
               :key="`${line.text}-${lineIndex}`"
               data-testid="modifier-line"
               :data-mod-influence="line.influence"
               class="grid grid-cols-[3.25rem_1fr_3.25rem] items-center"
-              :style="valueBandStyle(line)"
+              :style="bandStyle"
             >
               <span
                 class="text-xs text-left pl-0.5"
                 :class="line.influence ? $style[`influence-${line.influence}`] : tierClass(line)"
               >{{ gutterTier(line) }}</span>
               <img
-                v-if="veiledArt(line)"
-                :src="veiledArt(line)"
+                v-if="veiledArt"
+                :src="veiledArt"
                 :alt="line.text"
                 class="block w-full h-5 object-contain"
                 draggable="false"
@@ -58,8 +58,8 @@
                 <span :class="line.influence ? $style[`influence-${line.influence}`] : line.value != null ? 'text-gray-400' : $style[`number-color-${line.color}`]">{{ line.text }}</span>
                 <span v-if="line.value != null" :class="line.influence ? $style[`influence-${line.influence}`] : $style[`number-color-${line.color}`]">{{ line.value }}</span>
                 <img
-                  v-if="valueBandIcon(line)"
-                  :src="valueBandIcon(line)"
+                  v-if="bandIcon"
+                  :src="bandIcon"
                   alt=""
                   class="inline-block h-4 align-text-bottom ml-1"
                   draggable="false"
@@ -143,6 +143,30 @@ const frameRarity = computed(() => {
   return byFrame.includes(rarity ?? '') ? rarity! : 'Normal'
 })
 
+/* Derived per-line display data, computed once per line here rather than
+   re-derived in every template binding. */
+interface DisplayRow {
+  line: DisplayItemLine
+  veiledArt?: string
+  bandStyle?: CSSProperties
+  bandIcon?: string
+}
+
+function toDisplayRow (line: DisplayItemLine): DisplayRow {
+  const band = VALUE_BANDS.find(band => band.match.test(line.text))
+  return {
+    line,
+    veiledArt: veiledArt(line),
+    bandStyle: band && {
+      backgroundImage: `url(${band.art})`,
+      backgroundSize: '100% 100%',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center'
+    },
+    bandIcon: band?.icon
+  }
+}
+
 const sections = computed(() => {
   const display = item.value
   if (!display) return []
@@ -164,15 +188,18 @@ const sections = computed(() => {
     // One section for all tags, so no separator lands between them.
     { key: 'itemTags', content: display.itemTags }
   ]
-  return result
+  return result.map(({ key, content }) => ({ key, content: content?.map(toDisplayRow) }))
 })
 
 const dividerVisible = computed(() => sections.value.map((section, index) => {
   return Boolean(section.content?.length) && sections.value.slice(index + 1).some(next => Boolean(next.content?.length))
 }))
 
-/* Numeric tiers ("P1", "S2 + S3") sit in the left gutter; word tiers
-   (eldritch "Lesser".."Perfect") read as part of the mod, so they go inline. */
+/* Numeric tiers sit in the left gutter; word tiers (eldritch
+   "Lesser".."Perfect") read as part of the mod, so they go inline.
+   P = prefix, S = suffix, R = the rank the trade API reports for
+   crafted/bench mods ("R2") — ranks belong in the gutter but carry the
+   neutral colour since they are neither prefix nor suffix. */
 function isNumericTier (tier: string): boolean {
   return /^[PSR]\d/.test(tier)
 }
@@ -195,22 +222,6 @@ const VALUE_BANDS: Array<{ match: RegExp, art: string, icon?: string }> = [
   { match: /^Intangibility\b/, art: '/images/item-display/intangibility-title.png' },
   { match: /^Memories\b/, art: '/images/item-display/memory-title.png', icon: '/images/item-display/memory-icon.png' }
 ]
-function valueBand (line: DisplayItemLine): { art: string, icon?: string } | undefined {
-  return VALUE_BANDS.find(band => band.match.test(line.text))
-}
-function valueBandStyle (line: DisplayItemLine): CSSProperties | undefined {
-  const band = valueBand(line)
-  if (!band) return undefined
-  return {
-    backgroundImage: `url(${band.art})`,
-    backgroundSize: '100% 100%',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center'
-  }
-}
-function valueBandIcon (line: DisplayItemLine): string | undefined {
-  return valueBand(line)?.icon
-}
 
 /* The ornate strip IS the unrevealed modifier — it replaces the text row.
    One of six variants, picked per tooltip the way the game varies them.

@@ -138,6 +138,15 @@ describe('Trade listing tooltip modifier lines', () => {
     expect(word.text()).toContain('Greater Intangibility')
   })
 
+  it('renders crafted-mod ranks (R-prefix) in the gutter with the neutral colour', () => {
+    const wrapper = mountTooltip([], [
+      { text: '63% increased Energy Shield', tier: 'R2', color: TradeNumberColors.Crafted }
+    ])
+    const line = wrapper.find('[data-testid="modifier-line"]')
+    expect(line.find('.text-poe-tier-neutral').text()).toBe('R2')
+    expect(line.text()).not.toContain('R2 63%')
+  })
+
   it('draws title bands behind Intangibility and Memories values, with the memory icon', () => {
     const result = {
       displayItem: {
