@@ -688,7 +688,7 @@ function toPricingResult (result: FetchResult, opts: { accountName: string }): P
   try {
     displayItem = parseFetchResult(result)
   } catch (error) {
-    console.warn('Unable to build item tooltip for a trade result', error)
+    console.warn(`Unable to build item tooltip for trade result ${result.id}`, error)
   }
 
   return {
