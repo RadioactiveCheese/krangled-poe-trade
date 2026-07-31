@@ -2,7 +2,7 @@
 title: OCR Guide
 ---
 
-This guide will help you to setup and perform OCR using Awakened PoE Trade.
+This guide will help you set up and perform OCR using Krangled PoE Trade.
 
 ### OCR Setup ###
 

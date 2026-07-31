@@ -11,10 +11,10 @@ title: Common issues
 
 3. Are you playing with Vulkan renderer? Update GPU drivers.
 
-    If Awakened works for you with DirectX11/12 renderer,
+    If Krangled PoE Trade works for you with the DirectX11/12 renderer,
     then problem is old Vulkan drivers for sure.
 
-4. Delete `%appdata%\awakened-poe-trade`
+4. Delete `%appdata%\krangled-poe-trade`
 
     If needed, backup `apt-data` folder with your configuration inside.
 
@@ -22,12 +22,15 @@ title: Common issues
 
     Launch them later one at a time to identify **conflict**.
 
-6. Restart Awakened PoE Trade.
+6. Restart Krangled PoE Trade.
 
     *(don't forget to quit first, otherwise launching second instance will do nothing).*
 
-7. As last resort, go to Discord. But if you don't describe something specific about
-    your problem, **you will most likely be directed to this page**.
+7. As a last resort,
+   [open an issue](https://github.com/RadioactiveCheese/krangled-poe-trade/issues)
+   with the app version, logs, and clear reproduction steps. There is very
+   little guarantee anyone will respond, though. You can always fork it and
+   have an AI fix it for you.
 
 ---
 

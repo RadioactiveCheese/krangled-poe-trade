@@ -73,9 +73,9 @@ export async function initConfig () {
 
     // TODO
     // dialog.showErrorBox(
-    //   'Awakened PoE Trade - Incompatible configuration',
+    //   'Krangled PoE Trade - Incompatible configuration',
     //   // ----------------------
-    //   'You are trying to use an older version of Awakened PoE Trade with a newer incompatible configuration file.\n' +
+    //   'You are trying to use an older version of Krangled PoE Trade with a newer incompatible configuration file.\n' +
     //   'You need to install the latest version to continue using it.'
     // )
   }

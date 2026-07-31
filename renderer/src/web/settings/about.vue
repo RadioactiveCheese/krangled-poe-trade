@@ -1,13 +1,17 @@
 <template>
   <div class="p-2 flex flex-col h-full items-center">
     <div class="flex flex-col items-center p-2 mb-4">
-      <img class="w-12 h-12" src="/images/TransferOrb.png">
-      <p class="text-base">Awakened PoE Trade</p>
+      <img class="w-12 h-12 rounded" src="/icon.png">
+      <p class="text-base">Krangled PoE Trade</p>
       <p class="">{{ t('app.version', [version]) }}</p>
       <div class="flex gap-2">
-        <a class="border-b" href="https://github.com/SnosMe/awakened-poe-trade/releases" target="_blank">{{ t('app.release_notes') }}</a>
-        <a class="border-b" href="https://github.com/SnosMe/awakened-poe-trade/issues" target="_blank">{{ t('app.report_bug') }}</a>
+        <a class="border-b" href="https://github.com/RadioactiveCheese/krangled-poe-trade/releases" target="_blank">{{ t('app.release_notes') }}</a>
+        <a class="border-b" href="https://github.com/RadioactiveCheese/krangled-poe-trade/issues" target="_blank">{{ t('app.report_bug') }}</a>
       </div>
+      <p class="text-center text-xs text-gray-400 mt-2 max-w-xs">
+        Built on <a class="border-b" href="https://github.com/SnosMe/awakened-poe-trade" target="_blank">Awakened PoE Trade</a>
+        by Alexander Drozdov (SnosMe) and its contributors.
+      </p>
     </div>
     <div class="border border-gray-600 rounded p-2 whitespace-nowrap min-w-min w-72">
       <p>{{ info.str1 }}</p>
@@ -39,7 +43,7 @@ function checkForUpdates () {
 }
 
 function openDownloadPage () {
-  window.open('https://snosme.github.io/awakened-poe-trade/download')
+  window.open('https://radioactivecheese.github.io/krangled-poe-trade/download')
 }
 
 function quitAndInstall () {
