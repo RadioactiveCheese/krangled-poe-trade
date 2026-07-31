@@ -44,7 +44,7 @@ CSC_NAME="Certificate name in Keychain" npm run package
 
 # CI, releases, and upstream updates
 
-- Pull requests and pushes to `master` run
+- Pull requests and pushes to `main` run
   [CI](./.github/workflows/ci.yml) without publishing an installer.
 - Pushing a tag such as `v3.29.200` runs
   [Release](./.github/workflows/release.yml). The tag must match the version in
@@ -52,7 +52,8 @@ CSC_NAME="Certificate name in Keychain" npm run package
   are published to the matching GitHub Release.
 - [Sync upstream](./.github/workflows/sync-upstream.yml) runs every Monday and
   can also be started from the Actions tab. It merges the original project's
-  `master` branch into `chore/sync-upstream` and opens or refreshes a pull
+  `master` branch into `chore/sync-upstream` based on this fork's `main` branch
+  and opens or refreshes a pull
   request for review.
 
 For the sync workflow to open pull requests, enable **Allow GitHub Actions to
