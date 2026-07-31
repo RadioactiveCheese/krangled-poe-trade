@@ -1,5 +1,6 @@
 {
-  "name": "awakened-poe-trade",
+  "name": "krangled-poe-trade",
+  "productName": "Krangled PoE Trade",
   "version": "3.29.200",
   "private": true,
   "scripts": {

@@ -9,7 +9,7 @@ const route = useRoute()
   <div class="max-w-screen-md mx-auto">
     <div id="site-header" class="flex items-center justify-between py-4 border-b mb-4">
       <a :href="withBase('/')" id="site-logo" class="flex items-center">
-        <img src="pathname:///favicon.png">
+        <img :src="withBase('/favicon.png')" alt="">
         <span class="ml-4 font-semibold text-lg">{{ site.title }}</span>
       </a>
       <div class="flex text-sm gap-2">

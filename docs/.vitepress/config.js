@@ -1,9 +1,9 @@
 import { defineConfig } from 'vitepress'
 
-const BASE = '/awakened-poe-trade/'
+const BASE = '/krangled-poe-trade/'
 
 export default defineConfig({
-  title: 'Awakened PoE Trade',
+  title: 'Krangled PoE Trade',
   description: 'App for price-checking items in Path of Exile',
   base: BASE,
   mpa: true,
@@ -20,25 +20,25 @@ export default defineConfig({
   },
   themeConfig: {
     // logo: 'TODO', https://github.com/vuejs/vitepress/issues/1401
-    appVersion: '3.29.102',
+    appVersion: '3.29.200',
     github: {
-      releasesUrl: 'https://github.com/SnosMe/awakened-poe-trade/releases'
+      releasesUrl: 'https://github.com/RadioactiveCheese/krangled-poe-trade/releases'
     },
     socialLinks: [
       {
-        text: 'Discord',
+        text: 'Issues',
         color: '#7289DA',
-        link: 'https://github.com/SnosMe/awakened-poe-trade/issues/22'
+        link: 'https://github.com/RadioactiveCheese/krangled-poe-trade/issues'
       },
       {
-        text: 'Patreon',
+        text: 'Support upstream',
         color: '#FF424D',
         link: 'https://patreon.com/awakened_poe_trade'
       },
       {
         text: 'GitHub',
         color: '#181717',
-        link: 'https://github.com/SnosMe/awakened-poe-trade'
+        link: 'https://github.com/RadioactiveCheese/krangled-poe-trade'
       }
     ],
     sidebar: [
@@ -67,6 +67,9 @@ export default defineConfig({
         }, {
           text: 'FAQ',
           link: '/faq'
+        }, {
+          text: 'About',
+          link: '/about'
         }]
       }
     ]
