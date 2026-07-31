@@ -35,12 +35,14 @@ export function createExactStatFilters (
   ) return []
 
   const keepByType = [ModifierType.Pseudo, ModifierType.Fractured, ModifierType.Enchant, ModifierType.Necropolis, ModifierType.Imbued]
+  const isChart = item.category === ItemCategory.Chart
 
   if (
     !item.influences.length &&
     !item.isFractured &&
     item.category !== ItemCategory.Tincture &&
-    item.category !== ItemCategory.Idol
+    item.category !== ItemCategory.Idol &&
+    !isChart
   ) {
     keepByType.push(ModifierType.Implicit)
   }
@@ -48,12 +50,16 @@ export function createExactStatFilters (
   if (item.rarity === ItemRarity.Magic && (
     item.category !== ItemCategory.ClusterJewel &&
     item.category !== ItemCategory.Map &&
+    !isChart &&
     item.category !== ItemCategory.HeistContract &&
     item.category !== ItemCategory.HeistBlueprint &&
     item.category !== ItemCategory.Sentinel
   )) {
     keepByType.push(ModifierType.Explicit)
-  } else if (item.rarity === ItemRarity.Rare && item.category === ItemCategory.Idol) {
+  } else if (item.rarity === ItemRarity.Rare && (
+    item.category === ItemCategory.Idol ||
+    isChart
+  )) {
     keepByType.push(ModifierType.Explicit)
   }
 
@@ -63,7 +69,7 @@ export function createExactStatFilters (
 
   const ctx: FiltersCreationContext = {
     item,
-    searchInRange: (item.category !== ItemCategory.Map)
+    searchInRange: (item.category !== ItemCategory.Map && !isChart)
       ? Math.min(2, opts.searchStatRange)
       : opts.searchStatRange,
     filters: [],
@@ -87,7 +93,7 @@ export function createExactStatFilters (
     applyMirroredTabletRules(ctx.filters)
     return ctx.filters
   }
-  if (item.category === ItemCategory.Map) {
+  if (item.category === ItemCategory.Map || isChart) {
     for (const filter of ctx.filters) {
       if (filter.tag !== FilterTag.Property && filter.tag !== FilterTag.Pseudo) {
         filter.disabled = false

@@ -1,5 +1,6 @@
 import { stat, pseudoStatByRef } from '@/assets/data'
 import { ItemRarity } from '@/parser/ParsedItem'
+import { ItemCategory } from '@/parser'
 import { ModifierType } from '@/parser/modifiers'
 import { FiltersCreationContext } from '../create-stat-filters'
 import { noSourcePseudoToFilter, propToFilter } from './item-property'
@@ -23,7 +24,9 @@ export function mapProps (ctx: FiltersCreationContext): void {
 
   const hasMoreDrops = Boolean(item.map.moreMaps || item.map.moreScarabs || item.map.moreCurrency || item.map.moreDivCards)
 
-  if (!item.isCorrupted && !hasMoreDrops && item.info.refName !== 'Nightmare Map') return
+  if (item.category !== ItemCategory.Chart &&
+    !item.isCorrupted && !hasMoreDrops && item.info.refName !== 'Nightmare Map'
+  ) return
 
   if (item.map.itemQuantity) {
     ctx.filters.push(propToFilter({

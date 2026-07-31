@@ -15,6 +15,7 @@ import { magicBasetype } from './magic-name'
 import { isModInfoLine, groupLinesByMod, parseModInfoLine, parseModType, ModifierInfo, ParsedModifier, ENCHANT_LINE, SCOURGE_LINE, IMPLICIT_LINE } from './advanced-mod-desc'
 import { calcPropPercentile, QUALITY_STATS } from './calc-q20'
 import { parseMercenaryWarrantDetails } from './mercenary-warrant'
+import { resolveChartArea, resolveChartShape } from './chart'
 
 type SectionParseResult =
   | 'SECTION_PARSED'
@@ -61,6 +62,8 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseSockets,
   parseHeistContract,
   parseHeistBlueprint,
+  parseChartProperties,
+  parseChartShape,
   parseAreaLevel,
   parseAtzoatlRooms,
   parseMirroredTablet,
@@ -987,6 +990,48 @@ function parseHeistBlueprint (section: string[], item: ParsedItem) {
     }
   }
 
+  return 'SECTION_PARSED'
+}
+
+function parseChartProperties (section: string[], item: ParsedItem) {
+  if (item.category !== ItemCategory.Chart) return 'PARSER_SKIPPED'
+
+  parseAreaLevelNested(section, item)
+  if (!item.areaLevel) return 'SECTION_SKIPPED'
+
+  const areaName = section[0]
+  item.chart = {
+    areaName,
+    areaId: resolveChartArea(areaName, item.info.refName)
+  }
+  item.map = { tier: undefined }
+
+  for (const line of section) {
+    if (line.startsWith(_$.MAP_ITEM_QUANTITY)) {
+      item.map.itemQuantity = parseInt(line.slice(_$.MAP_ITEM_QUANTITY.length), 10)
+    } else if (line.startsWith(_$.MAP_ITEM_RARITY)) {
+      item.map.itemRarity = parseInt(line.slice(_$.MAP_ITEM_RARITY.length), 10)
+    } else if (line.startsWith(_$.MAP_MONSTER_PACK_SIZE)) {
+      item.map.packSize = parseInt(line.slice(_$.MAP_MONSTER_PACK_SIZE.length), 10)
+    } else if (_$.CHART_SULPHUR && line.startsWith(_$.CHART_SULPHUR)) {
+      item.chart.sulphur = parseInt(line.slice(_$.CHART_SULPHUR.length), 10)
+    } else if (_$.CHART_GOLD && line.startsWith(_$.CHART_GOLD)) {
+      item.chart.gold = parseInt(line.slice(_$.CHART_GOLD.length), 10)
+    }
+  }
+
+  return 'SECTION_PARSED'
+}
+
+function parseChartShape (section: string[], item: ParsedItem) {
+  if (item.category !== ItemCategory.Chart) return 'PARSER_SKIPPED'
+  if (!item.chart || !_$.CHART_SHAPE || !section[0].startsWith(_$.CHART_SHAPE)) {
+    return 'SECTION_SKIPPED'
+  }
+
+  const shape = section[0].slice(_$.CHART_SHAPE.length)
+  item.chart.shape = shape
+  item.chart.shapeId = resolveChartShape(shape)
   return 'SECTION_PARSED'
 }
 

@@ -1,4 +1,6 @@
 {"ref":"# Added Passive Skills are Jewel Sockets","better":1,"matchers":[{"string":"# Added Passive Skills are Jewel Sockets"},{"string":"1 Added Passive Skill is a Jewel Socket","value":1}],"trade":{"ids":{"explicit":["explicit.stat_4079888060"],"fractured":["fractured.stat_4079888060"],"enchant":["enchant.stat_4079888060"]}}}
+{"ref":"#% increased Dead Man's Sulphur found in this Area","better":1,"matchers":[{"string":"#% increased Dead Man's Sulphur found in this Area"}],"trade":{"ids":{"explicit":["explicit.stat_1605192338"]}},"fromAreaMods":"yes"}
+{"ref":"Voyage Modifier will be revealed once Charted","better":0,"matchers":[{"string":"Voyage Modifier will be revealed once Charted"}],"trade":{"ids":{"implicit":["implicit.stat_3582759801"]}}}
 {"ref":"# Cold Damage taken per second per Frenzy Charge while moving","better":1,"matchers":[{"string":"# Cold Damage taken per second per Frenzy Charge while moving"}],"trade":{"ids":{"explicit":["explicit.stat_1528823952"]}}}
 {"ref":"# Crafted Modifiers","better":1,"matchers":[{"string":"# Crafted Modifiers "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_number_of_crafted_mods"]}}}
 {"ref":"# Crafted Prefix Modifiers","better":1,"matchers":[{"string":"# Crafted Prefix Modifiers "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_number_of_crafted_prefix_mods"]}}}

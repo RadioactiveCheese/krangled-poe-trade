@@ -1,4 +1,6 @@
 {"ref":"# Added Passive Skills are Jewel Sockets","better":1,"matchers":[{"string":"# 個附加的天賦為珠寶插槽"},{"string":"1 個附加的天賦為珠寶插槽","value":1}],"trade":{"ids":{"explicit":["explicit.stat_4079888060"],"fractured":["fractured.stat_4079888060"],"enchant":["enchant.stat_4079888060"]}}}
+{"ref":"#% increased Dead Man's Sulphur found in this Area","better":1,"matchers":[{"string":"增加 #% 相鄰區域內找到的亡者硫酸"},{"string":"增加 #% 此區域內找到的亡者硫酸"}],"trade":{"ids":{"explicit":["explicit.stat_1605192338"]}},"fromAreaMods":"yes"}
+{"ref":"Voyage Modifier will be revealed once Charted","better":0,"matchers":[{"string":"航程詞綴會於測繪後揭露"}],"trade":{"ids":{"implicit":["implicit.stat_3582759801"]}}}
 {"ref":"# Cold Damage taken per second per Frenzy Charge while moving","better":1,"matchers":[{"string":"移動時每秒每顆狂怒球受到 # 冰冷傷害"}],"trade":{"ids":{"explicit":["explicit.stat_1528823952"]}}}
 {"ref":"# Crafted Modifiers","better":1,"matchers":[{"string":"# 工藝詞綴 "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_number_of_crafted_mods"]}}}
 {"ref":"# Crafted Prefix Modifiers","better":1,"matchers":[{"string":"# 工藝前綴 "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_number_of_crafted_prefix_mods"]}}}
