@@ -9,7 +9,7 @@
         <a class="border-b" href="https://github.com/RadioactiveCheese/krangled-poe-trade/issues" target="_blank">{{ t('app.report_bug') }}</a>
       </div>
       <p class="text-center text-xs text-gray-400 mt-2 max-w-xs">
-        Built on <a class="border-b" href="https://github.com/SnosMe/awakened-poe-trade" target="_blank">Awakened PoE Trade</a>
+        Based on the <a class="border-b" href="https://github.com/SnosMe/awakened-poe-trade" target="_blank">original project</a>
         by Alexander Drozdov (SnosMe) and its contributors.
       </p>
     </div>
