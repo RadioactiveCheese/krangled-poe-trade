@@ -4,6 +4,7 @@ publish:
   - provider: "github"
     owner: "RadioactiveCheese"
     repo: "krangled-poe-trade"
+    releaseType: "draft"
 npmRebuild: false
 toolsets:
   appimage: 1.0.3
