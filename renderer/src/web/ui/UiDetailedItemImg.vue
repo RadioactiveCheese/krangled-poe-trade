@@ -65,7 +65,8 @@ function socketCenter (index: number): { x: number, y: number } {
   return { x: fromLeft ? 0.5 : width - 0.5, y }
 }
 
-/* The game's socket sprites, sliced from item-display/socket-sheet.png. */
+/* The game's socket sprites — one PNG per socket colour, pre-sliced offline
+   from item-display/socket-sheet.png. */
 function socketSprite (socket: DisplaySocket): string {
   const color = socket.sColour ?? ({ S: 'R', D: 'G', I: 'B', G: 'W', A: 'A' } as Record<string, string>)[socket.attr ?? '']
   const sprite = ({ R: 'r', G: 'g', B: 'b', W: 'w', A: 'a' } as Record<string, string>)[color ?? ''] ?? 'w'

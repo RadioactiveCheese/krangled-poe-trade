@@ -88,7 +88,7 @@
 import { computed } from 'vue'
 import type { CSSProperties } from 'vue'
 import type { PricingResult } from './pathofexile-trade'
-import type { DisplayInfluence, DisplayItemLine } from './trade-tooltip'
+import type { DisplayInfluence, DisplayItemLine, DisplayItemSymbol } from './trade-tooltip'
 import UiDetailedItemImg from '@/web/ui/UiDetailedItemImg.vue'
 
 const props = defineProps<{
@@ -108,7 +108,7 @@ const INFLUENCE_CAPS: Record<DisplayInfluence, { label: string, icon: string }> 
   'eater-of-worlds': { label: 'Eater of Worlds', icon: '/images/influence-EaterOfWorlds.png' }
 }
 
-const ITEM_SYMBOL_CAPS: Record<string, { label: string, icon: string }> = {
+const ITEM_SYMBOL_CAPS: Record<DisplayItemSymbol, { label: string, icon: string }> = {
   foresight: { label: 'Foresight (Hinekora\'s Lock)', icon: '/images/item-symbols/foresight.png' },
   synthesised: { label: 'Synthesised', icon: '/images/item-symbols/synthesised.png' },
   veiled: { label: 'Veiled', icon: '/images/item-symbols/veiled.png' }
@@ -122,9 +122,7 @@ const capMarkers = computed(() => {
   if (!display) return []
   const markers = [
     ...display.influences.map(type => ({ kind: 'influence' as const, type: type as string, ...INFLUENCE_CAPS[type] })),
-    ...(display.symbols ?? []).flatMap(type => ITEM_SYMBOL_CAPS[type]
-      ? [{ kind: 'symbol' as const, type: type as string, ...ITEM_SYMBOL_CAPS[type] }]
-      : [])
+    ...(display.symbols ?? []).map(type => ({ kind: 'symbol' as const, type: type as string, ...ITEM_SYMBOL_CAPS[type] }))
   ].slice(0, 2)
   if (!markers.length) return []
   return [
