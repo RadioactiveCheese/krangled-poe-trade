@@ -1,0 +1,69 @@
+name: Sync upstream
+
+on:
+  schedule:
+    - cron: '0 6 * * 1' # Mondays 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+env:
+  UPSTREAM: https://github.com/SnosMe/awakened-poe-trade.git
+  SYNC_BRANCH: chore/sync-upstream
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Fetch upstream
+        run: |
+          git remote add upstream "$UPSTREAM"
+          git fetch upstream master
+
+      - name: Count new upstream commits
+        id: check
+        run: |
+          BEHIND=$(git rev-list --count HEAD..upstream/master)
+          echo "behind=$BEHIND" >> "$GITHUB_OUTPUT"
+          echo "$BEHIND new upstream commit(s)"
+
+      - name: Merge upstream into sync branch
+        if: steps.check.outputs.behind != '0'
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git checkout -B "$SYNC_BRANCH" origin/master
+          if ! git merge --no-edit upstream/master; then
+            git merge --abort
+            echo "::error::Upstream merge conflicts. Resolve manually:" \
+                 "git fetch upstream && git checkout -b $SYNC_BRANCH origin/master && git merge upstream/master"
+            exit 1
+          fi
+          git push --force origin "$SYNC_BRANCH"
+
+      - name: Open or update pull request
+        if: steps.check.outputs.behind != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -n "$(gh pr list --head "$SYNC_BRANCH" --state open --json number --jq '.[].number')" ]; then
+            echo "PR already open for $SYNC_BRANCH; force-push refreshed it."
+          else
+            cat > /tmp/pr-body.md <<'EOF'
+          Automated merge of `SnosMe/awakened-poe-trade@master`.
+
+          Review the diff before merging — upstream changes can conflict semantically
+          with fork-only features even when git merges cleanly.
+          EOF
+            gh pr create \
+              --base master \
+              --head "$SYNC_BRANCH" \
+              --title "chore: sync upstream ($(date -u +%Y-%m-%d))" \
+              --body-file /tmp/pr-body.md
+          fi

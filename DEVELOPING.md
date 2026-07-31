@@ -9,35 +9,56 @@ Note that these 2 both depend on each other, and one cannot run without the othe
 
 # How to develop
 
-The most up-to-date instructions can always be derived from CI:
+The most up-to-date build instructions can be derived from
+[the CI workflow](./.github/workflows/ci.yml).
 
-[.github/workflows/main.yml](https://github.com/SnosMe/awakened-poe-trade/blob/master/.github/workflows/main.yml)
-
-Here's what that looks like as of 2023-12-03.
-
-```shell
+```sh
 cd renderer
-yarn install
-yarn make-index-files
-yarn dev
+npm ci
+npm run make-index-files
+npm run dev
 
 # In a second shell
 cd main
-yarn install
-yarn dev
+npm ci
+npm run dev
 ```
 
 # How to build
 
-```shell
+```sh
 cd renderer
-yarn install
-yarn make-index-files
-yarn build
+npm ci
+npm run make-index-files
+npm run lint
+npm test
+npm run build
 
 cd ../main
-yarn build
+npm ci
+npm run build
 # We want to sign with a distribution certificate to ensure other users can
 # install without errors
-CSC_NAME="Certificate name in Keychain" yarn package
+CSC_NAME="Certificate name in Keychain" npm run package
 ```
+
+# CI, releases, and upstream updates
+
+- Pull requests and pushes to `master` run
+  [CI](./.github/workflows/ci.yml) without publishing an installer.
+- Pushing a tag such as `v3.29.200` runs
+  [Release](./.github/workflows/release.yml). The tag must match the version in
+  `main/package.json`. Windows, Linux, and macOS packages and updater metadata
+  are published to the matching GitHub Release.
+- [Sync upstream](./.github/workflows/sync-upstream.yml) runs every Monday and
+  can also be started from the Actions tab. It merges the original project's
+  `master` branch into `chore/sync-upstream` and opens or refreshes a pull
+  request for review.
+
+For the sync workflow to open pull requests, enable **Allow GitHub Actions to
+create and approve pull requests** under **Settings > Actions > General >
+Workflow permissions** in the GitHub repository. The workflows grant write
+access only to the release and sync jobs that need it.
+
+The packaged app checks the releases from `RadioactiveCheese/krangled-poe-trade`
+because that publisher is configured in `main/electron-builder.yml`.

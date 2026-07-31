@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - 'master'
+    tags-ignore:
+      - '**'
+    paths-ignore:
+      - 'docs/**'
+      - README.md
+
+# A newer push to the same branch makes the in-flight run obsolete.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  renderer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: renderer/package-lock.json
+      - run: npm ci
+        working-directory: ./renderer
+      - run: npm run make-index-files
+        working-directory: ./renderer
+      - run: npm run lint
+        working-directory: ./renderer
+      - run: npm run test
+        working-directory: ./renderer
+      - run: npm run build
+        working-directory: ./renderer
+
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: main/package-lock.json
+      - run: npm ci
+        working-directory: ./main
+      # tsc --noEmit + esbuild bundle; does not need renderer/dist
+      - run: npm run build
+        working-directory: ./main

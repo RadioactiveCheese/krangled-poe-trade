@@ -1,0 +1,79 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  # Manual run publishes a draft release for the current main/package.json version.
+  workflow_dispatch:
+
+jobs:
+  renderer:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Verify tag matches main/package.json version
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          TAG="${GITHUB_REF_NAME#v}"
+          PKG=$(node -p "require('./main/package.json').version")
+          if [ "$TAG" != "$PKG" ]; then
+            echo "::error::Tag v$TAG does not match main/package.json version $PKG"
+            exit 1
+          fi
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: renderer/package-lock.json
+      - run: npm ci
+        working-directory: ./renderer
+      - run: npm run make-index-files
+        working-directory: ./renderer
+      - run: npm run build
+        working-directory: ./renderer
+      - uses: actions/upload-artifact@v7
+        with:
+          name: renderer-dist
+          path: ./renderer/dist
+          retention-days: 1
+
+  package:
+    needs: renderer
+    permissions:
+      contents: write # electron-builder creates/uploads the GitHub Release
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-2022, ubuntu-22.04, macos-14]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: main/package-lock.json
+      - uses: actions/download-artifact@v8
+        with:
+          name: renderer-dist
+          path: ./renderer/dist
+      - run: npm ci
+        working-directory: ./main
+      - run: npm run build
+        working-directory: ./main
+      - name: Package and publish
+        run: npm run package -- --publish always
+        working-directory: ./main
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update metadata
+        run: |
+          case "${{ matrix.os }}" in
+            windows*) cat ./main/dist/latest.yml ;;
+            ubuntu*)  cat ./main/dist/latest-linux.yml ;;
+            macos*)   cat ./main/dist/latest-mac.yml ;;
+          esac

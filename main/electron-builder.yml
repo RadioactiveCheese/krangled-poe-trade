@@ -1,6 +1,9 @@
+appId: "com.krangled.poe-trade"
+productName: "Krangled PoE Trade"
 publish:
-  - "github"
-productName: "Awakened PoE Trade"
+  - provider: "github"
+    owner: "RadioactiveCheese"
+    repo: "krangled-poe-trade"
 npmRebuild: false
 toolsets:
   appimage: 1.0.3
