@@ -284,8 +284,8 @@ describe('PoE 1 trade listing tooltip parsing', () => {
   })
 
   it('keeps CSS classes for special modifier colors', () => {
-    expectTooltipColorCss(8729, 'text-indigo-300')
-    expectTooltipColorCss(8730, 'text-orange-300')
-    expectTooltipColorCss(8734, 'text-blue-400')
+    expectTooltipColorCss(8729, 'text-poe-enchant')
+    expectTooltipColorCss(8730, 'text-poe-fractured')
+    expectTooltipColorCss(8734, 'text-poe-crafted')
   })
 })

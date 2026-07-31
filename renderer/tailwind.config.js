@@ -16,6 +16,25 @@ module.exports = {
       rare: '#ffff77',
       unique: '#af6025',
 
+      // Colours the game/trade site use for the trade API's colour IDs,
+      // replacing the old Tailwind-default approximations.
+      poe: {
+        augmented: '#8888ff',
+        unmet: '#d20000',
+        fire: '#960000',
+        cold: '#366492',
+        lightning: '#ffd700',
+        chaos: '#d02090',
+        currency: '#aa9e82',
+        divination: '#0ebaff',
+        enchant: '#b4b4ff',
+        fractured: '#a29162',
+        crafted: '#b4b4ff',
+        'tier-prefix': '#e07a6a',
+        'tier-suffix': '#74b3e0',
+        'tier-neutral': '#8b8b7a',
+      },
+
       gray: {
         100: '#f7fafc',
         200: '#edf2f7',

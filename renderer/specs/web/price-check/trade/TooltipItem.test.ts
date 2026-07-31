@@ -4,7 +4,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import TooltipItem from '@/web/price-check/trade/TooltipItem.vue'
 import type { PricingResult } from '@/web/price-check/trade/pathofexile-trade'
-import { TradeNumberColors, type DisplayInfluence, type DisplayItemLine } from '@/web/price-check/trade/trade-tooltip'
+import { TradeNumberColors, type DisplayInfluence, type DisplayItemLine, type DisplayItemSymbol } from '@/web/price-check/trade/trade-tooltip'
 
 const ALL_INFLUENCES: DisplayInfluence[] = [
   'shaper',
@@ -17,13 +17,18 @@ const ALL_INFLUENCES: DisplayInfluence[] = [
   'eater-of-worlds'
 ]
 
-function mountTooltip (influences: DisplayInfluence[], implicitMods?: DisplayItemLine[]) {
+function mountTooltip (
+  influences: DisplayInfluence[],
+  implicitMods?: DisplayItemLine[],
+  symbols?: DisplayItemSymbol[]
+) {
   const result = {
     displayItem: {
       title: ['Fixture Mantle', 'Vaal Regalia'],
       rarity: 'Rare',
       frameType: 2,
       influences,
+      symbols,
       implicitMods
     }
   } as unknown as PricingResult
@@ -36,33 +41,49 @@ function mountTooltip (influences: DisplayInfluence[], implicitMods?: DisplayIte
   })
 }
 
-describe('Trade listing tooltip influences', () => {
-  it('renders every classic and Eldritch influence returned by the normalizer', () => {
+describe('Trade listing tooltip header caps', () => {
+  it('seats the first two influences in the header caps, in order', () => {
     const wrapper = mountTooltip(ALL_INFLUENCES)
-    const badges = wrapper.findAll('[data-influence]')
+    const caps = wrapper.findAll('[data-testid="header-cap"]')
 
-    expect(badges.map(badge => badge.attributes('data-influence'))).toEqual(ALL_INFLUENCES)
-    expect(badges.map(badge => badge.text())).toEqual([
-      'Shaper',
-      'Elder',
-      'Crusader',
-      'Hunter',
-      'Redeemer',
-      'Warlord',
-      'Searing Exarch',
-      'Eater of Worlds'
-    ])
-
-    expect(wrapper.findAll('[data-influence] img')).toHaveLength(6)
-    expect(wrapper.find('[data-influence="shaper"] img').attributes('src')).toBe('/images/influence-Shaper.png')
-    expect(wrapper.find('[data-influence="searing-exarch"] img').exists()).toBe(false)
-    expect(wrapper.find('[data-influence="eater-of-worlds"] img').exists()).toBe(false)
+    expect(caps).toHaveLength(2)
+    expect(caps.map(cap => cap.attributes('data-influence'))).toEqual(['shaper', 'elder'])
+    expect(caps.map(cap => cap.attributes('title'))).toEqual(['Shaper', 'Elder'])
+    expect(caps[0].find('img').attributes('src')).toBe('/images/influence-Shaper.png')
   })
 
-  it('omits the influence row when the API reports none', () => {
-    expect(mountTooltip([]).find('[data-testid="item-influences"]').exists()).toBe(false)
+  it('mirrors a lone influence into both caps', () => {
+    const caps = mountTooltip(['elder']).findAll('[data-testid="header-cap"]')
+    expect(caps.map(cap => cap.attributes('data-influence'))).toEqual(['elder', 'elder'])
   })
 
+  it('renders the Searing Exarch and Eater of Worlds emblem art', () => {
+    const wrapper = mountTooltip(['searing-exarch', 'eater-of-worlds'])
+    expect(wrapper.find('[data-influence="searing-exarch"] img').attributes('src'))
+      .toBe('/images/influence-SearingExarch.png')
+    expect(wrapper.find('[data-influence="eater-of-worlds"] img').attributes('src'))
+      .toBe('/images/influence-EaterOfWorlds.png')
+  })
+
+  it('fills leftover cap slots with item symbols, influence first', () => {
+    const wrapper = mountTooltip(['shaper'], undefined, ['synthesised'])
+    const caps = wrapper.findAll('[data-testid="header-cap"]')
+    expect(caps[0].attributes('data-influence')).toBe('shaper')
+    expect(caps[1].attributes('data-symbol')).toBe('synthesised')
+    expect(caps[1].find('img').attributes('src')).toBe('/images/item-symbols/synthesised.png')
+  })
+
+  it('mirrors a lone item symbol when there is no influence', () => {
+    const caps = mountTooltip([], undefined, ['veiled']).findAll('[data-testid="header-cap"]')
+    expect(caps.map(cap => cap.attributes('data-symbol'))).toEqual(['veiled', 'veiled'])
+  })
+
+  it('renders no caps when the API reports no influence or symbols', () => {
+    expect(mountTooltip([]).findAll('[data-testid="header-cap"]')).toHaveLength(0)
+  })
+})
+
+describe('Trade listing tooltip modifier lines', () => {
   it('colors only associated Eldritch implicit lines and renders their tiers', () => {
     const wrapper = mountTooltip(
       ['searing-exarch', 'eater-of-worlds'],
@@ -98,5 +119,43 @@ describe('Trade listing tooltip influences', () => {
     expect(eater.html()).toContain('influence-eater-of-worlds')
     expect(exarch.text()).toContain('Lesser')
     expect(exarch.html()).toContain('influence-searing-exarch')
+  })
+
+  it('puts numeric tiers in the left gutter and keeps word tiers inline with the mod', () => {
+    const wrapper = mountTooltip([], [
+      { text: '+97 to maximum Energy Shield', tier: 'P1', color: TradeNumberColors.Augmented },
+      { text: 'Intangibility', tier: 'Greater', color: TradeNumberColors.Augmented }
+    ])
+
+    const [numeric, word] = wrapper.findAll('[data-testid="modifier-line"]')
+    expect(numeric.find('.text-poe-tier-prefix').text()).toBe('P1')
+    expect(word.text()).toContain('Greater Intangibility')
+  })
+
+  it('renders unrevealed veiled mods as the ornament image instead of text', () => {
+    const result = {
+      displayItem: {
+        title: ['Fixture Mantle', 'Vaal Regalia'],
+        rarity: 'Rare',
+        frameType: 2,
+        influences: [],
+        veiledMods: [
+          { text: 'Unrevealed Suffix', color: TradeNumberColors.Augmented, modCategory: 'veiled' },
+          { text: 'Préfixe voilé', color: TradeNumberColors.Augmented, modCategory: 'veiled' }
+        ]
+      }
+    } as unknown as PricingResult
+    const wrapper = mount(TooltipItem, {
+      props: { result },
+      global: { stubs: { UiDetailedItemImg: true } }
+    })
+
+    const lines = wrapper.findAll('[data-testid="modifier-line"]')
+    const ornament = lines[0].find('img')
+    expect(ornament.attributes('src')).toMatch(/^\/images\/veiled\/suffix_0[1-6]a\.png$/)
+    expect(lines[0].text()).not.toContain('Unrevealed Suffix')
+    // Unrecognized localized labels keep their text.
+    expect(lines[1].find('img').exists()).toBe(false)
+    expect(lines[1].text()).toContain('Préfixe voilé')
   })
 })

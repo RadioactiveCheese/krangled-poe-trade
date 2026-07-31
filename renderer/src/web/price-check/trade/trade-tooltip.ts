@@ -94,11 +94,16 @@ const CLASSIC_INFLUENCES: Array<{
   { field: 'warlord', display: 'warlord' }
 ]
 
+/* Item-state markers that share the two header-cap slots with influence
+   emblems (influence takes precedence). */
+export type DisplayItemSymbol = 'synthesised' | 'veiled'
+
 export interface DisplayItem {
   title: string[]
   rarity: string
   frameType?: number
   influences: DisplayInfluence[]
+  symbols?: DisplayItemSymbol[]
   nameBlock?: DisplayItemLine[]
   itemProps?: DisplayItemLine[]
   enchantMods?: DisplayItemLine[]
@@ -173,6 +178,7 @@ export function parseFetchResult (result: FetchResultForTooltip): DisplayItem {
     rarity: result.item.rarity ?? 'Normal',
     frameType: result.item.frameType,
     influences: parseInfluences(result.item),
+    symbols: buildItemSymbols(result.item),
     nameBlock: buildNameBlock(result.item.properties),
     itemProps: buildItemProps(result.item.ilvl, result.item.requirements),
     ...parseMods(result),
@@ -425,6 +431,13 @@ function buildItemProps (itemLevel: number | undefined, requirements: TradeDataL
     })
   }
   return block.length ? block : undefined
+}
+
+function buildItemSymbols (item: FetchItem): DisplayItemSymbol[] | undefined {
+  const symbols: DisplayItemSymbol[] = []
+  if (item.synthesised) symbols.push('synthesised')
+  if (item.veiledMods?.length) symbols.push('veiled')
+  return symbols.length ? symbols : undefined
 }
 
 function buildItemTags (item: FetchItem): DisplayItemLine[] | undefined {
