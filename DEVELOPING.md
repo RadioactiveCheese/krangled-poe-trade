@@ -89,18 +89,39 @@ only — against a *different* version it either fails outright or, worse, appli
 with nothing but a warning. This repo previously carried a `26.8.1` patch under
 an `^26.9.0` range and sat in that second state.
 
-Bumping `electron-builder` is therefore a two-step change: edit the exact
-version, then regenerate the patch.
+Bumping `electron-builder` therefore means regenerating the patch as part of the
+same change. Note the order below: `patch-package <name>` produces a diff of
+whatever is in `node_modules` *right now* against a pristine copy of that
+version. On a version bump the old patch usually fails to apply, which leaves
+`node_modules/app-builder-lib` pristine — so regenerating first would produce an
+empty diff and silently drop the AppRun fix. Re-apply the edit by hand first.
 
 ```sh
 cd main
-# after changing the version and running npm install
+# 1. change the version in package.json, then:
+npm install   # expect patch-package to fail here; that is the point
+
+# 2. re-apply the edit by hand, in
+#    node_modules/app-builder-lib/out/targets/appimage/appImageUtil.js,
+#    inside the AppRun heredoc:
+#      -args=("$@")
+#      -NUMBER_OF_ARGS="$#"
+#      +args=("$@" "--ozone-platform=x11")
+#      +NUMBER_OF_ARGS="\${#args[@]}"
+
+# 3. regenerate, and only then drop the old patch
 npx patch-package app-builder-lib --patch-dir build
+grep ozone-platform build/app-builder-lib+<new version>.patch  # must match
 git rm build/app-builder-lib+<old version>.patch
+
+# 4. confirm a clean install applies it
+rm -rf node_modules && npm ci
+grep ozone-platform node_modules/app-builder-lib/out/targets/appimage/appImageUtil.js
 ```
 
 `build/apprun-patch.test.mjs` re-asserts the patched AppRun script at AppImage
-build time, so a silently dropped patch fails the Linux release build.
+build time, but that only runs during packaging — step 3's `grep` is what keeps
+an empty patch from reaching `main` in the first place.
 
 `tailwindcss@3` also reached the deprecated `glob@10` through `sucrase@3.35.0`;
 `sucrase@3.35.1` swapped it for `tinyglobby`, so a lockfile refresh was enough.
