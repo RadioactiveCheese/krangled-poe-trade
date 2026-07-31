@@ -1,8 +1,8 @@
 diff --git a/node_modules/app-builder-lib/out/targets/appimage/appImageUtil.js b/node_modules/app-builder-lib/out/targets/appimage/appImageUtil.js
-index ee817d1..ef1f916 100644
+index 12f078a..613e7ca 100644
 --- a/node_modules/app-builder-lib/out/targets/appimage/appImageUtil.js
 +++ b/node_modules/app-builder-lib/out/targets/appimage/appImageUtil.js
-@@ -139,8 +139,8 @@ set -e
+@@ -170,8 +170,8 @@ set -e
  
  THIS="$0"
  # http://stackoverflow.com/questions/3190818/

@@ -52,6 +52,12 @@
     "eslint": "^9.0.0",
     "eslint-plugin-vue": "~10.8.0"
   },
+  "overrides": {
+    "magic-string": "^0.30.0",
+    "js-beautify": "^2.0.3",
+    "nopt": "^8.1.0",
+    "abbrev": "^3.0.1"
+  },
   "postcss": {
     "plugins": {
       "tailwindcss/nesting": {},
