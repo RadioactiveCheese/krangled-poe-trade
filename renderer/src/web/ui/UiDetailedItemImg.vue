@@ -6,20 +6,20 @@
   >
     <img :src="icon" class="block w-full h-full object-contain" draggable="false">
     <div v-if="layout.length" class="absolute inset-0 pointer-events-none">
-      <div
+      <img
         v-for="link in links"
         :key="link.key"
-        class="absolute h-[5px] bg-gray-500 border border-gray-900 origin-left z-0"
+        :src="link.src"
+        class="absolute z-0"
         :style="link.style"
-      />
+        draggable="false"
+      >
       <div
         v-for="socket in layout"
         :key="socket.index"
-        class="absolute w-[26px] h-[26px] rounded-full border-[3px] border-gray-300 shadow-[0_0_0_2px_#171717] z-10"
+        class="absolute z-10 bg-no-repeat drop-shadow"
         :style="socket.style"
-      >
-        <div class="absolute inset-[4px] rounded-full bg-black bg-opacity-50" />
-      </div>
+      />
     </div>
   </div>
 </template>
@@ -40,40 +40,37 @@ const props = withDefaults(defineProps<{
   sockets: () => []
 })
 
-const CELL = 48
-const SOCKET_SIZE = 26
+/* rem, so the whole overlay tracks the app font-size setting. */
+const CELL = 3
+const SOCKET_SIZE = 1.625
+const LINK_SIZE = CELL * 0.45 // the link sprite's aspect (14/31)
 
 const containerStyle = computed<CSSProperties>(() => ({
-  width: `${Math.max(1, props.itemWidth) * CELL}px`,
-  height: `${Math.max(1, props.itemHeight) * CELL}px`
+  width: `${Math.max(1, props.itemWidth) * CELL}rem`,
+  height: `${Math.max(1, props.itemHeight) * CELL}rem`
 }))
 
+/* Sockets sit on the item's own grid — one cell of pitch, columns on cell
+   centres — with the block centred in the art. Snake order matches the game:
+   L,R then R,L then L,R; the third socket on a 2-wide item lands lower-right. */
 function socketCenter (index: number): { x: number, y: number } {
-  const width = Math.max(1, props.itemWidth) * CELL
-  const height = Math.max(1, props.itemHeight) * CELL
-  if (props.itemWidth <= 1) {
-    return { x: width / 2, y: Math.min(height - 16, 16 + index * CELL) }
-  }
-
-  const row = Math.floor(index / 2)
+  const width = Math.max(1, props.itemWidth)
+  const height = Math.max(1, props.itemHeight)
+  const cols = width >= 2 ? 2 : 1
+  const rows = Math.ceil((props.sockets?.length ?? 0) / cols)
+  const row = Math.floor(index / cols)
+  const y = (height - (rows - 1)) / 2 + row
+  if (cols === 1) return { x: width / 2, y }
   const fromLeft = row % 2 === 0 ? index % 2 === 0 : index % 2 === 1
-  const x = fromLeft ? 16 : width - 16
-  const rows = Math.ceil((props.sockets?.length ?? 0) / 2)
-  const y = rows <= 1
-    ? height / 2
-    : 16 + row * ((height - 32) / (rows - 1))
-  return { x, y }
+  return { x: fromLeft ? 0.5 : width - 0.5, y }
 }
 
-function socketColor (socket: DisplaySocket): string {
+/* The game's socket sprites — one PNG per socket colour, pre-sliced offline
+   from item-display/socket-sheet.png. */
+function socketSprite (socket: DisplaySocket): string {
   const color = socket.sColour ?? ({ S: 'R', D: 'G', I: 'B', G: 'W', A: 'A' } as Record<string, string>)[socket.attr ?? '']
-  return ({
-    R: '#c95a4d',
-    G: '#57a957',
-    B: '#4f78c4',
-    W: '#d7d7d7',
-    A: '#222222'
-  } as Record<string, string>)[color ?? ''] ?? '#777777'
+  const sprite = ({ R: 'r', G: 'g', B: 'b', W: 'w', A: 'a' } as Record<string, string>)[color ?? ''] ?? 'w'
+  return `/images/item-display/socket-${sprite}.png`
 }
 
 const layout = computed(() => (props.sockets ?? []).map((socket, index) => {
@@ -83,27 +80,43 @@ const layout = computed(() => (props.sockets ?? []).map((socket, index) => {
     socket,
     center,
     style: {
-      left: `${center.x - SOCKET_SIZE / 2}px`,
-      top: `${center.y - SOCKET_SIZE / 2}px`,
-      backgroundColor: socketColor(socket)
+      left: `${center.x * CELL - SOCKET_SIZE / 2}rem`,
+      top: `${center.y * CELL - SOCKET_SIZE / 2}rem`,
+      width: `${SOCKET_SIZE}rem`,
+      height: `${SOCKET_SIZE}rem`,
+      backgroundImage: `url(${socketSprite(socket)})`,
+      backgroundSize: '100% 100%'
     } as CSSProperties
   }
 }))
 
+/* Adjacent sockets on the grid are exactly one cell apart, so a link is
+   always axis-aligned — horizontal and vertical gold connector sprites. */
 const links = computed(() => layout.value.slice(0, -1).flatMap((socket, index) => {
   const next = layout.value[index + 1]
   if (socket.socket.group !== next.socket.group) return []
-  const dx = next.center.x - socket.center.x
-  const dy = next.center.y - socket.center.y
-  const length = Math.sqrt(dx * dx + dy * dy)
+  const from = socket.center
+  const to = next.center
+  const dx = to.x - from.x
+  const dy = to.y - from.y
+  const vertical = Math.abs(dy) > Math.abs(dx)
+  const style: CSSProperties = vertical
+    ? {
+        left: `${from.x * CELL - LINK_SIZE / 2}rem`,
+        top: `${Math.min(from.y, to.y) * CELL}rem`,
+        width: `${LINK_SIZE}rem`,
+        height: `${Math.abs(dy) * CELL}rem`
+      }
+    : {
+        left: `${Math.min(from.x, to.x) * CELL}rem`,
+        top: `${from.y * CELL - LINK_SIZE / 2}rem`,
+        width: `${Math.abs(dx) * CELL}rem`,
+        height: `${LINK_SIZE}rem`
+      }
   return [{
     key: `${index}-${index + 1}`,
-    style: {
-      left: `${socket.center.x}px`,
-      top: `${socket.center.y - 2.5}px`,
-      width: `${length}px`,
-      transform: `rotate(${Math.atan2(dy, dx)}rad)`
-    } as CSSProperties
+    src: vertical ? '/images/item-display/socket-link-v.png' : '/images/item-display/socket-link-h.png',
+    style
   }]
 }))
 </script>
