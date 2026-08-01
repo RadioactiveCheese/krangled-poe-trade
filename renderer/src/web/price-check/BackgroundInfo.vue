@@ -2,6 +2,9 @@
   <div v-if="updateInfo" class="bg-gray-900 mt-2 mx-4 rounded py-1 px-2">
     <p>{{ updateInfo.str1 }}</p>
     <p class="text-gray-500">{{ updateInfo.str2 }}</p>
+    <button v-if="updateReady" class="btn w-full mt-1" @click="quitAndInstall">
+      {{ t('updates.close_update_restart') }}
+    </button>
   </div>
   <div v-if="leagues.isLoading.value" class="pt-2 px-4">
     <i class="fas fa-info-circle text-gray-600"></i> {{ t('app.leagues_loading') }}</div>
@@ -42,9 +45,18 @@ const updateInfo = computed(() => {
   }
 })
 
+const updateReady = computed(() => Host.updateInfo.value.state === 'update-downloaded')
+
 const leagues = useLeagues()
 
 function openCaptcha () {
   showBrowser(`https://${poeWebApi()}/api/leagues?type=main&realm=pc`)
+}
+
+function quitAndInstall () {
+  Host.sendEvent({
+    name: 'CLIENT->MAIN::user-action',
+    payload: { action: 'update-and-restart' }
+  })
 }
 </script>
