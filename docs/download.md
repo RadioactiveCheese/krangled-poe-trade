@@ -14,7 +14,7 @@ unofficial mirrors have not been verified.
 | Download link | Automatic updates | Startup time |
 |---------------|-------------------|--------------|
 | <a :href="`${theme.github.releasesUrl}/download/v${theme.appVersion}/Krangled-PoE-Trade-Setup-${theme.appVersion}.exe`">Windows 10+ (installer)</a> | ✔ | Fast |
-| <a :href="`${theme.github.releasesUrl}/download/v${theme.appVersion}/Krangled-PoE-Trade-${theme.appVersion}.exe`">Windows 10+ (portable)</a> | ❌ | Slower |
+| <a :href="`${theme.github.releasesUrl}/download/v${theme.appVersion}/Krangled-PoE-Trade-Portable-${theme.appVersion}.exe`">Windows 10+ (portable)</a> | ❌ | Slower |
 | <a :href="`${theme.github.releasesUrl}/download/v${theme.appVersion}/Krangled-PoE-Trade-${theme.appVersion}.AppImage`">Linux (AppImage)</a> | ✔ | n/a |
 | <a :href="`${theme.github.releasesUrl}/download/v${theme.appVersion}/Krangled-PoE-Trade-${theme.appVersion}-universal.dmg`">macOS (dmg)</a> | ❌ | n/a |
 
