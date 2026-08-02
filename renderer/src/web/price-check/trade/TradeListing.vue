@@ -11,6 +11,12 @@
       </div>
       <online-filter v-if="list" :by-time="true" :filters="filters" api="trade" />
       <div class="flex-1"></div>
+      <button v-if="list && showMakeupToggle"
+        class="rounded px-2 mr-1"
+        :class="makeupView ? 'bg-gray-600 text-gray-200' : 'bg-gray-700 text-gray-400'"
+        :title="t(':makeup_view_hint')"
+        @click="makeupView = !makeupView"
+      ><i class="fas fa-layer-group text-xs" /> {{ t(':makeup_view') }}</button>
       <trade-links v-if="list"
         :get-link="makeTradeLink" />
     </div>
@@ -98,6 +104,7 @@ import { defineComponent, computed, watch, PropType, inject, shallowReactive, sh
 import { useI18nNs } from '@/web/i18n'
 import UiErrorBox from '@/web/ui/UiErrorBox.vue'
 import { requestTradeResultList, requestResults, createTradeRequest, PricingResult, SearchResult } from './pathofexile-trade'
+import { makeupViewEnabled } from './trade-tooltip'
 import { getTradeEndpoint } from './common'
 import { AppConfig } from '@/web/Config'
 import { PriceCheckWidget } from '@/web/overlay/interfaces'
@@ -283,6 +290,8 @@ export default defineComponent({
       error,
       canCreateTradeLink,
       showSeller: computed(() => widget.value.showSeller),
+      makeupView: makeupViewEnabled,
+      showMakeupToggle: computed(() => widget.value.itemHoverTooltip !== 'off'),
       makeTradeLink,
       openTradeLink () {
         showBrowser(makeTradeLink())

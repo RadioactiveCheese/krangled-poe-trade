@@ -30,7 +30,39 @@
       </div>
       <div class="flex flex-col px-3 py-1 text-sm leading-snug">
         <template v-for="(section, index) in sections" :key="section.key">
-          <div v-if="section.content?.length">
+          <div
+            v-if="section.key === 'explicitMods' && makeupViewEnabled && makeupGroups.length"
+            data-testid="affix-makeup"
+          >
+            <template v-for="(group, groupIndex) in makeupGroups" :key="group[0].side">
+              <div v-if="groupIndex > 0" :class="$style['affix-group-separator']" />
+              <div
+                v-for="affix in group"
+                :key="`${affix.modName}-${affix.tier}-${affix.lines[0].text}`"
+                data-testid="affix-row"
+                class="grid grid-cols-[1.5rem_minmax(13rem,1fr)_6rem] items-center min-h-[1.375rem]"
+              >
+                <span
+                  class="text-xs text-right"
+                  :class="tierClass(affix.lines[0])"
+                >{{ affix.tier ?? '' }}</span>
+                <span class="text-center">
+                  <template v-for="({ line, art }, lineIndex) in affix.rows" :key="`${line.text}-${lineIndex}`">
+                    <img
+                      v-if="art"
+                      :src="art"
+                      :alt="line.text"
+                      class="block w-full h-5 object-contain"
+                      draggable="false"
+                    >
+                    <span v-else class="block" :class="$style[`number-color-${line.color}`]">{{ line.text }}</span>
+                  </template>
+                </span>
+                <span :class="$style['affix-mod-name']">{{ affix.modName }}</span>
+              </div>
+            </template>
+          </div>
+          <div v-else-if="section.content?.length">
             <div
               v-for="({ line, veiledArt, bandStyle, bandIcon }, lineIndex) in section.content"
               :key="`${line.text}-${lineIndex}`"
@@ -88,6 +120,7 @@
 import { computed } from 'vue'
 import type { CSSProperties } from 'vue'
 import type { PricingResult } from './pathofexile-trade'
+import { groupAffixesByMod, makeupViewEnabled } from './trade-tooltip'
 import type { DisplayInfluence, DisplayItemLine, DisplayItemSymbol } from './trade-tooltip'
 import UiDetailedItemImg from '@/web/ui/UiDetailedItemImg.vue'
 
@@ -110,8 +143,11 @@ const INFLUENCE_CAPS: Record<DisplayInfluence, { label: string, icon: string }> 
 
 const ITEM_SYMBOL_CAPS: Record<DisplayItemSymbol, { label: string, icon: string }> = {
   foresight: { label: 'Foresight (Hinekora\'s Lock)', icon: '/images/item-symbols/foresight.png' },
+  breach: { label: 'Foulborn', icon: '/images/item-symbols/breach.png' },
+  vestigial: { label: 'Vestigial', icon: '/images/item-symbols/vestigial.png' },
   synthesised: { label: 'Synthesised', icon: '/images/item-symbols/synthesised.png' },
-  veiled: { label: 'Veiled', icon: '/images/item-symbols/veiled.png' }
+  veiled: { label: 'Veiled', icon: '/images/item-symbols/veiled.png' },
+  memory: { label: 'Memory Strands', icon: '/images/item-symbols/memory.png' }
 }
 
 /* The two header caps hold at most two markers: influence emblems first
@@ -151,7 +187,7 @@ interface DisplayRow {
 }
 
 function toDisplayRow (line: DisplayItemLine): DisplayRow {
-  const band = VALUE_BANDS.find(band => band.match.test(line.text))
+  const band = VALUE_BANDS.find(band => band.match(line))
   return {
     line,
     veiledArt: veiledArt(line),
@@ -193,6 +229,27 @@ const dividerVisible = computed(() => sections.value.map((section, index) => {
   return Boolean(section.content?.length) && sections.value.slice(index + 1).some(next => Boolean(next.content?.length))
 }))
 
+/* The item-makeup view: an alternative to trade-site parity — one row per
+   modifier, prefixes before suffixes, the affix name in a stable right
+   column. Toggled by the button in the results header (makeupViewEnabled). */
+const makeupGroups = computed(() => {
+  const display = item.value
+  if (!display) return []
+  const affixes = groupAffixesByMod([
+    display.fracturedMods,
+    display.explicitMods,
+    display.craftedMods,
+    display.veiledMods
+  ]).map(affix => ({
+    ...affix,
+    rows: affix.lines.map(line => ({ line, art: veiledArt(line) }))
+  }))
+  return [
+    affixes.filter(affix => affix.side === 'prefix'),
+    affixes.filter(affix => affix.side === 'suffix')
+  ].filter(group => group.length)
+})
+
 /* Numeric tiers sit in the left gutter; word tiers (eldritch
    "Lesser".."Perfect") read as part of the mod, so they go inline.
    P = prefix, S = suffix, R = the rank the trade API reports for
@@ -215,10 +272,19 @@ function tierClass (line: DisplayItemLine): string {
 }
 
 /* Certain named values carry the game's own chrome: a title band drawn
-   behind the row, and for Memories a crystal icon beside the value. */
-const VALUE_BANDS: Array<{ match: RegExp, art: string, icon?: string }> = [
-  { match: /^Intangibility\b/, art: '/images/item-display/intangibility-title.png' },
-  { match: /^Memories\b/, art: '/images/item-display/memory-title.png', icon: '/images/item-display/memory-icon.png' }
+   behind the row, and for Memory Strands a crystal icon beside the value.
+   Matched on the API's property type (stable across locales), with the
+   English text as a fallback for lines that arrive without one. */
+const VALUE_BANDS: Array<{ match: (line: DisplayItemLine) => boolean, art: string, icon?: string }> = [
+  {
+    match: line => line.propType === 110 || /^Intangibility\b/.test(line.text),
+    art: '/images/item-display/intangibility-title.png'
+  },
+  {
+    match: line => line.propType === 99 || /^Memor(?:y Strands|ies)\b/.test(line.text),
+    art: '/images/item-display/memory-title.png',
+    icon: '/images/item-display/memory-icon.png'
+  }
 ]
 
 /* The ornate strip IS the unrevealed modifier — it replaces the text row.
@@ -244,6 +310,17 @@ function veiledArt (line: DisplayItemLine): string | undefined {
 .Magic-separator { @apply bg-[url(/images/item-display/separator-magic.png)]; }
 .Rare-separator { @apply bg-[url(/images/item-display/separator-rare.png)]; }
 .Unique-separator { @apply bg-[url(/images/item-display/separator-unique.png)]; }
+
+/* Soft divider between the prefix and suffix groups of the makeup view. */
+.affix-group-separator {
+  @apply h-[2px] my-1 bg-center bg-no-repeat opacity-40;
+  background-image: url('/images/item-display/separator-rare.png');
+}
+.affix-mod-name {
+  @apply pl-2 self-center text-right text-xs;
+  color: #8b8b7a;
+  line-height: 1.15;
+}
 
 /* rem throughout, so the frame art tracks the app font-size setting. */
 .Normal-title,

@@ -1,8 +1,14 @@
+import { shallowRef } from 'vue'
 import { CLIENT_STRINGS } from '@/assets/data'
 import {
   ELDRITCH_IMPLICIT_METADATA,
   type EldritchImplicitInfluence
 } from './eldritch-implicit-metadata'
+
+/* Whether tooltips render the item-makeup view (one row per modifier, with
+   affix names) instead of trade-site parity. Toggled from the results
+   header; shared across every tooltip for the session. */
+export const makeupViewEnabled = shallowRef(false)
 
 export enum TradeNumberColors {
   White = 0,
@@ -64,6 +70,13 @@ export interface DisplayItemLine {
   color: TradeNumberColors
   influence?: EldritchImplicitInfluence
   modCategory?: 'fractured' | 'explicit' | 'crafted' | 'veiled'
+  /* The trade API's property `type` (e.g. 99 = Memory Strands,
+     110 = Intangibility) — lets the renderer key special chrome off the
+     stable number instead of localized text. */
+  propType?: number
+  /* Underlying affix name(s), e.g. "of the Apt"; lines the API sums from
+     several mods join their names with " + ", mirroring how tiers join. */
+  modName?: string
 }
 
 export interface DisplaySocket {
@@ -96,8 +109,10 @@ const CLASSIC_INFLUENCES: Array<{
 
 /* Item-state markers that share the two header-cap slots with influence
    emblems (influence takes precedence). 'foresight' marks an item with
-   Hinekora's Lock applied. */
-export type DisplayItemSymbol = 'foresight' | 'synthesised' | 'veiled'
+   Hinekora's Lock applied; 'breach' marks Foulborn items (the trade API
+   calls them "mutated"); 'memory' marks items carrying Memory Strands. */
+export type DisplayItemSymbol =
+  'foresight' | 'synthesised' | 'veiled' | 'breach' | 'memory' | 'vestigial'
 
 export interface DisplayItem {
   title: string[]
@@ -141,6 +156,12 @@ export interface FetchItem {
   fractured?: boolean
   replica?: boolean
   foreseeing?: boolean
+  /* Foulborn item ("Foulborn <name>" uniques). */
+  mutated?: boolean
+  /* Item with Memory Strands. */
+  memoryItem?: boolean
+  /* Vestigial unique. */
+  vestigial?: boolean
   influences?: Record<string, boolean>
   searing?: boolean
   tangled?: boolean
@@ -270,7 +291,8 @@ function parseModBlock (
       color: getModColor(line, color),
       tier: getRichTier(line) ?? getLegacyTier(index, mods, hashes) ?? eldritch?.tier,
       influence: eldritch?.influence,
-      modCategory: getModCategory(line, modCategory)
+      modCategory: getModCategory(line, modCategory),
+      modName: getRichModName(line) ?? getLegacyModName(index, mods, hashes)
     }
   })
 }
@@ -345,6 +367,52 @@ function parseVeiledMod (mod: FetchResultModLine): DisplayItemLine {
   }
 }
 
+export interface DisplayAffix {
+  side: 'prefix' | 'suffix'
+  tier?: string
+  modName?: string
+  lines: DisplayItemLine[]
+}
+
+/* The item-makeup view: one row per modifier, prefixes before suffixes.
+   A hybrid mod's stat lines collapse into the row of the first line backed
+   by the same underlying mod. Only lines backed by exactly one named mod can
+   group — lines the API summed from several mods (joined "A + B" names)
+   keep their own row, since their composition can't be recovered. */
+export function groupAffixesByMod (groups: Array<DisplayItemLine[] | undefined>): DisplayAffix[] {
+  const affixes: DisplayAffix[] = []
+  for (const line of groups.flatMap(group => group ?? [])) {
+    const groupable = line.modName != null && !line.modName.includes(' + ')
+    const existing = groupable
+      ? affixes.find(affix =>
+          affix.modName === line.modName &&
+        affix.tier === line.tier &&
+        affix.lines[0].modCategory === line.modCategory)
+      : undefined
+    if (existing) {
+      existing.lines.push(line)
+    } else {
+      affixes.push({ side: affixSide(line), tier: line.tier, modName: line.modName, lines: [line] })
+    }
+  }
+  return [
+    ...affixes.filter(affix => affix.side === 'prefix'),
+    ...affixes.filter(affix => affix.side === 'suffix')
+  ]
+}
+
+/* Crafted-mod ranks ("R2") carry no side, so their name decides: English
+   suffixes always read "of ...". Unrevealed veiled lines encode the side in
+   their normalized text. */
+function affixSide (line: DisplayItemLine): DisplayAffix['side'] {
+  if (line.tier?.startsWith('P')) return 'prefix'
+  if (line.tier?.startsWith('S')) return 'suffix'
+  if (line.text === 'Unrevealed Prefix') return 'prefix'
+  if (line.text === 'Unrevealed Suffix') return 'suffix'
+  if (line.modName != null) return /^of /.test(line.modName) ? 'suffix' : 'prefix'
+  return 'suffix'
+}
+
 export function orderDisplayAffixes (groups: Array<DisplayItemLine[] | undefined>): DisplayItemLine[] {
   const categoryOrder: Record<NonNullable<DisplayItemLine['modCategory']>, number> = {
     fractured: 0,
@@ -393,6 +461,23 @@ function getLegacyTier (
   return tiers.length ? tiers.join(' + ') : undefined
 }
 
+function getRichModName (line: FetchResultModLine): string | undefined {
+  if (typeof line !== 'object' || line == null || !('mods' in line)) return undefined
+  const names = line.mods?.map(mod => mod.name).filter((name): name is string => Boolean(name))
+  return names?.length ? names.join(' + ') : undefined
+}
+
+function getLegacyModName (
+  displayIndex: number,
+  mods?: TradeModMetadata[],
+  hashes?: TradeModHashes[]
+): string | undefined {
+  const indexes = hashes?.[displayIndex]?.[1]
+  if (!indexes?.length || !mods?.length) return undefined
+  const names = indexes.map(index => mods[index]?.name).filter((name): name is string => Boolean(name))
+  return names.length ? names.join(' + ') : undefined
+}
+
 function buildNameBlock (properties: TradeDataLine[] | undefined): DisplayItemLine[] | undefined {
   if (!properties?.length) return undefined
 
@@ -404,12 +489,13 @@ function buildNameBlock (properties: TradeDataLine[] | undefined): DisplayItemLi
     if (name.includes('{0}')) {
       let text = name
       values.forEach((value, index) => { text = text.replace(`{${index}}`, value) })
-      return [{ text, color }]
+      return [{ text, color, propType: property.type }]
     }
     return [{
       text: name ? `${name}: ` : '',
       value: values.join(', '),
-      color
+      color,
+      propType: property.type
     }]
   })
 }
@@ -438,8 +524,11 @@ function buildItemProps (itemLevel: number | undefined, requirements: TradeDataL
 function buildItemSymbols (item: FetchItem): DisplayItemSymbol[] | undefined {
   const symbols: DisplayItemSymbol[] = []
   if (item.foreseeing) symbols.push('foresight')
+  if (item.mutated) symbols.push('breach')
+  if (item.vestigial) symbols.push('vestigial')
   if (item.synthesised) symbols.push('synthesised')
   if (item.veiledMods?.length) symbols.push('veiled')
+  if (item.memoryItem) symbols.push('memory')
   return symbols.length ? symbols : undefined
 }
 
@@ -455,8 +544,16 @@ function buildItemTags (item: FetchItem): DisplayItemLine[] | undefined {
   return tags.length ? tags : undefined
 }
 
+/* The API wraps game terms in "[Key|Display]" (or "[Term]") lore markup,
+   e.g. the Intangibility property name arrives as
+   "[Intangibility|Intangibility]" — only the display half is shown. */
+function stripLoreMarkup (text: string): string {
+  return text.replace(/\[([^[\]]*)\]/g, (_, inner: string) => inner.split('|').pop()!)
+}
+
 function parseTradeText (text: TradeRichText | FetchResultMod): string {
-  if (typeof text === 'string' || typeof text === 'number') return String(text)
+  if (typeof text === 'string') return stripLoreMarkup(text)
+  if (typeof text === 'number') return String(text)
   if (text == null || typeof text !== 'object') return ''
   if ('description' in text && text.description != null) return parseTradeText(text.description)
   if ('text' in text && text.text != null) return parseTradeText(text.text)
