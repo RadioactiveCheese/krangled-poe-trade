@@ -47,10 +47,10 @@
                   :class="tierClass(affix.lines[0])"
                 >{{ affix.tier ?? '' }}</span>
                 <span class="text-center">
-                  <template v-for="(line, lineIndex) in affix.lines" :key="`${line.text}-${lineIndex}`">
+                  <template v-for="({ line, art }, lineIndex) in affix.rows" :key="`${line.text}-${lineIndex}`">
                     <img
-                      v-if="veiledArt(line)"
-                      :src="veiledArt(line)"
+                      v-if="art"
+                      :src="art"
                       :alt="line.text"
                       class="block w-full h-5 object-contain"
                       draggable="false"
@@ -240,7 +240,10 @@ const makeupGroups = computed(() => {
     display.explicitMods,
     display.craftedMods,
     display.veiledMods
-  ])
+  ]).map(affix => ({
+    ...affix,
+    rows: affix.lines.map(line => ({ line, art: veiledArt(line) }))
+  }))
   return [
     affixes.filter(affix => affix.side === 'prefix'),
     affixes.filter(affix => affix.side === 'suffix')

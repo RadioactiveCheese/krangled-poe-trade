@@ -1,9 +1,13 @@
 // @vitest-environment happy-dom
 
 import { mount } from '@vue/test-utils'
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it } from 'vitest'
 import TooltipItem from '@/web/price-check/trade/TooltipItem.vue'
 import { makeupViewEnabled } from '@/web/price-check/trade/trade-tooltip'
+
+afterEach(() => {
+  makeupViewEnabled.value = false
+})
 import type { PricingResult } from '@/web/price-check/trade/pathofexile-trade'
 import { TradeNumberColors, type DisplayInfluence, type DisplayItemLine, type DisplayItemSymbol } from '@/web/price-check/trade/trade-tooltip'
 

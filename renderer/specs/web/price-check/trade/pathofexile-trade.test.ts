@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import fs from 'node:fs'
 import path from 'node:path'
 import fixture from '../../../fixtures/trade-fetch-poe1.json'
-import { findPropertyValue, testExports, DisplayItemLine } from '@/web/price-check/trade/trade-tooltip'
+import { findPropertyValue, groupAffixesByMod, testExports, DisplayItemLine } from '@/web/price-check/trade/trade-tooltip'
 
 function parse (item = fixture.item) {
   return testExports.parseFetchResult({
@@ -195,7 +195,7 @@ describe('PoE 1 trade listing tooltip parsing', () => {
   })
 
   it('groups hybrid stat lines into one affix per mod, prefixes before suffixes', () => {
-    const grouped = testExports.groupAffixesByMod([
+    const grouped = groupAffixesByMod([
       [
         { text: '+17 to Strength', tier: 'S8', color: 1, modCategory: 'explicit', modName: 'of the Apt' },
         { text: '+284 to Accuracy Rating', tier: 'S3', color: 1, modCategory: 'explicit', modName: 'of the Sniper' },

@@ -563,6 +563,5 @@ function parseTradeText (text: TradeRichText | FetchResultMod): string {
 
 export const testExports = {
   parseFetchResult,
-  orderDisplayAffixes,
-  groupAffixesByMod
+  orderDisplayAffixes
 }
