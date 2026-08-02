@@ -4,6 +4,7 @@ on:
   schedule:
     - cron: '0 6 * * 1' # Mondays 06:00 UTC
   workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: write
@@ -16,6 +17,9 @@ env:
 jobs:
   sync:
     runs-on: ubuntu-latest
+    concurrency:
+      group: sync-upstream
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v6
         with:
@@ -23,18 +27,46 @@ jobs:
 
       - name: Fetch upstream
         run: |
+          git fetch origin main:refs/remotes/origin/main
           git remote add upstream "$UPSTREAM"
           git fetch upstream master
 
       - name: Count new upstream commits
         id: check
         run: |
-          BEHIND=$(git rev-list --count HEAD..upstream/master)
+          BEHIND=$(git rev-list --count origin/main..upstream/master)
           echo "behind=$BEHIND" >> "$GITHUB_OUTPUT"
           echo "$BEHIND new upstream commit(s)"
 
+          NEEDS_SYNC=false
+          if [ "$BEHIND" != "0" ]; then
+            if git ls-remote --exit-code --heads origin "$SYNC_BRANCH" >/dev/null 2>&1; then
+              git fetch origin "$SYNC_BRANCH:refs/remotes/origin/$SYNC_BRANCH"
+              if git merge-base --is-ancestor upstream/master "origin/$SYNC_BRANCH"; then
+                echo "The sync branch already contains the latest upstream commit."
+              else
+                STATUS=$?
+                if [ "$STATUS" -eq 1 ]; then
+                  NEEDS_SYNC=true
+                else
+                  echo "::error::Could not compare upstream with the sync branch (status $STATUS)."
+                  exit "$STATUS"
+                fi
+              fi
+            else
+              STATUS=$?
+              if [ "$STATUS" -eq 2 ]; then
+                NEEDS_SYNC=true
+              else
+                echo "::error::Could not query the remote sync branch (status $STATUS)."
+                exit "$STATUS"
+              fi
+            fi
+          fi
+          echo "needs_sync=$NEEDS_SYNC" >> "$GITHUB_OUTPUT"
+
       - name: Merge upstream into sync branch
-        if: steps.check.outputs.behind != '0'
+        if: steps.check.outputs.needs_sync == 'true'
         run: |
           git config user.name  'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -48,12 +80,12 @@ jobs:
           git push --force origin "$SYNC_BRANCH"
 
       - name: Open or update pull request
-        if: steps.check.outputs.behind != '0'
+        if: steps.check.outputs.needs_sync == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ -n "$(gh pr list --head "$SYNC_BRANCH" --state open --json number --jq '.[].number')" ]; then
-            echo "PR already open for $SYNC_BRANCH; force-push refreshed it."
+            echo "PR already open for $SYNC_BRANCH; refreshed it with the latest upstream commit."
           else
             cat > /tmp/pr-body.md <<'EOF'
           Automated merge of `SnosMe/awakened-poe-trade@master`.
