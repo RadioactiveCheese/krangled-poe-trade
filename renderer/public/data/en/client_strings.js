@@ -131,6 +131,7 @@ export default {
   VESTIGIAL_NAME: /^Vestigial (.*)$/,
   VESTIGIAL_MODIFIER: 'Vestigial Implicit Modifier',
   VESTIGIAL_IMPLICIT: 'Vestigial Implicit Modifier',
+  SCRYING_MAP_AREA: 'Map Area: ',
   // ---
   CHAT_SYSTEM: /^: (?<body>.+)$/,
   CHAT_TRADE: /^\$(?:<(?<guild_tag>.+?)> )?(?<char_name>.+?): (?<body>.+)$/,
