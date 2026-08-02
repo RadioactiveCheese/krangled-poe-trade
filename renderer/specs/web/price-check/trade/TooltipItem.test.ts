@@ -3,6 +3,7 @@
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from 'vitest'
 import TooltipItem from '@/web/price-check/trade/TooltipItem.vue'
+import { makeupViewEnabled } from '@/web/price-check/trade/trade-tooltip'
 import type { PricingResult } from '@/web/price-check/trade/pathofexile-trade'
 import { TradeNumberColors, type DisplayInfluence, type DisplayItemLine, type DisplayItemSymbol } from '@/web/price-check/trade/trade-tooltip'
 
@@ -84,6 +85,18 @@ describe('Trade listing tooltip header caps', () => {
     expect(caps[0].find('img').attributes('src')).toBe('/images/item-symbols/foresight.png')
   })
 
+  it('renders the Foulborn, Vestigial, and Memory Strand symbol art', () => {
+    const breach = mountTooltip([], undefined, ['breach', 'vestigial']).findAll('[data-testid="header-cap"]')
+    expect(breach.map(cap => cap.attributes('data-symbol'))).toEqual(['breach', 'vestigial'])
+    expect(breach[0].attributes('title')).toBe('Foulborn')
+    expect(breach[0].find('img').attributes('src')).toBe('/images/item-symbols/breach.png')
+    expect(breach[1].find('img').attributes('src')).toBe('/images/item-symbols/vestigial.png')
+
+    const memory = mountTooltip([], undefined, ['memory']).findAll('[data-testid="header-cap"]')
+    expect(memory.map(cap => cap.attributes('data-symbol'))).toEqual(['memory', 'memory'])
+    expect(memory[0].find('img').attributes('src')).toBe('/images/item-symbols/memory.png')
+  })
+
   it('renders no caps when the API reports no influence or symbols', () => {
     expect(mountTooltip([]).findAll('[data-testid="header-cap"]')).toHaveLength(0)
   })
@@ -147,7 +160,7 @@ describe('Trade listing tooltip modifier lines', () => {
     expect(line.text()).not.toContain('R2 63%')
   })
 
-  it('draws title bands behind Intangibility and Memories values, with the memory icon', () => {
+  it('draws title bands behind Intangibility and Memory Strand values, with the memory icon', () => {
     const result = {
       displayItem: {
         title: ['Fixture Mantle', 'Vaal Regalia'],
@@ -155,9 +168,11 @@ describe('Trade listing tooltip modifier lines', () => {
         frameType: 2,
         influences: [],
         nameBlock: [
-          { text: 'Intangibility: ', value: '12%', color: TradeNumberColors.Augmented },
-          { text: 'Memories: ', value: '3', color: TradeNumberColors.Augmented },
-          { text: 'Quality: ', value: '+20%', color: TradeNumberColors.Augmented }
+          // Property types as the live API reports them: 110 = Intangibility,
+          // 99 = Memory Strands, 6 = Quality.
+          { text: 'Intangibility: ', value: '8%', color: TradeNumberColors.White, propType: 110 },
+          { text: 'Memory Strands: ', value: '74', color: TradeNumberColors.White, propType: 99 },
+          { text: 'Quality: ', value: '+20%', color: TradeNumberColors.Augmented, propType: 6 }
         ]
       }
     } as unknown as PricingResult
@@ -172,6 +187,62 @@ describe('Trade listing tooltip modifier lines', () => {
     expect(memories.attributes('style')).toContain('/images/item-display/memory-title.png')
     expect(memories.find('img').attributes('src')).toBe('/images/item-display/memory-icon.png')
     expect(quality.attributes('style')).toBeUndefined()
+  })
+
+  it('falls back to matching band lines by text when no property type is present', () => {
+    const wrapper = mountTooltip([], [
+      { text: 'Intangibility: 8%', color: TradeNumberColors.Augmented },
+      { text: 'Memory Strands: 74', color: TradeNumberColors.Augmented }
+    ])
+    const [intangibility, memories] = wrapper.findAll('[data-testid="modifier-line"]')
+    expect(intangibility.attributes('style')).toContain('intangibility-title.png')
+    expect(memories.attributes('style')).toContain('memory-title.png')
+  })
+
+  it('regroups the affix block by underlying mod while the makeup toggle is on', async () => {
+    const result = {
+      displayItem: {
+        title: ['Fixture Mantle', 'Vaal Regalia'],
+        rarity: 'Rare',
+        frameType: 2,
+        influences: [],
+        explicitMods: [
+          { text: '+17 to Strength', tier: 'S8', color: TradeNumberColors.Augmented, modCategory: 'explicit', modName: 'of the Apt' },
+          { text: '+18 to Dexterity', tier: 'S8', color: TradeNumberColors.Augmented, modCategory: 'explicit', modName: 'of the Apt' },
+          { text: '+123 to maximum Life', tier: 'P1', color: TradeNumberColors.Augmented, modCategory: 'explicit', modName: 'Vigorous' }
+        ],
+        veiledMods: [
+          { text: 'Unrevealed Suffix', color: TradeNumberColors.Augmented, modCategory: 'veiled' }
+        ]
+      }
+    } as unknown as PricingResult
+    const wrapper = mount(TooltipItem, {
+      props: { result },
+      global: { stubs: { UiDetailedItemImg: true } }
+    })
+
+    // Default view: trade-site parity — flat lines in source order.
+    expect(wrapper.find('[data-testid="affix-makeup"]').exists()).toBe(false)
+    expect(wrapper.findAll('[data-testid="modifier-line"]')).toHaveLength(4)
+
+    makeupViewEnabled.value = true
+    await wrapper.vm.$nextTick()
+
+    const rows = wrapper.findAll('[data-testid="affix-row"]')
+    expect(rows).toHaveLength(3)
+    // Prefixes first; the hybrid mod's two stat lines share one row with
+    // its name in the right column.
+    expect(rows[0].text()).toContain('+123 to maximum Life')
+    expect(rows[0].text()).toContain('Vigorous')
+    expect(rows[1].text()).toContain('+17 to Strength')
+    expect(rows[1].text()).toContain('+18 to Dexterity')
+    expect(rows[1].text()).toContain('of the Apt')
+    expect(rows[2].find('img').attributes('src')).toMatch(/^\/images\/veiled\/suffix_0[1-6]a\.png$/)
+
+    makeupViewEnabled.value = false
+    await wrapper.vm.$nextTick()
+    expect(wrapper.find('[data-testid="affix-makeup"]').exists()).toBe(false)
+    expect(wrapper.findAll('[data-testid="modifier-line"]')).toHaveLength(4)
   })
 
   it('renders unrevealed veiled mods as the ornament image instead of text', () => {

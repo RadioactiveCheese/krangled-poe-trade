@@ -304,7 +304,9 @@
     "you_have": "You have",
     "stack": "Stack",
     "legacy_bulk_xchg_msg": "This item is available on the Currency Exchange Market",
-    "market_ratio": "Market Ratio"
+    "market_ratio": "Market Ratio",
+    "makeup_view": "Makeup",
+    "makeup_view_hint": "Show item tooltips grouped by modifier, with affix names (prefixes before suffixes)"
   },
   "settings": {
     "title": "Settings - Awakened PoE Trade",

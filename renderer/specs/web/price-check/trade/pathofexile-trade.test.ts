@@ -179,6 +179,48 @@ describe('PoE 1 trade listing tooltip parsing', () => {
     })
 
     expect(tiers(item?.explicitMods)).toEqual(['P7', 'P7', 'S5 + P9'])
+    expect(item?.explicitMods?.map(line => line.modName)).toEqual([
+      'Hybrid Armour and Life',
+      'Hybrid Armour and Life',
+      'of Strength + Hybrid Strength'
+    ])
+  })
+
+  it('extracts affix names from rich fetch lines', () => {
+    expect(parse().explicitMods?.map(line => line.modName)).toEqual([
+      'Resplendent',
+      'of the Magma',
+      'Upgraded'
+    ])
+  })
+
+  it('groups hybrid stat lines into one affix per mod, prefixes before suffixes', () => {
+    const grouped = testExports.groupAffixesByMod([
+      [
+        { text: '+17 to Strength', tier: 'S8', color: 1, modCategory: 'explicit', modName: 'of the Apt' },
+        { text: '+284 to Accuracy Rating', tier: 'S3', color: 1, modCategory: 'explicit', modName: 'of the Sniper' },
+        { text: '+18 to Dexterity', tier: 'S8', color: 1, modCategory: 'explicit', modName: 'of the Apt' },
+        { text: '+123 to maximum Life', tier: 'P1', color: 1, modCategory: 'explicit', modName: 'Vigorous' },
+        // A line the API summed from two mods keeps its own row.
+        { text: '+47 to maximum Mana', tier: 'P2 + P4', color: 1, modCategory: 'explicit', modName: 'Beryl + Opalescent' }
+      ],
+      [
+        // Rank tiers carry no side, so the "of ..." name decides.
+        { text: '+21 to Dexterity', tier: 'R2', color: 8734, modCategory: 'crafted', modName: 'of the Craft' }
+      ],
+      [
+        { text: 'Unrevealed Prefix', color: 1, modCategory: 'veiled' }
+      ]
+    ])
+
+    expect(grouped.map(affix => ({ side: affix.side, modName: affix.modName, texts: affix.lines.map(line => line.text) }))).toEqual([
+      { side: 'prefix', modName: 'Vigorous', texts: ['+123 to maximum Life'] },
+      { side: 'prefix', modName: 'Beryl + Opalescent', texts: ['+47 to maximum Mana'] },
+      { side: 'prefix', modName: undefined, texts: ['Unrevealed Prefix'] },
+      { side: 'suffix', modName: 'of the Apt', texts: ['+17 to Strength', '+18 to Dexterity'] },
+      { side: 'suffix', modName: 'of the Sniper', texts: ['+284 to Accuracy Rating'] },
+      { side: 'suffix', modName: 'of the Craft', texts: ['+21 to Dexterity'] }
+    ])
   })
 
   it('keeps PoE 1 modifier categories visually distinct', () => {
@@ -235,6 +277,33 @@ describe('PoE 1 trade listing tooltip parsing', () => {
       'Fractured Suffix',
       'Explicit Suffix',
       'Crafted Suffix'
+    ])
+  })
+
+  it('derives header-cap symbols from the Foulborn, Vestigial, and Memory Strand fields', () => {
+    const item = parse({
+      ...fixture.item,
+      foreseeing: true,
+      mutated: true,
+      vestigial: true,
+      memoryItem: true
+    } as never)
+
+    expect(item.symbols).toEqual(['foresight', 'breach', 'vestigial', 'memory'])
+  })
+
+  it('strips [Key|Display] lore markup and keeps the property type on value lines', () => {
+    const item = parse({
+      ...fixture.item,
+      properties: [
+        { name: '[Intangibility|Intangibility]', values: [['8%', 0]], displayMode: 0, type: 110 },
+        { name: 'Memory Strands', values: [['74', 0]], displayMode: 0, type: 99 }
+      ]
+    } as never)
+
+    expect(item.nameBlock).toEqual([
+      expect.objectContaining({ text: 'Intangibility: ', value: '8%', propType: 110 }),
+      expect.objectContaining({ text: 'Memory Strands: ', value: '74', propType: 99 })
     ])
   })
 
