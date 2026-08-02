@@ -23,6 +23,8 @@ nsis:
   allowToChangeInstallationDirectory: true
   installerIcon: "build/icons/icon.ico"
   uninstallerIcon: "build/icons/icon.ico"
+portable:
+  artifactName: "Krangled-PoE-Trade-Portable-${version}.${ext}"
 win:
   icon: "build/icons/icon.ico"
   target:

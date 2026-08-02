@@ -237,6 +237,7 @@
     "last_checked": "Last checked: {0}",
     "check_now": "Check now",
     "install_now": "Install now",
+    "close_update_restart": "Close, update and restart",
     "downloads_page": "Open the Downloads page",
     "installed_on_exit": "It will be installed automatically on exit",
     "download_manually": "You can download it from GitHub",
