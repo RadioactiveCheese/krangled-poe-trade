@@ -166,6 +166,7 @@ export default {
   FOULBORN_NAME: /^(?:Нечестивый|Нечестивая|Нечестивое|Нечестивые) (.*)$/,
   FOULBORN_MODIFIER: 'Нечестивое уникальное свойство',
   VESTIGIAL_NAME: /^Вырожденный: (.*)$/,
+  VESTIGIAL_IMPLICIT: 'Собственное свойство вояжа',
   // ---
   CHAT_SYSTEM: /^: (?<body>.+)$/,
   CHAT_TRADE: /^\$(?:<(?<guild_tag>.+?)> )?(?<char_name>.+?): (?<body>.+)$/,
