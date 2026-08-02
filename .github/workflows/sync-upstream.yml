@@ -3,12 +3,8 @@ name: Sync upstream
 on:
   schedule:
     - cron: '0 6 * * 1' # Mondays 06:00 UTC
-    - cron: '17 */4 * * *' # Launch mode: every 4 hours, away from peak minute 0
   workflow_dispatch:
-
-# Set the repository variable HIGH_FREQUENCY_SYNC to true shortly before a
-# league launch, then set it back to false after the launch window. The weekly
-# schedule and manual runs are always enabled.
+  workflow_call:
 
 permissions:
   contents: write
@@ -20,10 +16,6 @@ env:
 
 jobs:
   sync:
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      github.event.schedule == '0 6 * * 1' ||
-      vars.HIGH_FREQUENCY_SYNC == 'true'
     runs-on: ubuntu-latest
     concurrency:
       group: sync-upstream
@@ -35,13 +27,14 @@ jobs:
 
       - name: Fetch upstream
         run: |
+          git fetch origin main:refs/remotes/origin/main
           git remote add upstream "$UPSTREAM"
           git fetch upstream master
 
       - name: Count new upstream commits
         id: check
         run: |
-          BEHIND=$(git rev-list --count HEAD..upstream/master)
+          BEHIND=$(git rev-list --count origin/main..upstream/master)
           echo "behind=$BEHIND" >> "$GITHUB_OUTPUT"
           echo "$BEHIND new upstream commit(s)"
 

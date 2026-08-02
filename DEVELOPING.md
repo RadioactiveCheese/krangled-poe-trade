@@ -135,10 +135,13 @@ an empty patch from reaching `main` in the first place.
   `main/package.json`. Windows, Linux, and macOS packages and updater metadata
   are published to the matching GitHub Release.
 - [Sync upstream](./.github/workflows/sync-upstream.yml) runs every Monday and
-  can also be started from the Actions tab. It merges the original project's
-  `master` branch into `chore/sync-upstream` based on this fork's `main` branch
-  and opens or refreshes a pull
-  request for review.
+  can also be started from the Actions tab. Around a league launch, enable
+  [Sync upstream (launch cadence)](./.github/workflows/sync-upstream-launch.yml)
+  to run the same sync every four hours, then disable it after the one- or
+  two-week launch window. Keeping the launch workflow disabled between leagues
+  avoids filling the Actions history with skipped runs. The sync merges the
+  original project's `master` branch into `chore/sync-upstream` based on this
+  fork's `main` branch and opens or refreshes a pull request for review.
 
 For the sync workflow to open pull requests, enable **Allow GitHub Actions to
 create and approve pull requests** under **Settings > Actions > General >
