@@ -127,6 +127,7 @@ export default {
   FOULBORN_NAME: /^삿된 (.*)$/,
   FOULBORN_MODIFIER: '삿된 고유 속성',
   VESTIGIAL_NAME: /^흔적 (.*)$/,
+  VESTIGIAL_IMPLICIT: '흔적 고정 속성',
   // ---
   CHAT_SYSTEM: /^: (?<body>.+)$/,
   CHAT_TRADE: /^\$(?:<(?<guild_tag>.+?)> )?(?<char_name>.+?): (?<body>.+)$/,

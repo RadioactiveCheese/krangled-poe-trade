@@ -238,6 +238,7 @@ export interface TranslationDict {
   FOULBORN_MODIFIER: string
   VESTIGIAL_NAME: RegExp
   VESTIGIAL_MODIFIER?: string
+  VESTIGIAL_IMPLICIT?: string
   // ---
   CHAT_SYSTEM: RegExp
   CHAT_TRADE: RegExp

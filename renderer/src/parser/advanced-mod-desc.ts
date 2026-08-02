@@ -54,7 +54,10 @@ export function parseModInfoLine (line: string): ModifierInfo {
     }
 
     const modifierType = match.groups!.type
-    if (_$.VESTIGIAL_MODIFIER !== undefined && modifierType === _$.VESTIGIAL_MODIFIER) {
+    if (
+      (_$.VESTIGIAL_MODIFIER !== undefined && modifierType === _$.VESTIGIAL_MODIFIER) ||
+      (_$.VESTIGIAL_IMPLICIT !== undefined && modifierType === _$.VESTIGIAL_IMPLICIT)
+    ) {
       type = ModifierType.Implicit
       generation = 'vestigial'
     }
