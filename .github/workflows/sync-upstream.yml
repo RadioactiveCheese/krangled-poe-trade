@@ -45,10 +45,22 @@ jobs:
               if git merge-base --is-ancestor upstream/master "origin/$SYNC_BRANCH"; then
                 echo "The sync branch already contains the latest upstream commit."
               else
-                NEEDS_SYNC=true
+                STATUS=$?
+                if [ "$STATUS" -eq 1 ]; then
+                  NEEDS_SYNC=true
+                else
+                  echo "::error::Could not compare upstream with the sync branch (status $STATUS)."
+                  exit "$STATUS"
+                fi
               fi
             else
-              NEEDS_SYNC=true
+              STATUS=$?
+              if [ "$STATUS" -eq 2 ]; then
+                NEEDS_SYNC=true
+              else
+                echo "::error::Could not query the remote sync branch (status $STATUS)."
+                exit "$STATUS"
+              fi
             fi
           fi
           echo "needs_sync=$NEEDS_SYNC" >> "$GITHUB_OUTPUT"

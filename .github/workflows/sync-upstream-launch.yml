@@ -11,4 +11,3 @@ permissions:
 jobs:
   sync:
     uses: ./.github/workflows/sync-upstream.yml
-    secrets: inherit
