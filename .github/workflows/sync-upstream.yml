@@ -3,7 +3,12 @@ name: Sync upstream
 on:
   schedule:
     - cron: '0 6 * * 1' # Mondays 06:00 UTC
+    - cron: '17 */4 * * *' # Launch mode: every 4 hours, away from peak minute 0
   workflow_dispatch:
+
+# Set the repository variable HIGH_FREQUENCY_SYNC to true shortly before a
+# league launch, then set it back to false after the launch window. The weekly
+# schedule and manual runs are always enabled.
 
 permissions:
   contents: write
@@ -15,7 +20,14 @@ env:
 
 jobs:
   sync:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.schedule == '0 6 * * 1' ||
+      vars.HIGH_FREQUENCY_SYNC == 'true'
     runs-on: ubuntu-latest
+    concurrency:
+      group: sync-upstream
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v6
         with:
@@ -33,8 +45,23 @@ jobs:
           echo "behind=$BEHIND" >> "$GITHUB_OUTPUT"
           echo "$BEHIND new upstream commit(s)"
 
+          NEEDS_SYNC=false
+          if [ "$BEHIND" != "0" ]; then
+            if git ls-remote --exit-code --heads origin "$SYNC_BRANCH" >/dev/null 2>&1; then
+              git fetch origin "$SYNC_BRANCH:refs/remotes/origin/$SYNC_BRANCH"
+              if git merge-base --is-ancestor upstream/master "origin/$SYNC_BRANCH"; then
+                echo "The sync branch already contains the latest upstream commit."
+              else
+                NEEDS_SYNC=true
+              fi
+            else
+              NEEDS_SYNC=true
+            fi
+          fi
+          echo "needs_sync=$NEEDS_SYNC" >> "$GITHUB_OUTPUT"
+
       - name: Merge upstream into sync branch
-        if: steps.check.outputs.behind != '0'
+        if: steps.check.outputs.needs_sync == 'true'
         run: |
           git config user.name  'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -48,12 +75,12 @@ jobs:
           git push --force origin "$SYNC_BRANCH"
 
       - name: Open or update pull request
-        if: steps.check.outputs.behind != '0'
+        if: steps.check.outputs.needs_sync == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ -n "$(gh pr list --head "$SYNC_BRANCH" --state open --json number --jq '.[].number')" ]; then
-            echo "PR already open for $SYNC_BRANCH; force-push refreshed it."
+            echo "PR already open for $SYNC_BRANCH; refreshed it with the latest upstream commit."
           else
             cat > /tmp/pr-body.md <<'EOF'
           Automated merge of `SnosMe/awakened-poe-trade@master`.
