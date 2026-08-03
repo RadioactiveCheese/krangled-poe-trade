@@ -406,15 +406,9 @@ export function createTradeRequest (filters: ItemFilters, stats: StatFilter[]) {
     }
   }
 
-  const { chartShape, chartSulphur, chartGold } = filters
+  const { chartShape } = filters
   if (chartShape && !chartShape.disabled) {
     propSet(query.filters, 'map_filters.filters.chart_shape.option', chartShape.value)
-  }
-  if (chartSulphur && !chartSulphur.disabled) {
-    propSet(query.filters, 'map_filters.filters.chart_sulphur.min', chartSulphur.value)
-  }
-  if (chartGold && !chartGold.disabled) {
-    propSet(query.filters, 'map_filters.filters.map_gold.min', chartGold.value)
   }
 
   if (filters.heistWingsRevealed && !filters.heistWingsRevealed.disabled) {
@@ -519,6 +513,14 @@ export function createTradeRequest (filters: ItemFilters, stats: StatFilter[]) {
       case 'item.map_pack_size':
         propSet(query.filters, 'map_filters.filters.map_packsize.min', typeof input.min === 'number' ? input.min : undefined)
         propSet(query.filters, 'map_filters.filters.map_packsize.max', typeof input.max === 'number' ? input.max : undefined)
+        break
+      case 'item.chart_sulphur':
+        propSet(query.filters, 'map_filters.filters.chart_sulphur.min', typeof input.min === 'number' ? input.min : undefined)
+        propSet(query.filters, 'map_filters.filters.chart_sulphur.max', typeof input.max === 'number' ? input.max : undefined)
+        break
+      case 'item.chart_gold':
+        propSet(query.filters, 'map_filters.filters.map_gold.min', typeof input.min === 'number' ? input.min : undefined)
+        propSet(query.filters, 'map_filters.filters.map_gold.max', typeof input.max === 'number' ? input.max : undefined)
         break
       case 'item.heist_job_agility':
         propSet(query.filters, 'heist_filters.filters.heist_agility.min', typeof input.min === 'number' ? input.min : 1)

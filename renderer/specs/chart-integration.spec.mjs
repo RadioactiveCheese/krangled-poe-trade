@@ -156,13 +156,15 @@ test('charts are accepted by the Map Check tool and expose their dangerous modif
   assert.ok(prepared.some(entry => entry.matcher.includes('more Monster Life')))
 })
 
-test('chart price checks default to the zone with all modifier filters unchecked', () => {
+test('chart price checks expose aggregate properties and leave explicit modifiers unchecked', () => {
   const item = parseChart()
   const stats = runtime.createExactStatFilters(item, item.statsByType, { searchStatRange: 0 })
   const explicitStats = stats.filter(stat => stat.tag === 'explicit')
 
   assert.ok(explicitStats.length > 0)
   assert.ok(!stats.some(stat => stat.statRef === "#% increased Dead Man's Sulphur found in this Area"))
+  assert.ok(stats.some(stat => stat.statRef === "Dead Man's Sulphur: +#%"))
+  assert.ok(stats.some(stat => stat.statRef === 'Gold Found: +#%'))
   assert.ok(explicitStats.every(stat => stat.disabled))
 })
 

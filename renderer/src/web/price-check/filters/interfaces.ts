@@ -92,8 +92,6 @@ export interface ItemFilters {
     name: string
     disabled: boolean
   }
-  chartSulphur?: FilterNumeric
-  chartGold?: FilterNumeric
   heistWingsRevealed?: FilterNumeric
   sentinelCharge?: FilterNumeric
   trade: {
@@ -156,6 +154,8 @@ const _INTERNAL_TRADE_IDS = [
   'item.map_item_quantity',
   'item.map_item_rarity',
   'item.map_pack_size',
+  'item.chart_sulphur',
+  'item.chart_gold',
   'item.heist_job_lockpicking',
   'item.heist_job_bruteforce',
   'item.heist_job_perception',
