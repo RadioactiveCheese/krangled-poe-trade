@@ -76,6 +76,12 @@ export function createExactStatFilters (
     statsByType: statsByType.filter(calc => keepByType.includes(calc.type))
   }
 
+  if (isChart) {
+    ctx.statsByType = ctx.statsByType.filter(calc =>
+      calc.stat.ref !== "#% increased Dead Man's Sulphur found in this Area"
+    )
+  }
+
   filterBasePercentile(ctx)
   filterMemoryStrands(ctx)
   mapProps(ctx)
@@ -93,7 +99,14 @@ export function createExactStatFilters (
     applyMirroredTabletRules(ctx.filters)
     return ctx.filters
   }
-  if (item.category === ItemCategory.Map || isChart) {
+  if (isChart) {
+    for (const filter of ctx.filters) {
+      filter.disabled = true
+    }
+    return ctx.filters
+  }
+
+  if (item.category === ItemCategory.Map) {
     for (const filter of ctx.filters) {
       if (filter.tag !== FilterTag.Property && filter.tag !== FilterTag.Pseudo) {
         filter.disabled = false

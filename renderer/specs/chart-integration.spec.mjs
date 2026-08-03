@@ -99,7 +99,8 @@ test.before(async () => {
     const { ItemCategory, parseClipboard } = await server.ssrLoadModule('/src/parser/index.ts')
     const { isMapLikeItem } = await server.ssrLoadModule('/src/web/map-check/is-map-like.ts')
     const { prepareMapStats } = await server.ssrLoadModule('/src/web/map-check/prepare-map-stats.ts')
-    runtime = { ItemCategory, parseClipboard, isMapLikeItem, prepareMapStats }
+    const { createExactStatFilters } = await server.ssrLoadModule('/src/web/price-check/filters/create-stat-filters.ts')
+    runtime = { ItemCategory, parseClipboard, isMapLikeItem, prepareMapStats, createExactStatFilters }
   } catch (error) {
     await server.close()
     throw error
@@ -153,6 +154,16 @@ test('charts are accepted by the Map Check tool and expose their dangerous modif
   assert.ok(!prepared.some(entry => entry.matcher.includes('Voyage Modifier will be revealed')))
   assert.ok(prepared.some(entry => entry.matcher.includes('maximum Resistances')))
   assert.ok(prepared.some(entry => entry.matcher.includes('more Monster Life')))
+})
+
+test('chart price checks default to the zone with all modifier filters unchecked', () => {
+  const item = parseChart()
+  const stats = runtime.createExactStatFilters(item, item.statsByType, { searchStatRange: 0 })
+  const explicitStats = stats.filter(stat => stat.tag === 'explicit')
+
+  assert.ok(explicitStats.length > 0)
+  assert.ok(!stats.some(stat => stat.statRef === "#% increased Dead Man's Sulphur found in this Area"))
+  assert.ok(explicitStats.every(stat => stat.disabled))
 })
 
 test('keeps chart-crafting currency out of the Map Check path', () => {

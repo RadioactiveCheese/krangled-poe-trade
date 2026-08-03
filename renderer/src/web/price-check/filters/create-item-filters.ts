@@ -232,19 +232,19 @@ export function createFilters (
       filters.chartShape = {
         value: item.chart.shapeId,
         name: item.chart.shape,
-        disabled: false
+        disabled: true
       }
     }
     if (item.chart?.sulphur) {
       filters.chartSulphur = {
         value: item.chart.sulphur,
-        disabled: false
+        disabled: true
       }
     }
     if (item.chart?.gold) {
       filters.chartGold = {
         value: item.chart.gold,
-        disabled: false
+        disabled: true
       }
     }
   } else {
