@@ -76,6 +76,12 @@ export function createExactStatFilters (
     statsByType: statsByType.filter(calc => keepByType.includes(calc.type))
   }
 
+  if (isChart) {
+    ctx.statsByType = ctx.statsByType.filter(calc =>
+      calc.stat.ref !== "#% increased Dead Man's Sulphur found in this Area"
+    )
+  }
+
   filterBasePercentile(ctx)
   filterMemoryStrands(ctx)
   mapProps(ctx)

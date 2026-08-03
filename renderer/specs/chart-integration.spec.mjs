@@ -161,6 +161,7 @@ test('chart price checks default to the zone with all modifier filters unchecked
   const stats = runtime.createExactStatFilters(item, item.statsByType, { searchStatRange: 0 })
 
   assert.ok(stats.length > 0)
+  assert.ok(!stats.some(stat => stat.statRef === "#% increased Dead Man's Sulphur found in this Area"))
   assert.ok(stats.every(stat => stat.disabled))
 })
 
