@@ -55,6 +55,24 @@ export function mapProps (ctx: FiltersCreationContext): void {
       disabled: false
     }, ctx))
   }
+  if (item.chart?.sulphur) {
+    ctx.filters.push(propToFilter({
+      ref: "Dead Man's Sulphur: +#%",
+      tradeId: 'item.chart_sulphur',
+      roll: { min: 0, max: Number.MAX_SAFE_INTEGER, value: item.chart.sulphur },
+      sources: [],
+      disabled: false
+    }, ctx))
+  }
+  if (item.chart?.gold) {
+    ctx.filters.push(propToFilter({
+      ref: 'Gold Found: +#%',
+      tradeId: 'item.chart_gold',
+      roll: { min: 0, max: Number.MAX_SAFE_INTEGER, value: item.chart.gold },
+      sources: [],
+      disabled: false
+    }, ctx))
+  }
 
   if (item.map.moreMaps) {
     ctx.filters.push(noSourcePseudoToFilter({

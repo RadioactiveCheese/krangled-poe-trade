@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest'
 import { ItemCategory, ItemRarity, type ParsedItem } from '@/parser'
 import { resolveChartArea, resolveChartShape } from '@/parser/chart'
 import { createFilters } from '@/web/price-check/filters/create-item-filters'
+import { createExactStatFilters } from '@/web/price-check/filters/create-stat-filters'
 import { createTradeRequest } from '@/web/price-check/trade/pathofexile-trade'
 
 const TRADITIONAL_CHINESE_CHART_AREAS = [
@@ -76,7 +77,8 @@ function chartItem (): ParsedItem {
 
 describe('Chart trade query', () => {
   it('defaults to the chart zone discriminator and area level', () => {
-    const filters = createFilters(chartItem(), {
+    const item = chartItem()
+    const filters = createFilters(item, {
       league: 'Hardcore',
       currency: 'chaos',
       collapseListings: 'api',
@@ -84,7 +86,8 @@ describe('Chart trade query', () => {
       exact: true,
       useEn: true
     })
-    const request = createTradeRequest(filters, [])
+    const stats = createExactStatFilters(item, item.statsByType, { searchStatRange: 0 })
+    const request = createTradeRequest(filters, stats)
 
     expect(request.query.type).toEqual({
       discriminator: 'chart_sandy_seabed',
@@ -95,10 +98,21 @@ describe('Chart trade query', () => {
     expect(filters.areaLevel?.disabled).toBe(false)
     expect(filters.chartShape?.value).toBe('4')
     expect(filters.chartShape?.disabled).toBe(true)
-    expect(filters.chartSulphur?.value).toBe(75)
-    expect(filters.chartSulphur?.disabled).toBe(true)
-    expect(filters.chartGold?.value).toBe(30)
-    expect(filters.chartGold?.disabled).toBe(true)
+
+    const properties = Object.fromEntries(stats
+      .filter(stat => stat.tag === 'property')
+      .map(stat => [stat.tradeId[0], stat]))
+    expect(properties['item.map_item_quantity']?.roll?.value).toBe(25)
+    expect(properties['item.map_pack_size']?.roll?.value).toBe(18)
+    expect(properties['item.chart_sulphur']?.roll?.value).toBe(75)
+    expect(properties['item.chart_gold']?.roll?.value).toBe(30)
+    expect(Object.values(properties).every(stat => stat.disabled)).toBe(true)
+
+    properties['item.chart_sulphur'].disabled = false
+    properties['item.chart_gold'].disabled = false
+    const propertyRequest = createTradeRequest(filters, stats)
+    expect(propertyRequest.query.filters.map_filters?.filters.chart_sulphur?.min).toBe(75)
+    expect(propertyRequest.query.filters.map_filters?.filters.map_gold?.min).toBe(30)
   })
 
   it.each(TRADITIONAL_CHINESE_CHART_AREAS)(

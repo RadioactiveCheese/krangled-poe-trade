@@ -235,18 +235,6 @@ export function createFilters (
         disabled: true
       }
     }
-    if (item.chart?.sulphur) {
-      filters.chartSulphur = {
-        value: item.chart.sulphur,
-        disabled: true
-      }
-    }
-    if (item.chart?.gold) {
-      filters.chartGold = {
-        value: item.chart.gold,
-        disabled: true
-      }
-    }
   } else {
     filters.searchExact = {
       baseType: item.info.name,
