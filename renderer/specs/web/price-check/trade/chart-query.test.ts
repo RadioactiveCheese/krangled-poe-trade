@@ -75,7 +75,7 @@ function chartItem (): ParsedItem {
 }
 
 describe('Chart trade query', () => {
-  it('uses the chart zone discriminator and map-style chart filters', () => {
+  it('defaults to the chart zone discriminator and area level', () => {
     const filters = createFilters(chartItem(), {
       league: 'Hardcore',
       currency: 'chaos',
@@ -92,9 +92,10 @@ describe('Chart trade query', () => {
     })
     expect(request.query.filters.type_filters?.filters.rarity?.option).toBe('nonunique')
     expect(request.query.filters.map_filters?.filters.area_level?.min).toBe(83)
-    expect(request.query.filters.map_filters?.filters.chart_shape?.option).toBe('4')
-    expect(request.query.filters.map_filters?.filters.chart_sulphur?.min).toBe(75)
-    expect(request.query.filters.map_filters?.filters.map_gold?.min).toBe(30)
+    expect(filters.areaLevel?.disabled).toBe(false)
+    expect(filters.chartShape?.disabled).toBe(true)
+    expect(filters.chartSulphur?.disabled).toBe(true)
+    expect(filters.chartGold?.disabled).toBe(true)
   })
 
   it.each(TRADITIONAL_CHINESE_CHART_AREAS)(

@@ -93,7 +93,14 @@ export function createExactStatFilters (
     applyMirroredTabletRules(ctx.filters)
     return ctx.filters
   }
-  if (item.category === ItemCategory.Map || isChart) {
+  if (isChart) {
+    for (const filter of ctx.filters) {
+      filter.disabled = true
+    }
+    return ctx.filters
+  }
+
+  if (item.category === ItemCategory.Map) {
     for (const filter of ctx.filters) {
       if (filter.tag !== FilterTag.Property && filter.tag !== FilterTag.Pseudo) {
         filter.disabled = false
