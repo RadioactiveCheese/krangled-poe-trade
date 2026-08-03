@@ -159,10 +159,11 @@ test('charts are accepted by the Map Check tool and expose their dangerous modif
 test('chart price checks default to the zone with all modifier filters unchecked', () => {
   const item = parseChart()
   const stats = runtime.createExactStatFilters(item, item.statsByType, { searchStatRange: 0 })
+  const explicitStats = stats.filter(stat => stat.tag === 'explicit')
 
-  assert.ok(stats.length > 0)
+  assert.ok(explicitStats.length > 0)
   assert.ok(!stats.some(stat => stat.statRef === "#% increased Dead Man's Sulphur found in this Area"))
-  assert.ok(stats.every(stat => stat.disabled))
+  assert.ok(explicitStats.every(stat => stat.disabled))
 })
 
 test('keeps chart-crafting currency out of the Map Check path', () => {

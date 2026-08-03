@@ -93,8 +93,11 @@ describe('Chart trade query', () => {
     expect(request.query.filters.type_filters?.filters.rarity?.option).toBe('nonunique')
     expect(request.query.filters.map_filters?.filters.area_level?.min).toBe(83)
     expect(filters.areaLevel?.disabled).toBe(false)
+    expect(filters.chartShape?.value).toBe('4')
     expect(filters.chartShape?.disabled).toBe(true)
+    expect(filters.chartSulphur?.value).toBe(75)
     expect(filters.chartSulphur?.disabled).toBe(true)
+    expect(filters.chartGold?.value).toBe(30)
     expect(filters.chartGold?.disabled).toBe(true)
   })
 
