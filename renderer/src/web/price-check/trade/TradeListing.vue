@@ -109,7 +109,7 @@ import { getTradeEndpoint } from './common'
 import { AppConfig } from '@/web/Config'
 import { PriceCheckWidget } from '@/web/overlay/interfaces'
 import { ItemFilters, StatFilter } from '../filters/interfaces'
-import { ParsedItem } from '@/parser'
+import { ItemRarity, ParsedItem } from '@/parser'
 import { artificialSlowdown } from './artificial-slowdown'
 import OnlineFilter from './OnlineFilter.vue'
 import TradeLinks from './TradeLinks.vue'
@@ -291,7 +291,9 @@ export default defineComponent({
       canCreateTradeLink,
       showSeller: computed(() => widget.value.showSeller),
       makeupView: makeupViewEnabled,
-      showMakeupToggle: computed(() => widget.value.itemHoverTooltip !== 'off'),
+      showMakeupToggle: computed(() =>
+        widget.value.itemHoverTooltip !== 'off' &&
+        props.item.rarity !== ItemRarity.Unique),
       makeTradeLink,
       openTradeLink () {
         showBrowser(makeTradeLink())

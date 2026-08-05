@@ -275,4 +275,28 @@ describe('Trade listing tooltip modifier lines', () => {
     expect(lines[1].find('img').exists()).toBe(false)
     expect(lines[1].text()).toContain('Préfixe voilé')
   })
+
+  it('keeps unique item tooltips in the standard view when makeup mode is enabled', async () => {
+    const result = {
+      displayItem: {
+        title: ['Fixture Unique', 'Vaal Regalia'],
+        rarity: 'Unique',
+        frameType: 3,
+        influences: [],
+        explicitMods: [
+          { text: '+123 to maximum Life', tier: 'P1', color: TradeNumberColors.Unique, modCategory: 'explicit', modName: 'Vigorous' }
+        ]
+      }
+    } as unknown as PricingResult
+    const wrapper = mount(TooltipItem, {
+      props: { result },
+      global: { stubs: { UiDetailedItemImg: true } }
+    })
+
+    makeupViewEnabled.value = true
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.find('[data-testid="affix-makeup"]').exists()).toBe(false)
+    expect(wrapper.findAll('[data-testid="modifier-line"]')).toHaveLength(1)
+  })
 })
