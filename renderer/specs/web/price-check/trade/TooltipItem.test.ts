@@ -293,10 +293,15 @@ describe('Trade listing tooltip modifier lines', () => {
       global: { stubs: { UiDetailedItemImg: true } }
     })
 
-    makeupViewEnabled.value = true
-    await wrapper.vm.$nextTick()
+    const previousMakeupView = makeupViewEnabled.value
+    try {
+      makeupViewEnabled.value = true
+      await wrapper.vm.$nextTick()
 
-    expect(wrapper.find('[data-testid="affix-makeup"]').exists()).toBe(false)
-    expect(wrapper.findAll('[data-testid="modifier-line"]')).toHaveLength(1)
+      expect(wrapper.find('[data-testid="affix-makeup"]').exists()).toBe(false)
+      expect(wrapper.findAll('[data-testid="modifier-line"]')).toHaveLength(1)
+    } finally {
+      makeupViewEnabled.value = previousMakeupView
+    }
   })
 })
