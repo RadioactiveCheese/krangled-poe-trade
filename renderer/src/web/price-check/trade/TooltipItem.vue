@@ -31,7 +31,7 @@
       <div class="flex flex-col px-3 py-1 text-sm leading-snug">
         <template v-for="(section, index) in sections" :key="section.key">
           <div
-            v-if="section.key === 'explicitMods' && makeupViewEnabled && makeupGroups.length"
+            v-if="section.key === 'explicitMods' && frameRarity !== 'Unique' && makeupViewEnabled && makeupGroups.length"
             data-testid="affix-makeup"
           >
             <template v-for="(group, groupIndex) in makeupGroups" :key="group[0].side">
