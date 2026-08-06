@@ -119,6 +119,9 @@ export function parseClipboard (clipboard: string): Result<ParsedItem, string> {
         }
       }
     }
+    if (parsed.value.info.refName === 'Scrying Orb' && !parsed.value.mapArea) {
+      return err('item.parse_error')
+    }
     return Object.freeze(parsed)
   } catch (e) {
     console.log(e)
@@ -277,7 +280,7 @@ function parseMap (section: string[], item: ParsedItem) {
     } else if (_$.MAP_COMPLETION_REWARD.test(line)) {
       const rewardName = _$.MAP_COMPLETION_REWARD.exec(line)![1]
       const rewardInfo = ITEM_BY_TRANSLATED('UNIQUE', rewardName)
-      if (!rewardInfo) throw new Error('Unknown Unique Item.')
+      if (!rewardInfo?.length) throw new Error('Unknown Unique Item.')
       item.mapCompletionReward = rewardInfo[0]
       isParsed = 'SECTION_PARSED'
     }
@@ -856,7 +859,7 @@ function parseScryingOrb (section: string[], item: ParsedItem) {
     if (section[0].startsWith(_$.SCRYING_MAP_AREA)) {
       const areaName = section[0].slice(_$.SCRYING_MAP_AREA.length)
       const areaInfo = ITEM_BY_TRANSLATED('AREA', areaName)
-      if (!areaInfo) throw new Error('Unknown Area name.')
+      if (!areaInfo?.length) throw new Error('Unknown Area name.')
       item.mapArea = areaInfo[0]
       return 'SECTION_PARSED'
     }

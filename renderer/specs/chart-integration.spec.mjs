@@ -59,6 +59,12 @@ A noble Eternal who gave up his name to join the Brinerots. He climbed the ranks
 --------
 Can be used as part of Allflame Crafting aboard The Sovereign.`
 
+const INCOMPLETE_SCRYING_ORB_TEXT = `Item Class: Stackable Currency
+Rarity: Currency
+Scrying Orb
+--------
+Item Level: 1`
+
 let server
 let runtime
 let originalFetch
@@ -121,6 +127,12 @@ function parseItem (text) {
 function parseChart () {
   return parseItem(CHART_TEXT)
 }
+
+test('rejects a Scrying Orb without a map area', () => {
+  const parsed = runtime.parseClipboard(INCOMPLETE_SCRYING_ORB_TEXT)
+  assert.equal(parsed.isErr(), true)
+  assert.equal(parsed.error, 'item.parse_error')
+})
 
 test('parses chart properties and map-style aggregate values', () => {
   const item = parseChart()

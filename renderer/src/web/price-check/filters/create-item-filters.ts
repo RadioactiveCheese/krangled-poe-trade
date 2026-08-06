@@ -100,14 +100,16 @@ export function createFilters (
     return filters
   }
   if (item.info.refName === 'Scrying Orb') {
-    filters.searchExact = {
-      baseType: item.info.name,
-      baseTypeTrade: item.mapArea!.tradeDisc!
-    }
     filters.discriminator = {
       trade: item.info.tradeDisc!
     }
-    filters.scryingMapArea = item.mapArea!.name
+    if (!item.mapArea) return filters
+
+    filters.searchExact = {
+      baseType: item.info.name,
+      baseTypeTrade: item.mapArea.tradeDisc!
+    }
+    filters.scryingMapArea = item.mapArea.name
 
     return filters
   }
