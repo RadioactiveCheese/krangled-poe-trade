@@ -1,0 +1,14 @@
+name: Refresh upstream sync draft
+
+on:
+  schedule:
+    - cron: '37 9 * * *' # Daily, offset from the launch and weekly sync jobs
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  refresh:
+    uses: ./.github/workflows/sync-upstream.yml
