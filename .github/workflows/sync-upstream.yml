@@ -116,6 +116,11 @@ jobs:
           for directory in ('main', 'renderer'):
               package_path = Path(directory) / 'package.json'
               lock_path = Path(directory) / 'package-lock.json'
+              if not package_path.exists():
+                  subprocess.run(
+                      ['git', 'checkout', 'origin/main', '--', package_path.as_posix()],
+                      check=True,
+                  )
               original_bytes = subprocess.check_output(
                   ['git', 'show', f'origin/main:{package_path.as_posix()}']
               )
@@ -135,34 +140,39 @@ jobs:
                       (json.dumps(package, indent=2) + '\n').replace('\n', newline).encode()
                   )
 
-              if lock_path.exists():
-                  original_lock_bytes = subprocess.check_output(
-                      ['git', 'show', f'origin/main:{lock_path.as_posix()}']
+              if not lock_path.exists():
+                  subprocess.run(
+                      ['git', 'checkout', 'origin/main', '--', lock_path.as_posix()],
+                      check=True,
                   )
-                  original_lock = json.loads(original_lock_bytes)
-                  lock = json.loads(lock_path.read_text(encoding='utf-8'))
-                  for key in ('name', 'version'):
-                      if key in original_lock:
-                          lock[key] = original_lock[key]
-                  original_root = original_lock.get('packages', {}).get('', {})
-                  root = lock.get('packages', {}).get('', {})
-                  for key in ('name', 'version'):
-                      if key in original_root:
-                          root[key] = original_root[key]
-                  if lock == original_lock:
-                      subprocess.run(
-                          ['git', 'checkout', 'origin/main', '--', lock_path.as_posix()],
-                          check=True,
-                      )
-                  else:
-                      newline = '\r\n' if original_lock_bytes.count(b'\r\n') else '\n'
-                      lock_path.write_bytes(
-                          (json.dumps(lock, indent=2) + '\n').replace('\n', newline).encode()
-                      )
+              original_lock_bytes = subprocess.check_output(
+                  ['git', 'show', f'origin/main:{lock_path.as_posix()}']
+              )
+              original_lock = json.loads(original_lock_bytes)
+              lock = json.loads(lock_path.read_text(encoding='utf-8'))
+              for key in ('name', 'version'):
+                  if key in original_lock:
+                      lock[key] = original_lock[key]
+              original_root = original_lock.get('packages', {}).get('', {})
+              root = lock.get('packages', {}).get('', {})
+              for key in ('name', 'version'):
+                  if key in original_root:
+                      root[key] = original_root[key]
+              if lock == original_lock:
+                  subprocess.run(
+                      ['git', 'checkout', 'origin/main', '--', lock_path.as_posix()],
+                      check=True,
+                  )
+              else:
+                  newline = '\r\n' if original_lock_bytes.count(b'\r\n') else '\n'
+                  lock_path.write_bytes(
+                      (json.dumps(lock, indent=2) + '\n').replace('\n', newline).encode()
+                  )
           PY
 
           git add --all
-          git commit --no-edit
+          # An ancestry-only sync can intentionally have the same tree as main.
+          git commit --no-edit --allow-empty
           git push --force origin "$SYNC_BRANCH"
 
           {
