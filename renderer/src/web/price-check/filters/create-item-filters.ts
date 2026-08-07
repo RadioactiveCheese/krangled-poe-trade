@@ -3,8 +3,9 @@ import { ParsedItem, ItemCategory, ItemRarity } from '@/parser'
 import { MAGIC_ONLY_OR_UNIQUE_ITEM, CONSUMABLE_CRAFTABLE_ITEM } from '@/parser/meta'
 import { tradeTag } from '../trade/common'
 import { ModifierType } from '@/parser/modifiers'
-import { BaseType, ITEM_BY_REF, ITEM_BY_TRANSLATED } from '@/assets/data'
+import { BaseType, ITEM_BY_REF } from '@/assets/data'
 import { CATEGORY_TO_TRADE_ID } from '../trade/pathofexile-trade'
+import { PERMANENT_SC } from '../../background/Leagues'
 
 export const SPECIAL_SUPPORT_GEM = ['Empower Support', 'Enlighten Support', 'Enhance Support']
 
@@ -98,6 +99,20 @@ export function createFilters (
     }
     return filters
   }
+  if (item.info.refName === 'Scrying Orb') {
+    filters.discriminator = {
+      trade: item.info.tradeDisc!
+    }
+    if (!item.mapArea) return filters
+
+    filters.searchExact = {
+      baseType: item.info.name,
+      baseTypeTrade: item.mapArea.tradeDisc!
+    }
+    filters.scryingMapArea = item.mapArea.name
+
+    return filters
+  }
   if (
     item.category === ItemCategory.DivinationCard ||
     item.category === ItemCategory.Currency ||
@@ -159,8 +174,8 @@ export function createFilters (
 
     if (item.mapCompletionReward) {
       filters.mapCompletionReward = {
-        name: item.mapCompletionReward,
-        nameTrade: t(opts, ITEM_BY_TRANSLATED('UNIQUE', item.mapCompletionReward)![0])
+        name: item.mapCompletionReward.name,
+        nameTrade: t(opts, item.mapCompletionReward)
       }
     }
 
@@ -342,6 +357,7 @@ export function createFilters (
   if (item.isSplit) {
     filters.split = { disabled: false, hidden: false }
   } else if (
+    (!PERMANENT_SC.includes(opts.league) || opts.exact) &&
     item.info.craftable && !item.isCorrupted && !item.isMirrored &&
     !item.isSynthesised && !item.isFractured && !item.influences.length
   ) {

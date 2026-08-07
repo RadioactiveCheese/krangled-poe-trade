@@ -2,6 +2,7 @@
 
 import { describe, expect, it } from 'vitest'
 import { ItemCategory, ItemRarity, type ParsedItem } from '@/parser'
+import { createVirtualItem } from '@/parser/ParsedItem'
 import { resolveChartArea, resolveChartShape } from '@/parser/chart'
 import { createFilters } from '@/web/price-check/filters/create-item-filters'
 import { createExactStatFilters } from '@/web/price-check/filters/create-stat-filters'
@@ -76,6 +77,30 @@ function chartItem (): ParsedItem {
 }
 
 describe('Chart trade query', () => {
+  it('handles a virtual Scrying Orb before a map area is selected', () => {
+    const item = createVirtualItem({
+      info: {
+        name: 'Scrying Orb',
+        refName: 'Scrying Orb',
+        namespace: 'ITEM',
+        tradeDisc: 'scrying_orb',
+        icon: ''
+      }
+    })
+
+    const filters = createFilters(item, {
+      league: 'Hardcore',
+      currency: 'chaos',
+      collapseListings: 'api',
+      activateStockFilter: false,
+      exact: true,
+      useEn: true
+    })
+
+    expect(filters.discriminator?.trade).toBe('scrying_orb')
+    expect(filters.scryingMapArea).toBeUndefined()
+  })
+
   it('defaults to the chart zone discriminator and area level', () => {
     const item = chartItem()
     const filters = createFilters(item, {

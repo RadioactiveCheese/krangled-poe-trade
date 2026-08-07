@@ -63,7 +63,8 @@ export interface BaseType {
     'CAPTURED_BEAST' |
     'UNIQUE' |
     'ITEM' |
-    'GEM'
+    'GEM' |
+    'AREA'
   )
   icon: string
   w?: number
@@ -239,6 +240,7 @@ export interface TranslationDict {
   VESTIGIAL_NAME: RegExp
   VESTIGIAL_MODIFIER?: string
   VESTIGIAL_IMPLICIT?: string
+  SCRYING_MAP_AREA: string
   // ---
   CHAT_SYSTEM: RegExp
   CHAT_TRADE: RegExp
