@@ -77,6 +77,14 @@ export interface DisplayItemLine {
   /* Underlying affix name(s), e.g. "of the Apt"; lines the API sums from
      several mods join their names with " + ", mirroring how tiers join. */
   modName?: string
+  affixParts?: DisplayAffixPart[]
+}
+
+export interface DisplayAffixPart {
+  name?: string
+  tier?: string
+  level?: number
+  range?: string
 }
 
 export interface DisplaySocket {
@@ -129,12 +137,19 @@ export interface DisplayItem {
   craftedMods?: DisplayItemLine[]
   veiledMods?: DisplayItemLine[]
   itemTags?: DisplayItemLine[]
+  summary?: DisplayItemSummary[]
   sockets?: DisplaySocket[]
   icon?: {
     url: string
     w: number
     h: number
   }
+}
+
+export interface DisplayItemSummary {
+  label: 'Base Percentile' | 'Armour' | 'Evasion Rating' | 'Energy Shield' | 'Ward' | 'DPS' | 'Physical DPS' | 'Elemental DPS'
+  value: string
+  color?: 'physical' | 'elemental'
 }
 
 export interface FetchItem {
@@ -175,6 +190,14 @@ export interface FetchItem {
   craftedMods?: FetchResultModLine[]
   veiledMods?: FetchResultModLine[]
   extended?: {
+    base_defence_percentile?: number
+    ar?: number
+    ev?: number
+    es?: number
+    ward?: number
+    dps?: number
+    pdps?: number
+    edps?: number
     hashes?: Record<string, TradeModHashes[]>
     mods?: Record<string, TradeModMetadata[]>
     [key: string]: unknown
@@ -204,6 +227,7 @@ export function parseFetchResult (result: FetchResultForTooltip): DisplayItem {
     symbols: buildItemSymbols(result.item),
     nameBlock: buildNameBlock(result.item.properties),
     itemProps: buildItemProps(result.item.ilvl, result.item.requirements),
+    summary: buildItemSummary(result.item.extended),
     ...parseMods(result),
     veiledMods: result.item.veiledMods?.map(parseVeiledMod),
     itemTags: buildItemTags(result.item),
@@ -216,6 +240,22 @@ export function parseFetchResult (result: FetchResultForTooltip): DisplayItem {
         }
       : undefined
   }
+}
+
+function buildItemSummary (extended: FetchItem['extended']): DisplayItemSummary[] | undefined {
+  if (!extended) return undefined
+  const summary: DisplayItemSummary[] = []
+  if (extended.base_defence_percentile != null) {
+    summary.push({ label: 'Base Percentile', value: `${extended.base_defence_percentile}%` })
+  }
+  if (extended.ar != null) summary.push({ label: 'Armour', value: String(extended.ar) })
+  if (extended.ev != null) summary.push({ label: 'Evasion Rating', value: String(extended.ev) })
+  if (extended.es != null) summary.push({ label: 'Energy Shield', value: String(extended.es) })
+  if (extended.ward != null) summary.push({ label: 'Ward', value: String(extended.ward) })
+  if (extended.dps != null) summary.push({ label: 'DPS', value: String(extended.dps) })
+  if (extended.pdps != null) summary.push({ label: 'Physical DPS', value: String(extended.pdps), color: 'physical' })
+  if (extended.edps != null) summary.push({ label: 'Elemental DPS', value: String(extended.edps), color: 'elemental' })
+  return summary.length ? summary : undefined
 }
 
 function parseInfluences (item: FetchItem): DisplayInfluence[] {
@@ -286,13 +326,15 @@ function parseModBlock (
 
   return lines.map((line, index) => {
     const eldritch = eldritchItem ? getEldritchImplicit(line, eldritchItem) : undefined
+    const affixParts = getRichAffixParts(line) ?? getLegacyAffixParts(index, mods, hashes)
     return {
       text: parseTradeText(line),
       color: getModColor(line, color),
-      tier: getRichTier(line) ?? getLegacyTier(index, mods, hashes) ?? eldritch?.tier,
+      tier: joinAffixPart(affixParts, 'tier') ?? eldritch?.tier,
       influence: eldritch?.influence,
       modCategory: getModCategory(line, modCategory),
-      modName: getRichModName(line) ?? getLegacyModName(index, mods, hashes)
+      modName: joinAffixPart(affixParts, 'name'),
+      affixParts
     }
   })
 }
@@ -444,38 +486,40 @@ function getModColor (line: FetchResultModLine, fallback: TradeNumberColors): Tr
   return fallback
 }
 
-function getRichTier (line: FetchResultModLine): string | undefined {
+function getRichAffixParts (line: FetchResultModLine): DisplayAffixPart[] | undefined {
   if (typeof line !== 'object' || line == null || !('mods' in line)) return undefined
-  const tiers = line.mods?.map(mod => mod.tier).filter((tier): tier is string => Boolean(tier))
-  return tiers?.length ? tiers.join(' + ') : undefined
+  return line.mods?.map(toAffixPart)
 }
 
-function getLegacyTier (
+function getLegacyAffixParts (
   displayIndex: number,
   mods?: TradeModMetadata[],
   hashes?: TradeModHashes[]
-): string | undefined {
+): DisplayAffixPart[] | undefined {
   const indexes = hashes?.[displayIndex]?.[1]
   if (!indexes?.length || !mods?.length) return undefined
-  const tiers = indexes.map(index => mods[index]?.tier).filter((tier): tier is string => Boolean(tier))
-  return tiers.length ? tiers.join(' + ') : undefined
+  return indexes.map(index => mods[index]).filter(Boolean).map(toAffixPart)
 }
 
-function getRichModName (line: FetchResultModLine): string | undefined {
-  if (typeof line !== 'object' || line == null || !('mods' in line)) return undefined
-  const names = line.mods?.map(mod => mod.name).filter((name): name is string => Boolean(name))
-  return names?.length ? names.join(' + ') : undefined
+function toAffixPart (mod: TradeModMetadata): DisplayAffixPart {
+  const ranges = mod.magnitudes?.map(magnitude => formatMagnitudeRange(magnitude.min, magnitude.max))
+  return {
+    name: mod.name || undefined,
+    tier: mod.tier || undefined,
+    level: mod.level,
+    range: ranges?.length ? ranges.join(', ') : undefined
+  }
 }
 
-function getLegacyModName (
-  displayIndex: number,
-  mods?: TradeModMetadata[],
-  hashes?: TradeModHashes[]
-): string | undefined {
-  const indexes = hashes?.[displayIndex]?.[1]
-  if (!indexes?.length || !mods?.length) return undefined
-  const names = indexes.map(index => mods[index]?.name).filter((name): name is string => Boolean(name))
-  return names.length ? names.join(' + ') : undefined
+function formatMagnitudeRange (min: string | number, max: string | number): string {
+  const normalizedMin = normalizeMagnitude(min)
+  const normalizedMax = normalizeMagnitude(max)
+  return normalizedMin === normalizedMax ? normalizedMin : `${normalizedMin}–${normalizedMax}`
+}
+
+function joinAffixPart (parts: DisplayAffixPart[] | undefined, key: 'name' | 'tier'): string | undefined {
+  const values = parts?.map(part => part[key]).filter((value): value is string => Boolean(value))
+  return values?.length ? values.join(' + ') : undefined
 }
 
 function buildNameBlock (properties: TradeDataLine[] | undefined): DisplayItemLine[] | undefined {
