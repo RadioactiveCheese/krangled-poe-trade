@@ -48,6 +48,7 @@ jobs:
                 OPEN_PRS=$(gh api --method GET "repos/$GITHUB_REPOSITORY/pulls" \
                   -f state=open \
                   -f head="$GITHUB_REPOSITORY_OWNER:$SYNC_BRANCH" \
+                  -f base=main \
                   --jq 'length')
                 if [ "$OPEN_PRS" = "0" ]; then
                   echo 'The sync branch is current but its pull request is missing; rebuilding it.'
@@ -237,10 +238,15 @@ jobs:
           PR_NUMBER=$(gh api --method GET "repos/$GITHUB_REPOSITORY/pulls" \
             -f state=open \
             -f head="$GITHUB_REPOSITORY_OWNER:$SYNC_BRANCH" \
+            -f base=main \
             --jq '.[0].number // empty')
           if [ -n "$PR_NUMBER" ]; then
+            IS_DRAFT=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" --jq '.draft')
             gh api --method PATCH "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" \
               --raw-field body="$(cat /tmp/pr-body.md)" >/dev/null
+            if [ "$IS_DRAFT" != 'true' ]; then
+              gh pr ready "$PR_NUMBER" --undo --repo "$GITHUB_REPOSITORY"
+            fi
             echo "Updated upstream sync PR #$PR_NUMBER."
           else
             gh api --method POST "repos/$GITHUB_REPOSITORY/pulls" \
