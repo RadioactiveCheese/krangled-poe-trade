@@ -13,7 +13,6 @@
     "leagues_failed_help_alt": "아이템 가격 책정을 하시고 오류 설명에 있는 지시를 따라주세요.",
     "thanks_3rd_party": "이 프로그램은 {0}과 {1}의 도움을 받고 있습니다. 이들을 도우는 것도 고려해봐주세요.",
     "toggle_browser_hint": "{0}을 눌러 브라우저나 인게임으로 이동해주세요.",
-    "contact_me": "PoE 디스코드를 통해서 저에게 연락하세요",
     "version": "버전 {0}",
     "release_notes": "릴리즈 노트",
     "report_bug": "버그 발생 시 GitHub에 보고해주세요",
@@ -293,7 +292,7 @@
     "market_ratio": "시장 비율"
   },
   "settings": {
-    "title": "세팅 - Awakened PoE Trade",
+    "title": "세팅 - Krangled PoE Trade",
     "language": "언어",
     "private_league": "개인리그",
     "account_name": "계정명",
