@@ -196,6 +196,7 @@ export default defineComponent({
         props.item.category !== ItemCategory.CapturedBeast &&
         props.item.category !== ItemCategory.HeistContract &&
         props.item.category !== ItemCategory.HeistBlueprint &&
+        props.item.category !== ItemCategory.Chart &&
         props.item.category !== ItemCategory.Invitation &&
         props.item.info.refName !== 'Expedition Logbook' &&
         !props.item.isUnidentified
