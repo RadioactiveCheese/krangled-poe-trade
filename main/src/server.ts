@@ -36,10 +36,29 @@ function isLoopbackRequest (req: import('http').IncomingMessage): boolean {
   return address === '::1' || address?.startsWith('127.') === true || address?.startsWith('::ffff:127.') === true
 }
 
-function requireLoopback (req: import('http').IncomingMessage, res: import('http').ServerResponse): boolean {
-  if (isLoopbackRequest(req)) return true
-  sendJson(res, 403, { error: 'Theme files can only be changed from this computer.' })
-  return false
+function requireLocalMutation (
+  req: import('http').IncomingMessage,
+  res: import('http').ServerResponse,
+  expectsJson = false
+): boolean {
+  const origin = req.headers.origin
+  let sameLoopbackOrigin = false
+  try {
+    const parsed = new URL(origin ?? '')
+    const hostname = parsed.hostname.toLowerCase()
+    const loopbackHostname = hostname === 'localhost' || hostname === '[::1]' || hostname.startsWith('127.')
+    sameLoopbackOrigin = loopbackHostname && parsed.host === req.headers.host
+  } catch {}
+
+  if (!isLoopbackRequest(req) || !sameLoopbackOrigin) {
+    sendJson(res, 403, { error: 'Theme files can only be changed by the local application.' })
+    return false
+  }
+  if (expectsJson && req.headers['content-type']?.split(';', 1)[0].trim().toLowerCase() !== 'application/json') {
+    sendJson(res, 415, { error: 'Expected an application/json request body.' })
+    return false
+  }
+  return true
 }
 
 export const server = createServer()
@@ -141,7 +160,7 @@ export async function startServer (
         if (req.method === 'GET') {
           sendJson(res, 200, await themeStore.list())
         } else if (req.method === 'POST') {
-          if (!requireLoopback(req, res)) return
+          if (!requireLocalMutation(req, res, true)) return
           const body = await readJsonBody(req)
           sendJson(res, 201, await themeStore.import(String(body.filename ?? ''), String(body.css ?? '')))
         } else {
@@ -153,7 +172,7 @@ export async function startServer (
       return
     }
     if (req.url === '/user-themes/duplicate' && req.method === 'POST') {
-      if (!requireLoopback(req, res)) return
+      if (!requireLocalMutation(req, res, true)) return
       try {
         const body = await readJsonBody(req)
         sendJson(res, 201, await themeStore.duplicate(String(body.filename ?? '')))
@@ -163,7 +182,7 @@ export async function startServer (
       return
     }
     if (req.url === '/user-themes/open' && req.method === 'POST') {
-      if (!requireLoopback(req, res)) return
+      if (!requireLocalMutation(req, res)) return
       try {
         await themeStore.openFolder()
         sendJson(res, 200, { ok: true })
