@@ -35,7 +35,7 @@ function themeLabel (filename: string): string {
 
 export function themeStylesheetUrl (theme: AppTheme): string {
   return theme === 'default'
-    ? `/themes/default.css?v=${Date.now()}`
+    ? '/themes/default.css'
     : `/user-theme?file=${encodeURIComponent(theme.slice('file:'.length))}&v=${Date.now()}`
 }
 

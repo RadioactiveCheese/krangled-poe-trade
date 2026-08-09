@@ -42,6 +42,10 @@ describe('themes', () => {
     expect(themeStylesheetUrl('file:My Theme.css')).toMatch(/^\/user-theme\?file=My%20Theme\.css&v=\d+$/)
   })
 
+  it('uses the packaged static path for the default theme', () => {
+    expect(themeStylesheetUrl('default')).toBe('/themes/default.css')
+  })
+
   it('falls back to Default and reports a failed custom stylesheet', async () => {
     const stylesheet = document.createElement('link')
     stylesheet.id = 'app-theme'
