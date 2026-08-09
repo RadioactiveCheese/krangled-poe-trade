@@ -47,6 +47,36 @@ describe('PoE 1 trade listing tooltip parsing', () => {
     expect(item?.itemTags).toContainEqual(expect.objectContaining({ text: 'Corrupted' }))
   })
 
+  it('maps trade-site armour and weapon summaries from extended data', () => {
+    const armour = parse({
+      ...fixture.item,
+      extended: {
+        ...fixture.item.extended,
+        base_defence_percentile: 36,
+        ar: 3198,
+        ev: 1842,
+        ward: 412
+      }
+    } as never)
+    expect(armour.summary).toEqual([
+      { label: 'Base Percentile', value: '36%' },
+      { label: 'Armour', value: '3198' },
+      { label: 'Evasion Rating', value: '1842' },
+      { label: 'Energy Shield', value: '524' },
+      { label: 'Ward', value: '412' }
+    ])
+
+    const weapon = parse({
+      ...fixture.item,
+      extended: { dps: 339, pdps: 227.5, edps: 111.5 }
+    } as never)
+    expect(weapon.summary).toEqual([
+      { label: 'DPS', value: '339' },
+      { label: 'Physical DPS', value: '227.5', color: 'physical' },
+      { label: 'Elemental DPS', value: '111.5', color: 'elemental' }
+    ])
+  })
+
   it('normalizes every classic and Eldritch influence field from the PoE 1 fetch payload', () => {
     const item = parse({
       ...fixture.item,
@@ -192,6 +222,29 @@ describe('PoE 1 trade listing tooltip parsing', () => {
       'of the Magma',
       'Upgraded'
     ])
+  })
+
+  it('retains each contributing affix roll range and item-level requirement', () => {
+    const item = parse({
+      ...fixture.item,
+      explicitMods: [{
+        description: '107% increased Armour',
+        mods: [
+          { name: 'Girded', tier: 'P3', level: 72, magnitudes: [{ min: '80', max: '91' }] },
+          { name: 'Armadillo’s', tier: 'P4', level: 29, magnitudes: [{ min: '21', max: '26' }] }
+        ]
+      }],
+      extended: undefined
+    } as never)
+
+    expect(item.explicitMods?.[0]).toMatchObject({
+      tier: 'P3 + P4',
+      modName: 'Girded + Armadillo’s',
+      affixParts: [
+        { name: 'Girded', tier: 'P3', level: 72, range: '80–91' },
+        { name: 'Armadillo’s', tier: 'P4', level: 29, range: '21–26' }
+      ]
+    })
   })
 
   it('groups hybrid stat lines into one affix per mod, prefixes before suffixes', () => {

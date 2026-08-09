@@ -47,6 +47,90 @@ function mountTooltip (
 }
 
 describe('Trade listing tooltip header caps', () => {
+  it('shows roll ranges and item-level requirements in makeup rows', async () => {
+    makeupViewEnabled.value = true
+    const wrapper = mountTooltip([], undefined)
+    await wrapper.setProps({
+      result: {
+        displayItem: {
+          title: ['Corpse Coat', 'Royal Plate'],
+          rarity: 'Rare',
+          influences: [],
+          explicitMods: [{
+            text: '107% increased Armour',
+            color: 1,
+            tier: 'P3 + P4',
+            modName: 'Girded + Armadillo’s',
+            modCategory: 'explicit',
+            affixParts: [
+              { name: 'Girded', tier: 'P3', level: 72, range: '80–91' },
+              { name: 'Armadillo’s', tier: 'P4', level: 29, range: '21–26' }
+            ]
+          }]
+        }
+      } as unknown as PricingResult
+    })
+
+    const row = wrapper.find('[data-testid="affix-row"]')
+    expect(row.text()).toContain('P3 [80–91] + P4 [21–26]')
+    expect(row.text()).toContain('Girded (≥72) + Armadillo’s (≥29)')
+  })
+
+  it('renders the trade-site summary footer', () => {
+    const wrapper = mount(TooltipItem, {
+      props: {
+        result: {
+          displayItem: {
+            title: ['Blight Burst', 'Karui Maul'],
+            rarity: 'Rare',
+            influences: [],
+            summary: [
+              { label: 'DPS', value: '339' },
+              { label: 'Physical DPS', value: '227.5', color: 'physical' },
+              { label: 'Elemental DPS', value: '111.5', color: 'elemental' }
+            ]
+          }
+        } as unknown as PricingResult
+      },
+      global: { stubs: { UiDetailedItemImg: true } }
+    })
+
+    expect(wrapper.find('[data-testid="item-summary"]').exists()).toBe(true)
+    expect(wrapper.findAll('[data-testid="item-summary-value"]').map(row => row.text()))
+      .toEqual(['DPS:339', 'Physical DPS:227.5', 'Elemental DPS:111.5'])
+  })
+
+  it('renders every supplied defence for hybrid armour', () => {
+    const wrapper = mount(TooltipItem, {
+      props: {
+        result: {
+          displayItem: {
+            title: ['Hybrid Fixture', 'Armour'],
+            rarity: 'Rare',
+            influences: [],
+            summary: [
+              { label: 'Base Percentile', value: '72%' },
+              { label: 'Armour', value: '1240' },
+              { label: 'Evasion Rating', value: '980' },
+              { label: 'Energy Shield', value: '210' },
+              { label: 'Ward', value: '85' }
+            ]
+          }
+        } as unknown as PricingResult
+      },
+      global: { stubs: { UiDetailedItemImg: true } }
+    })
+
+    expect(wrapper.findAll('[data-testid="item-summary-value"]').map(row => row.text()))
+      .toEqual([
+        'Base Percentile:72%',
+        'Armour:1240',
+        'Evasion Rating:980',
+        'Energy Shield:210',
+        'Ward:85'
+      ])
+  })
+
   it('seats the first two influences in the header caps, in order', () => {
     const wrapper = mountTooltip(ALL_INFLUENCES)
     const caps = wrapper.findAll('[data-testid="header-cap"]')
