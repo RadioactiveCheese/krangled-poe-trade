@@ -156,7 +156,7 @@ export default defineComponent({
 .wrapper {
   @apply px-2 py-1;
   @apply rounded text-white;
-  @apply bg-gray-300/30;
+  background-color: color-mix(in srgb, var(--theme-gray-300, #e2e8f0) 30%, transparent);
 
   &:not(:hover) {
     .controls {

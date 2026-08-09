@@ -7,6 +7,7 @@ import type { StashSearchWidget } from './stash-search/widget'
 import type { ItemCheckWidget } from './item-check/widget'
 import type { ItemSearchWidget } from './item-search/widget'
 import { registry as widgetRegistry } from './overlay/widget-registry.js'
+import { applyTheme, type AppTheme } from './theme'
 
 const _config = shallowRef<Config | null>(null)
 let _lastSavedConfig: Config | null = null
@@ -24,6 +25,13 @@ export function AppConfig (type?: string) {
 export function updateConfig (updates: Config) {
   _config.value = deepReactive(JSON.parse(JSON.stringify(updates)))
   document.documentElement.style.fontSize = `${_config.value!.fontSize}px`
+  const requestedTheme = _config.value!.theme
+  applyTheme(requestedTheme).then(applied => {
+    if (!applied && requestedTheme !== 'default' && _config.value?.theme === requestedTheme) {
+      _config.value.theme = 'default'
+      saveConfig()
+    }
+  })
 }
 
 export function saveConfig (opts?: { isTemporary: boolean }) {
@@ -120,15 +128,17 @@ export interface Config {
   widgets: widget.Widget[]
   fontSize: number
   showAttachNotification: boolean
+  theme: AppTheme
 }
 
 export const defaultConfig = (): Config => ({
-  configVersion: 19,
+  configVersion: 22,
   overlayKey: 'Shift + Space',
   overlayBackground: 'rgba(129, 139, 149, 0.15)',
   overlayBackgroundClose: true,
   restoreClipboard: false,
   showAttachNotification: true,
+  theme: 'default',
   commands: [{
     text: '/hideout',
     hotkey: 'F5',
@@ -438,6 +448,26 @@ function upgradeConfig (_config: Config): Config {
     priceCheck.itemHoverTooltip = 'keybind'
 
     config.configVersion = 19
+  }
+
+  if (config.configVersion < 20) {
+    config.theme = 'file:theme.css'
+    config.configVersion = 20
+  }
+
+  if (config.configVersion < 21) {
+    if (config.theme as string === 'custom') config.theme = 'file:theme.css'
+    config.configVersion = 21
+  }
+
+  if (config.configVersion < 22) {
+    // Built-in themes (besides 'default') are now just theme files that
+    // ship with the app, addressed like any other theme file.
+    const theme = config.theme as string
+    if (theme !== 'default' && !theme.startsWith('file:')) {
+      config.theme = `file:${theme}.css`
+    }
+    config.configVersion = 22
   }
   /* eslint-enable */
 
