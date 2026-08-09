@@ -82,25 +82,31 @@ export async function openThemeFolder () {
 let applySequence = 0
 
 export function applyTheme (theme: AppTheme): Promise<boolean> {
-  const stylesheet = document.querySelector<HTMLLinkElement>('#app-theme')
-  if (!stylesheet) return Promise.resolve(false)
+  const activeStylesheet = document.querySelector<HTMLLinkElement>('#app-theme')
+  if (!activeStylesheet) return Promise.resolve(false)
   const sequence = ++applySequence
+  const candidate = document.createElement('link')
+  candidate.rel = 'stylesheet'
 
   return new Promise(resolve => {
-    stylesheet.onload = () => {
-      if (sequence !== applySequence) return resolve(false)
+    candidate.onload = () => {
+      if (sequence !== applySequence) {
+        candidate.remove()
+        return resolve(false)
+      }
+      candidate.id = 'app-theme'
+      activeStylesheet.replaceWith(candidate)
       document.documentElement.dataset.theme = theme
       resolve(true)
     }
-    stylesheet.onerror = () => {
+    candidate.onerror = async () => {
+      candidate.remove()
       if (sequence !== applySequence) return resolve(false)
-      stylesheet.onload = null
-      stylesheet.onerror = null
-      stylesheet.href = themeStylesheetUrl('default')
-      document.documentElement.dataset.theme = 'default'
+      if (theme !== 'default') await applyTheme('default')
       window.dispatchEvent(new CustomEvent('theme-load-error', { detail: { theme } }))
       resolve(false)
     }
-    stylesheet.href = themeStylesheetUrl(theme)
+    candidate.href = themeStylesheetUrl(theme)
+    activeStylesheet.after(candidate)
   })
 }

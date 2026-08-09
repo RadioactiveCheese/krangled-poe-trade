@@ -31,6 +31,17 @@ function sendJson (res: import('http').ServerResponse, statusCode: number, body:
   res.end(JSON.stringify(body))
 }
 
+function isLoopbackRequest (req: import('http').IncomingMessage): boolean {
+  const address = req.socket.remoteAddress
+  return address === '::1' || address?.startsWith('127.') === true || address?.startsWith('::ffff:127.') === true
+}
+
+function requireLoopback (req: import('http').IncomingMessage, res: import('http').ServerResponse): boolean {
+  if (isLoopbackRequest(req)) return true
+  sendJson(res, 403, { error: 'Theme files can only be changed from this computer.' })
+  return false
+}
+
 export const server = createServer()
 const websocketServer = new WebSocketServer({ noServer: true })
 let lastActiveClient: WebSocket
@@ -130,6 +141,7 @@ export async function startServer (
         if (req.method === 'GET') {
           sendJson(res, 200, await themeStore.list())
         } else if (req.method === 'POST') {
+          if (!requireLoopback(req, res)) return
           const body = await readJsonBody(req)
           sendJson(res, 201, await themeStore.import(String(body.filename ?? ''), String(body.css ?? '')))
         } else {
@@ -141,6 +153,7 @@ export async function startServer (
       return
     }
     if (req.url === '/user-themes/duplicate' && req.method === 'POST') {
+      if (!requireLoopback(req, res)) return
       try {
         const body = await readJsonBody(req)
         sendJson(res, 201, await themeStore.duplicate(String(body.filename ?? '')))
@@ -150,6 +163,7 @@ export async function startServer (
       return
     }
     if (req.url === '/user-themes/open' && req.method === 'POST') {
+      if (!requireLoopback(req, res)) return
       try {
         await themeStore.openFolder()
         sendJson(res, 200, { ok: true })
