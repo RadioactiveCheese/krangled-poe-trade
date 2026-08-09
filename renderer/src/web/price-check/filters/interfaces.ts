@@ -13,12 +13,17 @@ interface SearchFilter {
   nameTrade?: string
   baseType?: string
   baseTypeTrade?: string
+  discriminatorTrade?: string
   category?: ItemCategory
 }
 
+interface SearchFilterSub extends SearchFilter {
+  sub?: SearchFilter & { disabled: boolean }
+}
+
 export interface ItemFilters {
-  searchExact: SearchFilter
-  searchRelaxed?: SearchFilter & { disabled: boolean }
+  searchExact: SearchFilterSub
+  searchRelaxed?: SearchFilterSub & { disabled: boolean }
   discriminator?: {
     value?: string
     trade: string
@@ -103,6 +108,7 @@ export interface ItemFilters {
     currency: string | undefined
     league: string
     collapseListings: 'api' | 'app'
+    collapseMerchant: boolean
   }
 }
 

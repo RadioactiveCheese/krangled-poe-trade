@@ -34,16 +34,19 @@ export function createFilters (
       listed: undefined,
       currency: opts.currency,
       league: opts.league,
-      collapseListings: opts.collapseListings
+      collapseListings: opts.collapseListings,
+      collapseMerchant: false
     }
   }
 
-  if (!opts.currency) {
-    if ((!item.info.craftable || CONSUMABLE_CRAFTABLE_ITEM.has(item.category!)) &&
-      item.rarity !== ItemRarity.Unique
-    ) {
+  if (
+    (!item.info.craftable || CONSUMABLE_CRAFTABLE_ITEM.has(item.category!)) &&
+    item.rarity !== ItemRarity.Unique
+  ) {
+    if (!opts.currency) {
       filters.trade.currency = 'chaos_divine'
     }
+    filters.trade.collapseMerchant = true
   }
 
   if (item.mercenary) {
@@ -165,7 +168,7 @@ export function createFilters (
     }
 
     if (item.info.refName === 'Map' || item.info.unique?.base === 'Map') {
-      filters.discriminator = { trade: 'map' }
+      filters.searchExact.discriminatorTrade = 'map'
     }
 
     if (item.mapBlighted) {
@@ -179,9 +182,9 @@ export function createFilters (
       }
     }
 
-    if (item.map!.tier) {
+    if (item.mapTier) {
       filters.mapTier = {
-        value: item.map!.tier,
+        value: item.mapTier,
         disabled: false
       }
     }
@@ -224,18 +227,20 @@ export function createFilters (
   } else if (item.category === ItemCategory.Chart) {
     filters.searchRelaxed = {
       category: item.category,
-      disabled: true
+      disabled: true,
+      sub: item.chart?.areaId && item.info.tradeDisc
+        ? {
+            baseType: item.chart.areaName,
+            baseTypeTrade: item.chart.areaId,
+            discriminatorTrade: item.info.tradeDisc,
+            disabled: false
+          }
+        : undefined
     }
     filters.searchExact = {
       baseType: item.info.name,
-      baseTypeTrade: t(opts, item.info)
-    }
-    if (item.chart?.areaId && item.info.tradeDisc) {
-      filters.discriminator = {
-        trade: item.info.tradeDisc,
-        option: item.chart.areaId,
-        value: item.chart.areaName
-      }
+      baseTypeTrade: item.chart?.areaId ?? t(opts, item.info),
+      discriminatorTrade: item.chart?.areaId ? item.info.tradeDisc : undefined
     }
     if (item.areaLevel) {
       filters.areaLevel = {
@@ -388,11 +393,11 @@ export function createFilters (
       item.category !== ItemCategory.Jewel && /* https://pathofexile.gamepedia.com/Jewel#Affixes */
       item.category !== ItemCategory.HeistBlueprint &&
       item.category !== ItemCategory.HeistContract &&
+      item.category !== ItemCategory.Chart &&
       item.category !== ItemCategory.MemoryLine &&
       item.category !== ItemCategory.SanctumRelic &&
       item.category !== ItemCategory.Charm &&
       item.category !== ItemCategory.Idol &&
-      item.category !== ItemCategory.Chart &&
       item.info.refName !== 'Expedition Logbook'
     ) {
       if (item.category === ItemCategory.ClusterJewel) {
@@ -496,10 +501,8 @@ function createGemFilters (
     const normalGem = ITEM_BY_REF('GEM', item.info.gem!.normalVariant!)![0]
     filters.searchExact = {
       baseType: item.info.name,
-      baseTypeTrade: t(opts, normalGem)
-    }
-    filters.discriminator = {
-      trade: item.info.tradeDisc!
+      baseTypeTrade: t(opts, normalGem),
+      discriminatorTrade: item.info.tradeDisc!
     }
   }
 

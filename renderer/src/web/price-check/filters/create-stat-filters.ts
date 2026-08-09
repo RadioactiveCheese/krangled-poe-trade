@@ -6,7 +6,7 @@ import { filterPseudo } from './pseudo'
 import { applyRules as applyAtzoatlRules } from './pseudo/atzoatl-rules'
 import { applyRules as applyMirroredTabletRules } from './pseudo/reflection-rules'
 import { filterItemProp, filterBasePercentile, filterMemoryStrands } from './pseudo/item-property'
-import { mapProps, valdoBadMods } from './pseudo/maps'
+import { mapProps, valdoBadMods, chartProps } from './pseudo/maps'
 import { applyFlaskHybridMod } from './pseudo/flasks'
 import { applyHeistRules } from './pseudo/heist'
 import { decodeOils, applyAnointmentRules } from './pseudo/anointments'
@@ -22,7 +22,7 @@ export interface FiltersCreationContext {
 export function createExactStatFilters (
   item: ParsedItem,
   statsByType: StatCalculated[],
-  opts: { searchStatRange: number }
+  opts: { searchStatRange: number, mode?: 'props' | 'bulk' }
 ): StatFilter[] {
   if (
     item.mapBlighted ||
@@ -84,7 +84,8 @@ export function createExactStatFilters (
 
   filterBasePercentile(ctx)
   filterMemoryStrands(ctx)
-  mapProps(ctx)
+  mapProps(opts.mode === 'bulk', ctx)
+  chartProps(opts.mode === 'bulk', ctx)
   valdoBadMods(ctx)
 
   ctx.filters.push(
