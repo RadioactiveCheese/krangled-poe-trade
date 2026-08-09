@@ -150,11 +150,8 @@ test('parses chart properties and map-style aggregate values', () => {
     shapeId: '4',
     sulphur: 75
   })
-  assert.deepEqual(item.map, {
-    tier: undefined,
-    itemQuantity: 25,
-    packSize: 18
-  })
+  assert.equal(item.areaItemQuantity, 25)
+  assert.equal(item.areaPackSize, 18)
   assert.deepEqual(item.unknownModifiers, [])
 })
 

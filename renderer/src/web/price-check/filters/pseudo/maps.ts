@@ -24,13 +24,7 @@ function areaProps (
 ): void {
   const { item } = ctx
 
-  const hasMoreDrops = Boolean(item.map.moreMaps || item.map.moreScarabs || item.map.moreCurrency || item.map.moreDivCards)
-
-  if (item.category !== ItemCategory.Chart &&
-    !item.isCorrupted && !hasMoreDrops && item.info.refName !== 'Nightmare Map'
-  ) return
-
-  if (item.map.itemQuantity) {
+  if (item.areaItemQuantity) {
     ctx.filters.push(propToFilter({
       ref: 'Item Quantity: +#%',
       tradeId: 'item.map_item_quantity',
@@ -57,24 +51,7 @@ function areaProps (
       disabled: disabled.packSize
     }, ctx))
   }
-  if (item.chart?.sulphur) {
-    ctx.filters.push(propToFilter({
-      ref: "Dead Man's Sulphur: +#%",
-      tradeId: 'item.chart_sulphur',
-      roll: { min: 0, max: Number.MAX_SAFE_INTEGER, value: item.chart.sulphur },
-      sources: [],
-      disabled: false
-    }, ctx))
-  }
-  if (item.chart?.gold) {
-    ctx.filters.push(propToFilter({
-      ref: 'Gold Found: +#%',
-      tradeId: 'item.chart_gold',
-      roll: { min: 0, max: Number.MAX_SAFE_INTEGER, value: item.chart.gold },
-      sources: [],
-      disabled: false
-    }, ctx))
-  }
+}
 
 export function mapProps (bulk: boolean, ctx: FiltersCreationContext): void {
   const { item } = ctx
@@ -143,11 +120,20 @@ export function chartProps (bulk: boolean, ctx: FiltersCreationContext): void {
     }
   }, ctx)
 
-  if (item.chartSulphur) {
+  if (item.chart?.sulphur) {
     ctx.filters.push(propToFilter({
       ref: "Dead Man's Sulphur: +#%",
       tradeId: 'item.chart_sulphur',
-      roll: { min: 0, max: Number.MAX_SAFE_INTEGER, value: item.chartSulphur },
+      roll: { min: 0, max: Number.MAX_SAFE_INTEGER, value: item.chart.sulphur },
+      sources: [],
+      disabled: false
+    }, ctx))
+  }
+  if (item.chart?.gold) {
+    ctx.filters.push(propToFilter({
+      ref: 'Gold Found: +#%',
+      tradeId: 'item.chart_gold',
+      roll: { min: 0, max: Number.MAX_SAFE_INTEGER, value: item.chart.gold },
       sources: [],
       disabled: false
     }, ctx))

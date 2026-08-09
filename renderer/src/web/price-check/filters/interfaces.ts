@@ -22,8 +22,8 @@ interface SearchFilterSub extends SearchFilter {
 }
 
 export interface ItemFilters {
-  searchExact: SearchFilter
-  searchRelaxed?: SearchFilter & { disabled: boolean }
+  searchExact: SearchFilterSub
+  searchRelaxed?: SearchFilterSub & { disabled: boolean }
   discriminator?: {
     value?: string
     trade: string
@@ -172,8 +172,7 @@ const _INTERNAL_TRADE_IDS = [
   'item.heist_job_agility',
   'item.heist_job_deception',
   'item.heist_job_engineering',
-  'item.heist_target_priceless',
-  'item.chart_sulphur'
+  'item.heist_target_priceless'
 ] as const
 
 export type InternalTradeId = typeof _INTERNAL_TRADE_IDS[number]

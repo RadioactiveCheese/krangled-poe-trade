@@ -176,7 +176,6 @@ interface TradeRequest {
           map_uberblighted?: FilterBoolean
           area_level?: FilterRange
           map_completion_reward?: { option?: 'any' | string }
-          chart_sulphur?: FilterRange
         }
       }
       heist_filters?: {
@@ -295,11 +294,13 @@ export function createTradeRequest (filters: ItemFilters, stats: StatFilter[]) {
   if (activeSearch.sub && !activeSearch.sub.disabled) {
     activeSearch = activeSearch.sub
   }
+  const discriminator = activeSearch.discriminatorTrade ?? filters.discriminator?.trade
+  const discriminatorOption = filters.discriminator?.option
 
   if (activeSearch.nameTrade) {
-    query.name = nameToQuery(activeSearch.nameTrade, activeSearch.discriminatorTrade)
+    query.name = nameToQuery(activeSearch.nameTrade, discriminator, discriminatorOption)
   } else if (activeSearch.name) {
-    query.name = nameToQuery(activeSearch.name, activeSearch.discriminatorTrade)
+    query.name = nameToQuery(activeSearch.name, discriminator, discriminatorOption)
   }
 
   if (filters.mercenaryBuild) {
@@ -316,9 +317,9 @@ export function createTradeRequest (filters: ItemFilters, stats: StatFilter[]) {
       tradeId,
       activeSearch.baseTypeTrade || activeSearch.baseType)
   } else if (activeSearch.baseTypeTrade) {
-    query.type = nameToQuery(activeSearch.baseTypeTrade, filters)
+    query.type = nameToQuery(activeSearch.baseTypeTrade, discriminator, discriminatorOption)
   } else if (activeSearch.baseType) {
-    query.type = nameToQuery(activeSearch.baseType, activeSearch.discriminatorTrade)
+    query.type = nameToQuery(activeSearch.baseType, discriminator, discriminatorOption)
   }
 
   if (filters.foil && !filters.foil.disabled) {
@@ -568,10 +569,6 @@ export function createTradeRequest (filters: ItemFilters, stats: StatFilter[]) {
       case 'item.heist_target_priceless':
         propSet(query.filters, 'heist_filters.filters.heist_objective_value.option', 'priceless')
         break
-      case 'item.chart_sulphur':
-        propSet(query.filters, 'map_filters.filters.chart_sulphur.min', typeof input.min === 'number' ? input.min : undefined)
-        propSet(query.filters, 'map_filters.filters.chart_sulphur.max', typeof input.max === 'number' ? input.max : undefined)
-        break
     }
   }
 
@@ -781,14 +778,13 @@ function tradeIdToQuery (id: string, stat: Pick<StatFilter, 'roll' | 'option' | 
   }
 }
 
-function nameToQuery (name: string, discriminator?: string) {
+function nameToQuery (name: string, discriminator?: string, option?: string) {
   if (!discriminator) {
     return name
   } else {
     return {
-      discriminator: filters.discriminator.trade,
-      option:
-        filters.discriminator.option ?? name
+      discriminator,
+      option: option ?? name
     }
   }
 }

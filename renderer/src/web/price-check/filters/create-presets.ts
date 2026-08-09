@@ -43,7 +43,6 @@ export function createPresets (
     item.category === ItemCategory.Invitation ||
     item.category === ItemCategory.HeistContract ||
     item.category === ItemCategory.HeistBlueprint ||
-    item.category === ItemCategory.Chart ||
     item.category === ItemCategory.Sentinel
   ) {
     if (item.rarity !== ItemRarity.Unique && (

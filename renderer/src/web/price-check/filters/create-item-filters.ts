@@ -197,21 +197,6 @@ export function createFilters (
       value: floorToBracket(item.areaLevel!, [1, 68, 73, 78, 81, 83]),
       disabled: false
     }
-  } else if (item.category === ItemCategory.Chart) {
-    filters.searchExact = {
-      baseType: item.info.name,
-      baseTypeTrade: t(opts, item.info)
-    }
-    filters.searchRelaxed = {
-      category: item.category,
-      disabled: false,
-      sub: {
-        baseType: item.mapArea!.name,
-        baseTypeTrade: item.mapArea!.tradeDisc!,
-        discriminatorTrade: item.info.tradeDisc!,
-        disabled: false
-      }
-    }
   } else if (item.category === ItemCategory.HeistBlueprint) {
     filters.searchRelaxed = {
       category: item.category,
@@ -242,18 +227,20 @@ export function createFilters (
   } else if (item.category === ItemCategory.Chart) {
     filters.searchRelaxed = {
       category: item.category,
-      disabled: true
+      disabled: true,
+      sub: item.chart?.areaId && item.info.tradeDisc
+        ? {
+            baseType: item.chart.areaName,
+            baseTypeTrade: item.chart.areaId,
+            discriminatorTrade: item.info.tradeDisc,
+            disabled: false
+          }
+        : undefined
     }
     filters.searchExact = {
       baseType: item.info.name,
-      baseTypeTrade: t(opts, item.info)
-    }
-    if (item.chart?.areaId && item.info.tradeDisc) {
-      filters.discriminator = {
-        trade: item.info.tradeDisc,
-        option: item.chart.areaId,
-        value: item.chart.areaName
-      }
+      baseTypeTrade: item.chart?.areaId ?? t(opts, item.info),
+      discriminatorTrade: item.chart?.areaId ? item.info.tradeDisc : undefined
     }
     if (item.areaLevel) {
       filters.areaLevel = {
@@ -411,7 +398,6 @@ export function createFilters (
       item.category !== ItemCategory.SanctumRelic &&
       item.category !== ItemCategory.Charm &&
       item.category !== ItemCategory.Idol &&
-      item.category !== ItemCategory.Chart &&
       item.info.refName !== 'Expedition Logbook'
     ) {
       if (item.category === ItemCategory.ClusterJewel) {

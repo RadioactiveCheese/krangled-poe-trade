@@ -241,7 +241,6 @@ export interface TranslationDict {
   VESTIGIAL_MODIFIER?: string
   VESTIGIAL_IMPLICIT?: string
   SCRYING_MAP_AREA: string
-  CHART_SULPHUR: string
   // ---
   CHAT_SYSTEM: RegExp
   CHAT_TRADE: RegExp

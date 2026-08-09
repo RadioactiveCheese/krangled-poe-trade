@@ -1025,15 +1025,9 @@ function parseChartProperties (section: string[], item: ParsedItem) {
     areaName,
     areaId: resolveChartArea(areaName, item.info.refName)
   }
-  item.map = { tier: undefined }
-
   for (const line of section) {
-    if (line.startsWith(_$.MAP_ITEM_QUANTITY)) {
-      item.map.itemQuantity = parseInt(line.slice(_$.MAP_ITEM_QUANTITY.length), 10)
-    } else if (line.startsWith(_$.MAP_ITEM_RARITY)) {
-      item.map.itemRarity = parseInt(line.slice(_$.MAP_ITEM_RARITY.length), 10)
-    } else if (line.startsWith(_$.MAP_MONSTER_PACK_SIZE)) {
-      item.map.packSize = parseInt(line.slice(_$.MAP_MONSTER_PACK_SIZE.length), 10)
+    if (parseAreaPropNested(line, item)) {
+      // line parsed
     } else if (_$.CHART_SULPHUR && line.startsWith(_$.CHART_SULPHUR)) {
       item.chart.sulphur = parseInt(line.slice(_$.CHART_SULPHUR.length), 10)
     } else if (_$.CHART_GOLD && line.startsWith(_$.CHART_GOLD)) {

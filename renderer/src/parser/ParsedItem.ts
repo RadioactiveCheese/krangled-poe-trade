@@ -60,10 +60,7 @@ export interface ParsedItem {
   mapMoreScarabs?: number
   mapMoreCurrency?: number
   mapMoreDivCards?: number
-  heistBlueprint?: {
-    wingsRevealed?: number
-    target?: 'Enchants' | 'Trinkets' | 'Gems' | 'Replicas'
-  }
+  logbookAreaMods?: ParsedModifier[][]
   chart?: {
     areaName: string
     areaId?: string

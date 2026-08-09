@@ -55,11 +55,8 @@ function chartItem (): ParsedItem {
       sulphur: 75,
       gold: 30
     },
-    map: {
-      tier: undefined,
-      itemQuantity: 25,
-      packSize: 18
-    },
+    areaItemQuantity: 25,
+    areaPackSize: 18,
     areaLevel: 83,
     itemLevel: 83,
     influences: [],
@@ -123,6 +120,12 @@ describe('Chart trade query', () => {
     expect(filters.areaLevel?.disabled).toBe(false)
     expect(filters.chartShape?.value).toBe('4')
     expect(filters.chartShape?.disabled).toBe(true)
+    expect(filters.searchRelaxed?.sub).toEqual({
+      baseType: 'Hazardous Depths',
+      baseTypeTrade: 'HazardousDepths',
+      discriminatorTrade: 'chart_sandy_seabed',
+      disabled: false
+    })
 
     const properties = Object.fromEntries(stats
       .filter(stat => stat.tag === 'property')
@@ -138,6 +141,28 @@ describe('Chart trade query', () => {
     const propertyRequest = createTradeRequest(filters, stats)
     expect(propertyRequest.query.filters.map_filters?.filters.chart_sulphur?.min).toBe(75)
     expect(propertyRequest.query.filters.map_filters?.filters.map_gold?.min).toBe(30)
+  })
+
+  it('can broaden a chart search from its zone to the chart category', () => {
+    const filters = createFilters(chartItem(), {
+      league: 'Hardcore',
+      currency: 'chaos',
+      collapseListings: 'api',
+      activateStockFilter: false,
+      exact: true,
+      useEn: true
+    })
+
+    filters.searchRelaxed!.disabled = false
+    expect(createTradeRequest(filters, []).query.type).toEqual({
+      discriminator: 'chart_sandy_seabed',
+      option: 'HazardousDepths'
+    })
+
+    filters.searchRelaxed!.sub!.disabled = true
+    const request = createTradeRequest(filters, [])
+    expect(request.query.type).toBeUndefined()
+    expect(request.query.filters.type_filters?.filters.category?.option).toBe('chart')
   })
 
   it.each(TRADITIONAL_CHINESE_CHART_AREAS)(
