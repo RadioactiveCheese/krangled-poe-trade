@@ -1,0 +1,46 @@
+/* @name Maven's Crucible
+ * @author Krangled PoE Trade
+ * @description Cosmic violet, cyan light, and the Maven's arena hues.
+ * @version 1 */
+@import '/themes/default.css';
+
+/* Maven's Crucible — cold stars, nebula glass, and delighted violence. */
+:root {
+  --theme-gray-100: #e1ddf8;
+  --theme-gray-200: #c8c2e5;
+  --theme-gray-300: #bdb7d2;
+  --theme-gray-400: #ada8c0;
+  --theme-gray-500: #8b86a5;
+  --theme-gray-600: #675e9d;
+  --theme-gray-700: #191945;
+  --theme-gray-800: #10122b;
+  --theme-gray-900: #050611;
+  --theme-table-row-alt: #232050;
+  --theme-red-400: #ff739f;
+  --theme-red-500: #df477d;
+  --theme-red-600: #ad285e;
+  --theme-red-700: #771a49;
+  --theme-yellow-400: #d7e889;
+  --theme-yellow-500: #afca62;
+  --theme-yellow-700: #72883c;
+  --theme-green-500: #50d4bd;
+  --theme-green-700: #278e80;
+  --theme-blue-100: #e6fdff;
+  --theme-blue-400: #beebff;
+  --theme-blue-600: #2ca9d4;
+  --theme-blue-800: #26648d;
+  --theme-purple-100: #fae9ff;
+  --theme-purple-600: #8d7ce8;
+  --theme-purple-700: #6454b4;
+  --theme-pink-700: #d96fb5;
+  --theme-item-magic: #72dbff;
+  --theme-item-rare: #e8ed9e;
+  --theme-item-unique: #c9803f;
+  --theme-radius: 0.4rem;
+  --theme-shadow-color: rgba(64, 158, 210, 0.35);
+}
+
+::selection { color: #fff; background: #a72e78; }
+::-webkit-scrollbar-thumb { background: linear-gradient(90deg, #342461, #43cdeb, #b83d91); border: 1px solid #b5efff; }
+.btn:hover { color: #edfbff !important; box-shadow: 0 0 0.7rem rgba(69, 215, 255, 0.52), inset 0 0 0.5rem rgba(206, 74, 183, 0.22); }
+input, select, textarea { accent-color: #c348a3; caret-color: #67eaff; }

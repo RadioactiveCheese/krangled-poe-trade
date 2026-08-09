@@ -1,0 +1,37 @@
+/* @name Harbinger
+ * @author Krangled PoE Trade
+ * @description Arcane blue light over deep navy surfaces.
+ * @version 1 */
+@import '/themes/default.css';
+
+/* Harbinger — impossible blue script suspended in violet void. */
+:root {
+  --theme-gray-100: #d1e8ff;
+  --theme-gray-200: #aecbe6;
+  --theme-gray-300: #aebfd0;
+  --theme-gray-400: #9fb0c1;
+  --theme-gray-500: #768fa6;
+  --theme-gray-600: #386c9b;
+  --theme-gray-700: #102344;
+  --theme-gray-800: #0a1730;
+  --theme-gray-900: #050a15;
+  --theme-table-row-alt: #172d53;
+  --theme-blue-100: #e5fbff;
+  --theme-blue-400: #82dfff;
+  --theme-blue-600: #2c9bef;
+  --theme-blue-800: #245797;
+  --theme-purple-100: #f0e5ff;
+  --theme-purple-600: #7755c7;
+  --theme-purple-700: #513898;
+  --theme-pink-700: #9d3eb4;
+  --theme-item-magic: #70bfff;
+  --theme-item-rare: #ecdf9d;
+  --theme-item-unique: #c98445;
+  --theme-radius: 0.3rem;
+  --theme-shadow-color: rgba(49, 71, 182, 0.4);
+}
+
+::selection { color: #fff; background: #5532a8; }
+::-webkit-scrollbar-thumb { background: linear-gradient(90deg, #34216f, #36a6d2, #34216f); border: 1px solid #71dcf2; }
+.btn:hover { color: #c7f5ff !important; box-shadow: 0 0 0.65rem rgba(68, 174, 236, 0.48); }
+input, select, textarea { accent-color: #6c54d9; caret-color: #65ddff; }
