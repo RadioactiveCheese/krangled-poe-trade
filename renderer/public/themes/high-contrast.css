@@ -1,0 +1,42 @@
+/*
+ * @name High Contrast
+ * @author Krangled PoE Trade
+ * @description Crisp separation, bright text, and conspicuous focus states for maximum readability.
+ * @version 1
+ */
+@import '/themes/default.css';
+
+:root {
+  --theme-gray-100: #ffffff;
+  --theme-gray-200: #f5f7fa;
+  --theme-gray-300: #e2e8f0;
+  --theme-gray-400: #cbd5e0;
+  --theme-gray-500: #a0aec0;
+  --theme-gray-600: #718096;
+  --theme-gray-700: #273244;
+  --theme-gray-800: #111827;
+  --theme-gray-900: #05070b;
+  --theme-table-row-alt: #1d2939;
+  --theme-blue-400: #67e8f9;
+  --theme-blue-600: #0891b2;
+  --theme-red-400: #ff8a8a;
+  --theme-red-500: #ff4d4d;
+  --theme-yellow-400: #ffe66d;
+  --theme-green-500: #5df29a;
+  --theme-surface-primary: #05070b;
+  --theme-surface-raised: #111827;
+  --theme-border-subtle: #94a3b8;
+  --theme-text-primary: #ffffff;
+  --theme-text-muted: #d8dee9;
+  --theme-accent: #67e8f9;
+  --theme-focus-ring: #fff36d;
+  --theme-selection: #075985;
+  --theme-danger: #ff4d4d;
+  --theme-radius: 0.2rem;
+  --theme-shadow-color: rgba(0, 0, 0, 0.85);
+}
+
+:focus-visible {
+  outline: 2px solid var(--theme-focus-ring) !important;
+  outline-offset: 2px;
+}

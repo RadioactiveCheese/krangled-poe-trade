@@ -19,22 +19,22 @@
   <div :class="$style.window" class="grow layout-column" :onMouseenter="hidePodium">
     <AppTitleBar @close="cancel" :title="t('settings.title')" />
     <div class="flex grow min-h-0">
-      <div class="pl-2 pt-2 bg-gray-900 flex flex-col gap-1" style="min-width: 10rem;">
+      <div class="pl-2 pt-2 bg-surface flex flex-col gap-1" style="min-width: 10rem;">
         <template v-for="item of menuItems">
           <button v-if="item.type === 'menu-item'"
             @click="item.select" :class="[$style['menu-item'], { [$style['active']]: item.isSelected }]">{{ item.name }}</button>
           <div v-else
-            class="border-b mx-2 border-gray-800" />
+            class="border-b mx-2 border-border-subtle" />
         </template>
         <button v-if="menuItems.length >= 4"
           :class="$style['quit-btn']" @click="quit">{{ t('app.quit') }}</button>
       </div>
-      <div class="text-gray-100 grow layout-column bg-gray-900">
-        <div class="grow overflow-y-auto bg-gray-800 rounded-tl">
+      <div class="text-primary grow layout-column bg-surface">
+        <div class="grow overflow-y-auto bg-surface-raised rounded-tl">
           <component v-if="configClone"
             :is="selectedComponent" :config="configClone" :configWidget="configWidget" />
         </div>
-        <div class="border-t bg-gray-900 border-gray-600 p-2 flex justify-end gap-x-2">
+        <div class="border-t bg-surface border-border-subtle p-2 flex justify-end gap-x-2">
           <button @click="save" class="px-3 bg-gray-800 rounded">{{ t('Save') }}</button>
           <button @click="cancel" class="px-3">{{ t('Cancel') }}</button>
         </div>
@@ -63,6 +63,7 @@ import SettingsMaps from '../map-check/settings-maps.vue'
 import SettingsStashSearch from '../stash-search/stash-search-editor.vue'
 import SettingsStopwatch from '../stopwatch/settings-stopwatch.vue'
 import SettingsItemSearch from '../item-search/settings-item-search.vue'
+import { applyTheme } from '@/web/theme'
 
 function shuffle<T> (array: T[]): T[] {
   let currentIndex = array.length
@@ -125,6 +126,7 @@ export default defineComponent({
           shuffle(APP_PATRONS.filter(row => row.style === i))
         )
       } else {
+        applyTheme(AppConfig().theme)
         configClone.value = null
         if (selectedWmId.value != null) {
           selectedWmId.value = null
