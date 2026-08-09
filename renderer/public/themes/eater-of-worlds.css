@@ -2,7 +2,7 @@
  * @author Krangled PoE Trade
  * @description Eldritch teal light against an oceanic void.
  * @version 1 */
-@import url('/themes/default.css');
+@import '/themes/default.css';
 
 /* Eater of Worlds — drowned teal flesh, abyssal navy, and cold ichor. */
 :root {

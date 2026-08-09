@@ -75,17 +75,47 @@ function validateCss (css: string): string[] {
     throw new ThemeValidationError('Theme files must be smaller than 512 KB.')
   }
 
-  const withoutComments = css.replace(/\/\*[\s\S]*?\*\//g, '')
   let depth = 0
-  for (const char of withoutComments) {
+  let quote: '"' | "'" | null = null
+  let escaped = false
+  let inComment = false
+  for (let index = 0; index < css.length; index++) {
+    const char = css[index]
+    const next = css[index + 1]
+    if (inComment) {
+      if (char === '*' && next === '/') {
+        inComment = false
+        index++
+      }
+      continue
+    }
+    if (quote) {
+      if (escaped) {
+        escaped = false
+      } else if (char === '\\') {
+        escaped = true
+      } else if (char === quote) {
+        quote = null
+      }
+      continue
+    }
+    if (char === '/' && next === '*') {
+      inComment = true
+      index++
+      continue
+    }
+    if (char === '"' || char === "'") {
+      quote = char
+      continue
+    }
     if (char === '{') depth++
     if (char === '}') depth--
     if (depth < 0) throw new ThemeValidationError('Theme contains an unmatched closing brace.')
   }
   if (depth !== 0) throw new ThemeValidationError('Theme contains an unmatched opening brace.')
 
-  const importsDefault = /@import\s+(?:url\()?['"]?\/themes\/default\.css/i.test(withoutComments)
-  const hasRoot = /:root\s*\{/.test(withoutComments)
+  const importsDefault = /@import\s+(?:url\()?['"]?\/themes\/default\.css/i.test(css)
+  const hasRoot = /:root\s*\{/.test(css)
   if (!importsDefault && !hasRoot) {
     throw new ThemeValidationError('Theme must import /themes/default.css or define a :root block.')
   }
@@ -162,6 +192,7 @@ export class ThemeStore {
 
   async import (filename: string, css: string): Promise<ThemeWriteResult> {
     if (!validFilename(filename)) throw new ThemeValidationError('Use a valid filename ending in .css.')
+    if (filename.toLowerCase() === 'default.css') throw new ThemeValidationError('default.css is reserved by the application.')
     const warnings = validateCss(css)
     await fs.mkdir(this.userPath, { recursive: true })
     const target = path.join(this.userPath, filename)
@@ -200,7 +231,9 @@ export class ThemeStore {
     } catch (error) {
       if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error
       await fs.mkdir(this.userPath, { recursive: true })
-      await fs.writeFile(themePath, DEFAULT_THEME, { flag: 'wx' }).catch(() => {})
+      await fs.writeFile(themePath, DEFAULT_THEME, { flag: 'wx' }).catch((error: NodeJS.ErrnoException) => {
+        if (error.code !== 'EEXIST') throw error
+      })
     }
   }
 }

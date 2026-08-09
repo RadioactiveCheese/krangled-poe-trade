@@ -2,7 +2,7 @@
  * @author Krangled PoE Trade
  * @description Blood-red corruption, dark stone, and ancient Vaal gold.
  * @version 1 */
-@import url('/themes/default.css');
+@import '/themes/default.css';
 
 /* Vaal Corruption — obsidian black, sacrificial crimson, and a thin line of old gold. */
 :root {

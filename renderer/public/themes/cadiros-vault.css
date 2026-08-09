@@ -2,7 +2,7 @@
  * @author Krangled PoE Trade
  * @description Tarnished gold, warm coin light, and dark bronze surfaces.
  * @version 1 */
-@import url('/themes/default.css');
+@import '/themes/default.css';
 
 /* Cadiro's Vault — black lacquer, old burgundy, and altogether too much gold. */
 :root {

@@ -4,7 +4,7 @@
  * @description True-black surfaces with restrained cyan accents for OLED displays and dark rooms.
  * @version 1
  */
-@import url('/themes/default.css');
+@import '/themes/default.css';
 
 :root {
   --theme-gray-100: #f4f7f8;

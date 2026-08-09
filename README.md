@@ -34,7 +34,7 @@ See [DEVELOPING.md](./DEVELOPING.md)
 
 Choose a theme under **Settings → General → Theme**. Besides Default, every
 theme is just a `.css` file: the app ships with Path of Exile-inspired presets,
-High Contrast, and OLED Black. Every `.css` file in the themes folder appears
+High Contrast, and OLED Black. Every valid `.css` file in the themes folder appears
 in the selector, and Settings can open that folder, import a file, or duplicate
 the selected theme. Changes are detected while Settings is open. A user file
 with the same name as a shipped theme replaces it, so included themes can be

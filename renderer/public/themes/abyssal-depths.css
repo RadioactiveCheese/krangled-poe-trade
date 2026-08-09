@@ -2,7 +2,7 @@
  * @author Krangled PoE Trade
  * @description Near-black stone illuminated by abyssal green.
  * @version 1 */
-@import url('/themes/default.css');
+@import '/themes/default.css';
 
 /* Abyssal Depths — lightless stone split by sickly green fissures. */
 :root {

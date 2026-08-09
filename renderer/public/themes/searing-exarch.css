@@ -2,7 +2,7 @@
  * @author Krangled PoE Trade
  * @description Ember orange, scorched red, and volcanic shadow.
  * @version 1 */
-@import url('/themes/default.css');
+@import '/themes/default.css';
 
 /* Searing Exarch — scorched basalt, incandescent brass, and living flame. */
 :root {

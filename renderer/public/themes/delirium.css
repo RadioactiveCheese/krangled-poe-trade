@@ -2,7 +2,7 @@
  * @author Krangled PoE Trade
  * @description Desaturated mist, charcoal, and cold metallic highlights.
  * @version 1 */
-@import url('/themes/default.css');
+@import '/themes/default.css';
 
 /* Delirium — ash, fog, tarnished silver, and almost no warmth. */
 /* The desaturation lives in the palette itself: a body-wide filter would wash

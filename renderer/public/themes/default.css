@@ -45,9 +45,9 @@
   --theme-item-magic: #8888ff;
   --theme-item-rare: #ffff77;
   --theme-item-unique: #af6025;
-  --theme-font-ui: Exo2, sans-serif;
-  --theme-font-item: Fontin, FrizQuadrataC, serif;
-  --theme-font-item-small-caps: FontinSmallCaps, FrizQuadrataC, serif;
+  --theme-font-ui: "Exo2", sans-serif;
+  --theme-font-item: "Fontin", "FrizQuadrataC", serif;
+  --theme-font-item-small-caps: "FontinSmallCaps", "FrizQuadrataC", serif;
   --theme-radius: 0.25rem;
   --theme-shadow-color: rgba(0, 0, 0, 0.5);
 

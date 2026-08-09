@@ -2,7 +2,7 @@
  * @author Krangled PoE Trade
  * @description Cosmic violet, cyan light, and the Maven's arena hues.
  * @version 1 */
-@import url('/themes/default.css');
+@import '/themes/default.css';
 
 /* Maven's Crucible — cold stars, nebula glass, and delighted violence. */
 :root {

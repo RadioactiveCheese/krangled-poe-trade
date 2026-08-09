@@ -2,7 +2,7 @@
  * @author Krangled PoE Trade
  * @description Arcane blue light over deep navy surfaces.
  * @version 1 */
-@import url('/themes/default.css');
+@import '/themes/default.css';
 
 /* Harbinger — impossible blue script suspended in violet void. */
 :root {

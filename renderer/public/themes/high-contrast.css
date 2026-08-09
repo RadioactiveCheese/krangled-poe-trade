@@ -4,7 +4,7 @@
  * @description Crisp separation, bright text, and conspicuous focus states for maximum readability.
  * @version 1
  */
-@import url('/themes/default.css');
+@import '/themes/default.css';
 
 :root {
   --theme-gray-100: #ffffff;

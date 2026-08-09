@@ -27,8 +27,8 @@
       </div>
     </div>
     <div class="mb-4">
-      <div class="flex-1 mb-1">Theme</div>
-      <select v-model="theme" class="p-1 rounded bg-gray-700 w-56">
+      <label class="flex-1 mb-1" for="theme-select">Theme</label>
+      <select id="theme-select" v-model="theme" class="p-1 rounded bg-gray-700 w-56">
         <option v-for="option in themes" :key="option.value" :value="option.value">{{ option.label }}</option>
       </select>
       <div class="flex flex-wrap gap-1 mt-2">
@@ -117,8 +117,9 @@ export default defineComponent({
             props.config.theme = 'default'
             await applyTheme('default')
             themeMessage.value = { text: 'The selected theme is unavailable. Default was restored.', error: true }
-          } else if (props.config.theme !== 'default') {
-            await applyTheme(props.config.theme)
+          } else if (props.config.theme !== 'default' && !await applyTheme(props.config.theme)) {
+            props.config.theme = 'default'
+            themeMessage.value = { text: 'That theme could not be loaded. Default was restored.', error: true }
           }
         }
         if (!quiet) themeMessage.value = { text: 'Theme list refreshed.', error: false }
@@ -138,7 +139,11 @@ export default defineComponent({
         const result = await action()
         await refreshThemes(true)
         props.config.theme = `file:${result.theme.filename}`
-        await applyTheme(props.config.theme)
+        if (!await applyTheme(props.config.theme)) {
+          props.config.theme = 'default'
+          themeMessage.value = { text: 'That theme could not be loaded. Default was restored.', error: true }
+          return
+        }
         themeMessage.value = {
           text: result.warnings.length ? `${success} ${result.warnings.join(' ')}` : success,
           error: result.warnings.length > 0
