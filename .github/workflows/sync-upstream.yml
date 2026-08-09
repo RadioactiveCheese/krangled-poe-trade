@@ -33,6 +33,8 @@ jobs:
 
       - name: Count new upstream commits
         id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           BEHIND=$(git rev-list --count origin/main..upstream/master)
           echo "behind=$BEHIND" >> "$GITHUB_OUTPUT"
@@ -43,7 +45,17 @@ jobs:
             if git ls-remote --exit-code --heads origin "$SYNC_BRANCH" >/dev/null 2>&1; then
               git fetch origin "$SYNC_BRANCH:refs/remotes/origin/$SYNC_BRANCH"
               if git merge-base --is-ancestor upstream/master "origin/$SYNC_BRANCH"; then
-                echo "The sync branch already contains the latest upstream commit."
+                OPEN_PRS=$(gh api --method GET "repos/$GITHUB_REPOSITORY/pulls" \
+                  -f state=open \
+                  -f head="$GITHUB_REPOSITORY_OWNER:$SYNC_BRANCH" \
+                  -f base=main \
+                  --jq 'length')
+                if [ "$OPEN_PRS" = "0" ]; then
+                  echo 'The sync branch is current but its pull request is missing; rebuilding it.'
+                  NEEDS_SYNC=true
+                else
+                  echo 'The sync branch and its pull request already contain the latest upstream commit.'
+                fi
               else
                 STATUS=$?
                 if [ "$STATUS" -eq 1 ]; then
@@ -223,15 +235,25 @@ jobs:
             echo '<!-- sync-upstream-summary -->'
           } > /tmp/pr-body.md
 
-          PR_NUMBER=$(gh pr list --head "$SYNC_BRANCH" --state open --json number --jq '.[0].number // empty')
+          PR_NUMBER=$(gh api --method GET "repos/$GITHUB_REPOSITORY/pulls" \
+            -f state=open \
+            -f head="$GITHUB_REPOSITORY_OWNER:$SYNC_BRANCH" \
+            -f base=main \
+            --jq '.[0].number // empty')
           if [ -n "$PR_NUMBER" ]; then
-            gh pr edit "$PR_NUMBER" --body-file /tmp/pr-body.md
-            gh pr ready "$PR_NUMBER" --undo || true
-            echo "Updated draft PR #$PR_NUMBER."
+            IS_DRAFT=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" --jq '.draft')
+            gh api --method PATCH "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" \
+              --raw-field body="$(cat /tmp/pr-body.md)" >/dev/null
+            if [ "$IS_DRAFT" != 'true' ]; then
+              gh pr ready "$PR_NUMBER" --undo --repo "$GITHUB_REPOSITORY"
+            fi
+            echo "Updated upstream sync PR #$PR_NUMBER."
           else
-            gh pr create --draft \
-              --base main \
-              --head "$SYNC_BRANCH" \
-              --title "chore: sync upstream ($(date -u +%Y-%m-%d))" \
-              --body-file /tmp/pr-body.md
+            gh api --method POST "repos/$GITHUB_REPOSITORY/pulls" \
+              --raw-field title="chore: sync upstream ($(date -u +%Y-%m-%d))" \
+              --raw-field head="$SYNC_BRANCH" \
+              --raw-field base=main \
+              --raw-field body="$(cat /tmp/pr-body.md)" \
+              -F draft=true \
+              --jq '.html_url'
           fi
