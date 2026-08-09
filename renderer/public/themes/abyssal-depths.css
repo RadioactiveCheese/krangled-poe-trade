@@ -1,0 +1,37 @@
+/* @name Abyssal Depths
+ * @author Krangled PoE Trade
+ * @description Near-black stone illuminated by abyssal green.
+ * @version 1 */
+@import url('/themes/default.css');
+
+/* Abyssal Depths — lightless stone split by sickly green fissures. */
+:root {
+  --theme-gray-100: #d8e8cb;
+  --theme-gray-200: #bdcfb0;
+  --theme-gray-300: #aebca6;
+  --theme-gray-400: #a1ab9c;
+  --theme-gray-500: #7e8b7b;
+  --theme-gray-600: #4b6d3f;
+  --theme-gray-700: #101a13;
+  --theme-gray-800: #0b120d;
+  --theme-gray-900: #050806;
+  --theme-table-row-alt: #16251a;
+  --theme-green-500: #79c83b;
+  --theme-green-700: #4c8d28;
+  --theme-yellow-400: #d9ef55;
+  --theme-yellow-500: #b3c93a;
+  --theme-yellow-700: #6f8a20;
+  --theme-blue-400: #5aa68c;
+  --theme-blue-600: #34745f;
+  --theme-blue-800: #1b493b;
+  --theme-purple-600: #596c42;
+  --theme-purple-700: #3a492c;
+  --theme-item-unique: #b57b41;
+  --theme-radius: 0.15rem;
+  --theme-shadow-color: rgba(58, 148, 30, 0.35);
+}
+
+::selection { color: #f0ffe8; background: #347d25; }
+::-webkit-scrollbar-thumb { background: linear-gradient(90deg, #102114, #4b9b2c, #102114); border: 1px solid #78c54c; }
+.btn:hover { color: #dfffbd !important; box-shadow: 0 0 0.55rem rgba(92, 211, 51, 0.42); }
+input, select, textarea { accent-color: #62bd32; caret-color: #a8ec69; }

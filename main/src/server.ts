@@ -7,9 +7,29 @@ import * as path from 'path'
 import { app } from 'electron'
 import { IpcEvent, IpcEventPayload, HostState } from '../../ipc/types'
 import { ConfigStore } from './host-files/ConfigStore'
+import { ThemeStore } from './host-files/ThemeStore'
 import { addFileUploadRoutes } from './host-files/file-uploads'
 import type { AppUpdater } from './AppUpdater'
 import type { Logger } from './RemoteLogger'
+
+async function readJsonBody (req: import('http').IncomingMessage): Promise<Record<string, unknown>> {
+  const chunks: Buffer[] = []
+  let size = 0
+  for await (const chunk of req) {
+    const bytes = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk)
+    size += bytes.length
+    if (size > 600 * 1024) throw new Error('Request body is too large.')
+    chunks.push(bytes)
+  }
+  return JSON.parse(Buffer.concat(chunks).toString('utf8')) as Record<string, unknown>
+}
+
+function sendJson (res: import('http').ServerResponse, statusCode: number, body: unknown) {
+  res.statusCode = statusCode
+  res.setHeader('content-type', 'application/json')
+  res.setHeader('cache-control', 'no-store')
+  res.end(JSON.stringify(body))
+}
 
 export const server = createServer()
 const websocketServer = new WebSocketServer({ noServer: true })
@@ -19,7 +39,7 @@ addFileUploadRoutes(server)
 
 if (!process.env.VITE_DEV_SERVER_URL) {
   server.addListener('request', (req, res) => {
-    if (req.url?.startsWith('/config') || req.url?.startsWith('/uploads') || req.url?.startsWith('/proxy')) return
+    if (req.url?.startsWith('/config') || req.url?.startsWith('/user-theme') || req.url?.startsWith('/uploads') || req.url?.startsWith('/proxy')) return
 
     const filePath = (req.url === '/') ? '/index.html' : req.url!
     switch (path.extname(filePath)) {
@@ -80,6 +100,7 @@ export async function startServer (
   logger: Logger
 ): Promise<number> {
   const configStore = new ConfigStore(eventPipe)
+  const themeStore = new ThemeStore()
 
   websocketServer.on('connection', (socket) => {
     lastActiveClient = socket
@@ -104,6 +125,51 @@ export async function startServer (
   })
 
   server.addListener('request', async (req, res) => {
+    if (req.url === '/user-themes') {
+      try {
+        if (req.method === 'GET') {
+          sendJson(res, 200, await themeStore.list())
+        } else if (req.method === 'POST') {
+          const body = await readJsonBody(req)
+          sendJson(res, 201, await themeStore.import(String(body.filename ?? ''), String(body.css ?? '')))
+        } else {
+          sendJson(res, 405, { error: 'Method not allowed.' })
+        }
+      } catch (error) {
+        sendJson(res, 400, { error: (error as Error).message })
+      }
+      return
+    }
+    if (req.url === '/user-themes/duplicate' && req.method === 'POST') {
+      try {
+        const body = await readJsonBody(req)
+        sendJson(res, 201, await themeStore.duplicate(String(body.filename ?? '')))
+      } catch (error) {
+        sendJson(res, 400, { error: (error as Error).message })
+      }
+      return
+    }
+    if (req.url === '/user-themes/open' && req.method === 'POST') {
+      try {
+        await themeStore.openFolder()
+        sendJson(res, 200, { ok: true })
+      } catch (error) {
+        sendJson(res, 500, { error: (error as Error).message })
+      }
+      return
+    }
+    if (req.url?.startsWith('/user-theme?')) {
+      try {
+        const filename = new URL(req.url, 'http://localhost').searchParams.get('file') ?? ''
+        res.setHeader('content-type', 'text/css; charset=utf-8')
+        res.setHeader('cache-control', 'no-store')
+        res.end(await themeStore.load(filename))
+      } catch {
+        res.statusCode = 404
+        res.end('/* Theme file not found */')
+      }
+      return
+    }
     if (req.url === '/config') {
       res.setHeader('content-type', 'application/json')
       const resBody: HostState = {

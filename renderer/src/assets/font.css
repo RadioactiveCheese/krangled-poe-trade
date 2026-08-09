@@ -23,10 +23,10 @@
 }
 
 .font-poe {
-  font-family: Fontin, FrizQuadrataC;
+  font-family: var(--theme-font-item, Fontin, FrizQuadrataC);
 }
 .font-poe-sc {
-  font-family: FontinSmallCaps, FrizQuadrataC;
+  font-family: var(--theme-font-item-small-caps, FontinSmallCaps, FrizQuadrataC);
 }
 
 @font-face {
@@ -49,5 +49,5 @@
 }
 
 .font-exo2 {
-  font-family: Exo2;
+  font-family: var(--theme-font-ui, Exo2, sans-serif);
 }

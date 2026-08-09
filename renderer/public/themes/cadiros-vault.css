@@ -1,0 +1,50 @@
+/* @name Cadiro's Vault
+ * @author Krangled PoE Trade
+ * @description Tarnished gold, warm coin light, and dark bronze surfaces.
+ * @version 1 */
+@import url('/themes/default.css');
+
+/* Cadiro's Vault — black lacquer, old burgundy, and altogether too much gold. */
+:root {
+  --theme-gray-100: #f3e4b3;
+  --theme-gray-200: #d9c58e;
+  --theme-gray-300: #ccbe9f;
+  --theme-gray-400: #bbaf95;
+  --theme-gray-500: #9a8d70;
+  --theme-gray-600: #826626;
+  --theme-gray-700: #30240f;
+  --theme-gray-800: #20190d;
+  --theme-gray-900: #100d08;
+  --theme-table-row-alt: #3d2e13;
+  --theme-red-400: #db6f60;
+  --theme-red-500: #a93637;
+  --theme-red-600: #7c2028;
+  --theme-red-700: #57141e;
+  --theme-red-800: #3c0d15;
+  --theme-red-900: #25080d;
+  --theme-orange-400: #e1a344;
+  --theme-orange-500: #c17b25;
+  --theme-orange-600: #945619;
+  --theme-orange-700: #683713;
+  --theme-yellow-100: #fff7d6;
+  --theme-yellow-400: #f0d36c;
+  --theme-yellow-500: #c99a2e;
+  --theme-yellow-700: #966d1c;
+  --theme-green-500: #889447;
+  --theme-green-700: #59622f;
+  --theme-blue-400: #7ba5a6;
+  --theme-blue-600: #527779;
+  --theme-blue-800: #344d50;
+  --theme-purple-600: #83516e;
+  --theme-purple-700: #5c344c;
+  --theme-item-rare: #ffe06d;
+  --theme-item-unique: #dc7b2c;
+  --theme-radius: 0.2rem;
+  --theme-shadow-color: rgba(180, 130, 30, 0.35);
+}
+
+::selection { color: #1a0e0d; background: #e3b847; }
+::-webkit-scrollbar-thumb { background: linear-gradient(90deg, #341313, #b17c28, #341313); border: 1px solid #ecc65c; }
+.btn { border-color: #7f6129; }
+.btn:hover { color: #fff1b0 !important; border-color: #dfb743; box-shadow: 0 0 0.55rem rgba(218, 168, 48, 0.4); }
+input, select, textarea { accent-color: #c59832; caret-color: #f5cf63; }

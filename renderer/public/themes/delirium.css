@@ -1,0 +1,46 @@
+/* @name Delirium
+ * @author Krangled PoE Trade
+ * @description Desaturated mist, charcoal, and cold metallic highlights.
+ * @version 1 */
+@import url('/themes/default.css');
+
+/* Delirium — ash, fog, tarnished silver, and almost no warmth. */
+/* The desaturation lives in the palette itself: a body-wide filter would wash
+   out item art and semantic colors, and break position:fixed overlay widgets. */
+:root {
+  --theme-gray-100: #d7d8da;
+  --theme-gray-200: #c1c3c6;
+  --theme-gray-300: #bbbec1;
+  --theme-gray-400: #acaeb2;
+  --theme-gray-500: #8a8d90;
+  --theme-gray-600: #67686d;
+  --theme-gray-700: #222327;
+  --theme-gray-800: #17181b;
+  --theme-gray-900: #0b0b0d;
+  --theme-table-row-alt: #303136;
+  --theme-red-400: #cf9595;
+  --theme-red-500: #ad7171;
+  --theme-red-600: #8c5757;
+  --theme-red-700: #6b4343;
+  --theme-yellow-400: #cdc7a8;
+  --theme-yellow-500: #aaa68b;
+  --theme-yellow-700: #777461;
+  --theme-green-500: #8ba892;
+  --theme-green-700: #5d7062;
+  --theme-blue-400: #9daebe;
+  --theme-blue-600: #707f8e;
+  --theme-blue-800: #464f58;
+  --theme-purple-600: #8d879a;
+  --theme-purple-700: #625e6d;
+  --theme-item-normal: #d3d3d3;
+  --theme-item-magic: #a3aecc;
+  --theme-item-rare: #d3cdae;
+  --theme-item-unique: #a3846b;
+  --theme-radius: 0;
+  --theme-shadow-color: rgba(220, 220, 220, 0.16);
+}
+
+::selection { color: #111; background: #d5d5d5; }
+::-webkit-scrollbar-thumb { background: linear-gradient(90deg, #292a2d, #777a7e, #292a2d); border: 1px solid #a6a8aa; }
+.btn:hover { color: #fff !important; box-shadow: 0 0 0.5rem rgba(220, 220, 220, 0.24); }
+input, select, textarea { accent-color: #a6a8aa; caret-color: #ededed; }

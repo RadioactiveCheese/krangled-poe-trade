@@ -1,0 +1,44 @@
+/* @name Searing Exarch
+ * @author Krangled PoE Trade
+ * @description Ember orange, scorched red, and volcanic shadow.
+ * @version 1 */
+@import url('/themes/default.css');
+
+/* Searing Exarch — scorched basalt, incandescent brass, and living flame. */
+:root {
+  --theme-gray-100: #f8d9ba;
+  --theme-gray-200: #dcba9d;
+  --theme-gray-300: #d2b5a4;
+  --theme-gray-400: #c0a699;
+  --theme-gray-500: #a08479;
+  --theme-gray-600: #9e503c;
+  --theme-gray-700: #32170d;
+  --theme-gray-800: #21100a;
+  --theme-gray-900: #100503;
+  --theme-table-row-alt: #451e0f;
+  --theme-red-100: #ffe8ce;
+  --theme-red-200: #ffbd82;
+  --theme-red-400: #ff9636;
+  --theme-red-500: #ee5728;
+  --theme-red-600: #a92319;
+  --theme-red-700: #791712;
+  --theme-red-800: #50100d;
+  --theme-red-900: #300907;
+  --theme-orange-400: #ffd06b;
+  --theme-orange-500: #ff9636;
+  --theme-orange-600: #bc4e12;
+  --theme-orange-700: #82300d;
+  --theme-yellow-100: #fff7c9;
+  --theme-yellow-400: #ffd35a;
+  --theme-yellow-500: #e7a82e;
+  --theme-yellow-700: #9e6817;
+  --theme-item-rare: #ffd45f;
+  --theme-item-unique: #ef7627;
+  --theme-radius: 0.1rem;
+  --theme-shadow-color: rgba(200, 52, 18, 0.42);
+}
+
+::selection { color: #fff7cf; background: #a92d17; }
+::-webkit-scrollbar-thumb { background: linear-gradient(90deg, #3b110c, #db4b1d, #f2a52e, #3b110c); border: 1px solid #f2bd4f; }
+.btn:hover { color: #fff0b1 !important; box-shadow: 0 0 0.7rem rgba(239, 75, 25, 0.58); }
+input, select, textarea { accent-color: #dc431d; caret-color: #ffc348; }

@@ -1,0 +1,65 @@
+/*
+ * @name Default
+ * @author Krangled PoE Trade
+ * @description The original application palette.
+ * @version 1
+ */
+:root {
+  --theme-gray-100: #f7fafc;
+  --theme-gray-200: #edf2f7;
+  --theme-gray-300: #e2e8f0;
+  --theme-gray-400: #cbd5e0;
+  --theme-gray-500: #a0aec0;
+  --theme-gray-600: #718096;
+  --theme-gray-700: #4a5568;
+  --theme-gray-800: #2d3748;
+  --theme-gray-900: #1a202c;
+  --theme-table-row-alt: #353f52;
+  --theme-red-100: #fff5f5;
+  --theme-red-200: #fed7d7;
+  --theme-red-400: #fc8181;
+  --theme-red-500: #f56565;
+  --theme-red-600: #e53e3e;
+  --theme-red-700: #c53030;
+  --theme-red-800: #9b2c2c;
+  --theme-red-900: #742a2a;
+  --theme-orange-400: #f6ad55;
+  --theme-orange-500: #ed8936;
+  --theme-orange-600: #dd6b20;
+  --theme-orange-700: #c05621;
+  --theme-yellow-100: #fffff0;
+  --theme-yellow-400: #f6e05e;
+  --theme-yellow-500: #ecc94b;
+  --theme-yellow-700: #b7791f;
+  --theme-green-500: #48bb78;
+  --theme-green-700: #2f855a;
+  --theme-blue-100: #ebf8ff;
+  --theme-blue-400: #63b3ed;
+  --theme-blue-600: #3182ce;
+  --theme-blue-800: #2c5282;
+  --theme-purple-100: #faf5ff;
+  --theme-purple-600: #805ad5;
+  --theme-purple-700: #6b46c1;
+  --theme-pink-700: #b83280;
+  --theme-item-normal: #c8c8c8;
+  --theme-item-magic: #8888ff;
+  --theme-item-rare: #ffff77;
+  --theme-item-unique: #af6025;
+  --theme-font-ui: Exo2, sans-serif;
+  --theme-font-item: Fontin, FrizQuadrataC, serif;
+  --theme-font-item-small-caps: FontinSmallCaps, FrizQuadrataC, serif;
+  --theme-radius: 0.25rem;
+  --theme-shadow-color: rgba(0, 0, 0, 0.5);
+
+  /* Prefer these semantic tokens in targeted custom CSS. Their defaults follow
+     the palette above, so palette-only themes inherit coherent application UI. */
+  --theme-surface-primary: var(--theme-gray-900);
+  --theme-surface-raised: var(--theme-gray-800);
+  --theme-border-subtle: var(--theme-gray-600);
+  --theme-text-primary: var(--theme-gray-100);
+  --theme-text-muted: var(--theme-gray-400);
+  --theme-accent: var(--theme-blue-400);
+  --theme-focus-ring: var(--theme-blue-400);
+  --theme-selection: var(--theme-blue-600);
+  --theme-danger: var(--theme-red-500);
+}

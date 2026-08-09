@@ -1,0 +1,61 @@
+/* @name Vaal Corruption
+ * @author Krangled PoE Trade
+ * @description Blood-red corruption, dark stone, and ancient Vaal gold.
+ * @version 1 */
+@import url('/themes/default.css');
+
+/* Vaal Corruption — obsidian black, sacrificial crimson, and a thin line of old gold. */
+:root {
+  --theme-gray-100: #f4e7c3;
+  --theme-gray-200: #dfcea3;
+  --theme-gray-300: #d0bd95;
+  --theme-gray-400: #c0ad8d;
+  --theme-gray-500: #9c8b76;
+  --theme-gray-600: #7d6136;
+  --theme-gray-700: #3a1a24;
+  --theme-gray-800: #180d12;
+  --theme-gray-900: #0b0709;
+  --theme-table-row-alt: #38101a;
+  --theme-red-100: #ffe1d2;
+  --theme-red-200: #ffb096;
+  --theme-red-400: #e94a38;
+  --theme-red-500: #c5222f;
+  --theme-red-600: #a20f25;
+  --theme-red-700: #79091c;
+  --theme-red-800: #520713;
+  --theme-red-900: #30040c;
+  --theme-orange-400: #d88b3a;
+  --theme-orange-500: #bd6825;
+  --theme-orange-600: #924518;
+  --theme-orange-700: #662b12;
+  --theme-yellow-100: #fff3c4;
+  --theme-yellow-400: #e2bc59;
+  --theme-yellow-500: #c99a36;
+  --theme-yellow-700: #8c621d;
+  --theme-green-500: #81964a;
+  --theme-green-700: #52652f;
+  --theme-blue-100: #dce7e5;
+  --theme-blue-400: #759aa0;
+  --theme-blue-600: #496f79;
+  --theme-blue-800: #2e4851;
+  --theme-purple-100: #eee0ef;
+  --theme-purple-600: #7d426f;
+  --theme-purple-700: #5c2a50;
+  --theme-pink-700: #8e2e50;
+  --theme-item-normal: #d0c7b2;
+  --theme-item-magic: #8f9fff;
+  --theme-item-rare: #e7c65b;
+  --theme-item-unique: #cf7434;
+  --theme-radius: 0.125rem;
+  --theme-shadow-color: rgba(116, 0, 20, 0.5);
+}
+
+body { color: #d8c69d; text-shadow: 0 1px 1px #000; }
+::selection { color: #fff3c4; background: #8d0b20; }
+::-webkit-scrollbar-track { background: #0b0709; box-shadow: inset 0 0 0.4rem #000; }
+::-webkit-scrollbar-thumb { background: linear-gradient(90deg, #3b0913, #9b1629, #3b0913); border: 1px solid #b58a35; }
+.btn { color: #ecd9a8 !important; background: linear-gradient(180deg, #4a0a16, #200409) !important; border: 1px solid #a97f31; box-shadow: inset 0 1px rgba(255, 179, 128, 0.14), 0 2px 5px rgba(0, 0, 0, 0.65); }
+.btn:hover { color: #ffe7a1 !important; border-color: #d8ab4a; box-shadow: inset 0 0 0.75rem rgba(197, 34, 47, 0.3), 0 0 0.5rem rgba(116, 0, 20, 0.6); }
+input, select, textarea { accent-color: #b6182e; caret-color: #e6bd57; }
+input:focus, select:focus, textarea:focus { border-color: #b88a35 !important; box-shadow: 0 0 0.35rem rgba(162, 15, 37, 0.7); }
+a:hover { color: #f0ca68; }

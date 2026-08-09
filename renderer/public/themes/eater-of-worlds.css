@@ -1,0 +1,39 @@
+/* @name Eater of Worlds
+ * @author Krangled PoE Trade
+ * @description Eldritch teal light against an oceanic void.
+ * @version 1 */
+@import url('/themes/default.css');
+
+/* Eater of Worlds — drowned teal flesh, abyssal navy, and cold ichor. */
+:root {
+  --theme-gray-100: #c8f3ef;
+  --theme-gray-200: #a6d4d0;
+  --theme-gray-300: #a0c1c0;
+  --theme-gray-400: #90b2b2;
+  --theme-gray-500: #679195;
+  --theme-gray-600: #266f82;
+  --theme-gray-700: #0a222a;
+  --theme-gray-800: #06171d;
+  --theme-gray-900: #02090e;
+  --theme-table-row-alt: #10323b;
+  --theme-green-500: #22b8c5;
+  --theme-green-700: #237e73;
+  --theme-blue-100: #ddffff;
+  --theme-blue-400: #74efe4;
+  --theme-blue-600: #22b8c5;
+  --theme-blue-800: #216897;
+  --theme-purple-100: #e5e6ff;
+  --theme-purple-600: #6269bd;
+  --theme-purple-700: #414584;
+  --theme-pink-700: #6e487e;
+  --theme-item-magic: #62dbea;
+  --theme-item-rare: #e2e3a4;
+  --theme-item-unique: #ab7f56;
+  --theme-radius: 0.45rem;
+  --theme-shadow-color: rgba(28, 140, 146, 0.38);
+}
+
+::selection { color: #eaffff; background: #176d78; }
+::-webkit-scrollbar-thumb { background: linear-gradient(90deg, #10283b, #2da8aa, #173047); border: 1px solid #63d9d0; }
+.btn:hover { color: #cffff8 !important; box-shadow: 0 0 0.7rem rgba(46, 193, 194, 0.46); }
+input, select, textarea { accent-color: #35aaa5; caret-color: #75eee2; }

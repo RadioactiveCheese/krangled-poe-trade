@@ -30,6 +30,18 @@ Alexander and every upstream contributor for their sustained work.
 
 See [DEVELOPING.md](./DEVELOPING.md)
 
+### Custom themes
+
+Choose a theme under **Settings → General → Theme**. Besides Default, every
+theme is just a `.css` file: the app ships with Path of Exile-inspired presets,
+High Contrast, and OLED Black. Every `.css` file in the themes folder appears
+in the selector, and Settings can open that folder, import a file, or duplicate
+the selected theme. Changes are detected while Settings is open. A user file
+with the same name as a shipped theme replaces it, so included themes can be
+customized without modifying the installation. See the
+[theme authoring guide](./docs/theme-authoring.md) for metadata, validation,
+semantic variables, palette variables, and accessibility guidance.
+
 ### Acknowledgments
 
 - Alexander Drozdov ([SnosMe](https://github.com/SnosMe)), creator and

@@ -1,0 +1,37 @@
+/*
+ * @name OLED Black
+ * @author Krangled PoE Trade
+ * @description True-black surfaces with restrained cyan accents for OLED displays and dark rooms.
+ * @version 1
+ */
+@import url('/themes/default.css');
+
+:root {
+  --theme-gray-100: #f4f7f8;
+  --theme-gray-200: #dce3e5;
+  --theme-gray-300: #c4ced1;
+  --theme-gray-400: #9eaaad;
+  --theme-gray-500: #778387;
+  --theme-gray-600: #465054;
+  --theme-gray-700: #171b1d;
+  --theme-gray-800: #090b0c;
+  --theme-gray-900: #000000;
+  --theme-table-row-alt: #101416;
+  --theme-blue-100: #dbfbff;
+  --theme-blue-400: #58d6e6;
+  --theme-blue-600: #168da0;
+  --theme-blue-800: #155766;
+  --theme-green-500: #48c78e;
+  --theme-red-500: #e65c64;
+  --theme-surface-primary: #000000;
+  --theme-surface-raised: #090b0c;
+  --theme-border-subtle: #465054;
+  --theme-text-primary: #f4f7f8;
+  --theme-text-muted: #aeb9bc;
+  --theme-accent: #58d6e6;
+  --theme-focus-ring: #73e6f2;
+  --theme-selection: #155766;
+  --theme-danger: #e65c64;
+  --theme-radius: 0.2rem;
+  --theme-shadow-color: rgba(0, 0, 0, 0.95);
+}
