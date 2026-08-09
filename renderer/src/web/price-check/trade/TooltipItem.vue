@@ -45,7 +45,7 @@
                 <span
                   class="text-xs text-right"
                   :class="tierClass(affix.lines[0])"
-                >{{ affix.tier ?? '' }}</span>
+                >{{ makeupTierLabel(affix.lines[0]) }}</span>
                 <span class="text-center">
                   <template v-for="({ line, art }, lineIndex) in affix.rows" :key="`${line.text}-${lineIndex}`">
                     <img
@@ -58,7 +58,7 @@
                     <span v-else class="block" :class="$style[`number-color-${line.color}`]">{{ line.text }}</span>
                   </template>
                 </span>
-                <span :class="$style['affix-mod-name']">{{ affix.modName }}</span>
+                <span :class="$style['affix-mod-name']">{{ makeupModLabel(affix.lines[0]) }}</span>
               </div>
             </template>
           </div>
@@ -111,6 +111,24 @@
             >
           </template>
         </template>
+      </div>
+      <div
+        v-if="item.summary?.length"
+        data-testid="item-summary"
+        class="flex flex-wrap justify-center border-t-4 border-gray-800 text-xs leading-5"
+      >
+        <div
+          v-for="summary in item.summary"
+          :key="summary.label"
+          data-testid="item-summary-value"
+          class="flex justify-center gap-1 px-2 whitespace-nowrap"
+        >
+          <span class="text-gray-400">{{ summary.label }}:</span>
+          <span
+            class="font-bold"
+            :class="summary.color === 'physical' ? 'text-normal' : summary.color === 'elemental' ? 'text-poe-fire' : 'text-white'"
+          >{{ summary.value }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -269,6 +287,22 @@ function tierClass (line: DisplayItemLine): string {
   if (line.tier.startsWith('P')) return 'text-poe-tier-prefix'
   if (line.tier.startsWith('S')) return 'text-poe-tier-suffix'
   return 'text-poe-tier-neutral'
+}
+
+function makeupTierLabel (line: DisplayItemLine): string {
+  if (!line.affixParts?.length) return line.tier ?? ''
+  return line.affixParts
+    .map(part => [part.tier, part.range && `[${part.range}]`].filter(Boolean).join(' '))
+    .filter(Boolean)
+    .join(' + ')
+}
+
+function makeupModLabel (line: DisplayItemLine): string {
+  if (!line.affixParts?.length) return line.modName ?? ''
+  return line.affixParts
+    .map(part => [part.name, part.level != null && `(≥${part.level})`].filter(Boolean).join(' '))
+    .filter(Boolean)
+    .join(' + ')
 }
 
 /* Certain named values carry the game's own chrome: a title band drawn
