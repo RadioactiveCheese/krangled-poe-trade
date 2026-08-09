@@ -115,7 +115,7 @@
       <div
         v-if="item.summary?.length"
         data-testid="item-summary"
-        class="grid grid-flow-col auto-cols-fr border-t-4 border-gray-800 text-xs leading-5"
+        class="flex flex-wrap justify-center border-t-4 border-gray-800 text-xs leading-5"
       >
         <div
           v-for="summary in item.summary"
