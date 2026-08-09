@@ -64,36 +64,47 @@ for (const lang of LANGUAGES) {
 }
 
 for (const lang of LANGUAGES) {
-  /** @type{Array<{ hashName: number, hashRefName: number, start: number }>} */
-  let lineStarts
+  /** @type{Array<{ hash: number, start: number }>} */
+  let nameStarts
+  /** @type{Array<{ hash: number, start: number }>} */
+  let refNameStarts
   {
     const ndjson = fs.readFileSync(`./public/data/${lang}/items.ndjson`, { encoding: 'utf-8' })
     let start = 0
-    /** @type{Map<string, typeof lineStarts[number]>} */
+    /** @type{Map<string, typeof nameStarts[number]>} */
     const startsByName = new Map()
+    /** @type{Map<string, typeof refNameStarts[number]>} */
+    const startsByRefName = new Map()
     while (start !== ndjson.length) {
       const end = ndjson.indexOf('\n', start)
       /** @type {import('./data/interfaces').BaseType} */
       const item = JSON.parse(ndjson.slice(start, end))
-      const key = `${item.namespace}::${item.refName}`
-      if (!startsByName.has(key)) {
-        startsByName.set(key, {
-          hashName: Number(fnv1a(`${item.namespace}::${item.name}`, { size: 32 })),
-          hashRefName: Number(fnv1a(`${item.namespace}::${item.refName}`, { size: 32 })),
+      const nameKey = `${item.namespace}::${item.name}`
+      const refNameKey = `${item.namespace}::${item.refName}`
+      if (!startsByName.has(nameKey)) {
+        startsByName.set(nameKey, {
+          hash: Number(fnv1a(nameKey, { size: 32 })),
+          start: start
+        })
+      }
+      if (!startsByRefName.has(refNameKey)) {
+        startsByRefName.set(refNameKey, {
+          hash: Number(fnv1a(refNameKey, { size: 32 })),
           start: start
         })
       }
       start = (end + 1)
     }
-    lineStarts = Array.from(startsByName.values())
+    nameStarts = Array.from(startsByName.values())
+    refNameStarts = Array.from(startsByRefName.values())
   }
 
   {
-    const indexData = new Uint32Array(lineStarts.length * 2)
-    lineStarts.sort((a, b) => a.hashName - b.hashName)
-    for (let i = 0; i < lineStarts.length; i += 1) {
-      indexData[i * 2 + 0] = lineStarts[i].hashName
-      indexData[i * 2 + 1] = lineStarts[i].start
+    const indexData = new Uint32Array(nameStarts.length * 2)
+    nameStarts.sort((a, b) => a.hash - b.hash)
+    for (let i = 0; i < nameStarts.length; i += 1) {
+      indexData[i * 2 + 0] = nameStarts[i].hash
+      indexData[i * 2 + 1] = nameStarts[i].start
     }
     fs.writeFileSync(
       path.join('./public/data', lang, 'items-name.index.bin'),
@@ -102,11 +113,11 @@ for (const lang of LANGUAGES) {
   }
 
   {
-    const indexData = new Uint32Array(lineStarts.length * 2)
-    lineStarts.sort((a, b) => a.hashRefName - b.hashRefName)
-    for (let i = 0; i < lineStarts.length; i += 1) {
-      indexData[i * 2 + 0] = lineStarts[i].hashRefName
-      indexData[i * 2 + 1] = lineStarts[i].start
+    const indexData = new Uint32Array(refNameStarts.length * 2)
+    refNameStarts.sort((a, b) => a.hash - b.hash)
+    for (let i = 0; i < refNameStarts.length; i += 1) {
+      indexData[i * 2 + 0] = refNameStarts[i].hash
+      indexData[i * 2 + 1] = refNameStarts[i].start
     }
     fs.writeFileSync(
       path.join('./public/data', lang, 'items-ref.index.bin'),

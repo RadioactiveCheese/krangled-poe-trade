@@ -106,7 +106,7 @@ test.before(async () => {
     const { isMapLikeItem } = await server.ssrLoadModule('/src/web/map-check/is-map-like.ts')
     const { prepareMapStats } = await server.ssrLoadModule('/src/web/map-check/prepare-map-stats.ts')
     const { createExactStatFilters } = await server.ssrLoadModule('/src/web/price-check/filters/create-stat-filters.ts')
-    runtime = { ItemCategory, parseClipboard, isMapLikeItem, prepareMapStats, createExactStatFilters }
+    runtime = { Data, ItemCategory, parseClipboard, isMapLikeItem, prepareMapStats, createExactStatFilters }
   } catch (error) {
     await server.close()
     throw error
@@ -182,4 +182,14 @@ test('keeps chart-crafting currency out of the Map Check path', () => {
   assert.equal(item.info.refName, "The Genteel's Ducat")
   assert.notEqual(item.category, runtime.ItemCategory.Chart)
   assert.equal(runtime.isMapLikeItem(item), false)
+})
+
+test('indexes every localized name for a shared area reference', async () => {
+  await runtime.Data.init('ko')
+  try {
+    assert.equal(runtime.Data.ITEM_BY_TRANSLATED('AREA', '사라진 유적')?.[0].refName, 'Lost Ruins')
+    assert.equal(runtime.Data.ITEM_BY_TRANSLATED('AREA', '잃어버린 폐허')?.[0].refName, 'Lost Ruins')
+  } finally {
+    await runtime.Data.init('en')
+  }
 })

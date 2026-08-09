@@ -144,7 +144,9 @@ describe('Chart trade query', () => {
   })
 
   it('can broaden a chart search from its zone to the chart category', () => {
-    const filters = createFilters(chartItem(), {
+    const item = chartItem()
+    item.areaLevel = 82
+    const filters = createFilters(item, {
       league: 'Hardcore',
       currency: 'chaos',
       collapseListings: 'api',
@@ -154,10 +156,12 @@ describe('Chart trade query', () => {
     })
 
     filters.searchRelaxed!.disabled = false
-    expect(createTradeRequest(filters, []).query.type).toEqual({
+    const zoneRequest = createTradeRequest(filters, [])
+    expect(zoneRequest.query.type).toEqual({
       discriminator: 'chart_sandy_seabed',
       option: 'HazardousDepths'
     })
+    expect(zoneRequest.query.filters.map_filters?.filters.area_level?.min).toBe(81)
 
     filters.searchRelaxed!.sub!.disabled = true
     const request = createTradeRequest(filters, [])

@@ -475,10 +475,7 @@ export function createFilters (
     }
   }
 
-  if (
-    item.category === ItemCategory.HeistContract ||
-    item.category === ItemCategory.Chart
-  ) {
+  if (item.category === ItemCategory.HeistContract) {
     if (item.rarity !== ItemRarity.Unique) {
       filters.areaLevel = {
         value: item.areaLevel!,
