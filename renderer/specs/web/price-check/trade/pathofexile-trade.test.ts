@@ -247,6 +247,29 @@ describe('PoE 1 trade listing tooltip parsing', () => {
     })
   })
 
+  it('retains every magnitude range from a multi-stat affix', () => {
+    const item = parse({
+      ...fixture.item,
+      explicitMods: [{
+        description: 'Hybrid defence modifier',
+        mods: [{
+          name: 'Reinforced',
+          tier: 'P2',
+          level: 78,
+          magnitudes: [
+            { min: '92', max: '100' },
+            { min: '32', max: '43' }
+          ]
+        }]
+      }],
+      extended: undefined
+    } as never)
+
+    expect(item.explicitMods?.[0].affixParts).toEqual([
+      { name: 'Reinforced', tier: 'P2', level: 78, range: '92–100, 32–43' }
+    ])
+  })
+
   it('groups hybrid stat lines into one affix per mod, prefixes before suffixes', () => {
     const grouped = groupAffixesByMod([
       [

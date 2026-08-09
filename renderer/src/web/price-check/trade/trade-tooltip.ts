@@ -502,12 +502,12 @@ function getLegacyAffixParts (
 }
 
 function toAffixPart (mod: TradeModMetadata): DisplayAffixPart {
-  const magnitude = mod.magnitudes?.[0]
+  const ranges = mod.magnitudes?.map(magnitude => formatMagnitudeRange(magnitude.min, magnitude.max))
   return {
     name: mod.name || undefined,
     tier: mod.tier || undefined,
     level: mod.level,
-    range: magnitude ? formatMagnitudeRange(magnitude.min, magnitude.max) : undefined
+    range: ranges?.length ? ranges.join(', ') : undefined
   }
 }
 
