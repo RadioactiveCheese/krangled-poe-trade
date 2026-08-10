@@ -1,7 +1,7 @@
 {
   "name": "krangled-poe-trade",
   "productName": "Krangled PoE Trade",
-  "version": "3.29.206",
+  "version": "3.29.207",
   "private": true,
   "scripts": {
     "dev": "node build/script.mjs",
