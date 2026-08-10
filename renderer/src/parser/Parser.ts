@@ -9,7 +9,7 @@ import {
 } from '@/assets/data'
 import { ModifierType, sumStatsByModType } from './modifiers'
 import { linesToStatStrings, tryParseTranslation, getRollOrMinmaxAvg } from './stat-translations'
-import { ItemCategory, ACCESSORY } from './meta'
+import { ItemCategory } from './meta'
 import { IncursionRoom, ParsedItem, ItemInfluence, ItemRarity } from './ParsedItem'
 import { magicBasetype } from './magic-name'
 import { isModInfoLine, groupLinesByMod, parseModInfoLine, parseModType, ModifierInfo, ParsedModifier, ENCHANT_LINE, SCOURGE_LINE, IMPLICIT_LINE } from './advanced-mod-desc'
@@ -50,7 +50,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseGem,
   parseArmour,
   parseWeapon,
-  parseAccessory,
+  parseMemoryStrands,
   parseFlask,
   parseTincture,
   parseStackSize,
@@ -699,9 +699,7 @@ function parseWeapon (section: string[], item: ParsedItem) {
   return isParsed
 }
 
-function parseAccessory (section: string[], item: ParsedItem) {
-  if (!item.category || !ACCESSORY.has(item.category)) return 'PARSER_SKIPPED'
-
+function parseMemoryStrands (section: string[], item: ParsedItem) {
   if (parseMemoryStrandsNested(section, item)) {
     return 'SECTION_PARSED'
   }
