@@ -114,12 +114,10 @@ export default defineComponent({
           themes.value = updated
           themeFingerprint = fingerprint
           if (props.config.theme !== 'default' && !updated.some(option => option.value === props.config.theme)) {
-            props.config.theme = 'default'
             await applyTheme('default')
-            themeMessage.value = { text: 'The selected theme is unavailable. Default was restored.', error: true }
+            themeMessage.value = { text: 'The selected theme is unavailable. Default is shown temporarily; your selection was kept.', error: true }
           } else if (props.config.theme !== 'default' && !await applyTheme(props.config.theme)) {
-            props.config.theme = 'default'
-            themeMessage.value = { text: 'That theme could not be loaded. Default was restored.', error: true }
+            themeMessage.value = { text: 'That theme could not be loaded. Default is shown temporarily; your selection was kept.', error: true }
           }
         }
         if (!quiet) themeMessage.value = { text: 'Theme list refreshed.', error: false }
@@ -140,8 +138,7 @@ export default defineComponent({
         await refreshThemes(true)
         props.config.theme = `file:${result.theme.filename}`
         if (!await applyTheme(props.config.theme)) {
-          props.config.theme = 'default'
-          themeMessage.value = { text: 'That theme could not be loaded. Default was restored.', error: true }
+          themeMessage.value = { text: 'That theme could not be loaded. Default is shown temporarily; your selection was kept.', error: true }
           return
         }
         themeMessage.value = {
@@ -183,8 +180,7 @@ export default defineComponent({
         async set (value) {
           props.config.theme = value
           if (!await applyTheme(value)) {
-            props.config.theme = 'default'
-            themeMessage.value = { text: 'That theme could not be loaded. Default was restored.', error: true }
+            themeMessage.value = { text: 'That theme could not be loaded. Default is shown temporarily; your selection was kept.', error: true }
           } else {
             themeMessage.value = null
           }

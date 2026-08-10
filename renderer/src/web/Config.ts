@@ -25,13 +25,7 @@ export function AppConfig (type?: string) {
 export function updateConfig (updates: Config) {
   _config.value = deepReactive(JSON.parse(JSON.stringify(updates)))
   document.documentElement.style.fontSize = `${_config.value!.fontSize}px`
-  const requestedTheme = _config.value!.theme
-  applyTheme(requestedTheme).then(applied => {
-    if (!applied && requestedTheme !== 'default' && _config.value?.theme === requestedTheme) {
-      _config.value.theme = 'default'
-      saveConfig()
-    }
-  })
+  applyTheme(_config.value!.theme)
 }
 
 export function saveConfig (opts?: { isTemporary: boolean }) {
