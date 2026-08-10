@@ -227,7 +227,11 @@ export function createFilters (
   } else if (item.category === ItemCategory.Chart) {
     filters.searchRelaxed = {
       category: item.category,
-      disabled: true,
+      disabled: true
+    }
+    filters.searchExact = {
+      baseType: item.info.name,
+      baseTypeTrade: t(opts, item.info),
       sub: item.chart?.areaId && item.info.tradeDisc
         ? {
             baseType: item.chart.areaName,
@@ -236,11 +240,6 @@ export function createFilters (
             disabled: false
           }
         : undefined
-    }
-    filters.searchExact = {
-      baseType: item.info.name,
-      baseTypeTrade: item.chart?.areaId ?? t(opts, item.info),
-      discriminatorTrade: item.chart?.areaId ? item.info.tradeDisc : undefined
     }
     if (item.areaLevel) {
       filters.areaLevel = {
