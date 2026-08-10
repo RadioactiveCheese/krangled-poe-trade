@@ -14,6 +14,8 @@ const TRADITIONAL_CHINESE_CHART_AREAS = [
   ['危機海淵', 'Sandy Seabed Chart', 'HazardousDepths'],
   ['感染潛水球', 'Sandy Seabed Chart', 'InfestedBathyspheres'],
   ['奇夏拉安眠地', 'Sandy Seabed Chart', 'KisharasRest'],
+  ['平凡海床', 'Sandy Seabed Chart', 'UnremarkableSeabed'],
+  ['異能深溝', 'Coral Forest Chart', 'EldritchDepths'],
   ['失落遺跡', 'Coral Forest Chart', 'LostRuins'],
   ['遠洋深淵', 'Coral Forest Chart', 'PelagicAbyss'],
   ['海洋之柱', 'Coral Forest Chart', 'SeaPillars'],
@@ -33,23 +35,34 @@ const TRADITIONAL_CHINESE_CHART_SHAPES = [
   ['十字口', '5']
 ] as const
 
+const NEW_LOCALIZED_CHART_AREAS = [
+  ['Eldritch Depths', 'Coral Forest Chart', 'EldritchDepths'],
+  ['Unremarkable Seabed', 'Sandy Seabed Chart', 'UnremarkableSeabed'],
+  ['Мистические глубины', 'Coral Forest Chart', 'EldritchDepths'],
+  ['Непримечательное дно', 'Sandy Seabed Chart', 'UnremarkableSeabed'],
+  ['섬뜩한 지하', 'Coral Forest Chart', 'EldritchDepths'],
+  ['평범한 해저', 'Sandy Seabed Chart', 'UnremarkableSeabed'],
+  ['異能深溝', 'Coral Forest Chart', 'EldritchDepths'],
+  ['平凡海床', 'Sandy Seabed Chart', 'UnremarkableSeabed']
+] as const
+
 function chartItem (): ParsedItem {
   return {
     category: ItemCategory.Chart,
     rarity: ItemRarity.Rare,
     name: 'Oceanic Adventure',
-    baseType: 'Sandy Seabed Chart',
+    baseType: 'Coral Reef Chart',
     info: {
-      name: 'Sandy Seabed Chart',
-      refName: 'Sandy Seabed Chart',
+      name: 'Coral Reef Chart',
+      refName: 'Coral Reef Chart',
       namespace: 'ITEM',
       craftable: { category: ItemCategory.Chart },
-      tradeDisc: 'chart_sandy_seabed'
+      tradeDisc: 'chart_coral_reef'
     },
     infoVariants: [],
     chart: {
-      areaName: 'Hazardous Depths',
-      areaId: 'HazardousDepths',
+      areaName: 'Diving Shoals',
+      areaId: 'DivingShoals',
       shape: 'Junction',
       shapeId: '4',
       sulphur: 75,
@@ -112,19 +125,27 @@ describe('Chart trade query', () => {
     const request = createTradeRequest(filters, stats)
 
     expect(request.query.type).toEqual({
-      discriminator: 'chart_sandy_seabed',
-      option: 'HazardousDepths'
+      discriminator: 'chart_coral_reef',
+      option: 'DivingShoals'
     })
     expect(request.query.filters.type_filters?.filters.rarity?.option).toBe('nonunique')
     expect(request.query.filters.map_filters?.filters.area_level?.min).toBe(83)
     expect(filters.areaLevel?.disabled).toBe(false)
     expect(filters.chartShape?.value).toBe('4')
     expect(filters.chartShape?.disabled).toBe(true)
-    expect(filters.searchRelaxed?.sub).toEqual({
-      baseType: 'Hazardous Depths',
-      baseTypeTrade: 'HazardousDepths',
-      discriminatorTrade: 'chart_sandy_seabed',
-      disabled: false
+    expect(filters.searchExact).toEqual({
+      baseType: 'Coral Reef Chart',
+      baseTypeTrade: 'Coral Reef Chart',
+      sub: {
+        baseType: 'Diving Shoals',
+        baseTypeTrade: 'DivingShoals',
+        discriminatorTrade: 'chart_coral_reef',
+        disabled: false
+      }
+    })
+    expect(filters.searchRelaxed).toEqual({
+      category: ItemCategory.Chart,
+      disabled: true
     })
 
     const properties = Object.fromEntries(stats
@@ -157,16 +178,14 @@ describe('Chart trade query', () => {
 
     filters.searchRelaxed!.disabled = false
     const zoneRequest = createTradeRequest(filters, [])
-    expect(zoneRequest.query.type).toEqual({
-      discriminator: 'chart_sandy_seabed',
-      option: 'HazardousDepths'
-    })
+    expect(zoneRequest.query.type).toBeUndefined()
+    expect(zoneRequest.query.filters.type_filters?.filters.category?.option).toBe('chart')
     expect(zoneRequest.query.filters.map_filters?.filters.area_level?.min).toBe(81)
 
-    filters.searchRelaxed!.sub!.disabled = true
+    filters.searchRelaxed!.disabled = true
+    filters.searchExact.sub!.disabled = true
     const request = createTradeRequest(filters, [])
-    expect(request.query.type).toBeUndefined()
-    expect(request.query.filters.type_filters?.filters.category?.option).toBe('chart')
+    expect(request.query.type).toBe('Coral Reef Chart')
   })
 
   it.each(TRADITIONAL_CHINESE_CHART_AREAS)(
@@ -180,6 +199,13 @@ describe('Chart trade query', () => {
     'resolves Traditional Chinese chart shape %s',
     (shape, shapeId) => {
       expect(resolveChartShape(shape)).toBe(shapeId)
+    }
+  )
+
+  it.each(NEW_LOCALIZED_CHART_AREAS)(
+    'resolves new localized chart area %s',
+    (areaName, baseType, areaId) => {
+      expect(resolveChartArea(areaName, baseType)).toBe(areaId)
     }
   )
 })
