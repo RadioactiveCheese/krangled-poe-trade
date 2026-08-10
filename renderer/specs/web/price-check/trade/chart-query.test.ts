@@ -1,6 +1,8 @@
 // @vitest-environment happy-dom
 
 import { describe, expect, it } from 'vitest'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { ItemCategory, ItemRarity, type ParsedItem } from '@/parser'
 import { createVirtualItem } from '@/parser/ParsedItem'
 import { resolveChartArea, resolveChartShape } from '@/parser/chart'
@@ -8,24 +10,26 @@ import { createFilters } from '@/web/price-check/filters/create-item-filters'
 import { createExactStatFilters } from '@/web/price-check/filters/create-stat-filters'
 import { createTradeRequest } from '@/web/price-check/trade/pathofexile-trade'
 
-const TRADITIONAL_CHINESE_CHART_AREAS = [
-  ['深海平原', 'Sandy Seabed Chart', 'AbyssalPlain'],
-  ['定錨點', 'Sandy Seabed Chart', 'Anchorfield'],
-  ['危機海淵', 'Sandy Seabed Chart', 'HazardousDepths'],
-  ['感染潛水球', 'Sandy Seabed Chart', 'InfestedBathyspheres'],
-  ['奇夏拉安眠地', 'Sandy Seabed Chart', 'KisharasRest'],
-  ['平凡海床', 'Sandy Seabed Chart', 'UnremarkableSeabed'],
-  ['異能深溝', 'Coral Forest Chart', 'EldritchDepths'],
-  ['失落遺跡', 'Coral Forest Chart', 'LostRuins'],
-  ['遠洋深淵', 'Coral Forest Chart', 'PelagicAbyss'],
-  ['海洋之柱', 'Coral Forest Chart', 'SeaPillars'],
-  ['海底幽林', 'Coral Forest Chart', 'UnderseaGroves'],
-  ['海洋王的領域', 'Coral Reef Chart', 'BrineKingsDomain'],
-  ['蛤蜊之架', 'Coral Reef Chart', 'ClamInfestedShelf'],
-  ['潛水沙洲', 'Coral Reef Chart', 'DivingShoals'],
-  ['海底山脊', 'Coral Reef Chart', 'SeafloorRidges'],
-  ['沉沒圖騰', 'Coral Reef Chart', 'SunkenTotems']
-] as const
+const CHART_AREA_BASE_TYPES = {
+  'Abyssal Plain': 'Sandy Seabed Chart',
+  Anchorfield: 'Sandy Seabed Chart',
+  "Brine King's Domain": 'Coral Reef Chart',
+  'Clam-infested Shelf': 'Coral Reef Chart',
+  'Diving Shoals': 'Coral Reef Chart',
+  'Eldritch Depths': 'Coral Forest Chart',
+  'Hazardous Depths': 'Sandy Seabed Chart',
+  'Infested Bathyspheres': 'Sandy Seabed Chart',
+  "Kishara's Rest": 'Sandy Seabed Chart',
+  'Lost Ruins': 'Coral Forest Chart',
+  'Pelagic Abyss': 'Coral Forest Chart',
+  'Sea Pillars': 'Coral Forest Chart',
+  'Seafloor Ridges': 'Coral Reef Chart',
+  'Sunken Totems': 'Coral Reef Chart',
+  'Undersea Groves': 'Coral Forest Chart',
+  'Unremarkable Seabed': 'Sandy Seabed Chart'
+} as const
+
+const SUPPORTED_LANGUAGES = ['en', 'ru', 'ko', 'cmn-Hant'] as const
 
 const TRADITIONAL_CHINESE_CHART_SHAPES = [
   ['終點', '1'],
@@ -33,17 +37,6 @@ const TRADITIONAL_CHINESE_CHART_SHAPES = [
   ['直線', '3'],
   ['交界處', '4'],
   ['十字口', '5']
-] as const
-
-const NEW_LOCALIZED_CHART_AREAS = [
-  ['Eldritch Depths', 'Coral Forest Chart', 'EldritchDepths'],
-  ['Unremarkable Seabed', 'Sandy Seabed Chart', 'UnremarkableSeabed'],
-  ['Мистические глубины', 'Coral Forest Chart', 'EldritchDepths'],
-  ['Непримечательное дно', 'Sandy Seabed Chart', 'UnremarkableSeabed'],
-  ['섬뜩한 지하', 'Coral Forest Chart', 'EldritchDepths'],
-  ['평범한 해저', 'Sandy Seabed Chart', 'UnremarkableSeabed'],
-  ['異能深溝', 'Coral Forest Chart', 'EldritchDepths'],
-  ['平凡海床', 'Sandy Seabed Chart', 'UnremarkableSeabed']
 ] as const
 
 function chartItem (): ParsedItem {
@@ -188,10 +181,30 @@ describe('Chart trade query', () => {
     expect(request.query.type).toBe('Coral Reef Chart')
   })
 
-  it.each(TRADITIONAL_CHINESE_CHART_AREAS)(
-    'resolves Traditional Chinese chart area %s',
-    (areaName, baseType, areaId) => {
-      expect(resolveChartArea(areaName, baseType)).toBe(areaId)
+  it.each(SUPPORTED_LANGUAGES)(
+    'matches all %s chart areas in the authoritative item metadata',
+    (language) => {
+      const items = readFileSync(
+        resolve(process.cwd(), `public/data/${language}/items.ndjson`),
+        'utf8'
+      ).trim().split('\n').map(line => JSON.parse(line) as {
+        name: string
+        refName: string
+        namespace: string
+        tradeDisc?: string
+      })
+      const chartAreas = items.filter(item =>
+        item.namespace === 'AREA' && item.refName in CHART_AREA_BASE_TYPES)
+
+      expect(new Set(chartAreas.map(area => area.refName))).toEqual(
+        new Set(Object.keys(CHART_AREA_BASE_TYPES))
+      )
+      for (const area of chartAreas) {
+        const baseType = CHART_AREA_BASE_TYPES[
+          area.refName as keyof typeof CHART_AREA_BASE_TYPES
+        ]
+        expect(resolveChartArea(area.name, baseType), area.refName).toBe(area.tradeDisc)
+      }
     }
   )
 
@@ -202,10 +215,4 @@ describe('Chart trade query', () => {
     }
   )
 
-  it.each(NEW_LOCALIZED_CHART_AREAS)(
-    'resolves new localized chart area %s',
-    (areaName, baseType, areaId) => {
-      expect(resolveChartArea(areaName, baseType)).toBe(areaId)
-    }
-  )
 })

@@ -82,6 +82,7 @@ const CHART_AREAS: Record<string, ChartArea> = {
   '위태한 지하': { baseType: 'Sandy Seabed Chart', option: 'HazardousDepths' },
   '감염된 잠수구': { baseType: 'Sandy Seabed Chart', option: 'InfestedBathyspheres' },
   '키샤라의 안식처': { baseType: 'Sandy Seabed Chart', option: 'KisharasRest' },
+  '사라진 유적': { baseType: 'Coral Forest Chart', option: 'LostRuins' },
   '잃어버린 폐허': { baseType: 'Coral Forest Chart', option: 'LostRuins' },
   '원양 심연': { baseType: 'Coral Forest Chart', option: 'PelagicAbyss' },
   '바다 기둥': { baseType: 'Coral Forest Chart', option: 'SeaPillars' },
