@@ -74,6 +74,11 @@ describe('Trade listing tooltip header caps', () => {
     const row = wrapper.find('[data-testid="affix-row"]')
     expect(row.text()).toContain('P3 [80–91] + P4 [21–26]')
     expect(row.text()).toContain('Girded (≥72) + Armadillo’s (≥29)')
+    expect(wrapper.find('[data-testid="affix-roll-range"]').classes()).toContain('whitespace-nowrap')
+    expect(wrapper.find('[data-testid="affix-mod-name"]').classes()).toEqual(expect.arrayContaining([
+      'whitespace-normal',
+      'break-words'
+    ]))
   })
 
   it('renders the trade-site summary footer', () => {
