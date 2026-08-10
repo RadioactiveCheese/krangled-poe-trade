@@ -1,5 +1,5 @@
 <template>
-  <div v-if="item" class="flex flex-row items-start max-w-[48rem] shadow-2xl">
+  <div v-if="item" class="flex flex-row items-start max-w-[57.6rem] shadow-2xl">
     <div v-if="item.icon" class="flex-none bg-gray-800 bg-opacity-80 self-stretch flex items-center">
       <ui-detailed-item-img
         :icon="item.icon.url"
@@ -8,7 +8,7 @@
         :sockets="item.sockets"
       />
     </div>
-    <div class="flex flex-col min-w-[22rem] max-w-[36rem] bg-black text-center border border-gray-700 font-poe">
+    <div class="flex flex-col min-w-[22rem] max-w-[43.2rem] bg-black text-center border border-gray-700 font-poe">
       <div
         class="relative flex flex-col items-center justify-center text-base px-12 leading-tight overflow-hidden font-poe-sc"
         :class="$style[`${frameRarity}-title`]"
@@ -40,10 +40,11 @@
                 v-for="affix in group"
                 :key="`${affix.modName}-${affix.tier}-${affix.lines[0].text}`"
                 data-testid="affix-row"
-                class="grid grid-cols-[1.5rem_minmax(13rem,1fr)_6rem] items-center min-h-[1.375rem]"
+                class="grid grid-cols-[max-content_minmax(13rem,1fr)_6rem] items-center min-h-[1.375rem]"
               >
                 <span
-                  class="text-xs text-right"
+                  data-testid="affix-roll-range"
+                  class="text-xs text-right whitespace-nowrap"
                   :class="tierClass(affix.lines[0])"
                 >{{ makeupTierLabel(affix.lines[0]) }}</span>
                 <span class="text-center">
@@ -58,7 +59,11 @@
                     <span v-else class="block" :class="$style[`number-color-${line.color}`]">{{ line.text }}</span>
                   </template>
                 </span>
-                <span :class="$style['affix-mod-name']">{{ makeupModLabel(affix.lines[0]) }}</span>
+                <span
+                  data-testid="affix-mod-name"
+                  class="whitespace-normal break-words"
+                  :class="$style['affix-mod-name']"
+                >{{ makeupModLabel(affix.lines[0]) }}</span>
               </div>
             </template>
           </div>
