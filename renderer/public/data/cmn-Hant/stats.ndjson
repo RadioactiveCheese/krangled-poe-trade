@@ -4168,6 +4168,7 @@
 {"ref":"Chaos Skills inflict up to 15 Withered Debuffs on Hit for # seconds","better":1,"matchers":[{"string":"#秒內，混沌技能擊中可造成最多 15 凋零減益效果"}],"trade":{"ids":{"explicit":["explicit.stat_2676773112"]}}}
 {"ref":"Chaotic Burst","better":0,"mercenary":{"icon":"https://webtw.poecdn.com/gen/image/WzIxLDE0LHsiayI6IjJEQXJ0L1NraWxsSWNvbnMvSG91c2VCYXJkaXlhU2tpbGwifV0/8e78c633c6/HouseBardiyaSkill.png"},"matchers":[{"string":"混沌爆發"}],"trade":{"ids":{"pseudo":["mercenary.skill_26913"]}}}
 {"ref":"Chaotic Shot","better":0,"mercenary":{"icon":"https://webtw.poecdn.com/gen/image/WzIxLDE0LHsiayI6IjJEQXJ0L1NraWxsSWNvbnMvSG91c2VCYXJkaXlhU2tpbGwifV0/8e78c633c6/HouseBardiyaSkill.png","supports":["Multiple Projectiles","Physical as Extra Chaos","Chaos Penetration","Faster Attacks","Faster Projectiles","Chance to Poison"]},"matchers":[{"string":"混沌射擊"}],"trade":{"ids":{"pseudo":["mercenary.skill_18986"]}}}
+{"ref":"Charged Dash of the Arcane","better":0,"mercenary":{"icon":""},"matchers":[{"string":"雷霆衝鋒．秘術"}],"trade":{"ids":{"pseudo":["mercenary.skill_5673"]}}}
 {"ref":"Charged Traps","better":1,"mercenary":{"tier":3},"matchers":[{"string":"充能陷阱","advanced":"充能陷阱(階層：3)"}],"trade":{"ids":{"pseudo":["mercenary.support_5081"]}}}
 {"ref":"Chests have #% chance to drop Double Aureus Coins","better":1,"matchers":[{"string":"保險箱有 #% 機率掉落 2 倍奧瑞厄斯幣"}],"trade":{"ids":{"explicit":["sanctum.stat_3926246735"]}}}
 {"ref":"Chill Effect and Freeze Duration on you are based on #% of Energy Shield","better":1,"matchers":[{"string":"冰緩和冰凍持續時間根據你 #% 的能量護盾計算"}],"trade":{"ids":{"explicit":["explicit.stat_1194648995"]}}}
@@ -6187,6 +6188,7 @@
 {"ref":"Poisonous Hit","better":1,"matchers":[{"string":"攻擊擊中時使敵人中毒"}],"trade":{"ids":{"explicit":["explicit.stat_4075957192"]}}}
 {"ref":"Poisons on you expire #% slower","better":-1,"matchers":[{"string":"你身上的中毒消逝速度提高 #%"},{"string":"你身上的中毒消逝速度減慢 #%","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2443132097"]},"inverted":true}}
 {"ref":"Poisons you inflict deal Damage #% faster","better":1,"matchers":[{"string":"你造成的中毒傷害加速 #%"}],"trade":{"ids":{"explicit":["explicit.stat_2907156609"],"implicit":["implicit.stat_2907156609"],"fractured":["fractured.stat_2907156609"]}}}
+{"ref":"Power Siphon","better":0,"mercenary":{"icon":""},"matchers":[{"string":"力量抽取"}],"trade":{"ids":{"pseudo":["mercenary.skill_26705"]}}}
 {"ref":"Precise Technique","better":1,"matchers":[{"string":"精準科技"}],"trade":{"ids":{"explicit":["explicit.stat_4096273663"]}}}
 {"ref":"Precision","better":0,"mercenary":{"icon":"https://webtw.poecdn.com/gen/image/WzIxLDE0LHsiayI6IjJEQXJ0L1NraWxsSWNvbnMvYXVyYWNyaXQifV0/c7ab957d14/auracrit.png"},"matchers":[{"string":"精準"}],"trade":{"ids":{"pseudo":["mercenary.skill_36279"]}}}
 {"ref":"Precision has #% increased Mana Reservation Efficiency","better":1,"matchers":[{"string":"精準增加 #% 魔力保留效用"},{"string":"精準減少 #% 魔力保留效用","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3859865977"],"enchant":["enchant.stat_3859865977"]}}}

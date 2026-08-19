@@ -111,6 +111,7 @@ export interface BaseType {
     ward?: [min: number, max: number]
   }
   mercenaryBuild?: BaseType['refName'] | MercenaryBuild
+  mercenaryTradeId?: string
 }
 
 export interface MercenaryBuild {

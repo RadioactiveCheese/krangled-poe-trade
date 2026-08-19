@@ -169,8 +169,6 @@ export default {
   VESTIGIAL_IMPLICIT: 'Собственное свойство вояжа',
   SCRYING_MAP_AREA: 'Область карты: ',
   CHART_SULPHUR: 'Мертвецкая сера: ',
-  MERCENARY_LEVEL: 'Уровень наёмника: ',
-  MERCENARY_BUILD: 'Билд: ',
   // ---
   CHAT_SYSTEM: /^: (?<body>.+)$/,
   CHAT_TRADE: /^\$(?:<(?<guild_tag>.+?)> )?(?<char_name>.+?): (?<body>.+)$/,

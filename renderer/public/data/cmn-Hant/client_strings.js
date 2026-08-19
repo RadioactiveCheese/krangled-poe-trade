@@ -130,8 +130,6 @@ export default {
   VESTIGIAL_IMPLICIT: '殘存固定詞綴',
   SCRYING_MAP_AREA: '地圖區域: ',
   CHART_SULPHUR: '亡者硫酸: ',
-  MERCENARY_LEVEL: '傭兵等級: ',
-  MERCENARY_BUILD: '流派: ',
   // ---
   CHAT_SYSTEM: /^: (?<body>.+)$/,
   CHAT_TRADE: /^\$(?:<(?<guild_tag>.+?)> )?(?<char_name>.+?): (?<body>.+)$/,

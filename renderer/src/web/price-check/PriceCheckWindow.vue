@@ -7,7 +7,7 @@
   }">
     <div v-if="!isBrowserShown" class="layout-column shrink-0 overflow-hidden"
       style="width: var(--game-panel);">
-      <img v-if="itemPreview && item?.isOk() && item.value.mercenary"
+      <img v-if="itemPreview && item?.isOk() && item.value.info.refName === 'Mercenary Warrant'"
         :src="itemPreview.dataUrl"
         class="block w-full h-full object-fill"
         alt=""

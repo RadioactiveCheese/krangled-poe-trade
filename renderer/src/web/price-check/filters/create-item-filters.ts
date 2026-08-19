@@ -51,20 +51,33 @@ export function createFilters (
     }
   }
 
-  if (item.mercenary) {
+  if (item.info.refName === 'Mercenary Warrant') {
+    const normal = item.mercenaryBuild!
+    const infamous = item.mercenaryInfamousVariant
+    const variant = item.mercenaryBuildVariant!
+    const isStandardVariant = (
+      variant.refName === normal.refName ||
+      variant.refName === infamous?.refName
+    )
+
     filters.searchExact = {
       baseType: item.info.name,
       baseTypeTrade: t(opts, item.info)
     }
-    filters.discriminator = {
-      trade: 'mercenary_warrant'
-    }
+    filters.discriminator = { trade: item.info.tradeDisc! }
     filters.mercenaryBuild = {
-      value: item.mercenary.build,
-      disabled: false
+      value: variant.name,
+      tradeId: variant.mercenaryTradeId!,
+      disabled: false,
+      variants: (isStandardVariant && infamous)
+        ? {
+            normal: { value: normal.name, tradeId: normal.mercenaryTradeId! },
+            infamous: { value: infamous.name, tradeId: infamous.mercenaryTradeId! }
+          }
+        : undefined
     }
     filters.itemLevel = {
-      value: item.mercenary.level,
+      value: item.itemLevel!,
       disabled: false
     }
     return filters
@@ -114,8 +127,6 @@ export function createFilters (
       baseType: item.info.name,
       baseTypeTrade: item.mapArea.tradeDisc!
     }
-    filters.scryingMapArea = item.mapArea.name
-
     return filters
   }
   if (
@@ -213,13 +224,6 @@ export function createFilters (
       value: item.areaLevel!,
       disabled: false
     }
-
-    if (item.heistBlueprint?.wingsRevealed) {
-      filters.heistWingsRevealed = {
-        value: item.heistBlueprint.wingsRevealed,
-        disabled: false
-      }
-    }
   } else if (item.rarity === ItemRarity.Unique && item.info.unique) {
     filters.searchExact = {
       name: item.info.name,
@@ -266,8 +270,7 @@ export function createFilters (
       if (
         item.category === ItemCategory.ClusterJewel ||
         item.category === ItemCategory.Idol ||
-        item.category === ItemCategory.Graft ||
-        item.category === ItemCategory.HeistBlueprint
+        item.category === ItemCategory.Graft
       ) {
         disabled = true
       } else if (

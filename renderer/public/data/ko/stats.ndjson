@@ -4170,6 +4170,7 @@
 {"ref":"Chaos Skills inflict up to 15 Withered Debuffs on Hit for # seconds","better":1,"matchers":[{"string":"카오스 스킬 명중 시 #초 동안 위축 디버프 최대 15 유발"}],"trade":{"ids":{"explicit":["explicit.stat_2676773112"]}}}
 {"ref":"Chaotic Burst","better":0,"mercenary":{"icon":"https://web.poecdn.com/gen/image/WzIxLDE0LHsiayI6IjJEQXJ0L1NraWxsSWNvbnMvSG91c2VCYXJkaXlhU2tpbGwifV0/8e78c633c6/HouseBardiyaSkill.png"},"matchers":[{"string":"혼돈의 격발"}],"trade":{"ids":{"pseudo":["mercenary.skill_26913"]}}}
 {"ref":"Chaotic Shot","better":0,"mercenary":{"icon":"https://web.poecdn.com/gen/image/WzIxLDE0LHsiayI6IjJEQXJ0L1NraWxsSWNvbnMvSG91c2VCYXJkaXlhU2tpbGwifV0/8e78c633c6/HouseBardiyaSkill.png","supports":["Multiple Projectiles","Physical as Extra Chaos","Chaos Penetration","Faster Attacks","Faster Projectiles","Chance to Poison"]},"matchers":[{"string":"혼돈의 사격"}],"trade":{"ids":{"pseudo":["mercenary.skill_18986"]}}}
+{"ref":"Charged Dash of the Arcane","better":0,"mercenary":{"icon":""},"matchers":[{"string":"비전의 충전 질주"}],"trade":{"ids":{"pseudo":["mercenary.skill_5673"]}}}
 {"ref":"Charged Traps","better":1,"mercenary":{"tier":3},"matchers":[{"string":"충전된 덫","advanced":"충전된 덫 (등급: 3)"}],"trade":{"ids":{"pseudo":["mercenary.support_5081"]}}}
 {"ref":"Chests have #% chance to drop Double Aureus Coins","better":1,"matchers":[{"string":"상자에서 #%의 확률로 아우레우스 코인이 2배로 등장"}],"trade":{"ids":{"explicit":["sanctum.stat_3926246735"]}}}
 {"ref":"Chill Effect and Freeze Duration on you are based on #% of Energy Shield","better":1,"matchers":[{"string":"플레이어에게 적용되는 냉각 효과 및 동결 지속시간이 에너지 보호막의 #%에 비례함"}],"trade":{"ids":{"explicit":["explicit.stat_1194648995"]}}}
@@ -6181,6 +6182,7 @@
 {"ref":"Poisonous Hit","better":1,"matchers":[{"string":"중독 공격"}],"trade":{"ids":{"explicit":["explicit.stat_4075957192"]}}}
 {"ref":"Poisons on you expire #% slower","better":-1,"matchers":[{"string":"플레이어에게 적용되는 중독이 #% 더 빠르게 만료"},{"string":"플레이어에게 적용되는 중독이 #% 더 느리게 만료","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2443132097"]},"inverted":true}}
 {"ref":"Poisons you inflict deal Damage #% faster","better":1,"matchers":[{"string":"플레이어가 유발한 중독이 피해 #% 가속"}],"trade":{"ids":{"explicit":["explicit.stat_2907156609"],"implicit":["implicit.stat_2907156609"],"fractured":["fractured.stat_2907156609"]}}}
+{"ref":"Power Siphon","better":0,"mercenary":{"icon":""},"matchers":[{"string":"권능 착취"}],"trade":{"ids":{"pseudo":["mercenary.skill_26705"]}}}
 {"ref":"Precise Technique","better":1,"matchers":[{"string":"정확한 기술"}],"trade":{"ids":{"explicit":["explicit.stat_4096273663"]}}}
 {"ref":"Precision","better":0,"mercenary":{"icon":"https://web.poecdn.com/gen/image/WzIxLDE0LHsiayI6IjJEQXJ0L1NraWxsSWNvbnMvYXVyYWNyaXQifV0/c7ab957d14/auracrit.png"},"matchers":[{"string":"정밀함"}],"trade":{"ids":{"pseudo":["mercenary.skill_36279"]}}}
 {"ref":"Precision has #% increased Mana Reservation Efficiency","better":1,"matchers":[{"string":"정밀함의 마나 점유 효율 #% 증가"},{"string":"정밀함의 마나 점유 효율 #% 감소","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3859865977"],"enchant":["enchant.stat_3859865977"]}}}

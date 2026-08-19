@@ -21,19 +21,6 @@ export enum ItemInfluence {
   Warlord = 'Warlord'
 }
 
-export interface MercenarySupport {
-  hash: string
-  name: string
-  tier: number
-}
-
-export interface MercenarySkill {
-  hash: string
-  name: string
-  icon: string
-  supports?: MercenarySupport[]
-}
-
 export interface ParsedItem {
   rarity?: ItemRarity
   itemLevel?: number
@@ -74,6 +61,8 @@ export interface ParsedItem {
   vaalGem?: BaseType
   imbuedGem?: boolean
   mercenaryBuild?: BaseType
+  mercenaryBuildVariant?: BaseType
+  mercenaryInfamousVariant?: BaseType
   mercenarySkills?: ParsedStat[][]
   talismanTier?: number
   memoryStrands?: number
@@ -104,17 +93,13 @@ export interface ParsedItem {
   }>
   heistBlueprint?: {
     wingsRevealed?: number
+    wingsTotal?: number
     target?: 'Enchants' | 'Trinkets' | 'Gems' | 'Replicas'
   }
   heistContract?: {
     requiredJob?: 'Lockpicking' | 'Brute Force' | 'Perception' | 'Demolition' | 'Counter-Thaumaturgy' | 'Trap Disarmament' | 'Agility' | 'Deception' | 'Engineering'
     jobLevel?: number
     targetValue?: 'Priceless'
-  }
-  mercenary?: {
-    build: string
-    level: number
-    skills?: MercenarySkill[]
   }
   category?: ItemCategory
   info: BaseType

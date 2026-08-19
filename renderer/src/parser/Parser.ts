@@ -8,13 +8,12 @@ import {
   BaseType
 } from '@/assets/data'
 import { ModifierType, sumStatsByModType } from './modifiers'
-import { linesToStatStrings, tryParseTranslation, getRollOrMinmaxAvg } from './stat-translations'
+import { linesToStatStrings, tryParseTranslation, getRollOrMinmaxAvg, ParsedStat } from './stat-translations'
 import { ItemCategory } from './meta'
 import { IncursionRoom, ParsedItem, ItemInfluence, ItemRarity } from './ParsedItem'
 import { magicBasetype } from './magic-name'
 import { isModInfoLine, groupLinesByMod, parseModInfoLine, parseModType, ModifierInfo, ParsedModifier, ENCHANT_LINE, SCOURGE_LINE, IMPLICIT_LINE } from './advanced-mod-desc'
 import { calcPropPercentile, QUALITY_STATS } from './calc-q20'
-import { parseMercenaryWarrantDetails } from './mercenary-warrant'
 import { resolveChartArea, resolveChartShape } from './chart'
 
 type SectionParseResult =
@@ -42,8 +41,6 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   { virtual: normalizeName },
   { virtual: findInDatabase },
   // -----------
-  parseMercenaryWarrant,
-  { virtual: validateMercenaryWarrant },
   parseItemLevel,
   parseTalismanTier,
   parseGem,
@@ -82,6 +79,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseMercenaryGems,
   parseMercenaryGems,
   parseMercenaryGems,
+  { virtual: validateMercenaryWarrant },
   parseModifiers, // enchant
   parseModifiers, // scourge
   parseModifiers, // implicit
@@ -295,22 +293,6 @@ function parseMap (section: string[], item: ParsedItem) {
   }
 
   return isParsed
-}
-
-function parseMercenaryWarrant (section: string[], item: ParsedItem): SectionParseResult {
-  if (item.info.refName !== 'Mercenary Warrant') return 'PARSER_SKIPPED'
-
-  const mercenary = parseMercenaryWarrantDetails(section, _$)
-  if (!mercenary) return 'SECTION_SKIPPED'
-
-  item.mercenary = mercenary
-  return 'SECTION_PARSED'
-}
-
-function validateMercenaryWarrant (item: ParsedItem): Result<never, string> | void {
-  if (item.info.refName === 'Mercenary Warrant' && !item.mercenary) {
-    return err('item.unknown')
-  }
 }
 
 function parseBlightedMap (item: ParsedItem) {
@@ -753,24 +735,45 @@ function parseLogbookArea (section: string[], item: ParsedItem) {
 function parseMercenary (section: string[], item: ParsedItem) {
   if (item.info.refName !== 'Mercenary Warrant') return 'PARSER_SKIPPED'
 
+  let sawMercenaryField = false
   for (const line of section) {
-    if (line.startsWith(_$.MERCENARY_LEVEL)) {
-      item.itemLevel = Number(line.slice(_$.MERCENARY_LEVEL.length))
-    } else if (line.startsWith(_$.MERCENARY_BUILD)) {
-      let buildInfo = ITEM_BY_TRANSLATED('MERCENARY_BUILD', line.slice(_$.MERCENARY_BUILD.length))
-      if (!buildInfo) throw new Error('Unknown Mercenary Build.')
+    const levelText = parseMercenaryField(line, _$.MERCENARY_LEVEL)
+    const buildName = parseMercenaryField(line, _$.MERCENARY_BUILD)
+    if (levelText != null) {
+      sawMercenaryField = true
+      if (!/^\d+$/u.test(levelText)) continue
+      const level = Number(levelText)
+      if (level < 1 || level > 100) continue
+      item.itemLevel = level
+    } else if (buildName != null) {
+      sawMercenaryField = true
+      if (!/\p{L}/u.test(buildName)) continue
+      let buildInfo = ITEM_BY_TRANSLATED('MERCENARY_BUILD', buildName)
+      if (!buildInfo?.length) continue
 
-      if (typeof buildInfo[0].mercenaryBuild === 'string') {
-        buildInfo = ITEM_BY_REF('MERCENARY_BUILD', buildInfo[0].mercenaryBuild)!
+      const variant = buildInfo[0]
+      if (!variant.mercenaryTradeId) continue
+      if (typeof variant.mercenaryBuild === 'string') {
+        buildInfo = ITEM_BY_REF('MERCENARY_BUILD', variant.mercenaryBuild)
+        if (!buildInfo?.length) continue
       }
       item.mercenaryBuild = buildInfo[0]
+      item.mercenaryBuildVariant = variant
+      item.mercenaryInfamousVariant = ITEM_BY_REF(
+        'MERCENARY_BUILD',
+        `Infamous ${item.mercenaryBuild.refName}`
+      )?.find(entry => entry.mercenaryTradeId)
     }
   }
 
-  if (item.mercenaryBuild) {
-    return 'SECTION_PARSED'
+  return sawMercenaryField ? 'SECTION_PARSED' : 'SECTION_SKIPPED'
+}
+
+function parseMercenaryField (line: string, label: string): string | undefined {
+  for (const separator of [':', '：']) {
+    const prefix = `${label}${separator}`
+    if (line.startsWith(prefix)) return line.slice(prefix.length).trim()
   }
-  return 'SECTION_SKIPPED'
 }
 
 function parseMercenaryGems (section: string[], item: ParsedItem) {
@@ -800,6 +803,13 @@ function parseMercenaryGems (section: string[], item: ParsedItem) {
   item.mercenarySkills.push(group)
 
   return 'SECTION_PARSED'
+}
+
+function validateMercenaryWarrant (item: ParsedItem): Result<never, string> | void {
+  if (item.info.refName !== 'Mercenary Warrant') return
+  if (!item.mercenaryBuild || !item.mercenaryBuildVariant || !item.itemLevel || !item.mercenarySkills?.length) {
+    return err('item.unknown')
+  }
 }
 
 function parseModifiers (section: string[], item: ParsedItem) {

@@ -1,5 +1,5 @@
-import { ItemInfluence, ItemCategory, MercenarySkill } from '@/parser'
-import { ItemFilters, StatFilter, INTERNAL_TRADE_IDS, InternalTradeId } from '../filters/interfaces'
+import { ItemInfluence, ItemCategory } from '@/parser'
+import { ItemFilters, StatFilter, FilterOrGroup, FilterTag, INTERNAL_TRADE_IDS, InternalTradeId } from '../filters/interfaces'
 import { setProperty as propSet } from 'dot-prop'
 import { DateTime } from 'luxon'
 import { Host } from '@/web/background/IPC'
@@ -10,8 +10,6 @@ import { RateLimiter } from './RateLimiter'
 import { ModifierType } from '@/parser/modifiers'
 import { Cache } from './Cache'
 import { DisplayItem, FetchItem, findPropertyValue, parseFetchResult } from './trade-tooltip'
-import { resolveMercenaryBuildTradeId } from './mercenary-trade-data'
-import { createMercenaryBuildQueryType } from '../filters/mercenary-build-filter'
 
 export type { DisplayItem, DisplayItemLine, DisplaySocket } from './trade-tooltip'
 
@@ -237,6 +235,19 @@ interface FetchResult {
   }
 }
 
+interface MercenarySupport {
+  hash: string
+  name: string
+  tier: number
+}
+
+interface MercenarySkill {
+  hash: string
+  name: string
+  icon: string
+  supports?: MercenarySupport[]
+}
+
 export interface PricingResult {
   id: string
   itemLevel?: string
@@ -298,7 +309,9 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
     activeSearch = activeSearch.sub
   }
   const discriminator = activeSearch.discriminatorTrade ?? filters.discriminator?.trade
-  const discriminatorOption = filters.discriminator?.option
+  const discriminatorOption = (filters.mercenaryBuild && !filters.mercenaryBuild.disabled)
+    ? filters.mercenaryBuild.tradeId
+    : filters.discriminator?.option
 
   if (activeSearch.nameTrade) {
     query.name = nameToQuery(activeSearch.nameTrade, discriminator, discriminatorOption)
@@ -306,20 +319,7 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
     query.name = nameToQuery(activeSearch.name, discriminator, discriminatorOption)
   }
 
-  if (filters.mercenaryBuild) {
-    const tradeId = filters.mercenaryBuild.disabled
-      ? undefined
-      : resolveMercenaryBuildTradeId(
-          filters.mercenaryBuild.value,
-          filters.mercenaryBuild.infamous)
-    if (!filters.mercenaryBuild.disabled && !tradeId) {
-      throw new Error(`Unknown Mercenary build: ${filters.mercenaryBuild.value}`)
-    }
-    query.type = createMercenaryBuildQueryType(
-      filters.mercenaryBuild,
-      tradeId,
-      activeSearch.baseTypeTrade || activeSearch.baseType)
-  } else if (activeSearch.baseTypeTrade) {
+  if (activeSearch.baseTypeTrade) {
     query.type = nameToQuery(activeSearch.baseTypeTrade, discriminator, discriminatorOption)
   } else if (activeSearch.baseType) {
     query.type = nameToQuery(activeSearch.baseType, discriminator, discriminatorOption)
@@ -420,10 +420,6 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
   const { chartShape } = filters
   if (chartShape && !chartShape.disabled) {
     propSet(query.filters, 'map_filters.filters.chart_shape.option', chartShape.value)
-  }
-
-  if (filters.heistWingsRevealed && !filters.heistWingsRevealed.disabled) {
-    propSet(query.filters, 'heist_filters.filters.heist_wings.min', filters.heistWingsRevealed.value)
   }
 
   if (filters.sentinelCharge && !filters.sentinelCharge.disabled) {
@@ -571,6 +567,14 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
         break
       case 'item.heist_target_priceless':
         propSet(query.filters, 'heist_filters.filters.heist_objective_value.option', 'priceless')
+        break
+      case 'item.heist_wings_revealed':
+        propSet(query.filters, 'heist_filters.filters.heist_wings.min', typeof input.min === 'number' ? input.min : undefined)
+        propSet(query.filters, 'heist_filters.filters.heist_wings.max', typeof input.max === 'number' ? input.max : undefined)
+        break
+      case 'item.heist_wings_total':
+        propSet(query.filters, 'heist_filters.filters.heist_max_wings.min', typeof input.min === 'number' ? input.min : undefined)
+        propSet(query.filters, 'heist_filters.filters.heist_max_wings.max', typeof input.max === 'number' ? input.max : undefined)
         break
     }
   }

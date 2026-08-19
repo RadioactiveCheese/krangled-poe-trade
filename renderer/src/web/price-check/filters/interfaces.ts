@@ -31,8 +31,12 @@ export interface ItemFilters {
   }
   mercenaryBuild?: {
     value: string
+    tradeId: string
     disabled: boolean
-    infamous?: boolean
+    variants?: {
+      normal: { value: string, tradeId: string }
+      infamous: { value: string, tradeId: string }
+    }
   }
   rarity?: {
     value: string
@@ -97,7 +101,6 @@ export interface ItemFilters {
     name: string
     disabled: boolean
   }
-  heistWingsRevealed?: FilterNumeric
   sentinelCharge?: FilterNumeric
   trade: {
     offline: boolean
@@ -186,7 +189,9 @@ const _INTERNAL_TRADE_IDS = [
   'item.heist_job_agility',
   'item.heist_job_deception',
   'item.heist_job_engineering',
-  'item.heist_target_priceless'
+  'item.heist_target_priceless',
+  'item.heist_wings_revealed',
+  'item.heist_wings_total'
 ] as const
 
 export type InternalTradeId = typeof _INTERNAL_TRADE_IDS[number]
@@ -224,6 +229,10 @@ export enum FilterTag {
   Incursion = 'explicit-incursion',
   Infamous = 'explicit-infamous',
   Essence = 'explicit-essence',
-  MercenarySkill = 'mercenary-skill',
-  MercenarySupport = 'mercenary-support'
+  Brick = 'brick',
+  MercenaryPrimary = 'mercenary-primary',
+  MercenarySecondary = 'mercenary-secondary',
+  MercenaryUtility = 'mercenary-utility',
+  MercenarySupport = 'mercenary-support',
+  FilterGroup = 'filter-group'
 }

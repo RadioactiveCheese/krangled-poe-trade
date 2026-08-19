@@ -4,16 +4,76 @@ import path from 'node:path'
 import test from 'node:test'
 import { fileURLToPath } from 'node:url'
 import { createServer } from 'vite'
-import { ref } from 'vue'
 
 const rendererDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const publicDir = path.join(rendererDir, 'public')
 
-test('parses Mercenary Warrant details and a complete copied item', async () => {
+test('Mercenary metadata covers the complete official Trade dataset', async () => {
+  const [itemsResponse, statsResponse] = await Promise.all([
+    fetch('https://www.pathofexile.com/api/trade/data/items', {
+      headers: { 'User-Agent': 'Krangled-PoE-Trade metadata test' },
+      signal: AbortSignal.timeout(15_000)
+    }),
+    fetch('https://www.pathofexile.com/api/trade/data/stats', {
+      headers: { 'User-Agent': 'Krangled-PoE-Trade metadata test' },
+      signal: AbortSignal.timeout(15_000)
+    })
+  ])
+  assert.equal(itemsResponse.ok, true)
+  assert.equal(statsResponse.ok, true)
+
+  const officialItems = await itemsResponse.json()
+  const officialStats = await statsResponse.json()
+  const officialBuilds = officialItems.result
+    .find(group => group.id === 'map').entries
+    .filter(entry => entry.disc === 'mercenary_warrant')
+  const officialBuildsByName = new Map(officialBuilds.map(entry => [
+    entry.text.match(/\(([^()]*)\)$/u)?.[1],
+    entry.type
+  ]))
+  const officialStatIds = new Set(
+    officialStats.result.find(group => group.id === 'mercenary').entries
+      .map(entry => entry.id)
+  )
+
+  const localItems = await readNdjson(path.join(publicDir, 'data/en/items.ndjson'))
+  const localBuildRows = localItems
+    .filter(entry => entry.namespace === 'MERCENARY_BUILD')
+  const localBuildNames = new Set(localBuildRows.map(entry => entry.refName))
+
+  for (const language of ['en', 'ru', 'ko', 'cmn-Hant']) {
+    const items = await readNdjson(path.join(publicDir, `data/${language}/items.ndjson`))
+    const buildRows = items
+      .filter(entry => entry.namespace === 'MERCENARY_BUILD')
+    assert.deepEqual(
+      new Map(buildRows.map(entry => [entry.refName, entry.mercenaryTradeId])),
+      officialBuildsByName,
+      `${language} Mercenary builds and Trade IDs must exactly match the official set`
+    )
+    const warrant = items.find(entry => entry.refName === 'Mercenary Warrant')
+    assert.equal(warrant.tradeDisc, 'mercenary_warrant')
+    assert.match(warrant.icon, /MercenaryWarrant\.png$/u)
+
+    const stats = await readNdjson(path.join(publicDir, `data/${language}/stats.ndjson`))
+    const localStatIds = new Set(stats
+      .flatMap(expandStatGroups)
+      .flatMap(entry => entry.trade?.ids?.pseudo ?? [])
+      .filter(id => id.startsWith('mercenary.')))
+    assert.deepEqual(localStatIds, officialStatIds,
+      `${language} Mercenary stat IDs must exactly match the official set`)
+    assert.equal(localStatIds.has('mercenary.skill_26705'), true)
+    assert.equal(localStatIds.has('mercenary.skill_5673'), true)
+  }
+
+  // Regression coverage for additions that exposed the stale fork-only mapping.
+  assert.equal(localBuildNames.has('Infamous Warpriest of the Ruckus'), true)
+})
+
+test('parses and filters a complete Mercenary Warrant with strict validation', async () => {
   const originalFetch = globalThis.fetch
   globalThis.fetch = async (url) => {
     const pathname = new URL(String(url), 'http://local').pathname
-    const file = path.join(publicDir, pathname.replace(/^\//, ''))
+    const file = path.join(publicDir, pathname.replace(/^\//u, ''))
     try {
       return new Response(await fs.readFile(file), { status: 200 })
     } catch {
@@ -45,172 +105,70 @@ test('parses Mercenary Warrant details and a complete copied item', async () => 
     const Data = await vite.ssrLoadModule('/src/assets/data/index.ts')
     await Data.init('en')
     const { parseClipboard } = await vite.ssrLoadModule('/src/parser/index.ts')
-    const { parseMercenaryWarrantDetails } = await vite.ssrLoadModule('/src/parser/mercenary-warrant.ts')
-    const { MERCENARY_BUILD_SKILL_IDS } = await vite.ssrLoadModule('/src/assets/data/mercenary-build-skills.ts')
-    const { selectMercenaryStat } = await vite.ssrLoadModule('/src/web/price-check/filters/mercenary-picker-state.ts')
-    const {
-      createMercenaryBuildQueryType,
-      isMercenaryInfamousActive,
-      selectMercenaryBuildVariantTradeId,
-      toggleMercenaryBuild,
-      toggleMercenaryInfamous
-    } = await vite.ssrLoadModule('/src/web/price-check/filters/mercenary-build-filter.ts')
+    const { createMercenaryFilters } = await vite.ssrLoadModule('/src/web/price-check/filters/pseudo/mercenary.ts')
 
-    assert.equal(Object.keys(MERCENARY_BUILD_SKILL_IDS).length, 63)
-    const mappedSkillIds = new Set()
-    for (const groups of Object.values(MERCENARY_BUILD_SKILL_IDS)) {
-      for (const kind of ['primary', 'secondary', 'utility']) {
-        assert.ok(groups[kind].length > 0)
-        for (const id of groups[kind]) mappedSkillIds.add(id)
-      }
-    }
-    assert.equal(mappedSkillIds.size, 268)
-    assert.ok(MERCENARY_BUILD_SKILL_IDS.MeleeAOEMarauderPhysSlam)
-    assert.ok(MERCENARY_BUILD_SKILL_IDS.ChaosMinionWitchInstabilityNoble)
-
-    const reanimatorVariant = {
-      baseName: 'Reanimator',
-      normalTradeId: 'ChaosMinionWitchInstability',
-      infamousTradeId: 'ChaosMinionWitchInstabilityNoble',
-      isInfamous: true
-    }
-    const buildFilter = {
-      value: 'Infamous Reanimator',
-      disabled: false
-    }
-    assert.equal(isMercenaryInfamousActive(buildFilter, reanimatorVariant), true)
-    assert.equal(selectMercenaryBuildVariantTradeId(reanimatorVariant), 'ChaosMinionWitchInstabilityNoble')
-
-    toggleMercenaryInfamous(buildFilter, reanimatorVariant)
-    assert.deepEqual(buildFilter, {
-      value: 'Infamous Reanimator',
-      disabled: false,
-      infamous: false
-    })
-    assert.equal(selectMercenaryBuildVariantTradeId(reanimatorVariant, buildFilter.infamous), 'ChaosMinionWitchInstability')
-
-    toggleMercenaryBuild(buildFilter)
-    assert.equal(buildFilter.disabled, true)
-    assert.equal(buildFilter.infamous, false)
-    assert.equal(
-      createMercenaryBuildQueryType(buildFilter, undefined, 'Mercenary Warrant'),
-      'Mercenary Warrant')
-
-    toggleMercenaryInfamous(buildFilter, reanimatorVariant)
-    assert.equal(buildFilter.disabled, false)
-    assert.equal(buildFilter.infamous, true)
-    toggleMercenaryBuild(buildFilter)
-    assert.equal(buildFilter.disabled, true)
-    assert.equal(buildFilter.infamous, true)
-    assert.equal(isMercenaryInfamousActive(buildFilter, reanimatorVariant), false)
-    toggleMercenaryBuild(buildFilter)
-    assert.equal(buildFilter.disabled, false)
-    assert.equal(buildFilter.infamous, true)
-    assert.equal(isMercenaryInfamousActive(buildFilter, reanimatorVariant), true)
-
-    const selectedStats = []
-    const pickerQuery = ref('first')
-    const showSuggestions = ref(false)
-    selectMercenaryStat(
-      { id: 'mercenary.skill_first', text: 'First Skill', kind: 'skill' },
-      stat => selectedStats.push(stat),
-      pickerQuery,
-      showSuggestions)
-    assert.equal(pickerQuery.value, '')
-    assert.equal(showSuggestions.value, true)
-
-    pickerQuery.value = 'second'
-    selectMercenaryStat(
-      { id: 'mercenary.skill_second', text: 'Second Skill', kind: 'skill' },
-      stat => selectedStats.push(stat),
-      pickerQuery,
-      showSuggestions)
-    assert.deepEqual(selectedStats.map(stat => stat.tradeId[0]), [
-      'mercenary.skill_first',
-      'mercenary.skill_second'
-    ])
-    assert.equal(showSuggestions.value, true)
-
-    for (const fixture of [
-      { lang: 'en', lines: ['Build: Earthshaker', 'Mercenary Level: 83'], expected: { build: 'Earthshaker', level: 83 } },
-      { lang: 'ru', lines: ['Билд: Боевой жрец', 'Уровень наёмника: 81'], expected: { build: 'Боевой жрец', level: 81 } },
-      { lang: 'ko', lines: ['빌드: 대지분쇄자', '용병 레벨: 80'], expected: { build: '대지분쇄자', level: 80 } },
-      { lang: 'cmn-Hant', lines: ['流派： 萬惡戰爭牧師', '傭兵等級： 79'], expected: { build: '萬惡戰爭牧師', level: 79 } }
-    ]) {
-      await Data.loadForLang(fixture.lang)
-      assert.deepEqual(
-        parseMercenaryWarrantDetails(fixture.lines, Data.CLIENT_STRINGS),
-        fixture.expected
-      )
-    }
-    await Data.loadForLang('en')
-    assert.equal(
-      parseMercenaryWarrantDetails([
-        'Right click this item to view Mercenary details.',
-        'Can be used in a personal Map Device alongside a Map.'
-      ], Data.CLIENT_STRINGS),
-      undefined
-    )
-    assert.equal(
-      parseMercenaryWarrantDetails([
-        'Build: 83',
-        'Mercenary Level: 1'
-      ], Data.CLIENT_STRINGS),
-      undefined
-    )
-    assert.equal(
-      parseMercenaryWarrantDetails([
-        'Build: Earthshaker',
-        'Mercenary Level 83'
-      ], Data.CLIENT_STRINGS),
-      undefined
-    )
-    assert.equal(
-      parseMercenaryWarrantDetails([
-        'Build: Earthshaker',
-        'Mercenary Level: 101'
-      ], Data.CLIENT_STRINGS),
-      undefined
-    )
-    assert.equal(
-      parseMercenaryWarrantDetails([
-        'Role: Earthshaker',
-        'Level: 83'
-      ], Data.CLIENT_STRINGS),
-      undefined
-    )
-
-    const result = parseClipboard(`Item Class: Map Fragments
-Rarity: Normal
-Mercenary Warrant
---------
-Rako Rata
---------
-Build: Earthshaker
-Mercenary Level: 83
---------
-Right click this item to view Mercenary details.
-Can be used in a personal Map Device alongside a Map to add the Mercenary to the area.`)
-
+    const result = parseClipboard(warrantText({
+      details: ['Build: Earthshaker', 'Mercenary Level: 83'],
+      skills: [['Vaal Ground Slam', 'Pulverise (Tier: 2)']]
+    }))
     assert.equal(result.isOk(), true)
     assert.equal(result.value.info.refName, 'Mercenary Warrant')
-    assert.deepEqual(result.value.mercenary, {
-      build: 'Earthshaker',
-      level: 83
-    })
+    assert.equal(result.value.mercenaryBuild.refName, 'Earthshaker')
+    assert.equal(result.value.itemLevel, 83)
+    assert.deepEqual(
+      result.value.mercenarySkills.map(group => group.map(stat => stat.stat.ref)),
+      [['Vaal Ground Slam', 'Pulverise']]
+    )
 
-    const malformed = parseClipboard(`Item Class: Map Fragments
-Rarity: Normal
-Mercenary Warrant
---------
-Rako Rata
---------
-Build: Earthshaker
---------
-Right click this item to view Mercenary details.`)
-    assert.equal(malformed.isErr(), true)
+    const filters = createMercenaryFilters(result.value)
+    const skillGroup = filters.find(filter => filter.group === 'mercenary')
+    assert.equal(skillGroup.meta.statRef, 'Vaal Ground Slam')
+    assert.equal(skillGroup.stats[0].statRef, 'Pulverise')
+
+    const renamedVariant = parseClipboard(warrantText({
+      details: ['Build: Infamous Warpriest of the Ruckus', 'Mercenary Level: 84'],
+      skills: [['Smite']]
+    }))
+    assert.equal(renamedVariant.isOk(), true)
+    assert.equal(renamedVariant.value.mercenaryBuild.refName, 'Warpriest')
+    assert.equal(renamedVariant.value.mercenaryBuildVariant.refName, 'Infamous Warpriest of the Ruckus')
+    assert.equal(renamedVariant.value.mercenaryBuildVariant.mercenaryTradeId, 'AurasMinionsTemplarSmiteRuckusNoble')
+    assert.doesNotThrow(() => createMercenaryFilters(renamedVariant.value))
+
+    for (const invalid of [
+      warrantText({ details: ['Build: Earthshaker', 'Mercenary Level: 101'], skills: [['Vaal Ground Slam']] }),
+      warrantText({ details: ['Build: Earthshaker', 'Mercenary Level 83'], skills: [['Vaal Ground Slam']] }),
+      warrantText({ details: ['Build: Earthshaker', 'Mercenary Level: 83'], skills: [] })
+    ]) {
+      assert.equal(parseClipboard(invalid).isErr(), true)
+    }
   } finally {
     globalThis.fetch = originalFetch
     await vite?.close()
   }
 })
+
+function warrantText ({ details, skills }) {
+  return `Item Class: Map Fragments
+Rarity: Normal
+Mercenary Warrant
+--------
+Rako Rata
+--------
+${details.join('\n')}
+${skills.map(group => `--------\n${group.join('\n')}`).join('\n')}
+--------
+Right click this item to view Mercenary details.
+Can be used in a personal Map Device alongside a Map to add the Mercenary to the area.`
+}
+
+async function readNdjson (file) {
+  return (await fs.readFile(file, 'utf8'))
+    .trim()
+    .split(/\r?\n/u)
+    .map(line => JSON.parse(line))
+}
+
+function expandStatGroups (entry) {
+  return entry.stats ?? [entry]
+}
