@@ -5,7 +5,7 @@ import type { ParsedItem } from '@/parser/ParsedItem'
 export interface FilterPreset {
   id: string
   filters: ItemFilters
-  stats: StatFilter[]
+  stats: FilterOrGroup[]
 }
 
 interface SearchFilter {
@@ -81,7 +81,6 @@ export interface ItemFilters {
     name: string
     nameTrade: string
   }
-  scryingMapArea?: string
   itemLevel?: FilterNumeric
   stackSize?: FilterNumeric
   unidentified?: {
@@ -118,12 +117,25 @@ export interface FilterNumeric {
   disabled: boolean
 }
 
+export type FilterOrGroup =
+  | StatFilter
+  | FilterGroup
+
+export interface FilterGroup {
+  group: 'not' | 'mercenary'
+  expanded: boolean // NOTE: mutable in UI
+  meta: StatFilter
+  stats: StatFilter[]
+}
+
 export interface StatFilter {
+  group?: never
   tradeId: string[]
   statRef: string
   text: string
   tag: FilterTag
   oils?: string[]
+  mercenary?: { icon?: string, tier?: number }
   sources: StatCalculated['sources']
   not?: true
   roll?: {
@@ -145,6 +157,7 @@ export interface StatFilter {
 }
 
 const _INTERNAL_TRADE_IDS = [
+  'item.not_group',
   'item.base_percentile',
   'item.memory_strands',
   'item.armour',
@@ -158,6 +171,7 @@ const _INTERNAL_TRADE_IDS = [
   'item.crit',
   'item.aps',
   'item.has_empty_modifier',
+  'item.mercenary_6link',
   'item.map_item_quantity',
   'item.map_item_rarity',
   'item.map_pack_size',

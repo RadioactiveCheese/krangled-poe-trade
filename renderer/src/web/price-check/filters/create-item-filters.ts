@@ -46,7 +46,9 @@ export function createFilters (
     if (!opts.currency) {
       filters.trade.currency = 'chaos_divine'
     }
-    filters.trade.collapseMerchant = true
+    if (item.info.refName !== 'Mercenary Warrant') {
+      filters.trade.collapseMerchant = true
+    }
   }
 
   if (item.mercenary) {
@@ -264,7 +266,8 @@ export function createFilters (
       if (
         item.category === ItemCategory.ClusterJewel ||
         item.category === ItemCategory.Idol ||
-        item.category === ItemCategory.Graft
+        item.category === ItemCategory.Graft ||
+        item.category === ItemCategory.HeistBlueprint
       ) {
         disabled = true
       } else if (
@@ -312,12 +315,7 @@ export function createFilters (
     // item.isCorrupted && -- let the buyer corrupt
     (item.category === ItemCategory.Jewel || item.category === ItemCategory.AbyssJewel))
 
-  if (!item.isUnmodifiable && (
-    item.rarity === ItemRarity.Normal ||
-    item.rarity === ItemRarity.Magic ||
-    item.rarity === ItemRarity.Rare ||
-    item.rarity === ItemRarity.Unique
-  )) {
+  if (!item.isUnmodifiable && (item.info.craftable || item.rarity === ItemRarity.Unique)) {
     filters.corrupted = {
       value: item.isCorrupted,
       exact: forAdornedJewel
@@ -339,11 +337,11 @@ export function createFilters (
       value: 'magic',
       disabled: true
     }
-  } else if (
+  } else if (item.info.craftable && (
     item.rarity === ItemRarity.Normal ||
     item.rarity === ItemRarity.Magic ||
     item.rarity === ItemRarity.Rare
-  ) {
+  )) {
     filters.rarity = {
       value: 'nonunique',
       disabled: false
@@ -502,6 +500,15 @@ function createGemFilters (
       baseType: item.info.name,
       baseTypeTrade: t(opts, normalGem),
       discriminatorTrade: item.info.tradeDisc!
+    }
+  }
+
+  if (item.vaalGem) {
+    filters.searchExact.sub = {
+      baseType: item.vaalGem.name,
+      baseTypeTrade: t(opts, item.vaalGem),
+      discriminatorTrade: item.info.tradeDisc,
+      disabled: false
     }
   }
 

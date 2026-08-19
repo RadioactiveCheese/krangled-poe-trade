@@ -1,5 +1,6 @@
 import type { ModifierType, StatCalculated } from './modifiers'
 import type { ParsedModifier } from './advanced-mod-desc'
+import type { ParsedStat } from './stat-translations'
 import type { BaseType } from '@/assets/data'
 import { ItemCategory } from './meta'
 import type { ChartShape } from './chart'
@@ -70,7 +71,10 @@ export interface ParsedItem {
     gold?: number
   }
   gemLevel?: number
+  vaalGem?: BaseType
   imbuedGem?: boolean
+  mercenaryBuild?: BaseType
+  mercenarySkills?: ParsedStat[][]
   talismanTier?: number
   memoryStrands?: number
   quality?: number

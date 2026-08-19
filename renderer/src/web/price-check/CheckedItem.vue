@@ -41,6 +41,10 @@
       <trade-links v-if="tradeAPI === 'trade' && !item.mercenary"
         :get-link="makeTradeLink" />
     </div>
+    <p v-if="showComplexityHint" :class="$style.complexityHint">
+      <i class="fas fa-info-circle" />
+      {{ t('item.complexity_hint') }}
+    </p>
     <stack-value :filters="itemFilters" :item="item"/>
     <div v-if="showSupportLinks" class="mt-auto border border-dashed p-2">
       <i18n-t keypath="app.thanks_3rd_party" tag="div">
@@ -140,7 +144,8 @@ export default defineComponent({
           (item.category === ItemCategory.SanctumRelic) ||
           (item.category === ItemCategory.Charm) ||
           (item.category === ItemCategory.Idol) ||
-          (!CATEGORY_TO_TRADE_ID.has(item.category!)) ||
+          (!CATEGORY_TO_TRADE_ID.has(item.category!) &&
+            item.info.refName !== 'Mercenary Warrant') ||
           (item.isUnidentified) ||
           (item.isVeiled)
         )
@@ -255,6 +260,8 @@ export default defineComponent({
       addMercenaryStat,
       removeMercenaryStat,
       showSupportLinks,
+      showComplexityHint: computed(() => !widget.value.builtinBrowser && !doSearch.value &&
+        props.item.info.refName === 'Mercenary Warrant'),
       presets: computed(() => presets.value.presets.map(preset =>
         ({ id: preset.id, active: (preset.id === presets.value.active) }))),
       selectPreset (id: string) {
@@ -270,3 +277,20 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="postcss" module>
+.complexityHint {
+  display: flex;
+  align-items: baseline;
+  gap: theme('spacing.2');
+  margin-top: theme('spacing.4');
+  padding: theme('spacing.2') theme('spacing.4') theme('spacing.2') theme('spacing.3');
+  border-radius: theme('borderRadius.DEFAULT');
+  background: theme('colors.gray.900');
+  text-wrap-style: pretty;
+
+  & > i {
+    color: theme('colors.gray.600');
+  }
+}
+</style>

@@ -162,7 +162,7 @@ function useTradeApi () {
     return out
   })
 
-  async function search (filters: ItemFilters, stats: StatFilter[]) {
+  async function search (filters: ItemFilters, stats: FilterOrGroup[]) {
     try {
       searchId += 1
       error.value = null
@@ -234,7 +234,7 @@ export default defineComponent({
       required: true
     },
     stats: {
-      type: Array as PropType<StatFilter[]>,
+      type: Array as PropType<FilterOrGroup[]>,
       required: true
     },
     item: {
