@@ -1,5 +1,6 @@
 import type { ModifierType, StatCalculated } from './modifiers'
 import type { ParsedModifier } from './advanced-mod-desc'
+import type { ParsedStat } from './stat-translations'
 import type { BaseType } from '@/assets/data'
 import { ItemCategory } from './meta'
 import type { ChartShape } from './chart'
@@ -18,19 +19,6 @@ export enum ItemInfluence {
   Redeemer = 'Redeemer',
   Shaper = 'Shaper',
   Warlord = 'Warlord'
-}
-
-export interface MercenarySupport {
-  hash: string
-  name: string
-  tier: number
-}
-
-export interface MercenarySkill {
-  hash: string
-  name: string
-  icon: string
-  supports?: MercenarySupport[]
 }
 
 export interface ParsedItem {
@@ -70,7 +58,12 @@ export interface ParsedItem {
     gold?: number
   }
   gemLevel?: number
+  vaalGem?: BaseType
   imbuedGem?: boolean
+  mercenaryBuild?: BaseType
+  mercenaryBuildVariant?: BaseType
+  mercenaryInfamousVariant?: BaseType
+  mercenarySkills?: ParsedStat[][]
   talismanTier?: number
   memoryStrands?: number
   quality?: number
@@ -100,17 +93,13 @@ export interface ParsedItem {
   }>
   heistBlueprint?: {
     wingsRevealed?: number
+    wingsTotal?: number
     target?: 'Enchants' | 'Trinkets' | 'Gems' | 'Replicas'
   }
   heistContract?: {
     requiredJob?: 'Lockpicking' | 'Brute Force' | 'Perception' | 'Demolition' | 'Counter-Thaumaturgy' | 'Trap Disarmament' | 'Agility' | 'Deception' | 'Engineering'
     jobLevel?: number
     targetValue?: 'Priceless'
-  }
-  mercenary?: {
-    build: string
-    level: number
-    skills?: MercenarySkill[]
   }
   category?: ItemCategory
   info: BaseType

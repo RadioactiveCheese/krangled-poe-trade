@@ -8,15 +8,10 @@
     <price-trend v-else
       :item="item"
       :filters="itemFilters" />
-    <mercenary-filters v-if="item.mercenary"
-      :stats="itemStats"
-      :build="item.mercenary.build"
-      @add="addMercenaryStat"
-      @remove="removeMercenaryStat" />
     <filters-block
       ref="filtersComponent"
       :filters="itemFilters"
-      :stats="item.mercenary ? [] : itemStats"
+      :stats="itemStats"
       :item="item"
       :presets="presets"
       @preset="selectPreset"
@@ -38,9 +33,13 @@
       <div class="flex w-40" @mouseenter="handleSearchMouseenter">
         <button class="btn" @click="doSearch = true" style="min-width: 5rem;">{{ t('Search') }}</button>
       </div>
-      <trade-links v-if="tradeAPI === 'trade' && !item.mercenary"
+      <trade-links v-if="tradeAPI === 'trade'"
         :get-link="makeTradeLink" />
     </div>
+    <p v-if="showComplexityHint" :class="$style.complexityHint">
+      <i class="fas fa-info-circle" />
+      {{ t('item.complexity_hint') }}
+    </p>
     <stack-value :filters="itemFilters" :item="item"/>
     <div v-if="showSupportLinks" class="mt-auto border border-dashed p-2">
       <i18n-t keypath="app.thanks_3rd_party" tag="div">
@@ -67,10 +66,9 @@ import StackValue from './stack-value/StackValue.vue'
 import FilterName from './filters/FilterName.vue'
 import { CATEGORY_TO_TRADE_ID, createTradeRequest } from './trade/pathofexile-trade'
 import { AppConfig } from '@/web/Config'
-import { FilterPreset, StatFilter } from './filters/interfaces'
+import { FilterPreset } from './filters/interfaces'
 import { PriceCheckWidget } from '../overlay/interfaces'
 import { useLeagues } from '@/web/background/Leagues'
-import MercenaryFilters from './filters/MercenaryFilters.vue'
 
 let _showSupportLinksCounter = 0
 
@@ -83,7 +81,6 @@ export default defineComponent({
     TradeLinks,
     PriceTrend,
     FiltersBlock,
-    MercenaryFilters,
     FilterName,
     StackValue
   },
@@ -140,7 +137,8 @@ export default defineComponent({
           (item.category === ItemCategory.SanctumRelic) ||
           (item.category === ItemCategory.Charm) ||
           (item.category === ItemCategory.Idol) ||
-          (!CATEGORY_TO_TRADE_ID.has(item.category!)) ||
+          (!CATEGORY_TO_TRADE_ID.has(item.category!) &&
+            item.info.refName !== 'Mercenary Warrant') ||
           (item.isUnidentified) ||
           (item.isVeiled)
         )
@@ -232,15 +230,6 @@ export default defineComponent({
 
     const { t } = useI18n()
 
-    function addMercenaryStat (stat: StatFilter) {
-      itemStats.value.push(stat)
-    }
-
-    function removeMercenaryStat (stat: StatFilter) {
-      const index = itemStats.value.indexOf(stat)
-      if (index !== -1) itemStats.value.splice(index, 1)
-    }
-
     return {
       t,
       itemFilters,
@@ -252,9 +241,9 @@ export default defineComponent({
       showPredictedPrice,
       show,
       handleSearchMouseenter,
-      addMercenaryStat,
-      removeMercenaryStat,
       showSupportLinks,
+      showComplexityHint: computed(() => !widget.value.builtinBrowser && !doSearch.value &&
+        props.item.info.refName === 'Mercenary Warrant'),
       presets: computed(() => presets.value.presets.map(preset =>
         ({ id: preset.id, active: (preset.id === presets.value.active) }))),
       selectPreset (id: string) {
@@ -270,3 +259,20 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="postcss" module>
+.complexityHint {
+  display: flex;
+  align-items: baseline;
+  gap: theme('spacing.2');
+  margin-top: theme('spacing.4');
+  padding: theme('spacing.2') theme('spacing.4') theme('spacing.2') theme('spacing.3');
+  border-radius: theme('borderRadius.DEFAULT');
+  background: theme('colors.gray.900');
+  text-wrap-style: pretty;
+
+  & > i {
+    color: theme('colors.gray.600');
+  }
+}
+</style>

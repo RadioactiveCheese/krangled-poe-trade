@@ -9,37 +9,30 @@
         :filter="filters.mapTier" :name="t('item.map_tier')" />
       <filter-btn-logical v-if="filters.mapCompletionReward" readonly
         :filter="{ disabled: false }" :text="t('item.map_foil_reward', [filters.mapCompletionReward.name])" />
-      <filter-btn-logical v-if="filters.scryingMapArea" readonly
-        :filter="{ disabled: false }" :text="filters.scryingMapArea" />
       <filter-btn-numeric v-if="filters.areaLevel"
         :filter="filters.areaLevel" :name="t('item.area_level')" />
       <filter-btn-logical v-if="filters.chartShape" raw
         :filter="filters.chartShape" :text="t('item.chart_shape', [filters.chartShape.name])" />
-      <filter-btn-numeric v-if="filters.heistWingsRevealed"
-        :filter="filters.heistWingsRevealed" :name="t('item.heist_wings_revealed')" />
       <filter-btn-numeric v-if="filters.sentinelCharge"
         :filter="filters.sentinelCharge" :name="t('item.sentinel_charge')" />
       <filter-btn-logical v-if="filters.mapBlighted" readonly
         :filter="{ disabled: false }" :text="filters.mapBlighted.value" />
       <filter-btn-logical v-if="filters.discriminator?.value && !filters.mercenaryBuild" readonly
         :filter="{ disabled: false }" :text="filters.discriminator.value" />
-      <template v-if="filters.mercenaryBuild && mercenaryBuildVariant">
-        <filter-btn-logical v-if="mercenaryBuildVariant.infamousTradeId" controlled
+      <template v-if="filters.mercenaryBuild">
+        <filter-btn-logical v-if="filters.mercenaryBuild.variants" controlled
           :filter="filters.mercenaryBuild"
           :active="mercenaryInfamousActive"
           text="mercenary.infamous"
-          @toggle="handleToggleMercenaryInfamous" />
+          @toggle="toggleMercenaryInfamous" />
         <filter-btn-logical controlled raw
           :filter="filters.mercenaryBuild"
           :active="!filters.mercenaryBuild.disabled"
-          :text="mercenaryBuildVariant.baseName"
-          @toggle="handleToggleMercenaryBuild" />
+          :text="filters.mercenaryBuild.variants?.normal.value ?? filters.mercenaryBuild.value"
+          @toggle="toggleMercenaryBuild" />
       </template>
-      <filter-btn-logical v-else-if="filters.mercenaryBuild" readonly raw
-        :filter="filters.mercenaryBuild"
-        :text="filters.mercenaryBuild.value" />
       <filter-btn-numeric v-if="filters.itemLevel"
-        :filter="filters.itemLevel" :name="item.mercenary ? t('mercenary.level') : t('item.item_level')" />
+        :filter="filters.itemLevel" :name="item.info.refName === 'Mercenary Warrant' ? t('mercenary.level') : t('item.item_level')" />
       <filter-btn-numeric v-if="filters.stackSize"
         :filter="filters.stackSize" :name="t('item.stock')" />
       <filter-btn-numeric v-if="filters.whiteSockets"
@@ -85,11 +78,15 @@
         <div class="flex-1 border-b border-gray-700" />
       </div>
       <form @submit.prevent="handleStatsSubmit">
-        <filter-modifier v-for="filter of filteredStats" :key="filter.tag + '/' + filter.text"
-          :filter="filter"
-          :item="item"
-          :show-sources="showFilterSources"
-          @submit="handleStatsSubmit" />
+        <template v-for="filter of filteredStats">
+          <filter-group v-if="filter.group" :key="`group_${filter.meta.tag}_${filter.meta.text}`"
+            :group="filter"
+            :item="item" />
+          <filter-modifier v-else :key="`${filter.tag}_${filter.text}`"
+            :filter="filter"
+            :item="item"
+            :show-sources="showFilterSources" />
+        </template>
         <div v-if="!filteredStats.length && !showUnknownMods"
           class="border-b border-gray-700 py-2">{{ t('filters.empty') }}</div>
         <template v-if="showUnknownMods">
@@ -115,27 +112,19 @@ import { defineComponent, watch, shallowRef, shallowReactive, computed, PropType
 import { useI18n } from 'vue-i18n'
 import UiToggle from '@/web/ui/UiToggle.vue'
 import FilterModifier from './FilterModifier.vue'
+import FilterGroup from './FilterGroup.vue'
 import FilterBtnNumeric from './FilterBtnNumeric.vue'
 import FilterBtnLogical from './FilterBtnLogical.vue'
 import UnknownModifier from './UnknownModifier.vue'
-import { ItemFilters, StatFilter } from './interfaces'
+import { ItemFilters, FilterOrGroup } from './interfaces'
 import { ParsedItem, ItemRarity, ItemCategory } from '@/parser'
-import {
-  loadMercenaryTradeData,
-  type MercenaryBuildVariant,
-  type MercenaryTradeData
-} from '../trade/mercenary-trade-data'
-import {
-  isMercenaryInfamousActive,
-  toggleMercenaryBuild,
-  toggleMercenaryInfamous
-} from './mercenary-build-filter'
 
 export default defineComponent({
   name: 'FiltersBlock',
   emits: ['submit', 'preset'],
   components: {
     FilterModifier,
+    FilterGroup,
     FilterBtnNumeric,
     FilterBtnLogical,
     UnknownModifier,
@@ -151,7 +140,7 @@ export default defineComponent({
       required: true
     },
     stats: {
-      type: Array as PropType<StatFilter[]>,
+      type: Array as PropType<FilterOrGroup[]>,
       required: true
     },
     item: {
@@ -163,51 +152,11 @@ export default defineComponent({
     const statsVisibility = shallowReactive({ disabled: false })
     const showHidden = shallowRef(false)
     const showFilterSources = shallowRef(false)
-    const mercenaryTradeData = shallowRef<MercenaryTradeData>()
 
     watch(() => props.item, () => {
       showHidden.value = false
       statsVisibility.disabled = false
     })
-
-    watch(() => props.item.mercenary?.build, async (build) => {
-      mercenaryTradeData.value = undefined
-      if (!build) return
-
-      try {
-        const data = await loadMercenaryTradeData()
-        if (props.item.mercenary?.build === build) mercenaryTradeData.value = data
-      } catch {
-        // MercenaryFilters displays the retryable metadata-loading error.
-      }
-    }, { immediate: true })
-
-    const mercenaryBuildVariant = computed<MercenaryBuildVariant | undefined>(() => {
-      const build = props.filters.mercenaryBuild?.value
-      return build ? mercenaryTradeData.value?.buildVariants.get(build) : undefined
-    })
-
-    const mercenaryInfamousActive = computed(() => {
-      const filter = props.filters.mercenaryBuild
-      const variant = mercenaryBuildVariant.value
-      if (!filter || !variant || filter.disabled) return false
-      return isMercenaryInfamousActive(filter, variant)
-    })
-
-    function handleToggleMercenaryInfamous () {
-      const filter = props.filters.mercenaryBuild
-      const variant = mercenaryBuildVariant.value
-      if (!filter || !variant) return
-
-      toggleMercenaryInfamous(filter, variant)
-    }
-
-    function handleToggleMercenaryBuild () {
-      const filter = props.filters.mercenaryBuild
-      if (!filter) return
-
-      toggleMercenaryBuild(filter)
-    }
 
     const showUnknownMods = computed(() =>
       props.item.unknownModifiers.length &&
@@ -217,24 +166,52 @@ export default defineComponent({
 
     const { t } = useI18n()
 
+    const mercenaryInfamousActive = computed(() => {
+      const filter = props.filters.mercenaryBuild
+      return Boolean(filter?.variants && filter.tradeId === filter.variants.infamous.tradeId)
+    })
+
+    function toggleMercenaryInfamous () {
+      const filter = props.filters.mercenaryBuild
+      if (!filter?.variants) return
+
+      const variant = mercenaryInfamousActive.value
+        ? filter.variants.normal
+        : filter.variants.infamous
+      filter.value = variant.value
+      filter.tradeId = variant.tradeId
+      filter.disabled = false
+    }
+
+    function toggleMercenaryBuild () {
+      const filter = props.filters.mercenaryBuild
+      if (filter) filter.disabled = !filter.disabled
+    }
+
     return {
       t,
       statsVisibility,
       showHidden,
       showFilterSources,
-      mercenaryBuildVariant,
       mercenaryInfamousActive,
-      handleToggleMercenaryInfamous,
-      handleToggleMercenaryBuild,
+      toggleMercenaryInfamous,
+      toggleMercenaryBuild,
       totalSelectedMods: computed(() => {
-        return props.stats.filter(stat => !stat.disabled).length
+        return props.stats.filter(stat => {
+          if (stat.group) {
+            return !stat.meta.disabled
+          }
+          return !stat.disabled
+        }).length
       }),
       filteredStats: computed(() => {
-        if (showHidden.value) {
-          return props.stats.filter(s => s.hidden)
-        } else {
-          return props.stats.filter(s => !s.hidden)
-        }
+        const show = showHidden.value
+        return props.stats.filter(s => {
+          if (s.group) {
+            return Boolean(s.meta.hidden) === show
+          }
+          return Boolean(s.hidden) === show
+        })
       }),
       searchSub: computed(() => {
         const { filters } = props

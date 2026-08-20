@@ -8,7 +8,6 @@
     "pretest": "npm run make-index-files",
     "test": "vitest run --exclude specs/mercenary-warrant-integration.spec.mjs --exclude specs/vestigial-unique-integration.spec.mjs --exclude specs/chart-integration.spec.mjs --exclude specs/memory-strands-integration.spec.mjs && node --test --test-concurrency=1 specs/mercenary-warrant-integration.spec.mjs specs/vestigial-unique-integration.spec.mjs specs/chart-integration.spec.mjs specs/memory-strands-integration.spec.mjs",
     "build": "vue-tsc --noEmit && vite build",
-    "generate-mercenary-build-skills": "node src/assets/generate-mercenary-build-skills.mjs",
     "make-index-files": "node src/assets/make-index-files.mjs",
     "make-eldritch-implicit-data": "node scripts/generate-eldritch-implicit-metadata.mjs"
   },

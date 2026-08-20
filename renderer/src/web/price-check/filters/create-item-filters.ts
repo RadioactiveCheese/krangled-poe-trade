@@ -46,23 +46,38 @@ export function createFilters (
     if (!opts.currency) {
       filters.trade.currency = 'chaos_divine'
     }
-    filters.trade.collapseMerchant = true
+    if (item.info.refName !== 'Mercenary Warrant') {
+      filters.trade.collapseMerchant = true
+    }
   }
 
-  if (item.mercenary) {
+  if (item.info.refName === 'Mercenary Warrant') {
+    const normal = item.mercenaryBuild!
+    const infamous = item.mercenaryInfamousVariant
+    const variant = item.mercenaryBuildVariant!
+    const isStandardVariant = (
+      variant.refName === normal.refName ||
+      variant.refName === infamous?.refName
+    )
+
     filters.searchExact = {
       baseType: item.info.name,
       baseTypeTrade: t(opts, item.info)
     }
-    filters.discriminator = {
-      trade: 'mercenary_warrant'
-    }
+    filters.discriminator = { trade: item.info.tradeDisc! }
     filters.mercenaryBuild = {
-      value: item.mercenary.build,
-      disabled: false
+      value: variant.name,
+      tradeId: variant.mercenaryTradeId!,
+      disabled: false,
+      variants: (isStandardVariant && infamous)
+        ? {
+            normal: { value: normal.name, tradeId: normal.mercenaryTradeId! },
+            infamous: { value: infamous.name, tradeId: infamous.mercenaryTradeId! }
+          }
+        : undefined
     }
     filters.itemLevel = {
-      value: item.mercenary.level,
+      value: item.itemLevel!,
       disabled: false
     }
     return filters
@@ -112,8 +127,6 @@ export function createFilters (
       baseType: item.info.name,
       baseTypeTrade: item.mapArea.tradeDisc!
     }
-    filters.scryingMapArea = item.mapArea.name
-
     return filters
   }
   if (
@@ -211,13 +224,6 @@ export function createFilters (
       value: item.areaLevel!,
       disabled: false
     }
-
-    if (item.heistBlueprint?.wingsRevealed) {
-      filters.heistWingsRevealed = {
-        value: item.heistBlueprint.wingsRevealed,
-        disabled: false
-      }
-    }
   } else if (item.rarity === ItemRarity.Unique && item.info.unique) {
     filters.searchExact = {
       name: item.info.name,
@@ -312,12 +318,7 @@ export function createFilters (
     // item.isCorrupted && -- let the buyer corrupt
     (item.category === ItemCategory.Jewel || item.category === ItemCategory.AbyssJewel))
 
-  if (!item.isUnmodifiable && (
-    item.rarity === ItemRarity.Normal ||
-    item.rarity === ItemRarity.Magic ||
-    item.rarity === ItemRarity.Rare ||
-    item.rarity === ItemRarity.Unique
-  )) {
+  if (!item.isUnmodifiable && (item.info.craftable || item.rarity === ItemRarity.Unique)) {
     filters.corrupted = {
       value: item.isCorrupted,
       exact: forAdornedJewel
@@ -339,11 +340,11 @@ export function createFilters (
       value: 'magic',
       disabled: true
     }
-  } else if (
+  } else if (item.info.craftable && (
     item.rarity === ItemRarity.Normal ||
     item.rarity === ItemRarity.Magic ||
     item.rarity === ItemRarity.Rare
-  ) {
+  )) {
     filters.rarity = {
       value: 'nonunique',
       disabled: false
@@ -502,6 +503,15 @@ function createGemFilters (
       baseType: item.info.name,
       baseTypeTrade: t(opts, normalGem),
       discriminatorTrade: item.info.tradeDisc!
+    }
+  }
+
+  if (item.vaalGem) {
+    filters.searchExact.sub = {
+      baseType: item.vaalGem.name,
+      baseTypeTrade: t(opts, item.vaalGem),
+      discriminatorTrade: item.info.tradeDisc,
+      disabled: false
     }
   }
 

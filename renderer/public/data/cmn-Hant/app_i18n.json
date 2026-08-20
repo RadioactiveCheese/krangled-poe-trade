@@ -52,5 +52,8 @@
       "remove_filter": "移除篩選",
       "retry": "重試",
       "loadout": "傭兵技能配置"
+    },
+    "filters": {
+      "mercenary_primary_no_support": "主要技能沒有輔助寶石"
     }
 }

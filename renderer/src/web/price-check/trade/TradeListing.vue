@@ -31,7 +31,7 @@
               <div class="px-2">{{ t(':stock') }}</div>
             </th>
             <th v-if="filters.itemLevel" :class="$style.tableHeading">
-              <div class="px-2">{{ item.mercenary ? t('mercenary.level') : t(':item_level') }}</div>
+              <div class="px-2">{{ item.info.refName === 'Mercenary Warrant' ? t('mercenary.level') : t(':item_level') }}</div>
             </th>
             <th v-if="item.category === 'Gem'" :class="$style.tableHeading">
               <div class="px-2">{{ t(':gem_level') }}</div>
@@ -90,11 +90,11 @@
   </div>
   <ui-error-box v-else>
     <template #name>{{ t(':error') }}</template>
-    <p>Error: {{ error }}</p>
-    <p v-if="canCreateTradeLink">{{ t('app.leagues_failed_help') }}</p>
+    <p v-if="error.includes('JSON')">{{ t('app.leagues_failed_help') }}</p>
+    <p v-else>Error: {{ error }}</p>
     <template #actions>
       <button class="btn" @click="execSearch">{{ t('Retry') }}</button>
-      <button v-if="canCreateTradeLink" class="btn" @click="openTradeLink">{{ t('Browser') }}</button>
+      <button class="btn" @click="openTradeLink">{{ t('Browser') }}</button>
     </template>
   </ui-error-box>
 </template>
@@ -108,13 +108,12 @@ import { makeupViewEnabled } from './trade-tooltip'
 import { getTradeEndpoint } from './common'
 import { AppConfig } from '@/web/Config'
 import { PriceCheckWidget } from '@/web/overlay/interfaces'
-import { ItemFilters, StatFilter } from '../filters/interfaces'
+import { ItemFilters, FilterOrGroup } from '../filters/interfaces'
 import { ItemRarity, ParsedItem } from '@/parser'
 import { artificialSlowdown } from './artificial-slowdown'
 import OnlineFilter from './OnlineFilter.vue'
 import TradeLinks from './TradeLinks.vue'
 import TradeItem from './TradeItem.vue'
-import { loadMercenaryTradeData, resolveMercenaryBuildTradeId } from './mercenary-trade-data'
 
 const slowdown = artificialSlowdown(900)
 
@@ -162,7 +161,7 @@ function useTradeApi () {
     return out
   })
 
-  async function search (filters: ItemFilters, stats: StatFilter[]) {
+  async function search (filters: ItemFilters, stats: FilterOrGroup[]) {
     try {
       searchId += 1
       error.value = null
@@ -171,12 +170,6 @@ function useTradeApi () {
       fetchResults.value = _fetchResults
 
       const _searchId = searchId
-      if (filters.mercenaryBuild && !filters.mercenaryBuild.disabled) {
-        const mercenaryData = await loadMercenaryTradeData()
-        if (!mercenaryData.builds.has(filters.mercenaryBuild.value)) {
-          throw new Error(`Unknown Mercenary build: ${filters.mercenaryBuild.value}`)
-        }
-      }
       const request = createTradeRequest(filters, stats)
       const _searchResult = await requestTradeResultList(request, filters.trade.league)
       if (_searchId !== searchId) {
@@ -234,7 +227,7 @@ export default defineComponent({
       required: true
     },
     stats: {
-      type: Array as PropType<StatFilter[]>,
+      type: Array as PropType<FilterOrGroup[]>,
       required: true
     },
     item: {
@@ -253,13 +246,6 @@ export default defineComponent({
     const expandedResultId = shallowRef<string | null>(null)
 
     const showBrowser = inject<(url: string) => void>('builtin-browser')!
-    const canCreateTradeLink = computed(() => {
-      const build = props.filters.mercenaryBuild
-      return !props.item.mercenary ||
-        build?.disabled ||
-        Boolean(build && resolveMercenaryBuildTradeId(build.value, build.infamous))
-    })
-
     function makeTradeLink () {
       return (searchResult.value)
         ? `https://${getTradeEndpoint()}/trade/search/${props.filters.trade.league}/${searchResult.value.id}`
@@ -290,7 +276,6 @@ export default defineComponent({
       }),
       execSearch: () => { search(props.filters, props.stats) },
       error,
-      canCreateTradeLink,
       showSeller: computed(() => widget.value.showSeller),
       makeupView: makeupViewEnabled,
       showMakeupToggle: computed(() =>

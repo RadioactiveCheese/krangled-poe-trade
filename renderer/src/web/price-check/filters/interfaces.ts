@@ -1,11 +1,12 @@
 import type { ItemInfluence, ItemCategory } from '@/parser'
 import type { StatCalculated } from '@/parser/modifiers'
 import type { ParsedItem } from '@/parser/ParsedItem'
+import type { Stat } from '@/assets/data'
 
 export interface FilterPreset {
   id: string
   filters: ItemFilters
-  stats: StatFilter[]
+  stats: FilterOrGroup[]
 }
 
 interface SearchFilter {
@@ -31,8 +32,12 @@ export interface ItemFilters {
   }
   mercenaryBuild?: {
     value: string
+    tradeId: string
     disabled: boolean
-    infamous?: boolean
+    variants?: {
+      normal: { value: string, tradeId: string }
+      infamous: { value: string, tradeId: string }
+    }
   }
   rarity?: {
     value: string
@@ -81,7 +86,6 @@ export interface ItemFilters {
     name: string
     nameTrade: string
   }
-  scryingMapArea?: string
   itemLevel?: FilterNumeric
   stackSize?: FilterNumeric
   unidentified?: {
@@ -98,7 +102,6 @@ export interface ItemFilters {
     name: string
     disabled: boolean
   }
-  heistWingsRevealed?: FilterNumeric
   sentinelCharge?: FilterNumeric
   trade: {
     offline: boolean
@@ -118,12 +121,25 @@ export interface FilterNumeric {
   disabled: boolean
 }
 
+export type FilterOrGroup =
+  | StatFilter
+  | FilterGroup
+
+export interface FilterGroup {
+  group: 'not' | 'mercenary'
+  expanded: boolean // NOTE: mutable in UI
+  meta: StatFilter
+  stats: StatFilter[]
+}
+
 export interface StatFilter {
+  group?: never
   tradeId: string[]
   statRef: string
   text: string
   tag: FilterTag
   oils?: string[]
+  mercenary?: { icon?: string, tier?: number, supportFamilies?: Stat[][] }
   sources: StatCalculated['sources']
   not?: true
   roll?: {
@@ -145,6 +161,7 @@ export interface StatFilter {
 }
 
 const _INTERNAL_TRADE_IDS = [
+  'item.not_group',
   'item.base_percentile',
   'item.memory_strands',
   'item.armour',
@@ -158,6 +175,7 @@ const _INTERNAL_TRADE_IDS = [
   'item.crit',
   'item.aps',
   'item.has_empty_modifier',
+  'item.mercenary_6link',
   'item.map_item_quantity',
   'item.map_item_rarity',
   'item.map_pack_size',
@@ -172,7 +190,9 @@ const _INTERNAL_TRADE_IDS = [
   'item.heist_job_agility',
   'item.heist_job_deception',
   'item.heist_job_engineering',
-  'item.heist_target_priceless'
+  'item.heist_target_priceless',
+  'item.heist_wings_revealed',
+  'item.heist_wings_total'
 ] as const
 
 export type InternalTradeId = typeof _INTERNAL_TRADE_IDS[number]
@@ -210,6 +230,10 @@ export enum FilterTag {
   Incursion = 'explicit-incursion',
   Infamous = 'explicit-infamous',
   Essence = 'explicit-essence',
-  MercenarySkill = 'mercenary-skill',
-  MercenarySupport = 'mercenary-support'
+  Brick = 'brick',
+  MercenaryPrimary = 'mercenary-primary',
+  MercenarySecondary = 'mercenary-secondary',
+  MercenaryUtility = 'mercenary-utility',
+  MercenarySupport = 'mercenary-support',
+  FilterGroup = 'filter-group'
 }
