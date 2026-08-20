@@ -29,6 +29,12 @@ test('localized Mercenary metadata matches the checked-in English set', async ()
     )
     assert.deepEqual(stats, canonicalStats,
       `${language} must contain the same Mercenary stat IDs as English`)
+
+    const translations = JSON.parse(
+      await fs.readFile(path.join(publicDir, `data/${language}/app_i18n.json`), 'utf8')
+    )
+    assert.equal(typeof translations.filters?.mercenary_primary_no_support, 'string',
+      `${language} must translate the primary Mercenary skill without supports hint`)
   }
 
   assert.equal(canonicalBuilds.has('Infamous Warpriest of the Ruckus'), true)

@@ -166,6 +166,7 @@
     "hide_anointment": "Buyer will likely change anointment",
     "hide_for_crafting": "Select only if price-checking as base item for crafting",
     "hide_empty_mod": "Select only if item has 6 modifiers (1 of which is crafted) or if it has 5 modifiers",
+    "mercenary_primary_no_support": "주요 스킬에 보조 젬이 없습니다",
 
     "tag_implicit": "고정 속성",
     "tag_fractured": "분열된",
