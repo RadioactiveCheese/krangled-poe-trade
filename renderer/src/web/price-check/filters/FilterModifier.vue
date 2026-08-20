@@ -9,10 +9,10 @@
       <div class="flex items-baseline">
         <div class="flex items-baseline min-w-0 mr-2">
           <button :class="[$style.checkbox, { [$style.checked]: !isDisabled, [$style.uncheckedHint]: isDisabled && groupExpanded }]"
-            @click="toggleFilter" type="submit">
+            @click="toggleFilter" type="button">
             <i :class="isDisabled ? 'far fa-square' : 'fas fa-check-square'" />
           </button>
-          <button :class="$style.labelBtn" @click="smartToggle" type="submit">
+          <button :class="$style.labelBtn" @click="smartToggle" type="button">
             <img v-if="filter.mercenary?.icon"
               :src="filter.mercenary.icon">
             <span v-if="filter.not && miniFilter"
@@ -44,7 +44,7 @@
             </div>
           </div>
           <div v-else-if="rollOptions" :class="$style.rollOptions">
-            <button v-for="option of rollOptions" :key="option.value" type="submit"
+            <button v-for="option of rollOptions" :key="option.value" type="button"
               @click="handleOptionClick($event, option.value)"
               :class="[$style.rollOption, {
                 [$style.filterChecked]: !filter.disabled,
@@ -215,7 +215,6 @@ export default defineComponent({
     }
 
     function handleOptionClick (e: MouseEvent, value: number) {
-      if (e.detail === 0) return
       e.preventDefault()
 
       if (value === props.filter.option!.value) {
@@ -227,7 +226,6 @@ export default defineComponent({
     }
 
     function toggleFilter (e: MouseEvent) {
-      if (e.detail === 0) return
       e.preventDefault()
 
       props.filter.disabled = !props.filter.disabled
@@ -238,7 +236,6 @@ export default defineComponent({
     }
 
     function smartToggle (e: MouseEvent) {
-      if (e.detail === 0) return
       e.preventDefault()
 
       if (!props.filter.disabled && props.groupExpanded === true) {

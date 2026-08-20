@@ -8,7 +8,37 @@ import { createServer } from 'vite'
 const rendererDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 const publicDir = path.join(rendererDir, 'public')
 
-test('Mercenary metadata covers the complete official Trade dataset', async () => {
+test('localized Mercenary metadata matches the checked-in English set', async () => {
+  const canonicalItems = await readNdjson(path.join(publicDir, 'data/en/items.ndjson'))
+  const canonicalBuilds = mercenaryBuildMap(canonicalItems)
+  const canonicalStats = mercenaryStatIds(
+    await readNdjson(path.join(publicDir, 'data/en/stats.ndjson'))
+  )
+
+  for (const language of ['en', 'ru', 'ko', 'cmn-Hant']) {
+    const items = await readNdjson(path.join(publicDir, `data/${language}/items.ndjson`))
+    assert.deepEqual(mercenaryBuildMap(items), canonicalBuilds,
+      `${language} must contain the same Mercenary builds and Trade IDs as English`)
+    const warrant = items.find(entry => entry.refName === 'Mercenary Warrant')
+    assert.ok(warrant, `${language} must contain the Mercenary Warrant base item`)
+    assert.equal(warrant.tradeDisc, 'mercenary_warrant')
+    assert.match(warrant.icon, /MercenaryWarrant\.png$/u)
+
+    const stats = mercenaryStatIds(
+      await readNdjson(path.join(publicDir, `data/${language}/stats.ndjson`))
+    )
+    assert.deepEqual(stats, canonicalStats,
+      `${language} must contain the same Mercenary stat IDs as English`)
+  }
+
+  assert.equal(canonicalBuilds.has('Infamous Warpriest of the Ruckus'), true)
+  assert.equal(canonicalStats.has('mercenary.skill_26705'), true)
+  assert.equal(canonicalStats.has('mercenary.skill_5673'), true)
+})
+
+test('Mercenary metadata covers the complete official Trade dataset', {
+  skip: !process.env.TEST_LIVE_TRADE_API && 'set TEST_LIVE_TRADE_API=1 to run'
+}, async () => {
   const [itemsResponse, statsResponse] = await Promise.all([
     fetch('https://www.pathofexile.com/api/trade/data/items', {
       headers: { 'User-Agent': 'Krangled-PoE-Trade metadata test' },
@@ -24,49 +54,26 @@ test('Mercenary metadata covers the complete official Trade dataset', async () =
 
   const officialItems = await itemsResponse.json()
   const officialStats = await statsResponse.json()
-  const officialBuilds = officialItems.result
-    .find(group => group.id === 'map').entries
-    .filter(entry => entry.disc === 'mercenary_warrant')
+  const mapGroup = officialItems.result.find(group => group.id === 'map')
+  assert.ok(mapGroup, 'official items response must contain the "map" group')
+  const officialBuilds = mapGroup.entries.filter(entry => entry.disc === 'mercenary_warrant')
   const officialBuildsByName = new Map(officialBuilds.map(entry => [
     entry.text.match(/\(([^()]*)\)$/u)?.[1],
     entry.type
   ]))
-  const officialStatIds = new Set(
-    officialStats.result.find(group => group.id === 'mercenary').entries
-      .map(entry => entry.id)
-  )
+  assert.equal(officialBuildsByName.has(undefined), false,
+    'every official Mercenary Warrant must expose a build name')
+
+  const mercenaryGroup = officialStats.result.find(group => group.id === 'mercenary')
+  assert.ok(mercenaryGroup, 'official stats response must contain the "mercenary" group')
+  const officialStatIds = new Set(mercenaryGroup.entries.map(entry => entry.id))
 
   const localItems = await readNdjson(path.join(publicDir, 'data/en/items.ndjson'))
-  const localBuildRows = localItems
-    .filter(entry => entry.namespace === 'MERCENARY_BUILD')
-  const localBuildNames = new Set(localBuildRows.map(entry => entry.refName))
-
-  for (const language of ['en', 'ru', 'ko', 'cmn-Hant']) {
-    const items = await readNdjson(path.join(publicDir, `data/${language}/items.ndjson`))
-    const buildRows = items
-      .filter(entry => entry.namespace === 'MERCENARY_BUILD')
-    assert.deepEqual(
-      new Map(buildRows.map(entry => [entry.refName, entry.mercenaryTradeId])),
-      officialBuildsByName,
-      `${language} Mercenary builds and Trade IDs must exactly match the official set`
-    )
-    const warrant = items.find(entry => entry.refName === 'Mercenary Warrant')
-    assert.equal(warrant.tradeDisc, 'mercenary_warrant')
-    assert.match(warrant.icon, /MercenaryWarrant\.png$/u)
-
-    const stats = await readNdjson(path.join(publicDir, `data/${language}/stats.ndjson`))
-    const localStatIds = new Set(stats
-      .flatMap(expandStatGroups)
-      .flatMap(entry => entry.trade?.ids?.pseudo ?? [])
-      .filter(id => id.startsWith('mercenary.')))
-    assert.deepEqual(localStatIds, officialStatIds,
-      `${language} Mercenary stat IDs must exactly match the official set`)
-    assert.equal(localStatIds.has('mercenary.skill_26705'), true)
-    assert.equal(localStatIds.has('mercenary.skill_5673'), true)
-  }
-
-  // Regression coverage for additions that exposed the stale fork-only mapping.
-  assert.equal(localBuildNames.has('Infamous Warpriest of the Ruckus'), true)
+  assert.deepEqual(mercenaryBuildMap(localItems), officialBuildsByName,
+    'English Mercenary builds and Trade IDs must exactly match the official set')
+  const localStats = await readNdjson(path.join(publicDir, 'data/en/stats.ndjson'))
+  assert.deepEqual(mercenaryStatIds(localStats), officialStatIds,
+    'English Mercenary stat IDs must exactly match the official set')
 })
 
 test('parses and filters a complete Mercenary Warrant with strict validation', async () => {
@@ -135,6 +142,16 @@ test('parses and filters a complete Mercenary Warrant with strict validation', a
     assert.equal(renamedVariant.value.mercenaryBuildVariant.mercenaryTradeId, 'AurasMinionsTemplarSmiteRuckusNoble')
     assert.doesNotThrow(() => createMercenaryFilters(renamedVariant.value))
 
+    const metadataDrift = parseClipboard(warrantText({
+      details: ['Build: Earthshaker', 'Mercenary Level: 83'],
+      skills: [['Smite']]
+    }))
+    assert.equal(metadataDrift.isOk(), true)
+    const driftFilters = createMercenaryFilters(metadataDrift.value)
+    const driftSkill = driftFilters.find(filter => !filter.group && filter.statRef === 'Smite')
+    assert.ok(driftSkill)
+    assert.equal(driftSkill.tag, 'mercenary-utility')
+
     for (const invalid of [
       warrantText({ details: ['Build: Earthshaker', 'Mercenary Level: 101'], skills: [['Vaal Ground Slam']] }),
       warrantText({ details: ['Build: Earthshaker', 'Mercenary Level 83'], skills: [['Vaal Ground Slam']] }),
@@ -171,4 +188,17 @@ async function readNdjson (file) {
 
 function expandStatGroups (entry) {
   return entry.stats ?? [entry]
+}
+
+function mercenaryBuildMap (items) {
+  return new Map(items
+    .filter(entry => entry.namespace === 'MERCENARY_BUILD')
+    .map(entry => [entry.refName, entry.mercenaryTradeId]))
+}
+
+function mercenaryStatIds (stats) {
+  return new Set(stats
+    .flatMap(expandStatGroups)
+    .flatMap(entry => entry.trade?.ids?.pseudo ?? [])
+    .filter(id => id.startsWith('mercenary.')))
 }

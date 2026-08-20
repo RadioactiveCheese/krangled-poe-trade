@@ -1,6 +1,6 @@
 import { Stat, MercenaryBuild, stat } from '@/assets/data'
 import { ItemCategory, ParsedItem } from '@/parser'
-import { ModifierType, StatSource } from '@/parser/modifiers'
+import { ModifierType } from '@/parser/modifiers'
 import { findAndResolveByRef, metaNotFilter } from './utils'
 import { propToFilter } from './item-property'
 import { FilterTag, FilterOrGroup, FilterGroup, StatFilter } from '../interfaces'
@@ -35,7 +35,7 @@ export function createMercenaryFilters (item: ParsedItem): FilterOrGroup[] {
       !support.stat.mercenary!.syntheticFamily || support.stat.mercenary!.tier === 3)
 
     const skillType = mercenaryBuild.skills.find(buildSkill =>
-      buildSkill.name === skill.stat.ref)!.type
+      buildSkill.name === skill.stat.ref)?.type ?? 'utility'
     const skillFilter = skillToFilter({
       stat: skill.stat,
       type: skillType,
@@ -74,13 +74,15 @@ export function createMercenaryFilters (item: ParsedItem): FilterOrGroup[] {
 
     if (supports.length === 5 && possibleSupports.length) {
       const tier3Count = supports.filter(support => support.stat.mercenary!.tier! >= 3).length
-      filterGroup.stats.push(propToFilter({
+      const sixLinkFilter = propToFilter({
         ref: '6-Link',
         tradeId: 'item.mercenary_6link',
         roll: { min: 0, max: 5, value: tier3Count },
-        sources: possibleSupports.map(family => encodeFamilyToSource(family)),
+        sources: [],
         disabled: true
-      }, { filters: [], item, searchInRange: 0, statsByType: [] }))
+      }, { filters: [], item, searchInRange: 0, statsByType: [] })
+      sixLinkFilter.mercenary = { supportFamilies: possibleSupports }
+      filterGroup.stats.push(sixLinkFilter)
     }
 
     for (const support of supports) {
@@ -181,20 +183,6 @@ export enum SearchMode {
 
 function findGemByRef (name: string): Stat {
   return findAndResolveByRef(name, ModifierType.Pseudo, ItemCategory.MercenaryWarrant)
-}
-
-function encodeFamilyToSource (family: Stat[]): StatSource {
-  return {
-    modifier: {
-      info: undefined!,
-      stats: family.map(stat => ({ stat: stat, translation: undefined! }))
-    },
-    stat: undefined!
-  }
-}
-
-export function decodeFamilyFromSource (source: StatSource): Stat[] {
-  return source.modifier.stats.map(stat => stat.stat)
 }
 
 type SkillType = MercenaryBuild['skills'][number]['type']

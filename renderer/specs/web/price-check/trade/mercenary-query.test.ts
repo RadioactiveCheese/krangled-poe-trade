@@ -5,7 +5,7 @@ import { createTradeRequest } from '@/web/price-check/trade/pathofexile-trade'
 import { FilterTag, type FilterOrGroup, type ItemFilters, type StatFilter } from '@/web/price-check/filters/interfaces'
 import { createFilters } from '@/web/price-check/filters/create-item-filters'
 import { ItemRarity, type ParsedItem } from '@/parser'
-import type { BaseType } from '@/assets/data'
+import { StatBetter, type BaseType, type Stat } from '@/assets/data'
 
 function itemFilters (): ItemFilters {
   const normal = mercenaryBuild('Warpriest', 'AurasMinionsTemplarSmite', { skills: [] })
@@ -104,6 +104,37 @@ describe('Mercenary and Heist grouped trade queries', () => {
     })
   })
 
+  it('serializes six-link support families without synthetic modifier sources', () => {
+    const families = Array.from({ length: 5 }, (_, index) => [mercenaryStat(
+      `Support ${index + 1}`,
+      `mercenary.support_${index + 1}`
+    )])
+    const sixLink = stat({
+      tradeId: ['item.mercenary_6link'],
+      statRef: '6-Link',
+      tag: FilterTag.Property,
+      mercenary: { supportFamilies: families },
+      roll: roll(0)
+    })
+
+    const request = createTradeRequest(itemFilters(), [{
+      group: 'mercenary',
+      expanded: true,
+      meta: stat({
+        tradeId: ['mercenary.skill_primary'],
+        statRef: 'Primary Skill',
+        tag: FilterTag.MercenaryPrimary
+      }),
+      stats: [sixLink]
+    }])
+
+    expect(sixLink.sources).toEqual([])
+    const sixLinkGroup = request.query.stats.find(group => group.type === 'mercenary')
+    expect(sixLinkGroup?.filters.map(filter => filter.id)).toEqual(expect.arrayContaining(
+      families.map(family => family[0].trade.ids.pseudo[0])
+    ))
+  })
+
   it('serializes revealed and total Heist wings exactly once through property filters', () => {
     const stats: FilterOrGroup[] = [
       stat({
@@ -134,6 +165,16 @@ function roll (value: number): NonNullable<StatFilter['roll']> {
     default: { min: value, max: value },
     dp: false,
     isNegated: false
+  }
+}
+
+function mercenaryStat (ref: string, tradeId: string): Stat {
+  return {
+    ref,
+    matchers: [{ string: ref }],
+    better: StatBetter.NotComparable,
+    mercenary: { tier: 3 },
+    trade: { ids: { pseudo: [tradeId] } }
   }
 }
 

@@ -5,7 +5,7 @@ import { DateTime } from 'luxon'
 import { Host } from '@/web/background/IPC'
 import { TradeResponse, Account, getTradeEndpoint, adjustRateLimits, RATE_LIMIT_RULES, preventQueueCreation } from './common'
 import { stat, STAT_BY_REF_V2, pseudoStatByRef } from '@/assets/data'
-import { decodeFamilyFromSource as decodeMercenarySupports, SearchMode as MercSearchMode } from '../filters/pseudo/mercenary'
+import { SearchMode as MercSearchMode } from '../filters/pseudo/mercenary'
 import { RateLimiter } from './RateLimiter'
 import { ModifierType } from '@/parser/modifiers'
 import { Cache } from './Cache'
@@ -656,8 +656,7 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
           const forceEnabled = (stat.disabled && localNotStats.length > 0)
           if (stat.disabled && !forceEnabled) continue
 
-          const possibleSupports = stat.sources
-            .map(source => decodeMercenarySupports(source))
+          const possibleSupports = (stat.mercenary?.supportFamilies ?? [])
             .filter(family => !localNotStats.some(notStat =>
               notStat.statRef === family[0].mercenary!.canonical ||
               notStat.statRef === family[0].ref

@@ -1,6 +1,7 @@
 import type { ItemInfluence, ItemCategory } from '@/parser'
 import type { StatCalculated } from '@/parser/modifiers'
 import type { ParsedItem } from '@/parser/ParsedItem'
+import type { Stat } from '@/assets/data'
 
 export interface FilterPreset {
   id: string
@@ -138,7 +139,7 @@ export interface StatFilter {
   text: string
   tag: FilterTag
   oils?: string[]
-  mercenary?: { icon?: string, tier?: number }
+  mercenary?: { icon?: string, tier?: number, supportFamilies?: Stat[][] }
   sources: StatCalculated['sources']
   not?: true
   roll?: {
