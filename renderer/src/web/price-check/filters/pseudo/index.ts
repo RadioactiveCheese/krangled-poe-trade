@@ -364,18 +364,9 @@ export function filterPseudo (ctx: FiltersCreationContext) {
     !PSEUDO_RULES.some(rule => rule.stats.some(({ ref }) => m.stat.ref === ref)))
 
   if (filterByGroup.has('to_x_ele_res')) {
-    const resFilters = filterByGroup.get('to_x_ele_res')!
-
-    resFilters.sort((a, b) => b.roll!.value - a.roll!.value)
-    const maxFilter = (resFilters[0]?.roll?.value === resFilters[1]?.roll?.value)
-      ? undefined
-      : resFilters[0]
-
-    if (maxFilter) {
-      maxFilter.hidden = 'filters.hide_ele_res'
+    for (const filter of filterByGroup.get('to_x_ele_res')!) {
+      filter.hidden = 'filters.hide_ele_res'
     }
-
-    ctx.filters = ctx.filters.filter(filter => !resFilters.includes(filter) || filter === maxFilter)
   }
 
   if (filterByGroup.has('to_x_attr')) {
