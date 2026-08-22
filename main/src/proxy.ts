@@ -8,7 +8,6 @@ const PROXY_HOSTS = [
   { host: 'pathofexile.tw', official: true },
   { host: 'poe.kakaogames.com', official: true },
   { host: 'poe.ninja', official: false },
-  { host: 'www.poeprices.info', official: false },
 ]
 
 export class HttpProxy {

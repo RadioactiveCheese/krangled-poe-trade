@@ -3,9 +3,7 @@
     <filter-name
       :filters="itemFilters"
       :item="item" />
-    <price-prediction v-if="showPredictedPrice" class="mb-4"
-      :item="item" />
-    <price-trend v-else
+    <price-trend
       :item="item"
       :filters="itemFilters" />
     <filters-block
@@ -43,7 +41,6 @@
     <stack-value :filters="itemFilters" :item="item"/>
     <div v-if="showSupportLinks" class="mt-auto border border-dashed p-2">
       <i18n-t keypath="app.thanks_3rd_party" tag="div">
-        <a href="https://poeprices.info" target="_blank" class="bg-gray-900 px-1 rounded">poeprices.info</a>
         <a href="https://poe.ninja/support" target="_blank" class="bg-gray-900 px-1 rounded">poe.ninja</a>
       </i18n-t>
     </div>
@@ -61,7 +58,6 @@ import { apiToSatisfySearch, getTradeEndpoint } from './trade/common'
 import PriceTrend from './trends/PriceTrend.vue'
 import FiltersBlock from './filters/FiltersBlock.vue'
 import { createPresets } from './filters/create-presets'
-import PricePrediction from './price-prediction/PricePrediction.vue'
 import StackValue from './stack-value/StackValue.vue'
 import FilterName from './filters/FilterName.vue'
 import { CATEGORY_TO_TRADE_ID, createTradeRequest } from './trade/pathofexile-trade'
@@ -75,7 +71,6 @@ let _showSupportLinksCounter = 0
 export default defineComponent({
   name: 'CheckedItem',
   components: {
-    PricePrediction,
     TradeListing,
     TradeBulk,
     TradeLinks,
@@ -181,24 +176,6 @@ export default defineComponent({
       }
     }, { deep: false })
 
-    const showPredictedPrice = computed(() => {
-      if (!widget.value.requestPricePrediction ||
-          AppConfig().language !== 'en' ||
-          !leagues.selected.value!.isPopular) return false
-
-      if (presets.value.active === 'filters.preset_base_item') return false
-
-      return props.item.rarity === ItemRarity.Rare &&
-        props.item.category !== ItemCategory.Map &&
-        props.item.category !== ItemCategory.Chart &&
-        props.item.category !== ItemCategory.CapturedBeast &&
-        props.item.category !== ItemCategory.HeistContract &&
-        props.item.category !== ItemCategory.HeistBlueprint &&
-        props.item.category !== ItemCategory.Invitation &&
-        props.item.info.refName !== 'Expedition Logbook' &&
-        !props.item.isUnidentified
-    })
-
     const show = computed(() => {
       return !(props.item.rarity === ItemRarity.Unique &&
         props.item.isUnidentified &&
@@ -238,7 +215,6 @@ export default defineComponent({
       tradeAPI,
       tradeService,
       filtersComponent,
-      showPredictedPrice,
       show,
       handleSearchMouseenter,
       showSupportLinks,
