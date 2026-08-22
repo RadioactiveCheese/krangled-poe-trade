@@ -308,13 +308,6 @@ function upgradeConfig (_config: Config): Config {
     config.configVersion = 10
   }
 
-  if (config.configVersion < 11) {
-    config.widgets.find(w => w.wmType === 'price-check')!
-      .requestPricePrediction = false
-
-    config.configVersion = 11
-  }
-
   if (config.configVersion < 12) {
     const afterSettings = config.widgets.findIndex(w => w.wmType === 'settings')
     config.widgets.splice(afterSettings + 1, 0, {
