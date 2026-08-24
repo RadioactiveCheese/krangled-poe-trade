@@ -17,11 +17,13 @@ vi.mock('@/web/Config', () => ({
   AppConfig: () => config
 }))
 
-vi.mock('@/parser', () => ({
+vi.mock('@/parser', async (importOriginal) => ({
+  ...await importOriginal<typeof import('@/parser')>(),
   parseClipboard: vi.fn()
 }))
 
-import { openPoedb } from '@/web/item-check/hotkeyable-actions'
+import { ItemCategory } from '@/parser'
+import { openPoedb, openPoedbMods } from '@/web/item-check/hotkeyable-actions'
 
 function parsedItem (refName: string): Parameters<typeof openPoedb>[0] {
   return { info: { refName } } as Parameters<typeof openPoedb>[0]
@@ -49,5 +51,41 @@ describe('openPoedb', () => {
 
     expect(open).toHaveBeenCalledOnce()
     expect(open).toHaveBeenCalledWith(expectedUrl)
+  })
+})
+
+describe('openPoedbMods', () => {
+  beforeEach(() => {
+    config.language = 'en'
+    vi.restoreAllMocks()
+  })
+
+  it('opens the base modifier pool for a normal item', () => {
+    const open = vi.spyOn(window, 'open').mockImplementation(() => null)
+    const twilightRegalia = {
+      category: ItemCategory.BodyArmour,
+      armourES: 301,
+      info: { refName: 'Twilight Regalia' }
+    } as Parameters<typeof openPoedbMods>[0]
+
+    openPoedbMods(twilightRegalia)
+
+    expect(open).toHaveBeenCalledWith('https://poedb.tw/us/Body_Armours_int')
+  })
+
+  it('opens an identified unique item page', () => {
+    const open = vi.spyOn(window, 'open').mockImplementation(() => null)
+    const shavronnesWrappings = {
+      category: ItemCategory.BodyArmour,
+      armourES: 350,
+      info: {
+        refName: "Shavronne's Wrappings",
+        unique: { base: "Occultist's Vestment" }
+      }
+    } as Parameters<typeof openPoedbMods>[0]
+
+    openPoedbMods(shavronnesWrappings)
+
+    expect(open).toHaveBeenCalledWith('https://poedb.tw/us/Shavronnes_Wrappings')
   })
 })

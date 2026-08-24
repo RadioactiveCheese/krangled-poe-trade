@@ -1,12 +1,13 @@
 import { Host } from '@/web/background/IPC'
 import { AppConfig } from '@/web/Config'
 import { ParsedItem, parseClipboard } from '@/parser'
+import { getPoedbItemPage, getPoedbModsPage } from './poedb-mods'
 
 const POEDB_LANGS = { 'en': 'us', 'ru': 'ru', 'cmn-Hant': 'tw', 'ko': 'kr' }
 
 export function registerActions () {
   Host.onEvent('MAIN->CLIENT::item-text', (e) => {
-    if (!['open-wiki', 'open-craft-of-exile', 'open-poedb', 'search-similar'].includes(e.target)) return
+    if (!['open-wiki', 'open-craft-of-exile', 'open-poedb', 'open-poedb-mods', 'search-similar'].includes(e.target)) return
     const parsed = parseClipboard(e.clipboard)
     if (!parsed.isOk()) return
 
@@ -16,6 +17,8 @@ export function registerActions () {
       openCoE(parsed.value)
     } else if (e.target === 'open-poedb') {
       openPoedb(parsed.value)
+    } else if (e.target === 'open-poedb-mods') {
+      openPoedbMods(parsed.value)
     } else if (e.target === 'search-similar') {
       findSimilarItems(parsed.value)
     }
@@ -26,8 +29,12 @@ export function openWiki (item: ParsedItem) {
   window.open(`https://www.poewiki.net/wiki/${item.info.refName}`)
 }
 export function openPoedb (item: ParsedItem) {
-  const slug = encodeURIComponent(item.info.refName.replaceAll("'", '').replaceAll(' ', '_'))
-  window.open(`https://poedb.tw/${POEDB_LANGS[AppConfig().language]}/${slug}`)
+  window.open(`https://poedb.tw/${POEDB_LANGS[AppConfig().language]}/${getPoedbItemPage(item)}`)
+}
+export function openPoedbMods (item: ParsedItem) {
+  const page = getPoedbModsPage(item) ?? getPoedbItemPage(item)
+
+  window.open(`https://poedb.tw/${POEDB_LANGS[AppConfig().language]}/${page}`)
 }
 export function openCoE (item: ParsedItem) {
   const encodedClipboard = encodeURIComponent(item.rawText)
