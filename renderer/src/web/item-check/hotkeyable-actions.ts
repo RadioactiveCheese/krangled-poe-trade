@@ -26,7 +26,8 @@ export function openWiki (item: ParsedItem) {
   window.open(`https://www.poewiki.net/wiki/${item.info.refName}`)
 }
 export function openPoedb (item: ParsedItem) {
-  window.open(`https://poedb.tw/${POEDB_LANGS[AppConfig().language]}/search?q=${item.info.refName}`)
+  const slug = encodeURIComponent(item.info.refName.replaceAll("'", '').replaceAll(' ', '_'))
+  window.open(`https://poedb.tw/${POEDB_LANGS[AppConfig().language]}/${slug}`)
 }
 export function openCoE (item: ParsedItem) {
   const encodedClipboard = encodeURIComponent(item.rawText)
