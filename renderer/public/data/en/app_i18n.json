@@ -96,6 +96,7 @@
     "complexity_hint": "Price-checking this item will most likely require you to enable the built-in browser and log in to your account.",
     "open_on_wiki": "Open item on wiki",
     "open_on_poedb": "Open item on PoEDB",
+    "open_mods_on_poedb": "Open modifiers on PoEDB",
     "open_on_craftofexile": "Open base item on Craft of Exile",
     "info": "Item info",
     "corrupted": "Corrupted",

@@ -86,6 +86,7 @@
     "identification": "식별되지 않은 \"{0}\" 베이스 타입의 유니크 가격을 체크하려고 합니다. 어떤 아이템입니까?",
     "open_on_wiki": "PoE Wiki에서 아이템 보기",
     "open_on_poedb": "PoEDB에서 아이템 보기",
+    "open_mods_on_poedb": "PoEDB에서 속성 보기",
     "info": "아이템 정보",
     "corrupted": "타락",
     "not_corrupted": "타락되지 않은",

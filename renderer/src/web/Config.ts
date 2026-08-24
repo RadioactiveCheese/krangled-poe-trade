@@ -126,7 +126,7 @@ export interface Config {
 }
 
 export const defaultConfig = (): Config => ({
-  configVersion: 22,
+  configVersion: 23,
   overlayKey: 'Shift + Space',
   overlayBackground: 'rgba(129, 139, 149, 0.15)',
   overlayBackgroundClose: true,
@@ -456,6 +456,12 @@ function upgradeConfig (_config: Config): Config {
     }
     config.configVersion = 22
   }
+
+  if (config.configVersion < 23) {
+    const itemCheck = config.widgets.find(w => w.wmType === 'item-check') as ItemCheckWidget
+    itemCheck.poedbModsKey = null
+    config.configVersion = 23
+  }
   /* eslint-enable */
 
   return config as unknown as Config
@@ -501,6 +507,12 @@ function getConfigForHost (): HostConfig {
     actions.push({
       shortcut: itemCheck.poedbKey,
       action: { type: 'copy-item', target: 'open-poedb' }
+    })
+  }
+  if (itemCheck.poedbModsKey) {
+    actions.push({
+      shortcut: itemCheck.poedbModsKey,
+      action: { type: 'copy-item', target: 'open-poedb-mods' }
     })
   }
   if (itemCheck.stashSearchKey) {

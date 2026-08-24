@@ -5,6 +5,7 @@ export interface ItemCheckWidget extends Widget {
   hotkey: string | null
   wikiKey: string | null
   poedbKey: string | null
+  poedbModsKey: string | null
   craftOfExileKey: string | null
   stashSearchKey: string | null
   maps: MapCheckConfig

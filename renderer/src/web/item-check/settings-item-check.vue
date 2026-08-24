@@ -32,6 +32,10 @@ const hotkeys = computed(() => {
     translationKey: 'item.open_on_poedb',
     config: _configModelValue(widget, 'poedbKey')
   })
+  out.push({
+    translationKey: 'item.open_mods_on_poedb',
+    config: _configModelValue(widget, 'poedbModsKey')
+  })
   if (isEnglish) {
     out.push({
       translationKey: 'item.open_on_craftofexile',
