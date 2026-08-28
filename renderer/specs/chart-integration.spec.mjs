@@ -47,6 +47,44 @@ Players have -14(-14--12)% to all maximum Resistances
 --------
 Take this item to Valerie aboard the Sovereign to Chart this area.`
 
+const CROSSING_CHART_TEXT = `Item Class: Chart
+Rarity: Rare
+Nautical Journey
+Coral Reef Chart
+--------
+Seafloor Ridges
+Area Level: 83
+Item Quantity: +112% (augmented)
+Monster Pack Size: +36% (augmented)
+--------
+Requirements:
+Level: 66
+--------
+Item Level: 83
+--------
+{ Implicit Modifier }
+Voyage Modifier will be revealed once Charted
+--------
+Chart Shape: Crossing
+--------
+{ Prefix Modifier "Unstoppable" (Tier: 1) — Speed }
+Monsters cannot be Taunted — Unscalable Value
+Monsters' Action Speed cannot be modified to below Base Value
+Monsters' Movement Speed cannot be modified to below Base Value — Unscalable Value
+{ Prefix Modifier "Fecund" (Tier: 1) — Life }
+48(46-60)% more Monster Life
+{ Prefix Modifier "Unwavering" (Tier: 1) — Life }
+15(10-20)% more Monster Life
+Monsters cannot be Stunned — Unscalable Value
+{ Suffix Modifier "of Deadliness" (Tier: 1) — Damage, Critical }
+Monsters have 304(242-350)% increased Critical Strike Chance
++45(41-45)% to Monster Critical Strike Multiplier
+{ Suffix Modifier "of Snares" (Tier: 1) }
+Monsters inflict 3 Grasping Vines on Hit
+(Up to 10 Vines can grasp you, inflicting 8% less Movement Speed per Vine. Broken by moving)
+--------
+Take this item to Valerie aboard the Sovereign to Chart this area.`
+
 const DUCAT_TEXT = `Item Class: Stackable Currency
 Rarity: Currency
 The Genteel's Ducat
@@ -140,6 +178,8 @@ test('parses chart properties and map-style aggregate values', () => {
   assert.equal(item.category, runtime.ItemCategory.Chart)
   assert.equal(item.info.refName, 'Sandy Seabed Chart')
   assert.equal(item.info.tradeDisc, 'chart_sandy_seabed')
+  assert.equal(item.mapArea.refName, 'Hazardous Depths')
+  assert.equal(item.mapArea.area.special, true)
   assert.equal(item.areaLevel, 83)
   assert.equal(item.itemLevel, 83)
   assert.deepEqual(item.chart, {
@@ -153,6 +193,18 @@ test('parses chart properties and map-style aggregate values', () => {
   assert.equal(item.areaItemQuantity, 25)
   assert.equal(item.areaPackSize, 18)
   assert.deepEqual(item.unknownModifiers, [])
+})
+
+test('parses the reported Crossing chart and resolves its area metadata', () => {
+  const item = parseItem(CROSSING_CHART_TEXT)
+
+  assert.equal(item.info.refName, 'Coral Reef Chart')
+  assert.equal(item.mapArea.refName, 'Seafloor Ridges')
+  assert.equal(item.mapArea.area?.special, undefined)
+  assert.equal(item.chart.areaName, 'Seafloor Ridges')
+  assert.equal(item.chart.areaId, 'SeafloorRidges')
+  assert.equal(item.chart.shape, 'Crossing')
+  assert.equal(item.chart.shapeId, '5')
 })
 
 test('charts are accepted by the Map Check tool and expose their dangerous modifiers', () => {
@@ -193,3 +245,46 @@ test('indexes every localized name for a shared area reference', async () => {
     await runtime.Data.init('en')
   }
 })
+
+test('Chart metadata covers the complete official Trade dataset', {
+  skip: !process.env.TEST_LIVE_TRADE_API && 'set TEST_LIVE_TRADE_API=1 to run'
+}, async () => {
+  const response = await originalFetch('https://www.pathofexile.com/api/trade/data/items', {
+    headers: { 'User-Agent': 'Krangled-PoE-Trade metadata test' },
+    signal: AbortSignal.timeout(15_000)
+  })
+  assert.equal(response.ok, true)
+
+  const official = await response.json()
+  const chartGroup = official.result.find(group => group.id === 'chart')
+  assert.ok(chartGroup, 'official items response must contain the "chart" group')
+
+  const officialBaseTypes = new Set(chartGroup.entries
+    .filter(entry => !entry.disc && entry.type.endsWith(' Chart'))
+    .map(entry => entry.type))
+  const officialAreas = new Map(chartGroup.entries
+    .filter(entry => entry.disc === 'chart')
+    .map(entry => [entry.text.match(/^Chart \((.*)\)$/u)?.[1], entry.type]))
+  assert.equal(officialAreas.has(undefined), false,
+    'every official Chart area must expose its canonical name')
+
+  const localItems = await readNdjson(path.join(PUBLIC, 'data/en/items.ndjson'))
+  const localBaseTypes = new Set(localItems
+    .filter(entry => entry.namespace === 'ITEM' && entry.craftable?.category === 'Chart')
+    .map(entry => entry.refName))
+  const localAreas = new Map(localItems
+    .filter(entry => entry.namespace === 'AREA' && officialAreas.has(entry.refName))
+    .map(entry => [entry.refName, entry.tradeDisc]))
+
+  assert.deepEqual(localBaseTypes, officialBaseTypes,
+    'English Chart base types must exactly match the official set')
+  assert.deepEqual(localAreas, officialAreas,
+    'English Chart areas and Trade option IDs must exactly match the official set')
+})
+
+async function readNdjson (file) {
+  return (await fs.readFile(file, 'utf8'))
+    .trim()
+    .split(/\r?\n/u)
+    .map(line => JSON.parse(line))
+}
