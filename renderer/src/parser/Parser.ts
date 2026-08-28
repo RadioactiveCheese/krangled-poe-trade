@@ -1086,6 +1086,8 @@ function parseChartProperties (section: string[], item: ParsedItem) {
   if (!item.areaLevel) return 'SECTION_SKIPPED'
 
   const areaName = section[0]
+  const areaInfo = ITEM_BY_TRANSLATED('AREA', areaName)
+  if (areaInfo?.length) item.mapArea = areaInfo[0]
   item.chart = {
     areaName,
     areaId: resolveChartArea(areaName, item.info.refName)
