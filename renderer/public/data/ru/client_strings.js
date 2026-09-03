@@ -104,6 +104,8 @@ export default {
   INCURSION_OBSTRUCTED: 'Отделённые комнаты:',
   EATER_IMPLICIT: /^Собственное свойство Пожирателя миров \((?<rank>.+)\)$/,
   EXARCH_IMPLICIT: /^Собственное свойство Пламенного экзарха \((?<rank>.+)\)$/,
+  ITEM_EATER: 'Предмет Пожирателя миров',
+  ITEM_EXARCH: 'Предмет Пламенного экзарха',
   ELDRITCH_MOD_R1: 'Мелкий',
   ELDRITCH_MOD_R2: 'Крупный',
   ELDRITCH_MOD_R3: 'Великий',
@@ -167,7 +169,7 @@ export default {
   FOULBORN_MODIFIER: 'Нечестивое уникальное свойство',
   VESTIGIAL_NAME: /^Вырожденный: (.*)$/,
   VESTIGIAL_IMPLICIT: 'Собственное свойство вояжа',
-  SCRYING_MAP_AREA: 'Область карты: ',
+  MAP_AREA: 'Область карты: ',
   CHART_SULPHUR: 'Мертвецкая сера: ',
   // ---
   CHAT_SYSTEM: /^: (?<body>.+)$/,

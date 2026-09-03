@@ -104,6 +104,8 @@ export default {
   INCURSION_OBSTRUCTED: '受阻的房間：',
   EATER_IMPLICIT: /^吞噬天地固定詞綴 \((?<rank>.+)\)$/,
   EXARCH_IMPLICIT: /^灼烙總督固定詞綴 \((?<rank>.+)\)$/,
+  ITEM_EATER: '吞噬天地物品',
+  ITEM_EXARCH: '卓烙總督物品',
   ELDRITCH_MOD_R1: '低階',
   ELDRITCH_MOD_R2: '高階',
   ELDRITCH_MOD_R3: '宏偉',
@@ -128,7 +130,7 @@ export default {
   FOULBORN_MODIFIER: 'Foulborn Unique Modifier',
   VESTIGIAL_NAME: /^殘存 (.*)$/,
   VESTIGIAL_IMPLICIT: '殘存固定詞綴',
-  SCRYING_MAP_AREA: '地圖區域: ',
+  MAP_AREA: '地圖區域: ',
   CHART_SULPHUR: '亡者硫酸: ',
   // ---
   CHAT_SYSTEM: /^: (?<body>.+)$/,

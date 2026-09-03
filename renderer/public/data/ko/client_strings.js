@@ -104,6 +104,8 @@ export default {
   INCURSION_OBSTRUCTED: '막힌 방:',
   EATER_IMPLICIT: /^세계 포식자 고정 속성 \((?<rank>.+)\)$/,
   EXARCH_IMPLICIT: /^작열의 총주교 고정 속성 \((?<rank>.+)\)$/,
+  ITEM_EATER: '세계 포식자 아이템',
+  ITEM_EXARCH: '작열의 총주교 아이템',
   ELDRITCH_MOD_R1: '하급',
   ELDRITCH_MOD_R2: '상급',
   ELDRITCH_MOD_R3: '우수한',
@@ -128,7 +130,7 @@ export default {
   FOULBORN_MODIFIER: '삿된 고유 속성',
   VESTIGIAL_NAME: /^흔적 (.*)$/,
   VESTIGIAL_IMPLICIT: '흔적 고정 속성',
-  SCRYING_MAP_AREA: '지도 지역: ',
+  MAP_AREA: '지도 지역: ',
   CHART_SULPHUR: '망자의 유황: ',
   // ---
   CHAT_SYSTEM: /^: (?<body>.+)$/,

@@ -15,7 +15,6 @@ The most up-to-date build instructions can be derived from
 ```sh
 cd renderer
 npm ci
-npm run make-index-files
 npm run dev
 
 # In a second shell
