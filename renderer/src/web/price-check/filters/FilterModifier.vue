@@ -72,9 +72,12 @@
           <span v-if="showTag"
             :class="[$style['tag'], $style[`tag-${tag}`]]">{{ t(`filters.tag_${tag.replace('-', '_')}`) }}{{ (filter.sources.length > 1) ? ` x ${filter.sources.length}` : null }}</span>
           <filter-modifier-tiers :filter="filter" :item="item" />
-          <filter-modifier-item-has-empty :filter="filter" />
+          <filter-modifier-options v-if="rollOptions"
+            show-checked="always"
+            :options="rollOptions"
+            :filter="filter" />
         </div>
-        <stat-roll-slider v-if="roll && roll.bounds"
+        <stat-roll-slider v-if="roll && roll.bounds && showBounds()"
           class="ml-2 mr-4" style="width: 12.5rem;"
           v-model="sliderValue"
           :roll="roll.value"
@@ -95,21 +98,16 @@ import UiPopover from '@/web/ui/Popover.vue'
 import StatRollSlider from '../../ui/StatRollSlider.vue'
 import ItemModifierText from '../../ui/ItemModifierText.vue'
 import ModifierAnointment from './FilterModifierAnointment.vue'
-import FilterModifierItemHasEmpty from './FilterModifierItemHasEmpty.vue'
+import FilterModifierOptions, { RollOption } from './FilterModifierOptions.vue'
 import FilterModifierTiers from './FilterModifierTiers.vue'
 import { AppConfig } from '@/web/Config'
 import { ItemCategory, ItemRarity, ParsedItem } from '@/parser'
-import { FilterTag, StatFilter, INTERNAL_TRADE_IDS } from './interfaces'
+import { FilterTag, StatFilter, INTERNAL_TRADE_IDS, ItemHasEmptyModifier } from './interfaces'
 import SourceInfo from './SourceInfo.vue'
 import { SearchMode as MercSearchMode } from './pseudo/mercenary.js'
 
-interface RollOption {
-  text: string
-  value: number
-}
-
 export default defineComponent({
-  components: { ItemModifierText, ModifierAnointment, FilterModifierItemHasEmpty, FilterModifierTiers, SourceInfo, StatRollSlider, UiPopover },
+  components: { ItemModifierText, ModifierAnointment, FilterModifierOptions, FilterModifierTiers, SourceInfo, StatRollSlider, UiPopover },
   emits: ['update:groupExpanded'],
   props: {
     filter: {
@@ -155,9 +153,7 @@ export default defineComponent({
       props.item.info.refName !== 'Mirrored Tablet' &&
       props.item.info.refName !== 'Filled Coffin' &&
       props.item.category !== ItemCategory.Gem &&
-      !(props.item.rarity === ItemRarity.Unique && (
-        props.filter.tag === FilterTag.Explicit ||
-        props.filter.tag === FilterTag.Pseudo))
+      !(props.item.rarity === ItemRarity.Unique && props.filter.tag === FilterTag.Explicit && (props.filter.roll?.bounds || props.filter.hidden) && !props.grouped)
     )
 
     const showQ20Notice = computed(() => {
@@ -285,6 +281,12 @@ export default defineComponent({
             { text: t('filters.option_merc_required'), value: MercSearchMode.Required },
             { text: t('filters.option_merc_optional'), value: MercSearchMode.Optional }
           ]
+        } else if (props.filter.tradeId[0] === 'item.has_empty_modifier') {
+          return [
+            { text: t('filters.option_empty_affix'), value: ItemHasEmptyModifier.Any },
+            { text: t('filters.option_empty_prefix'), value: ItemHasEmptyModifier.Prefix },
+            { text: t('filters.option_empty_suffix'), value: ItemHasEmptyModifier.Suffix }
+          ]
         }
       }),
       fontSize: computed(() => AppConfig().fontSize),
@@ -311,8 +313,8 @@ export default defineComponent({
             props.filter.sources[0].modifier.info.rank != null
           )
         )),
+      showBounds: () => props.item.rarity === ItemRarity.Unique,
       inputFocus,
-      handleOptionClick,
       toggleFilter,
       toggleExpanded,
       smartToggle
@@ -415,29 +417,9 @@ export default defineComponent({
   text-align: center;
 }
 
-.rollOptions {
-  display: flex;
-  align-items: baseline;
-  gap: theme('spacing.1');
+.miniRollOptions {
   margin: -99px 0; /* not allowed to extend baseline */
   margin-left: auto;
-}
-
-.rollOption {
-  background: theme('colors.gray.700');
-  color: theme('colors.gray.400');
-  padding: 0 theme('spacing.2');
-  border: 1px solid transparent;
-  min-width: theme('width.10');
-  text-align: center;
-  white-space: nowrap;
-  line-height: 1.125rem;
-  border-radius: theme('borderRadius.DEFAULT');
-
-  &.checked.filterChecked {
-    color: theme('colors.gray.300');
-    border-color: theme('colors.gray.500');
-  }
 }
 
 .mods {

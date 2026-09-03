@@ -80,7 +80,7 @@ export interface ItemFilters {
   gemLevel?: FilterNumeric
   mapTier?: FilterNumeric
   mapBlighted?: {
-    value: NonNullable<ParsedItem['mapBlighted']>
+    value: 'Blighted' | 'Blight-ravaged' | false
   }
   mapCompletionReward?: {
     name: string
@@ -107,8 +107,8 @@ export interface ItemFilters {
     offline: boolean
     onlineInLeague: boolean
     merchantOnly: boolean
-    listed: string | undefined
-    currency: string | undefined
+    listed: string | null
+    currency: string | null
     league: string
     collapseListings: 'api' | 'app'
     collapseMerchant: boolean
@@ -126,7 +126,7 @@ export type FilterOrGroup =
   | FilterGroup
 
 export interface FilterGroup {
-  group: 'not' | 'mercenary'
+  group: 'not' | 'one' | 'mercenary'
   expanded: boolean // NOTE: mutable in UI
   meta: StatFilter
   stats: StatFilter[]
@@ -162,6 +162,7 @@ export interface StatFilter {
 
 const _INTERNAL_TRADE_IDS = [
   'item.not_group',
+  'item.count_one_group',
   'item.base_percentile',
   'item.memory_strands',
   'item.armour',
