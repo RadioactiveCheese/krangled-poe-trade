@@ -39,6 +39,7 @@
       {{ t('item.complexity_hint') }}
     </p>
     <stack-value :filters="itemFilters" :item="item"/>
+    <dust-value v-if="item.dustEquivalent" :item="item"/>
     <div v-if="showSupportLinks" class="mt-auto border border-dashed p-2">
       <i18n-t keypath="app.thanks_3rd_party" tag="div">
         <a href="https://poe.ninja/support" target="_blank" class="bg-gray-900 px-1 rounded">poe.ninja</a>
@@ -77,7 +78,8 @@ export default defineComponent({
     PriceTrend,
     FiltersBlock,
     FilterName,
-    StackValue
+    StackValue,
+    DustValue
   },
   props: {
     item: {
@@ -105,10 +107,11 @@ export default defineComponent({
     const filtersComponent = ref<ComponentPublicInstance>(null!)
 
     watch(() => props.item, (item, prevItem) => {
-      const prevCurrency = (presets.value != null) ? itemFilters.value.trade.currency : undefined
+      const prevCurrency = (presets.value != null) ? itemFilters.value.trade.currency : null
 
       presets.value = createPresets(item, {
         league: leagues.selectedId.value!,
+        merchantOnly: widget.value.merchantOnly,
         collapseListings: widget.value.collapseListings,
         activateStockFilter: widget.value.activateStockFilter,
         searchStatRange: widget.value.searchStatRange,
@@ -116,7 +119,7 @@ export default defineComponent({
         currency: (prevItem &&
           item.info.namespace === prevItem.info.namespace &&
           item.info.refName === prevItem.info.refName
-        ) ? prevCurrency : undefined
+        ) ? prevCurrency : widget.value.defaultCurrency
       })
 
       if ((!props.advancedCheck && !widget.value.smartInitialSearch) ||
