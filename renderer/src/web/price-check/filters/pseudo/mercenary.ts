@@ -111,7 +111,10 @@ export function createMercenaryFilters (item: ParsedItem): FilterOrGroup[] {
         statRef: canonStat.ref,
         text: canonStat.matchers[0].string,
         tag: FilterTag.MercenarySupport,
-        mercenary: { tier: tier },
+        mercenary: {
+          tier: tier,
+          maxTier: (tier >= 3 || support.stat.modFamily?.at(-1) === support.stat.ref)
+        },
         sources: [],
         option: { value: SearchMode.Required },
         disabled: true

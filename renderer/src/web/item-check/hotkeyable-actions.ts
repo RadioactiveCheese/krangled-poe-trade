@@ -1,9 +1,14 @@
 import { Host } from '@/web/background/IPC'
-import { AppConfig } from '@/web/Config'
+import { AppConfig, Config } from '@/web/Config'
 import { ParsedItem, parseClipboard } from '@/parser'
 import { getPoedbItemPage, getPoedbModsPage } from './poedb-mods'
 
-const POEDB_LANGS = { 'en': 'us', 'ru': 'ru', 'cmn-Hant': 'tw', 'ko': 'kr' }
+const POEDB_LANGS: Record<Config['language'], string> = {
+  'en': 'us',
+  'ru': 'ru',
+  'cmn-Hant': 'tw',
+  'ko': 'kr'
+}
 
 export function registerActions () {
   Host.onEvent('MAIN->CLIENT::item-text', (e) => {
