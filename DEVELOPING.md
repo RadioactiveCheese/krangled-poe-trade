@@ -15,7 +15,6 @@ The most up-to-date build instructions can be derived from
 ```sh
 cd renderer
 npm ci
-npm run make-index-files
 npm run dev
 
 # In a second shell
@@ -25,6 +24,10 @@ npm run dev
 ```
 
 # How to build
+
+Vite generates the item/stat indexes before development and production builds,
+and regenerates them when their NDJSON source files change during development.
+`npm run make-index-files` remains available for tools that load data outside Vite.
 
 ```sh
 cd renderer
