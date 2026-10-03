@@ -16,8 +16,12 @@
       <div v-else class="flex flex-col gap-1 text-gray-100" :class="{ 'opacity-50': error === 'invalid' }">
         <div v-if="split" class="flex flex-wrap items-center justify-center gap-1 rounded bg-gray-800 p-1 text-xl">
           <span v-if="split.negative">&minus;</span>
-          <span class="min-w-0 break-all">{{ split.divine }}</span><img src="/images/divine.png" class="w-7 h-7 shrink-0">
-          <span class="min-w-0 break-all">{{ split.chaos }}</span><img src="/images/chaos.png" class="w-7 h-7 shrink-0">
+          <span class="flex items-center gap-1 min-w-0">
+            <span class="min-w-0 break-all">{{ split.divine }}</span><img src="/images/divine.png" class="w-7 h-7 shrink-0">
+          </span>
+          <span class="flex items-center gap-1 min-w-0">
+            <span class="min-w-0 break-all">{{ split.chaos }}</span><img src="/images/chaos.png" class="w-7 h-7 shrink-0">
+          </span>
         </div>
         <div class="grid gap-1" style="grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);">
           <div class="flex items-center justify-end gap-1 rounded bg-gray-800 p-1">
