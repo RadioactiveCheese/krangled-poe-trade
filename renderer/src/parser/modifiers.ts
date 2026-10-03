@@ -66,12 +66,17 @@ export function statSourcesTotal (
   sources: StatSource[],
   mode: 'sum' | 'max' = 'sum'
 ): StatRoll | undefined {
+  if (sources.every(source => !source.contributes)) {
+    return undefined
+  }
+
   const fn = (mode === 'sum')
     ? (a: number, b: number) => a + b
     : (a: number, b: number) => Math.max(a, b)
   return (sources.length === 1)
     ? (sources[0].contributes)
     : (sources.reduce((sum, { contributes }) => {
+        // A flag contributes one when combined with numeric sources.
         contributes = contributes ?? { value: 1, min: 1, max: 1 }
         sum.value = fn(sum.value, contributes.value)
         sum.min = fn(sum.min, contributes.min)
@@ -106,7 +111,7 @@ export function translateStatWithRoll (
 
   const dp = (roll)
     ? calc.stat.dp ||
-      calc.sources.some(s => s.stat.stat.ref === calc.stat.ref && s.stat.roll!.dp)
+      calc.sources.some(s => s.stat.stat.ref === calc.stat.ref && s.stat.roll?.dp)
     : undefined
 
   return { string: translation.string, negate: translation.negate || false, dp: dp }

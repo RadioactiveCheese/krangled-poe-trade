@@ -107,8 +107,8 @@ export interface ItemFilters {
     offline: boolean
     onlineInLeague: boolean
     merchantOnly: boolean
-    listed: string | undefined
-    currency: string | undefined
+    listed: string | null
+    currency: string | null
     league: string
     collapseListings: 'api' | 'app'
     collapseMerchant: boolean
@@ -139,7 +139,7 @@ export interface StatFilter {
   text: string
   tag: FilterTag
   oils?: string[]
-  mercenary?: { icon?: string, tier?: number, supportFamilies?: Stat[][] }
+  mercenary?: { icon?: string, tier?: number, maxTier?: boolean, supportFamilies?: Stat[][] }
   sources: StatCalculated['sources']
   not?: true
   roll?: {
