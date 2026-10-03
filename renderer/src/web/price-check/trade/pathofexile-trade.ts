@@ -658,7 +658,12 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
               notStat.statRef === family[0].ref
             ))
           let tier3Count = (typeof stat.roll?.min === 'number') ? Math.min(Math.max(stat.roll.min, 0), 5) : 0
-          if (forceEnabled) {
+          const guaranteedMaximumSupports =
+            enabledRequiredGems.filter(stat => stat.mercenary?.maxTier).length +
+            (enabledOptionalGems.length >= 2
+              ? Math.max(0, enabledOptionalGems.filter(stat => stat.mercenary?.maxTier).length - 1)
+              : 0)
+          if (forceEnabled || guaranteedMaximumSupports >= tier3Count) {
             tier3Count = 0
           }
 

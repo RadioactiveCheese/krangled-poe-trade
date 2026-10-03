@@ -73,7 +73,7 @@ export function createMercenaryFilters (item: ParsedItem): FilterOrGroup[] {
     })
 
     if (supports.length === 5 && possibleSupports.length) {
-      const tier3Count = supports.filter(support => support.stat.mercenary!.tier! >= 3).length
+      const tier3Count = supports.filter(support => isMaximumSupportTier(support.stat)).length
       const sixLinkFilter = propToFilter({
         ref: '6-Link',
         tradeId: 'item.mercenary_6link',
@@ -111,7 +111,7 @@ export function createMercenaryFilters (item: ParsedItem): FilterOrGroup[] {
         statRef: canonStat.ref,
         text: canonStat.matchers[0].string,
         tag: FilterTag.MercenarySupport,
-        mercenary: { tier: tier },
+        mercenary: { tier: tier, maxTier: isMaximumSupportTier(support.stat) },
         sources: [],
         option: { value: SearchMode.Required },
         disabled: true
@@ -179,6 +179,12 @@ export function createMercenaryFilters (item: ParsedItem): FilterOrGroup[] {
 export enum SearchMode {
   Optional = 0,
   Required = 1
+}
+
+export function isMaximumSupportTier (support: Stat): boolean {
+  return support.mercenary!.tier! >= 3 ||
+    (!support.mercenary!.syntheticFamily &&
+      (!support.modFamily || support.modFamily.at(-1) === support.ref))
 }
 
 function findGemByRef (name: string): Stat {
