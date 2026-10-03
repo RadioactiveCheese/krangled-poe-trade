@@ -38,9 +38,9 @@
   "Phantasmal": "몽환적인",
 
   "item": {
-    "disenchanting": "인챈트 해제 (예상)",
     "prop_quality": "{0}% 퀄리티",
     "base_percentile": "기본 백분위수: {0}%",
+    "disenchanting": "인챈트 해제 (예상)",
     "armour": "방어도: {0}",
     "evasion_rating": "회피: {0}",
     "energy_shield": "에너지 보호막: {0}",
