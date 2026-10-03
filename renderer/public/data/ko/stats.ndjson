@@ -6253,23 +6253,23 @@
 {"ref":"Purity of Lightning has #% increased Aura Effect","better":1,"matchers":[{"string":"번개의 순수함의 오라 효과 #% 증가"},{"string":"번개의 순수함의 오라 효과 #% 감소","negate":true}],"trade":{"ids":{"implicit":["implicit.stat_45589825"]}}}
 {"ref":"Purity of Lightning has #% increased Mana Reservation Efficiency","better":1,"matchers":[{"string":"번개의 순수함의 마나 점유 효율 #% 증가"},{"string":"번개의 순수함의 마나 점유 효율 #% 감소","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3411256933"],"implicit":["implicit.stat_3411256933"],"enchant":["enchant.stat_3411256933"]}}}
 {"ref":"Purity of Lightning has no Reservation","better":1,"matchers":[{"string":"번개의 순수함으로 인한 점유 없음"}],"trade":{"ids":{"explicit":["explicit.stat_2308225900"]}}}
-{"ref":"Quality (Attack Modifiers): #%","better":1,"matchers":[{"string":"퀄리티 (공격 속성 부여): #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_attack_quality"]}}}
-{"ref":"Quality (Attribute Modifiers): #%","better":1,"matchers":[{"string":"퀄리티 (능력치 속성 부여): #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_attribute_quality"]}}}
-{"ref":"Quality (Caster Modifiers): #%","better":1,"matchers":[{"string":"퀄리티 (시전 속성 부여): #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_caster_quality"]}}}
-{"ref":"Quality (Critical Modifiers): #%","better":1,"matchers":[{"string":"퀄리티 (치명타 속성 부여): #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_critical_quality"]}}}
+{"ref":"Quality (Attack Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Abrasive Catalyst"},"matchers":[{"string":"퀄리티 (공격 속성 부여): #%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_attack_quality"]}}}
+{"ref":"Quality (Attribute Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Intrinsic Catalyst"},"matchers":[{"string":"퀄리티 (능력치 속성 부여): #%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_attribute_quality"]}}}
+{"ref":"Quality (Caster Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Imbued Catalyst"},"matchers":[{"string":"퀄리티 (시전 속성 부여): #%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_caster_quality"]}}}
+{"ref":"Quality (Critical Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Unstable Catalyst"},"matchers":[{"string":"퀄리티 (치명타 속성 부여): #%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_critical_quality"]}}}
 {"ref":"Quality (Currency): #%","better":1,"matchers":[{"string":"퀄리티 (화폐): #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_map_quality_currency"]}}}
-{"ref":"Quality (Defence Modifiers): #%","better":1,"matchers":[{"string":"퀄리티 (방어 속성 부여): #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_defense_quality"]}}}
+{"ref":"Quality (Defence Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Tempering Catalyst"},"matchers":[{"string":"퀄리티 (방어 속성 부여): #%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_defense_quality"]}}}
 {"ref":"Quality (Divination Cards): #%","better":1,"matchers":[{"string":"퀄리티 (점술 카드): #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_map_quality_cards"]}}}
-{"ref":"Quality (Elemental Damage Modifiers): #%","better":1,"matchers":[{"string":"퀄리티 (원소 피해 속성 부여): #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_elemental_quality"]}}}
-{"ref":"Quality (Life and Mana Modifiers): #%","better":1,"matchers":[{"string":"퀄리티 (생명력과 마나 속성 부여): #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_resource_quality"]}}}
+{"ref":"Quality (Elemental Damage Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Turbulent Catalyst"},"matchers":[{"string":"퀄리티 (원소 피해 속성 부여): #%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_elemental_quality"]}}}
+{"ref":"Quality (Life and Mana Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Fertile Catalyst"},"matchers":[{"string":"퀄리티 (생명력과 마나 속성 부여): #%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_resource_quality"]}}}
 {"ref":"Quality (Pack Size): #%","better":1,"matchers":[{"string":"퀄리티 (무리 규모): #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_map_quality_pack_size"]}}}
-{"ref":"Quality (Physical and Chaos Damage Modifiers): #%","better":1,"matchers":[{"string":"퀄리티 (물리 및 카오스 피해 속성 부여): #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_physical_chaos_quality"]}}}
-{"ref":"Quality (Prefix Modifiers): #%","better":1,"matchers":[{"string":"퀄리티 (접두어 속성): #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_prefix_quality"]}}}
+{"ref":"Quality (Physical and Chaos Damage Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Noxious Catalyst"},"matchers":[{"string":"퀄리티 (물리 및 카오스 피해 속성 부여): #%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_physical_chaos_quality"]}}}
+{"ref":"Quality (Prefix Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Sinistral Catalyst"},"matchers":[{"string":"퀄리티 (접두어 속성): #%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_prefix_quality"]}}}
 {"ref":"Quality (Rarity): #%","better":1,"matchers":[{"string":"퀄리티 (희귀도): #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_map_quality_rarity"]}}}
-{"ref":"Quality (Resistance Modifiers): #%","better":1,"matchers":[{"string":"퀄리티 (저항 속성 부여): #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_resistance_quality"]}}}
+{"ref":"Quality (Resistance Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Prismatic Catalyst"},"matchers":[{"string":"퀄리티 (저항 속성 부여): #%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_resistance_quality"]}}}
 {"ref":"Quality (Scarabs): #%","better":1,"matchers":[{"string":"퀄리티 (갑충석): #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_map_quality_scarabs"]}}}
-{"ref":"Quality (Speed Modifiers): #%","better":1,"matchers":[{"string":"퀄리티 (속도 속성 부여): #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_speed_quality"]}}}
-{"ref":"Quality (Suffix Modifiers): #%","better":1,"matchers":[{"string":"퀄리티 (접미어 속성): #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_suffix_quality"]}}}
+{"ref":"Quality (Speed Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Accelerating Catalyst"},"matchers":[{"string":"퀄리티 (속도 속성 부여): #%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_speed_quality"]}}}
+{"ref":"Quality (Suffix Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Dextral Catalyst"},"matchers":[{"string":"퀄리티 (접미어 속성): #%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_suffix_quality"]}}}
 {"ref":"Quality does not increase Defences","better":1,"matchers":[{"string":"퀄리티가 방어력을 증가시키지 않음"}],"trade":{"ids":{"enchant":["enchant.stat_2677401098"]}}}
 {"ref":"Quality does not increase Physical Damage","better":1,"matchers":[{"string":"퀄리티가 물리 피해를 증가시키지 않음"}],"trade":{"ids":{"enchant":["enchant.stat_2052525717"]}}}
 {"ref":"Queen's Demand can Trigger Level # Flames of Judgement","better":1,"matchers":[{"string":"여왕의 요구가 #레벨 심판의 화염 발동 가능"}],"trade":{"ids":{"explicit":["explicit.stat_2766423342"]}}}

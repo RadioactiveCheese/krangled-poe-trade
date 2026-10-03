@@ -1,4 +1,5 @@
 import { ParsedItem, ItemRarity, ItemCategory } from '@/parser'
+import { ACCESSORY } from '@/parser/meta'
 import { ModifierType, StatCalculated, statSourcesTotal, translateStatWithRoll } from '@/parser/modifiers'
 import { getPropQuality, QUALITY_CHANGING_ENCHANT } from '@/parser/calc-q20'
 import { percentRoll, percentRollDelta, roundRoll } from './util'
@@ -361,6 +362,10 @@ function hideNotVariableStat (filter: StatFilter, item: ParsedItem) {
     return
   }
 
+  if (item.quality && ACCESSORY.has(item.category!) &&
+    filter.sources.some(source => source.modifier.info.rollIncr && !source.stat.roll?.unscalable)
+  ) return
+
   if (!filter.roll) {
     filter.hidden = 'filters.hide_const_roll'
     filter.disabled = true
@@ -476,6 +481,8 @@ function finalFilterTweaks (ctx: FiltersCreationContext) {
         // hide only if fractured mod has corresponding explicit variant
         filter.hidden = 'filters.hide_for_crafting'
       }
+    } else if (filter.sources[0]?.stat.stat.jewelleryQuality) {
+      filter.hidden = 'hide_jewellery_quality'
     } else if (filter.tag === FilterTag.Implicit) {
       if (item.rarity === ItemRarity.Unique && !item.isCorrupted && item.category !== ItemCategory.Jewel && !filter.roll?.bounds) {
         filter.hidden = 'filters.hide_unique_base_implicit'

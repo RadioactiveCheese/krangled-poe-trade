@@ -1,6 +1,6 @@
 import type { ItemFilters } from './interfaces'
 import { ParsedItem, ItemCategory, ItemRarity } from '@/parser'
-import { MAGIC_ONLY_OR_UNIQUE_ITEM, CONSUMABLE_CRAFTABLE_ITEM } from '@/parser/meta'
+import { MAGIC_ONLY_OR_UNIQUE_ITEM, CONSUMABLE_CRAFTABLE_ITEM, ACCESSORY } from '@/parser/meta'
 import { getPropQuality } from '@/parser/calc-q20'
 import { tradeTag } from '../trade/common'
 import { ModifierType } from '@/parser/modifiers'
@@ -287,7 +287,7 @@ export function createFilters (
     }
   }
 
-  if (item.quality && item.quality >= 20) {
+  if (item.quality && item.quality >= 20 && !ACCESSORY.has(item.category!)) {
     if (
       item.category === ItemCategory.Flask || item.category === ItemCategory.Tincture ||
       getPropQuality(item) === 0 || opts.exact // for Weapons & Armour

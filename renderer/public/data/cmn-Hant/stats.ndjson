@@ -6259,23 +6259,23 @@
 {"ref":"Purity of Lightning has #% increased Aura Effect","better":1,"matchers":[{"string":"閃電淨化增加 #% 光環效果"},{"string":"閃電淨化減少 #% 光環效果","negate":true}],"trade":{"ids":{"implicit":["implicit.stat_45589825"]}}}
 {"ref":"Purity of Lightning has #% increased Mana Reservation Efficiency","better":1,"matchers":[{"string":"閃電淨化增加 #% 魔力保留效用"},{"string":"閃電淨化減少 #% 魔力保留效用","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3411256933"],"implicit":["implicit.stat_3411256933"],"enchant":["enchant.stat_3411256933"]}}}
 {"ref":"Purity of Lightning has no Reservation","better":1,"matchers":[{"string":"閃電淨化無保留"}],"trade":{"ids":{"explicit":["explicit.stat_2308225900"]}}}
-{"ref":"Quality (Attack Modifiers): #%","better":1,"matchers":[{"string":"品質（攻擊詞綴）：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_attack_quality"]}}}
-{"ref":"Quality (Attribute Modifiers): #%","better":1,"matchers":[{"string":"品質（能力值詞綴）：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_attribute_quality"]}}}
-{"ref":"Quality (Caster Modifiers): #%","better":1,"matchers":[{"string":"品質（法術詞綴）：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_caster_quality"]}}}
-{"ref":"Quality (Critical Modifiers): #%","better":1,"matchers":[{"string":"品質（暴擊詞綴）：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_critical_quality"]}}}
+{"ref":"Quality (Attack Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Abrasive Catalyst"},"matchers":[{"string":"品質 (攻擊詞綴): #%"},{"string":"品質（攻擊詞綴）：#%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_attack_quality"]}}}
+{"ref":"Quality (Attribute Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Intrinsic Catalyst"},"matchers":[{"string":"品質 (能力值詞綴): #%"},{"string":"品質（能力值詞綴）：#%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_attribute_quality"]}}}
+{"ref":"Quality (Caster Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Imbued Catalyst"},"matchers":[{"string":"品質 (法術詞綴): #%"},{"string":"品質（法術詞綴）：#%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_caster_quality"]}}}
+{"ref":"Quality (Critical Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Unstable Catalyst"},"matchers":[{"string":"品質 (暴擊詞綴): #%"},{"string":"品質（暴擊詞綴）：#%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_critical_quality"]}}}
 {"ref":"Quality (Currency): #%","better":1,"matchers":[{"string":"品質（通貨）：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_map_quality_currency"]}}}
-{"ref":"Quality (Defence Modifiers): #%","better":1,"matchers":[{"string":"品質（防禦詞綴）：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_defense_quality"]}}}
+{"ref":"Quality (Defence Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Tempering Catalyst"},"matchers":[{"string":"品質 (防禦詞綴): #%"},{"string":"品質（防禦詞綴）：#%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_defense_quality"]}}}
 {"ref":"Quality (Divination Cards): #%","better":1,"matchers":[{"string":"品質（命運卡）：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_map_quality_cards"]}}}
-{"ref":"Quality (Elemental Damage Modifiers): #%","better":1,"matchers":[{"string":"品質（元素傷害詞綴）：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_elemental_quality"]}}}
-{"ref":"Quality (Life and Mana Modifiers): #%","better":1,"matchers":[{"string":"品質（生命和魔力詞綴）：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_resource_quality"]}}}
+{"ref":"Quality (Elemental Damage Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Turbulent Catalyst"},"matchers":[{"string":"品質 (元素傷害詞綴): #%"},{"string":"品質（元素傷害詞綴）：#%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_elemental_quality"]}}}
+{"ref":"Quality (Life and Mana Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Fertile Catalyst"},"matchers":[{"string":"品質 (生命和魔力詞綴): #%"},{"string":"品質（生命和魔力詞綴）：#%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_resource_quality"]}}}
 {"ref":"Quality (Pack Size): #%","better":1,"matchers":[{"string":"品質（怪物群大小）：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_map_quality_pack_size"]}}}
-{"ref":"Quality (Physical and Chaos Damage Modifiers): #%","better":1,"matchers":[{"string":"品質（物理和混沌傷害詞綴）：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_physical_chaos_quality"]}}}
-{"ref":"Quality (Prefix Modifiers): #%","better":1,"matchers":[{"string":"品質(前綴):#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_prefix_quality"]}}}
+{"ref":"Quality (Physical and Chaos Damage Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Noxious Catalyst"},"matchers":[{"string":"品質 (物理和混沌傷害詞綴): #%"},{"string":"品質（物理和混沌傷害詞綴）：#%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_physical_chaos_quality"]}}}
+{"ref":"Quality (Prefix Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Sinistral Catalyst"},"matchers":[{"string":"品質(前綴): #%"},{"string":"品質(前綴):#%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_prefix_quality"]}}}
 {"ref":"Quality (Rarity): #%","better":1,"matchers":[{"string":"品質（稀有度）：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_map_quality_rarity"]}}}
-{"ref":"Quality (Resistance Modifiers): #%","better":1,"matchers":[{"string":"品質（抗性詞綴）：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_resistance_quality"]}}}
+{"ref":"Quality (Resistance Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Prismatic Catalyst"},"matchers":[{"string":"品質 (抗性詞綴): #%"},{"string":"品質（抗性詞綴）：#%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_resistance_quality"]}}}
 {"ref":"Quality (Scarabs): #%","better":1,"matchers":[{"string":"品質（聖甲蟲）：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_map_quality_scarabs"]}}}
-{"ref":"Quality (Speed Modifiers): #%","better":1,"matchers":[{"string":"品質（速度詞綴）：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_speed_quality"]}}}
-{"ref":"Quality (Suffix Modifiers): #%","better":1,"matchers":[{"string":"品質(後綴):#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_suffix_quality"]}}}
+{"ref":"Quality (Speed Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Accelerating Catalyst"},"matchers":[{"string":"品質 (速度詞綴): #%"},{"string":"品質（速度詞綴）：#%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_speed_quality"]}}}
+{"ref":"Quality (Suffix Modifiers): +#%","better":1,"jewelleryQuality":{"catalyst":"Dextral Catalyst"},"matchers":[{"string":"品質(後綴): #%"},{"string":"品質(後綴):#%"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_jewellery_suffix_quality"]}}}
 {"ref":"Quality does not increase Defences","better":1,"matchers":[{"string":"品質不會增加防禦"}],"trade":{"ids":{"enchant":["enchant.stat_2677401098"]}}}
 {"ref":"Quality does not increase Physical Damage","better":1,"matchers":[{"string":"品質不會增加物理傷害"}],"trade":{"ids":{"enchant":["enchant.stat_2052525717"]}}}
 {"ref":"Queen's Demand can Trigger Level # Flames of Judgement","better":1,"matchers":[{"string":"女王之慾可以觸發等級 # 的審判烈焰"}],"trade":{"ids":{"explicit":["explicit.stat_2766423342"]}}}
