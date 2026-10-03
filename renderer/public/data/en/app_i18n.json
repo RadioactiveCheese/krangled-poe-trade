@@ -86,7 +86,6 @@
     "quality": "Quality: {0}",
     "memory_strands": "Memory Strands: {0}",
     "gem_level": "Level: {0}",
-    "sentinel_charge": "Charge: {0}",
     "find_in_stash": "Find in Stash",
     "parse_error": "An error occurred while parsing the item",
     "parse_error_help": "This is probably a bug and you can report it on GitHub.",
@@ -158,7 +157,6 @@
     "accessory_trinket": "Trinket",
     "sanctum_relic": "Sanctum Relic",
     "tincture": "Tincture",
-    "azmeri_charm": "Charm",
     "idol": "Idol",
     "graft": "Graft",
     "chart": "Chart"

@@ -52,7 +52,9 @@ export const CATEGORY_TO_TRADE_ID = new Map([
   [ItemCategory.Trinket, 'accessory.trinket'],
   [ItemCategory.SanctumRelic, 'sanctum.relic'],
   [ItemCategory.Tincture, 'tincture'],
-  [ItemCategory.Charm, 'azmeri.charm'],
+  // ItemCategory.Charm is intentionally unmapped: the PoE1 trade API has no charm
+  // category (checked against /api/trade/data/filters on 2026-10-03), so charm
+  // searches send no category filter.
   [ItemCategory.Idol, 'idol'],
   [ItemCategory.Chart, 'chart'],
   [ItemCategory.Graft, 'graft']
@@ -190,11 +192,6 @@ interface TradeRequest {
           heist_lockpicking?: FilterRange
           heist_perception?: FilterRange
           heist_trap_disarmament?: FilterRange
-        }
-      }
-      sentinel_filters?: {
-        filters: {
-          sentinel_durability?: FilterRange
         }
       }
       trade_filters?: {
@@ -420,10 +417,6 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
   const { chartShape } = filters
   if (chartShape && !chartShape.disabled) {
     propSet(query.filters, 'map_filters.filters.chart_shape.option', chartShape.value)
-  }
-
-  if (filters.sentinelCharge && !filters.sentinelCharge.disabled) {
-    propSet(query.filters, 'sentinel_filters.filters.sentinel_durability.min', filters.sentinelCharge.value)
   }
 
   for (const stat of stats) {

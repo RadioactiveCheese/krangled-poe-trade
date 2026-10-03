@@ -1,15 +1,15 @@
+// @vitest-environment happy-dom
+
 import { readFileSync } from 'node:fs'
-import { describe, expect, it, vi } from 'vitest'
+import { resolve } from 'node:path'
+import { describe, expect, it } from 'vitest'
+import { ItemCategory, ItemRarity, type ParsedItem } from '@/parser'
 import type { ItemFilters } from '@/web/price-check/filters/interfaces'
+import { createFilters } from '@/web/price-check/filters/create-item-filters'
+import { createTradeRequest, CATEGORY_TO_TRADE_ID } from '@/web/price-check/trade/pathofexile-trade'
 // Snapshot of https://www.pathofexile.com/api/trade/data/filters (PoE1), fetched 2026-10-03.
 // Refresh it when the trade site changes its filter set.
 import liveFilters from '../../../fixtures/trade-data-filters-poe1.json'
-
-vi.mock('@/web/Config', () => ({
-  poeWebApi: () => 'www.pathofexile.com'
-}))
-
-import { createTradeRequest, CATEGORY_TO_TRADE_ID } from '@/web/price-check/trade/pathofexile-trade'
 
 interface LiveFilter { id: string, option?: { options?: Array<{ id: string | null }> } }
 const LIVE = new Map<string, Map<string, LiveFilter>>(
@@ -17,17 +17,8 @@ const LIVE = new Map<string, Map<string, LiveFilter>>(
     .map(group => [group.id, new Map(group.filters.map(f => [f.id, f]))])
 )
 
-// Filters the query builder still emits but the live trade site no longer lists.
-// Kept here deliberately so new drift is caught; remove entries once resolved.
-const KNOWN_MISSING_FILTERS = new Set([
-  'sentinel_filters.sentinel_durability'
-])
-const KNOWN_MISSING_CATEGORIES = new Set([
-  'azmeri.charm'
-])
-
 const SOURCE = readFileSync(
-  new URL('../../../../src/web/price-check/trade/pathofexile-trade.ts', import.meta.url),
+  resolve(process.cwd(), 'src/web/price-check/trade/pathofexile-trade.ts'),
   'utf8'
 ).replace(/\r\n/g, '\n')
 
@@ -54,6 +45,11 @@ function typedFilterPaths (): string[] {
   return paths.sort()
 }
 
+function isLive (path: string) {
+  const [group, id] = path.split('.')
+  return LIVE.get(group)?.has(id) ?? false
+}
+
 function baseFilters (): ItemFilters {
   return {
     searchExact: { baseType: 'Sapphire Ring' },
@@ -69,6 +65,44 @@ function baseFilters (): ItemFilters {
   }
 }
 
+function parsedItem (category: ItemCategory, name: string, extra: Partial<ParsedItem> = {}): ParsedItem {
+  return {
+    category,
+    rarity: ItemRarity.Normal,
+    name,
+    baseType: name,
+    info: {
+      name,
+      refName: name,
+      namespace: 'ITEM',
+      craftable: { category }
+    },
+    infoVariants: [],
+    itemLevel: 80,
+    influences: [],
+    statsByType: [],
+    unknownModifiers: [],
+    newMods: [],
+    isUnidentified: false,
+    isCorrupted: false,
+    isMirrored: false,
+    isSplit: false,
+    isFractured: false,
+    isSynthesised: false,
+    rawText: '',
+    ...extra
+  }
+}
+
+const CREATE_OPTS = {
+  league: 'Standard',
+  currency: undefined,
+  collapseListings: 'app' as const,
+  activateStockFilter: false,
+  exact: false,
+  useEn: true
+}
+
 describe('trade filter IDs match the live /api/trade/data/filters dataset', () => {
   it('finds the filter paths the query builder emits', () => {
     expect(emittedFilterPaths().length).toBeGreaterThan(30)
@@ -76,35 +110,23 @@ describe('trade filter IDs match the live /api/trade/data/filters dataset', () =
   })
 
   it.each(emittedFilterPaths())('emitted filter %s exists in the live dataset', (path) => {
-    const [group, id] = path.split('.')
-    expect(LIVE.get(group)?.has(id) || KNOWN_MISSING_FILTERS.has(path)).toBe(true)
+    expect(isLive(path)).toBe(true)
   })
 
   it.each(typedFilterPaths())('TradeRequest filter %s exists in the live dataset', (path) => {
-    const [group, id] = path.split('.')
-    expect(LIVE.get(group)?.has(id) || KNOWN_MISSING_FILTERS.has(path)).toBe(true)
+    expect(isLive(path)).toBe(true)
   })
 
-  it('known-missing allowlist only lists filters that are really missing', () => {
-    for (const path of KNOWN_MISSING_FILTERS) {
-      const [group, id] = path.split('.')
-      expect(LIVE.get(group)?.has(id) ?? false).toBe(false)
-    }
-  })
-
-  it('every category trade id is a live category option', () => {
+  it.each([...new Set(CATEGORY_TO_TRADE_ID.values())])('category %s is a live category option', (id) => {
     const options = new Set(LIVE.get('type_filters')!.get('category')!.option!.options!.map(o => o.id))
-    for (const id of new Set(CATEGORY_TO_TRADE_ID.values())) {
-      expect(options.has(id) || KNOWN_MISSING_CATEGORIES.has(id), id).toBe(true)
-    }
-    for (const id of KNOWN_MISSING_CATEGORIES) {
-      expect(options.has(id), id).toBe(false)
-    }
+    expect(options.has(id)).toBe(true)
   })
 
-  it('no longer uses the removed foulborn_item filter', () => {
+  it('no longer uses removed filters', () => {
     expect(LIVE.get('misc_filters')!.has('foulborn_item')).toBe(false)
+    expect(LIVE.has('sentinel_filters')).toBe(false)
     expect(SOURCE).not.toContain('foulborn_item')
+    expect(SOURCE).not.toContain('sentinel_filters')
   })
 })
 
@@ -125,5 +147,26 @@ describe('Foulborn trade query', () => {
     const request = createTradeRequest(filters, [])
 
     expect(request.query.filters.misc_filters?.filters?.mutated).toBeUndefined()
+  })
+})
+
+describe('filters without a live trade equivalent', () => {
+  it('a sentinel with a charge sends no sentinel_filters', () => {
+    const item = parsedItem(ItemCategory.Sentinel, 'Stalker Sentinel', { sentinelCharge: 12 })
+    const filters = createFilters(item, CREATE_OPTS)
+    const request = createTradeRequest(filters, [])
+
+    expect(filters).not.toHaveProperty('sentinelCharge')
+    expect(request.query.filters).not.toHaveProperty('sentinel_filters')
+  })
+
+  it('a charm sends no category filter and does not throw', () => {
+    const item = parsedItem(ItemCategory.Charm, 'Test Charm')
+    const filters = createFilters(item, CREATE_OPTS)
+    expect(filters.searchRelaxed).toBeUndefined()
+
+    const request = createTradeRequest(filters, [])
+    expect(request.query.type).toBe('Test Charm')
+    expect(request.query.filters.type_filters?.filters.category).toBeUndefined()
   })
 })
