@@ -6,6 +6,7 @@ import { FilterTag, type FilterOrGroup, type ItemFilters, type StatFilter } from
 import { createFilters } from '@/web/price-check/filters/create-item-filters'
 import { ItemRarity, type ParsedItem } from '@/parser'
 import { StatBetter, type BaseType, type Stat } from '@/assets/data'
+import { isMaximumSupportTier } from '@/web/price-check/filters/pseudo/mercenary'
 
 function itemFilters (): ItemFilters {
   const normal = mercenaryBuild('Warpriest', 'AurasMinionsTemplarSmite', { skills: [] })
@@ -44,6 +45,45 @@ function stat (overrides: Partial<StatFilter> & Pick<StatFilter, 'tradeId' | 'st
 }
 
 describe('Mercenary and Heist grouped trade queries', () => {
+  it('recognizes naturally capped support families without treating synthetic lower tiers as maximum', () => {
+    const support = mercenaryStat('Knockback', 'mercenary.knockback')
+    support.mercenary!.tier = 1
+    expect(isMaximumSupportTier(support)).toBe(true)
+    support.modFamily = ['Knockback']
+    expect(isMaximumSupportTier(support)).toBe(true)
+    support.modFamily = ['Knockback', 'Knockback T2', 'Knockback T3']
+    support.mercenary!.syntheticFamily = true
+    expect(isMaximumSupportTier(support)).toBe(false)
+    support.mercenary!.tier = 3
+    expect(isMaximumSupportTier(support)).toBe(true)
+    support.mercenary!.tier = 4
+    expect(isMaximumSupportTier(support)).toBe(true)
+  })
+
+  it.each([
+    [1, 1, false],
+    [1, 2, false],
+    [0, 2, true],
+    [0, 1, true]
+  ])('omits a redundant maximum-tier group only when required/N-1 supports guarantee it (%s, %s)', (required, optional, needsTierGroup) => {
+    const families = Array.from({ length: 5 }, (_, index) => [mercenaryStat(`S${index}`, `mercenary.s${index}`)])
+    const supports = Array.from({ length: required + optional }, (_, index) => stat({
+      tradeId: [`mercenary.s${index}`], statRef: `S${index}`,
+      option: { value: index < required ? 1 : 0 },
+      mercenary: { tier: 1, maxTier: index === 0 }
+    }))
+    const request = createTradeRequest(itemFilters(), [{
+      group: 'mercenary', expanded: true,
+      meta: stat({ tradeId: ['mercenary.skill_primary'], statRef: 'Primary', tag: FilterTag.MercenaryPrimary }),
+      stats: [stat({ tradeId: ['item.mercenary_6link'], statRef: '6-Link', tag: FilterTag.Property,
+        mercenary: { supportFamilies: families }, roll: roll(1) }), ...supports]
+    }])
+    // Every six-link query counts all five families; the separate maximum-tier
+    // query contains those families with a count of one instead.
+    const groups = request.query.stats.filter(group => group.type === 'mercenary')
+    expect(groups.length).toBe(needsTierGroup ? 3 : 2)
+  })
+
   it('combines exact build selection with required and optional N-1 Mercenary supports', () => {
     const stats: FilterOrGroup[] = [{
       group: 'mercenary',

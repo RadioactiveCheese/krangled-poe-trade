@@ -138,6 +138,19 @@ test('parses and filters a complete Mercenary Warrant with strict validation', a
     assert.equal(skillGroup.meta.statRef, 'Vaal Ground Slam')
     assert.equal(skillGroup.stats[0].statRef, 'Pulverise')
 
+    const sixLink = parseClipboard(warrantText({
+      details: ['Build: Earthshaker', 'Mercenary Level: 83'],
+      skills: [['Vaal Ground Slam', 'Knockback (Tier: 1)', 'Pulverise (Tier: 2)',
+        'Greater Faster Attacks (Tier: 3)', 'Added Fire (Tier: 2)', 'Multistrike (Tier: 2)']]
+    }))
+    assert.equal(sixLink.isOk(), true)
+    const supportGroup = createMercenaryFilters(sixLink.value).find(filter => filter.group === 'mercenary')
+    const knockback = supportGroup.stats.find(filter => filter.statRef === 'Knockback')
+    assert.equal(knockback.mercenary.maxTier, true)
+    assert.ok(supportGroup.stats.find(filter => filter.tradeId[0] === 'item.mercenary_6link'), JSON.stringify(supportGroup))
+    assert.equal(supportGroup.stats.find(filter => filter.tradeId[0] === 'item.mercenary_6link').roll.value, 2,
+      'six-link maximum-tier count includes naturally capped tier-one Knockback')
+
     const renamedVariant = parseClipboard(warrantText({
       details: ['Build: Infamous Warpriest of the Ruckus', 'Mercenary Level: 84'],
       skills: [['Smite']]
