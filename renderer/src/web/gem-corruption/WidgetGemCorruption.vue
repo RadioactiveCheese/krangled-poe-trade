@@ -81,7 +81,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { inject, computed, shallowRef, watch } from 'vue'
+import { inject, computed, shallowRef, watch, onUnmounted } from 'vue'
 import { useI18nNs } from '@/web/i18n'
 import { usePoeninja, displayRounding } from '@/web/background/Prices'
 import { Host } from '@/web/background/IPC'
@@ -121,10 +121,21 @@ const {
 
 const isShown = computed(() => props.config.wmWants === 'show')
 
-// Widgets stay mounted while hidden, so register interest in prices whenever it's opened.
-watch(isShown, (shown) => {
-  if (shown) queuePricesFetch()
+// Widgets stay mounted while hidden, and blur hides this one without changing wmWants.
+// Price interest lapses after 20 minutes but a refresh needs 31, so keep renewing it
+// while the widget is actually on screen.
+const INTEREST_RENEW_MS = 5 * 60 * 1000
+const isOnScreen = computed(() => isShown.value && wm.active.value)
+let interestTimer: ReturnType<typeof setInterval> | undefined
+watch(isOnScreen, (onScreen) => {
+  clearInterval(interestTimer)
+  interestTimer = undefined
+  if (onScreen) {
+    queuePricesFetch()
+    interestTimer = setInterval(queuePricesFetch, INTEREST_RENEW_MS)
+  }
 }, { immediate: true })
+onUnmounted(() => clearInterval(interestTimer))
 
 // Evaluating every gem takes a few thousand lookups, so only do it while the widget is
 // visible and once per poe.ninja download.
