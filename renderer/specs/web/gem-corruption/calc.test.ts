@@ -222,11 +222,11 @@ describe('coverage of every gem against live poe.ninja data', () => {
     const counts: Record<string, number> = {}
     for (const e of excluded) counts[e.reason] = (counts[e.reason] ?? 0) + 1
     expect({ rows: rows.length, ...counts }).toEqual({
-      rows: 542,
+      rows: 543,
       'vaal-gem': 50,
       'no-buy-price': 68,
       'no-sell-price': 31,
-      'sell-outlier': 133
+      'sell-outlier': 132
     })
   })
 
@@ -235,7 +235,15 @@ describe('coverage of every gem against live poe.ninja data', () => {
     expect(byName.get('Enlighten Support')).toMatchObject({ buyLevel: 3, sellLevel: 4 })
     expect(byName.get('Awakened Enlighten Support')).toMatchObject({ buyLevel: 4, sellLevel: 5 })
     expect(byName.get('Greater Multistrike Support')).toMatchObject({ buyLevel: 3, sellLevel: 4 })
-    expect(byName.get('Brand Recall')).toMatchObject({ buyLevel: 6, sellLevel: 7, buyRoute: 'full-quality' })
+    expect(byName.get('Brand Recall')).toMatchObject({ buyLevel: 6, sellLevel: 7 })
+  })
+
+  it('treats quality-agnostic listings as 0% gems, costed with prisms and unconfirmed', () => {
+    const byName = new Map(rows.map(r => [r.gem.refName, r]))
+    for (const name of ['Enlighten Support', 'Awakened Enlighten Support', 'Brand Recall']) {
+      expect(byName.get(name)).toMatchObject({ buyRoute: 'gemcutter', fullQualityPrice: undefined, unconfirmed: true })
+    }
+    expect(byName.get('Greater Multistrike Support')).toMatchObject({ unconfirmed: false })
   })
 
   it('states why known gems drop out', () => {

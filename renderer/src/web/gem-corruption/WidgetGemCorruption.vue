@@ -45,7 +45,7 @@
               <div class="flex items-center gap-1 text-sm" :title="t(':profit_hint')">
                 <span class="text-gray-500">{{ t(':profit_if') }}</span>
                 <span class="flex items-center" :class="row.profit >= 0 ? 'text-green-400' : 'text-red-400'">
-                  {{ row.profit >= 0 ? '+' : '&minus;' }}{{ fmt(Math.abs(row.profit)).text }}<img
+                  {{ row.profit >= 0 ? '+' : '−' }}{{ fmt(Math.abs(row.profit)).text }}<img
                     :src="fmt(Math.abs(row.profit)).icon" :class="$style.inlineIcon" alt="">
                 </span>
                 <span class="text-gray-400">({{ formatPercent(row.margin) }}, {{ row.ratio.toFixed(1) }}&times;)</span>
