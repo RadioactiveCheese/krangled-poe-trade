@@ -46,14 +46,9 @@
                 v-model.number="inputMax" @focus="inputFocus($event, 'max')" @mousewheel.stop>
             </div>
           </div>
-          <div v-else-if="rollOptions" :class="$style.rollOptions">
-            <button v-for="option of rollOptions" :key="option.value" type="button"
-              @click="handleOptionClick($event, option.value)"
-              :class="[$style.rollOption, {
-                [$style.filterChecked]: !filter.disabled,
-                [$style.checked]: option.value === filter.option!.value
-              }]">{{ option.text }}</button>
-          </div>
+          <filter-modifier-options v-else-if="miniFilter && rollOptions"
+            :class="$style.miniRollOptions" show-checked="currentDisabled"
+            :options="rollOptions" :filter="filter" />
         </slot>
       </div>
       <div class="flex pt-px" v-if="!miniFilter">
@@ -75,7 +70,8 @@
           <span v-if="showTag"
             :class="[$style['tag'], $style[`tag-${tag}`]]">{{ t(`filters.tag_${tag.replace('-', '_')}`) }}{{ (filter.sources.length > 1) ? ` x ${filter.sources.length}` : null }}</span>
           <filter-modifier-tiers v-if="!roll?.bounds || item.rarity !== ItemRarity.Unique" :filter="filter" :item="item" />
-          <filter-modifier-item-has-empty :filter="filter" />
+          <filter-modifier-options v-if="rollOptions"
+            :options="rollOptions" :filter="filter" show-checked="always" />
         </div>
         <stat-roll-slider v-if="roll && roll.bounds && item.rarity === ItemRarity.Unique"
           class="ml-2 mr-4" style="width: 12.5rem;"
@@ -98,7 +94,7 @@ import UiPopover from '@/web/ui/Popover.vue'
 import StatRollSlider from '../../ui/StatRollSlider.vue'
 import ItemModifierText from '../../ui/ItemModifierText.vue'
 import ModifierAnointment from './FilterModifierAnointment.vue'
-import FilterModifierItemHasEmpty from './FilterModifierItemHasEmpty.vue'
+import FilterModifierOptions, { type RollOption } from './FilterModifierOptions.vue'
 import FilterModifierTiers from './FilterModifierTiers.vue'
 import { AppConfig } from '@/web/Config'
 import { ItemCategory, ItemRarity, ParsedItem } from '@/parser'
@@ -106,14 +102,10 @@ import { getTradeMaxQuality } from '@/parser/calc-q20'
 import { FilterTag, StatFilter, INTERNAL_TRADE_IDS } from './interfaces'
 import SourceInfo from './SourceInfo.vue'
 import { SearchMode as MercSearchMode } from './pseudo/mercenary.js'
-
-interface RollOption {
-  text: string
-  value: number
-}
+import { ItemHasEmptyModifier } from './interfaces'
 
 export default defineComponent({
-  components: { ItemModifierText, ModifierAnointment, FilterModifierItemHasEmpty, FilterModifierTiers, SourceInfo, StatRollSlider, UiPopover },
+  components: { ItemModifierText, ModifierAnointment, FilterModifierOptions, FilterModifierTiers, SourceInfo, StatRollSlider, UiPopover },
   emits: ['update:groupExpanded'],
   props: {
     filter: {
@@ -216,17 +208,6 @@ export default defineComponent({
       props.filter.disabled = false
     }
 
-    function handleOptionClick (e: MouseEvent, value: number) {
-      e.preventDefault()
-
-      if (value === props.filter.option!.value) {
-        props.filter.disabled = !props.filter.disabled
-      } else {
-        props.filter.option!.value = value
-        props.filter.disabled = false
-      }
-    }
-
     function toggleFilter (e: MouseEvent) {
       e.preventDefault()
 
@@ -283,6 +264,13 @@ export default defineComponent({
       changeStep: computed(() => props.filter.roll!.dp ? 0.01 : 1),
       showInputs: computed(() => props.filter.roll != null && !props.filter.oils),
       rollOptions: computed<RollOption[] | undefined>(() => {
+        if (props.filter.tradeId[0] === 'item.has_empty_modifier' && props.filter.option) {
+          return [
+            { text: t('filters.option_empty_affix'), value: ItemHasEmptyModifier.Any },
+            { text: t('filters.option_empty_prefix'), value: ItemHasEmptyModifier.Prefix },
+            { text: t('filters.option_empty_suffix'), value: ItemHasEmptyModifier.Suffix }
+          ]
+        }
         if (props.filter.tag === FilterTag.MercenarySupport && props.filter.option) {
           return [
             { text: t('filters.option_merc_required'), value: MercSearchMode.Required },
@@ -332,7 +320,6 @@ export default defineComponent({
           )
         )),
       inputFocus,
-      handleOptionClick,
       toggleFilter,
       toggleExpanded,
       smartToggle
@@ -434,29 +421,9 @@ export default defineComponent({
   white-space: nowrap;
 }
 
-.rollOptions {
-  display: flex;
-  align-items: baseline;
-  gap: theme('spacing.1');
+.miniRollOptions {
   margin: -99px 0; /* not allowed to extend baseline */
   margin-left: auto;
-}
-
-.rollOption {
-  background: theme('colors.gray.700');
-  color: theme('colors.gray.400');
-  padding: 0 theme('spacing.2');
-  border: 1px solid transparent;
-  min-width: theme('width.10');
-  text-align: center;
-  white-space: nowrap;
-  line-height: 1.125rem;
-  border-radius: theme('borderRadius.DEFAULT');
-
-  &.checked.filterChecked {
-    color: theme('colors.gray.300');
-    border-color: theme('colors.gray.500');
-  }
 }
 
 .mods {
