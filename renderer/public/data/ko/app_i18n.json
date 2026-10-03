@@ -77,7 +77,6 @@
     "quality": "퀄리티: {0}",
     "memory_strands": "기억 가닥: {0}",
     "gem_level": "젬 레벨: {0}",
-    "sentinel_charge": "Charge: {0}",
     "find_in_stash": "보관함에서 찾기",
     "parse_error": "분석 중 오류 발생",
     "parse_error_help": "버그일 수도 있습니다. GitHub에 버그 신고해주세요.",
@@ -145,8 +144,7 @@
     "heistequipment_heistutility": "강탈 망토",
     "accessory_trinket": "도둑 장신구",
     "sanctum_relic": "성역 유물",
-    "tincture": "팅크",
-    "azmeri_charm": "부적"
+    "tincture": "팅크"
   },
   "filters": {
     "selected_some": "{1} 중 {0}개 선택",
