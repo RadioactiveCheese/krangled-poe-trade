@@ -107,8 +107,8 @@ export interface ItemFilters {
     offline: boolean
     onlineInLeague: boolean
     merchantOnly: boolean
-    listed: string | undefined
-    currency: string | undefined
+    listed: string | null
+    currency: string | null
     league: string
     collapseListings: 'api' | 'app'
     collapseMerchant: boolean
@@ -126,10 +126,15 @@ export type FilterOrGroup =
   | FilterGroup
 
 export interface FilterGroup {
-  group: 'not' | 'mercenary'
+  group: 'not' | 'one' | 'mercenary'
   expanded: boolean // NOTE: mutable in UI
   meta: StatFilter
   stats: StatFilter[]
+}
+
+export function isFilterEnabled (filter: FilterOrGroup): boolean {
+  if (!filter.group) return !filter.disabled
+  return !filter.meta.disabled && (filter.group !== 'one' || filter.stats.some(stat => !stat.disabled))
 }
 
 export interface StatFilter {
@@ -139,7 +144,7 @@ export interface StatFilter {
   text: string
   tag: FilterTag
   oils?: string[]
-  mercenary?: { icon?: string, tier?: number, supportFamilies?: Stat[][] }
+  mercenary?: { icon?: string, tier?: number, maxTier?: boolean, supportFamilies?: Stat[][] }
   sources: StatCalculated['sources']
   not?: true
   roll?: {
@@ -162,6 +167,7 @@ export interface StatFilter {
 
 const _INTERNAL_TRADE_IDS = [
   'item.not_group',
+  'item.count_one_group',
   'item.base_percentile',
   'item.memory_strands',
   'item.armour',

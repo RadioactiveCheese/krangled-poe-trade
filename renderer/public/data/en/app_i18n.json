@@ -42,6 +42,7 @@
 
   "item": {
     "not_group": "None of",
+    "count_one_group": "One of",
     "prop_quality": "Q {0}%",
     "base_percentile": "Base Percentile: {0}%",
     "armour": "Armour: {0}",
@@ -385,6 +386,7 @@
     "loadout": "Mercenary loadout"
   },
   "price_check": {
+    "default_settings": "Default filters",
     "name": "Price check",
     "hotkey" :"Auto-hide Mode",
     "hotkey_locked" :"Open without auto-hide",

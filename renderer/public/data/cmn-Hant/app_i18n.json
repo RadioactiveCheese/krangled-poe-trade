@@ -29,6 +29,7 @@
     "map.mods.outdated": "過時",
     "Support development on": "支持開發",
     "price_check": {
+    "default_settings": "預設搜尋篩選",
       "use_tooltip_hover": "將滑鼠懸停在價格上時顯示物品",
       "use_tooltip_keybind": "SHIFT + 懸停",
       "use_tooltip_always": "始終懸停顯示",
@@ -56,6 +57,9 @@
     "modifier_hint": {
       "volatile": "可能是易變瓦爾寶珠效果。剪貼簿文字無法確定超出範圍數值的來源。",
       "reflecting": "可能是映像迷霧效果。剪貼簿文字無法確定超出範圍數值的來源。"
+    },
+    "item": {
+      "count_one_group": "其中之一"
     },
     "filters": {
       "hide_jewellery_quality": "品質已反映在飾品詞綴中",
