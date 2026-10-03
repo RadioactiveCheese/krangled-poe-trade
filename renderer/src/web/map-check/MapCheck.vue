@@ -65,7 +65,7 @@ const mapName = computed(() => props.item.info.area?.blighted
   ? props.item.info.name : props.item.mapArea?.name ?? props.item.info.name)
 
 const image = computed(() =>
-  ((props.item.rarity === ItemRarity.Unique && props.item.isUnidentified) || props.item.info.area?.blighted)
+  (props.item.rarity === ItemRarity.Unique && props.item.isUnidentified)
     ? undefined
     : props.item.info.area?.screenshot ?? props.item.mapArea?.area?.screenshot)
 

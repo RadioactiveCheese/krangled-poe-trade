@@ -109,7 +109,7 @@ export function createExactStatFilters (
 
   for (const filter of ctx.filters) {
     if (filter.not) continue
-    filter.hidden = undefined
+    if (item.category !== ItemCategory.Map) filter.hidden = undefined
 
     if (filter.tag === FilterTag.Explicit) {
       filter.disabled = !filter.sources.some(source =>

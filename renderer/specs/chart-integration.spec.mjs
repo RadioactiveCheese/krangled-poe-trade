@@ -292,6 +292,22 @@ test('chart price checks expose aggregate properties and leave explicit modifier
   assert.ok(explicitStats.every(stat => stat.disabled))
 })
 
+test('keeps constant unique-map implicit filters hidden', () => {
+  const item = parseItem(`Item Class: Maps
+Rarity: Unique
+Vaults of Atziri
+Map
+--------
+Item Level: 83
+--------
+{ Implicit Modifier }
+Area contains 6 additional Strongboxes`)
+  const filters = runtime.createExactStatFilters(item, item.statsByType, { searchStatRange: 10 })
+  const implicit = filters.find(filter => filter.statRef === 'Area contains an additional Strongbox')
+  assert.ok(implicit, 'fixed implicit must exist so users can still reveal hidden filters')
+  assert.equal(implicit.hidden, 'filters.hide_const_roll')
+})
+
 test('keeps chart-crafting currency out of the Map Check path', () => {
   const item = parseItem(DUCAT_TEXT)
   assert.equal(item.info.refName, "The Genteel's Ducat")
