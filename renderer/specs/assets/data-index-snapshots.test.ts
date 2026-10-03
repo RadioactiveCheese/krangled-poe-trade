@@ -18,8 +18,12 @@ for (const language of ['en', 'ru', 'cmn-Hant', 'ko']) {
 afterAll(() => fs.rmSync(root, { recursive: true, force: true }))
 
 describe('development data/index HTTP pairing', () => {
-  it('serves validated languages during a partial save and recovers without another watch event', async () => {
-    const recoveryRoot = path.join(root, 'recovery')
+  it.each([
+    { save: 'malformed items', kind: 'items', partial: '{"namespace":' },
+    { save: 'empty items', kind: 'items', partial: '' },
+    { save: 'empty stats', kind: 'stats', partial: '' }
+  ])('serves validated languages during a $save save and recovers without another watch event', async ({ save, kind, partial }) => {
+    const recoveryRoot = path.join(root, `recovery-${save.replaceAll(' ', '-')}`)
     for (const language of ['en', 'ru', 'cmn-Hant', 'ko']) {
       const folder = path.join(recoveryRoot, 'public/data', language)
       fs.mkdirSync(folder, { recursive: true })
@@ -28,17 +32,32 @@ describe('development data/index HTTP pairing', () => {
     }
     const server = await createServer({
       configFile: false, root: recoveryRoot, logLevel: 'silent', plugins: [makeIndexFilesPlugin()],
-      optimizeDeps: { noDiscovery: true }, server: { host: '127.0.0.1', port: 0 }
+      optimizeDeps: { noDiscovery: true },
+      server: { host: '127.0.0.1', port: 0, watch: { ignored: ['**/*.ndjson'] } }
     })
     try {
       await server.listen()
       const address = server.httpServer!.address() as { port: number }
       const origin = `http://127.0.0.1:${address.port}`
-      const file = path.join(recoveryRoot, 'public/data/en/items.ndjson')
-      const original = await (await fetch(`${origin}/data/en/items.ndjson`)).text()
-      const russian = await fetch(`${origin}/data/ru/items.ndjson`)
-      const version = russian.headers.get('X-Data-Index-Version')!
-      const unchangedIndex = Buffer.from(await (await fetch(`${origin}/data/ru/items-ref.index.bin?v=${version}`)).arrayBuffer())
+      const file = path.join(recoveryRoot, `public/data/en/${kind}.ndjson`)
+      const snapshots = new Map<string, { source: string, version: string, indexes: Map<string, Buffer> }>()
+      for (const language of ['en', 'ru', 'cmn-Hant', 'ko']) {
+        for (const dataset of ['items', 'stats']) {
+          const key = `${language}/${dataset}`
+          const response = await fetch(`${origin}/data/${key}.ndjson`)
+          expect(response.status).toBe(200)
+          const version = response.headers.get('X-Data-Index-Version')!
+          const indexes = new Map<string, Buffer>()
+          for (const suffix of dataset === 'items' ? ['name', 'ref'] : ['ref', 'matcher']) {
+            const index = `${key}-${suffix}.index.bin`
+            const result = await fetch(`${origin}/data/${index}?v=${version}`)
+            expect(result.status).toBe(200)
+            indexes.set(index, Buffer.from(await result.arrayBuffer()))
+          }
+          snapshots.set(key, { source: await response.text(), version, indexes })
+        }
+      }
+      const original = snapshots.get(`en/${kind}`)!.source
       // The only change event is the explicit one during the incomplete write.
       // Completing the write cannot notify the plugin through this watcher.
       await server.watcher.unwatch(file)
@@ -46,29 +65,41 @@ describe('development data/index HTTP pairing', () => {
       server.watcher.on('change', changed => {
         if (path.resolve(changed) === path.resolve(file)) changes()
       })
-      fs.writeFileSync(file, '{"namespace":')
+      fs.writeFileSync(file, partial)
       server.watcher.emit('change', file)
-      expect(await (await fetch(`${origin}/data/en/items.ndjson`)).text()).toBe(original)
-      const unchanged = await fetch(`${origin}/data/ru/items.ndjson`)
-      expect(unchanged.status).toBe(200)
-      expect(unchanged.headers.get('X-Data-Index-Version')).toBe(version)
-      expect(Buffer.from(await (await fetch(`${origin}/data/ru/items-ref.index.bin?v=${version}`)).arrayBuffer())).toEqual(unchangedIndex)
-      const completed = JSON.stringify({ namespace: 'ITEM', name: 'Completed item', refName: 'Completed item' }) + '\n' + original
+      for (const [key, snapshot] of snapshots) {
+        const unchanged = await fetch(`${origin}/data/${key}.ndjson`)
+        expect(unchanged.status).toBe(200)
+        expect(unchanged.headers.get('X-Data-Index-Version')).toBe(snapshot.version)
+        expect(await unchanged.text()).toBe(snapshot.source)
+        for (const [index, bytes] of snapshot.indexes) {
+          const response = await fetch(`${origin}/data/${index}?v=${snapshot.version}`)
+          expect(response.status).toBe(200)
+          expect(response.headers.get('X-Data-Index-Version')).toBe(snapshot.version)
+          expect(Buffer.from(await response.arrayBuffer())).toEqual(bytes)
+        }
+      }
+      const prefix = kind === 'items'
+        ? { namespace: 'ITEM', name: 'Completed item', refName: 'Completed item' }
+        : { ref: 'Completed stat', matchers: [{ string: 'Completed text' }] }
+      const completed = JSON.stringify(prefix) + '\n' + original
       fs.writeFileSync(file, completed)
       await vi.waitFor(async () => {
-        const source = await fetch(`${origin}/data/en/items.ndjson`)
+        const source = await fetch(`${origin}/data/en/${kind}.ndjson`)
         expect(source.status).toBe(200)
         expect(await source.text()).toBe(completed)
-        const indexResponse = await fetch(`${origin}/data/en/items-ref.index.bin?v=${source.headers.get('X-Data-Index-Version')}`)
+        expect(source.headers.get('X-Data-Index-Version')).not.toBe(snapshots.get(`en/${kind}`)!.version)
+        const indexResponse = await fetch(`${origin}/data/en/${kind}-ref.index.bin?v=${source.headers.get('X-Data-Index-Version')}`)
         expect(indexResponse.status).toBe(200)
         const index = Buffer.from(await indexResponse.arrayBuffer())
-        const hash = Number(fnv1a('ITEM::Target item', { size: 32 }))
+        const hash = Number(fnv1a(kind === 'items' ? 'ITEM::Target item' : 'Target stat', { size: 32 }))
         const offsets: number[] = []
         for (let offset = 0; offset < index.length; offset += 8) {
           if (index.readUInt32LE(offset) === hash) offsets.push(index.readUInt32LE(offset + 4))
         }
         expect(offsets).toEqual([completed.length - original.length])
-        expect(JSON.parse(completed.slice(offsets[0], completed.indexOf('\n', offsets[0]))).refName).toBe('Target item')
+        const target = JSON.parse(completed.slice(offsets[0], completed.indexOf('\n', offsets[0])))
+        expect(kind === 'items' ? target.refName : target.ref).toBe(kind === 'items' ? 'Target item' : 'Target stat')
       }, { timeout: 3000, interval: 50 })
       expect(changes).toHaveBeenCalledOnce()
     } finally {

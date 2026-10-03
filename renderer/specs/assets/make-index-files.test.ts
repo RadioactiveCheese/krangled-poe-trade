@@ -33,6 +33,20 @@ function readIndex (file: string) {
 }
 
 describe('data index generation', () => {
+  it.each(languages.flatMap(language => ['items', 'stats'].map(kind => ({ language, kind }))))(
+    'rejects an empty $language/$kind source instead of accepting an empty generation', ({ language, kind }) => {
+      const synthetic = path.join(temporary, `empty-${language}-${kind}`)
+      for (const locale of languages) {
+        const folder = path.join(synthetic, locale)
+        fs.mkdirSync(folder, { recursive: true })
+        fs.writeFileSync(path.join(folder, 'items.ndjson'), '{"namespace":"ITEM","name":"Item","refName":"Item"}\n')
+        fs.writeFileSync(path.join(folder, 'stats.ndjson'), '{"ref":"stat","matchers":[{"string":"text"}]}\n')
+      }
+      fs.writeFileSync(path.join(synthetic, language, `${kind}.ndjson`), '')
+      expect(() => makeIndexFiles(synthetic)).toThrow(`Empty data source: ${language}/${kind}.ndjson`)
+    }
+  )
+
   it('preserves complete per-language item/name/ref and stat/matcher lookup offsets', () => {
     for (const language of languages) {
       const target = path.join(temporary, language)
