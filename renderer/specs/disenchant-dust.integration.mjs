@@ -101,3 +101,27 @@ Item Level: 84`)
   assert.equal(item.quality, 20)
   assert.equal(item.dustEquivalent, Math.floor(5.32 * 2500 * 1.4))
 })
+
+test('corruption implicit mechanics contribute their bonus after clipboard parsing', () => {
+  const item = parse(`Item Class: Gloves
+Rarity: Unique
+Meginord's Vise
+Steel Gauntlets
+--------
+Quality: +20% (augmented)
+Armour: 100
+--------
+Item Level: 84
+--------
+{ Corruption Implicit Modifier }
++1 to Level of Socketed Gems (implicit)
+{ Corruption Implicit Modifier }
++2 to Level of Socketed AoE Gems (implicit)
+--------
+Corrupted`)
+  assert.equal(item.isCorrupted, true)
+  const corruptions = item.newMods.filter(mod => mod.info.mechanic === 'corrupted')
+  assert.equal(corruptions.length, 2)
+  assert.ok(corruptions.every(mod => mod.info.generation === undefined))
+  assert.equal(item.dustEquivalent, Math.floor(5.46 * 2500 * 2.4))
+})

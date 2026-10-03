@@ -1,5 +1,6 @@
 import type { ParsedItem } from './ParsedItem'
 import { CONSUMABLE_CRAFTABLE_ITEM } from './meta'
+import { ModifierMechanic } from './modifiers'
 
 // Estimates assume maximum Kingsmarch disenchanting rank. PoEDB's per-unique
 // multipliers are rounded, so results can differ slightly from the game.
@@ -15,7 +16,7 @@ export function calcDisenchantDust (item: ParsedItem): number | undefined {
   const quality = item.quality ?? 0
   if (!Number.isFinite(quality) || quality < 0) return undefined
   const corruptImplicits = item.isCorrupted
-    ? item.newMods.filter(mod => mod.info.generation === 'corrupted').length
+    ? item.newMods.filter(mod => mod.info.mechanic === ModifierMechanic.Corruption).length
     : 0
   const bonuses = 1 + new Set(item.influences).size * 0.5 + quality * 0.02 + corruptImplicits * 0.5
 

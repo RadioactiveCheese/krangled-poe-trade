@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { calcDisenchantDust } from '@/parser/calc-disenchant-dust'
 import { makeIdentifiedUnique } from '@/parser'
 import { createVirtualItem, ItemInfluence, ItemRarity } from '@/parser/ParsedItem'
-import { ModifierType } from '@/parser/modifiers'
+import { ModifierMechanic, ModifierType } from '@/parser/modifiers'
 import { ItemCategory } from '@/parser/meta'
 import type { ParsedItem } from '@/parser'
 import contract from '../fixtures/disenchant-contract.json'
@@ -12,7 +12,7 @@ const unique = { name: 'Test Unique', refName: 'Test Unique', namespace: 'UNIQUE
 const item = (props: Partial<ParsedItem> = {}) => createVirtualItem({
   rarity: ItemRarity.Unique, category: ItemCategory.Gloves, itemLevel: 84, info: unique, ...props
 })
-const corrupted = () => ({ info: { type: ModifierType.Implicit, generation: 'corrupted' as const, tags: [] }, stats: [] })
+const corrupted = () => ({ info: { type: ModifierType.Implicit, mechanic: ModifierMechanic.Corruption, tags: [] }, stats: [] })
 
 describe('unique disenchant dust estimates', () => {
   it.each([[1, 250], [46, 250], [47, 260], [65, 465], [66, 475], [67, 485], [68, 500], [69, 625], [84, 2500], [100, 2500]])(
@@ -37,7 +37,7 @@ describe('unique disenchant dust estimates', () => {
   it('adds quality, distinct influences and corrupted implicits at maximum town rank', () => {
     expect(calcDisenchantDust(item({ quality: 20 }))).toBe(35000)
     expect(calcDisenchantDust(item({ influences: [ItemInfluence.Shaper, ItemInfluence.Elder, ItemInfluence.Shaper] }))).toBe(50000)
-    const mods = [corrupted(), corrupted(), { info: { type: ModifierType.Implicit, generation: 'eldritch' as const, tags: [] }, stats: [] }]
+    const mods = [corrupted(), corrupted(), { info: { type: ModifierType.Implicit, mechanic: ModifierMechanic.Eldritch, tags: [] }, stats: [] }]
     expect(calcDisenchantDust(item({ quality: 20, influences: [ItemInfluence.Shaper], isCorrupted: true, newMods: mods }))).toBe(72500)
     expect(calcDisenchantDust(item({ newMods: mods }))).toBe(25000)
   })
