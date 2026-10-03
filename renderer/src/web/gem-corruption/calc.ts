@@ -2,7 +2,7 @@ import type { BaseType } from '@/assets/data'
 import type { ParsedItem } from '@/parser'
 import { ItemCategory } from '@/parser/meta'
 import { createVirtualItem } from '@/parser/ParsedItem'
-import { forSkillGem } from '@/web/price-check/trends/gem-variant'
+import { forSkillGem, SPECIAL_SUPPORT_GEM } from '@/web/price-check/trends/gem-variant'
 
 export interface PriceQuery {
   ns: string
@@ -72,6 +72,11 @@ export function isAwakened (gem: BaseType): boolean {
   return gem.refName.startsWith('Awakened ')
 }
 
+/** Enlighten/Empower/Enhance and their awakened versions: quality has no effect at max level. */
+export function isQualityIrrelevant (gem: BaseType): boolean {
+  return SPECIAL_SUPPORT_GEM.includes(gem.refName.replace(/^Awakened /, ''))
+}
+
 export function isTransfigured (gem: BaseType): boolean {
   return gem.gem?.transfigured === true
 }
@@ -112,12 +117,14 @@ export function evaluateGem (gem: BaseType, lookup: PriceLookup, currency: Curre
   if (!gem.gem || gem.gem.vaal) return { gem, reason: 'vaal-gem' }
   if (currency.vaalOrb === undefined) return { gem, reason: 'no-vaal-orb-price' }
 
-  // Some listings don't split by quality (Enlighten/Empower/Enhance, max-level awakened
-  // gems, Brand Recall), so the 20% and 0% lookups hit the same entry. That price says
-  // nothing about quality: cost it as a 0% gem plus prisms and leave the row unconfirmed.
+  // Some listings don't split by quality, so the 20% and 0% lookups hit the same entry.
+  // For Enlighten/Empower/Enhance (and their awakened versions) quality doesn't matter at
+  // max level, so that price is the full price. For anything else (Brand Recall, other
+  // max-level awakened gems) it says nothing about quality: cost it as a 0% gem plus
+  // prisms and leave the row unconfirmed.
   const fullQualityQuery = forSkillGem(buyItem(gem, 20))
   const noQualityQuery = forSkillGem(buyItem(gem, 0))
-  const fullQualityPrice = (fullQualityQuery.variant !== noQualityQuery.variant)
+  const fullQualityPrice = (fullQualityQuery.variant !== noQualityQuery.variant || isQualityIrrelevant(gem))
     ? lookup(fullQualityQuery)?.chaos
     : undefined
   const noQualityPrice = lookup(noQualityQuery)?.chaos
