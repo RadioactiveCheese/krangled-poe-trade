@@ -106,6 +106,12 @@ export function parseClipboard (clipboard: string): Result<ParsedItem, string> {
     sections.shift()
     parsed.value.rawText = clipboard
 
+    // Eldritch item markers can share the modifiers or item-status section.
+    for (const section of sections) {
+      stripEldritchItemMarkers(section)
+    }
+    sections = sections.filter(section => section.length)
+
     // each section can be parsed at most by one parser
     for (const parser of parsers) {
       if (typeof parser === 'object') {
@@ -131,6 +137,14 @@ export function parseClipboard (clipboard: string): Result<ParsedItem, string> {
   } catch (e) {
     console.log(e)
     return err('item.parse_error')
+  }
+}
+
+function stripEldritchItemMarkers (section: string[]): void {
+  while (section.length) {
+    const lastLine = section[section.length - 1]
+    if (lastLine !== _$.ITEM_EATER && lastLine !== _$.ITEM_EXARCH) break
+    section.pop()
   }
 }
 
