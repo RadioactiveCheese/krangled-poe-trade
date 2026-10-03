@@ -7,9 +7,10 @@ import { BaseType, ITEM_BY_REF } from '@/assets/data'
 import { CATEGORY_TO_TRADE_ID } from '../trade/pathofexile-trade'
 import { PERMANENT_SC } from '../../background/Leagues'
 
-interface CreateOptions {
+export interface CreateOptions {
   league: string
-  currency: string | undefined
+  merchantOnly?: boolean
+  currency?: string | null
   collapseListings: 'app' | 'api'
   activateStockFilter: boolean
   exact: boolean
@@ -25,12 +26,12 @@ export function createFilters (
     trade: {
       offline: false,
       onlineInLeague: false,
-      merchantOnly:
+      merchantOnly: (opts.merchantOnly ?? true) &&
         // these are Divination Cards, and some items at start of league
         // that are on Currency Exchange but was not added to Bulk section of site yet
         !(item.info.exchangeable && !item.info.tradeTag),
-      listed: undefined,
-      currency: opts.currency,
+      listed: null,
+      currency: opts.currency ?? null,
       league: opts.league,
       collapseListings: opts.collapseListings,
       collapseMerchant: false
@@ -41,7 +42,7 @@ export function createFilters (
     (!item.info.craftable || CONSUMABLE_CRAFTABLE_ITEM.has(item.category!)) &&
     item.rarity !== ItemRarity.Unique
   ) {
-    if (!opts.currency) {
+    if (opts.currency === undefined) {
       filters.trade.currency = 'chaos_divine'
     }
     if (item.info.refName !== 'Mercenary Warrant') {
