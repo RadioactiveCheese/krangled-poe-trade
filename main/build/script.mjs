@@ -1,6 +1,7 @@
 import child_process from 'child_process'
 import electron from 'electron'
 import esbuild from 'esbuild'
+import { electronDevArgs } from './electron-dev-args.mjs'
 
 const isDev = !process.argv.includes('--prod')
 
@@ -11,7 +12,7 @@ const electronRunner = (() => {
       console.info('Restarting Electron process.')
 
       if (handle) handle.kill()
-      handle = child_process.spawn(electron, ['.'], {
+      handle = child_process.spawn(electron, electronDevArgs(), {
         stdio: 'inherit'
       })
     }

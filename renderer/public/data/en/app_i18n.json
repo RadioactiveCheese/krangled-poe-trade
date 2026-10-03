@@ -380,6 +380,7 @@
     "loadout": "Mercenary loadout"
   },
   "price_check": {
+    "default_settings": "Default filters",
     "name": "Price check",
     "hotkey" :"Auto-hide Mode",
     "hotkey_locked" :"Open without auto-hide",

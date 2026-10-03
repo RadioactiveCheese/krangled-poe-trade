@@ -1,8 +1,9 @@
 <template>
-  <div class="w-full h-full"
-    @mouseenter="isHovered = true"
-    @mouseleave="isHovered = false">
-    <img :class="$style.img" :src="resolvedSrc">
+  <div
+    @mousemove="handleMouseMove"
+    @mouseleave="handleMouseLeave"
+    @click="handleClick">
+    <img :class="$style.img" :src="resolvedSrc" :style="{ objectFit: fit ?? 'cover' }">
     <teleport v-if="isHovered && !disabled" to="body">
       <div :class="$style.imgFullscreenWrapper">
         <img :class="$style.imgFullscreen" :src="resolvedSrc">
@@ -17,9 +18,45 @@ import { defineProps, shallowRef, computed } from 'vue'
 const props = defineProps<{
   src: string
   disabled?: boolean
+  fit?: 'cover' | 'contain'
 }>()
 
 const isHovered = shallowRef(false)
+let requiresLeave = false
+
+function handleMouseMove (e: MouseEvent) {
+  if (props.disabled || isHovered.value || requiresLeave) return
+
+  const el = e.currentTarget as HTMLElement
+  const rect = el.getBoundingClientRect()
+
+  const prevX = e.clientX - e.movementX
+  const prevY = e.clientY - e.movementY
+
+  const wasOutside =
+    prevX <= rect.left + 2 ||
+    prevX >= rect.right - 2 ||
+    prevY <= rect.top + 2 ||
+    prevY >= rect.bottom - 2
+
+  if (wasOutside) {
+    isHovered.value = true
+  } else {
+    requiresLeave = true
+  }
+}
+
+function handleMouseLeave () {
+  isHovered.value = false
+  requiresLeave = false
+}
+
+function handleClick () {
+  if (!props.disabled) {
+    isHovered.value = true
+  }
+}
+
 const resolvedSrc = computed(() => {
   if (props.src.includes('://')) {
     return props.src
@@ -35,7 +72,6 @@ const resolvedSrc = computed(() => {
 .img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 
 .imgFullscreenWrapper {
