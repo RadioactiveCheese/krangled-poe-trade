@@ -102,7 +102,6 @@ export interface ItemFilters {
     name: string
     disabled: boolean
   }
-  sentinelCharge?: FilterNumeric
   trade: {
     offline: boolean
     onlineInLeague: boolean
@@ -139,7 +138,7 @@ export interface StatFilter {
   text: string
   tag: FilterTag
   oils?: string[]
-  mercenary?: { icon?: string, tier?: number, supportFamilies?: Stat[][] }
+  mercenary?: { icon?: string, tier?: number, maxTier?: boolean, supportFamilies?: Stat[][] }
   sources: StatCalculated['sources']
   not?: true
   roll?: {
