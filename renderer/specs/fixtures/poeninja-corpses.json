@@ -1,5 +1,10 @@
 {
   "type": "Corpse",
+  "sampleLine": {
+    "name": "Perfect Forest Tiger",
+    "chaos": 28501,
+    "graph": [0, -4.69, -6.8, 5.07, -1.22, 2.35, 2.77]
+  },
   "source": "https://poe.ninja/poe1/api/economy/current/dense/overviews?league=Allflame&language=en",
   "names": [
     "Perfect Forest Tiger",
