@@ -102,7 +102,6 @@ export interface ItemFilters {
     name: string
     disabled: boolean
   }
-  sentinelCharge?: FilterNumeric
   trade: {
     offline: boolean
     onlineInLeague: boolean
