@@ -10,7 +10,6 @@ const DEFAULT_DATA_ROOT = fileURLToPath(new URL('../../public/data/', import.met
 
 /** @param {string} dataRoot */
 export function makeIndexFiles (dataRoot = DEFAULT_DATA_ROOT) {
-
   for (const lang of LANGUAGES) {
     const lineStarts = {
       /** @type{Array<{ hash: number, start: number }>} */
