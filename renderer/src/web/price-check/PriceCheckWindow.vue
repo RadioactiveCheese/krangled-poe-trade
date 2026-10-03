@@ -120,7 +120,8 @@ export default defineComponent({
         showSeller: false,
         searchStatRange: 10,
         showCursor: true,
-        rememberCurrency: false,
+        merchantOnly: true,
+        defaultCurrency: null,
         itemHoverTooltip: 'keybind'
       }
     }

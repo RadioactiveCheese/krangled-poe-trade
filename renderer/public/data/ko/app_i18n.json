@@ -38,6 +38,7 @@
   "Phantasmal": "몽환적인",
 
   "item": {
+    "count_one_group": "다음 중 하나",
     "prop_quality": "{0}% 퀄리티",
     "base_percentile": "기본 백분위수: {0}%",
     "armour": "방어도: {0}",
@@ -355,6 +356,7 @@
     "loadout": "용병 스킬 구성"
   },
   "price_check": {
+    "default_settings": "기본 검색 필터",
     "name": "Price check",
     "hotkey" :"Auto-hide Mode",
     "hotkey_locked" :"Open without auto-hide",

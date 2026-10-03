@@ -1,0 +1,22 @@
+{
+  "source": "https://github.com/SnosMe/awakened-poe-trade/tree/master/renderer/public/data",
+  "retrievedAt": "2026-10-03",
+  "languages": {
+    "en": {
+      "ITEM_EATER": "Eater of Worlds Item",
+      "ITEM_EXARCH": "Searing Exarch Item"
+    },
+    "ru": {
+      "ITEM_EATER": "Предмет Пожирателя миров",
+      "ITEM_EXARCH": "Предмет Пламенного экзарха"
+    },
+    "ko": {
+      "ITEM_EATER": "세계 포식자 아이템",
+      "ITEM_EXARCH": "작열의 총주교 아이템"
+    },
+    "cmn-Hant": {
+      "ITEM_EATER": "吞噬天地物品",
+      "ITEM_EXARCH": "卓烙總督物品"
+    }
+  }
+}
