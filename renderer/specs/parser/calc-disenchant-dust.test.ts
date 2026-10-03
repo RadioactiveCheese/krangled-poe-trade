@@ -72,7 +72,7 @@ describe('unique disenchant dust estimates', () => {
     const source = contract.values as Record<string, number>
     for (const language of ['en', 'ru', 'cmn-Hant', 'ko']) {
       const translations = JSON.parse(fs.readFileSync(`public/data/${language}/app_i18n.json`, 'utf8'))
-      expect(translations.item.disenchanting).toBeTruthy()
+      expect(translations.price_check.disenchanting).toBeTruthy()
       const items = fs.readFileSync(`public/data/${language}/items.ndjson`, 'utf8').trim().split('\n').map(line => JSON.parse(line))
       const uniques = items.filter(item => item.namespace === 'UNIQUE')
       for (const entry of uniques) {

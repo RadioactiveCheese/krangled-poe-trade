@@ -19,7 +19,7 @@
           <div>{{ weaponDPS.total }}</div>
         </template>
         <template v-if="item.dustEquivalent !== undefined">
-          <div>{{ t('item.disenchanting') }}</div>
+          <div>{{ t('price_check.disenchanting') }}</div>
           <div class="flex gap-1 items-center">{{ item.dustEquivalent.toLocaleString() }} <img src="/images/dust.png" class="w-5" /></div>
         </template>
       </div>

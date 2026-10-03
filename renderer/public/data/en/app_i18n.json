@@ -41,7 +41,6 @@
   "Phantasmal": "Phantasmal",
 
   "item": {
-    "disenchanting": "Disenchanting (estimate)",
     "not_group": "None of",
     "prop_quality": "Q {0}%",
     "base_percentile": "Base Percentile: {0}%",
@@ -381,6 +380,7 @@
     "loadout": "Mercenary loadout"
   },
   "price_check": {
+    "disenchanting": "Disenchanting (estimate)",
     "name": "Price check",
     "hotkey" :"Auto-hide Mode",
     "hotkey_locked" :"Open without auto-hide",
