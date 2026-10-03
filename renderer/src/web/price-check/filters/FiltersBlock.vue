@@ -112,7 +112,7 @@ import FilterGroup from './FilterGroup.vue'
 import FilterBtnNumeric from './FilterBtnNumeric.vue'
 import FilterBtnLogical from './FilterBtnLogical.vue'
 import UnknownModifier from './UnknownModifier.vue'
-import { ItemFilters, FilterOrGroup } from './interfaces'
+import { ItemFilters, FilterOrGroup, isFilterEnabled } from './interfaces'
 import { ParsedItem, ItemRarity, ItemCategory } from '@/parser'
 
 export default defineComponent({
@@ -193,12 +193,7 @@ export default defineComponent({
       toggleMercenaryInfamous,
       toggleMercenaryBuild,
       totalSelectedMods: computed(() => {
-        return props.stats.filter(stat => {
-          if (stat.group) {
-            return !stat.meta.disabled
-          }
-          return !stat.disabled
-        }).length
+        return props.stats.filter(isFilterEnabled).length
       }),
       filteredStats: computed(() => {
         const show = showHidden.value

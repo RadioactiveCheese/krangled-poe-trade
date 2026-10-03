@@ -1,5 +1,5 @@
 import { ItemInfluence, ItemCategory } from '@/parser'
-import { ItemFilters, StatFilter, FilterOrGroup, FilterTag, INTERNAL_TRADE_IDS, InternalTradeId } from '../filters/interfaces'
+import { ItemFilters, StatFilter, FilterOrGroup, FilterTag, INTERNAL_TRADE_IDS, InternalTradeId, isFilterEnabled } from '../filters/interfaces'
 import { setProperty as propSet } from 'dot-prop'
 import { DateTime } from 'luxon'
 import { Host } from '@/web/background/IPC'
@@ -619,6 +619,13 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
       query.stats.push({
         type: 'not',
         disabled: group.meta.disabled,
+        filters: group.stats.flatMap(stat => everyTradeIdToQuery(stat))
+      })
+    } else if (group.group === 'one') {
+      query.stats.push({
+        type: 'count',
+        value: { min: 1 },
+        disabled: !isFilterEnabled(group),
         filters: group.stats.flatMap(stat => everyTradeIdToQuery(stat))
       })
     } else if (group.group === 'mercenary') {

@@ -1,0 +1,118 @@
+{
+  "source": "https://www.pathofexile.com/api/trade/data/stats",
+  "retrieved": "2026-10-03",
+  "entries": [
+    {
+      "id": "explicit.pseudo_timeless_jewel_doryani",
+      "text": "Bathed in the blood of # sacrificed in the name of Doryani"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_victario",
+      "text": "Commissioned # coins to commemorate Victario"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_xibaqua",
+      "text": "Bathed in the blood of # sacrificed in the name of Xibaqua"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_kaom",
+      "text": "Commanded leadership over # warriors under Kaom"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_rakiata",
+      "text": "Commanded leadership over # warriors under Rakiata"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_akoya",
+      "text": "Commanded leadership over # warriors under Akoya"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_cadiro",
+      "text": "Commissioned # coins to commemorate Cadiro"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_maxarius",
+      "text": "Carved to glorify # new faithful converted by High Templar Maxarius"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_asenath",
+      "text": "Denoted service of # dekhara in the akhara of Asenath"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_nasima",
+      "text": "Denoted service of # dekhara in the akhara of Nasima"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_avarius",
+      "text": "Carved to glorify # new faithful converted by High Templar Avarius"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_ahuana",
+      "text": "Bathed in the blood of # sacrificed in the name of Ahuana"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_balbala",
+      "text": "Denoted service of # dekhara in the akhara of Balbala"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_dominus",
+      "text": "Carved to glorify # new faithful converted by High Templar Dominus"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_caspiro",
+      "text": "Commissioned # coins to commemorate Caspiro"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_chitus",
+      "text": "Commissioned # coins to commemorate Chitus"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_kiloava",
+      "text": "Commanded leadership over # warriors under Kiloava"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_zerphi",
+      "text": "Bathed in the blood of # sacrificed in the name of Zerphi"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_venarius",
+      "text": "Carved to glorify # new faithful converted by High Templar Venarius"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_deshret",
+      "text": "Denoted service of # dekhara in the akhara of Deshret"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_vorana",
+      "text": "Remembrancing # songworthy deeds by the line of Vorana"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_uhtred",
+      "text": "Remembrancing # songworthy deeds by the line of Uhtred"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_medved",
+      "text": "Remembrancing # songworthy deeds by the line of Medved"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_zorath",
+      "text": "Binding # souls to phylacteries to sustain Zorath"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_amanamu",
+      "text": "Subjugating # souls in the thrall of Amanamu"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_kurgal",
+      "text": "Subjugating # souls in the thrall of Kurgal"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_tecrod",
+      "text": "Subjugating # souls in the thrall of Tecrod"
+    },
+    {
+      "id": "explicit.pseudo_timeless_jewel_ulaman",
+      "text": "Subjugating # souls in the thrall of Ulaman"
+    }
+  ]
+}

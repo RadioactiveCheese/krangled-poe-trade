@@ -38,6 +38,7 @@
   "Phantasmal": "몽환적인",
 
   "item": {
+    "count_one_group": "다음 중 하나",
     "prop_quality": "{0}% 퀄리티",
     "base_percentile": "기본 백분위수: {0}%",
     "armour": "방어도: {0}",
@@ -146,18 +147,30 @@
     "sanctum_relic": "성역 유물",
     "tincture": "팅크"
   },
+  "modifier_hint": {
+    "volatile": "불안정한 바알 오브 효과일 수 있습니다. 클립보드 텍스트만으로 범위 밖 수치의 원인을 확인할 수 없습니다.",
+    "reflecting": "반사 안개 효과일 수 있습니다. 클립보드 텍스트만으로 범위 밖 수치의 원인을 확인할 수 없습니다."
+  },
   "filters": {
+    "hide_unique_base_implicit": "고유 아이템의 기본 유형 속성",
+    "hide_variable_by_base_percentile_only": "기본 백분위에 따라서만 변하는 방어력",
+    "hide_redundant": "방어 필터에 이미 기본 백분위가 반영됨",
+    "hide_enchant_meta_stat": "퀄리티 효과가 아이템 속성에 반영됨",
     "selected_some": "{1} 중 {0}개 선택",
     "selected_none": "스탯 미선택",
     "hidden_toggle": "숨겨진",
     "collapse": "접기",
     "mods_toggle": "모드",
+    "option_empty_affix": "빈 속성 부여",
+    "option_empty_prefix": "빈 접두어",
+    "option_empty_suffix": "빈 접미어",
     "empty": "No relevant stats were found",
     "tier": "티어 {0}",
     "preset_pseudo": "Pseudo",
     "preset_base_item": "베이스 아이템",
     "preset_bulk": "Bulk",
     "hide_const_roll": "Roll is not variable",
+    "hide_jewellery_quality": "퀄리티가 장신구 속성에 이미 반영됨",
     "hide_ele_dps": "Elemental damage is not the main source of DPS",
     "hide_phys_dps": "Physical damage is not the main source of DPS",
     "hide_ele_res": "Filtering by exact Elemental Resistance unreasonably increases the price",

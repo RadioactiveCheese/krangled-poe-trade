@@ -14,6 +14,7 @@ export enum StatBetter {
 }
 
 export interface Stat {
+  jewelleryQuality?: { catalyst: string }
   ref: string
   dp?: true
   matchers: StatMatcher[]

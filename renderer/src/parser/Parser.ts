@@ -7,9 +7,9 @@ import {
   StatBetter,
   BaseType
 } from '@/assets/data'
-import { ModifierType, sumStatsByModType } from './modifiers'
+import { ModifierType, ModifierMechanic, sumStatsByModType } from './modifiers'
 import { linesToStatStrings, tryParseTranslation, getRollOrMinmaxAvg, ParsedStat } from './stat-translations'
-import { ItemCategory } from './meta'
+import { ItemCategory, ACCESSORY } from './meta'
 import { IncursionRoom, ParsedItem, ItemInfluence, ItemRarity } from './ParsedItem'
 import { magicBasetype } from './magic-name'
 import { isModInfoLine, groupLinesByMod, parseModInfoLine, parseModType, ModifierInfo, ParsedModifier, ENCHANT_LINE, SCOURGE_LINE, IMPLICIT_LINE } from './advanced-mod-desc'
@@ -47,6 +47,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseVaalGem,
   parseArmour,
   parseWeapon,
+  parseAccessory,
   parseMemoryStrands,
   parseFlask,
   parseTincture,
@@ -84,6 +85,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseModifiers, // scourge
   parseModifiers, // implicit
   parseModifiers, // explicit
+  { virtual: augmentModifiers },
   { virtual: transformToLegacyModifiers },
   { virtual: parseFractured },
   { virtual: pickCorrectVariant },
@@ -303,10 +305,21 @@ function parseFractured (item: ParserState) {
 }
 
 function pickCorrectVariant (item: ParserState) {
-  if (!item.info.disc) return
+  item.info = pickVariant(item.infoVariants, item) ?? item.infoVariants[0]
+  if (item.info.unique) {
+    const bases = ITEM_BY_REF('ITEM', item.info.unique.base)
+    if (bases) {
+      item.uniqueBase = pickVariant(bases, item) ?? bases[0]
+    }
+  }
+}
 
-  for (const variant of item.infoVariants) {
-    const cond = variant.disc!
+function pickVariant (variants: BaseType[], item: ParsedItem): BaseType | undefined {
+  if (variants.length <= 1) return variants[0]
+
+  for (const variant of variants) {
+    const cond = variant.disc
+    if (!cond) return variant
 
     if (cond.propAR && !item.armourAR) continue
     if (cond.propEV && !item.armourEV) continue
@@ -331,7 +344,7 @@ function pickCorrectVariant (item: ParserState) {
 
     if (cond.sectionText && !item.rawText.includes(cond.sectionText)) continue
 
-    item.info = variant
+    return variant
   }
 
   // it may happen that we don't find correct variant
@@ -673,6 +686,27 @@ function parseMemoryStrands (section: string[], item: ParsedItem) {
     return 'SECTION_PARSED'
   }
 
+  return 'SECTION_SKIPPED'
+}
+
+function parseAccessory (section: string[], item: ParsedItem) {
+  if (!item.category || !ACCESSORY.has(item.category)) return 'PARSER_SKIPPED'
+  let parsed = false
+  for (const line of section) {
+    // The translated matcher identifies quality. A trailing annotation is
+    // optional and may be localized; its text is not part of the stat.
+    const text = line.replace(/\s*[（(][^（）()]*[）)]\s*$/, '').trimEnd()
+    const found = tryParseTranslation({ string: text, unscalable: true }, ModifierType.Pseudo, item.category)
+    if (!found?.stat.jewelleryQuality || !found.roll || found.roll.value < 0) continue
+    item.quality = found.roll.value
+    item.newMods.push({ info: { tags: [], type: ModifierType.Pseudo }, stats: [found] })
+    parsed = true
+  }
+  if (parsed) {
+    // The whole section is consumed, including nested Memory Strands.
+    parseMemoryStrandsNested(section, item)
+    return 'SECTION_PARSED'
+  }
   return 'SECTION_SKIPPED'
 }
 
@@ -1250,6 +1284,28 @@ function parseStatsFromMod (lines: string[], item: ParsedItem, modifier: ParsedM
   })))
 }
 
+function augmentModifiers (item: ParsedItem) {
+  for (const mod of item.newMods) {
+    if (item.isSynthesised && mod.info.type === ModifierType.Implicit) {
+      mod.info.mechanic ??= ModifierMechanic.Synthesised
+    }
+
+    for (const stat of mod.stats) {
+      if (stat.roll?.generation !== 'legacy' || stat.roll.unscalable) continue
+
+      // Clipboard text cannot distinguish an old roll from a currency-enhanced roll.
+      // Keep the bound fact intact; hints are only for explanatory UI.
+      if (item.rarity === ItemRarity.Unique && item.isCorrupted) {
+        stat.roll.mechanicHint = 'volatile'
+      } else if (item.rarity === ItemRarity.Rare && item.isMirrored &&
+        (item.category === ItemCategory.Ring || item.category === ItemCategory.Amulet)
+      ) {
+        stat.roll.mechanicHint = 'reflecting'
+      }
+    }
+  }
+}
+
 /**
  * @deprecated
  */
@@ -1258,9 +1314,7 @@ function transformToLegacyModifiers (item: ParsedItem) {
 }
 
 function calcBasePercentile (item: ParsedItem) {
-  const info = item.info.unique
-    ? ITEM_BY_REF('ITEM', item.info.unique.base)![0].armour
-    : item.info.armour
+  const info = item.uniqueBase?.armour ?? item.info.armour
   if (!info) return
 
   // Base percentile is the same for all defences.

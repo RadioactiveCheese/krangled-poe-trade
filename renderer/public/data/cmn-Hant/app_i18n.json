@@ -57,7 +57,18 @@
       "retry": "重試",
       "loadout": "傭兵技能配置"
     },
+    "modifier_hint": {
+      "volatile": "可能是易變瓦爾寶珠效果。剪貼簿文字無法確定超出範圍數值的來源。",
+      "reflecting": "可能是映像迷霧效果。剪貼簿文字無法確定超出範圍數值的來源。"
+    },
+    "item": {
+      "count_one_group": "其中之一"
+    },
     "filters": {
-      "mercenary_primary_no_support": "主要技能沒有輔助寶石"
+      "hide_jewellery_quality": "品質已反映在飾品詞綴中",
+      "mercenary_primary_no_support": "主要技能沒有輔助寶石",
+      "option_empty_affix": "任意",
+      "option_empty_prefix": "前綴",
+      "option_empty_suffix": "後綴"
     }
 }

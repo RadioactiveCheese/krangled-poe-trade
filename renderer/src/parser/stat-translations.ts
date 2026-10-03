@@ -14,7 +14,9 @@ export interface ParsedStat {
   readonly translation: StatMatcher
   roll?: {
     unscalable: boolean
-    legacy?: true
+    // Outside the copied modifier bounds; this does not prove historical origin.
+    generation?: 'legacy'
+    mechanicHint?: 'volatile' | 'reflecting'
     dp: boolean
     value: number
     min: number
@@ -210,7 +212,7 @@ export function tryParseTranslation (
       roll: combination.values.length
         ? {
             unscalable: stat.unscalable,
-            legacy: legacyStatRolls || undefined,
+            generation: (legacyStatRolls) ? 'legacy' : undefined,
             dp: found.stat.dp || combination.values.some(stat => stat.decimal),
             value: getRollOrMinmaxAvg(combination.values.map(stat => stat.roll)),
             min: getRollOrMinmaxAvg(combination.values.map(stat => stat.bounds?.min ?? stat.roll)),

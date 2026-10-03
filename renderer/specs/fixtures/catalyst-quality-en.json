@@ -1,0 +1,66 @@
+{
+  "entries": [
+    {
+      "id": "pseudo.pseudo_jewellery_elemental_quality",
+      "text": "Quality (Elemental Damage Modifiers): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_caster_quality",
+      "text": "Quality (Caster Modifiers): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_attack_quality",
+      "text": "Quality (Attack Modifiers): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_defense_quality",
+      "text": "Quality (Defence Modifiers): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_resource_quality",
+      "text": "Quality (Life and Mana Modifiers): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_resistance_quality",
+      "text": "Quality (Resistance Modifiers): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_attribute_quality",
+      "text": "Quality (Attribute Modifiers): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_physical_chaos_quality",
+      "text": "Quality (Physical and Chaos Damage Modifiers): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_speed_quality",
+      "text": "Quality (Speed Modifiers): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_critical_quality",
+      "text": "Quality (Critical Modifiers): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_prefix_quality",
+      "text": "Quality (Prefix Modifiers): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_suffix_quality",
+      "text": "Quality (Suffix Modifiers): #%",
+      "type": "pseudo"
+    }
+  ],
+  "checkedAt": "2026-10-03",
+  "source": "https://www.pathofexile.com/api/trade/data/stats"
+}

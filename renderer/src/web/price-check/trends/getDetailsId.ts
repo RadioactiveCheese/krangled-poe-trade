@@ -112,7 +112,7 @@ function forUniqueItem (item: ParsedItem) {
       getUniqueVariant(item),
       (item.category === ItemCategory.Flask) ? null
         : (item.category === ItemCategory.SanctumRelic) ? 'Relic'
-            : item.info.unique.base,
+            : item.uniqueBase?.refName ?? item.info.unique.base,
       (item.sockets?.linked) ? `${item.sockets.linked}L` : null
     ])
   }
