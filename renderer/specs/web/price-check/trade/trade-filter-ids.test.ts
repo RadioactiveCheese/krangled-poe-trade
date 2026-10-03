@@ -4,18 +4,26 @@ import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { ItemCategory, ItemRarity, type ParsedItem } from '@/parser'
+import { CHART_SHAPE_OPTIONS } from '@/parser/chart'
 import type { ItemFilters } from '@/web/price-check/filters/interfaces'
 import { createFilters } from '@/web/price-check/filters/create-item-filters'
 import { createTradeRequest, CATEGORY_TO_TRADE_ID } from '@/web/price-check/trade/pathofexile-trade'
-// Snapshot of https://www.pathofexile.com/api/trade/data/filters (PoE1), fetched 2026-10-03.
-// Refresh it when the trade site changes its filter set.
+// Trimmed snapshot (IDs only) of https://www.pathofexile.com/api/trade/data/filters (PoE1).
+// Regenerate it with `npm run make-trade-filters-fixture` (scripts/trim-trade-filters.mjs)
+// when the trade site changes its filter set; it is not fetched in CI.
 import liveFilters from '../../../fixtures/trade-data-filters-poe1.json'
 
-interface LiveFilter { id: string, option?: { options?: Array<{ id: string | null }> } }
+interface LiveFilter { id: string, options?: string[] }
 const LIVE = new Map<string, Map<string, LiveFilter>>(
   (liveFilters.result as Array<{ id: string, filters: LiveFilter[] }>)
     .map(group => [group.id, new Map(group.filters.map(f => [f.id, f]))])
 )
+
+function liveOptions (group: string, id: string): Set<string> {
+  const options = LIVE.get(group)?.get(id)?.options
+  if (!options) throw new Error(`fixture has no options for ${group}.${id}`)
+  return new Set(options)
+}
 
 const SOURCE = readFileSync(
   resolve(process.cwd(), 'src/web/price-check/trade/pathofexile-trade.ts'),
@@ -118,8 +126,28 @@ describe('trade filter IDs match the live /api/trade/data/filters dataset', () =
   })
 
   it.each([...new Set(CATEGORY_TO_TRADE_ID.values())])('category %s is a live category option', (id) => {
-    const options = new Set(LIVE.get('type_filters')!.get('category')!.option!.options!.map(o => o.id))
-    expect(options.has(id)).toBe(true)
+    expect(liveOptions('type_filters', 'category').has(id)).toBe(true)
+  })
+
+  const ONLINE_FILTER_VUE = readFileSync(
+    resolve(process.cwd(), 'src/web/price-check/trade/OnlineFilter.vue'), 'utf8')
+  const uiOptions = (model: string) => [...ONLINE_FILTER_VUE.matchAll(
+    new RegExp(`v-model="filters\\.trade\\.${model}" value="([^"]+)"`, 'g'))].map(m => m[1])
+
+  it.each([
+    ['status_filters', 'status', ['available', 'securable', 'any']],
+    ['type_filters', 'rarity', ['magic', 'nonunique', 'uniquefoil']],
+    ['trade_filters', 'collapse', ['true']],
+    ['heist_filters', 'heist_objective_value', ['priceless']],
+    ['map_filters', 'chart_shape', [...new Set(Object.values(CHART_SHAPE_OPTIONS))]],
+    ['trade_filters', 'indexed', uiOptions('listed')],
+    ['trade_filters', 'price', uiOptions('currency')]
+  ])('%s.%s option values sent by the app are live options', (group, id, values) => {
+    expect(values.length).toBeGreaterThan(0)
+    const options = liveOptions(group, id)
+    for (const value of values) {
+      expect(options.has(value), `${group}.${id} = ${value}`).toBe(true)
+    }
   })
 
   it('no longer uses removed filters', () => {
@@ -138,7 +166,8 @@ describe('Foulborn trade query', () => {
 
     expect(request.query.filters.misc_filters?.filters.mutated).toEqual({ option: 'false' })
     expect(request.query.filters.misc_filters?.filters).not.toHaveProperty('foulborn_item')
-    expect(LIVE.get('misc_filters')!.get('mutated')).toMatchObject({ text: 'Foulborn' })
+    // The live dataset labels this filter "Foulborn" (label trimmed from the fixture).
+    expect(LIVE.get('misc_filters')!.has('mutated')).toBe(true)
   })
 
   it('does not send the Foulborn filter when Foulborn items are allowed', () => {
