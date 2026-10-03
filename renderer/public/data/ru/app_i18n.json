@@ -390,7 +390,6 @@
     "loadout": "Умения наёмника"
   },
   "price_check": {
-    "disenchanting": "Распыление (оценка)",
     "name": "Прайс-чек",
     "hotkey" :"Режим авто-скрытия",
     "hotkey_locked" :"Открыть без авто-скрытия",
@@ -410,6 +409,7 @@
     "use_tooltip_hover": "Показывать предмет при наведении на цену",
     "use_tooltip_keybind": "SHIFT + наведение",
     "use_tooltip_always": "наведение",
+    "disenchanting": "Распыление (оценка)",
     "use_tooltip_off": "отключено"
   }
 }

@@ -380,7 +380,6 @@
     "loadout": "Mercenary loadout"
   },
   "price_check": {
-    "disenchanting": "Disenchanting (estimate)",
     "name": "Price check",
     "hotkey" :"Auto-hide Mode",
     "hotkey_locked" :"Open without auto-hide",
@@ -400,6 +399,7 @@
     "use_tooltip_hover": "Show item when hovering over price",
     "use_tooltip_keybind": "SHIFT + hover",
     "use_tooltip_always": "hover",
+    "disenchanting": "Disenchanting (estimate)",
     "use_tooltip_off": "off"
   }
 }

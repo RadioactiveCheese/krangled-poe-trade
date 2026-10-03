@@ -29,10 +29,10 @@
     "map.mods.outdated": "過時",
     "Support development on": "支持開發",
     "price_check": {
-      "disenchanting": "分解（估算）",
       "use_tooltip_hover": "將滑鼠懸停在價格上時顯示物品",
       "use_tooltip_keybind": "SHIFT + 懸停",
       "use_tooltip_always": "始終懸停顯示",
+      "disenchanting": "分解（估算）",
       "use_tooltip_off": "關閉"
     },
     "mercenary": {
