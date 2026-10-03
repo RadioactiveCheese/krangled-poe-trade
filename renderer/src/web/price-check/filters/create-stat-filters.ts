@@ -10,7 +10,7 @@ import { mapProps, valdoBadMods, chartProps } from './pseudo/maps'
 import { applyFlaskHybridMod } from './pseudo/flasks'
 import { applyHeistRules } from './pseudo/heist'
 import { decodeOils, applyAnointmentRules } from './pseudo/anointments'
-import { StatBetter, CLIENT_STRINGS } from '@/assets/data'
+import { StatBetter } from '@/assets/data'
 
 export interface FiltersCreationContext {
   readonly item: ParsedItem
@@ -242,7 +242,7 @@ export function calculatedStatToFilter (
     tradeId: stat.trade.ids[type],
     statRef: stat.ref,
     text: translation.string,
-    tag: (type as unknown) as FilterTag,
+    tag: type,
     oils: decodeOils(calc),
     sources: sources,
     roll: undefined,
@@ -258,48 +258,14 @@ export function calculatedStatToFilter (
     }
   }
 
-  if (type === ModifierType.Implicit) {
-    if (sources.some(s => s.modifier.info.generation === 'corrupted')) {
-      filter.tag = FilterTag.Corrupted
-    } else if (sources.some(s => s.modifier.info.generation === 'eldritch')) {
-      filter.tag = FilterTag.Eldritch
-    } else if (sources.some(s => s.modifier.info.generation === 'vestigial')) {
-      filter.tag = FilterTag.Vestigial
-    } else if (item.isSynthesised) {
-      filter.tag = FilterTag.Synthesised
+  if (type === ModifierType.Explicit && item.info.unique?.fixedStats) {
+    if (!item.info.unique.fixedStats.includes(filter.statRef)) {
+      filter.tag = FilterTag.Variant
     }
-  } else if (type === ModifierType.Explicit) {
-    if (item.info.unique?.fixedStats) {
-      const fixedStats = item.info.unique.fixedStats
-      if (!fixedStats.includes(filter.statRef)) {
-        filter.tag = FilterTag.Variant
-      }
-    } else if (sources.some(s => s.modifier.info.generation === 'foulborn')) {
-      filter.tag = FilterTag.Foulborn
-    } else if (sources.some(s => CLIENT_STRINGS.SHAPER_MODS.includes(s.modifier.info.name!))) {
-      filter.tag = FilterTag.Shaper
-    } else if (sources.some(s => CLIENT_STRINGS.ELDER_MODS.includes(s.modifier.info.name!))) {
-      filter.tag = FilterTag.Elder
-    } else if (sources.some(s => CLIENT_STRINGS.HUNTER_MODS.includes(s.modifier.info.name!))) {
-      filter.tag = FilterTag.Hunter
-    } else if (sources.some(s => CLIENT_STRINGS.WARLORD_MODS.includes(s.modifier.info.name!))) {
-      filter.tag = FilterTag.Warlord
-    } else if (sources.some(s => CLIENT_STRINGS.REDEEMER_MODS.includes(s.modifier.info.name!))) {
-      filter.tag = FilterTag.Redeemer
-    } else if (sources.some(s => CLIENT_STRINGS.CRUSADER_MODS.includes(s.modifier.info.name!))) {
-      filter.tag = FilterTag.Crusader
-    } else if (sources.some(s => CLIENT_STRINGS.DELVE_MODS.includes(s.modifier.info.name!))) {
-      filter.tag = FilterTag.Delve
-    } else if (sources.some(s => CLIENT_STRINGS.VEILED_MODS.includes(s.modifier.info.name!))) {
-      // can't drop from ground, so don't show
-      // filter.tag = FilterTag.Unveiled
-    } else if (sources.some(s => CLIENT_STRINGS.INCURSION_MODS.includes(s.modifier.info.name!))) {
-      filter.tag = FilterTag.Incursion
-    } else if (sources.some(s => CLIENT_STRINGS.ESSENCE_MODS.includes(s.modifier.info.name!))) {
-      filter.tag = FilterTag.Essence
-    } else if (sources.some(s => CLIENT_STRINGS.INFAMOUS_MODS.includes(s.modifier.info.name!))) {
-      filter.tag = FilterTag.Infamous
-    }
+  }
+  if (type === ModifierType.Implicit || type === ModifierType.Explicit) {
+    const mechanic = sources.find(source => source.modifier.info.mechanic)?.modifier.info.mechanic
+    if (mechanic) filter.tag = mechanic
   }
 
   if (roll && !filter.option) {
@@ -391,6 +357,14 @@ function hideNotVariableStat (filter: StatFilter, item: ParsedItem) {
     filter.tag !== FilterTag.Explicit &&
     filter.tag !== FilterTag.Pseudo
   ) return
+
+  // Scalable rolls remain relevant on corrupted uniques even when their
+  // uncorrupted values are constant.
+  if (item.isCorrupted && filter.sources.some(source => source.stat.roll && !source.stat.roll.unscalable)) {
+    const volatile = item.newMods.some(mod => mod.stats.some(stat => stat.roll?.generation === 'volatile'))
+    if (!volatile) filter.disabled = false
+    return
+  }
 
   if (!filter.roll) {
     filter.hidden = 'filters.hide_const_roll'

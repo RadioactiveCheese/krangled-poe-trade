@@ -80,6 +80,7 @@ test('parses a Vestigial unique and classifies its inherited implicit', async ()
     await Data.init('en')
     const { parseClipboard, ItemCategory, ItemRarity } = await vite.ssrLoadModule('/src/parser/index.ts')
     const { initUiModFilters } = await vite.ssrLoadModule('/src/web/price-check/filters/create-stat-filters.ts')
+    const { parseModInfoLine } = await vite.ssrLoadModule('/src/parser/advanced-mod-desc.ts')
 
     const result = parseClipboard(VESTIGIAL_ZAHNDETHUS)
 
@@ -98,6 +99,26 @@ test('parses a Vestigial unique and classifies its inherited implicit', async ()
     assert.equal(inheritedImplicit.disabled, false)
     assert.equal(inheritedImplicit.hidden, undefined)
 
+    for (const [text, expected] of [
+      [VESTIGIAL_ZAHNDETHUS.replace('134(125-150)', '200(125-150)'), 'legacy'],
+      [VESTIGIAL_ZAHNDETHUS.replace('134(125-150)', '200(125-150)') + '\n--------\nCorrupted', 'volatile']
+    ]) {
+      const parsed = parseClipboard(text)
+      assert.equal(parsed.isOk(), true)
+      const roll = parsed.value.newMods.flatMap(mod => mod.stats)
+        .find(stat => stat.stat.ref === '#% increased Energy Shield').roll
+      assert.equal(roll.generation, expected)
+    }
+    const reflected = parseClipboard(`Item Class: Rings\nRarity: Rare\nReflection\nGold Ring\n--------\n{ Prefix Modifier "Healthy" (Tier: 1) }\n+120(50-70) to maximum Life\n--------\nMirrored`)
+    assert.equal(reflected.isOk(), true)
+    assert.equal(reflected.value.newMods[0].stats[0].roll.generation, 'reflecting')
+    const ordinaryCorrupted = parseClipboard(VESTIGIAL_ZAHNDETHUS + '\n--------\nCorrupted')
+    assert.equal(ordinaryCorrupted.isOk(), true)
+    const constantScalable = initUiModFilters(ordinaryCorrupted.value, { searchStatRange: 10 })
+      .find(filter => filter.statRef === '#% increased Light Radius')
+    assert.equal(constantScalable.hidden, undefined)
+    assert.equal(constantScalable.disabled, false)
+
     for (const fixture of [
       { lang: 'en', typeLine: "Vestigial Sage's Robe", baseType: "Sage's Robe" },
       { lang: 'ru', typeLine: 'Вырожденный: Одеяние мудреца', baseType: 'Одеяние мудреца' },
@@ -106,6 +127,27 @@ test('parses a Vestigial unique and classifies its inherited implicit', async ()
     ]) {
       await Data.loadForLang(fixture.lang)
       assert.equal(Data.CLIENT_STRINGS.VESTIGIAL_NAME.exec(fixture.typeLine)?.[1], fixture.baseType)
+      const strings = Data.CLIENT_STRINGS
+      assert.equal(parseModInfoLine(`{ ${strings.VESTIGIAL_MODIFIER ?? strings.VESTIGIAL_IMPLICIT} }`).mechanic, 'vestigial')
+      assert.equal(parseModInfoLine(`{ ${strings.FOULBORN_MODIFIER} }`).mechanic, 'foulborn')
+      assert.equal(parseModInfoLine(`{ ${strings.CORRUPTED_IMPLICIT} }`).mechanic, 'corrupted')
+      const families = [
+        ['SHAPER_MODS', 'explicit-shaper'], ['ELDER_MODS', 'explicit-elder'],
+        ['HUNTER_MODS', 'explicit-hunter'], ['WARLORD_MODS', 'explicit-warlord'],
+        ['REDEEMER_MODS', 'explicit-redeemer'], ['CRUSADER_MODS', 'explicit-crusader'],
+        ['DELVE_MODS', 'explicit-delve'], ['VEILED_MODS', 'explicit-veiled'],
+        ['INCURSION_MODS', 'explicit-incursion'], ['ESSENCE_MODS', 'explicit-essence'],
+        ['INFAMOUS_MODS', 'explicit-infamous']
+      ]
+      for (let familyIndex = 0; familyIndex < families.length; familyIndex++) {
+        const [key, expected] = families[familyIndex]
+        for (const name of strings[key]) {
+          // Some names are shared; classification intentionally uses precedence.
+          if (families.slice(0, familyIndex).some(([earlier]) => strings[earlier].includes(name))) continue
+          assert.equal(parseModInfoLine(`{ ${strings.PREFIX_MODIFIER} "${name}" }`).mechanic, expected,
+            `${fixture.lang}: classify every known ${key} name`)
+        }
+      }
     }
   } finally {
     globalThis.fetch = originalFetch
