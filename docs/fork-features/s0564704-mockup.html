@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Map Search Mockup</title>
+<style>
+  :root {
+    --g100: #f7fafc; --g200: #edf2f7; --g400: #cbd5e0; --g500: #a0aec0;
+    --g600: #718096; --g700: #4a5568; --g800: #2d3748; --g900: #1a202c;
+    --red400: #fc8181; --red700: #c53030; --red800: #9b2c2c;
+    --orange400: #f6ad55; --orange600: #dd6b20; --green700: #2f855a; --green500: #48bb78;
+    --rare: #ffff77;
+    --radius: 0.25rem;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 16px; min-height: 100vh;
+    background: radial-gradient(ellipse at top, #3b3226 0%, #15120e 70%);
+    color: var(--g200); font: 14px/1.4 "Segoe UI", system-ui, sans-serif;
+  }
+  button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
+  input { font: inherit; color: var(--g200); border: 0; outline: none; }
+  input:focus { box-shadow: 0 0 0 1px var(--g600); }
+  .mock-banner {
+    max-width: 1100px; margin: 0 auto 16px; padding: 8px 12px; border-radius: var(--radius);
+    background: rgba(26,32,44,.85); border: 1px dashed var(--orange400); color: var(--g400);
+  }
+  .mock-banner b { color: var(--orange400); }
+  .stage { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start; }
+  .caption { color: var(--g500); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; margin: 0 0 6px; }
+  .col { min-width: 0; }
+
+  /* ---- overlay map check panel (MapCheck.vue) ---- */
+  .mapcheck { background: var(--g800); border: 4px solid var(--g900); width: 26rem; max-width: 100%; }
+  .mc-head { background: var(--g900); padding: 4px 16px; display: flex; align-items: baseline; gap: 8px; }
+  .mc-name { flex: 1; text-align: center; color: var(--rare); }
+  .mc-profiles { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 2px; }
+  .mc-profiles button { background: var(--g800); padding: 0 4px; min-width: 1.5rem; max-width: 7rem;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border: 1px solid transparent; }
+  .mc-profiles button.on { border-color: var(--g600); }
+  .regex-bar { background: var(--g900); padding: 4px 16px; display: flex; align-items: center; gap: 8px;
+    border-top: 1px solid var(--g800); position: relative; }
+  .regex-bar.new::after { content: "NEW"; position: absolute; left: -40px; top: 6px; font-size: 10px;
+    color: var(--orange400); border: 1px solid var(--orange400); padding: 0 3px; border-radius: 2px; }
+  .btn { background: var(--g700); padding: 1px 8px; border-radius: var(--radius); }
+  .btn:hover { background: var(--g600); }
+  .btn:disabled { opacity: .4; cursor: default; }
+  .muted { color: var(--g500); }
+  .flex1 { flex: 1; }
+  .warn-ico { color: var(--orange400); }
+  .over { color: var(--red400); }
+  .stats { padding: 8px 0; display: flex; flex-direction: column; }
+  .stat { display: flex; }
+  .stat .cycle { flex: 1; display: flex; gap: 8px; align-items: baseline; padding: 6px 12px 6px 16px; text-align: left; min-width: 0; }
+  .stat .cycle span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .stat .cycle:hover { filter: brightness(1.15); }
+  .stat .ico { width: 1rem; text-align: center; flex-shrink: 0; }
+  .roll { color: #8888ff; }
+  .d-d { background: var(--red700); } .d-w { background: var(--orange600); } .d-g { background: var(--green700); }
+  .seen { width: 2rem; color: var(--g600); }
+
+  /* ---- settings window (settings-maps.vue) ---- */
+  .settings { background: var(--g800); border-radius: var(--radius); width: 40rem; max-width: 100%;
+    display: flex; flex-direction: column; height: 640px; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0,0,0,.5); }
+  .set-title { background: var(--g900); padding: 6px 12px; color: var(--g400); }
+  .profile-bar { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px; padding: 4px; border-bottom: 1px solid var(--g700); }
+  .profile-bar .pbtn { background: var(--g900); border-radius: var(--radius); padding: 0 8px; max-width: 7rem;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .profile-bar input { background: var(--g900); border-radius: var(--radius); padding: 0 8px; width: 7rem; border: 1px solid var(--g600); }
+  .iconbtn { padding: 0 8px; color: var(--g500); }
+  .iconbtn:hover { color: var(--g200); }
+  .iconbtn.pending { color: var(--red400); }
+  .filter-row { display: flex; padding: 4px; gap: 8px; align-items: center; }
+  .filter-row input { background: var(--g900); border-radius: var(--radius); padding: 0 4px; }
+  .colhead { display: flex; align-items: center; padding: 4px 0; box-shadow: 0 1px 3px rgba(0,0,0,.5); }
+  .colhead .flex1 { padding: 0 8px; }
+  .colhead i, .radios span { width: 2rem; text-align: center; display: inline-block; font-style: normal; }
+  .colhead i { padding: 2px 0; }
+  .modlist { flex: 1; overflow-y: auto; min-height: 0; }
+  .mrow { display: flex; align-items: center; padding: 0 0 0 8px; height: 28px; }
+  .mrow:hover { background: rgba(255,255,255,.03); }
+  .mrow .txt { flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .radios { display: flex; gap: 4px; padding-right: 3.2rem; }
+  .radios span { cursor: pointer; color: var(--g600); }
+  .radios span.on-w { color: var(--orange400); } .radios span.on-d { color: var(--red400); } .radios span.on-g { color: var(--green500); }
+
+  .gen { border-top: 1px solid var(--g700); display: flex; flex-direction: column; flex-shrink: 0; min-width: 0; }
+  .gen.open { max-height: 52%; }
+  .gen-head { display: flex; align-items: baseline; gap: 8px; padding: 4px 8px; text-align: left; flex-shrink: 0; }
+  .gen-head:hover { background: var(--g700); }
+  .gen-head .pname { flex: 1; color: var(--g500); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .gen-body { padding: 0 8px 8px; display: flex; flex-direction: column; gap: 8px; overflow-y: auto; min-height: 0; }
+  .row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .chk { display: inline-flex; align-items: center; gap: 4px; cursor: pointer; }
+  .chk .tag { padding: 0 4px; border-radius: 2px; }
+  .chk input { accent-color: var(--g500); }
+  .num { background: var(--g900); border-radius: var(--radius); padding: 0 4px; width: 3rem; }
+  .extra { background: var(--g900); border-radius: var(--radius); padding: 0 4px; flex: 1; min-width: 6rem; }
+  .out { background: var(--g900); border-radius: var(--radius); padding: 4px 8px; word-break: break-all;
+    font-family: Consolas, "Courier New", monospace; min-height: 2rem; user-select: all; }
+  .out.too-long { background: var(--red800); }
+  .note { color: var(--orange400); }
+  .tok { display: flex; align-items: baseline; gap: 8px; padding: 2px 0; }
+  .tok code { background: var(--g900); border-radius: var(--radius); padding: 0 4px; white-space: pre; font-family: Consolas, monospace; }
+  .tok .m { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--g400); }
+  .tok.dropped { opacity: .5; text-decoration: line-through; }
+  .c-d { color: var(--red400); } .c-w { color: var(--orange400); } .c-g { color: var(--green500); }
+  .kind { font-size: 11px; color: var(--g600); }
+
+  .toast { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); background: var(--g900);
+    border: 1px solid var(--g600); padding: 6px 12px; border-radius: var(--radius); opacity: 0; transition: opacity .2s; pointer-events: none; }
+  .toast.show { opacity: 1; }
+  @media (max-width: 720px) { .regex-bar.new::after { display: none; } }
+</style>
+</head>
+<body>
+
+<div class="mock-banner">
+  <b>MOCKUP</b>: s0564704/awakened-poe-trade map-check stash search, ported into krangled-poe-trade. Static HTML with sample data.
+  Tokens are illustrative and precomputed; the real generator derives them from the AreaMods data at runtime.
+  Click mods to cycle tags, switch profiles, and change thresholds. Copy and Search only show a toast here.
+</div>
+
+<div class="stage">
+  <div class="col">
+    <p class="caption">Overlay: map check (Ctrl+D on a map)</p>
+    <div class="mapcheck">
+      <div class="mc-head">
+        <div class="mc-name">Crimson Temple Map</div>
+        <div class="muted" style="margin-left:16px">Profile</div>
+        <div class="mc-profiles" id="ovProfiles"></div>
+      </div>
+      <div class="regex-bar new" id="regexBar">
+        <span class="muted">&#128269;</span>
+        <button class="btn" data-act="copy">Copy</button>
+        <button class="btn" data-act="search">Search stash</button>
+        <div class="flex1"></div>
+        <span class="warn-ico" id="barWarn" title="">&#9888;</span>
+        <span id="barLen" class="muted"></span>
+      </div>
+      <div class="stats" id="ovStats"></div>
+    </div>
+  </div>
+
+  <div class="col">
+    <p class="caption">Settings: Map check</p>
+    <div class="settings">
+      <div class="set-title">Settings &rsaquo; Map check</div>
+      <div class="profile-bar" id="profileBar"></div>
+      <div class="filter-row">
+        <input placeholder="Search..." id="search">
+        <label class="chk"><input type="checkbox" id="onlySel"> Only selected</label>
+      </div>
+      <div class="colhead">
+        <div class="flex1">Stat (found: <span id="found"></span>)</div>
+        <div style="display:flex;gap:4px;padding-right:3.2rem">
+          <i class="d-w">&#9888;</i><i class="d-d">&#9760;</i><i class="d-g">&#10003;</i>
+        </div>
+      </div>
+      <div class="modlist" id="modList"></div>
+
+      <div class="gen open" id="gen">
+        <button class="gen-head" id="genHead">
+          <span class="muted" id="chev">&#9662;</span>
+          <span>Stash tab search</span>
+          <span class="pname" id="genProfile"></span>
+          <span class="warn-ico" id="genWarn">&#9888;</span>
+          <span id="genLen" class="muted"></span>
+        </button>
+        <div class="gen-body" id="genBody">
+          <div class="row">
+            <span class="muted">Exclude</span>
+            <label class="chk"><input type="checkbox" data-cfg="excludeDeadly"><span class="tag d-d">&#9760;</span></label>
+            <label class="chk"><input type="checkbox" data-cfg="excludeWarning"><span class="tag d-w">&#9888;</span></label>
+            <span class="muted" style="margin-left:16px">Require</span>
+            <label class="chk"><input type="checkbox" data-cfg="requireGood"><span class="tag d-g">&#10003;</span></label>
+          </div>
+          <div class="row">
+            <label class="chk"><span class="muted">Quantity</span><input class="num" type="number" min="0" max="999" data-cfg="minQuantity"></label>
+            <label class="chk"><span class="muted">Rarity</span><input class="num" type="number" min="0" max="999" data-cfg="minRarity"></label>
+            <label class="chk"><span class="muted">Pack size</span><input class="num" type="number" min="0" max="999" data-cfg="minPackSize"></label>
+            <label class="chk"><span class="muted">Quality</span><input class="num" type="number" min="0" max="999" data-cfg="minQuality"></label>
+          </div>
+          <div class="row">
+            <label class="chk" style="flex:1"><span class="muted">Extra terms</span><input class="extra" data-cfg="extraTerms" placeholder='e.g. "tier: 16"'></label>
+          </div>
+          <div class="out" id="out"></div>
+          <div class="row" style="justify-content:flex-end">
+            <button class="btn" data-act="copy">Copy</button>
+            <button class="btn" data-act="search">Search stash</button>
+          </div>
+          <div class="note" id="noteDropped"></div>
+          <div class="note" id="noteAmbig"></div>
+          <div id="tokens"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// Sample AreaMods data with precomputed tokens. "readable" is the word-aligned
+// token, "compact" the fallback used when readable ones overflow 250 chars.
+const MODS = [
+  { m: 'Monsters reflect #% of Elemental Damage', r: 'of elem', c: 'f el', kind: 'plain' },
+  { m: 'Monsters reflect #% of Physical Damage', r: 'of phys', c: 'f ph', kind: 'plain' },
+  { m: 'Players cannot Regenerate Life, Mana or Energy Shield', r: 'regenerate', c: 'regen', kind: 'plain' },
+  { m: 'Players have #% less Recovery Rate of Life and Energy Shield', r: 'less recovery', c: 's rec', kind: 'plain' },
+  { m: 'Players are Cursed with Temporal Chains', r: 'temporal', c: 'mpo', kind: 'plain' },
+  { m: 'Players are Cursed with Elemental Weakness', r: 'elemental weak', c: 'l wea', kind: 'plain' },
+  { m: 'Players have #% to all maximum Resistances', r: 'maximum res', c: 'm res', kind: 'plain' },
+  { m: 'Monsters have #% chance to Avoid Elemental Ailments', r: 'avoid elem', c: 'd el', kind: 'plain' },
+  { m: 'Monsters fire # additional Projectiles', r: 'additional proj', c: 'l pr', kind: 'plain' },
+  { m: '#% more Monster Life', r: 'more monster life', c: 'e mon', kind: 'plain' },
+  { m: 'Monsters gain #% of Maximum Life as Extra Maximum Energy Shield', r: 'extra maximum', c: 'a max', kind: 'plain' },
+  { m: 'Area has patches of Burning Ground', r: 'burning', c: 'urni', kind: 'plain' },
+  { m: '#% increased Area of Effect', r: '^[0-9.]+% increased area', c: '^[0-9.]+% increased area', kind: 'anchored' },
+  { m: 'Unique Boss has #% increased Area of Effect', r: 'boss has', c: 'ss ha', kind: 'plain' },
+  { m: 'Monsters deal #% extra Physical Damage as Fire', r: 'as fire', c: 's fi', kind: 'plain' },
+  { m: 'Monsters have #% increased Critical Strike Chance', r: 'critical strike', c: 'cal s', kind: 'plain' },
+  { m: 'Area contains two Unique Bosses', r: 'two unique', c: 'two', kind: 'plain' },
+  { m: 'Area contains # additional pack of Monsters', r: 'additional pack', c: 'l pa', kind: 'ambiguous' },
+  { m: 'Rare Monsters each have a Nemesis Mod', r: 'nemesis', c: 'nem', kind: 'plain' },
+  { m: 'Monsters are Hexproof', r: 'hexproof', c: 'xpr', kind: 'plain' }
+]
+const BY_M = Object.fromEntries(MODS.map(x => [x.m, x]))
+
+// The checked map: matcher plus roll.
+const ITEM_STATS = [
+  ['Monsters reflect #% of Elemental Damage', '18'],
+  ['Players have #% less Recovery Rate of Life and Energy Shield', '60'],
+  ['Monsters fire # additional Projectiles', '2'],
+  ['#% more Monster Life', '40'],
+  ['Area has patches of Burning Ground', null],
+  ['Area contains two Unique Bosses', null],
+  ['Rare Monsters each have a Nemesis Mod', null],
+  ['Monsters are Hexproof', null]
+]
+
+// Label tails (shortestLabel) for the thresholds.
+const LABELS = { minQuantity: 'ntity: ', minRarity: 'y rarity: ', minPackSize: 'ze: ', minQuality: 'ality: ' }
+const LIMIT = 250
+
+const state = {
+  profile: 1,
+  regexExpanded: true,
+  profiles: [
+    { name: 'League start', regex: cfg({ excludeDeadly: true, excludeWarning: true }) },
+    { name: 'Juiced T16', regex: cfg({ excludeDeadly: true, excludeWarning: false, minQuantity: 80, minPackSize: 25 }) },
+    { name: 'Boss rush', regex: cfg({ excludeDeadly: true, requireGood: true, extraTerms: '"tier: 16"' }) }
+  ],
+  // decision string: one char per profile, trailing '-' trimmed
+  selectedStats: [
+    ['Monsters reflect #% of Elemental Damage', 'ddd'],
+    ['Monsters reflect #% of Physical Damage', 'dd'],
+    ['Players cannot Regenerate Life, Mana or Energy Shield', 'ddd'],
+    ['Players have #% less Recovery Rate of Life and Energy Shield', 'wd'],
+    ['Players are Cursed with Temporal Chains', 'w'],
+    ['Players have #% to all maximum Resistances', 'ww'],
+    ['Monsters have #% chance to Avoid Elemental Ailments', 'w'],
+    ['Monsters fire # additional Projectiles', 'w-w'],
+    ['Area has patches of Burning Ground', 'w'],
+    ['#% increased Area of Effect', '-w'],
+    ['Area contains two Unique Bosses', 'g-g'],
+    ['Area contains # additional pack of Monsters', '-g'],
+    ['Monsters are Hexproof', 's']
+  ].map(([matcher, decision]) => ({ matcher, decision }))
+}
+let pendingDelete = false
+
+function cfg (o) {
+  return Object.assign({ excludeDeadly: true, excludeWarning: true, requireGood: false,
+    minQuantity: null, minRarity: null, minPackSize: null, minQuality: null, extraTerms: '' }, o)
+}
+const ROMAN = ['I','II','III','IV','V','VI','VII','VIII','IX','X']
+const defaultProfileName = i => ROMAN[i] || String(i + 1)
+const active = () => state.profiles[state.profile - 1] || state.profiles[0]
+const decisionAt = (set, p) => set[p - 1] || '-'
+const hasColor = (set, p) => { const d = decisionAt(set, p); return d !== '-' && d !== 's' }
+const trim = s => s.replace(/-+$/, '')
+const isEmpty = s => !/[^-]/.test(s)
+function setDecision (matcher, p, value) {
+  const idx = state.selectedStats.findIndex(e => e.matcher === matcher)
+  const entry = state.selectedStats[idx]
+  const arr = (entry ? entry.decision : '').padEnd(p, '-').split('')
+  arr[p - 1] = value
+  const dec = trim(arr.join(''))
+  if (!entry) { if (!isEmpty(dec)) state.selectedStats.push({ matcher, decision: dec }) }
+  else if (isEmpty(dec)) state.selectedStats.splice(idx, 1)
+  else entry.decision = dec
+}
+const nextDecision = d => ({ d: 'w', w: 'g', g: 's' }[d] || 'd')
+
+// atLeastPattern, ported from the fork's map-regex.ts
+function atLeastPattern (min, maxDigits = 3) {
+  const alts = []; const digits = String(min)
+  for (let i = digits.length - 1; i >= 0; --i) {
+    const digit = Number(digits[i])
+    if (digit === 9 && i !== digits.length - 1) continue
+    const upper = (i === digits.length - 1) ? digit : digit + 1
+    if (upper > 9) continue
+    const rest = digits.length - i - 1
+    alts.push(digits.slice(0, i) + (upper === 9 ? '9' : `[${upper}-9]`) +
+      (rest === 0 ? '' : rest === 1 ? '[0-9]' : `[0-9]{${rest}}`))
+  }
+  for (let len = digits.length + 1; len <= maxDigits; ++len) {
+    alts.push('[1-9]' + (len === 2 ? '[0-9]' : `[0-9]{${len - 1}}`))
+  }
+  return alts.length === 1 ? alts[0] : `(${alts.join('|')})`
+}
+
+function generateWith (config, readable) {
+  const thresholds = Object.keys(LABELS)
+    .filter(k => config[k] != null && config[k] !== '' && Number.isFinite(+config[k]))
+    .map(k => `"${LABELS[k]}\\+?${atLeastPattern(+config[k])}"`)
+  const tokens = []
+  for (const s of state.selectedStats) {
+    if (!hasColor(s.decision, state.profile)) continue
+    const d = decisionAt(s.decision, state.profile)
+    const want = (d === 'd' && config.excludeDeadly) || (d === 'w' && config.excludeWarning) || (d === 'g' && config.requireGood)
+    const mod = BY_M[s.matcher]
+    if (want && mod && !tokens.some(t => t.matcher === s.matcher)) {
+      tokens.push({ matcher: s.matcher, decision: d, token: readable ? mod.r : mod.c, kind: mod.kind })
+    }
+  }
+  const byCost = [...tokens].sort((a, b) => b.token.length - a.token.length)
+  const dropped = []; let kept = tokens
+  for (;;) {
+    const ex = kept.filter(t => t.decision !== 'g'); const req = kept.filter(t => t.decision === 'g')
+    const terms = [...thresholds]
+    if (ex.length) terms.push(`!"${ex.map(t => t.token).join('|')}"`)
+    for (const t of req) terms.push(`"${t.token}"`)
+    if (config.extraTerms.trim()) terms.push(config.extraTerms.trim())
+    const text = terms.join(' ')
+    if (text.length <= LIMIT || !kept.length) return { text, tokens, dropped, compacted: !readable }
+    const evict = byCost.find(t => kept.includes(t)); dropped.push(evict); kept = kept.filter(t => t !== evict)
+  }
+}
+function generate () {
+  const a = generateWith(active().regex, true)
+  if (!a.dropped.length) return a
+  const b = generateWith(active().regex, false)
+  return b.dropped.length < a.dropped.length ? b : a
+}
+
+const $ = id => document.getElementById(id)
+const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]))
+const ICON = { d: '&#9760;', w: '&#9888;', g: '&#10003;' }
+
+function renderModText (m, roll) {
+  return esc(m).replace('#', `<span class="roll">${roll ?? '#'}</span>`)
+}
+
+function render () {
+  const g = generate()
+  const ambiguous = g.tokens.filter(t => t.kind === 'ambiguous')
+  const tooLong = g.text.length > LIMIT
+  const lenTxt = `${g.text.length}/${LIMIT}`
+
+  // overlay header
+  $('ovProfiles').innerHTML = state.profiles.map((p, i) =>
+    `<button class="${state.profile === i + 1 ? 'on' : ''}" data-prof="${i + 1}" title="${esc(p.name)}">${esc(p.name)}</button>`).join('')
+  // overlay regex bar
+  $('regexBar').style.display = g.text ? '' : 'none'
+  $('barWarn').style.display = g.dropped.length ? '' : 'none'
+  $('barWarn').title = `${g.dropped.length} mod(s) left out, the search field is full.`
+  $('barLen').textContent = lenTxt
+  $('barLen').className = tooLong ? 'over' : 'muted'
+  // overlay stats
+  $('ovStats').innerHTML = ITEM_STATS.map(([m, roll]) => {
+    const e = state.selectedStats.find(s => s.matcher === m)
+    const d = e ? decisionAt(e.decision, state.profile) : '-'
+    const cls = { d: 'd-d', w: 'd-w', g: 'd-g' }[d] || ''
+    return `<div class="stat"><button class="cycle ${cls}" data-cycle="${esc(m)}">
+      <span class="ico">${ICON[d] || ''}</span><span>${renderModText(m, roll)}</span></button>
+      <button class="seen"></button></div>`
+  }).join('')
+
+  // settings profile bar
+  $('profileBar').innerHTML = `<span class="muted" style="padding:0 4px">Profile</span>` +
+    state.profiles.map((p, i) => (state.profile === i + 1)
+      ? `<input id="pname" value="${esc(p.name)}" placeholder="Name">`
+      : `<button class="pbtn" data-prof="${i + 1}" title="${esc(p.name)}">${esc(p.name)}</button>`).join('') +
+    `<button class="iconbtn" data-pact="add" title="Add profile">+</button>` +
+    `<button class="iconbtn" data-pact="dup" title="Duplicate profile">&#10697;</button>` +
+    (state.profiles.length > 1 ? `<button class="iconbtn ${pendingDelete ? 'pending' : ''}" data-pact="del" title="Delete profile">&#128465;</button>` : '') +
+    (pendingDelete ? `<span class="over">Click again to delete this profile and its mod decisions</span>` : '')
+  const pn = $('pname')
+  if (pn) pn.oninput = () => { active().name = pn.value; renderLight() }
+
+  // settings mod list
+  const q = $('search').value.toLowerCase(); const only = $('onlySel').checked
+  const list = MODS.filter(x => x.m.toLowerCase().includes(q) &&
+    (!only || state.selectedStats.some(s => s.matcher === x.m && hasColor(s.decision, state.profile))))
+  $('found').textContent = list.length
+  $('modList').innerHTML = list.map(x => {
+    const e = state.selectedStats.find(s => s.matcher === x.m)
+    const d = e ? decisionAt(e.decision, state.profile) : '-'
+    return `<div class="mrow"><span class="txt">${esc(x.m)}</span><span class="radios">
+      ${['w', 'd', 'g'].map(k => `<span data-set="${esc(x.m)}" data-val="${k}" class="${d === k ? 'on-' + k : ''}">${d === k ? '&#9673;' : '&#9675;'}</span>`).join('')}
+    </span></div>`
+  }).join('')
+
+  // generator
+  const c = active().regex
+  document.querySelectorAll('[data-cfg]').forEach(el => {
+    const v = c[el.dataset.cfg]
+    if (el.type === 'checkbox') el.checked = !!v
+    else if (document.activeElement !== el) el.value = v ?? ''
+  })
+  $('gen').classList.toggle('open', state.regexExpanded)
+  $('genBody').style.display = state.regexExpanded ? '' : 'none'
+  $('chev').innerHTML = state.regexExpanded ? '&#9662;' : '&#9656;'
+  $('genWarn').style.display = (g.dropped.length || ambiguous.length) ? '' : 'none'
+  $('genLen').textContent = lenTxt
+  $('genLen').className = tooLong ? 'over' : 'muted'
+  $('out').textContent = g.text
+  $('out').classList.toggle('too-long', tooLong)
+  $('noteDropped').textContent = g.dropped.length
+    ? `${g.dropped.length} mod(s) left out, the search field is full. Remove some mods or a threshold.` : ''
+  $('noteAmbig').textContent = ambiguous.length
+    ? `${ambiguous.length} mod(s) cannot be told apart from a similar mod, so the search will also match that one.` : ''
+  $('tokens').innerHTML = (g.compacted ? '<div class="kind">Readable tokens overflowed; using compact tokens.</div>' : '') +
+    g.tokens.map(t => `<div class="tok ${g.dropped.includes(t) ? 'dropped' : ''}">
+      <span class="c-${t.decision}" style="width:1rem;text-align:center">${ICON[t.decision]}</span>
+      <code>${esc(t.token)}</code><span class="m">${esc(t.matcher)}</span>
+      ${t.kind !== 'plain' ? `<span class="kind">${t.kind}</span>` : ''}</div>`).join('')
+  document.querySelectorAll('[data-act]').forEach(b => { b.disabled = !g.text })
+  $('genProfile').textContent = active().name
+}
+// Re-render without rebuilding the focused name input.
+function renderLight () {
+  const keep = $('pname'); const pos = keep && keep.selectionStart
+  render()
+  const n = $('pname'); if (n && keep) { n.focus(); n.setSelectionRange(pos, pos) }
+}
+
+function toast (msg) {
+  const t = $('toast'); t.textContent = msg; t.classList.add('show')
+  clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove('show'), 1800)
+}
+
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-prof],[data-cycle],[data-set],[data-pact],[data-act],#genHead')
+  if (!el) return
+  if (el.dataset.prof) { state.profile = +el.dataset.prof; pendingDelete = false }
+  else if (el.dataset.cycle) {
+    const m = el.dataset.cycle; const e2 = state.selectedStats.find(s => s.matcher === m)
+    setDecision(m, state.profile, nextDecision(e2 ? decisionAt(e2.decision, state.profile) : '-'))
+  } else if (el.dataset.set) {
+    const m = el.dataset.set; const e2 = state.selectedStats.find(s => s.matcher === m)
+    const cur = e2 ? decisionAt(e2.decision, state.profile) : '-'
+    setDecision(m, state.profile, cur === el.dataset.val ? '-' : el.dataset.val)
+  } else if (el.dataset.pact === 'add') {
+    state.profiles.push({ name: defaultProfileName(state.profiles.length), regex: cfg({}) })
+    state.profile = state.profiles.length; pendingDelete = false
+  } else if (el.dataset.pact === 'dup') {
+    const src = state.profile
+    state.profiles.push({ name: defaultProfileName(state.profiles.length), regex: { ...active().regex } })
+    const target = state.profiles.length
+    for (const s of state.selectedStats) {
+      const arr = s.decision.padEnd(target, '-').split(''); arr[target - 1] = decisionAt(s.decision, src)
+      s.decision = trim(arr.join(''))
+    }
+    state.profile = target; pendingDelete = false
+  } else if (el.dataset.pact === 'del') {
+    if (!pendingDelete) { pendingDelete = true } else {
+      const idx = state.profile - 1
+      state.profiles.splice(idx, 1)
+      for (let i = state.selectedStats.length - 1; i >= 0; i--) {
+        const s = state.selectedStats[i]; const d = trim(s.decision.slice(0, idx) + s.decision.slice(idx + 1))
+        if (isEmpty(d)) state.selectedStats.splice(i, 1); else s.decision = d
+      }
+      state.profile = Math.min(state.profile, state.profiles.length); pendingDelete = false
+    }
+  } else if (el.dataset.act === 'copy') {
+    const text = generate().text
+    try { navigator.clipboard && navigator.clipboard.writeText(text) } catch (_) {}
+    el.textContent = 'Copied'; setTimeout(() => { el.textContent = 'Copy' }, 2000)
+    toast('Copied search string to the clipboard')
+    return
+  } else if (el.dataset.act === 'search') {
+    toast('Mock: focus game → Ctrl+F → paste → Enter (stash-search IPC)')
+    return
+  } else if (el.id === 'genHead') { state.regexExpanded = !state.regexExpanded }
+  render()
+})
+document.querySelectorAll('[data-cfg]').forEach(el => {
+  el.addEventListener(el.type === 'checkbox' ? 'change' : 'input', () => {
+    const k = el.dataset.cfg; const c = active().regex
+    if (el.type === 'checkbox') c[k] = el.checked
+    else if (el.type === 'number') c[k] = el.value === '' ? null : Number(el.value)
+    else c[k] = el.value
+    render()
+  })
+})
+$('search').addEventListener('input', render)
+$('onlySel').addEventListener('change', render)
+render()
+</script>
+</body>
+</html>
