@@ -49,5 +49,7 @@ jobs:
       - run: npm ci
         working-directory: ./main
       # tsc --noEmit + esbuild bundle; does not need renderer/dist
+      - run: npm test
+        working-directory: ./main
       - run: npm run build
         working-directory: ./main
