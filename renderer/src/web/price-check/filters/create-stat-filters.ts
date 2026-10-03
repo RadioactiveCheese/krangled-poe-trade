@@ -25,7 +25,7 @@ export function createExactStatFilters (
   opts: { searchStatRange: number, mode?: 'props' | 'bulk' }
 ): StatFilter[] {
   if (
-    item.mapBlighted ||
+    item.info.area?.blighted ||
     item.category === ItemCategory.Invitation
   ) return []
   if (
@@ -107,16 +107,8 @@ export function createExactStatFilters (
     return ctx.filters
   }
 
-  if (item.category === ItemCategory.Map) {
-    for (const filter of ctx.filters) {
-      if (filter.tag !== FilterTag.Property && filter.tag !== FilterTag.Pseudo) {
-        filter.disabled = false
-      }
-    }
-    return ctx.filters
-  }
-
   for (const filter of ctx.filters) {
+    if (filter.not) continue
     filter.hidden = undefined
 
     if (filter.tag === FilterTag.Explicit) {
@@ -124,7 +116,7 @@ export function createExactStatFilters (
         source.modifier.info.tier != null &&
         source.modifier.info.tier <= 2
       )
-    } else if (filter.tag !== FilterTag.Property) {
+    } else if (filter.tag !== FilterTag.Property && filter.tag !== FilterTag.Pseudo) {
       filter.disabled = false
     }
 

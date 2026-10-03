@@ -1,6 +1,5 @@
 import type { ItemInfluence, ItemCategory } from '@/parser'
 import type { StatCalculated } from '@/parser/modifiers'
-import type { ParsedItem } from '@/parser/ParsedItem'
 import type { Stat } from '@/assets/data'
 
 export interface FilterPreset {
@@ -80,7 +79,7 @@ export interface ItemFilters {
   gemLevel?: FilterNumeric
   mapTier?: FilterNumeric
   mapBlighted?: {
-    value: NonNullable<ParsedItem['mapBlighted']>
+    value: 'Blighted' | 'Blight-ravaged' | false
   }
   mapCompletionReward?: {
     name: string

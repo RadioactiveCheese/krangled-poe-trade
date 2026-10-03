@@ -1,165 +1,165 @@
 {"name":"심연의 평야","refName":"Abyssal Plain","namespace":"AREA","tradeDisc":"AbyssalPlain","icon":"","area":{}}
-{"name":"학술원","refName":"Academy","namespace":"AREA","tradeDisc":"54575","icon":""}
-{"name":"산성 암굴","refName":"Acid Caverns","namespace":"AREA","tradeDisc":"21257","icon":""}
-{"name":"골목길","refName":"Alleyways","namespace":"AREA","tradeDisc":"42968","icon":""}
+{"name":"학술원","refName":"Academy","namespace":"AREA","tradeDisc":"54575","icon":"","area":{}}
+{"name":"산성 암굴","refName":"Acid Caverns","namespace":"AREA","tradeDisc":"21257","icon":"","area":{"screenshot":"https://i.imgur.com/vISJftF.jpg"}}
+{"name":"골목길","refName":"Alleyways","namespace":"AREA","tradeDisc":"42968","icon":"","area":{"screenshot":"https://i.imgur.com/m21vNCp.jpg"}}
 {"name":"정박장","refName":"Anchorfield","namespace":"AREA","tradeDisc":"Anchorfield","icon":"","area":{"special":true}}
-{"name":"고대 도시","refName":"Ancient City","namespace":"AREA","tradeDisc":"2545","icon":""}
-{"name":"거미류 둥지","refName":"Arachnid Nest","namespace":"AREA","tradeDisc":"36866","icon":""}
-{"name":"거미류 무덤","refName":"Arachnid Tomb","namespace":"AREA","tradeDisc":"7465","icon":""}
-{"name":"상점가","refName":"Arcade","namespace":"AREA","tradeDisc":"44259","icon":""}
-{"name":"투기장","refName":"Arena","namespace":"AREA","tradeDisc":"1371","icon":""}
-{"name":"메마른 호수","refName":"Arid Lake","namespace":"AREA","tradeDisc":"27782","icon":""}
-{"name":"갑주 창고","refName":"Armoury","namespace":"AREA","tradeDisc":"15108","icon":""}
-{"name":"병기창","refName":"Arsenal","namespace":"AREA","tradeDisc":"25202","icon":""}
-{"name":"잿빛 숲","refName":"Ashen Wood","namespace":"AREA","tradeDisc":"43927","icon":""}
-{"name":"산호섬","refName":"Atoll","namespace":"AREA","tradeDisc":"19776","icon":""}
-{"name":"고분","refName":"Barrows","namespace":"AREA","tradeDisc":"49687","icon":""}
-{"name":"교회당","refName":"Basilica","namespace":"AREA","tradeDisc":"27821","icon":""}
-{"name":"장터","refName":"Bazaar","namespace":"AREA","tradeDisc":"36556","icon":""}
-{"name":"해변","refName":"Beach","namespace":"AREA","tradeDisc":"62685","icon":""}
-{"name":"종탑","refName":"Belfry","namespace":"AREA","tradeDisc":"59460","icon":""}
-{"name":"습지대","refName":"Bog","namespace":"AREA","tradeDisc":"47614","icon":""}
-{"name":"뼈 지하실","refName":"Bone Crypt","namespace":"AREA","tradeDisc":"23253","icon":""}
-{"name":"가시나무 계곡","refName":"Bramble Valley","namespace":"AREA","tradeDisc":"44170","icon":""}
+{"name":"고대 도시","refName":"Ancient City","namespace":"AREA","tradeDisc":"2545","icon":"","area":{"screenshot":"https://i.imgur.com/MThKML2.jpg"}}
+{"name":"거미류 둥지","refName":"Arachnid Nest","namespace":"AREA","tradeDisc":"36866","icon":"","area":{"screenshot":"https://i.imgur.com/Ljh7mDh.jpg"}}
+{"name":"거미류 무덤","refName":"Arachnid Tomb","namespace":"AREA","tradeDisc":"7465","icon":"","area":{"screenshot":"https://i.imgur.com/1IAVUXr.jpg"}}
+{"name":"상점가","refName":"Arcade","namespace":"AREA","tradeDisc":"44259","icon":"","area":{"screenshot":"https://i.imgur.com/mTl4tTm.jpg"}}
+{"name":"투기장","refName":"Arena","namespace":"AREA","tradeDisc":"1371","icon":"","area":{"screenshot":"https://i.imgur.com/EaTICR6.jpg"}}
+{"name":"메마른 호수","refName":"Arid Lake","namespace":"AREA","tradeDisc":"27782","icon":"","area":{"screenshot":"https://i.imgur.com/9gm7OPL.jpg"}}
+{"name":"갑주 창고","refName":"Armoury","namespace":"AREA","tradeDisc":"15108","icon":"","area":{"screenshot":"https://i.imgur.com/d5Y7MBu.jpg"}}
+{"name":"병기창","refName":"Arsenal","namespace":"AREA","tradeDisc":"25202","icon":"","area":{"screenshot":"https://i.imgur.com/5iGxpEn.jpg"}}
+{"name":"잿빛 숲","refName":"Ashen Wood","namespace":"AREA","tradeDisc":"43927","icon":"","area":{"screenshot":"https://i.imgur.com/kHvVFYI.jpg"}}
+{"name":"산호섬","refName":"Atoll","namespace":"AREA","tradeDisc":"19776","icon":"","area":{"screenshot":"https://i.imgur.com/ynKNdxR.jpg"}}
+{"name":"고분","refName":"Barrows","namespace":"AREA","tradeDisc":"49687","icon":"","area":{"screenshot":"https://i.imgur.com/SwZdc6q.jpg"}}
+{"name":"교회당","refName":"Basilica","namespace":"AREA","tradeDisc":"27821","icon":"","area":{"screenshot":"https://i.imgur.com/G6ySvIu.jpg"}}
+{"name":"장터","refName":"Bazaar","namespace":"AREA","tradeDisc":"36556","icon":"","area":{"screenshot":"https://i.imgur.com/bo5223u.jpg"}}
+{"name":"해변","refName":"Beach","namespace":"AREA","tradeDisc":"62685","icon":"","area":{"screenshot":"https://i.imgur.com/qZNQGdD.jpg"}}
+{"name":"종탑","refName":"Belfry","namespace":"AREA","tradeDisc":"59460","icon":"","area":{"screenshot":"https://i.imgur.com/7zjdJvN.jpg"}}
+{"name":"습지대","refName":"Bog","namespace":"AREA","tradeDisc":"47614","icon":"","area":{"screenshot":"https://i.imgur.com/cPWmdWr.jpg"}}
+{"name":"뼈 지하실","refName":"Bone Crypt","namespace":"AREA","tradeDisc":"23253","icon":"","area":{"screenshot":"https://i.imgur.com/NVVVCOt.jpg"}}
+{"name":"가시나무 계곡","refName":"Bramble Valley","namespace":"AREA","tradeDisc":"44170","icon":"","area":{"screenshot":"https://i.imgur.com/1HM5ro5.jpg"}}
 {"name":"염수왕의 영토","refName":"Brine King's Domain","namespace":"AREA","tradeDisc":"BrineKingsDomain","icon":"","area":{"special":true}}
-{"name":"묘실","refName":"Burial Chambers","namespace":"AREA","tradeDisc":"43016","icon":""}
-{"name":"창살","refName":"Cage","namespace":"AREA","tradeDisc":"3883","icon":""}
-{"name":"칼데라","refName":"Caldera","namespace":"AREA","tradeDisc":"64414","icon":""}
-{"name":"협곡","refName":"Canyon","namespace":"AREA","tradeDisc":"2336","icon":""}
-{"name":"시체","refName":"Carcass","namespace":"AREA","tradeDisc":"18547","icon":""}
-{"name":"성곽 유적","refName":"Castle Ruins","namespace":"AREA","tradeDisc":"36357","icon":""}
-{"name":"감방","refName":"Cells","namespace":"AREA","tradeDisc":"3775","icon":""}
-{"name":"공동묘지","refName":"Cemetery","namespace":"AREA","tradeDisc":"12635","icon":""}
-{"name":"물길","refName":"Channel","namespace":"AREA","tradeDisc":"22278","icon":""}
-{"name":"대저택","refName":"Chateau","namespace":"AREA","tradeDisc":"39459","icon":""}
-{"name":"도시 광장","refName":"City Square","namespace":"AREA","tradeDisc":"44762","icon":""}
+{"name":"묘실","refName":"Burial Chambers","namespace":"AREA","tradeDisc":"43016","icon":"","area":{"screenshot":"https://i.imgur.com/Wp5GF44.jpg"}}
+{"name":"창살","refName":"Cage","namespace":"AREA","tradeDisc":"3883","icon":"","area":{"screenshot":"https://i.imgur.com/r20ygP0.jpg"}}
+{"name":"칼데라","refName":"Caldera","namespace":"AREA","tradeDisc":"64414","icon":"","area":{"screenshot":"https://i.imgur.com/dAFd7cQ.jpg"}}
+{"name":"협곡","refName":"Canyon","namespace":"AREA","tradeDisc":"2336","icon":"","area":{"screenshot":"https://i.imgur.com/8BSd3du.jpg"}}
+{"name":"시체","refName":"Carcass","namespace":"AREA","tradeDisc":"18547","icon":"","area":{"screenshot":"https://i.imgur.com/bANX02j.jpg"}}
+{"name":"성곽 유적","refName":"Castle Ruins","namespace":"AREA","tradeDisc":"36357","icon":"","area":{"screenshot":"https://i.imgur.com/aFT1RlG.jpg"}}
+{"name":"감방","refName":"Cells","namespace":"AREA","tradeDisc":"3775","icon":"","area":{"screenshot":"https://i.imgur.com/ks4E8Cs.jpg"}}
+{"name":"공동묘지","refName":"Cemetery","namespace":"AREA","tradeDisc":"12635","icon":"","area":{"screenshot":"https://i.imgur.com/j9OPnMf.jpg"}}
+{"name":"물길","refName":"Channel","namespace":"AREA","tradeDisc":"22278","icon":"","area":{"screenshot":"https://i.imgur.com/qNjNqND.jpg"}}
+{"name":"대저택","refName":"Chateau","namespace":"AREA","tradeDisc":"39459","icon":"","area":{"screenshot":"https://i.imgur.com/9K7IyE3.jpg"}}
+{"name":"도시 광장","refName":"City Square","namespace":"AREA","tradeDisc":"44762","icon":"","area":{"screenshot":"https://i.imgur.com/dpMpwdP.jpg"}}
 {"name":"조개투성이 선반","refName":"Clam-infested Shelf","namespace":"AREA","tradeDisc":"ClamInfestedShelf","icon":"","area":{"special":true}}
-{"name":"차가운 강","refName":"Cold River","namespace":"AREA","tradeDisc":"38080","icon":""}
-{"name":"가로수","refName":"Colonnade","namespace":"AREA","tradeDisc":"31349","icon":""}
-{"name":"원형 경기장","refName":"Colosseum","namespace":"AREA","tradeDisc":"16355","icon":""}
-{"name":"온실","refName":"Conservatory","namespace":"AREA","tradeDisc":"6755","icon":""}
-{"name":"산호 유적","refName":"Coral Ruins","namespace":"AREA","tradeDisc":"41363","icon":""}
-{"name":"중심부","refName":"Core","namespace":"AREA","tradeDisc":"35484","icon":""}
-{"name":"법원","refName":"Courthouse","namespace":"AREA","tradeDisc":"49777","icon":""}
-{"name":"안뜰","refName":"Courtyard","namespace":"AREA","tradeDisc":"25370","icon":""}
-{"name":"만","refName":"Coves","namespace":"AREA","tradeDisc":"49159","icon":""}
-{"name":"분화구","refName":"Crater","namespace":"AREA","tradeDisc":"5132","icon":""}
-{"name":"진홍색 사원","refName":"Crimson Temple","namespace":"AREA","tradeDisc":"46612","icon":""}
-{"name":"진홍색 마을","refName":"Crimson Township","namespace":"AREA","tradeDisc":"10687","icon":""}
-{"name":"수정 광석","refName":"Crystal Ore","namespace":"AREA","tradeDisc":"17684","icon":""}
-{"name":"저주받은 지하실","refName":"Cursed Crypt","namespace":"AREA","tradeDisc":"8544","icon":""}
-{"name":"어둠의 숲","refName":"Dark Forest","namespace":"AREA","tradeDisc":"34447","icon":""}
-{"name":"더럽혀진 대성당","refName":"Defiled Cathedral","namespace":"AREA","tradeDisc":"47897","icon":""}
-{"name":"사막","refName":"Desert","namespace":"AREA","tradeDisc":"34997","icon":""}
-{"name":"사막의 샘","refName":"Desert Spring","namespace":"AREA","tradeDisc":"10211","icon":""}
-{"name":"발굴지","refName":"Dig","namespace":"AREA","tradeDisc":"43432","icon":""}
+{"name":"차가운 강","refName":"Cold River","namespace":"AREA","tradeDisc":"38080","icon":"","area":{"screenshot":"https://i.imgur.com/ld3HPg6.jpg"}}
+{"name":"가로수","refName":"Colonnade","namespace":"AREA","tradeDisc":"31349","icon":"","area":{"screenshot":"https://i.imgur.com/5uaNQwH.jpg"}}
+{"name":"원형 경기장","refName":"Colosseum","namespace":"AREA","tradeDisc":"16355","icon":"","area":{"screenshot":"https://i.imgur.com/LYXkjl8.jpg"}}
+{"name":"온실","refName":"Conservatory","namespace":"AREA","tradeDisc":"6755","icon":"","area":{"screenshot":"https://i.imgur.com/VfVUpKT.jpg"}}
+{"name":"산호 유적","refName":"Coral Ruins","namespace":"AREA","tradeDisc":"41363","icon":"","area":{"screenshot":"https://i.imgur.com/YI4jsqt.jpg"}}
+{"name":"중심부","refName":"Core","namespace":"AREA","tradeDisc":"35484","icon":"","area":{"screenshot":"https://i.imgur.com/SCCsOxV.jpg"}}
+{"name":"법원","refName":"Courthouse","namespace":"AREA","tradeDisc":"49777","icon":"","area":{"screenshot":"https://i.imgur.com/zg9qN4K.jpg"}}
+{"name":"안뜰","refName":"Courtyard","namespace":"AREA","tradeDisc":"25370","icon":"","area":{"screenshot":"https://i.imgur.com/rRYcncq.jpg"}}
+{"name":"만","refName":"Coves","namespace":"AREA","tradeDisc":"49159","icon":"","area":{"screenshot":"https://i.imgur.com/NB7i3Mu.jpg"}}
+{"name":"분화구","refName":"Crater","namespace":"AREA","tradeDisc":"5132","icon":"","area":{"screenshot":"https://i.imgur.com/ffRs5qU.jpg"}}
+{"name":"진홍색 사원","refName":"Crimson Temple","namespace":"AREA","tradeDisc":"46612","icon":"","area":{"screenshot":"https://i.imgur.com/4731HPd.jpg"}}
+{"name":"진홍색 마을","refName":"Crimson Township","namespace":"AREA","tradeDisc":"10687","icon":"","area":{"screenshot":"https://i.imgur.com/OOugfbm.jpg"}}
+{"name":"수정 광석","refName":"Crystal Ore","namespace":"AREA","tradeDisc":"17684","icon":"","area":{"screenshot":"https://i.imgur.com/ff3kcZI.jpg"}}
+{"name":"저주받은 지하실","refName":"Cursed Crypt","namespace":"AREA","tradeDisc":"8544","icon":"","area":{"screenshot":"https://i.imgur.com/hz8a9Ea.jpg"}}
+{"name":"어둠의 숲","refName":"Dark Forest","namespace":"AREA","tradeDisc":"34447","icon":"","area":{"screenshot":"https://i.imgur.com/ayyUVDP.jpg"}}
+{"name":"더럽혀진 대성당","refName":"Defiled Cathedral","namespace":"AREA","tradeDisc":"47897","icon":"","area":{"screenshot":"https://i.imgur.com/rSqf91M.jpg"}}
+{"name":"사막","refName":"Desert","namespace":"AREA","tradeDisc":"34997","icon":"","area":{"screenshot":"https://i.imgur.com/BcaiqlN.jpg"}}
+{"name":"사막의 샘","refName":"Desert Spring","namespace":"AREA","tradeDisc":"10211","icon":"","area":{"screenshot":"https://i.imgur.com/aDop71B.jpg"}}
+{"name":"발굴지","refName":"Dig","namespace":"AREA","tradeDisc":"43432","icon":"","area":{"screenshot":"https://i.imgur.com/E8Z9yPz.jpg"}}
 {"name":"잠수 모래톱","refName":"Diving Shoals","namespace":"AREA","tradeDisc":"DivingShoals","icon":"","area":{"special":true}}
-{"name":"메마른 바다","refName":"Dry Sea","namespace":"AREA","tradeDisc":"53637","icon":""}
-{"name":"사구","refName":"Dunes","namespace":"AREA","tradeDisc":"53116","icon":""}
-{"name":"던전","refName":"Dungeon","namespace":"AREA","tradeDisc":"64256","icon":""}
+{"name":"메마른 바다","refName":"Dry Sea","namespace":"AREA","tradeDisc":"53637","icon":"","area":{"screenshot":"https://i.imgur.com/JGfVZsB.jpg"}}
+{"name":"사구","refName":"Dunes","namespace":"AREA","tradeDisc":"53116","icon":"","area":{"screenshot":"https://i.imgur.com/88Gm4iq.jpg"}}
+{"name":"던전","refName":"Dungeon","namespace":"AREA","tradeDisc":"64256","icon":"","area":{"screenshot":"https://i.imgur.com/GRI8xIf.jpg"}}
 {"name":"섬뜩한 지하","refName":"Eldritch Depths","namespace":"AREA","tradeDisc":"EldritchDepths","icon":"","area":{"special":true}}
-{"name":"강어귀","refName":"Estuary","namespace":"AREA","tradeDisc":"40753","icon":""}
-{"name":"발굴터","refName":"Excavation","namespace":"AREA","tradeDisc":"33025","icon":""}
-{"name":"공장","refName":"Factory","namespace":"AREA","tradeDisc":"41763","icon":""}
-{"name":"들판","refName":"Fields","namespace":"AREA","tradeDisc":"36207","icon":""}
-{"name":"물에 잠긴 광산","refName":"Flooded Mine","namespace":"AREA","tradeDisc":"63065","icon":""}
-{"name":"금단의 숲","refName":"Forbidden Woods","namespace":"AREA","tradeDisc":"26156","icon":""}
-{"name":"갈라지는 강","refName":"Forking River","namespace":"AREA","tradeDisc":"29382","icon":""}
-{"name":"주조소","refName":"Foundry","namespace":"AREA","tradeDisc":"31509","icon":""}
-{"name":"얼어붙은 오막","refName":"Frozen Cabins","namespace":"AREA","tradeDisc":"51403","icon":""}
-{"name":"곰팡이 동혈","refName":"Fungal Hollow","namespace":"AREA","tradeDisc":"34425","icon":""}
-{"name":"정원","refName":"Gardens","namespace":"AREA","tradeDisc":"11533","icon":""}
-{"name":"정동석","refName":"Geode","namespace":"AREA","tradeDisc":"58981","icon":""}
-{"name":"빈민촌","refName":"Ghetto","namespace":"AREA","tradeDisc":"14879","icon":""}
-{"name":"빙하","refName":"Glacier","namespace":"AREA","tradeDisc":"4592","icon":""}
-{"name":"무덤 고랑","refName":"Grave Trough","namespace":"AREA","tradeDisc":"34760","icon":""}
-{"name":"묘지","refName":"Graveyard","namespace":"AREA","tradeDisc":"53902","icon":""}
-{"name":"석굴","refName":"Grotto","namespace":"AREA","tradeDisc":"19420","icon":""}
-{"name":"으스스한 대저택","refName":"Haunted Mansion","namespace":"AREA","tradeDisc":"1215","icon":""}
+{"name":"강어귀","refName":"Estuary","namespace":"AREA","tradeDisc":"40753","icon":"","area":{"screenshot":"https://i.imgur.com/LNLcK2Z.jpg"}}
+{"name":"발굴터","refName":"Excavation","namespace":"AREA","tradeDisc":"33025","icon":"","area":{"screenshot":"https://i.imgur.com/A3E80Du.jpg"}}
+{"name":"공장","refName":"Factory","namespace":"AREA","tradeDisc":"41763","icon":"","area":{"screenshot":"https://i.imgur.com/zOsCvpG.jpg"}}
+{"name":"들판","refName":"Fields","namespace":"AREA","tradeDisc":"36207","icon":"","area":{"screenshot":"https://i.imgur.com/ZBYW0jj.jpg"}}
+{"name":"물에 잠긴 광산","refName":"Flooded Mine","namespace":"AREA","tradeDisc":"63065","icon":"","area":{"screenshot":"https://i.imgur.com/RYNfkXJ.jpg"}}
+{"name":"금단의 숲","refName":"Forbidden Woods","namespace":"AREA","tradeDisc":"26156","icon":"","area":{"screenshot":"https://i.imgur.com/5Jl2OoA.jpg"}}
+{"name":"갈라지는 강","refName":"Forking River","namespace":"AREA","tradeDisc":"29382","icon":"","area":{"screenshot":"https://i.imgur.com/KLlqoMv.jpg"}}
+{"name":"주조소","refName":"Foundry","namespace":"AREA","tradeDisc":"31509","icon":"","area":{"screenshot":"https://i.imgur.com/EeefLOA.jpg"}}
+{"name":"얼어붙은 오막","refName":"Frozen Cabins","namespace":"AREA","tradeDisc":"51403","icon":"","area":{"screenshot":"https://i.imgur.com/eAML7S2.jpg"}}
+{"name":"곰팡이 동혈","refName":"Fungal Hollow","namespace":"AREA","tradeDisc":"34425","icon":"","area":{"screenshot":"https://i.imgur.com/D4HiW8x.jpg"}}
+{"name":"정원","refName":"Gardens","namespace":"AREA","tradeDisc":"11533","icon":"","area":{"screenshot":"https://i.imgur.com/nnb6Fss.jpg"}}
+{"name":"정동석","refName":"Geode","namespace":"AREA","tradeDisc":"58981","icon":"","area":{"screenshot":"https://i.imgur.com/iGJ0Ohk.jpg"}}
+{"name":"빈민촌","refName":"Ghetto","namespace":"AREA","tradeDisc":"14879","icon":"","area":{"screenshot":"https://i.imgur.com/I8onB4N.jpg"}}
+{"name":"빙하","refName":"Glacier","namespace":"AREA","tradeDisc":"4592","icon":"","area":{"screenshot":"https://i.imgur.com/t3Arfep.jpg"}}
+{"name":"무덤 고랑","refName":"Grave Trough","namespace":"AREA","tradeDisc":"34760","icon":"","area":{"screenshot":"https://i.imgur.com/ee5davj.jpg"}}
+{"name":"묘지","refName":"Graveyard","namespace":"AREA","tradeDisc":"53902","icon":"","area":{"screenshot":"https://i.imgur.com/gm0UolB.jpg"}}
+{"name":"석굴","refName":"Grotto","namespace":"AREA","tradeDisc":"19420","icon":"","area":{"screenshot":"https://i.imgur.com/N7P59cb.jpg"}}
+{"name":"으스스한 대저택","refName":"Haunted Mansion","namespace":"AREA","tradeDisc":"1215","icon":"","area":{"screenshot":"https://i.imgur.com/TyBueyN.jpg"}}
 {"name":"위태한 지하","refName":"Hazardous Depths","namespace":"AREA","tradeDisc":"HazardousDepths","icon":"","area":{"special":true}}
-{"name":"빙산","refName":"Iceberg","namespace":"AREA","tradeDisc":"59084","icon":""}
+{"name":"빙산","refName":"Iceberg","namespace":"AREA","tradeDisc":"59084","icon":"","area":{"screenshot":"https://i.imgur.com/9g2hpKu.jpg"}}
 {"name":"감염된 잠수구","refName":"Infested Bathyspheres","namespace":"AREA","tradeDisc":"InfestedBathyspheres","icon":"","area":{"special":true}}
-{"name":"감염된 계곡","refName":"Infested Valley","namespace":"AREA","tradeDisc":"24414","icon":""}
-{"name":"상아 사원","refName":"Ivory Temple","namespace":"AREA","tradeDisc":"16982","icon":""}
-{"name":"밀림 계곡","refName":"Jungle Valley","namespace":"AREA","tradeDisc":"4003","icon":""}
+{"name":"감염된 계곡","refName":"Infested Valley","namespace":"AREA","tradeDisc":"24414","icon":"","area":{"screenshot":"https://i.imgur.com/9FiIb93.jpg"}}
+{"name":"상아 사원","refName":"Ivory Temple","namespace":"AREA","tradeDisc":"16982","icon":"","area":{"screenshot":"https://i.imgur.com/gl7ODl5.jpg"}}
+{"name":"밀림 계곡","refName":"Jungle Valley","namespace":"AREA","tradeDisc":"4003","icon":"","area":{"screenshot":"https://i.imgur.com/O4q6Op8.jpg"}}
 {"name":"키샤라의 안식처","refName":"Kishara's Rest","namespace":"AREA","tradeDisc":"KisharasRest","icon":"","area":{"special":true}}
-{"name":"실험실","refName":"Laboratory","namespace":"AREA","tradeDisc":"43561","icon":""}
-{"name":"소굴","refName":"Lair","namespace":"AREA","tradeDisc":"8823","icon":""}
-{"name":"용암의 방","refName":"Lava Chamber","namespace":"AREA","tradeDisc":"7088","icon":""}
-{"name":"용암 호수","refName":"Lava Lake","namespace":"AREA","tradeDisc":"20343","icon":""}
-{"name":"지맥","refName":"Leyline","namespace":"AREA","tradeDisc":"12937","icon":""}
-{"name":"등대","refName":"Lighthouse","namespace":"AREA","tradeDisc":"43308","icon":""}
-{"name":"전망대","refName":"Lookout","namespace":"AREA","tradeDisc":"48831","icon":""}
+{"name":"실험실","refName":"Laboratory","namespace":"AREA","tradeDisc":"43561","icon":"","area":{"screenshot":"https://i.imgur.com/3wlWzSX.jpg"}}
+{"name":"소굴","refName":"Lair","namespace":"AREA","tradeDisc":"8823","icon":"","area":{"screenshot":"https://i.imgur.com/Uj6Ef71.jpg"}}
+{"name":"용암의 방","refName":"Lava Chamber","namespace":"AREA","tradeDisc":"7088","icon":"","area":{"screenshot":"https://i.imgur.com/XR1YVVq.jpg"}}
+{"name":"용암 호수","refName":"Lava Lake","namespace":"AREA","tradeDisc":"20343","icon":"","area":{"screenshot":"https://i.imgur.com/G85TEg5.jpg"}}
+{"name":"지맥","refName":"Leyline","namespace":"AREA","tradeDisc":"12937","icon":"","area":{"screenshot":"https://i.imgur.com/5UjUxso.jpg"}}
+{"name":"등대","refName":"Lighthouse","namespace":"AREA","tradeDisc":"43308","icon":"","area":{"screenshot":"https://i.imgur.com/40gXcr4.jpg"}}
+{"name":"전망대","refName":"Lookout","namespace":"AREA","tradeDisc":"48831","icon":"","area":{"screenshot":"https://i.imgur.com/QNuOzHT.jpg"}}
 {"name":"사라진 유적","refName":"Lost Ruins","namespace":"AREA","tradeDisc":"LostRuins","icon":"","area":{"special":true}}
 {"name":"잃어버린 폐허","refName":"Lost Ruins","namespace":"AREA","tradeDisc":"LostRuins","icon":"","area":{"special":true}}
-{"name":"기형","refName":"Malformation","namespace":"AREA","tradeDisc":"3421","icon":""}
-{"name":"습지","refName":"Marshes","namespace":"AREA","tradeDisc":"42115","icon":""}
-{"name":"능묘","refName":"Mausoleum","namespace":"AREA","tradeDisc":"57831","icon":""}
-{"name":"미로","refName":"Maze","namespace":"AREA","tradeDisc":"46524","icon":""}
-{"name":"메사","refName":"Mesa","namespace":"AREA","tradeDisc":"19999","icon":""}
-{"name":"광물층","refName":"Mineral Pools","namespace":"AREA","tradeDisc":"44313","icon":""}
-{"name":"달의 사원","refName":"Moon Temple","namespace":"AREA","tradeDisc":"41751","icon":""}
-{"name":"진흙 간헐천","refName":"Mud Geyser","namespace":"AREA","tradeDisc":"36946","icon":""}
-{"name":"박물관","refName":"Museum","namespace":"AREA","tradeDisc":"33220","icon":""}
-{"name":"매장지","refName":"Necropolis","namespace":"AREA","tradeDisc":"2279","icon":""}
-{"name":"과수원","refName":"Orchard","namespace":"AREA","tradeDisc":"38855","icon":""}
-{"name":"무성한 유적","refName":"Overgrown Ruin","namespace":"AREA","tradeDisc":"26732","icon":""}
-{"name":"무성한 성소","refName":"Overgrown Shrine","namespace":"AREA","tradeDisc":"26468","icon":""}
-{"name":"궁전","refName":"Palace","namespace":"AREA","tradeDisc":"51878","icon":""}
-{"name":"공원","refName":"Park","namespace":"AREA","tradeDisc":"32613","icon":""}
+{"name":"기형","refName":"Malformation","namespace":"AREA","tradeDisc":"3421","icon":"","area":{"screenshot":"https://i.imgur.com/bVcvxGD.jpg"}}
+{"name":"습지","refName":"Marshes","namespace":"AREA","tradeDisc":"42115","icon":"","area":{"screenshot":"https://i.imgur.com/25Oc1GQ.jpg"}}
+{"name":"능묘","refName":"Mausoleum","namespace":"AREA","tradeDisc":"57831","icon":"","area":{"screenshot":"https://i.imgur.com/lppiQiQ.jpg"}}
+{"name":"미로","refName":"Maze","namespace":"AREA","tradeDisc":"46524","icon":"","area":{"screenshot":"https://i.imgur.com/vPKZUFI.jpg"}}
+{"name":"메사","refName":"Mesa","namespace":"AREA","tradeDisc":"19999","icon":"","area":{"screenshot":"https://i.imgur.com/gvpYUBQ.jpg"}}
+{"name":"광물층","refName":"Mineral Pools","namespace":"AREA","tradeDisc":"44313","icon":"","area":{"screenshot":"https://i.imgur.com/AvgBb6c.jpg"}}
+{"name":"달의 사원","refName":"Moon Temple","namespace":"AREA","tradeDisc":"41751","icon":"","area":{"screenshot":"https://i.imgur.com/WoUgaQp.jpg"}}
+{"name":"진흙 간헐천","refName":"Mud Geyser","namespace":"AREA","tradeDisc":"36946","icon":"","area":{"screenshot":"https://i.imgur.com/qVVPlhi.jpg"}}
+{"name":"박물관","refName":"Museum","namespace":"AREA","tradeDisc":"33220","icon":"","area":{"screenshot":"https://i.imgur.com/oOrFsgt.jpg"}}
+{"name":"매장지","refName":"Necropolis","namespace":"AREA","tradeDisc":"2279","icon":"","area":{"screenshot":"https://i.imgur.com/6cNUs2I.jpg"}}
+{"name":"과수원","refName":"Orchard","namespace":"AREA","tradeDisc":"38855","icon":"","area":{"screenshot":"https://i.imgur.com/S5wxemk.jpg"}}
+{"name":"무성한 유적","refName":"Overgrown Ruin","namespace":"AREA","tradeDisc":"26732","icon":"","area":{"screenshot":"https://i.imgur.com/U1gMZhT.jpg"}}
+{"name":"무성한 성소","refName":"Overgrown Shrine","namespace":"AREA","tradeDisc":"26468","icon":"","area":{"screenshot":"https://i.imgur.com/vXh4QKk.jpg"}}
+{"name":"궁전","refName":"Palace","namespace":"AREA","tradeDisc":"51878","icon":"","area":{"screenshot":"https://i.imgur.com/U7ABlGw.jpg"}}
+{"name":"공원","refName":"Park","namespace":"AREA","tradeDisc":"32613","icon":"","area":{"screenshot":"https://i.imgur.com/HlFwmtM.jpg"}}
 {"name":"원양 심연","refName":"Pelagic Abyss","namespace":"AREA","tradeDisc":"PelagicAbyss","icon":"","area":{"special":true}}
-{"name":"우리","refName":"Pen","namespace":"AREA","tradeDisc":"19828","icon":""}
-{"name":"반도","refName":"Peninsula","namespace":"AREA","tradeDisc":"57690","icon":""}
-{"name":"환영","refName":"Phantasmagoria","namespace":"AREA","tradeDisc":"47634","icon":""}
-{"name":"선창","refName":"Pier","namespace":"AREA","tradeDisc":"60732","icon":""}
-{"name":"구덩이","refName":"Pit","namespace":"AREA","tradeDisc":"11490","icon":""}
-{"name":"고원","refName":"Plateau","namespace":"AREA","tradeDisc":"34832","icon":""}
-{"name":"광장","refName":"Plaza","namespace":"AREA","tradeDisc":"35076","icon":""}
-{"name":"항만","refName":"Port","namespace":"AREA","tradeDisc":"47088","icon":""}
-{"name":"구획","refName":"Precinct","namespace":"AREA","tradeDisc":"58250","icon":""}
-{"name":"태고의 구역","refName":"Primordial Blocks","namespace":"AREA","tradeDisc":"15595","icon":""}
-{"name":"태고의 웅덩이","refName":"Primordial Pool","namespace":"AREA","tradeDisc":"25302","icon":""}
-{"name":"산책로","refName":"Promenade","namespace":"AREA","tradeDisc":"54757","icon":""}
-{"name":"경주장","refName":"Racecourse","namespace":"AREA","tradeDisc":"57536","icon":""}
-{"name":"성벽","refName":"Ramparts","namespace":"AREA","tradeDisc":"52736","icon":""}
-{"name":"암초","refName":"Reef","namespace":"AREA","tradeDisc":"53973","icon":""}
-{"name":"유물의 방","refName":"Relic Chambers","namespace":"AREA","tradeDisc":"35162","icon":""}
-{"name":"주택","refName":"Residence","namespace":"AREA","tradeDisc":"4755","icon":""}
-{"name":"필사실","refName":"Scriptorium","namespace":"AREA","tradeDisc":"53075","icon":""}
+{"name":"우리","refName":"Pen","namespace":"AREA","tradeDisc":"19828","icon":"","area":{"screenshot":"https://i.imgur.com/FYax6WD.jpg"}}
+{"name":"반도","refName":"Peninsula","namespace":"AREA","tradeDisc":"57690","icon":"","area":{"screenshot":"https://i.imgur.com/5YycEWs.jpg"}}
+{"name":"환영","refName":"Phantasmagoria","namespace":"AREA","tradeDisc":"47634","icon":"","area":{"screenshot":"https://i.imgur.com/yCDYKxA.jpg"}}
+{"name":"선창","refName":"Pier","namespace":"AREA","tradeDisc":"60732","icon":"","area":{"screenshot":"https://i.imgur.com/rZMXMj1.jpg"}}
+{"name":"구덩이","refName":"Pit","namespace":"AREA","tradeDisc":"11490","icon":"","area":{"screenshot":"https://i.imgur.com/PkwpOv0.jpg"}}
+{"name":"고원","refName":"Plateau","namespace":"AREA","tradeDisc":"34832","icon":"","area":{"screenshot":"https://i.imgur.com/0t2NnqI.jpg"}}
+{"name":"광장","refName":"Plaza","namespace":"AREA","tradeDisc":"35076","icon":"","area":{"screenshot":"https://i.imgur.com/kYGkNDs.jpg"}}
+{"name":"항만","refName":"Port","namespace":"AREA","tradeDisc":"47088","icon":"","area":{"screenshot":"https://i.imgur.com/9KprAxq.jpg"}}
+{"name":"구획","refName":"Precinct","namespace":"AREA","tradeDisc":"58250","icon":"","area":{"screenshot":"https://i.imgur.com/fAJ8DcM.jpg"}}
+{"name":"태고의 구역","refName":"Primordial Blocks","namespace":"AREA","tradeDisc":"15595","icon":"","area":{"screenshot":"https://i.imgur.com/TtaIepR.jpg"}}
+{"name":"태고의 웅덩이","refName":"Primordial Pool","namespace":"AREA","tradeDisc":"25302","icon":"","area":{"screenshot":"https://i.imgur.com/Fxl9Naf.jpg"}}
+{"name":"산책로","refName":"Promenade","namespace":"AREA","tradeDisc":"54757","icon":"","area":{"screenshot":"https://i.imgur.com/Q8E3SQ5.jpg"}}
+{"name":"경주장","refName":"Racecourse","namespace":"AREA","tradeDisc":"57536","icon":"","area":{"screenshot":"https://i.imgur.com/tKH5lyG.jpg"}}
+{"name":"성벽","refName":"Ramparts","namespace":"AREA","tradeDisc":"52736","icon":"","area":{"screenshot":"https://i.imgur.com/Yx5UIDO.jpg"}}
+{"name":"암초","refName":"Reef","namespace":"AREA","tradeDisc":"53973","icon":"","area":{"screenshot":"https://i.imgur.com/pVdQXl9.jpg"}}
+{"name":"유물의 방","refName":"Relic Chambers","namespace":"AREA","tradeDisc":"35162","icon":"","area":{"screenshot":"https://i.imgur.com/jsNHNa1.jpg"}}
+{"name":"주택","refName":"Residence","namespace":"AREA","tradeDisc":"4755","icon":"","area":{"screenshot":"https://i.imgur.com/FF5qpbI.jpg"}}
+{"name":"필사실","refName":"Scriptorium","namespace":"AREA","tradeDisc":"53075","icon":"","area":{}}
 {"name":"바다 기둥","refName":"Sea Pillars","namespace":"AREA","tradeDisc":"SeaPillars","icon":"","area":{"special":true}}
 {"name":"해저 마루","refName":"Seafloor Ridges","namespace":"AREA","tradeDisc":"SeafloorRidges","icon":"","area":{}}
-{"name":"매장소","refName":"Sepulchre","namespace":"AREA","tradeDisc":"27716","icon":""}
-{"name":"조선소","refName":"Shipyard","namespace":"AREA","tradeDisc":"11724","icon":""}
-{"name":"바닷가","refName":"Shore","namespace":"AREA","tradeDisc":"22593","icon":""}
-{"name":"성소","refName":"Shrine","namespace":"AREA","tradeDisc":"64812","icon":""}
-{"name":"공성 구역","refName":"Siege","namespace":"AREA","tradeDisc":"3756","icon":""}
-{"name":"곡물 창고","refName":"Silo","namespace":"AREA","tradeDisc":"24497","icon":""}
-{"name":"거미 숲","refName":"Spider Forest","namespace":"AREA","tradeDisc":"4651","icon":""}
-{"name":"거미 소굴","refName":"Spider Lair","namespace":"AREA","tradeDisc":"60607","icon":""}
-{"name":"침체지","refName":"Stagnation","namespace":"AREA","tradeDisc":"3182","icon":""}
-{"name":"해안","refName":"Strand","namespace":"AREA","tradeDisc":"10021","icon":""}
-{"name":"유황 분출구","refName":"Sulphur Vents","namespace":"AREA","tradeDisc":"6074","icon":""}
-{"name":"꼭대기","refName":"Summit","namespace":"AREA","tradeDisc":"60634","icon":""}
-{"name":"물에 잠긴 도시","refName":"Sunken City","namespace":"AREA","tradeDisc":"11215","icon":""}
+{"name":"매장소","refName":"Sepulchre","namespace":"AREA","tradeDisc":"27716","icon":"","area":{"screenshot":"https://i.imgur.com/I8et20T.jpg"}}
+{"name":"조선소","refName":"Shipyard","namespace":"AREA","tradeDisc":"11724","icon":"","area":{"screenshot":"https://i.imgur.com/J5hM5mR.jpg"}}
+{"name":"바닷가","refName":"Shore","namespace":"AREA","tradeDisc":"22593","icon":"","area":{"screenshot":"https://i.imgur.com/HNPAnu9.jpg"}}
+{"name":"성소","refName":"Shrine","namespace":"AREA","tradeDisc":"64812","icon":"","area":{"screenshot":"https://i.imgur.com/wDK8KBW.jpg"}}
+{"name":"공성 구역","refName":"Siege","namespace":"AREA","tradeDisc":"3756","icon":"","area":{"screenshot":"https://i.imgur.com/vOwwEDe.jpg"}}
+{"name":"곡물 창고","refName":"Silo","namespace":"AREA","tradeDisc":"24497","icon":"","area":{"screenshot":"https://i.imgur.com/hk740NA.jpg"}}
+{"name":"거미 숲","refName":"Spider Forest","namespace":"AREA","tradeDisc":"4651","icon":"","area":{"screenshot":"https://i.imgur.com/HkKHFTB.jpg"}}
+{"name":"거미 소굴","refName":"Spider Lair","namespace":"AREA","tradeDisc":"60607","icon":"","area":{"screenshot":"https://i.imgur.com/s2WAMm5.jpg"}}
+{"name":"침체지","refName":"Stagnation","namespace":"AREA","tradeDisc":"3182","icon":"","area":{"screenshot":"https://i.imgur.com/OJbjzlG.jpg"}}
+{"name":"해안","refName":"Strand","namespace":"AREA","tradeDisc":"10021","icon":"","area":{"screenshot":"https://i.imgur.com/7aE4Xzp.jpg"}}
+{"name":"유황 분출구","refName":"Sulphur Vents","namespace":"AREA","tradeDisc":"6074","icon":"","area":{"screenshot":"https://i.imgur.com/D3sc6Dg.jpg"}}
+{"name":"꼭대기","refName":"Summit","namespace":"AREA","tradeDisc":"60634","icon":"","area":{"screenshot":"https://i.imgur.com/6aL5NhS.jpg"}}
+{"name":"물에 잠긴 도시","refName":"Sunken City","namespace":"AREA","tradeDisc":"11215","icon":"","area":{"screenshot":"https://i.imgur.com/QAoHzcR.jpg"}}
 {"name":"가라앉은 토템","refName":"Sunken Totems","namespace":"AREA","tradeDisc":"SunkenTotems","icon":"","area":{"special":true}}
-{"name":"사원","refName":"Temple","namespace":"AREA","tradeDisc":"45792","icon":""}
-{"name":"테라스","refName":"Terrace","namespace":"AREA","tradeDisc":"42558","icon":""}
-{"name":"잡목림","refName":"Thicket","namespace":"AREA","tradeDisc":"737","icon":""}
-{"name":"탑","refName":"Tower","namespace":"AREA","tradeDisc":"54446","icon":""}
-{"name":"맹독성 하수도","refName":"Toxic Sewer","namespace":"AREA","tradeDisc":"25747","icon":""}
-{"name":"열대 섬","refName":"Tropical Island","namespace":"AREA","tradeDisc":"5647","icon":""}
-{"name":"지하 강","refName":"Underground River","namespace":"AREA","tradeDisc":"20216","icon":""}
-{"name":"지하 해양","refName":"Underground Sea","namespace":"AREA","tradeDisc":"18545","icon":""}
+{"name":"사원","refName":"Temple","namespace":"AREA","tradeDisc":"45792","icon":"","area":{"screenshot":"https://i.imgur.com/g3LZ4zC.jpg"}}
+{"name":"테라스","refName":"Terrace","namespace":"AREA","tradeDisc":"42558","icon":"","area":{"screenshot":"https://i.imgur.com/dZZGyRt.jpg"}}
+{"name":"잡목림","refName":"Thicket","namespace":"AREA","tradeDisc":"737","icon":"","area":{"screenshot":"https://i.imgur.com/rlY2iPC.jpg"}}
+{"name":"탑","refName":"Tower","namespace":"AREA","tradeDisc":"54446","icon":"","area":{"screenshot":"https://i.imgur.com/LqSPV6K.jpg"}}
+{"name":"맹독성 하수도","refName":"Toxic Sewer","namespace":"AREA","tradeDisc":"25747","icon":"","area":{"screenshot":"https://i.imgur.com/CgSpbBl.jpg"}}
+{"name":"열대 섬","refName":"Tropical Island","namespace":"AREA","tradeDisc":"5647","icon":"","area":{"screenshot":"https://i.imgur.com/wraPtBT.jpg"}}
+{"name":"지하 강","refName":"Underground River","namespace":"AREA","tradeDisc":"20216","icon":"","area":{"screenshot":"https://i.imgur.com/8k4Dug4.jpg"}}
+{"name":"지하 해양","refName":"Underground Sea","namespace":"AREA","tradeDisc":"18545","icon":"","area":{"screenshot":"https://i.imgur.com/ELUmbfz.jpg"}}
 {"name":"바다 밑 숲","refName":"Undersea Groves","namespace":"AREA","tradeDisc":"UnderseaGroves","icon":"","area":{}}
 {"name":"평범한 해저","refName":"Unremarkable Seabed","namespace":"AREA","tradeDisc":"UnremarkableSeabed","icon":"","area":{"special":true}}
-{"name":"바알 피라미드","refName":"Vaal Pyramid","namespace":"AREA","tradeDisc":"28018","icon":""}
-{"name":"금고실","refName":"Vault","namespace":"AREA","tradeDisc":"57839","icon":""}
-{"name":"빌라","refName":"Villa","namespace":"AREA","tradeDisc":"2144","icon":""}
-{"name":"화산","refName":"Volcano","namespace":"AREA","tradeDisc":"30639","icon":""}
-{"name":"황폐한 웅덩이","refName":"Waste Pool","namespace":"AREA","tradeDisc":"42556","icon":""}
-{"name":"황무지","refName":"Wasteland","namespace":"AREA","tradeDisc":"17533","icon":""}
-{"name":"수로","refName":"Waterways","namespace":"AREA","tradeDisc":"28402","icon":""}
-{"name":"부두","refName":"Wharf","namespace":"AREA","tradeDisc":"54239","icon":""}
+{"name":"바알 피라미드","refName":"Vaal Pyramid","namespace":"AREA","tradeDisc":"28018","icon":"","area":{"screenshot":"https://i.imgur.com/RM2CNDk.jpg"}}
+{"name":"금고실","refName":"Vault","namespace":"AREA","tradeDisc":"57839","icon":"","area":{"screenshot":"https://i.imgur.com/zdIUUwN.jpg"}}
+{"name":"빌라","refName":"Villa","namespace":"AREA","tradeDisc":"2144","icon":"","area":{"screenshot":"https://i.imgur.com/EB0wTDF.jpg"}}
+{"name":"화산","refName":"Volcano","namespace":"AREA","tradeDisc":"30639","icon":"","area":{"screenshot":"https://i.imgur.com/kNQfYSd.jpg"}}
+{"name":"황폐한 웅덩이","refName":"Waste Pool","namespace":"AREA","tradeDisc":"42556","icon":"","area":{"screenshot":"https://i.imgur.com/fEvrcih.jpg"}}
+{"name":"황무지","refName":"Wasteland","namespace":"AREA","tradeDisc":"17533","icon":"","area":{"screenshot":"https://i.imgur.com/ywddRfu.jpg"}}
+{"name":"수로","refName":"Waterways","namespace":"AREA","tradeDisc":"28402","icon":"","area":{"screenshot":"https://i.imgur.com/qAEf4WS.jpg"}}
+{"name":"부두","refName":"Wharf","namespace":"AREA","tradeDisc":"54239","icon":"","area":{"screenshot":"https://i.imgur.com/JirgJcM.jpg"}}
 {"name":"산성 미끄럼뱀","refName":"Acid Slitherer","namespace":"CAPTURED_BEAST","icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQmVzdGlhcnlPcmJGdWxsIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/3214b44360/BestiaryOrbFull.png"}
 {"name":"미숙한 렉스","refName":"Adolescent Rhex","namespace":"CAPTURED_BEAST","icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQmVzdGlhcnlPcmJGdWxsIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/3214b44360/BestiaryOrbFull.png"}
 {"name":"고산 악마","refName":"Alpine Devil","namespace":"CAPTURED_BEAST","icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQmVzdGlhcnlPcmJGdWxsIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/3214b44360/BestiaryOrbFull.png"}
@@ -1813,9 +1813,9 @@
 {"name":"하사품의 역병 갑충석","refName":"Blight Scarab of Bounty","namespace":"ITEM","tradeTag":"blight-scarab-of-bounty","exchangeable":true,"icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJCbGlnaHQiLCJzY2FsZSI6MX1d/de78905e90/NormalScarabBlight.png"}
 {"name":"고무의 역병 갑충석","refName":"Blight Scarab of Invigoration","namespace":"ITEM","tradeTag":"blight-scarab-of-invigoration","exchangeable":true,"icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9BbHRUaWVyNFNjYXJhYkJsaWdodCIsInNjYWxlIjoxfV0/34e07da01c/AltTier4ScarabBlight.png"}
 {"name":"메마른 심장의 역병 갑충석","refName":"Blight Scarab of the Blightheart","namespace":"ITEM","tradeTag":"blight-scarab-of-the-blightheart","exchangeable":true,"icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiQmxpZ2h0Iiwic2NhbGUiOjF9XQ/d0aa6a6d55/GreaterScarabBlight.png"}
-{"name":"Blight-ravaged Map","refName":"Blight-ravaged Map","namespace":"ITEM","icon":"/images/maps/blight2.png"}
+{"name":"Blight-ravaged Map","refName":"Blight-ravaged Map","namespace":"ITEM","icon":"/images/maps/blight2.png","craftable":{"category":"Map"},"tradeDisc":"uberblighted","area":{"blighted":true}}
 {"name":"역병 걸린 환영의 오브","refName":"Blighted Delirium Orb","namespace":"ITEM","tradeTag":"blighted-delirium-orb","exchangeable":true,"icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJCbGlnaHQiLCJzY2FsZSI6MX1d/e65965e8bd/DeliriumOrbBlight.png"}
-{"name":"Blighted Map","refName":"Blighted Map","namespace":"ITEM","icon":"/images/maps/blight1.png"}
+{"name":"Blighted Map","refName":"Blighted Map","namespace":"ITEM","icon":"/images/maps/blight1.png","craftable":{"category":"Map"},"tradeDisc":"blighted","area":{"blighted":true}}
 {"name":"실명기","refName":"Blinder","namespace":"ITEM","craftable":{"category":"Claw"},"icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvV2VhcG9ucy9PbmVIYW5kV2VhcG9ucy9DbGF3cy9DbGF3NSIsInciOjIsImgiOjIsInNjYWxlIjoxfV0/1d5586ea56/Claw5.png","w":2,"h":2}
 {"name":"눈보라 왕관","refName":"Blizzard Crown","namespace":"ITEM","craftable":{"category":"Helmet"},"armour":{"ev":[185,212],"es":[38,43]},"icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9IZWxtZXRzL0hlbG1ldERleEludFIiLCJ3IjoyLCJoIjoyLCJzY2FsZSI6MX1d/9da7af13c1/HelmetDexIntR.png","w":2,"h":2}
 {"name":"피의 악마","refName":"Blood Demon","namespace":"ITEM","icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQXptZXJpL0hlbGxzY2FwZURlbW9uQm9zc0NvcnBzZSIsInciOjMsImgiOjIsInNjYWxlIjoxfV0/9bcd7bb5b8/HellscapeDemonBossCorpse.png","w":3,"h":2}
@@ -4975,3 +4975,6 @@
 {"name":"질의 증폭기","refName":"Zeel's Amplifier","namespace":"UNIQUE","unique":{"base":"Polished Spiked Shield","disenchantValue":4.13},"icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9TaGllbGRzL1plYWxzQW1wbGlmaWVyIiwidyI6MiwiaCI6Miwic2NhbGUiOjF9XQ/d1e9af3da7/ZealsAmplifier.png"}
 {"name":"제르피의 심장","refName":"Zerphi's Heart","namespace":"UNIQUE","unique":{"base":"Paua Amulet","disenchantValue":26.52},"icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQW11bGV0cy9aZXJwaGlzSGVhcnQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/3e35140dfe/ZerphisHeart.png"}
 {"name":"제르피의 마지막 숨결","refName":"Zerphi's Last Breath","namespace":"UNIQUE","unique":{"base":"Grand Mana Flask","disenchantValue":106.41},"icon":"https://web.poecdn.com/gen/image/WzksMTQseyJmIjoiMkRJdGVtcy9GbGFza3MvWmVycGhpc0xhc3RCcmVhdGgiLCJ3IjoxLCJoIjoyLCJzY2FsZSI6MSwibGV2ZWwiOjF9XQ/bf8cb7b943/ZerphisLastBreath.png"}
+{"name":"부정의 석실","refName":"Chambers of Impurity","namespace":"AREA","icon":"","area":{}}
+{"name":"허비의 안뜰","refName":"Courtyard of Wasting","namespace":"AREA","icon":"","area":{}}
+{"name":"거짓의 극장","refName":"Theatre of Lies","namespace":"AREA","icon":"","area":{}}

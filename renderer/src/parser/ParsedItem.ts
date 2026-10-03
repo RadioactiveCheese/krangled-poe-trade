@@ -41,7 +41,6 @@ export interface ParsedItem {
   areaItemQuantity?: number
   areaItemRarity?: number
   areaPackSize?: number
-  mapBlighted?: 'Blighted' | 'Blight-ravaged'
   mapCompletionReward?: BaseType
   mapTier?: number
   mapMoreMaps?: number

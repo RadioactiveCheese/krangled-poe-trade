@@ -53,6 +53,9 @@
       "retry": "重試",
       "loadout": "傭兵技能配置"
     },
+    "map_check": {
+      "maven_reminder": "包含釋界之邀所需的頭目"
+    },
     "filters": {
       "mercenary_primary_no_support": "主要技能沒有輔助寶石"
     }

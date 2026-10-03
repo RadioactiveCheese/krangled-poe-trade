@@ -172,6 +172,69 @@ test('rejects a Scrying Orb without a map area', () => {
   assert.equal(parsed.error, 'item.parse_error')
 })
 
+test('parses reworked Blighted Maps with localized area lines after aggregate properties', async () => {
+  for (const language of ['en', 'ru', 'ko', 'cmn-Hant']) {
+    await runtime.Data.init(language)
+    const strings = runtime.Data.CLIENT_STRINGS
+    for (const ref of ['Blighted Map', 'Blight-ravaged Map']) {
+      const base = runtime.Data.ITEM_BY_REF('ITEM', ref)[0]
+      const area = runtime.Data.ITEM_BY_REF('AREA', 'Strand')[0]
+      const header = `${strings.ITEM_CLASS}Maps\n${strings.RARITY}${strings.RARITY_NORMAL}\n${base.name}`
+      const properties = `${strings.MAP_ITEM_QUANTITY}+12%\n${strings.MAP_AREA}${area.name}`
+      const item = parseItem(`${header}\n--------\n${properties}`)
+      assert.equal(item.category, runtime.ItemCategory.Map)
+      assert.equal(item.info.refName, ref)
+      assert.equal(item.mapArea.refName, 'Strand')
+      assert.equal(item.areaItemQuantity, 12)
+      assert.deepEqual(runtime.createExactStatFilters(item, item.statsByType, { searchStatRange: 0 }), [])
+      assert.equal(runtime.parseClipboard(header).isErr(), true,
+        'Blighted Maps without an area must fail closed')
+    }
+  }
+  await runtime.Data.init('en')
+})
+
+test('map checker excludes every non-explicit modifier type, including unknown flags', () => {
+  const item = parseChart()
+  const explicit = item.statsByType.find(calc => calc.type === 'explicit')
+  item.statsByType = ['implicit', 'enchant', 'crafted', 'pseudo', 'explicit'].map(type => ({ ...explicit, type }))
+  assert.equal(runtime.prepareMapStats(item).length, 1)
+})
+
+test('map metadata covers all official Blighted area IDs and supported unique Map bases', {
+  skip: !process.env.TEST_LIVE_TRADE_API && 'set TEST_LIVE_TRADE_API=1 to run'
+}, async () => {
+  const responses = await Promise.all(['items', 'filters'].map(dataset => originalFetch(
+    `https://www.pathofexile.com/api/trade/data/${dataset}`, {
+      headers: { 'User-Agent': 'Krangled-PoE-Trade metadata test' }, signal: AbortSignal.timeout(15_000)
+    })))
+  for (const response of responses) assert.equal(response.ok, true)
+  const [items, filters] = await Promise.all(responses.map(response => response.json()))
+  const maps = items.result.find(group => group.id === 'map').entries
+  const officialAreas = new Map(maps.filter(entry => ['blighted', 'uberblighted'].includes(entry.disc))
+    .map(entry => [entry.text.match(/\((.*)\)$/u)[1], entry.type]))
+  const officialUniques = maps.filter(entry => entry.disc === 'map' && entry.flags?.unique)
+  // Trade still lists these retired uniques; neither local nor upstream metadata
+  // supports them. Keep that limitation explicit rather than invent translations.
+  const retired = new Set(['Infused Beachhead', 'The Beachhead', 'The Perandus Manor', 'The Tower of Ordeals', 'Untainted Paradise'])
+  for (const language of ['en', 'ru', 'ko', 'cmn-Hant']) {
+    const local = await readNdjson(path.join(PUBLIC, `data/${language}/items.ndjson`))
+    const areas = new Map(local.filter(entry => entry.namespace === 'AREA' && officialAreas.has(entry.refName))
+      .map(entry => [entry.refName, entry.tradeDisc]))
+    assert.deepEqual(areas, officialAreas, `${language} must cover every official Blighted/ravaged area`)
+    for (const unique of officialUniques) {
+      if (retired.has(unique.name)) continue
+      const entry = local.find(entry => entry.namespace === 'UNIQUE' && entry.refName === unique.name)
+      assert.equal(entry?.unique?.base, unique.type, `${language}: ${unique.name} must use the official Map base`)
+    }
+  }
+  const mapFilters = filters.result.find(group => group.id === 'map_filters').filters
+  for (const id of ['map_blighted', 'map_uberblighted']) {
+    assert.deepEqual(mapFilters.find(filter => filter.id === id).option.options.map(option => option.id),
+      [null, 'true', 'false'], `official ${id} must still accept explicit exclusions`)
+  }
+})
+
 test('parses chart properties and map-style aggregate values', () => {
   const item = parseChart()
 
