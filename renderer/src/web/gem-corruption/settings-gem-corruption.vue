@@ -9,12 +9,16 @@
     <div>
       <ui-toggle v-model="hideNegativeEv">{{ t(':hide_negative_ev') }}</ui-toggle>
     </div>
+    <div>
+      <ui-toggle v-model="showDouble">{{ t(':show_double') }}</ui-toggle>
+      <div class="text-gray-500 text-sm pl-5">{{ t(':double_ev_hint') }}</div>
+    </div>
     <div class="flex items-center gap-2">
       <span>{{ t(':sort_by') }}</span>
       <div class="flex rounded bg-gray-900">
-        <button v-for="key in (['ev', 'profit'] as const)" :key="key"
+        <button v-for="key in sortKeys" :key="key"
           class="rounded px-2" :class="sortBy === key ? 'bg-gray-700 text-gray-100' : 'text-gray-400'"
-          @click="sortBy = key">{{ t(key === 'ev' ? ':sort_ev_long' : ':sort_profit_long') }}</button>
+          @click="sortBy = key">{{ t(SORT_LABEL[key]) }}</button>
       </div>
     </div>
     <label class="flex flex-col gap-1">
@@ -34,6 +38,7 @@
     <div class="text-gray-500 text-sm">{{ t(':ev_hint') }}</div>
     <div class="text-gray-500 text-sm">{{ t(':profit_hint') }}</div>
     <div class="text-gray-500 text-sm">{{ t(':odds_hint') }}</div>
+    <div class="text-gray-500 text-sm">{{ t(':double_model_note') }}</div>
   </div>
 </template>
 
@@ -48,7 +53,7 @@ import { computed } from 'vue'
 import { useI18nNs } from '@/web/i18n'
 import { configProp } from '../settings/utils.js'
 import { GEM_CORRUPTION_DEFAULTS, type GemCorruptionWidget } from './widget.js'
-import { MAX_ATTEMPTS } from './calc.js'
+import { MAX_ATTEMPTS, type SortKey } from './calc.js'
 
 import UiToggle from '@/web/ui/UiToggle.vue'
 
@@ -72,6 +77,9 @@ function setting<K extends keyof typeof GEM_CORRUPTION_DEFAULTS> (key: K) {
 const minRatio = setting('minRatio')
 const hideNegativeEv = setting('hideNegativeEv')
 const sortBy = setting('sortBy')
+const showDouble = setting('showDouble')
+const sortKeys = computed<SortKey[]>(() => showDouble.value ? ['ev', 'double', 'profit'] : ['ev', 'profit'])
+const SORT_LABEL: Record<SortKey, string> = { ev: ':sort_ev_long', double: ':sort_double_long', profit: ':sort_profit_long' }
 const attemptsSetting = setting('attempts')
 const attempts = computed<number>({
   get: () => attemptsSetting.value,

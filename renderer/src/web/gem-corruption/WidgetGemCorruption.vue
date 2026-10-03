@@ -7,9 +7,9 @@
           :placeholder="t(':filter')"
           class="rounded bg-gray-700 text-gray-100 px-2 py-0.5 flex-1 min-w-0">
         <div class="flex shrink-0 rounded bg-gray-900 text-sm" :title="t(':sort_hint')">
-          <button v-for="key in (['ev', 'profit'] as const)" :key="key"
+          <button v-for="key in sortKeys" :key="key"
             :class="[$style.sortBtn, { [$style.sortActive]: sortBy === key }]"
-            @click="config.sortBy = key">{{ t(key === 'ev' ? ':sort_ev' : ':sort_profit') }}</button>
+            @click="config.sortBy = key">{{ t(SORT_LABEL[key]) }}</button>
         </div>
       </div>
       <div v-if="status" :class="$style.message">
@@ -50,17 +50,22 @@
                 </div>
               </div>
             </div>
-            <div class="flex items-center gap-x-3 text-sm pl-1">
-              <button class="flex items-center gap-1 rounded hover:bg-gray-700 px-1 -ml-1"
-                :title="t(':ev_hint')" @click="toggle(row)">
-                <i class="fas w-3 text-gray-500" :class="expanded === row.gem.refName ? 'fa-chevron-down' : 'fa-chevron-right'" />
-                <span class="text-gray-400">{{ t(':ev') }}</span>
-                <span class="flex items-center" :class="row.ev >= 0 ? 'text-green-400' : 'text-red-400'">
-                  {{ signed(row.ev) }}<img :src="fmt(Math.abs(row.ev)).icon" :class="$style.inlineIcon" alt="">
-                </span>
-                <i v-if="row.evIncomplete" class="fas fa-exclamation-triangle text-yellow-500"
-                  :title="t(':ev_incomplete_hint')" />
-              </button>
+            <div class="flex flex-col gap-0.5 text-sm pl-1">
+              <div class="flex items-center gap-x-3">
+                <button v-for="kind in evKinds" :key="kind"
+                  class="flex items-center gap-1 rounded hover:bg-gray-700 px-1 -ml-1"
+                  :title="t(kind === 'single' ? ':ev_hint' : ':double_ev_hint')" @click="toggle(row, kind)">
+                  <i class="fas w-3 text-gray-500" :class="isExpanded(row, kind) ? 'fa-chevron-down' : 'fa-chevron-right'" />
+                  <span class="text-gray-400">{{ t(kind === 'single' ? ':ev' : ':double_ev') }}</span>
+                  <span class="flex items-center" :class="evOf(row, kind).ev >= 0 ? 'text-green-400' : 'text-red-400'">
+                    {{ signed(evOf(row, kind).ev) }}<img :src="fmt(Math.abs(evOf(row, kind).ev)).icon" :class="$style.inlineIcon" alt="">
+                  </span>
+                  <i v-if="evOf(row, kind).aboveCap" class="fas fa-flag text-orange-400"
+                    :title="t(':above_cap_hint')" />
+                  <i v-if="evOf(row, kind).incomplete" class="fas fa-exclamation-triangle text-yellow-500"
+                    :title="t(':ev_incomplete_hint')" />
+                </button>
+              </div>
               <span class="flex items-center gap-1" :title="t(':profit_hint')">
                 <span class="text-gray-400">{{ t(':profit_if') }}</span>
                 <span class="flex items-center" :class="row.profit >= 0 ? 'text-green-400' : 'text-red-400'">
@@ -69,15 +74,18 @@
                 <span class="text-gray-400">({{ formatPercent(row.margin) }}, {{ row.ratio.toFixed(1) }}&times;)</span>
               </span>
             </div>
-            <div v-if="expanded === row.gem.refName" :class="$style.breakdown">
-              <div v-for="o in row.outcomes" :key="o.id" class="contents">
+            <div v-for="kind in evKinds.filter(k => isExpanded(row, k))" :key="kind" :class="$style.breakdown">
+              <div class="col-span-3 text-gray-300">{{ t(kind === 'single' ? ':breakdown_single' : ':breakdown_double') }}</div>
+              <div v-for="o in evOf(row, kind).outcomes" :key="o.id" class="contents">
                 <span class="text-gray-300">{{ outcomeLabel(row, o) }}</span>
                 <span class="text-right text-gray-400">{{ formatChance(o.chance) }}</span>
                 <span class="flex items-center justify-end gap-1">
                   <template v-if="o.status === 'priced'">
                     <span v-if="o.capped" class="text-gray-500"
                       :title="t(':capped_hint', [fmt(o.listedPrice!).text])">{{ t(':capped') }}</span>
-                    {{ fmt(o.value).text }}<img :src="fmt(o.value).icon" :class="$style.inlineIcon" alt="">
+                    <i v-if="o.aboveCap" class="fas fa-flag text-orange-400"
+                      :title="t(':above_cap_outcome_hint', [fmt(o.listedPrice!).text])" />
+                    <span :class="{ 'text-orange-400': o.aboveCap }">{{ fmt(o.value).text }}</span><img :src="fmt(o.value).icon" :class="$style.inlineIcon" alt="">
                   </template>
                   <span v-else-if="o.status === 'not-listed'" class="text-gray-500"
                     :title="t(':not_listed_hint')">{{ t(':not_listed') }}</span>
@@ -87,14 +95,24 @@
                 </span>
               </div>
               <div class="contents text-gray-400">
-                <span>{{ t(':ev_costs') }}</span>
+                <span>{{ t(kind === 'single' ? ':ev_costs' : ':double_costs') }}</span>
                 <span />
                 <span class="flex items-center justify-end">
-                  &minus;{{ fmt(row.buyCost + row.vaalOrbPrice).text }}<img
-                    :src="fmt(row.buyCost + row.vaalOrbPrice).icon" :class="$style.inlineIcon" alt="">
+                  &minus;{{ fmt(evOf(row, kind).cost).text }}<img
+                    :src="fmt(evOf(row, kind).cost).icon" :class="$style.inlineIcon" alt="">
                 </span>
               </div>
-              <div class="col-span-3 border-t border-gray-700 mt-0.5 pt-0.5 text-gray-300">
+              <div v-if="kind === 'double' && row.doubleCost === undefined" class="col-span-3 text-yellow-500">
+                {{ t(':double_no_temple_price') }}
+              </div>
+              <div v-if="evOf(row, kind).aboveCap" class="col-span-3 flex items-center gap-1 text-orange-400">
+                <i class="fas fa-flag" /> {{ t(':ev_without_above_cap') }}
+                <span class="ml-auto flex items-center" :class="evOf(row, kind).evWithoutAboveCap >= 0 ? 'text-green-400' : 'text-red-400'">
+                  {{ signed(evOf(row, kind).evWithoutAboveCap) }}<img
+                    :src="fmt(Math.abs(evOf(row, kind).evWithoutAboveCap)).icon" :class="$style.inlineIcon" alt="">
+                </span>
+              </div>
+              <div v-if="kind === 'single'" class="col-span-3 border-t border-gray-700 mt-0.5 pt-0.5 text-gray-300">
                 {{ t(':attempts_summary', [attempts]) }}
                 <div class="grid gap-x-3" style="grid-template-columns: 1fr auto;">
                   <span class="text-gray-400">{{ t(':attempts_level_up') }}</span>
@@ -107,10 +125,15 @@
                       :src="fmt(Math.abs(row.ev * attempts)).icon" :class="$style.inlineIcon" alt="">
                   </span>
                 </div>
-                <div v-if="row.evIncomplete" class="text-yellow-500 pt-0.5">
-                  <i class="fas fa-exclamation-triangle" /> {{ t(':ev_incomplete_note') }}
-                </div>
               </div>
+              <div v-else class="col-span-3 border-t border-gray-700 mt-0.5 pt-0.5 grid gap-x-3" style="grid-template-columns: 1fr auto;">
+                <span class="text-gray-400">{{ t(':double_level_up') }}</span>
+                <span class="text-right">{{ formatChance(DOUBLE_LEVEL_UP_CHANCE) }}</span>
+              </div>
+              <div v-if="evOf(row, kind).incomplete" class="col-span-3 text-yellow-500 pt-0.5">
+                <i class="fas fa-exclamation-triangle" /> {{ t(':ev_incomplete_note') }}
+              </div>
+              <div v-if="kind === 'double'" class="col-span-3 text-gray-500 pt-0.5">{{ t(':double_model_note') }}</div>
             </div>
           </div>
           <div v-if="!rows.length" :class="$style.message">{{ t(':no_matches') }}</div>
@@ -152,7 +175,7 @@ import type { WidgetManager } from '../overlay/interfaces.js'
 import { GEM_CORRUPTION_DEFAULTS, type GemCorruptionWidget } from './widget.js'
 import {
   evaluateGems, filterRows, sortRows, buyItem, buyQuality, sellItem, chanceOfLevelUp, chanceOfProfit,
-  MAX_ATTEMPTS, type GemFlipRow, type OutcomeValue
+  MAX_ATTEMPTS, DOUBLE_LEVEL_UP_CHANCE, type GemFlipRow, type OutcomeValue, type SortKey
 } from './calc'
 
 import Widget from '../overlay/Widget.vue'
@@ -232,9 +255,14 @@ const gemcutterIcon = computed(() => ITEM_BY_REF('ITEM', "Gemcutter's Prism")?.[
 
 const search = shallowRef('')
 const page = shallowRef(0)
-const expanded = shallowRef<string | null>(null)
+const expanded = shallowRef<{ name: string, kind: 'single' | 'double' } | null>(null)
 
-const sortBy = computed(() => props.config.sortBy ?? GEM_CORRUPTION_DEFAULTS.sortBy)
+const showDouble = computed(() => props.config.showDouble ?? GEM_CORRUPTION_DEFAULTS.showDouble)
+// a hidden double EV can't be the sort key
+const sortBy = computed<SortKey>(() => {
+  const key = props.config.sortBy ?? GEM_CORRUPTION_DEFAULTS.sortBy
+  return (key === 'double' && !showDouble.value) ? 'ev' : key
+})
 const attempts = computed(() =>
   Math.min(MAX_ATTEMPTS, Math.max(1, Math.round(props.config.attempts ?? GEM_CORRUPTION_DEFAULTS.attempts))))
 
@@ -258,13 +286,44 @@ const pageRows = computed(() => {
 
 watch([search, sortBy], () => { page.value = 0 })
 
-function toggle (row: GemFlipRow) {
-  expanded.value = (expanded.value === row.gem.refName) ? null : row.gem.refName
+type EvKind = 'single' | 'double'
+
+const evKinds = computed<EvKind[]>(() => showDouble.value ? ['single', 'double'] : ['single'])
+const sortKeys = computed<SortKey[]>(() => showDouble.value ? ['ev', 'double', 'profit'] : ['ev', 'profit'])
+const SORT_LABEL: Record<SortKey, string> = { ev: ':sort_ev', double: ':sort_double', profit: ':sort_profit' }
+
+function toggle (row: GemFlipRow, kind: EvKind) {
+  expanded.value = isExpanded(row, kind) ? null : { name: row.gem.refName, kind }
+}
+
+function isExpanded (row: GemFlipRow, kind: EvKind) {
+  return expanded.value?.name === row.gem.refName && expanded.value.kind === kind
+}
+
+function evOf (row: GemFlipRow, kind: EvKind) {
+  return (kind === 'single')
+    ? {
+        ev: row.ev,
+        outcomes: row.outcomes,
+        incomplete: row.evIncomplete,
+        aboveCap: row.evAboveCap,
+        evWithoutAboveCap: row.evWithoutAboveCap,
+        cost: row.buyCost + row.vaalOrbPrice
+      }
+    : {
+        ev: row.doubleEv,
+        outcomes: row.doubleOutcomes,
+        incomplete: row.doubleEvIncomplete,
+        aboveCap: row.doubleEvAboveCap,
+        evWithoutAboveCap: row.doubleEvWithoutAboveCap,
+        cost: row.buyCost + (row.doubleCost ?? 0)
+      }
 }
 
 // only worked out for the open breakdown
 const expandedProfitChance = computed(() => {
-  const row = rows.value.find(r => r.gem.refName === expanded.value)
+  if (expanded.value?.kind !== 'single') return undefined
+  const row = rows.value.find(r => r.gem.refName === expanded.value!.name)
   if (!row) return undefined
   return chanceOfProfit(row.outcomes, row.buyCost + row.vaalOrbPrice, attempts.value)
 })
@@ -291,16 +350,14 @@ function formatChance (p: number) {
 }
 
 function outcomeLabel (row: GemFlipRow, o: OutcomeValue) {
-  switch (o.id) {
-    case 'unchanged': return t(':outcome_unchanged')
-    case 'vaal': return o.vaalName ? t(':outcome_vaal', [o.vaalName]) : t(':outcome_vaal_none')
-    case 'level-up': return t(':outcome_level', [`${row.buyLevel + 1}`])
-    case 'level-down': return t(':outcome_level', [`${row.buyLevel - 1}`])
-    case 'quality-23': return t(':outcome_quality', ['23%'])
-    case 'quality-21-22': return t(':outcome_quality', ['21–22%'])
-    case 'quality-16-19': return t(':outcome_quality', ['16–19%'])
-    case 'quality-10-15': return t(':outcome_quality', ['10–15%'])
+  const parts: string[] = []
+  // gems without a Vaal version have their Vaal results folded into the others
+  if (o.vaalName) parts.push(t(':outcome_vaal', [o.vaalName]))
+  if (o.levelDelta !== 0) {
+    parts.push(t(o.pricedAsLevel1 ? ':outcome_level_as_1' : ':outcome_level', [`${row.buyLevel + o.levelDelta}`]))
   }
+  if (o.qualityRange !== '20') parts.push(t(':outcome_quality', [`${o.qualityRange.replace('-', '–')}%`]))
+  return parts.length ? parts.join(', ') : t(':outcome_unchanged')
 }
 
 function openBuy (row: GemFlipRow, e: MouseEvent) {
@@ -391,6 +448,9 @@ function dispatchPriceCheck (item: ParsedItem, e: MouseEvent) {
   display: grid;
   grid-template-columns: 1fr auto auto;
   column-gap: theme('spacing.3');
+  /* the double-corruption list is long; keep the widget on screen */
+  max-height: 22rem;
+  overflow-y: auto;
   @apply rounded bg-gray-900 px-2 py-1 text-sm;
 }
 

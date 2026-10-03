@@ -8,6 +8,7 @@ import {
   evaluateGem as evaluateGemWith, evaluateGems as evaluateGemsWith, filterRows, buyItem, buyQuality,
   isQualityIrrelevant, sellItem, lookupCurrency, sortRows, vaalVersion, chanceOfLevelUp, chanceOfProfit,
   MAX_PRICE_MULTIPLE, DEFAULT_MIN_RATIO, DEFAULT_ATTEMPTS, VAAL_ORB_GEM_OUTCOMES, LEVEL_UP_CHANCE,
+  DOUBLE_CORRUPTION_GEM_OUTCOMES_UNVERIFIED, DOUBLE_LEVEL_UP_CHANCE, DOUBLE_CORRUPT_TEMPLE,
   type PriceLookup, type PriceQuery, type ExclusionReason, type GemFlipRow, type CurrencyPrices, type OutcomeValue
 } from '@/web/gem-corruption/calc'
 import { GEM_CORRUPTION_DEFAULTS } from '@/web/gem-corruption/widget'
@@ -180,6 +181,7 @@ describe('row filters', () => {
       includeUnconfirmed: true,
       minRatio: DEFAULT_MIN_RATIO,
       hideNegativeEv: false,
+      showDouble: true,
       sortBy: 'ev',
       attempts: DEFAULT_ATTEMPTS
     })
@@ -247,10 +249,10 @@ describe('coverage of every gem against live poe.ninja data', () => {
     const counts: Record<string, number> = {}
     for (const e of excluded) counts[e.reason] = (counts[e.reason] ?? 0) + 1
     expect({ rows: rows.length, ...counts }).toEqual({
-      rows: 540,
+      rows: 543,
       'vaal-gem': 50,
-      'no-buy-price': 69,
-      'no-sell-price': 31,
+      'no-buy-price': 67,
+      'no-sell-price': 30,
       'sell-outlier': 134
     })
   })
@@ -296,7 +298,7 @@ describe('coverage of every gem against live poe.ninja data', () => {
 
   it('knows every skill gem name in the fixture', () => {
     const local = new Set(GEMS.map(g => g.refName))
-    const ninjaNames = new Set((JSON.parse(FIXTURE).itemOverviews[0].lines as Array<{ name: string }>).map(l => l.name))
+    const ninjaNames = new Set((JSON.parse(FIXTURE).itemOverviews.find((o: { type: string }) => o.type === 'SkillGem').lines as Array<{ name: string }>).map(l => l.name))
     // Vaal versions of transfigured gems only exist on poe.ninja, as "Vaal <gem> (<transfigured gem>)"
     const vaalTransfigured = (name: string) => {
       const m = /^Vaal (.+) \((.+)\)$/.exec(name)
@@ -370,10 +372,37 @@ describe('expected value', () => {
     expect(row.evIncomplete).toBe(false)
   })
 
-  it('ignores outliers, including Vaal versions, and marks the EV incomplete', () => {
-    const row = run({ ...ARC, 'Vaal Arc|20/20c': 801 })
-    expect(byId(row).vaal).toMatchObject({ status: 'outlier', value: 0, listedPrice: 801 })
+  it('ignores non-Vaal outliers and marks the EV incomplete', () => {
+    const row = run({ ...ARC, 'Arc|20/23c': 801 })
+    expect(byId(row)['quality-23']).toMatchObject({ status: 'outlier', value: 0, listedPrice: 801 })
     expect(row.evIncomplete).toBe(true)
+    expect(row.evAboveCap).toBe(false)
+  })
+
+  it('counts a Vaal version above the cap at its listed price, and flags it', () => {
+    const row = run({ ...ARC, 'Vaal Arc|20/20c': 801 })
+    expect(byId(row).vaal).toMatchObject({ status: 'priced', value: 801, listedPrice: 801, aboveCap: true })
+    expect(row.evIncomplete).toBe(false)
+    expect(row.evAboveCap).toBe(true)
+    // 173.5 with the Vaal version at 300
+    expect(row.outcomeValue).toBeCloseTo(173.5 + 0.25 * (801 - 300))
+    expect(row.evWithoutAboveCap).toBeCloseTo(173.5 - 0.25 * 300 - 102)
+    // within the cap nothing is flagged and both EVs agree
+    const normal = run(ARC)
+    expect(normal.evAboveCap).toBe(false)
+    expect(normal.evWithoutAboveCap).toBeCloseTo(normal.ev)
+  })
+
+  it('prices a level-down result from the level 1 listing at the same quality, never 1/23c', () => {
+    const row = run({ ...ARC, 'Arc|1/20c': 7, 'Arc|1/23c': 999 })
+    expect(byId(row)['level-down']).toMatchObject({ status: 'priced', value: 7, pricedAsLevel1: true, level: 19 })
+    // only 1/23c listed: counts as 0, without marking the EV incomplete
+    const only23 = run({ ...ARC, 'Arc|1/23c': 999 })
+    expect(byId(only23)['level-down']).toMatchObject({ status: 'not-listed', value: 0, pricedAsLevel1: true })
+    expect(only23.evIncomplete).toBe(false)
+    // a level 1 price above the buy price is capped: a 19/20c gem is worth no more than a 20/20 one
+    const pricey = run({ ...ARC, 'Arc|1/20c': 150 })
+    expect(byId(pricey)['level-down']).toMatchObject({ value: 100, capped: true, listedPrice: 150 })
   })
 
   it('values a result no better than the gem bought at most at the buy price', () => {
@@ -386,7 +415,7 @@ describe('expected value', () => {
     expect(byId(row)['quality-23'].capped).toBeUndefined()
   })
 
-  it('prices the unchanged result for the Vaal outcome when the gem has no Vaal version', () => {
+  it('folds the Vaal result into no change when the gem has no Vaal version', () => {
     const { row } = evaluateGem(gem('Added Fire Damage Support'), tableLookup({
       ...CURRENCY,
       'Added Fire Damage Support|20/20': 10,
@@ -394,8 +423,13 @@ describe('expected value', () => {
       'Added Fire Damage Support|21/20c': 40
     }), { vaalOrb: 2, gemcutter: 1 })
     const outcomes = byId(row!)
-    expect(outcomes.vaal).toMatchObject({ status: 'priced', value: 5 })
-    expect(outcomes.vaal.vaalName).toBeUndefined()
+    expect(outcomes.vaal).toBeUndefined()
+    expect(outcomes.unchanged).toMatchObject({ status: 'priced', value: 5, chance: 0.5 })
+    expect(row!.outcomes.reduce((s, o) => s + o.chance, 0)).toBeCloseTo(1)
+    // same for double corruption: "vaal+level-up" becomes "level-up"
+    expect(row!.doubleOutcomes.some(o => o.vaal)).toBe(false)
+    expect(row!.doubleOutcomes.reduce((s, o) => s + o.chance, 0)).toBeCloseTo(1)
+    expect(row!.doubleOutcomes.find(o => o.id === 'level-up')!.chance).toBeCloseTo(3 / 16 * 0.5 + 2 / 16 * 0.5)
   })
 
   it('ignores quality for Enlighten and counts its listed level-down price', () => {
@@ -407,7 +441,7 @@ describe('expected value', () => {
       'Enlighten Support|2c': 40
     }), { vaalOrb: 2, gemcutter: 1 })
     const outcomes = byId(row!)
-    for (const id of ['unchanged', 'vaal', 'quality-23', 'quality-21-22', 'quality-16-19', 'quality-10-15']) {
+    for (const id of ['unchanged', 'quality-23', 'quality-21-22', 'quality-16-19', 'quality-10-15']) {
       expect(outcomes[id], id).toMatchObject({ status: 'priced', value: 50 })
     }
     expect(outcomes['level-down']).toMatchObject({ status: 'priced', value: 40, level: 2 })
@@ -496,6 +530,122 @@ describe('Vaal Orb results in the live data', () => {
     expect({
       incomplete: rows.filter(r => r.evIncomplete).length,
       positive: rows.filter(r => r.ev > 0).length
-    }).toEqual({ incomplete: 282, positive: 132 })
+    }).toEqual({ incomplete: 281, positive: 157 })
+  })
+})
+
+const DOUBLE_COUNTS = { incomplete: 500, positive: 46, aboveCap: 45 }
+
+describe('double corruption (Lapidary Lens)', () => {
+  const table = DOUBLE_CORRUPTION_GEM_OUTCOMES_UNVERIFIED
+  const chance = (pred: (id: string) => boolean) => table.filter(o => pred(o.id)).reduce((s, o) => s + o.chance, 0)
+  const has = (kind: string) => (id: string) => id.split('+').some(part => part.startsWith(kind))
+
+  it('is two Vaal Orb rolls where a repeated kind does nothing (assumed model)', () => {
+    expect(table.reduce((s, o) => s + o.chance, 0)).toBeCloseTo(1, 12)
+    expect(new Set(table.map(o => o.id)).size).toBe(table.length)
+    // no level 22 and no double quality change
+    expect(table.every(o => Math.abs(o.levelDelta) <= 1)).toBe(true)
+    expect(table.every(o => o.id.split('+').filter(p => p.startsWith('quality')).length <= 1)).toBe(true)
+    // nothing twice: 1/16
+    expect(chance(id => id === 'unchanged')).toBeCloseTo(1 / 16)
+    // a kind shows up when either roll lands on it: 1 - (3/4)^2 = 7/16
+    expect(chance(has('vaal'))).toBeCloseTo(7 / 16)
+    expect(chance(has('quality'))).toBeCloseTo(7 / 16)
+    expect(chance(has('level-up'))).toBeCloseTo(DOUBLE_LEVEL_UP_CHANCE)
+    expect(DOUBLE_LEVEL_UP_CHANCE).toBeCloseTo(7 / 32)
+    // two different kinds: 2/16 per pair, then the spreads
+    expect(chance(id => id === 'level-up+quality-23')).toBeCloseTo(2 / 16 * 0.5 * 0.4)
+    // a single kind alone: rolled with nothing (2/16) or rolled twice (1/16)
+    expect(chance(id => id === 'level-up')).toBeCloseTo(3 / 16 * 0.5)
+    expect(table.find(o => o.id === 'level-up+quality-23')).toMatchObject({ levelDelta: 1, quality: '23', lookupQuality: 23 })
+    expect(table.find(o => o.id === 'vaal+level-up')).toMatchObject({ vaal: true, levelDelta: 1, lookupQuality: 20 })
+  })
+
+  const ARC = {
+    ...CURRENCY,
+    'Arc|20/20': 100,
+    'Arc|21/20c': 500,
+    'Arc|21/23c': 700,
+    'Arc|20/20c': 60,
+    'Arc|20/23c': 150,
+    'Arc|21c': 200,
+    'Arc|20c': 20,
+    'Vaal Arc|20/20c': 300,
+    'Vaal Arc|21/20c': 400,
+    'Vaal Arc|20/23c': 350,
+    'Vaal Arc|20c': 30
+  }
+  const run = (t: Record<string, number>, temple?: number) =>
+    evaluateGem(gem('Arc'), tableLookup(t), { vaalOrb: 2, gemcutter: 1, doubleCorruptTemple: temple }).row!
+
+  it('weights every result and subtracts the temple', () => {
+    const row = run(ARC, 224)
+    const expected = row.doubleOutcomes.reduce((s, o) => s + o.chance * o.value, 0)
+    expect(row.doubleOutcomeValue).toBeCloseTo(expected)
+    expect(row.doubleCost).toBe(224)
+    expect(row.doubleEv).toBeCloseTo(expected - 100 - 224)
+    expect(row.doubleEvIncomplete).toBe(false)
+    const v = Object.fromEntries(row.doubleOutcomes.map(o => [o.id, o]))
+    expect(v['level-up+quality-23']).toMatchObject({ value: 700, level: 21, quality: 23 })
+    expect(v['vaal+level-up']).toMatchObject({ value: 400, vaalName: 'Vaal Arc' })
+    expect(v['vaal+quality-23']).toMatchObject({ value: 350 })
+    expect(v['level-up+quality-10-15']).toMatchObject({ value: 200 })
+    expect(v['quality-10-15']).toMatchObject({ value: 20 })
+    expect(v.unchanged).toMatchObject({ value: 60 })
+    expect(v['level-down+quality-23']).toMatchObject({ status: 'not-listed', value: 0, pricedAsLevel1: true })
+  })
+
+  it('shows EV before the temple cost when the temple has no price', () => {
+    const row = run(ARC, undefined)
+    expect(row.doubleCost).toBeUndefined()
+    expect(row.doubleEv).toBeCloseTo(row.doubleOutcomeValue - 100)
+  })
+
+  it('marks the double EV incomplete when a listed kind of result is missing', () => {
+    const without: Record<string, number> = { ...ARC }
+    delete without['Arc|21/23c']
+    const row = run(without, 224)
+    expect(row.doubleOutcomes.find(o => o.id === 'level-up+quality-23')).toMatchObject({ status: 'missing', value: 0 })
+    expect(row.doubleEvIncomplete).toBe(true)
+    expect(row.evIncomplete).toBe(false)
+  })
+
+  it('reads the temple price from poe.ninja', () => {
+    expect(lookupCurrency(fixtureLookup).doubleCorruptTemple).toBe(224)
+    expect(DOUBLE_CORRUPT_TEMPLE).toMatchObject({ ns: 'TEMPLE', variant: 'Temple' })
+  })
+
+  it('finds double-corruption results in the live data', () => {
+    const { rows } = evaluateGems(GEMS, fixtureLookup)
+    const byName = new Map(rows.map(r => [r.gem.refName, r]))
+    const status = (name: string, id: string) => byName.get(name)!.doubleOutcomes.find(o => o.id === id)!.status
+    // 21/23c for a normal gem (Molten Shell's is above the outlier cap)
+    expect(status('Molten Shell', 'level-up+quality-23')).toBe('outlier')
+    expect(rows.filter(r => r.doubleOutcomes.find(o => o.id === 'level-up+quality-23')!.status === 'priced').length).toBeGreaterThan(50)
+    // Vaal 21/20c and Vaal 20/23c
+    expect(status('Molten Shell', 'vaal+level-up')).toBe('priced')
+    expect(status('Molten Shell', 'vaal+quality-23')).toBe('priced')
+    // Enlighten ignores quality, so every result uses 4c, 3c or 2c
+    expect(byName.get('Enlighten Support')!.doubleEvIncomplete).toBe(false)
+    expect({
+      incomplete: rows.filter(r => r.doubleEvIncomplete).length,
+      positive: rows.filter(r => r.doubleEv > 0).length,
+      aboveCap: rows.filter(r => r.doubleEvAboveCap).length
+    }).toEqual(DOUBLE_COUNTS)
+  })
+
+  it('sorts by double EV', () => {
+    const { rows } = evaluateGems(GEMS, fixtureLookup)
+    const sorted = sortRows(rows, 'double')
+    for (let i = 1; i < sorted.length; i++) expect(sorted[i - 1].doubleEv).toBeGreaterThanOrEqual(sorted[i].doubleEv)
+  })
+})
+
+describe('level-down coverage in the live data', () => {
+  it('has no 1/20c listings, so level-down counts as 0 except for Enlighten and Empower', () => {
+    const { rows } = evaluateGems(GEMS, fixtureLookup)
+    const priced = rows.filter(r => r.outcomes.find(o => o.id === 'level-down')!.status === 'priced').map(r => r.gem.refName)
+    expect(priced.sort()).toEqual(['Empower Support', 'Enlighten Support'])
   })
 })

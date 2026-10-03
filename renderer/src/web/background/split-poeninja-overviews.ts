@@ -71,7 +71,8 @@ export function splitJsonBlob (jsonBlob: string): PriceDatabase {
     { ns: 'UNIQUE', url: 'unique-maps', type: 'UniqueMap' },
     { ns: 'UNIQUE', url: 'unique-relics', type: 'UniqueRelic' },
     { ns: 'UNIQUE', url: 'unique-tinctures', type: 'UniqueTincture' },
-    { ns: 'GEM', url: 'skill-gems', type: 'SkillGem' }
+    { ns: 'GEM', url: 'skill-gems', type: 'SkillGem' },
+    { ns: 'TEMPLE', url: 'temples', type: 'IncursionTemple' }
   ]
 
   const database: PriceDatabase = []

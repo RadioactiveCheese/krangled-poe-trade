@@ -46,59 +46,147 @@ export const MAX_ATTEMPTS = 20
  * UNVERIFIED: how the quality change is distributed within "up to 10%". It is modelled as
  * a uniform 1-10, which is what splits the two quality halves into the rows below.
  */
-export type OutcomeId =
-  | 'unchanged' | 'vaal' | 'level-up' | 'level-down' |
-  'quality-23' | 'quality-21-22' | 'quality-16-19' | 'quality-10-15'
+/** Quality after corrupting a 20% gem. */
+export type QualityRange = '20' | '23' | '21-22' | '16-19' | '10-15'
+
+/**
+ * Quality used for the poe.ninja lookup. poe.ninja lists corrupted gems at 20% (which covers
+ * 16-20%), 23% and "no quality", so 21-22% is priced as 20% and 10-15% as the no-quality
+ * listing: stand-ins that undervalue those results a little.
+ */
+const LOOKUP_QUALITY: Record<QualityRange, number> = { '20': 20, '23': 23, '21-22': 20, '16-19': 20, '10-15': 0 }
+
+interface Effect { id: string, chance: number, levelDelta?: number, quality?: QualityRange, vaal?: true }
+
+/** The four equally likely kinds of Vaal Orb result, each with its own spread. */
+const CORRUPTION_KINDS: ReadonlyArray<readonly Effect[]> = [
+  [{ id: 'unchanged', chance: 1 }],
+  [{ id: 'vaal', chance: 1, vaal: true }],
+  [
+    { id: 'level-up', chance: 0.5, levelDelta: 1 },
+    { id: 'level-down', chance: 0.5, levelDelta: -1 }
+  ],
+  [
+    // +1..+10 from 20% (UNVERIFIED uniform split): +3 or more hits the 23% cap
+    { id: 'quality-23', chance: 0.5 * 0.8, quality: '23' },
+    { id: 'quality-21-22', chance: 0.5 * 0.2, quality: '21-22' },
+    // -1..-10 from 20% (UNVERIFIED uniform split)
+    { id: 'quality-16-19', chance: 0.5 * 0.4, quality: '16-19' },
+    { id: 'quality-10-15', chance: 0.5 * 0.6, quality: '10-15' }
+  ]
+]
 
 export interface OutcomeSpec {
-  id: OutcomeId
+  /** e.g. "level-up", or "level-up+quality-23" for a double corruption */
+  id: string
   chance: number
-  levelDelta: -1 | 0 | 1
-  /**
-   * Quality used for the poe.ninja lookup. poe.ninja lists corrupted gems at 20% (which
-   * covers 16-20%), 23% and "no quality", so 21-22% is priced as 20% and 10-15% as the
-   * no-quality listing: stand-ins that undervalue those results a little.
-   */
+  levelDelta: number
+  quality: QualityRange
   lookupQuality: number
   vaal?: true
 }
 
-export const VAAL_ORB_GEM_OUTCOMES: readonly OutcomeSpec[] = [
-  { id: 'unchanged', chance: 0.25, levelDelta: 0, lookupQuality: 20 },
-  { id: 'vaal', chance: 0.25, levelDelta: 0, lookupQuality: 20, vaal: true },
-  { id: 'level-up', chance: 0.125, levelDelta: 1, lookupQuality: 20 },
-  { id: 'level-down', chance: 0.125, levelDelta: -1, lookupQuality: 20 },
-  // +1..+10 from 20% (unverified uniform split): +3 or more hits the 23% cap
-  { id: 'quality-23', chance: 0.125 * 0.8, levelDelta: 0, lookupQuality: 23 },
-  { id: 'quality-21-22', chance: 0.125 * 0.2, levelDelta: 0, lookupQuality: 20 },
-  // -1..-10 from 20% (unverified uniform split)
-  { id: 'quality-16-19', chance: 0.125 * 0.4, levelDelta: 0, lookupQuality: 20 },
-  { id: 'quality-10-15', chance: 0.125 * 0.6, levelDelta: 0, lookupQuality: 0 }
-]
+function kindIndex (effect: Effect) {
+  return CORRUPTION_KINDS.findIndex(kind => kind.some(e => e.id === effect.id))
+}
+
+function toSpec (effects: readonly Effect[], chance: number): OutcomeSpec {
+  // canonical order (Vaal, level, quality) so both roll orders give the same id
+  const applied = effects.filter(e => e.id !== 'unchanged').sort((a, b) => kindIndex(a) - kindIndex(b))
+  const quality = applied.find(e => e.quality)?.quality ?? '20'
+  return {
+    id: applied.length ? applied.map(e => e.id).join('+') : 'unchanged',
+    chance,
+    levelDelta: applied.reduce((sum, e) => sum + (e.levelDelta ?? 0), 0),
+    quality,
+    lookupQuality: LOOKUP_QUALITY[quality],
+    ...(applied.some(e => e.vaal) ? { vaal: true as const } : {})
+  }
+}
+
+/** One Vaal Orb: one kind of result, 25% each. */
+export const VAAL_ORB_GEM_OUTCOMES: readonly OutcomeSpec[] = CORRUPTION_KINDS.flatMap(kind =>
+  kind.map(effect => toSpec([effect], effect.chance / CORRUPTION_KINDS.length)))
+
+/*
+ * Double corruption: the Lapidary Lens in Doryani's Institute (the tier 3 room of the
+ * Temple of Atzoatl's gem line) corrupts a gem twice. One gem per temple is assumed.
+ * Still in the game in 3.29: the 3.29.0 patch notes
+ * (https://www.pathofexile.com/forum/view-thread/3985332) change the Locus of Corruption in
+ * the same temple, and poe.ninja prices "Doryani's Institute (Tier 3)" temples in Allflame.
+ *
+ * Sources, none from GGG and none with odds:
+ * - maxroll.gg "Corruption Explained" (2025-02-08): "corrupts the gem twice successively,
+ *   with exactly the same options" as a Vaal Orb; "a 21/23 gem or a 21 Vaal gem" possible.
+ * - poewiki/fandom "Doryani's Institute", quoted in
+ *   https://www.pathofexile.com/forum/view-thread/2978546 (2020): "It will not roll the same
+ *   outcome twice" (so no level 22).
+ * - https://www.pathofexile.com/forum/view-thread/3340560 (2023): "you cannot roll the same
+ *   category twice".
+ *
+ * ASSUMED MODEL (user-provided; consistent with the sources, but not confirmed by them, since
+ * none says whether a repeat is re-rolled or lost): two independent Vaal Orb rolls from the
+ * single table above. If the second lands on the same kind as the first - no change, Vaal,
+ * level change (+1 or -1) or quality change (up or down) - the second roll is no change. So
+ * two quality rolls give one quality change and two level rolls one level change. If one
+ * roll makes the gem its Vaal version, the other applies to the Vaal gem normally (level,
+ * quality or no change); a Vaal roll on a gem with no Vaal version is no change. The gem is
+ * never destroyed.
+ */
+export const DOUBLE_CORRUPTION_GEM_OUTCOMES_UNVERIFIED: readonly OutcomeSpec[] = (() => {
+  const merged = new Map<string, OutcomeSpec>()
+  const kinds = CORRUPTION_KINDS.length
+  for (let i = 0; i < kinds; i++) {
+    for (let j = 0; j < kinds; j++) {
+      for (const a of CORRUPTION_KINDS[i]) {
+        // a repeated kind: the second roll does nothing
+        const seconds = (i === j) ? [{ id: 'unchanged', chance: 1 }] : CORRUPTION_KINDS[j]
+        for (const b of seconds) {
+          const spec = toSpec([a, b], a.chance * b.chance / (kinds * kinds))
+          const prev = merged.get(spec.id)
+          merged.set(spec.id, prev ? { ...prev, chance: prev.chance + spec.chance } : spec)
+        }
+      }
+    }
+  }
+  return [...merged.values()]
+})()
 
 export const LEVEL_UP_CHANCE = 0.125
 
-/**
- * Results poe.ninja seldom or never lists: a gem one level below max (never), and the
- * no-quality corrupted listing that stands in for 10-15% (missing for about half the gems).
- * Without a price they count as 0 without marking the EV incomplete; they're the least
- * valuable results, so 0 is a conservative floor rather than a gap worth flagging.
- */
-const RARELY_LISTED = new Set<OutcomeId>(['level-down', 'quality-10-15'])
+/** Chance a double corruption ends one level above max: either roll is a level change (7/16), and it's +1 half the time. */
+export const DOUBLE_LEVEL_UP_CHANCE = 7 / 32
+
+/** poe.ninja's name for a temple with Doryani's Institute, whose Lapidary Lens double-corrupts one gem. */
+export const DOUBLE_CORRUPT_TEMPLE = { ns: 'TEMPLE', name: "Doryani's Institute (Tier 3)", variant: 'Temple' }
 
 /**
- * - `priced`: poe.ninja has a price
+ * Results poe.ninja seldom lists: a gem one level below max (priced from the level 1
+ * corrupted listing, which most gems lack), and the no-quality corrupted listing that stands
+ * in for 10-15% (missing for about half the gems). Without a price they count as 0 without
+ * marking the EV incomplete; they're the least valuable results, so 0 is a conservative
+ * floor rather than a gap worth flagging.
+ */
+function rarelyListed (spec: OutcomeSpec) {
+  return spec.levelDelta < 0 || spec.quality === '10-15'
+}
+
+/**
+ * - `priced`: poe.ninja has a price (see `aboveCap` for Vaal versions)
  * - `missing`: poe.ninja usually lists this result but not for this gem; counted as 0 and
  *   the EV is marked incomplete (a lower bound)
- * - `outlier`: listed above MAX_PRICE_MULTIPLE x the 20/20 price and ignored; counted as 0
- *   and the EV is marked incomplete
- * - `not-listed`: a RARELY_LISTED result with no price; counted as 0
+ * - `outlier`: a non-Vaal result listed above MAX_PRICE_MULTIPLE x the 20/20 price; counted
+ *   as 0 and the EV is marked incomplete
+ * - `not-listed`: a rarely listed result with no price; counted as 0
  */
 export type OutcomeStatus = 'priced' | 'missing' | 'outlier' | 'not-listed'
 
 export interface OutcomeValue {
-  id: OutcomeId
+  id: string
   chance: number
+  levelDelta: number
+  qualityRange: QualityRange
+  vaal?: true
   status: OutcomeStatus
   /** chaos counted in the EV: the listed price when priced, otherwise 0 */
   value: number
@@ -106,6 +194,13 @@ export interface OutcomeValue {
   listedPrice?: number
   /** listed above the buy price for a result that's no better than the gem bought, so valued at the buy price */
   capped?: true
+  /**
+   * A Vaal version listed above MAX_PRICE_MULTIPLE x the 20/20 price. Counted at the listed
+   * price, but it may be a single ask, so the row warns about it.
+   */
+  aboveCap?: true
+  /** a below-max result priced from the gem's level 1 corrupted listing at the same quality */
+  pricedAsLevel1?: true
   level: number
   quality: number
   /** poe.ninja name of the Vaal gem for the `vaal` outcome, when the gem has one */
@@ -147,6 +242,20 @@ export interface GemFlipRow {
   ev: number
   /** a result poe.ninja normally lists has no usable price, so ev is a lower bound */
   evIncomplete: boolean
+  /** every double-corruption (Lapidary Lens) result with its chance and value */
+  doubleOutcomes: OutcomeValue[]
+  doubleOutcomeValue: number
+  /** price of a temple with Doryani's Institute, if poe.ninja has one */
+  doubleCost: number | undefined
+  /** expected profit per double corruption: doubleOutcomeValue - buyCost - doubleCost (0 if unknown) */
+  doubleEv: number
+  doubleEvIncomplete: boolean
+  /** ev and doubleEv with Vaal-version prices above the outlier cap counted as 0 */
+  evWithoutAboveCap: number
+  doubleEvWithoutAboveCap: number
+  /** some Vaal-version price in ev / doubleEv is above the outlier cap */
+  evAboveCap: boolean
+  doubleEvAboveCap: boolean
 }
 
 /**
@@ -167,6 +276,8 @@ export type GemEvaluation =
 export interface CurrencyPrices {
   vaalOrb: number | undefined
   gemcutter: number | undefined
+  /** a temple with Doryani's Institute; optional so older callers can leave it out */
+  doubleCorruptTemple?: number
 }
 
 export function isAwakened (gem: BaseType): boolean {
@@ -215,7 +326,8 @@ export function sellItem (gem: BaseType): ParsedItem {
 export function lookupCurrency (lookup: PriceLookup): CurrencyPrices {
   return {
     vaalOrb: lookup({ ns: 'ITEM', name: 'Vaal Orb', variant: undefined })?.chaos,
-    gemcutter: lookup({ ns: 'ITEM', name: "Gemcutter's Prism", variant: undefined })?.chaos
+    gemcutter: lookup({ ns: 'ITEM', name: "Gemcutter's Prism", variant: undefined })?.chaos,
+    doubleCorruptTemple: lookup(DOUBLE_CORRUPT_TEMPLE)?.chaos
   }
 }
 
@@ -238,54 +350,94 @@ export function vaalVersion (gem: BaseType, resolve: GemResolver = resolveFromIt
   }
 }
 
+function withoutVaal (table: readonly OutcomeSpec[]): OutcomeSpec[] {
+  const merged = new Map<string, OutcomeSpec>()
+  for (const spec of table) {
+    const id = spec.id.split('+').filter(part => part !== 'vaal').join('+') || 'unchanged'
+    const prev = merged.get(id)
+    if (prev) {
+      merged.set(id, { ...prev, chance: prev.chance + spec.chance })
+    } else {
+      const plain: OutcomeSpec = { ...spec, id }
+      delete plain.vaal
+      merged.set(id, plain)
+    }
+  }
+  return [...merged.values()]
+}
+
+/** "21/20c" -> 21, "4c" -> 4 */
+function variantLevel (variant: string) {
+  return parseInt(variant, 10)
+}
+
 function corruptedGem (info: BaseType, level: number, quality: number) {
   return createVirtualItem({ category: ItemCategory.Gem, info, gemLevel: level, quality, isCorrupted: true })
 }
 
 /**
- * Prices every Vaal Orb result for a gem bought at max level and 20% quality.
- * `outlierCap`: prices above it are ignored. `buyCost`: what the gem cost.
+ * Prices every result in `table` (default: one Vaal Orb) for a gem bought at max level and
+ * 20% quality. `outlierCap`: prices above it are ignored. `buyCost`: what the gem cost.
  */
 export function outcomeValues (
   gem: BaseType,
   lookup: PriceLookup,
-  opts: { outlierCap?: number, buyCost?: number },
+  opts: { outlierCap?: number, buyCost?: number, table?: readonly OutcomeSpec[] },
   resolve: GemResolver = resolveFromItems
 ): OutcomeValue[] {
-  const { outlierCap, buyCost } = opts
+  const { outlierCap, buyCost, table = VAAL_ORB_GEM_OUTCOMES } = opts
   const maxLevel = gem.gem!.maxLevel
   const vaal = vaalVersion(gem, resolve)
-  return VAAL_ORB_GEM_OUTCOMES.map((spec): OutcomeValue => {
+  // Without a Vaal version the Vaal result is no change, so fold it into the matching result.
+  const specs = vaal ? table : withoutVaal(table)
+  return specs.map((spec): OutcomeValue => {
     const level = maxLevel + spec.levelDelta
     const quality = spec.lookupQuality
     const vaalName = (spec.vaal && vaal) ? vaal.ninjaName : undefined
-    const base = { id: spec.id, chance: spec.chance, level, quality, vaalName }
+    const base = {
+      id: spec.id,
+      chance: spec.chance,
+      levelDelta: spec.levelDelta,
+      qualityRange: spec.quality,
+      ...(spec.vaal ? { vaal: true as const } : {}),
+      level,
+      quality,
+      vaalName
+    }
 
-    const query = (spec.vaal && vaal)
-      ? { ...forSkillGem(corruptedGem(vaal.base, level, quality)), name: vaal.ninjaName }
-      : forSkillGem(corruptedGem(gem, level, quality))
-    // Below max level forSkillGem falls back to the level 1 listing, which is a different
-    // item; poe.ninja doesn't list max - 1 corrupted gems anyway.
-    if (!query.variant.startsWith(String(level))) {
-      return { ...base, status: 'not-listed', value: 0 }
+    const queryAt = (atLevel: number) => (spec.vaal && vaal)
+      ? { ...forSkillGem(corruptedGem(vaal.base, atLevel, quality)), name: vaal.ninjaName }
+      : forSkillGem(corruptedGem(gem, atLevel, quality))
+    let query = queryAt(level)
+    let pricedAsLevel1: { pricedAsLevel1: true } | undefined
+    // poe.ninja doesn't list gems one level below max (except Enlighten/Empower/Enhance,
+    // which forSkillGem maps to e.g. "2c"). A corrupted gem below max is worth about as much
+    // as a level 1 corrupted one, so use that listing, at the same quality: "1/20c" for a
+    // 20% result, never "1/23c", which is a different (often pricey) gem.
+    if (variantLevel(query.variant) !== level) {
+      query = queryAt(1)
+      pricedAsLevel1 = { pricedAsLevel1: true }
     }
     const listedPrice = lookup(query)?.chaos
     if (listedPrice === undefined) {
-      return { ...base, status: RARELY_LISTED.has(spec.id) ? 'not-listed' : 'missing', value: 0 }
+      return { ...base, ...pricedAsLevel1, status: rarelyListed(spec) ? 'not-listed' : 'missing', value: 0 }
     }
-    // Applies to the Vaal version too: those are often thinly listed, and a single
-    // absurd ask would otherwise dominate the EV.
     if (outlierCap !== undefined && listedPrice > outlierCap) {
-      return { ...base, status: 'outlier', value: 0, listedPrice }
+      // A Vaal version is a different item and can be worth far more than the gem; count
+      // its listed price but flag it, since it may be a single ask.
+      if (vaalName) {
+        return { ...base, ...pricedAsLevel1, status: 'priced', value: listedPrice, listedPrice, aboveCap: true }
+      }
+      return { ...base, ...pricedAsLevel1, status: 'outlier', value: 0, listedPrice }
     }
     // A corrupted gem that came out no better than it went in can't be worth more than an
     // uncorrupted one, which anyone can buy for buyCost. poe.ninja often shows such gems at
     // round "1 divine" asks far above that.
-    const noBetter = spec.levelDelta === 0 && spec.lookupQuality <= 20 && !vaalName
+    const noBetter = (spec.levelDelta < 0 || (spec.levelDelta === 0 && spec.quality !== '23')) && !vaalName
     if (noBetter && buyCost !== undefined && listedPrice > buyCost) {
-      return { ...base, status: 'priced', value: buyCost, listedPrice, capped: true }
+      return { ...base, ...pricedAsLevel1, status: 'priced', value: buyCost, listedPrice, capped: true }
     }
-    return { ...base, status: 'priced', value: listedPrice, listedPrice }
+    return { ...base, ...pricedAsLevel1, status: 'priced', value: listedPrice, listedPrice }
   })
 }
 
@@ -370,6 +522,10 @@ export function evaluateGem (
   const profit = sellPrice - buyCost - currency.vaalOrb
   const outcomes = outcomeValues(gem, lookup, { outlierCap, buyCost }, resolve)
   const outcomeValue = outcomes.reduce((sum, o) => sum + o.chance * o.value, 0)
+  const doubleOutcomes = outcomeValues(gem, lookup,
+    { outlierCap, buyCost, table: DOUBLE_CORRUPTION_GEM_OUTCOMES_UNVERIFIED }, resolve)
+  const doubleOutcomeValue = doubleOutcomes.reduce((sum, o) => sum + o.chance * o.value, 0)
+  const doubleCost = currency.doubleCorruptTemple
   return {
     gem,
     row: {
@@ -390,15 +546,39 @@ export function evaluateGem (
       outcomes,
       outcomeValue,
       ev: outcomeValue - buyCost - currency.vaalOrb,
-      evIncomplete: outcomes.some(o => o.status === 'missing' || o.status === 'outlier')
+      evIncomplete: isIncomplete(outcomes),
+      doubleOutcomes,
+      doubleOutcomeValue,
+      doubleCost,
+      doubleEv: doubleOutcomeValue - buyCost - (doubleCost ?? 0),
+      doubleEvIncomplete: isIncomplete(doubleOutcomes),
+      evWithoutAboveCap: outcomeValue - aboveCapValue(outcomes) - buyCost - currency.vaalOrb,
+      doubleEvWithoutAboveCap: doubleOutcomeValue - aboveCapValue(doubleOutcomes) - buyCost - (doubleCost ?? 0),
+      evAboveCap: outcomes.some(o => o.aboveCap),
+      doubleEvAboveCap: doubleOutcomes.some(o => o.aboveCap)
     }
   }
 }
 
-export type SortKey = 'ev' | 'profit'
+function isIncomplete (outcomes: readonly OutcomeValue[]) {
+  return outcomes.some(o => o.status === 'missing' || o.status === 'outlier')
+}
+
+function aboveCapValue (outcomes: readonly OutcomeValue[]) {
+  return outcomes.reduce((sum, o) => sum + (o.aboveCap ? o.chance * o.value : 0), 0)
+}
+
+export type SortKey = 'ev' | 'double' | 'profit'
+
+const SORT_VALUE: Record<SortKey, (row: GemFlipRow) => number> = {
+  ev: row => row.ev,
+  double: row => row.doubleEv,
+  profit: row => row.profit
+}
 
 export function sortRows (rows: readonly GemFlipRow[], by: SortKey): GemFlipRow[] {
-  return [...rows].sort((a, b) => (by === 'ev') ? (b.ev - a.ev) : (b.profit - a.profit))
+  const value = SORT_VALUE[by] ?? SORT_VALUE.ev
+  return [...rows].sort((a, b) => value(b) - value(a))
 }
 
 /** Evaluates every gem; rows come back sorted by profit if +1, highest first. */
