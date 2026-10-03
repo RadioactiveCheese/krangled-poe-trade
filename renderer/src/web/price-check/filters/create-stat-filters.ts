@@ -2,7 +2,7 @@ import { ParsedItem, ItemRarity, ItemCategory } from '@/parser'
 import { ModifierType, StatCalculated, statSourcesTotal, translateStatWithRoll } from '@/parser/modifiers'
 import { getPropQuality, QUALITY_CHANGING_ENCHANT } from '@/parser/calc-q20'
 import { percentRoll, percentRollDelta, roundRoll } from './util'
-import { FilterTag, ItemHasEmptyModifier, StatFilter } from './interfaces'
+import { FilterTag, ItemHasEmptyModifier, StatFilter, FilterOrGroup } from './interfaces'
 import { filterPseudo } from './pseudo'
 import { applyRules as applyAtzoatlRules } from './pseudo/atzoatl-rules'
 import { applyRules as applyMirroredTabletRules } from './pseudo/reflection-rules'
@@ -10,6 +10,7 @@ import { filterItemProp, filterBasePercentile, filterMemoryStrands, BASE_PCTL_AF
 import { mapProps, valdoBadMods, chartProps } from './pseudo/maps'
 import { applyFlaskHybridMod } from './pseudo/flasks'
 import { applyHeistRules } from './pseudo/heist'
+import { filterTimelessJewelKeystones } from './pseudo/timeless-jewel'
 import { decodeOils, applyAnointmentRules } from './pseudo/anointments'
 import { StatBetter } from '@/assets/data'
 
@@ -158,7 +159,7 @@ export function initUiModFilters (
   opts: {
     searchStatRange: number
   }
-): StatFilter[] {
+): FilterOrGroup[] {
   const ctx: FiltersCreationContext = {
     item,
     filters: [],
@@ -181,6 +182,10 @@ export function initUiModFilters (
     filterPseudo(ctx)
   }
 
+  const keystones = item.info.unique?.base === 'Timeless Jewel'
+    ? filterTimelessJewelKeystones(ctx)
+    : undefined
+
   if (!item.isCorrupted && !item.isMirrored) {
     ctx.statsByType = ctx.statsByType.filter(mod => mod.type !== ModifierType.Fractured)
     ctx.statsByType.push(...item.statsByType.filter(mod => mod.type === ModifierType.Fractured))
@@ -200,7 +205,7 @@ export function initUiModFilters (
 
   finalFilterTweaks(ctx)
 
-  return ctx.filters
+  return keystones ? [...ctx.filters, keystones] : ctx.filters
 }
 
 export function calculatedStatToFilter (
