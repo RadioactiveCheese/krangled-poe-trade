@@ -15,6 +15,42 @@ vi.mock('@/web/theme', () => ({ applyTheme }))
 
 import { AppConfig, defaultConfig, initConfig, pushHostConfig, updateConfig } from '@/web/Config'
 import type { ItemCheckWidget } from '@/web/item-check/widget'
+import type { PriceCheckWidget } from '@/web/overlay/widgets'
+
+describe('price-check default filters', () => {
+  it('initializes merchant-only and automatic currency defaults on fresh widgets', () => {
+    const widget = defaultConfig().widgets.find(widget => widget.wmType === 'price-check') as PriceCheckWidget
+    expect(widget.merchantOnly).toBe(true)
+    expect(widget.defaultCurrency).toBeNull()
+    expect(widget.itemHoverTooltip).toBe('keybind')
+  })
+
+  it.each([false, true])('upgrades older widgets without overwriting saved merchant preference %s', async merchantOnly => {
+    const saved = defaultConfig()
+    const widget = saved.widgets.find(widget => widget.wmType === 'price-check') as PriceCheckWidget
+    widget.merchantOnly = merchantOnly
+    delete (widget as Partial<PriceCheckWidget>).defaultCurrency
+    getConfig.mockResolvedValue(JSON.stringify(saved))
+    await initConfig()
+    expect((AppConfig('price-check') as PriceCheckWidget).merchantOnly).toBe(merchantOnly)
+    expect((AppConfig('price-check') as PriceCheckWidget).defaultCurrency).toBeNull()
+  })
+
+  it('migrates a widget missing both defaults and retains configured currency on later loads', async () => {
+    const saved = defaultConfig()
+    const widget = saved.widgets.find(widget => widget.wmType === 'price-check') as PriceCheckWidget
+    delete (widget as Partial<PriceCheckWidget>).merchantOnly
+    delete (widget as Partial<PriceCheckWidget>).defaultCurrency
+    getConfig.mockResolvedValue(JSON.stringify(saved))
+    await initConfig()
+    expect((AppConfig('price-check') as PriceCheckWidget).merchantOnly).toBe(true)
+    expect((AppConfig('price-check') as PriceCheckWidget).defaultCurrency).toBeNull()
+    widget.defaultCurrency = 'divine'
+    getConfig.mockResolvedValue(JSON.stringify(saved))
+    await initConfig()
+    expect((AppConfig('price-check') as PriceCheckWidget).defaultCurrency).toBe('divine')
+  })
+})
 
 describe('configured theme', () => {
   beforeEach(() => {
