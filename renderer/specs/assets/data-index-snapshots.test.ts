@@ -18,6 +18,64 @@ for (const language of ['en', 'ru', 'cmn-Hant', 'ko']) {
 afterAll(() => fs.rmSync(root, { recursive: true, force: true }))
 
 describe('development data/index HTTP pairing', () => {
+  it('serves validated languages during a partial save and recovers without another watch event', async () => {
+    const recoveryRoot = path.join(root, 'recovery')
+    for (const language of ['en', 'ru', 'cmn-Hant', 'ko']) {
+      const folder = path.join(recoveryRoot, 'public/data', language)
+      fs.mkdirSync(folder, { recursive: true })
+      fs.writeFileSync(path.join(folder, 'items.ndjson'), JSON.stringify({ namespace: 'ITEM', name: 'Target item', refName: 'Target item' }) + '\n')
+      fs.writeFileSync(path.join(folder, 'stats.ndjson'), JSON.stringify({ ref: 'Target stat', matchers: [{ string: 'Target text' }] }) + '\n')
+    }
+    const server = await createServer({
+      configFile: false, root: recoveryRoot, logLevel: 'silent', plugins: [makeIndexFilesPlugin()],
+      optimizeDeps: { noDiscovery: true }, server: { host: '127.0.0.1', port: 0 }
+    })
+    try {
+      await server.listen()
+      const address = server.httpServer!.address() as { port: number }
+      const origin = `http://127.0.0.1:${address.port}`
+      const file = path.join(recoveryRoot, 'public/data/en/items.ndjson')
+      const original = await (await fetch(`${origin}/data/en/items.ndjson`)).text()
+      const russian = await fetch(`${origin}/data/ru/items.ndjson`)
+      const version = russian.headers.get('X-Data-Index-Version')!
+      const unchangedIndex = Buffer.from(await (await fetch(`${origin}/data/ru/items-ref.index.bin?v=${version}`)).arrayBuffer())
+      // The only change event is the explicit one during the incomplete write.
+      // Completing the write cannot notify the plugin through this watcher.
+      await server.watcher.unwatch(file)
+      const changes = vi.fn()
+      server.watcher.on('change', changed => {
+        if (path.resolve(changed) === path.resolve(file)) changes()
+      })
+      fs.writeFileSync(file, '{"namespace":')
+      server.watcher.emit('change', file)
+      expect(await (await fetch(`${origin}/data/en/items.ndjson`)).text()).toBe(original)
+      const unchanged = await fetch(`${origin}/data/ru/items.ndjson`)
+      expect(unchanged.status).toBe(200)
+      expect(unchanged.headers.get('X-Data-Index-Version')).toBe(version)
+      expect(Buffer.from(await (await fetch(`${origin}/data/ru/items-ref.index.bin?v=${version}`)).arrayBuffer())).toEqual(unchangedIndex)
+      const completed = JSON.stringify({ namespace: 'ITEM', name: 'Completed item', refName: 'Completed item' }) + '\n' + original
+      fs.writeFileSync(file, completed)
+      await vi.waitFor(async () => {
+        const source = await fetch(`${origin}/data/en/items.ndjson`)
+        expect(source.status).toBe(200)
+        expect(await source.text()).toBe(completed)
+        const indexResponse = await fetch(`${origin}/data/en/items-ref.index.bin?v=${source.headers.get('X-Data-Index-Version')}`)
+        expect(indexResponse.status).toBe(200)
+        const index = Buffer.from(await indexResponse.arrayBuffer())
+        const hash = Number(fnv1a('ITEM::Target item', { size: 32 }))
+        const offsets: number[] = []
+        for (let offset = 0; offset < index.length; offset += 8) {
+          if (index.readUInt32LE(offset) === hash) offsets.push(index.readUInt32LE(offset + 4))
+        }
+        expect(offsets).toEqual([completed.length - original.length])
+        expect(JSON.parse(completed.slice(offsets[0], completed.indexOf('\n', offsets[0]))).refName).toBe('Target item')
+      }, { timeout: 3000, interval: 50 })
+      expect(changes).toHaveBeenCalledOnce()
+    } finally {
+      await server.close()
+    }
+  })
+
   it('loads real item and stat records when their files change between source and index requests', async () => {
     const server = await createServer({
       configFile: false, root, logLevel: 'silent',

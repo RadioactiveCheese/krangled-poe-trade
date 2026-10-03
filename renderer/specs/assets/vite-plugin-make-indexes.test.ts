@@ -6,13 +6,20 @@ import { makeIndexFilesPlugin } from '../../src/assets/vite-plugin-make-indexes'
 
 vi.mock('../../src/assets/make-index-files.mjs', () => ({ makeIndexFiles: vi.fn() }))
 
-afterEach(() => vi.resetAllMocks())
+afterEach(() => {
+  vi.clearAllTimers()
+  vi.useRealTimers()
+  vi.resetAllMocks()
+})
 
 function snapshot (source = 'old', index = 'old offsets') {
   return new Map([
     ['en/items.ndjson', Buffer.from(source)],
     ['en/items-name.index.bin', Buffer.from(index)],
-    ['en/items-ref.index.bin', Buffer.from(index)]
+    ['en/items-ref.index.bin', Buffer.from(index)],
+    ['ru/items.ndjson', Buffer.from('unchanged language')],
+    ['ru/items-name.index.bin', Buffer.from('unchanged offsets')],
+    ['ru/items-ref.index.bin', Buffer.from('unchanged offsets')]
   ])
 }
 
@@ -97,13 +104,63 @@ describe('Vite automatic indexes', () => {
     expect(request('/data/en/items.ndjson').status).toBe(503)
   })
 
-  it('fails closed on malformed regeneration and recovers after the next valid edit', () => {
+  it('keeps previously valid data and unchanged languages available during an incomplete save', () => {
+    vi.useFakeTimers()
     const { watcher, root, logger, request } = pluginServer()
     vi.mocked(makeIndexFiles).mockImplementationOnce(() => { throw new Error('invalid NDJSON') })
     expect(() => watcher.emit('change', path.join(root, 'public/data/en/stats.ndjson'))).not.toThrow()
     expect(logger.error).toHaveBeenCalledWith(expect.stringContaining('invalid NDJSON'))
-    expect(request('/data/en/items.ndjson').status).toBe(503)
-    watcher.emit('change', path.join(root, 'public/data/en/stats.ndjson'))
     expect(request('/data/en/items.ndjson').status).toBe(200)
+    const unchanged = request('/data/ru/items.ndjson')
+    expect(unchanged.status).toBe(200)
+    expect(unchanged.body.toString()).toBe('unchanged language')
+    const version = unchanged.headers.get('X-Data-Index-Version')!
+    expect(request(`/data/ru/items-ref.index.bin?v=${version}`).body.toString()).toBe('unchanged offsets')
+  })
+
+  it('recovers a completed save without another watcher event', () => {
+    vi.useFakeTimers()
+    const { watcher, root, request } = pluginServer()
+    vi.mocked(makeIndexFiles).mockImplementationOnce(() => { throw new Error('incomplete NDJSON') })
+    watcher.emit('change', path.join(root, 'public/data/en/items.ndjson'))
+    vi.mocked(makeIndexFiles).mockReturnValue(snapshot('completed save', 'completed offsets'))
+    vi.advanceTimersByTime(100)
+    const completed = request('/data/en/items.ndjson')
+    expect(completed.status).toBe(200)
+    expect(completed.body.toString()).toBe('completed save')
+    const version = completed.headers.get('X-Data-Index-Version')!
+    expect(request(`/data/en/items-ref.index.bin?v=${version}`).body.toString()).toBe('completed offsets')
+    expect(makeIndexFiles).toHaveBeenCalledTimes(2)
+  })
+
+  it('bounds automatic retries and recovers long saves on a throttled source request', () => {
+    vi.useFakeTimers()
+    const { watcher, root, request, logger } = pluginServer()
+    vi.mocked(makeIndexFiles).mockImplementation(() => { throw new Error('incomplete NDJSON') })
+    watcher.emit('change', path.join(root, 'public/data/en/items.ndjson'))
+    vi.advanceTimersByTime(10000)
+    expect(makeIndexFiles).toHaveBeenCalledTimes(6)
+    expect(vi.getTimerCount()).toBe(0)
+    expect(request('/data/en/items.ndjson').status).toBe(200)
+    expect(makeIndexFiles).toHaveBeenCalledTimes(7)
+    expect(request('/data/ru/items.ndjson').status).toBe(200)
+    expect(makeIndexFiles).toHaveBeenCalledTimes(7)
+    expect(logger.error).toHaveBeenCalledOnce()
+    vi.mocked(makeIndexFiles).mockReturnValue(snapshot('completed long save', 'completed offsets'))
+    vi.advanceTimersByTime(1000)
+    expect(request('/data/en/items.ndjson').body.toString()).toBe('completed long save')
+    expect(vi.getTimerCount()).toBe(0)
+  })
+
+  it('cancels pending recovery when the server closes', () => {
+    vi.useFakeTimers()
+    const { watcher, root, httpServer } = pluginServer()
+    vi.mocked(makeIndexFiles).mockImplementation(() => { throw new Error('incomplete NDJSON') })
+    watcher.emit('change', path.join(root, 'public/data/en/items.ndjson'))
+    expect(vi.getTimerCount()).toBe(1)
+    httpServer.emit('close')
+    expect(vi.getTimerCount()).toBe(0)
+    vi.advanceTimersByTime(10000)
+    expect(makeIndexFiles).toHaveBeenCalledOnce()
   })
 })

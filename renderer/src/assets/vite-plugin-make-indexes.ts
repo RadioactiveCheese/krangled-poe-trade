@@ -10,6 +10,8 @@ interface Snapshot {
 
 // Eight current language/dataset pairs plus up to sixteen historical pairs.
 const MAX_HISTORY = 16
+const RETRY_DELAYS = [100, 200, 400, 800, 1600]
+const REQUEST_RETRY_INTERVAL = 1000
 
 export function makeIndexFilesPlugin (): Plugin {
   let dataRoot: string
@@ -25,7 +27,9 @@ export function makeIndexFilesPlugin (): Plugin {
     configureServer (server) {
       const current = new Map<string, Snapshot>()
       const history = new Map<string, Snapshot>()
-      let failed = false
+      let pending = false
+      let retryTimer: ReturnType<typeof setTimeout> | undefined
+      let nextRequestRetry = 0
       const publish = () => {
         const files = makeIndexFiles(dataRoot)
         const next = new Map<string, Snapshot>()
@@ -54,9 +58,27 @@ export function makeIndexFilesPlugin (): Plugin {
         while (history.size > MAX_HISTORY) history.delete(history.keys().next().value!)
         current.clear()
         for (const [key, snapshot] of next) current.set(key, snapshot)
-        failed = false
       }
       publish()
+
+      const recover = (attempt = 0, reportError = false) => {
+        try {
+          publish()
+          pending = false
+          server.config.logger.info('Regenerated all *.ndjson index files.', { timestamp: true })
+        } catch (error) {
+          pending = true
+          nextRequestRetry = Date.now() + REQUEST_RETRY_INTERVAL
+          if (reportError) server.config.logger.error(`Failed to regenerate index files: ${String(error)}`)
+          if (attempt < RETRY_DELAYS.length) {
+            retryTimer = setTimeout(() => {
+              retryTimer = undefined
+              recover(attempt + 1)
+            }, RETRY_DELAYS[attempt])
+            retryTimer.unref?.()
+          }
+        }
+      }
 
       // Source and indexes are served from one immutable generation. An edit
       // between requests cannot pair old source text with newly written offsets.
@@ -67,6 +89,12 @@ export function makeIndexFilesPlugin (): Plugin {
         const match = /^([^/]+)\/((items|stats)(?:\.ndjson|-(?:name|ref|matcher)\.index\.bin))$/.exec(url.pathname.slice(prefix.length))
         if (!match) return next()
         const [, language, file, kind] = match
+        // A long save may outlast the bounded retries. A later source request
+        // can recover it without another watcher event or an endless timer.
+        if (pending && !retryTimer && file.endsWith('.ndjson') && Date.now() >= nextRequestRetry) {
+          nextRequestRetry = Date.now() + REQUEST_RETRY_INTERVAL
+          recover(RETRY_DELAYS.length)
+        }
         const key = `${language}/${kind}`
         const version = url.searchParams.get('v')
         const latest = current.get(key)
@@ -75,7 +103,7 @@ export function makeIndexFilesPlugin (): Plugin {
             : version ? history.get(`${key}/${version}`) : undefined
         const bytes = snapshot?.files.get(file)
         response.setHeader('Cache-Control', 'no-store')
-        if (failed || !bytes || !snapshot) {
+        if (!bytes || !snapshot) {
           response.statusCode = 503
           response.end('Data index generation unavailable; reload to obtain a current snapshot.')
           return
@@ -90,17 +118,15 @@ export function makeIndexFilesPlugin (): Plugin {
       const regenerate = (file: string) => {
         const relative = path.relative(dataRoot, file).replace(/\\/g, '/')
         if (!/^[^/]+\/(items|stats)\.ndjson$/.test(relative)) return
-        try {
-          publish()
-          server.config.logger.info('Regenerated all *.ndjson index files.', { timestamp: true })
-        } catch (error) {
-          failed = true
-          server.config.logger.error(`Failed to regenerate index files: ${String(error)}`)
-        }
+        if (retryTimer) clearTimeout(retryTimer)
+        retryTimer = undefined
+        recover(0, true)
       }
       server.watcher.on('change', regenerate)
       server.watcher.on('add', regenerate)
       server.httpServer?.once('close', () => {
+        if (retryTimer) clearTimeout(retryTimer)
+        pending = false
         server.watcher.off('change', regenerate)
         server.watcher.off('add', regenerate)
         current.clear()
