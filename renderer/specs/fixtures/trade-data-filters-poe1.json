@@ -1,0 +1,123 @@
+{
+  "source": "https://www.pathofexile.com/api/trade/data/filters",
+  "fetched": "2026-10-03",
+  "result": [
+    { "id": "status_filters", "filters": [
+      {"id": "status", "options": ["available", "securable", "onlineleague", "online", "any"]}
+    ] },
+    { "id": "type_filters", "filters": [
+      {"id": "category", "options": ["", "weapon", "weapon.one", "weapon.onemelee", "weapon.twomelee", "weapon.bow", "weapon.claw", "weapon.dagger", "weapon.basedagger", "weapon.runedagger", "weapon.oneaxe", "weapon.onesword", "weapon.basesword", "weapon.rapier", "weapon.onemace", "weapon.basemace", "weapon.sceptre", "weapon.staff", "weapon.basestaff", "weapon.warstaff", "weapon.twoaxe", "weapon.twomace", "weapon.twosword", "weapon.wand", "weapon.rod", "armour", "armour.chest", "armour.boots", "armour.gloves", "armour.helmet", "armour.shield", "armour.quiver", "accessory", "accessory.amulet", "accessory.belt", "accessory.ring", "accessory.trinket", "gem", "gem.activegem", "gem.supportgem", "gem.supportgemplus", "jewel", "jewel.base", "jewel.abyss", "jewel.cluster", "flask", "map", "map.fragment", "map.breachstone", "map.invitation", "map.scarab", "leaguestone", "memoryline", "card", "monster.beast", "monster.yellowbeast", "monster.redbeast", "heistequipment", "heistequipment.heistweapon", "heistequipment.heisttool", "heistequipment.heistutility", "heistequipment.heistreward", "heistmission", "heistmission.contract", "heistmission.blueprint", "logbook", "sanctum.research", "sanctum.relic", "tincture", "corpse", "idol", "graft", "wombgift", "enshrouded", "chart", "currency", "currency.piece", "currency.resonator", "currency.fossil", "currency.incubator", "currency.heistobjective", "currency.omen", "currency.tattoo"]},
+      {"id": "rarity", "options": ["", "normal", "magic", "rare", "unique", "uniquefoil", "nonunique"]}
+    ] },
+    { "id": "weapon_filters", "filters": [
+      {"id": "damage"},
+      {"id": "aps"},
+      {"id": "crit"},
+      {"id": "dps"},
+      {"id": "pdps"},
+      {"id": "edps"}
+    ] },
+    { "id": "armour_filters", "filters": [
+      {"id": "ar"},
+      {"id": "ev"},
+      {"id": "es"},
+      {"id": "ward"},
+      {"id": "block"},
+      {"id": "base_defence_percentile"}
+    ] },
+    { "id": "socket_filters", "filters": [
+      {"id": "sockets"},
+      {"id": "links"}
+    ] },
+    { "id": "req_filters", "filters": [
+      {"id": "lvl"},
+      {"id": "str"},
+      {"id": "dex"},
+      {"id": "int"},
+      {"id": "class"}
+    ] },
+    { "id": "map_filters", "filters": [
+      {"id": "map_tier"},
+      {"id": "map_packsize"},
+      {"id": "map_iiq"},
+      {"id": "map_iir"},
+      {"id": "map_gold"},
+      {"id": "chart_sulphur"},
+      {"id": "chart_shape", "options": ["", "1", "2", "3", "4", "5"]},
+      {"id": "area_level"},
+      {"id": "map_series"},
+      {"id": "map_blighted"},
+      {"id": "map_uberblighted"},
+      {"id": "map_completion_reward"}
+    ] },
+    { "id": "heist_filters", "filters": [
+      {"id": "heist_wings"},
+      {"id": "heist_max_wings"},
+      {"id": "heist_escape_routes"},
+      {"id": "heist_max_escape_routes"},
+      {"id": "heist_reward_rooms"},
+      {"id": "heist_max_reward_rooms"},
+      {"id": "heist_objective_value", "options": ["", "moderate", "high", "precious", "priceless"]},
+      {"id": "heist_lockpicking"},
+      {"id": "heist_brute_force"},
+      {"id": "heist_perception"},
+      {"id": "heist_demolition"},
+      {"id": "heist_counter_thaumaturgy"},
+      {"id": "heist_trap_disarmament"},
+      {"id": "heist_agility"},
+      {"id": "heist_deception"},
+      {"id": "heist_engineering"}
+    ] },
+    { "id": "sanctum_filters", "filters": [
+      {"id": "sanctum_resolve"},
+      {"id": "sanctum_max_resolve"},
+      {"id": "sanctum_inspiration"},
+      {"id": "sanctum_gold"}
+    ] },
+    { "id": "ultimatum_filters", "filters": [
+      {"id": "ultimatum_challenge"},
+      {"id": "ultimatum_reward"},
+      {"id": "ultimatum_input"},
+      {"id": "ultimatum_output"}
+    ] },
+    { "id": "misc_filters", "filters": [
+      {"id": "quality"},
+      {"id": "ilvl"},
+      {"id": "gem_level"},
+      {"id": "gem_level_progress"},
+      {"id": "gem_transfigured"},
+      {"id": "gem_vaal"},
+      {"id": "fractured_item"},
+      {"id": "gem_imbued"},
+      {"id": "synthesised_item"},
+      {"id": "searing_item"},
+      {"id": "tangled_item"},
+      {"id": "identified"},
+      {"id": "corrupted"},
+      {"id": "mirrored"},
+      {"id": "split"},
+      {"id": "crafted"},
+      {"id": "veiled"},
+      {"id": "foreseeing"},
+      {"id": "vestigial"},
+      {"id": "memory_level"},
+      {"id": "intangibility"},
+      {"id": "stored_experience"},
+      {"id": "stack_size"},
+      {"id": "alternate_art"},
+      {"id": "foil_variation"},
+      {"id": "corpse_type"},
+      {"id": "scourge_tier"},
+      {"id": "crucible_item"},
+      {"id": "mutated"}
+    ] },
+    { "id": "trade_filters", "filters": [
+      {"id": "account"},
+      {"id": "collapse", "options": ["", "true"]},
+      {"id": "indexed", "options": ["", "1hour", "3hours", "12hours", "1day", "3days", "1week", "2weeks", "1month", "2months"]},
+      {"id": "sale_type"},
+      {"id": "fee"},
+      {"id": "price", "options": ["", "chaos_divine", "chaos", "exalted", "divine", "mirror", "blessed", "chrome", "gcp", "jewellers", "scour", "regret", "fusing", "chance", "alt", "alch", "regal", "vaal"]}
+    ] }
+  ]
+}
