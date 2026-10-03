@@ -124,7 +124,8 @@ const isShown = computed(() => props.config.wmWants === 'show')
 // Widgets stay mounted while hidden, and blur hides this one without changing wmWants.
 // Price interest lapses after 20 minutes but a refresh needs 31, so keep renewing it
 // while the widget is actually on screen.
-const INTEREST_RENEW_MS = 5 * 60 * 1000
+// 6 ticks = 31m06s, just past poe.ninja's 31 minute refresh interval.
+const INTEREST_RENEW_MS = (5 * 60 + 11) * 1000
 const isOnScreen = computed(() => isShown.value && wm.active.value)
 let interestTimer: ReturnType<typeof setInterval> | undefined
 watch(isOnScreen, (onScreen) => {

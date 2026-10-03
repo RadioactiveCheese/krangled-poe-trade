@@ -24,7 +24,7 @@ vi.mock('@/web/i18n', () => ({ useI18nNs: () => ({ t: (key: string) => key }) })
 vi.mock('@/web/background/IPC', () => ({ Host: {} }))
 vi.mock('@/assets/data', () => ({ ITEM_BY_REF: () => undefined, ITEMS_ITERATOR: () => [] }))
 
-const RENEW_MS = 5 * 60 * 1000
+const RENEW_MS = (5 * 60 + 11) * 1000
 
 beforeEach(() => {
   vi.useFakeTimers()
