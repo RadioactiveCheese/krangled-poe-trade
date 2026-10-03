@@ -91,6 +91,18 @@ describe('modifier option controls in the search form', () => {
     wrapper.unmount()
   })
 
+  it('retains rare-item tiers when bounds are available alongside option controls', async () => {
+    const { filter, wrapper, options } = mountOptions()
+    filter.roll = {
+      value: 1, min: 1, max: undefined, default: { min: 1, max: 2 },
+      bounds: { min: 1, max: 2 }, dp: false, isNegated: false
+    }
+    await wrapper.vm.$nextTick()
+    expect(wrapper.findComponent({ name: 'FilterModifierTiers' }).exists()).toBe(true)
+    expect(options.findAll('button')).toHaveLength(3)
+    wrapper.unmount()
+  })
+
   it('provides every empty-affix label in each supported locale', () => {
     for (const language of ['en', 'ru', 'ko', 'cmn-Hant']) {
       const { filters } = JSON.parse(readFileSync(`public/data/${language}/app_i18n.json`, 'utf8'))
