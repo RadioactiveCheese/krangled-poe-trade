@@ -62,6 +62,7 @@
       "count_one_group": "其中之一"
     },
     "filters": {
+      "hide_jewellery_quality": "品質已反映在飾品詞綴中",
       "mercenary_primary_no_support": "主要技能沒有輔助寶石"
     }
 }

@@ -9,7 +9,7 @@ import {
 } from '@/assets/data'
 import { ModifierType, ModifierMechanic, sumStatsByModType } from './modifiers'
 import { linesToStatStrings, tryParseTranslation, getRollOrMinmaxAvg, ParsedStat } from './stat-translations'
-import { ItemCategory } from './meta'
+import { ItemCategory, ACCESSORY } from './meta'
 import { IncursionRoom, ParsedItem, ItemInfluence, ItemRarity } from './ParsedItem'
 import { magicBasetype } from './magic-name'
 import { isModInfoLine, groupLinesByMod, parseModInfoLine, parseModType, ModifierInfo, ParsedModifier, ENCHANT_LINE, SCOURGE_LINE, IMPLICIT_LINE } from './advanced-mod-desc'
@@ -47,6 +47,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseVaalGem,
   parseArmour,
   parseWeapon,
+  parseAccessory,
   parseMemoryStrands,
   parseFlask,
   parseTincture,
@@ -715,6 +716,27 @@ function parseMemoryStrands (section: string[], item: ParsedItem) {
     return 'SECTION_PARSED'
   }
 
+  return 'SECTION_SKIPPED'
+}
+
+function parseAccessory (section: string[], item: ParsedItem) {
+  if (!item.category || !ACCESSORY.has(item.category)) return 'PARSER_SKIPPED'
+  let parsed = false
+  for (const line of section) {
+    // The translated matcher identifies quality. A trailing annotation is
+    // optional and may be localized; its text is not part of the stat.
+    const text = line.replace(/\s*[（(][^（）()]*[）)]\s*$/, '').trimEnd()
+    const found = tryParseTranslation({ string: text, unscalable: true }, ModifierType.Pseudo, item.category)
+    if (!found?.stat.jewelleryQuality || !found.roll || found.roll.value < 0) continue
+    item.quality = found.roll.value
+    item.newMods.push({ info: { tags: [], type: ModifierType.Pseudo }, stats: [found] })
+    parsed = true
+  }
+  if (parsed) {
+    // The whole section is consumed, including nested Memory Strands.
+    parseMemoryStrandsNested(section, item)
+    return 'SECTION_PARSED'
+  }
   return 'SECTION_SKIPPED'
 }
 
