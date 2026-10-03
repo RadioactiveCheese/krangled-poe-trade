@@ -55,7 +55,6 @@
                 :title="t(':ev_hint')" @click="toggle(row)">
                 <i class="fas w-3 text-gray-500" :class="expanded === row.gem.refName ? 'fa-chevron-down' : 'fa-chevron-right'" />
                 <span class="text-gray-400">{{ t(':ev') }}</span>
-                <span v-if="row.evIncomplete" class="text-gray-400" :title="t(':ev_incomplete_hint')">&ge;</span>
                 <span class="flex items-center" :class="row.ev >= 0 ? 'text-green-400' : 'text-red-400'">
                   {{ signed(row.ev) }}<img :src="fmt(Math.abs(row.ev)).icon" :class="$style.inlineIcon" alt="">
                 </span>
@@ -101,12 +100,15 @@
                   <span class="text-gray-400">{{ t(':attempts_level_up') }}</span>
                   <span class="text-right">{{ formatChance(chanceOfLevelUp(attempts)) }}</span>
                   <span class="text-gray-400">{{ t(':attempts_profit') }}</span>
-                  <span class="text-right">{{ row.evIncomplete ? '≥ ' : '' }}{{ formatChance(expandedProfitChance ?? 0) }}</span>
+                  <span class="text-right">{{ formatChance(expandedProfitChance ?? 0) }}</span>
                   <span class="text-gray-400">{{ t(':attempts_average') }}</span>
                   <span class="flex items-center justify-end" :class="row.ev >= 0 ? 'text-green-400' : 'text-red-400'">
-                    {{ row.evIncomplete ? '≥ ' : '' }}{{ signed(row.ev * attempts) }}<img
+                    {{ signed(row.ev * attempts) }}<img
                       :src="fmt(Math.abs(row.ev * attempts)).icon" :class="$style.inlineIcon" alt="">
                   </span>
+                </div>
+                <div v-if="row.evIncomplete" class="text-yellow-500 pt-0.5">
+                  <i class="fas fa-exclamation-triangle" /> {{ t(':ev_incomplete_note') }}
                 </div>
               </div>
             </div>
