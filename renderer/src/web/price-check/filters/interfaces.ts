@@ -1,7 +1,8 @@
 import type { ItemInfluence, ItemCategory } from '@/parser'
-import { ModifierType, ModifierMechanic, type StatCalculated } from '@/parser/modifiers'
+import type { StatCalculated } from '@/parser/modifiers'
 import type { ParsedItem } from '@/parser/ParsedItem'
 import type { Stat } from '@/assets/data'
+import { ModifierType, ModifierMechanic } from '@/parser/modifiers'
 
 export interface FilterPreset {
   id: string
