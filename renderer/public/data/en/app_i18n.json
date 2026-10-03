@@ -161,6 +161,10 @@
     "graft": "Graft",
     "chart": "Chart"
   },
+  "modifier_hint": {
+    "volatile": "Possible Volatile Vaal Orb effect. Clipboard text does not identify the origin of an out-of-range roll.",
+    "reflecting": "Possible Reflecting Mist effect. Clipboard text does not identify the origin of an out-of-range roll."
+  },
   "filters": {
     "selected_some": "{0} of {1}, stats",
     "selected_none": "Stats ignored",

@@ -146,6 +146,10 @@
     "sanctum_relic": "성역 유물",
     "tincture": "팅크"
   },
+  "modifier_hint": {
+    "volatile": "불안정한 바알 오브 효과일 수 있습니다. 클립보드 텍스트만으로 범위 밖 수치의 원인을 확인할 수 없습니다.",
+    "reflecting": "반사 안개 효과일 수 있습니다. 클립보드 텍스트만으로 범위 밖 수치의 원인을 확인할 수 없습니다."
+  },
   "filters": {
     "selected_some": "{1} 중 {0}개 선택",
     "selected_none": "스탯 미선택",
