@@ -129,10 +129,10 @@ describe('trade filter IDs match the live /api/trade/data/filters dataset', () =
     expect(liveOptions('type_filters', 'category').has(id)).toBe(true)
   })
 
-  const ONLINE_FILTER_VUE = readFileSync(
-    resolve(process.cwd(), 'src/web/price-check/trade/OnlineFilter.vue'), 'utf8')
-  const uiOptions = (model: string) => [...ONLINE_FILTER_VUE.matchAll(
-    new RegExp(`v-model="filters\\.trade\\.${model}" value="([^"]+)"`, 'g'))].map(m => m[1])
+  const ONLINE_FILTER_CORE_VUE = readFileSync(
+    resolve(process.cwd(), 'src/web/price-check/trade/OnlineFilterCore.vue'), 'utf8')
+  const uiOptions = (model: string) => [...ONLINE_FILTER_CORE_VUE.matchAll(
+    new RegExp(`v-model="filters\\.${model}"[^>]* value="([^"]+)"`, 'g'))].map(m => m[1])
 
   it.each([
     ['status_filters', 'status', ['available', 'securable', 'any']],

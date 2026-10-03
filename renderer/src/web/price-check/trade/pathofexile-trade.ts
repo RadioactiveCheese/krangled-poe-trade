@@ -1,5 +1,5 @@
 import { ItemInfluence, ItemCategory } from '@/parser'
-import { ItemFilters, StatFilter, FilterOrGroup, FilterTag, INTERNAL_TRADE_IDS, InternalTradeId } from '../filters/interfaces'
+import { ItemFilters, StatFilter, FilterOrGroup, FilterTag, INTERNAL_TRADE_IDS, InternalTradeId, isFilterEnabled } from '../filters/interfaces'
 import { setProperty as propSet } from 'dot-prop'
 import { DateTime } from 'luxon'
 import { Host } from '@/web/background/IPC'
@@ -618,6 +618,13 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
         disabled: group.meta.disabled,
         filters: group.stats.flatMap(stat => everyTradeIdToQuery(stat))
       })
+    } else if (group.group === 'one') {
+      query.stats.push({
+        type: 'count',
+        value: { min: 1 },
+        disabled: !isFilterEnabled(group),
+        filters: group.stats.flatMap(stat => everyTradeIdToQuery(stat))
+      })
     } else if (group.group === 'mercenary') {
       const { meta: skill, stats } = group
 
@@ -655,7 +662,12 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
               notStat.statRef === family[0].ref
             ))
           let tier3Count = (typeof stat.roll?.min === 'number') ? Math.min(Math.max(stat.roll.min, 0), 5) : 0
-          if (forceEnabled) {
+          const guaranteedMaximumSupports =
+            enabledRequiredGems.filter(stat => stat.mercenary?.maxTier).length +
+            (enabledOptionalGems.length >= 2
+              ? Math.max(0, enabledOptionalGems.filter(stat => stat.mercenary?.maxTier).length - 1)
+              : 0)
+          if (forceEnabled || guaranteedMaximumSupports >= tier3Count) {
             tier3Count = 0
           }
 

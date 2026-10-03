@@ -42,6 +42,7 @@
 
   "item": {
     "not_group": "None of",
+    "count_one_group": "One of",
     "prop_quality": "Q {0}%",
     "base_percentile": "Base Percentile: {0}%",
     "armour": "Armour: {0}",
@@ -175,6 +176,9 @@
     "hidden_toggle": "Hidden",
     "collapse": "Collapse",
     "mods_toggle": "Mods",
+    "option_empty_affix": "Any",
+    "option_empty_prefix": "Prefix",
+    "option_empty_suffix": "Suffix",
     "empty": "No relevant stats were found",
     "tier": "Tier {0}",
     "tier_gilded": "Unique",
@@ -385,6 +389,7 @@
     "loadout": "Mercenary loadout"
   },
   "price_check": {
+    "default_settings": "Default filters",
     "name": "Price check",
     "hotkey" :"Auto-hide Mode",
     "hotkey_locked" :"Open without auto-hide",
