@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gem Corruption Mockup</title>
+<style>
+  :root {
+    --g100:#f7fafc; --g300:#e2e8f0; --g400:#cbd5e0; --g500:#a0aec0; --g600:#718096;
+    --g700:#4a5568; --g800:#2d3748; --g900:#1a202c; --green:#48bb78; --red:#e53e3e;
+    --yellow:#ecc94b; --currency:#aa9e82; --gem:#1ba29b; --radius:0.25rem;
+    --inset: inset 0 1px 2px 0 rgba(0,0,0,0.6);
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#3b4350; background-image: radial-gradient(circle at 30% 20%, #4b5563 0, #1f242c 70%);
+    color:var(--g100); font: 15px/1.35 "Segoe UI", system-ui, sans-serif; min-height:100vh; padding:16px; }
+  h1 { font-size:18px; margin:0 0 4px; }
+  .banner { background:var(--yellow); color:#1a202c; font-weight:600; padding:6px 10px; border-radius:var(--radius); margin-bottom:12px; display:inline-block; }
+  .sub { color:var(--g400); margin:0 0 16px; max-width:70ch; }
+  .layout { display:flex; flex-wrap:wrap; gap:20px; align-items:flex-start; }
+  .caption { color:var(--g400); font-size:13px; margin:0 0 6px; text-transform:uppercase; letter-spacing:.04em; }
+  button { font:inherit; color:inherit; border:0; cursor:pointer; }
+
+  /* widget frame (Widget.vue look) */
+  .widget { background:rgba(26,32,44,.92); border-radius:var(--radius); box-shadow:0 10px 15px -3px rgba(0,0,0,.5); width:24rem; max-width:100%; }
+  .wtitle { display:flex; align-items:center; gap:6px; padding:2px 8px; background:var(--g900); color:var(--g400); font-size:13px; border-radius:var(--radius) var(--radius) 0 0; }
+  .wbody { padding:4px; display:flex; flex-direction:column; gap:4px; }
+  .toolbar { display:flex; gap:8px; padding:4px; background:var(--g800); border-radius:var(--radius); }
+  .input { flex:1; background:var(--g900); color:var(--g100); border:0; border-radius:var(--radius); padding:4px 8px; box-shadow:var(--inset); font:inherit; min-width:0; }
+  .input::placeholder { color:var(--g500); }
+  .row { display:flex; align-items:center; gap:8px; padding:4px 8px; background:var(--g800); border-radius:var(--radius); }
+  .icon { width:2.75rem; height:2.75rem; flex-shrink:0; border-radius:6px; display:grid; place-items:center; font-weight:700; color:#fff;
+    background: radial-gradient(circle at 35% 30%, #8ee6dc, var(--gem) 55%, #0d4d49); box-shadow: inset 0 0 0 2px rgba(0,0,0,.35); }
+  .icon.str { background: radial-gradient(circle at 35% 30%, #ffb3a7, #c0392b 55%, #5a1610); }
+  .icon.dex { background: radial-gradient(circle at 35% 30%, #b8f5b0, #2f9e44 55%, #12401a); }
+  .icon.int { background: radial-gradient(circle at 35% 30%, #b3cdff, #2f5fd0 55%, #102658); }
+  .info { display:flex; flex-direction:column; flex:1; min-width:0; }
+  .name { display:flex; align-items:center; gap:4px; height:1.5rem; }
+  .name span.t { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .unconf { color:var(--yellow); font-size:12px; }
+  .actions { display:flex; gap:4px; }
+  .act { display:flex; flex-direction:column; flex:1; text-align:left; background:var(--g900); border-radius:var(--radius); padding:2px 8px; box-shadow:var(--inset); min-width:0; }
+  .act:hover { background:var(--g700); }
+  .lbl { color:var(--g600); font-size:12.5px; display:flex; align-items:center; gap:3px; }
+  .val { display:flex; align-items:center; gap:4px; white-space:nowrap; font-size:14px; flex-wrap:wrap; }
+  .chaos { width:14px; height:14px; border-radius:50%; background: radial-gradient(circle at 40% 35%, #f0d98a, #b8862d 60%, #6b4a12); display:inline-block; flex-shrink:0; }
+  .gcp { width:11px; height:11px; border-radius:2px; background: linear-gradient(135deg,#e8f4ff,#7fb2d9); display:inline-block; }
+  .pos { color:var(--green); } .neg { color:var(--red); }
+  .msg { text-align:center; padding:2rem; color:var(--g400); }
+  .pager { display:flex; justify-content:center; align-items:center; gap:12px; padding:4px 0; color:var(--g500); }
+  .pbtn { background:var(--g800); color:var(--g300); padding:4px 12px; border-radius:var(--radius); }
+  .pbtn:disabled { background:transparent; color:var(--g600); cursor:default; }
+
+  /* settings window */
+  .settings { width:30rem; max-width:100%; background:var(--g900); border-radius:var(--radius); overflow:hidden; box-shadow:0 10px 15px -3px rgba(0,0,0,.5); }
+  .stitle { padding:4px 10px; background:var(--g800); color:var(--g400); font-size:13px; }
+  .sgrid { display:flex; }
+  .smenu { padding:8px 0 8px 8px; display:flex; flex-direction:column; gap:4px; min-width:9rem; }
+  .smenu button { text-align:left; padding:4px 8px; border-radius:var(--radius) 0 0 var(--radius); color:var(--g400); background:transparent; }
+  .smenu button.on { background:var(--g800); color:var(--g100); }
+  .spane { flex:1; background:var(--g800); padding:16px; display:flex; flex-direction:column; gap:16px; color:var(--g400); min-height:15rem; }
+  .toggle { display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; }
+  .sw { width:2rem; height:1.1rem; border-radius:999px; background:var(--g900); box-shadow:var(--inset); position:relative; flex-shrink:0; }
+  .sw::after { content:""; position:absolute; top:2px; left:2px; width:.85rem; height:.85rem; border-radius:50%; background:var(--g500); transition:left .12s; }
+  .toggle input { display:none; }
+  .toggle input:checked + .sw { background:var(--g600); }
+  .toggle input:checked + .sw::after { left:calc(100% - .85rem - 2px); background:var(--g100); }
+  .slider { appearance:none; -webkit-appearance:none; width:100%; height:4px; border-radius:var(--radius); box-shadow:var(--inset);
+    background: linear-gradient(to right, var(--g300) var(--fill,0%), var(--g900) var(--fill,0%)); }
+  .slider::-webkit-slider-thumb { -webkit-appearance:none; width:12px; height:12px; border-radius:50%; background:var(--g300); cursor:pointer; }
+  .slider::-moz-range-thumb { width:12px; height:12px; border:0; border-radius:50%; background:var(--g300); cursor:pointer; }
+  .check { display:flex; gap:8px; align-items:flex-start; cursor:pointer; }
+  .check input { margin-top:3px; accent-color: var(--g500); }
+  .filterdemo { background:var(--g900); border-radius:var(--radius); padding:6px 8px; display:flex; align-items:center; gap:8px; color:var(--g100); }
+  .tag { font-size:11px; color:var(--g500); background:var(--g800); border-radius:var(--radius); padding:0 4px; }
+  .num { width:3.2rem; text-align:center; background:var(--g800); border-radius:var(--radius); padding:1px 2px; box-shadow:var(--inset); }
+  .note { font-size:12.5px; color:var(--g500); }
+  .radio { display:flex; gap:12px; flex-wrap:wrap; }
+  @media (max-width: 520px) { .smenu { display:none; } }
+</style>
+</head>
+<body>
+  <div class="banner">MOCKUP: not a working feature</div>
+  <h1>Gem corruption widget + "exact min roll" (from the message/awakened-poe-trade fork)</h1>
+  <p class="sub">Static sample data shaped like poe.ninja output. In the fork, clicking Buy/Sell opens a normal price check for the
+    virtual gem (Buy: max level, 20% quality or 0% when the prism route is cheaper; Sell: max level+1, 20% quality, corrupted).
+    In this mockup, clicking shows what would be sent. Profit is the <em>success case only</em> (+1 level). It is not probability-weighted.</p>
+
+  <div class="layout">
+    <div>
+      <p class="caption">Overlay widget</p>
+      <div class="widget">
+        <div class="wtitle">&#9760; Gem corruption</div>
+        <div class="wbody">
+          <div class="toolbar"><input id="q" class="input" placeholder="Filter by name…"></div>
+          <div id="rows" style="display:flex;flex-direction:column;gap:4px"></div>
+          <div id="pager" class="pager">
+            <button id="prev" class="pbtn">&#8249;</button><span id="pinfo"></span><button id="next" class="pbtn">&#8250;</button>
+          </div>
+        </div>
+      </div>
+      <p id="dispatch" class="note" style="margin-top:8px;max-width:24rem"></p>
+    </div>
+
+    <div>
+      <p class="caption">Settings window</p>
+      <div class="settings">
+        <div class="stitle">Settings</div>
+        <div class="sgrid">
+          <div class="smenu">
+            <button data-tab="gc" class="on">Gem corruption</button>
+            <button data-tab="pc">Price check</button>
+          </div>
+          <div class="spane" id="tab-gc">
+            <label class="toggle"><input type="checkbox" id="optT" checked><span class="sw"></span>Transfigured</label>
+            <label class="toggle"><input type="checkbox" id="optA" checked><span class="sw"></span>Awakened</label>
+            <label class="toggle"><input type="checkbox" id="optU" checked><span class="sw"></span>Unconfirmed prices</label>
+            <label style="display:flex;flex-direction:column;gap:6px">
+              <span id="ratioLbl">Min sell/buy ratio: 7x</span>
+              <input id="ratio" class="slider" type="range" min="0" max="20" step="0.5" value="7">
+            </label>
+          </div>
+          <div class="spane" id="tab-pc" style="display:none">
+            <div>
+              <div style="margin-bottom:4px">Fill stat values</div>
+              <div class="radio">
+                <label><input type="radio" name="rng" value="10" checked> ±10%</label>
+                <label><input type="radio" name="rng" value="0"> Exact value</label>
+              </div>
+            </div>
+            <label class="check"><input type="checkbox" id="exact" checked>
+              <span>Search for the exact rolled value instead of a lower bound <span class="tag">new in fork</span></span></label>
+            <div>
+              <div class="note" style="margin-bottom:4px">Resulting filter for a rare ring:</div>
+              <div class="filterdemo">
+                <span style="flex:1">+87 to maximum Life</span>
+                <span class="num" id="fmin">87</span><span class="num" style="color:var(--g600)">max</span>
+              </div>
+              <div class="filterdemo" style="margin-top:4px">
+                <span style="flex:1">+41.6% to Fire Resistance</span>
+                <span class="num" id="fmin2">41.6</span><span class="num" style="color:var(--g600)">max</span>
+              </div>
+              <p class="note">The fork migrates every existing user to <b>on</b>. With "Exact value" selected, the current app already
+                gives nearly the same min (floored, not rounded).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // chaos prices, shaped like poe.ninja variants: buy = min(L/20, L + 20*GCP); sell = L+1/20c
+  const VAAL = 1.5, GCP = 1.1
+  const GEMS = [
+    { n:'Awakened Multistrike Support', c:'str', L:5, q20:380, q0:360, sell:5200, aw:true },
+    { n:'Awakened Spell Echo Support', c:'int', L:5, q20:290, q0:250, sell:3400, aw:true },
+    { n:'Awakened Added Fire Damage Support', c:'str', L:5, q20:85, q0:70, sell:640, aw:true, unconf:true },
+    { n:'Kinetic Blast of Clustering', c:'dex', L:20, q20:45, q0:3, sell:240, tr:true },
+    { n:'Lightning Arrow of Electrocution', c:'dex', L:20, q20:40, q0:16, sell:310, tr:true },
+    { n:'Arc', c:'int', L:20, q20:31, q0:1, sell:190 },
+    { n:'Penance Brand of Dissipation', c:'int', L:20, q20:35, q0:12, sell:210, tr:true },
+    { n:'Spark of the Nova', c:'int', L:20, q20:30, q0:9, sell:150, tr:true },
+    { n:'Cyclone of Tumult', c:'str', L:20, q20:60, q0:38, sell:260, tr:true, unconf:true },
+    { n:'Vortex', c:'int', L:20, q20:22, q0:2, sell:95 },
+    { n:'Blade Vortex', c:'dex', L:20, q20:20, q0:1, sell:70 },
+    { n:'Awakened Generosity Support', c:'str', L:5, q20:40, q0:35, sell:90, aw:true },
+    { n:'Hatred', c:'dex', L:20, q20:8, q0:1, sell:18 }
+  ].map(g => {
+    const craft = g.q0 + 20 * GCP
+    const buy = Math.min(craft, g.q20)
+    const via = craft <= g.q20
+    const profit = g.sell - buy - VAAL
+    return { ...g, buy, via, profit, margin: profit / buy, ratio: g.sell / buy }
+  }).sort((a, b) => b.profit - a.profit)
+
+  const $ = id => document.getElementById(id)
+  const fmt = v => Math.abs(v) < 10 ? (Math.round(v * 10) / 10).toString() : Math.round(v).toString()
+  let page = 0
+  const PAGE = 5
+
+  function filtered () {
+    const q = $('q').value.trim().toLowerCase()
+    const ratio = Number($('ratio').value)
+    return GEMS.filter(g =>
+      (!g.tr || $('optT').checked) && (!g.aw || $('optA').checked) && (!g.unconf || $('optU').checked) &&
+      (ratio <= 0 || g.ratio >= ratio) && (!q || g.n.toLowerCase().includes(q)))
+  }
+
+  function render () {
+    const rows = filtered()
+    const total = Math.max(1, Math.ceil(rows.length / PAGE))
+    page = Math.min(page, total - 1)
+    const el = $('rows')
+    el.innerHTML = ''
+    if (!rows.length) { el.innerHTML = '<div class="msg">No gems match the current filters</div>' }
+    rows.slice(page * PAGE, page * PAGE + PAGE).forEach(g => {
+      const d = document.createElement('div')
+      d.className = 'row'
+      d.innerHTML = `
+        <div class="icon ${g.c}">${g.n[0]}</div>
+        <div class="info">
+          <div class="name"><span class="t">${g.n}</span>${g.unconf ? '<span class="unconf" title="Some reference variants missing on poe.ninja">&#9888;</span>' : ''}</div>
+          <div class="actions">
+            <button class="act" data-a="buy" title="Click to price check the uncorrupted gem">
+              <span class="lbl">Buy · ${g.L}${g.via ? '' : '/20'} ${g.via ? '<span class="gcp" title="Priced as a 0% quality gem + 20x Gemcutter\'s Prism, cheaper than buying 20/20 outright"></span>' : ''}</span>
+              <span class="val">${fmt(g.buy)} <span class="chaos"></span></span>
+            </button>
+            <button class="act" data-a="sell" title="Click to browse corrupted listings of this gem">
+              <span class="lbl">Sell · ${g.L + 1}/20c</span>
+              <span class="val">${fmt(g.sell)} <span class="chaos"></span>
+                <span class="${g.profit >= 0 ? 'pos' : 'neg'}">(${g.profit >= 0 ? '+' : ''}${fmt(g.profit)}, ${(g.margin * 100).toFixed(0)}%, ${g.ratio.toFixed(1)}x)</span></span>
+            </button>
+          </div>
+        </div>`
+      d.querySelectorAll('.act').forEach(b => b.onclick = () => {
+        $('dispatch').textContent = b.dataset.a === 'buy'
+          ? `→ price-check: ${g.n}, level ${g.L}, quality ${g.via ? '0 (top up with 20x GCP)' : '20'}, not corrupted`
+          : `→ price-check: ${g.n}, level ${g.L + 1}, quality 20, corrupted`
+      })
+      el.appendChild(d)
+    })
+    $('pinfo').textContent = `${page + 1} / ${total}`
+    $('pager').style.display = total > 1 ? 'flex' : 'none'
+    $('prev').disabled = page === 0
+    $('next').disabled = page >= total - 1
+  }
+
+  function ratioUi () {
+    const v = Number($('ratio').value)
+    $('ratio').style.setProperty('--fill', (v / 20 * 100) + '%')
+    $('ratioLbl').textContent = 'Min sell/buy ratio: ' + (v > 0 ? v + 'x' : 'off')
+  }
+
+  function exactUi () {
+    const exact = $('exact').checked
+    const pct = Number(document.querySelector('input[name=rng]:checked').value)
+    $('fmin').textContent = exact ? 87 : Math.floor(87 * (1 - pct / 100))
+    $('fmin2').textContent = exact ? 41.6 : (Math.floor(41.6 * (1 - pct / 100) * 10) / 10)
+  }
+
+  $('q').oninput = () => { page = 0; render() }
+  ;['optT', 'optA', 'optU'].forEach(id => $(id).onchange = () => { page = 0; render() })
+  $('ratio').oninput = () => { ratioUi(); page = 0; render() }
+  $('prev').onclick = () => { page--; render() }
+  $('next').onclick = () => { page++; render() }
+  $('exact').onchange = exactUi
+  document.querySelectorAll('input[name=rng]').forEach(r => r.onchange = exactUi)
+  document.querySelectorAll('.smenu button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('.smenu button').forEach(x => x.classList.toggle('on', x === b))
+    $('tab-gc').style.display = b.dataset.tab === 'gc' ? 'flex' : 'none'
+    $('tab-pc').style.display = b.dataset.tab === 'pc' ? 'flex' : 'none'
+  })
+  ratioUi(); exactUi(); render()
+</script>
+</body>
+</html>
