@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alt Crafting Mockup</title>
+<style>
+  :root {
+    --gray-100:#f7fafc; --gray-300:#e2e8f0; --gray-400:#cbd5e0; --gray-500:#a0aec0;
+    --gray-600:#718096; --gray-700:#4a5568; --gray-800:#2d3748; --gray-900:#1a202c;
+    --red-700:#c53030; --red-800:#9b2c2c; --green-700:#2f855a; --yellow-500:#ecc94b;
+    --magic:#8888ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; color: var(--gray-100);
+    font: 14px/1.25 "Segoe UI", system-ui, sans-serif;
+    background: radial-gradient(ellipse at 70% 40%, #2a2219 0%, #120e0a 60%, #070504 100%);
+  }
+  .banner {
+    background: #744210; color: #fefcbf; padding: 6px 16px; font-size: 12px;
+    border-bottom: 1px solid #975a16;
+  }
+  .stage { position: relative; padding: 24px 16px; display: flex; flex-wrap: wrap; gap: 24px; }
+  .widget {
+    border-radius: 4px; background: var(--gray-900); padding: 4px; min-width: 24rem; max-width: 100%;
+    box-shadow: 0 1px 3px rgba(0,0,0,.75), 0 1px 2px rgba(0,0,0,.75);
+    position: relative;
+  }
+  .title { display:flex; justify-content:space-between; align-items:center; padding: 4px 6px; color: var(--gray-400); font-size: 12px; }
+  .panel { background: var(--gray-800); border-radius: 4px; }
+  .row { display:flex; gap:4px; padding:4px; align-items:center; flex-wrap: wrap; }
+  .btn {
+    background: var(--gray-700); color: var(--gray-100); border: 0; border-radius: 4px;
+    padding: 2px 8px; height: 24px; cursor: pointer; font: inherit; white-space: nowrap;
+  }
+  .btn:hover { background: var(--gray-600); }
+  .btn.danger { background: var(--red-800); }
+  .btn.danger:hover { background: var(--red-700); }
+  .btn.go { background: var(--green-700); }
+  input[type=text] {
+    background: var(--gray-900); color: var(--gray-100); border: 0; border-radius: 4px;
+    padding: 2px 6px; height: 24px; flex: 1; min-width: 6rem; font: inherit;
+  }
+  .preset { padding: 2px 6px; color: var(--yellow-500); }
+  .mod { display:flex; align-items:center; height: 32px; padding: 0 8px; gap: 6px; }
+  .mod:hover { background: var(--gray-700); }
+  .mod .m { flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-family: Consolas, monospace; }
+  .mod.off .m { color: var(--gray-600); text-decoration: line-through; }
+  .mod .x { background:none; border:0; color: var(--gray-500); cursor:pointer; padding: 4px; }
+  .mod .x:hover { color: var(--gray-100); }
+  .hit { font-size: 11px; background: var(--green-700); border-radius: 3px; padding: 0 4px; }
+  .presetBtn { background: var(--gray-800); border:1px solid var(--gray-700); color: var(--gray-100); border-radius:4px; padding: 8px; cursor:pointer; font: inherit; }
+  .presetBtn:hover { background: var(--gray-700); }
+  .status { padding: 6px 8px; font-size: 12px; border-top: 1px solid var(--gray-700); color: var(--gray-400); }
+  .status b { color: var(--gray-100); }
+  .running { color: #f6ad55; }
+  .hk { background: var(--gray-700); border-radius: 3px; padding: 0 4px; font-family: Consolas, monospace; font-size: 12px; }
+  .item {
+    width: 22rem; max-width: 100%; background: rgba(0,0,0,.85); border: 1px solid #4b4b9b;
+    font-family: Georgia, serif; text-align: center; font-size: 13px;
+  }
+  .item .hd { background: linear-gradient(#2b2b55,#1a1a33); color: var(--magic); padding: 6px; font-size: 16px; }
+  .item .bd { padding: 8px; color: var(--magic); }
+  .item .sep { height:1px; background:#4b4b9b; margin: 6px 0; }
+  .item .meta { color: var(--gray-500); font-size: 11px; }
+  .item .match { outline: 1px solid var(--green-700); background: rgba(47,133,90,.2); }
+  .notes { width: 100%; max-width: 46rem; color: var(--gray-400); font-size: 12px; }
+  .notes li { margin: 4px 0; }
+  .warn { color: #feb2b2; }
+  label.cb { display:flex; align-items:center; gap:4px; cursor:pointer; color: var(--gray-400); }
+</style>
+</head>
+<body>
+<div class="banner"><b>MOCKUP</b>: the "Alt Crafting" widget from unumtresocto/awakened-poe-trade (commit 39e6709), shown with sample data. Static HTML only. The "Start" button simulates rolls and clicks nothing.</div>
+
+<div class="stage">
+  <div class="widget" id="w">
+    <div class="title"><span>Alt Crafting</span><span>start <span class="hk">F7</span> · stop <span class="hk">Shift+F7</span></span></div>
+    <div class="panel" id="panel"></div>
+    <div class="status" id="status">Idle. Matchers sent to main process: <b id="sent"></b></div>
+  </div>
+
+  <div>
+    <div class="item" id="item"></div>
+    <div style="margin-top:8px; display:flex; gap:4px;">
+      <button class="btn go" id="start">Simulate F7 (start)</button>
+      <button class="btn danger" id="stop">Shift+F7 (stop)</button>
+    </div>
+  </div>
+
+  <ul class="notes">
+    <li><b>Fork behaviour:</b> F7 holds Shift and loops: Ctrl+C → regex test on clipboard → if prefix or suffix missing, right-click Augmentation and click item; otherwise click item with the held Alteration. It stops on a match.</li>
+    <li class="warn"><b>This automates server actions with synthetic clicks</b> sent through an external daemon (<code>/tmp/input_daemon.sock</code>) at hard-coded screen coordinates. That violates GGG's one-action-per-keypress rule. A port would keep only the passive matcher list.</li>
+    <li>"ALL" checked: every enabled matcher must hit. Use <code>a||b</code> inside one row for alternatives. Unchecked (ANY): any enabled matcher is enough.</li>
+  </ul>
+</div>
+
+<script>
+const presets = {
+  physaxe: ["tyrannical","emperor","dictator","merciless","flaring","cruel","conqueror"],
+  physjew: ["annealed","razor","tempered","flaring","training","venom"],
+  tinctura: ["unleashed||overpowering","horticultural||medicinal"]
+};
+let state = {
+  view: "default", mode: "ANY", preset: "physaxe",
+  mods: presets.physaxe.map((m,i)=>({id:i+1, matcher:m, on:true})),
+  input: "", running: false, rolls: 0, alts: 0, augs: 0, err: null
+};
+const affixes = {
+  prefix: [["Heavy","40% increased Physical Damage"],["Serrated","Adds 5 to 11 Physical Damage"],["Merciless","162% increased Physical Damage"],["Glinting","Adds 2 to 4 Physical Damage"],["Flaring","Adds 21 to 44 Physical Damage"],["Tempered","+12 to Accuracy Rating"],["Cruel","118% increased Physical Damage"],["Thirsty","Leeches 0.4% of Physical Damage as Life"]],
+  suffix: [["of Skill","8% increased Attack Speed"],["of the Brute","+18 to Strength"],["of Celebration","22% increased Attack Speed"],["of Ease","14% increased Critical Strike Chance"],["of the Lynx","+24 to Dexterity"],["of Rending","24% increased Critical Strike Multiplier"]]
+};
+let item = { prefix: affixes.prefix[0], suffix: null };
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function clipText() {
+  return [item.prefix && "{ Prefix Modifier \"" + item.prefix[0] + "\" }", item.prefix && item.prefix[1],
+          item.suffix && "{ Suffix Modifier \"" + item.suffix[0] + "\" }", item.suffix && item.suffix[1]]
+    .filter(Boolean).join("\n").toLowerCase();
+}
+function enabled() { return state.mods.filter(m=>m.on).map(m=>m.matcher); }
+function hits(m, clip) { try { return m.split("||").some(p => new RegExp(p.toLowerCase()).test(clip)); } catch { return false; } }
+function test() {
+  const clip = clipText(), mods = enabled();
+  if (state.mode === "ANY" || mods.length === 0) return mods.some(m => hits(m, clip));
+  return mods.every(m => hits(m, clip));
+}
+
+function renderItem() {
+  const clip = clipText();
+  const line = (a, kind) => {
+    if (!a) return '<div class="meta">(open ' + kind + ')</div>';
+    const hit = enabled().some(m => hits(m, ("\"" + a[0] + "\"\n" + a[1]).toLowerCase()));
+    return '<div class="meta">' + kind + ': ' + esc(a[0]) + '</div><div class="' + (hit ? "match" : "") + '">' + esc(a[1]) + '</div>';
+  };
+  const name = [item.prefix && item.prefix[0], "Vaal Axe", item.suffix && item.suffix[0]].filter(Boolean).join(" ");
+  $("item").innerHTML = '<div class="hd">' + esc(name) + '</div><div class="bd"><div class="meta">Two Handed Axe · Item Level: 84</div><div class="sep"></div>'
+    + line(item.prefix, "Prefix") + line(item.suffix, "Suffix") + '</div>';
+}
+
+function render() {
+  const p = $("panel");
+  let h = "";
+  if (state.view === "default") {
+    h += '<div class="row"><label class="cb"><input type="checkbox" id="all" ' + (state.mode==="ALL"?"checked":"") + '> ALL</label>'
+      + '<button class="btn" data-v="load_preset">Load preset</button><button class="btn" data-v="save_preset">Save preset</button><button class="btn" data-v="delete_preset">Delete preset</button></div>';
+    h += '<div class="row"><div class="preset">' + esc(state.preset) + '</div><input type="text" id="inp" placeholder="Enter new mod" value="' + esc(state.input) + '">'
+      + '<button class="btn" id="add">Add</button><button class="btn" id="reset">× Reset</button></div>';
+    const clip = clipText();
+    h += state.mods.map(m => '<div class="mod' + (m.on?"":" off") + '"><input type="checkbox" data-t="' + m.id + '" ' + (m.on?"checked":"") + '><span class="m">' + esc(m.matcher) + '</span>'
+      + (m.on && hits(m.matcher, clip) ? '<span class="hit">hit</span>' : '') + '<button class="x" data-r="' + m.id + '">✕</button></div>').join("");
+  } else {
+    const label = {save_preset:"Save preset", load_preset:"Load", delete_preset:"Delete"}[state.view];
+    h += '<div class="row">';
+    if (state.view === "save_preset") h += '<input type="text" id="pname" placeholder="Preset name"><button class="btn" id="psave">Save preset</button>';
+    h += '<button class="btn" data-v="default">Cancel</button></div>';
+    if (state.err) h += '<div class="row" style="color:#feb2b2">' + state.err + '</div>';
+    h += '<div class="row">' + Object.keys(presets).map(n => '<button class="presetBtn" data-p="' + esc(n) + '">' + (state.view==="delete_preset"?"🗑 ":"") + esc(n) + '</button>').join("") + '</div>';
+    h += '<div class="row" style="color:var(--gray-500);font-size:12px">Click a preset to ' + label.toLowerCase() + (state.view==="save_preset"?" (overwrite)":"") + '.</div>';
+  }
+  p.innerHTML = h;
+  $("sent").textContent = JSON.stringify({ mods: enabled(), mode: state.mode });
+  renderItem();
+}
+
+$("panel").addEventListener("click", e => {
+  const t = e.target.closest("[data-v],[data-r],[data-p],#add,#reset,#psave");
+  if (!t) return;
+  if (t.dataset.v) { state.view = t.dataset.v; state.err = null; }
+  else if (t.dataset.r) state.mods = state.mods.filter(m => m.id != t.dataset.r);
+  else if (t.dataset.p) {
+    const n = t.dataset.p;
+    if (state.view === "load_preset") { state.preset = n; state.mods = presets[n].map((m,i)=>({id:i+1,matcher:m,on:true})); state.view = "default"; }
+    else if (state.view === "delete_preset") { delete presets[n]; }
+    else if (state.view === "save_preset") { presets[n] = state.mods.map(m=>m.matcher); state.preset = n; state.view = "default"; }
+  }
+  else if (t.id === "add" && state.input.trim()) { state.mods.push({id: Date.now(), matcher: state.input.trim(), on: true}); state.input = ""; }
+  else if (t.id === "reset") state.mods = [];
+  else if (t.id === "psave") {
+    const n = $("pname").value.trim();
+    if (!n) state.err = "empty_name"; else if (presets[n]) state.err = "same_name";
+    else { presets[n] = state.mods.map(m=>m.matcher); state.preset = n; state.view = "default"; state.err = null; }
+  }
+  render();
+});
+$("panel").addEventListener("change", e => {
+  if (e.target.id === "all") state.mode = e.target.checked ? "ALL" : "ANY";
+  if (e.target.dataset.t) { const m = state.mods.find(m => m.id == e.target.dataset.t); m.on = e.target.checked; }
+  render();
+});
+$("panel").addEventListener("input", e => { if (e.target.id === "inp") state.input = e.target.value; });
+
+let timer = null;
+const pick = a => a[Math.floor(Math.random() * a.length)];
+function step() {
+  if (!state.running) return;
+  if (test()) { state.running = false; setStatus("Matched after " + state.rolls + " rolls (" + state.alts + " Alt, " + state.augs + " Aug). Loop stopped, Shift released."); return; }
+  state.rolls++;
+  if (!item.prefix || !item.suffix) {
+    state.augs++;
+    if (!item.prefix) item.prefix = pick(affixes.prefix); else item.suffix = pick(affixes.suffix);
+  } else {
+    state.alts++;
+    const r = Math.random();
+    item = r < .4 ? { prefix: pick(affixes.prefix), suffix: null } : r < .7 ? { prefix: null, suffix: pick(affixes.suffix) } : { prefix: pick(affixes.prefix), suffix: pick(affixes.suffix) };
+  }
+  render();
+  setStatus('<span class="running">● Running</span>: roll ' + state.rolls + ' · Alt ×' + state.alts + ' · Aug ×' + state.augs + ' (simulated, ~100 ms per click in the fork)');
+  timer = setTimeout(step, 220);
+}
+function setStatus(h) { $("status").innerHTML = h + '<br>Matchers sent to main process: <b>' + esc(JSON.stringify({mods: enabled(), mode: state.mode})) + '</b>'; }
+$("start").onclick = () => { if (state.running) return; state.running = true; state.rolls = state.alts = state.augs = 0; step(); };
+$("stop").onclick = () => { state.running = false; clearTimeout(timer); setStatus("Stopped by Shift+F7."); };
+render();
+</script>
+</body>
+</html>
