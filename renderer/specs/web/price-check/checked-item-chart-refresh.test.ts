@@ -19,6 +19,8 @@ vi.mock('@/web/Config', () => ({
     collapseListings: 'api',
     activateStockFilter: false,
     searchStatRange: 10,
+    merchantOnly: false,
+    defaultCurrency: 'divine',
     smartInitialSearch: true,
     lockedInitialSearch: true
   })
@@ -95,6 +97,26 @@ function chart (refName: 'Sandy Seabed Chart' | 'Coral Reef Chart') {
 }
 
 describe('CheckedItem Chart refresh', () => {
+  it('uses configured defaults for new items and retains the selected currency for the same base', async () => {
+    const wrapper = shallowMount(CheckedItem, {
+      props: { item: chart('Sandy Seabed Chart') as any, advancedCheck: false },
+      global: { stubs: { 'i18n-t': true, TradeListing: TradeListingStub } }
+    })
+    await nextTick()
+    const getFilters = () => wrapper.findComponent(TradeListingStub).props('filters')
+    expect(getFilters().trade.currency).toBe('divine')
+    expect(getFilters().trade.merchantOnly).toBe(false)
+    getFilters().trade.currency = 'chaos'
+    await wrapper.setProps({ item: chart('Sandy Seabed Chart') })
+    expect(getFilters().trade.currency).toBe('chaos')
+    getFilters().trade.currency = null
+    await wrapper.setProps({ item: chart('Sandy Seabed Chart') })
+    expect(getFilters().trade.currency).toBeNull()
+    await wrapper.setProps({ item: chart('Coral Reef Chart') })
+    expect(getFilters().trade.currency).toBe('divine')
+    wrapper.unmount()
+  })
+
   it('executes the second Chart search with the second item filters', async () => {
     mocks.searches = []
     const wrapper = shallowMount(CheckedItem, {
