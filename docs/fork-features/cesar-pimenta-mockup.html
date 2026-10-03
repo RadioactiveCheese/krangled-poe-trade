@@ -1,0 +1,474 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Build Mockup</title>
+<style>
+  /* Palette copied from renderer/public/themes/default.css */
+  :root {
+    --g100:#f7fafc; --g200:#edf2f7; --g300:#e2e8f0; --g400:#cbd5e0; --g500:#a0aec0;
+    --g600:#718096; --g700:#4a5568; --g800:#2d3748; --g900:#1a202c; --row-alt:#353f52;
+    --red300:#feb2b2; --red400:#fc8181; --red500:#f56565; --red900:#742a2a;
+    --green300:#9ae6b4; --green500:#48bb78; --green600:#38a169; --green900:#22543d;
+    --blue300:#90cdf4; --blue400:#63b3ed; --yellow500:#ecc94b;
+    --rare:#ffff77; --magic:#8888ff; --unique:#af6025; --gem:#1ba29b;
+    --poe-fire:#960000; --poe-cold:#366492; --poe-lightning:#ffd700;
+    --font-ui: "Exo2", "Segoe UI", system-ui, sans-serif;
+    --font-item: "Fontin", "FrizQuadrataC", Georgia, serif;
+    --radius: 0.25rem;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: #0d0f14 radial-gradient(ellipse at 30% 0%, #23262e 0%, #0d0f14 70%) fixed;
+    color: var(--g100); font-family: var(--font-ui); font-size: 15px; line-height: 1.35;
+    padding: 16px;
+  }
+  button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
+  .mock-banner {
+    max-width: 1100px; margin: 0 auto 14px; padding: 8px 12px; border: 1px dashed var(--yellow500);
+    color: var(--yellow500); border-radius: var(--radius); font-size: 13px;
+  }
+  .mock-banner b { color: var(--g100); }
+  .tabs { max-width: 1100px; margin: 0 auto 14px; display: flex; gap: 4px; flex-wrap: wrap; }
+  .tabs button { padding: 6px 12px; border-radius: var(--radius); background: var(--g800); color: var(--g400); }
+  .tabs button[aria-selected="true"] { background: var(--g700); color: var(--g100); }
+  .stage { max-width: 1100px; margin: 0 auto; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+  .panel[hidden] { display: none; }
+  .caption { color: var(--g500); font-size: 12px; margin: 0 0 6px; text-transform: uppercase; letter-spacing: .06em; }
+
+  /* App primitives */
+  .widget { background: var(--g900); border-radius: var(--radius);
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.75), 0 1px 2px 0 rgba(0,0,0,.75); }
+  .btn { background: var(--g700); color: var(--g400); padding: 4px 8px; line-height: 1; border-radius: var(--radius); white-space: nowrap; }
+  .btn:hover { color: var(--g200); }
+  .btn:disabled { opacity: .5; cursor: default; }
+  .muted { color: var(--g500); } .dim { color: var(--g600); } .dimmer { color: var(--g700); }
+  .font-poe { font-family: var(--font-item); }
+  .good { color: var(--green500); } .bad { color: var(--red500); } .neutral { color: var(--g600); }
+  .warn { color: var(--red400); }
+  .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  input.field { background: var(--g800); border: 0; color: var(--g100); border-radius: var(--radius); padding: 3px 6px; font: inherit; min-width: 0; }
+
+  table.cmp { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table.cmp td, table.cmp th { padding: 1px 4px; vertical-align: top; }
+  table.cmp th { color: var(--g500); font-weight: normal; text-align: right; }
+  table.cmp td { text-align: right; white-space: nowrap; }
+  table.cmp td:first-child { text-align: left; white-space: normal; max-width: 16rem; }
+  table.cmp tbody tr:nth-child(odd) { background: var(--g800); }
+  tr.prop td { color: var(--blue300); }
+  tr.prop td.good { color: var(--green500); } tr.prop td.bad { color: var(--red500); } tr.prop td.neutral { color: var(--g600); }
+  .section { border-top: 1px solid var(--g700); padding-top: 6px; margin-top: 10px; color: var(--g400); }
+
+  /* Price check window */
+  .pc { width: 460px; max-width: 100%; }
+  .pc-head { display: flex; align-items: center; justify-content: space-between; padding: 4px 8px;
+    background: var(--g800); border-radius: var(--radius) var(--radius) 0 0; color: var(--g400); font-size: 13px; }
+  .pc-body { padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .item-name { text-align: center; color: var(--rare); font-family: var(--font-item); font-size: 17px; line-height: 1.2; }
+  .item-name small { display: block; color: var(--g400); font-size: 13px; }
+  .cbanner { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 4px 8px; border-radius: var(--radius); text-align: left; }
+  .cbanner.up { background: var(--green900); color: var(--green300); }
+  .cbanner.down { background: var(--red900); color: var(--red300); }
+  .cbanner.eq { background: var(--g800); color: var(--g400); }
+  .cexpand { background: #11151c; border-radius: var(--radius); padding: 8px; }
+  .chip { border-radius: var(--radius); padding: 1px 8px; background: var(--g800); max-width: 12rem; border: 1px solid transparent; }
+  .chip.sel { border-color: var(--g400); }
+  .trend { display: flex; justify-content: space-between; align-items: center; background: var(--g800); border-radius: var(--radius); padding: 4px 8px; font-size: 14px; }
+  .filters { display: flex; flex-direction: column; gap: 2px; font-size: 14px; }
+  .flt { display: flex; align-items: center; gap: 6px; padding: 2px 4px; border-radius: var(--radius); }
+  .flt:nth-child(odd) { background: var(--g800); }
+  .flt .cb { width: 12px; height: 12px; border: 1px solid var(--g500); border-radius: 2px; flex-shrink: 0; }
+  .flt .cb.on { background: var(--blue400); border-color: var(--blue400); }
+  .flt .rng { margin-left: auto; color: var(--g400); font-variant-numeric: tabular-nums; }
+  .listing { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .listing td { padding: 2px 4px; }
+  .listing tr:nth-child(even) { background: var(--g800); }
+
+  /* My Build */
+  .build { width: 400px; max-width: 100%; padding: 8px; display: flex; flex-direction: column; gap: 8px; }
+  .row { display: flex; align-items: center; gap: 8px; }
+  .gear-row { display: flex; align-items: center; gap: 8px; padding: 1px 4px; border-radius: var(--radius); color: var(--g400); }
+  .gear-row:hover { background: var(--g800); }
+  .gear-row .x { visibility: hidden; color: var(--g600); }
+  .gear-row:hover .x { visibility: visible; }
+  .icon { width: 28px; height: 28px; flex-shrink: 0; border-radius: 3px; display: grid; place-items: center; font-size: 11px; font-weight: 700; color: #0b0d12; }
+  .icon.sm { width: 24px; height: 24px; }
+  .lbl { flex: 1; min-width: 0; line-height: 1.15; }
+  .lbl .n { color: var(--g300); font-family: var(--font-item); }
+  .lbl .s { color: var(--g600); font-size: .8em; }
+  .star { color: var(--g700); } .star.on { color: var(--yellow500); }
+  select.sock { background: transparent; color: var(--g500); border: 0; font: inherit; font-size: inherit; padding: 0; }
+  table.totals { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table.totals td { padding: 1px 4px; }
+  table.totals td:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+  table.totals tr:nth-child(odd) { background: var(--g800); }
+  table.totals tr.est td { color: var(--blue300); }
+
+  /* Compare widget (gem) */
+  .cw { width: 430px; max-width: 100%; padding: 8px; }
+  .sup-line { color: var(--g400); }
+  .sup-line.ign { color: var(--g600); }
+  .ok-ic { color: var(--green600); }
+  .note { max-width: 1100px; margin: 14px auto 0; color: var(--g600); font-size: 12px; }
+
+  @media (max-width: 520px) {
+    body { padding: 16px; font-size: 14px; }
+    .pc, .build, .cw { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="mock-banner">
+  <b>MOCKUP</b>: static illustration of the features in
+  <code>cesar-pimenta/awakened-poe-trade</code> (item compare, My Build panel, compare banner in price check,
+  skill DPS estimate, support-gem evaluation). The sample data is made up and the numbers are illustrative only. Nothing here is wired to the app.
+</div>
+
+<div class="tabs" role="tablist">
+  <button role="tab" aria-selected="true" data-tab="pc">Price check + compare banner</button>
+  <button role="tab" aria-selected="false" data-tab="build">My Build panel</button>
+  <button role="tab" aria-selected="false" data-tab="gem">Compare hotkey on a support gem</button>
+</div>
+
+<!-- ============================================================ PRICE CHECK -->
+<div class="stage panel" id="tab-pc">
+  <div>
+    <p class="caption">Price check (Ctrl+D on a rare ring)</p>
+    <div class="widget pc">
+      <div class="pc-head"><span>Settlers · Standard trade</span><span class="dim">&#x2715;</span></div>
+      <div class="pc-body">
+        <div class="item-name">Storm Loop<small>Two-Stone Ring</small></div>
+
+        <!-- CompareBanner.vue -->
+        <div>
+          <button class="cbanner up" id="bannerBtn" aria-expanded="false">
+            <span>&#x2191; Better than your equipped item</span>
+            <span id="bannerChev">&#x25BE;</span>
+          </button>
+          <div class="cexpand" id="bannerBody" hidden style="margin-top:4px">
+            <div class="row" style="gap:4px;margin-bottom:8px">
+              <button class="chip truncate sel" data-ring="0">Rapture Band</button>
+              <button class="chip truncate" data-ring="1">Dusk Knuckle</button>
+            </div>
+            <div class="muted" style="margin-bottom:4px">Comparing with: <span class="font-poe" style="color:var(--g300)" id="ringName">Rapture Band</span></div>
+            <div id="ringTables"></div>
+          </div>
+        </div>
+
+        <div class="trend"><span class="muted">poe.ninja trend</span><span>~ 12 <span class="muted">chaos</span></span></div>
+
+        <div class="filters">
+          <div class="flt"><span class="cb on"></span>Item level <span class="rng">84</span></div>
+          <div class="flt"><span class="cb on"></span>+# to maximum Life <span class="rng">62 &ndash; </span></div>
+          <div class="flt"><span class="cb on"></span>+#% to Lightning Resistance <span class="rng">41 &ndash; </span></div>
+          <div class="flt"><span class="cb on"></span>+#% to Cold Resistance <span class="rng">38 &ndash; </span></div>
+          <div class="flt"><span class="cb"></span>Adds # to # Lightning Damage to Attacks <span class="rng">16 &ndash; </span></div>
+          <div class="flt"><span class="cb"></span>+# to Dexterity <span class="rng">22 &ndash; </span></div>
+        </div>
+
+        <table class="listing">
+          <tr><td>14</td><td class="muted">chaos</td><td class="dim">2h ago</td><td class="dim" style="text-align:right">online</td></tr>
+          <tr><td>15</td><td class="muted">chaos</td><td class="dim">5h ago</td><td class="dim" style="text-align:right">online</td></tr>
+          <tr><td>20</td><td class="muted">chaos</td><td class="dim">1d ago</td><td class="dim" style="text-align:right">afk</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div style="flex:1;min-width:260px">
+    <p class="caption">Banner states</p>
+    <div style="display:flex;flex-direction:column;gap:6px;max-width:340px">
+      <div class="cbanner up"><span>&#x2191; Better than your equipped item</span><span>&#x25BE;</span></div>
+      <div class="cbanner down"><span>&#x2193; Worse than your equipped item</span><span>&#x25BE;</span></div>
+      <div class="cbanner eq"><span>= On par with your equipped item</span><span>&#x25BE;</span></div>
+    </div>
+    <p class="muted" style="font-size:13px;max-width:360px">
+      The banner appears only when a saved equipped item fits the same slot. Its colour is
+      <i>(better rows &minus; worse rows)</i>, an unweighted count, so in this example the ring is "better" even though
+      it loses 17 life. Click it to expand the same tables as the compare widget. With two rings
+      saved, tabs let you pick which ring to swap.
+    </p>
+  </div>
+</div>
+
+<!-- ============================================================ MY BUILD -->
+<div class="stage panel" id="tab-build" hidden>
+  <div>
+    <p class="caption">My Build widget (overlay, movable)</p>
+    <div class="widget build">
+      <div class="row" style="justify-content:space-between">
+        <span style="color:var(--g300)">My Build</span><span class="dim">10 slots</span>
+      </div>
+      <div class="row" style="gap:4px">
+        <input class="field" style="flex:1" value="KrangledDeadeye" aria-label="Character name" list="chars">
+        <datalist id="chars"><option value="KrangledDeadeye">Settlers lvl 94</option><option value="StashMule">Standard lvl 12</option></datalist>
+        <button class="btn" id="listBtn">List</button>
+        <button class="btn" id="importBtn">Import</button>
+      </div>
+      <div class="muted" id="importStatus">10 items imported from the site</div>
+
+      <!-- skill setups -->
+      <div id="setups"></div>
+
+      <!-- gear -->
+      <div style="display:flex;flex-direction:column;gap:1px" id="gear"></div>
+
+      <div class="section">Gear totals</div>
+      <table class="totals" id="totals"></table>
+      <div class="dim" style="font-size:13px">Sums gear only (passive tree, gems and buffs are not included).</div>
+    </div>
+  </div>
+
+  <div style="flex:1;min-width:260px;max-width:440px">
+    <p class="caption">How it fills</p>
+    <ul class="muted" style="font-size:13px;padding-left:18px;margin:0">
+      <li><b style="color:var(--g300)">List</b> calls <code>character-window/get-characters</code>, and
+        <b style="color:var(--g300)">Import</b> calls <code>get-items</code> through the app proxy. This needs a public profile
+        or a login in the built-in browser. The account name comes from price-check settings.</li>
+      <li>Only the 10 gear slots are imported. Gems are added by hand: press the compare hotkey on a skill gem
+        and click "Add as new skill", then press it on a support gem and click "Add to my supports".</li>
+      <li>&#x2605; marks the main setup. Skill DPS and gear-swap impact use only that setup.
+        "Socketed in" is just a label.</li>
+      <li>&#x1F310; marks an item imported from the site. Hover a row to show &#x2715; (remove).</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================================ SUPPORT GEM -->
+<div class="stage panel" id="tab-gem" hidden>
+  <div>
+    <p class="caption">Compare widget (Ctrl+Shift+D on a support gem)</p>
+    <div class="widget cw">
+      <div class="row" style="justify-content:space-between;align-items:baseline;margin-bottom:8px">
+        <div class="truncate font-poe" style="color:var(--gem)">Elemental Damage with Attacks Support</div>
+        <button class="btn">Add to my supports</button>
+      </div>
+      <div class="sup-line"><span class="ok-ic">&#x2713;</span> Supported Skills deal 35% more Elemental Damage with Attack Hits</div>
+      <div class="sup-line ign" title="Not considered in the estimate">&minus; Supported Skills have 20% increased Elemental Damage with Attack Skills per 10% Quality</div>
+
+      <div class="muted" style="margin-top:8px">Link to which skill?</div>
+      <div class="row" style="gap:4px;margin-bottom:4px;flex-wrap:wrap">
+        <button class="chip sel" data-setup="0">Lightning Arrow &#x2605;</button>
+        <button class="chip" data-setup="1">Tornado Shot</button>
+      </div>
+      <div id="supEval"></div>
+    </div>
+
+    <p class="caption" style="margin-top:18px">Same hotkey on an active attack gem</p>
+    <div class="widget cw">
+      <div class="row" style="justify-content:space-between;align-items:baseline;margin-bottom:8px">
+        <div class="truncate font-poe" style="color:var(--gem)">Lightning Arrow</div>
+        <button class="btn">Add as new skill</button>
+      </div>
+      <div class="muted">Attack Damage: 172% of base, Added Damage Effectiveness: 172%. Save it so the estimated Skill DPS uses these numbers.</div>
+      <div class="row" style="margin-top:4px"><span class="truncate" style="flex:1;color:var(--g400)">Lightning Arrow &#x2605;</span><button class="btn">Replace</button></div>
+      <div class="row" style="margin-top:4px"><span class="truncate" style="flex:1;color:var(--g400)">Tornado Shot</span><button class="btn">Replace</button></div>
+    </div>
+  </div>
+
+  <div style="flex:1;min-width:260px;max-width:440px">
+    <p class="caption">Model (fork's <code>buildTotals</code>)</p>
+    <pre class="muted" style="font-size:12px;white-space:pre-wrap;background:var(--g900);padding:8px;border-radius:var(--radius);margin:0">hit  = &Sigma;type (weapon[type] + (gearFlat[type] + supportFlat[type]) &times; eff)
+       &times; &Pi; support "more" (scoped) &times; gem Attack Damage %
+aps  = weaponAPS &times; (1 + &Sigma; inc AS) &times; &Pi; more AS
+crit = weaponCrit &times; (1 + &Sigma; inc global crit), multi 150 + &Sigma;
+dps  = hit &times; aps &times; (1 + crit &times; (multi &minus; 100))</pre>
+    <p class="muted" style="font-size:13px">Left out: passive tree, auras, "% increased damage" from any source,
+      enemy resists, accuracy, DoT, and spells. Weapon elemental damage is split evenly
+      into fire/cold/lightning. The deltas are only useful as a <i>relative</i> signal for one skill.</p>
+  </div>
+</div>
+
+<p class="note">Mockup only. Styling approximates this repo's default theme tokens and the fork's Tailwind classes
+(<code>widget-default-style</code>, <code>btn</code>, <code>bg-green-900</code>/<code>bg-red-900</code> banner).</p>
+
+<script>
+(function () {
+  // ---------- tabs
+  var tabs = document.querySelectorAll('[role=tab]');
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      tabs.forEach(function (o) {
+        o.setAttribute('aria-selected', String(o === t));
+        document.getElementById('tab-' + o.dataset.tab).hidden = (o !== t);
+      });
+    });
+  });
+
+  function fmtDelta (d) { if (d === 0) return '='; var r = Math.round(d * 10) / 10; return r > 0 ? '+' + r : String(r); }
+  function cls (d, betterSign) { if (d === 0) return 'neutral'; return (d * (betterSign || 1) > 0) ? 'good' : 'bad'; }
+  function v (x) { return x === undefined ? '&mdash;' : x; }
+
+  // ---------- compare banner (two saved rings)
+  var candidate = { life: 62, light: 41, cold: 38, dex: 22, flatLight: 17.5, ea: 0 };
+  var rings = [
+    { name: 'Rapture Band', life: 79, light: 30, cold: 0, dex: 0, flatLight: 0, str: 18 },
+    { name: 'Dusk Knuckle', life: 55, light: 0, cold: 45, dex: 30, flatLight: 0, str: 0 }
+  ];
+  var statDefs = [
+    ['+# to maximum Life', 'life'],
+    ['+#% to Lightning Resistance', 'light'],
+    ['+#% to Cold Resistance', 'cold'],
+    ['Adds # to # Lightning Damage to Attacks', 'flatLight'],
+    ['+# to Dexterity', 'dex'],
+    ['+# to Strength', 'str']
+  ];
+  var impactByRing = [
+    [ ['Skill DPS (est.)', 48210, 51630, ''], ['Life', 412, 395, ''], ['Cold Resistance', 80, 118, '%'],
+      ['Lightning Resistance', 86, 97, '%'], ['Dexterity', 141, 163, ''], ['Strength', 58, 40, ''] ],
+    [ ['Skill DPS (est.)', 48210, 51630, ''], ['Life', 412, 419, ''], ['Cold Resistance', 80, 73, '%'],
+      ['Lightning Resistance', 86, 127, '%'], ['Dexterity', 141, 133, ''] ]
+  ];
+
+  function renderRing (i) {
+    var r = rings[i];
+    var rows = statDefs.map(function (s) {
+      var a = r[s[1]] || undefined, b = candidate[s[1]] || undefined;
+      return { t: s[0], a: a, b: b, d: (b || 0) - (a || 0) };
+    }).filter(function (x) { return x.a !== undefined || x.b !== undefined; })
+      .sort(function (x, y) { return Math.abs(y.d) - Math.abs(x.d); });
+    var better = rows.filter(function (x) { return x.d > 0; }).length;
+    var worse = rows.filter(function (x) { return x.d < 0; }).length;
+
+    var html = '<table class="cmp"><thead><tr><th style="text-align:left"></th><th>Equipped</th><th>New</th><th>&Delta;</th></tr></thead><tbody>';
+    rows.forEach(function (x) {
+      html += '<tr><td>' + x.t + '</td><td>' + v(x.a) + '</td><td>' + v(x.b) + '</td><td class="' + cls(x.d) + '">' + fmtDelta(x.d) + '</td></tr>';
+    });
+    html += '</tbody></table><div class="muted" style="margin-top:6px">' + better + ' stats better, ' + worse + ' worse</div>';
+
+    html += '<div class="section" style="margin-top:10px;margin-bottom:4px">Impact on your gear totals</div><table class="cmp"><tbody>';
+    var anyWarn = false;
+    impactByRing[i].forEach(function (x) {
+      var d = x[2] - x[1];
+      var warn = x[3] === '%' && x[1] >= 75 && x[2] < 75;
+      anyWarn = anyWarn || warn;
+      html += '<tr><td>' + x[0] + '</td><td>' + x[1] + x[3] + '</td><td>' + x[2] + x[3] + '</td><td class="' + cls(d) + '">' + fmtDelta(d) + (warn ? ' <span class="warn">&#x26A0;</span>' : '') + '</td></tr>';
+    });
+    html += '</tbody></table>';
+    if (anyWarn) html += '<div class="warn" style="margin-top:4px">This swap drops a resistance below 75% (gear only)</div>';
+    document.getElementById('ringTables').innerHTML = html;
+    document.getElementById('ringName').textContent = r.name;
+  }
+
+  document.querySelectorAll('[data-ring]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('[data-ring]').forEach(function (o) { o.classList.toggle('sel', o === b); });
+      renderRing(Number(b.dataset.ring));
+    });
+  });
+  var bannerBtn = document.getElementById('bannerBtn');
+  bannerBtn.addEventListener('click', function () {
+    var body = document.getElementById('bannerBody');
+    body.hidden = !body.hidden;
+    bannerBtn.setAttribute('aria-expanded', String(!body.hidden));
+    document.getElementById('bannerChev').innerHTML = body.hidden ? '&#x25BE;' : '&#x25B4;';
+  });
+  renderRing(0);
+
+  // ---------- My Build
+  var gem = 'var(--gem)';
+  var setups = [
+    { skill: 'Lightning Arrow', sock: 'Body Armour', supports: ['Mirage Archer Support', 'Elemental Damage with Attacks Support', 'Inspiration Support', 'Trinity Support', 'Lightning Penetration Support'] },
+    { skill: 'Tornado Shot', sock: 'Helmet', supports: ['Greater Multiple Projectiles Support', 'Elemental Damage with Attacks Support', 'Inspiration Support'] }
+  ];
+  var mainIdx = 0;
+  var sockOptions = ['?', 'Bow', 'Quiver', 'Helmet', 'Body Armour', 'Gloves', 'Boots'];
+
+  function renderSetups () {
+    var html = '';
+    setups.forEach(function (s, i) {
+      html += '<div style="display:flex;flex-direction:column">' +
+        '<div class="gear-row"><button class="star' + (i === mainIdx ? ' on' : '') + '" data-main="' + i + '" title="Set as main skill">&#x2605;</button>' +
+        '<span class="icon" style="background:' + gem + '">' + s.skill.slice(0, 2) + '</span>' +
+        '<div class="lbl"><div class="n truncate">' + s.skill + '</div><div class="s">' + (i === mainIdx ? 'Main skill' : 'Secondary skill') + ' &middot; ' +
+        '<select class="sock" aria-label="Socketed in">' + sockOptions.map(function (o) {
+          return '<option' + (o === s.sock ? ' selected' : '') + '>Socketed in: ' + o + '</option>';
+        }).join('') + '</select></div></div><button class="x" title="Remove">&#x2715;</button></div>';
+      s.supports.forEach(function (sp) {
+        html += '<div class="gear-row" style="padding-left:28px"><span class="icon sm" style="background:#7a8a99">' + sp.slice(0, 2) + '</span>' +
+          '<div class="lbl"><div class="n truncate">' + sp + '</div></div><button class="x" title="Remove">&#x2715;</button></div>';
+      });
+      html += '</div>';
+    });
+    var el = document.getElementById('setups');
+    el.innerHTML = html;
+    el.querySelectorAll('[data-main]').forEach(function (b) {
+      b.addEventListener('click', function () { mainIdx = Number(b.dataset.main); renderSetups(); renderTotals(); });
+    });
+  }
+
+  var gear = [
+    ['Bow', 'Doom Thirst, Thicket Bow', '#ffff77', 'Bw'],
+    ['Quiver', 'Gale Bite, Primal Arrow Quiver', '#ffff77', 'Qv'],
+    ['Helmet', 'Grim Visor, Lion Pelt', '#ffff77', 'Hm'],
+    ['Body Armour', 'Hyrri\'s Ire, Zodiac Leather', '#af6025', 'BA'],
+    ['Gloves', 'Hate Grip, Sharkskin Gloves', '#ffff77', 'Gl'],
+    ['Boots', 'Storm Track, Two-Toned Boots', '#ffff77', 'Bt'],
+    ['Belt', 'Corpse Lock, Stygian Vise', '#ffff77', 'Be'],
+    ['Amulet', 'Eagle Talisman, Jade Amulet', '#ffff77', 'Am'],
+    ['Ring', 'Rapture Band, Two-Stone Ring', '#ffff77', 'Rg'],
+    ['Ring', 'Dusk Knuckle, Diamond Ring', '#ffff77', 'Rg']
+  ];
+  document.getElementById('gear').innerHTML = gear.map(function (g) {
+    return '<div class="gear-row"><span class="icon" style="background:' + g[2] + '">' + g[3] + '</span>' +
+      '<div class="lbl"><div class="n truncate">' + g[1] + '</div><div class="s">' + g[0] + '</div></div>' +
+      '<span class="dim" title="Imported from the site">&#x1F310;</span><button class="x" title="Remove">&#x2715;</button></div>';
+  }).join('');
+
+  function renderTotals () {
+    var dps = mainIdx === 0 ? 48210 : 31940;
+    var rows = [
+      ['Skill DPS (est.)', dps, '', true], ['Weapon DPS (est.)', 612, '', true],
+      ['Life', 412, ''], ['increased Life', 8, '%'], ['Energy Shield', 96, ''], ['Mana', 74, ''],
+      ['Evasion Rating', 2914, ''], ['Fire Resistance', 98, '%'], ['Cold Resistance', 80, '%'],
+      ['Lightning Resistance', 86, '%'], ['Chaos Resistance', 12, '%'], ['Strength', 58, ''],
+      ['Dexterity', 141, ''], ['Intelligence', 22, ''], ['Movement Speed', 30, '%'],
+      ['Attack Speed', 22, '%'], ['Critical Strike Chance', 38, '%'], ['Critical Strike Multiplier', 35, '%']
+    ];
+    document.getElementById('totals').innerHTML = rows.map(function (r) {
+      var val = (r[2] === '%' ? '+' : '') + r[1].toLocaleString('en-US') + r[2];
+      return '<tr' + (r[3] ? ' class="est"' : '') + '><td>' + r[0] + '</td><td>' + val + '</td></tr>';
+    }).join('');
+  }
+
+  var listBtn = document.getElementById('listBtn');
+  var importBtn = document.getElementById('importBtn');
+  var status = document.getElementById('importStatus');
+  listBtn.addEventListener('click', function () { status.textContent = '2 characters found, pick one from the list'; });
+  importBtn.addEventListener('click', function () {
+    status.textContent = 'Loading…'; importBtn.disabled = listBtn.disabled = true;
+    setTimeout(function () { status.textContent = '10 items imported from the site'; importBtn.disabled = listBtn.disabled = false; }, 700);
+  });
+
+  renderSetups();
+  renderTotals();
+
+  // ---------- support evaluation
+  var evals = [
+    { add: 18.4, rows: [['Mirage Archer Support', -9.6], ['Elemental Damage with Attacks Support', 0], ['Inspiration Support', 2.1], ['Trinity Support', 4.7], ['Lightning Penetration Support', 35]] },
+    { add: 35, rows: [['Greater Multiple Projectiles Support', 61.2], ['Elemental Damage with Attacks Support', 0], ['Inspiration Support', 6.3]] }
+  ];
+  function pct (d) { return (d > 0 ? '+' + d : String(d)) + '%'; }
+  function renderEval (i) {
+    var e = evals[i];
+    var html = '<div class="' + cls(e.add) + '">If added: ' + pct(e.add) + ' skill DPS</div>';
+    e.rows.forEach(function (r) {
+      html += '<div class="row" style="margin-top:4px"><span class="truncate" style="flex:1;color:var(--g400)">Replacing ' + r[0] + ':</span>' +
+        '<span class="' + (r[1] === 0 ? 'muted' : cls(r[1])) + '">' + pct(r[1]) + '</span><button class="btn">Replace</button></div>';
+    });
+    document.getElementById('supEval').innerHTML = html;
+  }
+  document.querySelectorAll('[data-setup]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('[data-setup]').forEach(function (o) { o.classList.toggle('sel', o === b); });
+      renderEval(Number(b.dataset.setup));
+    });
+  });
+  renderEval(0);
+})();
+</script>
+</body>
+</html>
