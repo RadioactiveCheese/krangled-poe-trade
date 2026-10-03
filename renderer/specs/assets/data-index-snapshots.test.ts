@@ -21,7 +21,9 @@ describe('development data/index HTTP pairing', () => {
   it.each([
     { save: 'malformed items', kind: 'items', partial: '{"namespace":' },
     { save: 'empty items', kind: 'items', partial: '' },
-    { save: 'empty stats', kind: 'stats', partial: '' }
+    { save: 'empty stats', kind: 'stats', partial: '' },
+    { save: 'missing-final-newline items', kind: 'items', partial: '{"namespace":"ITEM","name":"Partial item","refName":"Partial item"} ' },
+    { save: 'missing-final-newline stats', kind: 'stats', partial: '{"ref":"Partial stat","matchers":[{"string":"Partial text"}]} ' }
   ])('serves validated languages during a $save save and recovers without another watch event', async ({ save, kind, partial }) => {
     const recoveryRoot = path.join(root, `recovery-${save.replaceAll(' ', '-')}`)
     for (const language of ['en', 'ru', 'cmn-Hant', 'ko']) {

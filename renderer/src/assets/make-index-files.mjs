@@ -23,6 +23,7 @@ export function makeIndexFiles (dataRoot = DEFAULT_DATA_ROOT) {
     {
       const ndjson = fs.readFileSync(path.join(dataRoot, lang, 'stats.ndjson'), { encoding: 'utf-8' })
       if (ndjson.length === 0) throw new Error(`Empty data source: ${lang}/stats.ndjson`)
+      if (!ndjson.endsWith('\n')) throw new Error(`Missing final newline: ${lang}/stats.ndjson`)
       snapshot.set(`${lang}/stats.ndjson`, Buffer.from(ndjson))
       let start = 0
       while (start !== ndjson.length) {
@@ -79,6 +80,7 @@ export function makeIndexFiles (dataRoot = DEFAULT_DATA_ROOT) {
     {
       const ndjson = fs.readFileSync(path.join(dataRoot, lang, 'items.ndjson'), { encoding: 'utf-8' })
       if (ndjson.length === 0) throw new Error(`Empty data source: ${lang}/items.ndjson`)
+      if (!ndjson.endsWith('\n')) throw new Error(`Missing final newline: ${lang}/items.ndjson`)
       snapshot.set(`${lang}/items.ndjson`, Buffer.from(ndjson))
       let start = 0
       /** @type{Map<string, typeof nameStarts[number]>} */

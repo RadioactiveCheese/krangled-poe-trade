@@ -47,6 +47,27 @@ describe('data index generation', () => {
     }
   )
 
+  it.each(languages.flatMap(language => ['items', 'stats'].map(kind => ({ language, kind }))))(
+    'rejects a complete $language/$kind record with trailing whitespace but no final LF without hanging', ({ language, kind }) => {
+      const synthetic = path.join(temporary, `no-final-lf-${language}-${kind}`)
+      for (const locale of languages) {
+        const folder = path.join(synthetic, locale)
+        fs.mkdirSync(folder, { recursive: true })
+        fs.writeFileSync(path.join(folder, 'items.ndjson'), '{"namespace":"ITEM","name":"Item","refName":"Item"}\n')
+        fs.writeFileSync(path.join(folder, 'stats.ndjson'), '{"ref":"stat","matchers":[{"string":"text"}]}\n')
+      }
+      const file = path.join(synthetic, language, `${kind}.ndjson`)
+      fs.writeFileSync(file, fs.readFileSync(file, 'utf8').trimEnd() + ' ')
+      const generator = new URL('../../src/assets/make-index-files.mjs', import.meta.url).href
+      const script = `import { makeIndexFiles } from ${JSON.stringify(generator)}; makeIndexFiles(${JSON.stringify(synthetic)})`
+      // The pre-fix loop resets its offset to zero indefinitely. Keep that
+      // regression isolated and bounded rather than hanging the test runner.
+      expect(() => execFileSync(process.execPath, ['--input-type=module', '-e', script], {
+        timeout: 2000, stdio: 'pipe'
+      })).toThrow(`Missing final newline: ${language}/${kind}.ndjson`)
+    }
+  )
+
   it('preserves complete per-language item/name/ref and stat/matcher lookup offsets', () => {
     for (const language of languages) {
       const target = path.join(temporary, language)
