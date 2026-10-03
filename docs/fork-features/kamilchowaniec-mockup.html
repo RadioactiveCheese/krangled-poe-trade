@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Currency Calculator Mockup</title>
+<style>
+  :root {
+    --gray-100: #f7fafc; --gray-400: #cbd5e0; --gray-500: #a0aec0; --gray-600: #718096;
+    --gray-700: #4a5568; --gray-800: #2d3748; --gray-900: #1a202c;
+    --blue-400: #63b3ed; --yellow-400: #f6e05e; --red-400: #fc8181;
+    --radius: 0.25rem;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    min-height: 100vh;
+    font-family: Exo2, "Segoe UI", system-ui, sans-serif;
+    font-size: 15px;
+    color: var(--gray-100);
+    /* stand-in for the game behind the transparent overlay */
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(120, 90, 40, .35), transparent 55%),
+      radial-gradient(ellipse at 80% 80%, rgba(40, 70, 90, .35), transparent 60%),
+      repeating-linear-gradient(45deg, #15120e 0 18px, #191510 18px 36px);
+  }
+  .banner {
+    background: #744210; color: #fefcbf; padding: 8px 16px; font-size: 13px;
+    border-bottom: 1px solid #975a16;
+  }
+  .banner b { color: #fff; }
+  .stage { position: relative; min-height: calc(100vh - 40px); padding: 16px; }
+
+  /* widget chrome */
+  .widget-default-style {
+    border-radius: var(--radius);
+    background: var(--gray-900);
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.75), 0 1px 2px 0 rgba(0,0,0,.5);
+  }
+  button { font: inherit; cursor: pointer; }
+
+  /* widget menu (top-left, like WidgetMenu.vue) */
+  .menu { display: inline-flex; gap: 4px; padding: 4px; align-items: center; }
+  .menu-btn {
+    background: var(--gray-800); color: var(--gray-100); border: 1px solid var(--gray-800);
+    border-radius: var(--radius); padding: 8px; line-height: 1; min-width: 34px;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .menu-btn.on { border-color: var(--gray-500); }
+  .menu-btn svg { width: 15px; height: 15px; fill: currentColor; }
+  .menu-more { background: none; border: 0; color: var(--gray-600); padding: 4px 8px; }
+
+  /* calculator widget */
+  .calc {
+    position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%);
+    min-width: 14rem; width: 300px; max-width: calc(100vw - 32px);
+    display: flex; flex-direction: column; gap: 4px; padding: 4px;
+  }
+  .calc.hidden { display: none; }
+  .corner { position: absolute; width: 8px; height: 8px; border-color: var(--gray-600); border-style: solid; opacity: .6; }
+  .corner.tl { left: -3px; top: -3px; border-width: 2px 0 0 2px; }
+  .corner.tr { right: -3px; top: -3px; border-width: 2px 2px 0 0; }
+  .corner.bl { left: -3px; bottom: -3px; border-width: 0 0 2px 2px; }
+  .corner.br { right: -3px; bottom: -3px; border-width: 0 2px 2px 0; }
+
+  .head { display: flex; align-items: center; justify-content: space-between; }
+  .head .side { flex: 1; display: flex; align-items: center; padding: 4px; color: var(--gray-100); gap: 4px; }
+  .head .title { margin: 4px; line-height: 1rem; text-align: center; }
+  .spin { display: inline-block; animation: spin 1s linear infinite; color: var(--gray-400); padding: 0 8px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .input-wrap { display: flex; padding: 4px; background: var(--gray-800); border-radius: var(--radius); }
+  .input-wrap input {
+    flex: 1; min-width: 0; background: transparent; border: 0; outline: none;
+    color: var(--gray-100); font: inherit; padding: 4px;
+  }
+  .input-wrap input::placeholder { color: var(--gray-600); }
+  .input-wrap.invalid { box-shadow: inset 0 0 0 1px rgba(252,129,129,.45); }
+
+  .grid { display: grid; gap: 4px; grid-template-columns: 1fr 30px 1fr; }
+  .cell {
+    background: var(--gray-800); border-radius: var(--radius);
+    display: flex; gap: 4px; align-items: center; font-size: 1.25rem; padding: 2px 6px;
+    min-height: 36px; font-variant-numeric: tabular-nums;
+  }
+  .cell.span3 { grid-column: span 3; justify-content: center; }
+  .cell.end { justify-content: flex-end; }
+  .cell.start { justify-content: flex-start; }
+  .cell.eq { justify-content: center; color: var(--gray-400); font-size: 1.1rem; padding: 0; }
+
+  /* currency icons (stand-ins for /images/divine.png and /images/chaos.png) */
+  .orb { width: 28px; height: 28px; flex: none; display: inline-block; }
+
+  /* side panel for the mockup controls */
+  .panel {
+    position: absolute; right: 16px; bottom: 16px; width: 280px; max-width: calc(100vw - 32px);
+    padding: 10px 12px; font-size: 13px; color: var(--gray-400);
+  }
+  .panel h3 { margin: 0 0 6px; font-size: 13px; color: var(--gray-100); font-weight: 600; }
+  .panel .row { display: flex; gap: 6px; align-items: center; margin: 6px 0; flex-wrap: wrap; }
+  .chip {
+    background: var(--gray-800); color: var(--gray-100); border: 1px solid var(--gray-700);
+    border-radius: var(--radius); padding: 2px 6px; font-family: ui-monospace, Consolas, monospace; font-size: 12px;
+  }
+  .chip:hover { border-color: var(--gray-500); }
+  .panel input[type=range] { flex: 1; }
+  .panel label { display: flex; gap: 6px; align-items: center; }
+  @media (max-width: 640px) {
+    .calc { top: 120px; transform: translateX(-50%); }
+    .panel { position: static; margin-top: 260px; width: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="banner"><b>MOCKUP</b>: KamilChowaniec fork's "Currency calculator" widget (commit 7ff1be35), redrawn as static HTML for evaluation. Not part of the app. Icons and the background are placeholders.</div>
+
+<div class="stage">
+  <!-- Widget menu -->
+  <div class="widget-default-style menu" aria-label="Widget menu">
+    <button class="menu-btn" title="Settings">
+      <svg viewBox="0 0 512 512"><path d="M487 316l-42-24a190 190 0 000-72l42-24c5-3 7-9 5-14a250 250 0 00-54-94c-4-4-10-5-15-2l-42 24a186 186 0 00-62-36V26c0-6-4-11-10-12a252 252 0 00-108 0c-6 1-10 6-10 12v48c-23 8-44 20-62 36L47 86c-5-3-11-2-15 2a250 250 0 00-54 94c-2 5 0 11 5 14l42 24a190 190 0 000 72l-42 24c-5 3-7 9-5 14 11 35 30 67 54 94 4 4 10 5 15 2l42-24c18 16 39 28 62 36v48c0 6 4 11 10 12 36 8 73 8 108 0 6-1 10-6 10-12v-48c23-8 44-20 62-36l42 24c5 3 11 2 15-2a250 250 0 0054-94c2-5 0-11-5-14zM256 336a80 80 0 110-160 80 80 0 010 160z" transform="translate(0 0) scale(.9) translate(28 28)"/></svg>
+    </button>
+    <button class="menu-btn" title="Item search">
+      <svg viewBox="0 0 512 512"><path d="M505 442L405 342c-4-4-10-7-17-7h-16a207 207 0 10-37 37v16c0 7 3 13 7 17l100 100c9 9 25 9 34 0l29-29c9-10 9-25 0-34zM208 336a128 128 0 110-256 128 128 0 010 256z"/></svg>
+    </button>
+    <button class="menu-btn on" id="calcToggle" title="Calculator (new)">
+      <svg viewBox="0 0 448 512"><path d="M400 0H48C22 0 0 22 0 48v416c0 26 22 48 48 48h352c26 0 48-22 48-48V48c0-26-22-48-48-48zM128 435c0 7-6 13-13 13H77c-7 0-13-6-13-13v-38c0-7 6-13 13-13h38c7 0 13 6 13 13v38zm0-128c0 7-6 13-13 13H77c-7 0-13-6-13-13v-38c0-7 6-13 13-13h38c7 0 13 6 13 13v38zm128 128c0 7-6 13-13 13h-38c-7 0-13-6-13-13v-38c0-7 6-13 13-13h38c7 0 13 6 13 13v38zm0-128c0 7-6 13-13 13h-38c-7 0-13-6-13-13v-38c0-7 6-13 13-13h38c7 0 13 6 13 13v38zm128 128c0 7-6 13-13 13h-38c-7 0-13-6-13-13V269c0-7 6-13 13-13h38c7 0 13 6 13 13v166zm0-256c0 7-6 13-13 13H77c-7 0-13-6-13-13V77c0-7 6-13 13-13h294c7 0 13 6 13 13v102z"/></svg>
+    </button>
+    <button class="menu-more" title="More">&#8943;</button>
+  </div>
+
+  <!-- Calculator widget -->
+  <div class="widget-default-style calc" id="calc">
+    <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
+    <div class="widget-default-style head">
+      <div class="side" id="rate"></div>
+      <div class="title">Calculator</div>
+      <div style="flex:1"></div>
+    </div>
+    <div class="input-wrap" id="inputWrap">
+      <input id="expr" type="text" spellcheck="false" placeholder="Currency equation" value="3d + 45c" autocomplete="off">
+    </div>
+    <div class="grid">
+      <div class="cell span3" id="outSplit"></div>
+      <div class="cell end" id="outDiv"></div>
+      <div class="cell eq">=</div>
+      <div class="cell start" id="outChaos"></div>
+    </div>
+  </div>
+
+  <!-- Mockup controls (not part of the widget) -->
+  <div class="widget-default-style panel">
+    <h3>Mockup controls</h3>
+    <div>Try an example:</div>
+    <div class="row" id="examples"></div>
+    <div class="row">
+      <label for="rateIn">Divine rate</label>
+      <input id="rateIn" type="range" min="80" max="400" value="212">
+      <span id="rateVal" class="chip">212c</span>
+    </div>
+    <div class="row">
+      <label><input type="checkbox" id="loading"> poe.ninja still loading</label>
+    </div>
+    <div style="margin-top:6px;color:var(--gray-600)">Units: <b>c</b> chaos, <b>d</b> divine. A number with no unit counts as chaos. An invalid expression keeps the last result, as the fork does.</div>
+  </div>
+</div>
+
+<script>
+// Port of the fork's mathParser.ts (shunting-yard, unary +/-, unit suffixes)
+const OPS = {
+  'u_+': { f: a => a, p: 3, n: 1 }, 'u_-': { f: a => -a, p: 3, n: 1 },
+  '+': { f: (a, b) => a + b, p: 1, n: 2 }, '-': { f: (a, b) => a - b, p: 1, n: 2 },
+  '*': { f: (a, b) => a * b, p: 2, n: 2 }, '/': { f: (a, b) => a / b, p: 2, n: 2 }
+};
+function evaluate(expr, units) {
+  try {
+    const vals = [], ops = [];
+    const apply = op => OPS[op].n === 1 ? OPS[op].f(vals.pop()) : OPS[op].f(...vals.splice(-2));
+    const prec = op => (OPS[op] ? OPS[op].p : 0);
+    const until = pred => { while (ops.length && pred(ops[ops.length - 1])) vals.push(apply(ops.pop())); };
+    const re = new RegExp('^(\\d+(?:\\.\\d+)?|\\.\\d+)((?:' + Object.keys(units).join('|') + ')?)$');
+    const tokens = expr.replace(/\s/g, '').split(/(\+|-|\*|\/|\(|\))/).filter(Boolean);
+    let prev = '(', prev2 = '(';
+    for (let tok of tokens) {
+      if ((tok === '-' || tok === '+') && [...Object.keys(OPS), '('].includes(prev)) {
+        tok = 'u_' + tok;
+        if (tok === 'u_-' && prev === tok) { prev = prev2; ops.pop(); continue; }
+        else if (tok === 'u_+') continue;
+      }
+      if (tok in OPS) { until(op => prec(op) >= prec(tok)); ops.push(tok); }
+      else if (tok === '(') ops.push(tok);
+      else if (tok === ')') { until(op => op !== '('); ops.pop(); }
+      else { const m = re.exec(tok.toLowerCase()); if (!m) throw 0; vals.push(Number(m[1]) * (units[m[2]] ?? 1)); }
+      prev2 = prev; prev = tok;
+    }
+    until(() => true);
+    return vals[0] ?? 0;
+  } catch (e) { return NaN; }
+}
+
+// Port of CurrencySplit.vue (greedy split, last currency gets rounded remainder)
+function split(amount, currencies, precision) {
+  let rem = amount;
+  const sorted = [...currencies].sort((a, b) => b.value - a.value);
+  return sorted.map((c, i) => {
+    let n = rem / c.value;
+    if (i === sorted.length - 1) n = +n.toFixed(precision);
+    else { n = Math.trunc(n); rem -= n * c.value; }
+    return { ...c, amount: n };
+  });
+}
+
+const DIV_SVG = '<svg class="orb" viewBox="0 0 32 32"><defs><radialGradient id="dg" cx="45%" cy="40%"><stop offset="0" stop-color="#fffbe8"/><stop offset=".55" stop-color="#e8d9a8"/><stop offset="1" stop-color="#8a7a4a"/></radialGradient></defs><circle cx="16" cy="16" r="11" fill="url(#dg)"/><path d="M16 7l3 9-3 9-3-9z" fill="#fff" opacity=".85"/><circle cx="16" cy="16" r="11" fill="none" stroke="#5a4d2a" stroke-width="1"/></svg>';
+const CHAOS_SVG = '<svg class="orb" viewBox="0 0 32 32"><defs><radialGradient id="cg" cx="45%" cy="40%"><stop offset="0" stop-color="#ffe9a0"/><stop offset=".6" stop-color="#c8902a"/><stop offset="1" stop-color="#5c3a0c"/></radialGradient></defs><circle cx="16" cy="16" r="11" fill="url(#cg)"/><path d="M16 8a8 8 0 016 13M16 24a8 8 0 01-6-13M10 12l2 4M22 20l-2-4" stroke="#3b2306" stroke-width="2" fill="none" stroke-linecap="round"/></svg>';
+
+const $ = id => document.getElementById(id);
+const state = { rate: 212, loading: false, last: 0 };
+
+const fmt = n => String(n);
+function cellHtml(parts) {
+  return parts.map(p => '<span>' + fmt(p.amount) + '</span>' + (p.name === 'd' ? DIV_SVG : CHAOS_SVG)).join('');
+}
+
+function render() {
+  const rate = state.loading ? 0 : Math.round(state.rate);
+  $('rate').innerHTML = rate
+    ? '<span title="Divine Orb price from poe.ninja">&#8644;</span> ' + rate
+    : (state.loading ? '<span class="spin">&#10227;</span>' : '<span style="width:2rem"></span>');
+
+  const v = evaluate($('expr').value, { c: 1, d: rate });
+  const valid = !isNaN(v);
+  if (valid) state.last = v;
+  $('inputWrap').classList.toggle('invalid', !valid);
+  const r = state.last;
+
+  const divine = { name: 'd', value: rate }, chaos = { name: 'c', value: 1 };
+  $('outSplit').innerHTML = cellHtml(split(r, [divine, chaos], 0));
+  $('outDiv').innerHTML = cellHtml(split(r, [divine], 2));
+  $('outChaos').innerHTML = cellHtml(split(r, [chaos], 0));
+}
+
+['3d + 45c', '(2.5d - 80c) / 4', '12 * 7c', '1.75d', '-1d + 300c', '650', '5div'].forEach(ex => {
+  const b = document.createElement('button');
+  b.className = 'chip'; b.textContent = ex;
+  b.onclick = () => { $('expr').value = ex; render(); $('expr').focus(); };
+  $('examples').appendChild(b);
+});
+$('expr').addEventListener('input', render);
+$('rateIn').addEventListener('input', e => { state.rate = +e.target.value; $('rateVal').textContent = state.rate + 'c'; render(); });
+$('loading').addEventListener('change', e => { state.loading = e.target.checked; render(); });
+$('calcToggle').addEventListener('click', e => {
+  const btn = e.currentTarget; btn.classList.toggle('on');
+  $('calc').classList.toggle('hidden', !btn.classList.contains('on'));
+});
+render();
+</script>
+</body>
+</html>
