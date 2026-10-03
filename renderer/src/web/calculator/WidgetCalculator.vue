@@ -11,7 +11,7 @@
       </div>
       <input v-model="expression" type="text" spellcheck="false"
         :placeholder="t('calculator.input')"
-        class="rounded bg-gray-800 text-gray-100 p-1 px-2 font-mono">
+        class="rounded bg-gray-700 text-gray-100 p-1 px-2 font-mono">
       <div v-if="error === 'no-rate'" class="text-orange-400 p-1 text-center">{{ t('calculator.no_rate') }}</div>
       <div v-else class="flex flex-col gap-1 text-gray-100" :class="{ 'opacity-50': error === 'invalid' }">
         <div v-if="split" class="flex items-center justify-center gap-1 rounded bg-gray-800 p-1 text-xl">
