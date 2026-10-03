@@ -352,6 +352,7 @@
     "loadout": "용병 스킬 구성"
   },
   "price_check": {
+    "default_settings": "기본 검색 필터",
     "name": "Price check",
     "hotkey" :"Auto-hide Mode",
     "hotkey_locked" :"Open without auto-hide",
