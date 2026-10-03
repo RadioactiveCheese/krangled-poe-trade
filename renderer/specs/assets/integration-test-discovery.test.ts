@@ -1,4 +1,4 @@
-import { mkdtempSync, rmSync, writeFileSync, mkdirSync } from 'node:fs'
+import { mkdtempSync, rmSync, writeFileSync, mkdirSync, readFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { basename, dirname, join, resolve } from 'node:path'
 import { spawnSync } from 'node:child_process'
@@ -28,6 +28,24 @@ it('discovers every supported integration filename without including fixtures or
   for (const name of [...names, 'chart-integration.spec.ts', 'fixture-integration.mjs.json']) writeFileSync(join(directory, name), '')
   mkdirSync(join(directory, 'directory-integration.mjs'))
   expect(discoverIntegrationTests(directory)).toEqual(names.map(name => join(directory, name)).sort())
+})
+
+it('excludes only discovered native suites from Vitest, retaining differently named regression suites', () => {
+  const script = JSON.parse(readFileSync(new URL('../../package.json', import.meta.url), 'utf8')).scripts.test as string
+  const patterns = [...script.matchAll(/--exclude "([^"]+)"/g)].map(match => match[1])
+  expect(patterns).toHaveLength(4)
+  const directory = temporaryDirectory()
+  const names = [
+    'chart-integration.mjs', 'chart-integration.spec.mjs', 'chart.integration.mjs', 'chart.integration.spec.mjs',
+    'chart-integration-regression.spec.mjs', 'chart.integration-regression.spec.mjs', 'chart-integration.spec.ts'
+  ]
+  for (const name of names) writeFileSync(join(directory, name), '')
+  const discovered = discoverIntegrationTests(directory)
+  for (const name of names) {
+    // These top-level glob patterns have one wildcard and a literal filename suffix.
+    const excluded = patterns.some(pattern => ('specs/' + name).endsWith(pattern.replace('specs/*', '')))
+    expect(excluded, name).toBe(discovered.includes(join(directory, name)))
+  }
 })
 
 it('finds repository tests from another working directory, including paths with spaces', () => {
