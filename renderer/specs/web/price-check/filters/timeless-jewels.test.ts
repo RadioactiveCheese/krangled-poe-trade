@@ -2,7 +2,8 @@
 
 import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { describe, expect, it, vi } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { mount, shallowMount } from '@vue/test-utils'
+import { nextTick, reactive } from 'vue'
 
 const dataLanguage = vi.hoisted(() => ({ value: 'en' }))
 
@@ -40,6 +41,7 @@ import { initUiModFilters } from '@/web/price-check/filters/create-stat-filters'
 import { createTradeRequest } from '@/web/price-check/trade/pathofexile-trade'
 import type { ItemFilters } from '@/web/price-check/filters/interfaces'
 import FilterGroup from '@/web/price-check/filters/FilterGroup.vue'
+import FiltersBlock from '@/web/price-check/filters/FiltersBlock.vue'
 
 function readStats (lang: string): Stat[] {
   return readFileSync(`public/data/${lang}/stats.ndjson`, 'utf8').trim().split(/\r?\n/).flatMap(line => {
@@ -140,5 +142,34 @@ describe('Timeless Jewel keystone alternatives', () => {
     const count = createTradeRequest(filters, [group]).query.stats.find(group => group.type === 'count')!
     expect(count.filters.filter(filter => !filter.disabled)).toHaveLength(2)
     wrapper.unmount()
+  })
+
+  it('keeps the selected count consistent with a group whose alternatives are all disabled', async () => {
+    const seed = rows.find(row => row.ref === families[0])!
+    const item = { ...jewel(seed), unknownModifiers: [] }
+    const stats = reactive(initUiModFilters(item, { searchStatRange: 10 }))
+    const group = stats.find(stat => stat.group === 'one')!
+    if (!group.group) throw new Error('Expected keystone group')
+    const wrapper = shallowMount(FiltersBlock, { props: { stats, item, filters, presets: [] } })
+    expect(wrapper.vm.totalSelectedMods).toBe(1)
+    group.stats.forEach(stat => { stat.disabled = true })
+    await nextTick()
+    expect(wrapper.vm.totalSelectedMods).toBe(0)
+    expect(createTradeRequest(filters, stats).query.stats.find(group => group.type === 'count')?.disabled).toBe(true)
+    group.stats[1].disabled = false
+    await nextTick()
+    expect(wrapper.vm.totalSelectedMods).toBe(1)
+    group.meta.disabled = true
+    await nextTick()
+    expect(wrapper.vm.totalSelectedMods).toBe(0)
+    wrapper.unmount()
+  })
+
+  it('translates the group heading in every supported locale', () => {
+    for (const lang of ['en', 'ru', 'ko', 'cmn-Hant']) {
+      const messages = JSON.parse(readFileSync(`public/data/${lang}/app_i18n.json`, 'utf8'))
+      expect(messages.item.count_one_group, lang).toBeTruthy()
+    }
+    expect(JSON.parse(readFileSync('public/data/cmn-Hant/app_i18n.json', 'utf8')).item.count_one_group).toBe('其中之一')
   })
 })

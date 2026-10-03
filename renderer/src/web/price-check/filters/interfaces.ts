@@ -132,6 +132,11 @@ export interface FilterGroup {
   stats: StatFilter[]
 }
 
+export function isFilterEnabled (filter: FilterOrGroup): boolean {
+  if (!filter.group) return !filter.disabled
+  return !filter.meta.disabled && (filter.group !== 'one' || filter.stats.some(stat => !stat.disabled))
+}
+
 export interface StatFilter {
   group?: never
   tradeId: string[]

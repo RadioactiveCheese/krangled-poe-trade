@@ -57,6 +57,9 @@
       "volatile": "可能是易變瓦爾寶珠效果。剪貼簿文字無法確定超出範圍數值的來源。",
       "reflecting": "可能是映像迷霧效果。剪貼簿文字無法確定超出範圍數值的來源。"
     },
+    "item": {
+      "count_one_group": "其中之一"
+    },
     "filters": {
       "mercenary_primary_no_support": "主要技能沒有輔助寶石"
     }
