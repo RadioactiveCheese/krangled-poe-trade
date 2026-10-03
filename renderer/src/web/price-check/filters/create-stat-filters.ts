@@ -477,7 +477,7 @@ function finalFilterTweaks (ctx: FiltersCreationContext) {
         filter.hidden = 'filters.hide_for_crafting'
       }
     } else if (filter.tag === FilterTag.Implicit) {
-      if (item.rarity === ItemRarity.Unique && !item.isCorrupted && item.category !== ItemCategory.Jewel) {
+      if (item.rarity === ItemRarity.Unique && !item.isCorrupted && item.category !== ItemCategory.Jewel && !filter.roll?.bounds) {
         filter.hidden = 'filters.hide_unique_base_implicit'
         filter.disabled = true
       }

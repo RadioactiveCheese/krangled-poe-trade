@@ -74,7 +74,7 @@
             :class="[$style['tag'], $style['tag-not']]">{{ t('filters.tag_not') }}</span>
           <span v-if="showTag"
             :class="[$style['tag'], $style[`tag-${tag}`]]">{{ t(`filters.tag_${tag.replace('-', '_')}`) }}{{ (filter.sources.length > 1) ? ` x ${filter.sources.length}` : null }}</span>
-          <filter-modifier-tiers v-if="!roll?.bounds" :filter="filter" :item="item" />
+          <filter-modifier-tiers v-if="!roll?.bounds || item.rarity !== ItemRarity.Unique" :filter="filter" :item="item" />
           <filter-modifier-item-has-empty :filter="filter" />
         </div>
         <stat-roll-slider v-if="roll && roll.bounds && item.rarity === ItemRarity.Unique"

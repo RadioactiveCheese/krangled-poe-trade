@@ -128,3 +128,16 @@ test('uses base percentile when fixed unique defence rolls are the only other so
   assert.equal(stats.find(stat => stat.tradeId[0] === 'item.energy_shield').hidden, 'filters.hide_variable_by_base_percentile_only')
   assert.equal(stats.find(stat => stat.tradeId[0] === 'item.base_percentile').hidden, undefined)
 })
+
+test('retains variable unique base implicits and hides constant base implicits', () => {
+  for (const [roll, hidden] of [['10(6-15)', undefined], ['10', 'filters.hide_unique_base_implicit']]) {
+    const item = ring("Ventor's Gamble", 'Gold Ring', `{ Implicit Modifier }\n${roll}% increased Rarity of Items found`)
+    const implicit = initUiModFilters(item, { searchStatRange: 10 }).find(stat => stat.tag === 'implicit')
+    assert.equal(implicit.hidden, hidden)
+    if (!hidden) {
+      assert.deepEqual(implicit.roll.bounds, { min: 6, max: 15 })
+      implicit.disabled = false
+      assert.equal(implicit.disabled, false)
+    }
+  }
+})
