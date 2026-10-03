@@ -105,3 +105,28 @@ test('does not interpret unsupported catalyst-like text or quality on a quiver',
   assert.equal(parse(clipboard('Broadhead Arrow Quiver', 'Quality (Life and Mana Modifiers): +20% (augmented)', true)).memoryStrands, 86)
 })
 
+test('retains catalyst-enhanced unique fixed rolls and corrupted activation after final filter rules', async () => {
+  await Data.loadForLang('en')
+  for (const isCorrupted of [false, true]) {
+    const item = parse(`Item Class: Rings
+Rarity: Unique
+Heartbound Loop
+Moonstone Ring
+--------
+Quality (Life and Mana Modifiers): +20% (augmented)
+--------
+Item Level: 84
+--------
+{ Unique Modifier — Life — 20% Increased }
++30 to maximum Life${isCorrupted ? '\n--------\nCorrupted' : ''}`)
+    const filters = initUiModFilters(item, { searchStatRange: 10 })
+    const life = filters.find(filter => filter.statRef === '+# to maximum Life')
+    assert.equal(life.hidden, undefined)
+    assert.equal(life.roll.value, 36)
+    assert.equal(life.roll.min, 36)
+    if (isCorrupted) assert.equal(life.disabled, false)
+    assert.equal(filters.find(filter => filter.sources[0]?.stat.stat.jewelleryQuality).hidden, 'hide_jewellery_quality')
+    assert.equal(createFilters(item, options).quality, undefined)
+  }
+})
+

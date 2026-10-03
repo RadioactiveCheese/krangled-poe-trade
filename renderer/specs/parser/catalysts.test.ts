@@ -5,12 +5,13 @@ import { StatBetter } from '@/assets/data'
 import { createVirtualItem, ItemRarity } from '@/parser/ParsedItem'
 import { ItemCategory } from '@/parser/meta'
 import { ModifierType, sumStatsByModType } from '@/parser/modifiers'
-import { calculatedStatToFilter } from '@/web/price-check/filters/create-stat-filters'
+import { initUiModFilters } from '@/web/price-check/filters/create-stat-filters'
 
 vi.mock('@/assets/data', async importOriginal => ({
   ...await importOriginal<typeof import('@/assets/data')>(),
   CLIENT_STRINGS: (await import('../../public/data/en/client_strings.js')).default
 }))
+vi.mock('@/web/price-check/filters/pseudo', () => ({ filterPseudo: () => {} }))
 
 describe('catalyst quality metadata', () => {
   it.each(['en', 'ru', 'cmn-Hant', 'ko'])('covers the full current official quality set and localized text in %s', language => {
@@ -28,18 +29,18 @@ describe('catalyst quality metadata', () => {
   })
 })
 
-function fixedRollFilter (category = ItemCategory.Ring, quality = 20, unscalable = false) {
+function fixedRollFilter (category = ItemCategory.Ring, quality = 20, unscalable = false, isCorrupted = false) {
   const matcher = { string: '#% increased maximum Life' }
   const stat: Stat = { ref: '#% increased maximum Life', better: StatBetter.PositiveRoll, matchers: [matcher], trade: { ids: { explicit: ['explicit.life'] } } }
   const modifier = { info: { type: ModifierType.Explicit, rollIncr: 20, tags: ['Life'] }, stats: [{
     stat, translation: matcher, roll: { value: 30, min: 30, max: 30, dp: false, unscalable }
   }] }
   const item = createVirtualItem({
-    info: { name: 'Test', refName: 'Test', namespace: 'UNIQUE', unique: { base: 'Gold Ring' } },
-    rarity: ItemRarity.Unique, category, quality, newMods: [modifier]
+    info: { name: 'Test', refName: 'Test', namespace: 'UNIQUE', unique: { base: 'Gold Ring', fixedStats: [stat.ref] } },
+    rarity: ItemRarity.Unique, category, quality, isCorrupted, newMods: [modifier]
   })
-  const [calc] = sumStatsByModType(item.newMods)
-  return calculatedStatToFilter(calc, 10, item)
+  item.statsByType = sumStatsByModType(item.newMods)
+  return initUiModFilters(item, { searchStatRange: 10 }).find(filter => filter.statRef === stat.ref)!
 }
 
 describe('catalyst-enhanced fixed unique rolls', () => {
@@ -54,5 +55,11 @@ describe('catalyst-enhanced fixed unique rolls', () => {
     expect(fixedRollFilter(ItemCategory.Ring, 0).hidden).toBe('filters.hide_const_roll')
     expect(fixedRollFilter(ItemCategory.Gloves).hidden).toBe('filters.hide_const_roll')
     expect(fixedRollFilter(ItemCategory.Ring, 20, true).hidden).toBe('filters.hide_const_roll')
+  })
+
+  it('retains activation of scalable corrupted rolls alongside catalyst visibility', () => {
+    const filter = fixedRollFilter(ItemCategory.Ring, 20, false, true)
+    expect(filter.hidden).toBeUndefined()
+    expect(filter.disabled).toBe(false)
   })
 })
