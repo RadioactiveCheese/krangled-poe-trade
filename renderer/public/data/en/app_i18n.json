@@ -166,6 +166,10 @@
     "reflecting": "Possible Reflecting Mist effect. Clipboard text does not identify the origin of an out-of-range roll."
   },
   "filters": {
+    "hide_unique_base_implicit": "Implicit belongs to the unique item base",
+    "hide_variable_by_base_percentile_only": "Defence varies only with base percentile",
+    "hide_redundant": "Defence filters already cover base percentile",
+    "hide_enchant_meta_stat": "Quality effect is included in item properties",
     "selected_some": "{0} of {1}, stats",
     "selected_none": "Stats ignored",
     "hidden_toggle": "Hidden",

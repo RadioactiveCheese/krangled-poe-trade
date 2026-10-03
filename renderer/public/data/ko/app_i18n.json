@@ -151,6 +151,10 @@
     "reflecting": "반사 안개 효과일 수 있습니다. 클립보드 텍스트만으로 범위 밖 수치의 원인을 확인할 수 없습니다."
   },
   "filters": {
+    "hide_unique_base_implicit": "고유 아이템의 기본 유형 속성",
+    "hide_variable_by_base_percentile_only": "기본 백분위에 따라서만 변하는 방어력",
+    "hide_redundant": "방어 필터에 이미 기본 백분위가 반영됨",
+    "hide_enchant_meta_stat": "퀄리티 효과가 아이템 속성에 반영됨",
     "selected_some": "{1} 중 {0}개 선택",
     "selected_none": "스탯 미선택",
     "hidden_toggle": "숨겨진",
