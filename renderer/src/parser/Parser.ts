@@ -320,10 +320,21 @@ function parseFractured (item: ParserState) {
 }
 
 function pickCorrectVariant (item: ParserState) {
-  if (!item.info.disc) return
+  item.info = pickVariant(item.infoVariants, item) ?? item.infoVariants[0]
+  if (item.info.unique) {
+    const bases = ITEM_BY_REF('ITEM', item.info.unique.base)
+    if (bases) {
+      item.uniqueBase = pickVariant(bases, item) ?? bases[0]
+    }
+  }
+}
 
-  for (const variant of item.infoVariants) {
-    const cond = variant.disc!
+function pickVariant (variants: BaseType[], item: ParsedItem): BaseType | undefined {
+  if (variants.length <= 1) return variants[0]
+
+  for (const variant of variants) {
+    const cond = variant.disc
+    if (!cond) return variant
 
     if (cond.propAR && !item.armourAR) continue
     if (cond.propEV && !item.armourEV) continue
@@ -348,7 +359,7 @@ function pickCorrectVariant (item: ParserState) {
 
     if (cond.sectionText && !item.rawText.includes(cond.sectionText)) continue
 
-    item.info = variant
+    return variant
   }
 
   // it may happen that we don't find correct variant
@@ -1297,9 +1308,7 @@ function transformToLegacyModifiers (item: ParsedItem) {
 }
 
 function calcBasePercentile (item: ParsedItem) {
-  const info = item.info.unique
-    ? ITEM_BY_REF('ITEM', item.info.unique.base)![0].armour
-    : item.info.armour
+  const info = item.uniqueBase?.armour ?? item.info.armour
   if (!info) return
 
   // Base percentile is the same for all defences.

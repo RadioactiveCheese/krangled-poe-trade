@@ -77,7 +77,7 @@
           <filter-modifier-tiers v-if="!roll?.bounds" :filter="filter" :item="item" />
           <filter-modifier-item-has-empty :filter="filter" />
         </div>
-        <stat-roll-slider v-if="roll && roll.bounds"
+        <stat-roll-slider v-if="roll && roll.bounds && item.rarity === ItemRarity.Unique"
           class="ml-2 mr-4" style="width: 12.5rem;"
           v-model="sliderValue"
           :roll="roll.value"
@@ -102,6 +102,7 @@ import FilterModifierItemHasEmpty from './FilterModifierItemHasEmpty.vue'
 import FilterModifierTiers from './FilterModifierTiers.vue'
 import { AppConfig } from '@/web/Config'
 import { ItemCategory, ItemRarity, ParsedItem } from '@/parser'
+import { getTradeMaxQuality } from '@/parser/calc-q20'
 import { FilterTag, StatFilter, INTERNAL_TRADE_IDS } from './interfaces'
 import SourceInfo from './SourceInfo.vue'
 import { SearchMode as MercSearchMode } from './pseudo/mercenary.js'
@@ -158,9 +159,7 @@ export default defineComponent({
       props.item.info.refName !== 'Mirrored Tablet' &&
       props.item.info.refName !== 'Filled Coffin' &&
       props.item.category !== ItemCategory.Gem &&
-      !(props.item.rarity === ItemRarity.Unique && (
-        props.filter.tag === FilterTag.Explicit ||
-        props.filter.tag === FilterTag.Pseudo))
+      !(props.item.rarity === ItemRarity.Unique && props.filter.tag === FilterTag.Explicit && (props.filter.roll?.bounds || props.filter.hidden) && !props.grouped)
     )
 
     const showQ20Notice = computed(() => {
@@ -174,7 +173,7 @@ export default defineComponent({
       ].includes(props.filter.tradeId[0])
     })
 
-    const calcQuality = computed(() => Math.max(20, props.item.quality || 0))
+    const calcQuality = computed(() => getTradeMaxQuality(props.item))
 
     const inputMinEl = ref<HTMLInputElement | null>(null)
     const inputMaxEl = ref<HTMLInputElement | null>(null)
@@ -255,6 +254,7 @@ export default defineComponent({
     const { t } = useI18n()
 
     return {
+      ItemRarity,
       t,
       showTag,
       showQ20Notice,

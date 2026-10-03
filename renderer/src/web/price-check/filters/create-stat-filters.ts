@@ -1,11 +1,12 @@
 import { ParsedItem, ItemRarity, ItemCategory } from '@/parser'
 import { ModifierType, StatCalculated, statSourcesTotal, translateStatWithRoll } from '@/parser/modifiers'
+import { getPropQuality, QUALITY_CHANGING_ENCHANT } from '@/parser/calc-q20'
 import { percentRoll, percentRollDelta, roundRoll } from './util'
 import { FilterTag, ItemHasEmptyModifier, StatFilter } from './interfaces'
 import { filterPseudo } from './pseudo'
 import { applyRules as applyAtzoatlRules } from './pseudo/atzoatl-rules'
 import { applyRules as applyMirroredTabletRules } from './pseudo/reflection-rules'
-import { filterItemProp, filterBasePercentile, filterMemoryStrands } from './pseudo/item-property'
+import { filterItemProp, filterBasePercentile, filterMemoryStrands, BASE_PCTL_AFFECTED_IDS } from './pseudo/item-property'
 import { mapProps, valdoBadMods, chartProps } from './pseudo/maps'
 import { applyFlaskHybridMod } from './pseudo/flasks'
 import { applyHeistRules } from './pseudo/heist'
@@ -28,12 +29,6 @@ export function createExactStatFilters (
     item.mapBlighted ||
     item.category === ItemCategory.Invitation
   ) return []
-  if (
-    item.isUnidentified &&
-    item.rarity === ItemRarity.Unique &&
-    !item.isSynthesised
-  ) return []
-
   const keepByType = [ModifierType.Pseudo, ModifierType.Fractured, ModifierType.Enchant, ModifierType.Necropolis, ModifierType.Imbued]
   const isChart = item.category === ItemCategory.Chart
 
@@ -177,13 +172,13 @@ export function initUiModFilters (
     })
   }
 
+  filterItemProp(ctx)
+  if (item.rarity === ItemRarity.Unique) {
+    filterBasePercentile(ctx)
+  }
+  filterMemoryStrands(ctx, 'hide_memory_strands')
   if (item.info.refName !== 'Split Personality') {
-    filterItemProp(ctx)
     filterPseudo(ctx)
-    if (item.info.refName === "Emperor's Vigilance") {
-      filterBasePercentile(ctx)
-    }
-    filterMemoryStrands(ctx, 'hide_memory_strands')
   }
 
   if (!item.isCorrupted && !item.isMirrored) {
@@ -258,8 +253,15 @@ export function calculatedStatToFilter (
     }
   }
 
-  if (type === ModifierType.Explicit && item.info.unique?.fixedStats) {
-    if (!item.info.unique.fixedStats.includes(filter.statRef)) {
+  if (type === ModifierType.Explicit && item.info.unique) {
+    if (item.info.unique.fixedStats) {
+      if (!item.info.unique.fixedStats.includes(filter.statRef)) {
+        filter.tag = FilterTag.Variant
+      }
+    } else if (sources.some(source =>
+      source.modifier.info.generation === 'prefix' ||
+      source.modifier.info.generation === 'suffix'
+    )) {
       filter.tag = FilterTag.Variant
     }
   }
@@ -327,7 +329,7 @@ export function calculatedStatToFilter (
       min: undefined,
       max: undefined,
       default: filterDefault,
-      bounds: (item.rarity === ItemRarity.Unique && roll.min !== roll.max && calc.stat.better !== StatBetter.NotComparable)
+      bounds: (roll.min !== roll.max && calc.stat.better !== StatBetter.NotComparable)
         ? filterBounds
         : undefined,
       dp: dp,
@@ -343,20 +345,14 @@ export function calculatedStatToFilter (
     }
   }
 
-  hideNotVariableStat(filter, item)
-
   return filter
 }
 
 function hideNotVariableStat (filter: StatFilter, item: ParsedItem) {
-  if (item.rarity !== ItemRarity.Unique) return
-  if (filter.tag === FilterTag.Implicit &&
-    item.category === ItemCategory.Jewel) return
-  if (
-    filter.tag !== FilterTag.Implicit &&
+  if (item.rarity !== ItemRarity.Unique || (
     filter.tag !== FilterTag.Explicit &&
-    filter.tag !== FilterTag.Pseudo
-  ) return
+    filter.tag !== FilterTag.Property
+  )) return
 
   // Scalable rolls remain relevant on corrupted uniques even when their
   // uncorrupted values are constant.
@@ -367,13 +363,27 @@ function hideNotVariableStat (filter: StatFilter, item: ParsedItem) {
 
   if (!filter.roll) {
     filter.hidden = 'filters.hide_const_roll'
+    filter.disabled = true
   } else if (!filter.roll.bounds) {
     filter.roll.min = undefined
     filter.roll.max = undefined
     filter.hidden = 'filters.hide_const_roll'
+    filter.disabled = true
+  } else if (
+    BASE_PCTL_AFFECTED_IDS.includes(filter.tradeId[0]) &&
+    filter.sources.every(source => source.stat.roll?.min === source.stat.roll?.max) &&
+    getPropQuality(item) < 21
+  ) {
+    filter.roll.min = undefined
+    filter.roll.max = undefined
+    filter.hidden = 'filters.hide_variable_by_base_percentile_only'
+    filter.disabled = true
   }
 
-  if (item.isFoulborn && filter.tag === FilterTag.Explicit) {
+  if (item.isFoulborn && (
+    filter.tag === FilterTag.Explicit ||
+    (filter.tag === FilterTag.Property && filter.sources.length)
+  )) {
     // some mod not being replaced with foulborn one can be important
     filter.hidden = undefined
     filter.disabled = false
@@ -453,11 +463,23 @@ function finalFilterTweaks (ctx: FiltersCreationContext) {
   }
 
   for (const filter of ctx.filters) {
-    if (filter.tag === FilterTag.Fractured) {
+    hideNotVariableStat(filter, item)
+
+    if (filter.tag === FilterTag.Enchant) {
+      if (QUALITY_CHANGING_ENCHANT.includes(filter.statRef)) {
+        filter.hidden = 'filters.hide_enchant_meta_stat'
+        filter.disabled = true
+      }
+    } else if (filter.tag === FilterTag.Fractured) {
       const mod = ctx.item.statsByType.find(mod => mod.stat.ref === filter.statRef)!
       if (mod.stat.trade.ids[ModifierType.Explicit]) {
         // hide only if fractured mod has corresponding explicit variant
         filter.hidden = 'filters.hide_for_crafting'
+      }
+    } else if (filter.tag === FilterTag.Implicit) {
+      if (item.rarity === ItemRarity.Unique && !item.isCorrupted && item.category !== ItemCategory.Jewel) {
+        filter.hidden = 'filters.hide_unique_base_implicit'
+        filter.disabled = true
       }
     } else if (
       filter.tag === FilterTag.Foulborn ||
@@ -466,6 +488,13 @@ function finalFilterTweaks (ctx: FiltersCreationContext) {
     ) {
       filter.disabled = false
     }
+  }
+
+  const basePercentile = ctx.filters.find(filter => filter.tradeId[0] === 'item.base_percentile')
+  if (basePercentile && item.rarity === ItemRarity.Unique && ctx.filters.some(filter =>
+    BASE_PCTL_AFFECTED_IDS.includes(filter.tradeId[0]) && !filter.hidden)) {
+    basePercentile.hidden = 'filters.hide_redundant'
+    basePercentile.disabled = true
   }
 
   if (item.rarity === ItemRarity.Unique) {

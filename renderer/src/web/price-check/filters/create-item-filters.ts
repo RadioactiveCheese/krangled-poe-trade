@@ -1,6 +1,7 @@
 import type { ItemFilters } from './interfaces'
 import { ParsedItem, ItemCategory, ItemRarity } from '@/parser'
 import { MAGIC_ONLY_OR_UNIQUE_ITEM, CONSUMABLE_CRAFTABLE_ITEM } from '@/parser/meta'
+import { getPropQuality } from '@/parser/calc-q20'
 import { tradeTag } from '../trade/common'
 import { ModifierType } from '@/parser/modifiers'
 import { BaseType, ITEM_BY_REF } from '@/assets/data'
@@ -171,7 +172,7 @@ export function createFilters (
       filters.searchExact = {
         name: item.info.name,
         nameTrade: t(opts, item.info),
-        baseTypeTrade: t(opts, ITEM_BY_REF('ITEM', item.info.unique.base)![0])
+        baseTypeTrade: t(opts, item.uniqueBase ?? ITEM_BY_REF('ITEM', item.info.unique.base)![0])
       }
     } else {
       filters.searchExact = {
@@ -180,7 +181,7 @@ export function createFilters (
       }
     }
 
-    if (item.info.refName === 'Map' || item.info.unique?.base === 'Map') {
+    if (item.info.refName === 'Map' || (item.uniqueBase?.refName ?? item.info.unique?.base) === 'Map') {
       filters.searchExact.discriminatorTrade = 'map'
     }
 
@@ -228,7 +229,7 @@ export function createFilters (
     filters.searchExact = {
       name: item.info.name,
       nameTrade: t(opts, item.info),
-      baseTypeTrade: t(opts, ITEM_BY_REF('ITEM', item.info.unique.base)![0])
+      baseTypeTrade: t(opts, item.uniqueBase ?? ITEM_BY_REF('ITEM', item.info.unique.base)![0])
     }
   } else if (item.category === ItemCategory.Chart) {
     filters.searchRelaxed = {
@@ -289,7 +290,7 @@ export function createFilters (
   if (item.quality && item.quality >= 20) {
     if (
       item.category === ItemCategory.Flask || item.category === ItemCategory.Tincture ||
-      opts.exact // for Weapons & Armour
+      getPropQuality(item) === 0 || opts.exact // for Weapons & Armour
     ) {
       filters.quality = {
         value: item.quality,
