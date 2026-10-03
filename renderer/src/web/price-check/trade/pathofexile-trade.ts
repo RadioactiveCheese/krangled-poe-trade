@@ -52,7 +52,9 @@ export const CATEGORY_TO_TRADE_ID = new Map([
   [ItemCategory.Trinket, 'accessory.trinket'],
   [ItemCategory.SanctumRelic, 'sanctum.relic'],
   [ItemCategory.Tincture, 'tincture'],
-  [ItemCategory.Charm, 'azmeri.charm'],
+  // ItemCategory.Charm is intentionally unmapped: the PoE1 trade API has no charm
+  // category (checked against /api/trade/data/filters on 2026-10-03), so charm
+  // searches send no category filter.
   [ItemCategory.Idol, 'idol'],
   [ItemCategory.Chart, 'chart'],
   [ItemCategory.Graft, 'graft']
@@ -139,7 +141,7 @@ interface TradeRequest {
           identified?: FilterBoolean
           stack_size?: FilterRange
           memory_level?: FilterRange
-          foulborn_item?: FilterBoolean
+          mutated?: FilterBoolean // shown as "Foulborn" on the trade site
           vestigial?: FilterBoolean
         }
       }
@@ -190,11 +192,6 @@ interface TradeRequest {
           heist_lockpicking?: FilterRange
           heist_perception?: FilterRange
           heist_trap_disarmament?: FilterRange
-        }
-      }
-      sentinel_filters?: {
-        filters: {
-          sentinel_durability?: FilterRange
         }
       }
       trade_filters?: {
@@ -353,7 +350,7 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
     propSet(query.filters, 'misc_filters.filters.split.option', String(false))
   }
   if (filters.foulborn?.value === false) {
-    propSet(query.filters, 'misc_filters.filters.foulborn_item.option', String(false))
+    propSet(query.filters, 'misc_filters.filters.mutated.option', String(false))
   }
   if (filters.vestigial) {
     propSet(query.filters, 'misc_filters.filters.vestigial.option', String(filters.vestigial.value))
@@ -420,10 +417,6 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
   const { chartShape } = filters
   if (chartShape && !chartShape.disabled) {
     propSet(query.filters, 'map_filters.filters.chart_shape.option', chartShape.value)
-  }
-
-  if (filters.sentinelCharge && !filters.sentinelCharge.disabled) {
-    propSet(query.filters, 'sentinel_filters.filters.sentinel_durability.min', filters.sentinelCharge.value)
   }
 
   for (const stat of stats) {
@@ -662,7 +655,12 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
               notStat.statRef === family[0].ref
             ))
           let tier3Count = (typeof stat.roll?.min === 'number') ? Math.min(Math.max(stat.roll.min, 0), 5) : 0
-          if (forceEnabled) {
+          const guaranteedMaximumSupports =
+            enabledRequiredGems.filter(stat => stat.mercenary?.maxTier).length +
+            (enabledOptionalGems.length >= 2
+              ? Math.max(0, enabledOptionalGems.filter(stat => stat.mercenary?.maxTier).length - 1)
+              : 0)
+          if (forceEnabled || guaranteedMaximumSupports >= tier3Count) {
             tier3Count = 0
           }
 
