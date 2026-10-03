@@ -59,6 +59,7 @@
   "Phantasmal": "Фантомный",
 
   "item": {
+    "disenchanting": "Распыление (оценка)",
     "not_group": "Ни одного из",
     "prop_quality": "К-во: {0}%",
     "base_percentile": "Ролл значений базы: {0}%",

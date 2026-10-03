@@ -15,6 +15,7 @@ import { magicBasetype } from './magic-name'
 import { isModInfoLine, groupLinesByMod, parseModInfoLine, parseModType, ModifierInfo, ParsedModifier, ENCHANT_LINE, SCOURGE_LINE, IMPLICIT_LINE } from './advanced-mod-desc'
 import { calcPropPercentile, QUALITY_STATS } from './calc-q20'
 import { resolveChartArea, resolveChartShape } from './chart'
+import { calcDisenchantDust } from './calc-disenchant-dust'
 
 type SectionParseResult =
   | 'SECTION_PARSED'
@@ -90,8 +91,23 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   { virtual: parseFractured },
   { virtual: parseBlightedMap },
   { virtual: pickCorrectVariant },
+  { virtual: updateDisenchantDust },
   { virtual: calcBasePercentile }
 ]
+
+function updateDisenchantDust (item: ParsedItem) {
+  item.dustEquivalent = calcDisenchantDust(item)
+}
+
+export function makeIdentifiedUnique (uniqueInfo: BaseType, unidentified: ParsedItem): ParsedItem {
+  const preview: ParsedItem = {
+    ...unidentified,
+    info: uniqueInfo,
+    uniqueBase: unidentified.uniqueBase ?? unidentified.info
+  }
+  updateDisenchantDust(preview)
+  return Object.freeze(preview)
+}
 
 export function parseClipboard (clipboard: string): Result<ParsedItem, string> {
   try {
