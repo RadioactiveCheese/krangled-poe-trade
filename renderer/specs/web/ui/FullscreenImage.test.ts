@@ -50,6 +50,17 @@ describe('FullscreenImage deliberate entry', () => {
     expect(enlarged()).toBe(1)
   })
 
+  it('can preserve a complete screenshot in a differently shaped preview frame', async () => {
+    const wrapper = image()
+    expect(wrapper.find('img').element.style.objectFit).toBe('cover')
+    await wrapper.setProps({ fit: 'contain' })
+    expect(wrapper.find('img').element.style.objectFit).toBe('contain')
+    await wrapper.trigger('click')
+    expect(enlarged()).toBe(1)
+    // Fullscreen retains its own natural sizing; preview-fit only affects the thumbnail.
+    expect(document.body.querySelector('img')!.style.objectFit).toBe('')
+  })
+
   it('does not enlarge while disabled for editing or moving', async () => {
     const wrapper = image(true)
     await wrapper.trigger('mousemove', { clientX: 110, clientY: 150, movementX: 30, movementY: 0 })

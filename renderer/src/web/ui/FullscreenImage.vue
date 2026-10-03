@@ -3,7 +3,7 @@
     @mousemove="handleMouseMove"
     @mouseleave="handleMouseLeave"
     @click="handleClick">
-    <img :class="$style.img" :src="resolvedSrc">
+    <img :class="$style.img" :src="resolvedSrc" :style="{ objectFit: fit ?? 'cover' }">
     <teleport v-if="isHovered && !disabled" to="body">
       <div :class="$style.imgFullscreenWrapper">
         <img :class="$style.imgFullscreen" :src="resolvedSrc">
@@ -18,6 +18,7 @@ import { defineProps, shallowRef, computed } from 'vue'
 const props = defineProps<{
   src: string
   disabled?: boolean
+  fit?: 'cover' | 'contain'
 }>()
 
 const isHovered = shallowRef(false)
@@ -71,7 +72,6 @@ const resolvedSrc = computed(() => {
 .img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 
 .imgFullscreenWrapper {

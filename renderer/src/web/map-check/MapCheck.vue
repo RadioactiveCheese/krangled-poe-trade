@@ -14,7 +14,7 @@
       </div>
     </div>
     <FullscreenImage v-if="image"
-      :class="$style.screenshot" :src="image" />
+      :class="$style.screenshot" :src="image" fit="contain" />
     <div v-if="!mapStats.length" class="px-8 py-2">
       {{ t('map_check.no_mods') }}
     </div>
