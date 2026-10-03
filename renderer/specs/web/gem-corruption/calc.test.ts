@@ -5,7 +5,7 @@ import type { BaseType } from '@/assets/data'
 import { splitJsonBlob, findDenseInfo } from '@/web/background/split-poeninja-overviews'
 import { forSkillGem } from '@/web/price-check/trends/gem-variant'
 import {
-  evaluateGem, evaluateGems, filterRows, buyItem, sellItem,
+  evaluateGem, evaluateGems, filterRows, buyItem, buyQuality, isQualityIrrelevant, sellItem,
   MAX_PRICE_MULTIPLE, DEFAULT_MIN_RATIO,
   type PriceLookup, type PriceQuery, type ExclusionReason, type GemFlipRow
 } from '@/web/gem-corruption/calc'
@@ -244,6 +244,15 @@ describe('coverage of every gem against live poe.ninja data', () => {
       expect(byName.get(name), name).toMatchObject({ buyRoute: 'full-quality', unconfirmed: false })
     }
     expect(byName.get('Brand Recall')).toMatchObject({ buyRoute: 'gemcutter', fullQualityPrice: undefined, unconfirmed: true })
+  })
+
+  it('opens Buy without a quality filter when any quality will do', () => {
+    const byName = new Map(rows.map(r => [r.gem.refName, r]))
+    expect(buyQuality(byName.get('Enlighten Support')!)).toBe(0)
+    expect(buyQuality(byName.get('Awakened Enlighten Support')!)).toBe(0)
+    expect(buyQuality(byName.get('Brand Recall')!)).toBe(0)
+    const fullQuality = rows.find(r => r.buyRoute === 'full-quality' && !isQualityIrrelevant(r.gem))!
+    expect(buyQuality(fullQuality)).toBe(20)
     expect(byName.get('Greater Multistrike Support')).toMatchObject({ unconfirmed: false })
   })
 

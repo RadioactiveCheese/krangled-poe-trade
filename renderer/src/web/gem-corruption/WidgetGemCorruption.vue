@@ -89,7 +89,7 @@ import { ITEM_BY_REF, ITEMS_ITERATOR } from '@/assets/data'
 import type { ParsedItem } from '@/parser'
 import type { WidgetManager } from '../overlay/interfaces.js'
 import { GEM_CORRUPTION_DEFAULTS, type GemCorruptionWidget } from './widget.js'
-import { evaluateGems, filterRows, buyItem, sellItem, type GemFlipRow } from './calc'
+import { evaluateGems, filterRows, buyItem, buyQuality, sellItem, type GemFlipRow } from './calc'
 
 import Widget from '../overlay/Widget.vue'
 
@@ -187,8 +187,7 @@ function formatPercent (ratio: number) {
 }
 
 function openBuy (row: GemFlipRow, e: MouseEvent) {
-  // Via prisms, search any quality: the plan is to top it up to 20% yourself.
-  dispatchPriceCheck(buyItem(row.gem, row.buyRoute === 'gemcutter' ? 0 : 20), e)
+  dispatchPriceCheck(buyItem(row.gem, buyQuality(row)), e)
 }
 
 function openSell (row: GemFlipRow, e: MouseEvent) {

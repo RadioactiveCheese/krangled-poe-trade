@@ -91,6 +91,15 @@ export function buyItem (gem: BaseType, quality: number): ParsedItem {
   })
 }
 
+/**
+ * Quality for the Buy price check. Via prisms, any quality will do (you top it up
+ * yourself); for gems where quality doesn't matter, any quality is equivalent.
+ * Quality 0 means price check adds no quality filter.
+ */
+export function buyQuality (row: GemFlipRow): number {
+  return (row.buyRoute === 'gemcutter' || isQualityIrrelevant(row.gem)) ? 0 : 20
+}
+
 /** The outcome being priced: max level + 1, 20% quality, corrupted. */
 export function sellItem (gem: BaseType): ParsedItem {
   return createVirtualItem({
