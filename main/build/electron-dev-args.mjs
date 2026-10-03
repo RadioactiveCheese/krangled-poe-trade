@@ -2,5 +2,5 @@
 
 /** @param {NodeJS.Platform} platform */
 export function electronDevArgs (platform = process.platform) {
-  return platform === 'linux' ? ['--ozone-platform', 'x11', '.'] : ['.']
+  return platform === 'linux' ? ['--ozone-platform=x11', '.'] : ['.']
 }

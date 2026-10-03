@@ -3,7 +3,7 @@ import test from 'node:test'
 import { electronDevArgs } from './electron-dev-args.mjs'
 
 test('Linux development launches Electron on X11', () => {
-  assert.deepEqual(electronDevArgs('linux'), ['--ozone-platform', 'x11', '.'])
+  assert.deepEqual(electronDevArgs('linux'), ['--ozone-platform=x11', '.'])
 })
 
 test('Windows and macOS development arguments remain unchanged', () => {
