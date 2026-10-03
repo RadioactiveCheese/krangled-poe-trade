@@ -15,6 +15,8 @@ vi.mock('@/web/price-check/filters/pseudo', () => ({ filterPseudo: () => {} }))
 
 describe('catalyst quality metadata', () => {
   it.each(['en', 'ru', 'cmn-Hant', 'ko'])('covers the full current official quality set and localized text in %s', language => {
+    const translations = JSON.parse(fs.readFileSync(`public/data/${language}/app_i18n.json`, 'utf8'))
+    expect(translations.filters.hide_jewellery_quality).toBeTruthy()
     const contract = JSON.parse(fs.readFileSync(`specs/fixtures/catalyst-quality-${language}.json`, 'utf8'))
     const stats = fs.readFileSync(`public/data/${language}/stats.ndjson`, 'utf8').trim().split('\n').map(line => JSON.parse(line) as Stat)
     const quality = stats.filter(stat => stat.jewelleryQuality)

@@ -87,7 +87,7 @@ for (const language of ['en', 'ru', 'cmn-Hant', 'ko']) {
           assert.equal(filters.quality, undefined, 'jewellery quality must use the typed pseudo stat, not a generic quality filter')
           const stats = initUiModFilters(item, { searchStatRange: 10 })
           const quality = stats.find(filter => filter.tradeId?.includes(entry.id))
-          assert.equal(quality.hidden, 'hide_jewellery_quality')
+          assert.equal(quality.hidden, 'filters.hide_jewellery_quality')
           quality.disabled = false
           const query = createTradeRequest(filters, stats)
           assert.ok(query.query.stats.some(group => group.filters.some(filter => filter.id === entry.id)))
@@ -125,7 +125,7 @@ Item Level: 84
     assert.equal(life.roll.value, 36)
     assert.equal(life.roll.min, 36)
     if (isCorrupted) assert.equal(life.disabled, false)
-    assert.equal(filters.find(filter => filter.sources[0]?.stat.stat.jewelleryQuality).hidden, 'hide_jewellery_quality')
+    assert.equal(filters.find(filter => filter.sources[0]?.stat.stat.jewelleryQuality).hidden, 'filters.hide_jewellery_quality')
     assert.equal(createFilters(item, options).quality, undefined)
   }
 })
