@@ -2,24 +2,28 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import { execFileSync } from 'node:child_process'
+import { fileURLToPath } from 'node:url'
 import { afterAll, describe, expect, it } from 'vitest'
 import fnv1a from '@sindresorhus/fnv1a'
 import { makeIndexFiles } from '../../src/assets/make-index-files.mjs'
 
 const temporary = fs.mkdtempSync(path.join(os.tmpdir(), 'krangled-indexes-'))
 const languages = ['en', 'ru', 'cmn-Hant', 'ko']
+const dataRoot = fileURLToPath(new URL('../../public/data/', import.meta.url))
 afterAll(() => fs.rmSync(temporary, { recursive: true, force: true }))
 
-function expectedIndex (source: string, keys: (entry: any) => string[]) {
+function expectedIndex (source: string, keys: (entry: any) => string[], deduplicate = true) {
   let start = 0
   const entries = new Map<string, number>()
+  const records: Array<[string, number]> = []
   for (const line of source.trimEnd().split('\n')) {
     for (const key of keys(JSON.parse(line))) {
       if (!entries.has(key)) entries.set(key, start)
+      records.push([key, start])
     }
     start += line.length + 1
   }
-  return [...entries].map(([key, offset]) => [Number(fnv1a(key, { size: 32 })), offset]).sort((a, b) => a[0] - b[0])
+  return (deduplicate ? [...entries] : records).map(([key, offset]) => [Number(fnv1a(key, { size: 32 })), offset]).sort((a, b) => a[0] - b[0])
 }
 
 function readIndex (file: string) {
@@ -34,7 +38,7 @@ describe('data index generation', () => {
       const target = path.join(temporary, language)
       fs.mkdirSync(target)
       for (const file of ['items.ndjson', 'stats.ndjson']) {
-        fs.copyFileSync(`public/data/${language}/${file}`, path.join(target, file))
+        fs.copyFileSync(path.join(dataRoot, language, file), path.join(target, file))
       }
     }
     makeIndexFiles(temporary)
@@ -52,9 +56,8 @@ describe('data index generation', () => {
         ['stats-matcher.index.bin', (group: any) => statEntries(group).flatMap((stat: any) => stat.matchers.map((matcher: any) => matcher.advanced ?? matcher.string))]
       ] as const) {
         const actual = readIndex(path.join(target, file))
-        const expected = expectedIndex(stats, keys)
-        const actualPairs = new Set(actual.map(pair => pair.join(':')))
-        expect(expected.every(pair => actualPairs.has(pair.join(':')))).toBe(true)
+        const expected = expectedIndex(stats, keys, false)
+        expect(actual).toEqual(expected)
         expect(actual.every(([hash, offset], i) => i === 0 || hash >= actual[i - 1][0])).toBe(true)
         for (const [, offset] of actual) {
           expect(offset === 0 || stats[offset - 1] === '\n').toBe(true)
@@ -80,6 +83,7 @@ describe('data index generation', () => {
   })
 
   it('keeps the direct CLI working outside the renderer directory', () => {
-    expect(() => execFileSync(process.execPath, [path.resolve('src/assets/make-index-files.mjs')], { cwd: temporary })).not.toThrow()
+    const script = fileURLToPath(new URL('../../src/assets/make-index-files.mjs', import.meta.url))
+    expect(() => execFileSync(process.execPath, [script], { cwd: temporary })).not.toThrow()
   })
 })

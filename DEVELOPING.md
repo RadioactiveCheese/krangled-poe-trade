@@ -27,6 +27,9 @@ npm run dev
 
 Vite generates the item/stat indexes before development and production builds,
 and regenerates them when their NDJSON source files change during development.
+Development data loads pin indexes to the source snapshot they read, so edits
+between requests cannot mix offsets from different generations. The server keeps
+up to sixteen historical dataset snapshots; reload if an old snapshot expires.
 `npm run make-index-files` remains available for tools that load data outside Vite.
 
 ```sh

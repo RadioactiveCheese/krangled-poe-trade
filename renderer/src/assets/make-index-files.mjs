@@ -10,6 +10,8 @@ const DEFAULT_DATA_ROOT = fileURLToPath(new URL('../../public/data/', import.met
 
 /** @param {string} dataRoot */
 export function makeIndexFiles (dataRoot = DEFAULT_DATA_ROOT) {
+  /** @type {Map<string, Buffer>} */
+  const snapshot = new Map()
   for (const lang of LANGUAGES) {
     const lineStarts = {
       /** @type{Array<{ hash: number, start: number }>} */
@@ -20,6 +22,7 @@ export function makeIndexFiles (dataRoot = DEFAULT_DATA_ROOT) {
 
     {
       const ndjson = fs.readFileSync(path.join(dataRoot, lang, 'stats.ndjson'), { encoding: 'utf-8' })
+      snapshot.set(`${lang}/stats.ndjson`, Buffer.from(ndjson))
       let start = 0
       while (start !== ndjson.length) {
         const end = ndjson.indexOf('\n', start)
@@ -74,6 +77,7 @@ export function makeIndexFiles (dataRoot = DEFAULT_DATA_ROOT) {
     let refNameStarts
     {
       const ndjson = fs.readFileSync(path.join(dataRoot, lang, 'items.ndjson'), { encoding: 'utf-8' })
+      snapshot.set(`${lang}/items.ndjson`, Buffer.from(ndjson))
       let start = 0
       /** @type{Map<string, typeof nameStarts[number]>} */
       const startsByName = new Map()
@@ -129,6 +133,13 @@ export function makeIndexFiles (dataRoot = DEFAULT_DATA_ROOT) {
       )
     }
   }
+  for (const lang of LANGUAGES) {
+    for (const file of ['stats-ref', 'stats-matcher', 'items-name', 'items-ref']) {
+      const relative = `${lang}/${file}.index.bin`
+      snapshot.set(relative, fs.readFileSync(path.join(dataRoot, relative)))
+    }
+  }
+  return snapshot
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {
