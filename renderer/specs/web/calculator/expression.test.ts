@@ -64,6 +64,19 @@ describe('calculator expression', () => {
     expect(evaluate('5 / 0', RATE)).toEqual({ ok: false, reason: 'invalid' })
   })
 
+  it('rejects nested zero divisors even when the final value would be finite', () => {
+    for (const input of ['1 / (1 / 0)', '1 / (1 / -0)', '2 / (3 / (4 - 4))']) {
+      expect(evaluate(input, RATE)).toEqual({ ok: false, reason: 'invalid' })
+    }
+  })
+
+  it('rejects inherited object properties as currency units', () => {
+    for (const input of ['1constructor', '5 Constructor', '1toString']) {
+      expect(evaluate(input, RATE)).toEqual({ ok: false, reason: 'invalid' })
+      expect(evaluate(input, undefined)).toEqual({ ok: false, reason: 'invalid' })
+    }
+  })
+
   it('reports a missing rate only when divines are used', () => {
     expect(evaluate('3d', undefined)).toEqual({ ok: false, reason: 'no-rate' })
     expect(evaluate('3d', 0)).toEqual({ ok: false, reason: 'no-rate' })

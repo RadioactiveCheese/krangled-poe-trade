@@ -40,8 +40,9 @@ function tokenize (input: string): Token[] {
     if (!m) throw new EvalError('invalid')
     pos = re.lastIndex
     if (m[1] != null) {
-      const unit = m[2] ? UNITS[m[2].toLowerCase()] : 'chaos'
-      if (!unit) throw new EvalError('invalid')
+      const alias = m[2].toLowerCase()
+      if (alias && !Object.prototype.hasOwnProperty.call(UNITS, alias)) throw new EvalError('invalid')
+      const unit = alias ? UNITS[alias] : 'chaos'
       tokens.push({ type: 'num', value: Number(m[1]), unit })
     } else {
       tokens.push({ type: 'op', value: m[3] as Op })
@@ -78,7 +79,9 @@ export function evaluate (input: string, divineRate: number | undefined): EvalRe
     let value = unary()
     for (let op = peekOp(); op === '*' || op === '/'; op = peekOp()) {
       i++
-      value = (op === '*') ? value * unary() : value / unary()
+      const right = unary()
+      if (op === '/' && right === 0) throw new EvalError('invalid')
+      value = (op === '*') ? value * right : value / right
     }
     return value
   }

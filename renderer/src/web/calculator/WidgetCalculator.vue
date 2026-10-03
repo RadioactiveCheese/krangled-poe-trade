@@ -81,9 +81,9 @@ if (props.config.wmFlags[0] === 'uninitialized') {
 }
 
 const { xchgRate, initialLoading: xchgRateLoading, queuePricesFetch } = usePoeninja()
-// Widgets stay mounted while hidden, so register interest in prices whenever it's opened.
-watch(() => props.config.wmWants, (wants) => {
-  if (wants === 'show') queuePricesFetch()
+// Blur hides this widget without changing wmWants; renew interest on overlay reopen too.
+watch(() => props.config.wmWants === 'show' && wm.active.value, (visible) => {
+  if (visible) queuePricesFetch()
 }, { immediate: true })
 
 const stableOrbCost = computed(() => (xchgRate.value) ? Math.round(xchgRate.value) : null)
