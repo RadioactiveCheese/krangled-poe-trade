@@ -52,6 +52,14 @@ describe('calculator expression', () => {
     }
   })
 
+  it('rejects absurdly deep nesting instead of overflowing the stack', () => {
+    expect(chaos('(((((1)))))')).toBe(1)
+    expect(chaos('-'.repeat(50) + '1')).toBe(1)
+    for (const input of ['('.repeat(20000) + '1' + ')'.repeat(20000), '-'.repeat(20000) + '1']) {
+      expect(evaluate(input, RATE)).toEqual({ ok: false, reason: 'invalid' })
+    }
+  })
+
   it('rejects division by zero', () => {
     expect(evaluate('5 / 0', RATE)).toEqual({ ok: false, reason: 'invalid' })
   })

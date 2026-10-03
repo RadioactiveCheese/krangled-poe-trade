@@ -1,6 +1,6 @@
 <template>
   <Widget :config="config" move-handles="corners" readonly>
-    <div class="widget-default-style p-1 flex flex-col gap-1" style="min-width: 15rem;">
+    <div class="widget-default-style p-1 flex flex-col gap-1" style="min-width: 15rem; max-width: 24rem;">
       <div class="text-gray-100 p-1 flex items-center justify-between gap-4">
         <span>{{ t('calculator.name') }}</span>
         <span v-if="stableOrbCost" class="flex items-center gap-1">
@@ -14,20 +14,22 @@
         class="rounded bg-gray-700 text-gray-100 p-1 px-2 font-mono">
       <div v-if="error === 'no-rate'" class="text-orange-400 p-1 text-center">{{ t('calculator.no_rate') }}</div>
       <div v-else class="flex flex-col gap-1 text-gray-100" :class="{ 'opacity-50': error === 'invalid' }">
-        <div v-if="split" class="flex items-center justify-center gap-1 rounded bg-gray-800 p-1 text-xl">
+        <div v-if="split" class="flex flex-wrap items-center justify-center gap-1 rounded bg-gray-800 p-1 text-xl">
           <span v-if="split.negative">&minus;</span>
-          {{ split.divine }}<img src="/images/divine.png" class="w-7 h-7">
-          {{ split.chaos }}<img src="/images/chaos.png" class="w-7 h-7">
+          <span class="min-w-0 break-all">{{ split.divine }}</span><img src="/images/divine.png" class="w-7 h-7 shrink-0">
+          <span class="min-w-0 break-all">{{ split.chaos }}</span><img src="/images/chaos.png" class="w-7 h-7 shrink-0">
         </div>
-        <div class="grid gap-1" style="grid-template-columns: 1fr auto 1fr;">
+        <div class="grid gap-1" style="grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);">
           <div class="flex items-center justify-end gap-1 rounded bg-gray-800 p-1">
-            <template v-if="xchgRate">{{ formatNumber(lastValue / xchgRate, 2) }}</template>
-            <template v-else>&ndash;</template>
-            <img src="/images/divine.png" class="w-6 h-6">
+            <span class="min-w-0 break-all text-right">
+              <template v-if="xchgRate">{{ formatNumber(lastValue / xchgRate, 2) }}</template>
+              <template v-else>&ndash;</template>
+            </span>
+            <img src="/images/divine.png" class="w-6 h-6 shrink-0">
           </div>
           <div class="flex items-center px-1"><i class="fas fa-equals" /></div>
           <div class="flex items-center gap-1 rounded bg-gray-800 p-1">
-            {{ formatNumber(lastValue, 0) }}<img src="/images/chaos.png" class="w-6 h-6">
+            <span class="min-w-0 break-all">{{ formatNumber(lastValue, 0) }}</span><img src="/images/chaos.png" class="w-6 h-6 shrink-0">
           </div>
         </div>
       </div>

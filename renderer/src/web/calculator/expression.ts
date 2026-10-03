@@ -15,6 +15,8 @@ const UNITS: Record<string, 'chaos' | 'divine'> = {
   divines: 'divine'
 }
 
+const MAX_DEPTH = 100
+
 type Op = '+' | '-' | '*' | '/' | '(' | ')'
 
 type Token =
@@ -81,11 +83,19 @@ export function evaluate (input: string, divineRate: number | undefined): EvalRe
     return value
   }
 
+  // Every recursive path (parentheses, chained signs) passes through here;
+  // cap it so pasted junk fails as 'invalid' instead of overflowing the stack.
+  let depth = 0
   function unary (): number {
-    const op = peekOp()
-    if (op === '-') { i++; return -unary() }
-    if (op === '+') { i++; return unary() }
-    return primary()
+    if (++depth > MAX_DEPTH) throw new EvalError('invalid')
+    try {
+      const op = peekOp()
+      if (op === '-') { i++; return -unary() }
+      if (op === '+') { i++; return unary() }
+      return primary()
+    } finally {
+      depth--
+    }
   }
 
   function primary (): number {
