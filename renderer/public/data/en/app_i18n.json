@@ -277,6 +277,11 @@
     "search_text": "search text or regex",
     "friendly_name": "friendly name"
   },
+  "calculator": {
+    "name": "Calculator",
+    "input": "3d + 45c, (2.5d - 80) / 4…",
+    "no_rate": "Divine price not loaded yet"
+  },
   "image_strip": {
     "name": "Image strip"
   },
