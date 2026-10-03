@@ -76,8 +76,10 @@ describe('unique disenchant dust estimates', () => {
       const items = fs.readFileSync(`public/data/${language}/items.ndjson`, 'utf8').trim().split('\n').map(line => JSON.parse(line))
       const uniques = items.filter(item => item.namespace === 'UNIQUE')
       for (const entry of uniques) {
-        if (entry.unique?.disenchantValue !== undefined) {
-          expect(entry.unique.disenchantValue, `${language}: ${entry.refName}`).toBe(source[entry.refName])
+        if (Object.hasOwn(source, entry.refName)) {
+          expect(entry.unique?.disenchantValue, `${language}: missing or changed multiplier for ${entry.refName}`).toBe(source[entry.refName])
+        } else if (entry.unique?.disenchantValue !== undefined) {
+          throw new Error(`${language}: unexpected dust multiplier for ${entry.refName}`)
         }
       }
       const names = new Set(uniques.map(item => item.refName))
