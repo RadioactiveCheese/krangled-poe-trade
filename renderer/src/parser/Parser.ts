@@ -7,7 +7,7 @@ import {
   StatBetter,
   BaseType
 } from '@/assets/data'
-import { ModifierType, sumStatsByModType } from './modifiers'
+import { ModifierType, ModifierMechanic, sumStatsByModType } from './modifiers'
 import { linesToStatStrings, tryParseTranslation, getRollOrMinmaxAvg, ParsedStat } from './stat-translations'
 import { ItemCategory } from './meta'
 import { IncursionRoom, ParsedItem, ItemInfluence, ItemRarity } from './ParsedItem'
@@ -84,6 +84,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseModifiers, // scourge
   parseModifiers, // implicit
   parseModifiers, // explicit
+  { virtual: augmentModifiers },
   { virtual: transformToLegacyModifiers },
   { virtual: parseFractured },
   { virtual: parseBlightedMap },
@@ -105,6 +106,12 @@ export function parseClipboard (clipboard: string): Result<ParsedItem, string> {
 
     sections.shift()
     parsed.value.rawText = clipboard
+
+    // Eldritch item markers can share the modifiers or item-status section.
+    for (const section of sections) {
+      stripEldritchItemMarkers(section)
+    }
+    sections = sections.filter(section => section.length)
 
     // each section can be parsed at most by one parser
     for (const parser of parsers) {
@@ -131,6 +138,14 @@ export function parseClipboard (clipboard: string): Result<ParsedItem, string> {
   } catch (e) {
     console.log(e)
     return err('item.parse_error')
+  }
+}
+
+function stripEldritchItemMarkers (section: string[]): void {
+  while (section.length) {
+    const lastLine = section[section.length - 1]
+    if (lastLine !== _$.ITEM_EATER && lastLine !== _$.ITEM_EXARCH) break
+    section.pop()
   }
 }
 
@@ -319,10 +334,21 @@ function parseFractured (item: ParserState) {
 }
 
 function pickCorrectVariant (item: ParserState) {
-  if (!item.info.disc) return
+  item.info = pickVariant(item.infoVariants, item) ?? item.infoVariants[0]
+  if (item.info.unique) {
+    const bases = ITEM_BY_REF('ITEM', item.info.unique.base)
+    if (bases) {
+      item.uniqueBase = pickVariant(bases, item) ?? bases[0]
+    }
+  }
+}
 
-  for (const variant of item.infoVariants) {
-    const cond = variant.disc!
+function pickVariant (variants: BaseType[], item: ParsedItem): BaseType | undefined {
+  if (variants.length <= 1) return variants[0]
+
+  for (const variant of variants) {
+    const cond = variant.disc
+    if (!cond) return variant
 
     if (cond.propAR && !item.armourAR) continue
     if (cond.propEV && !item.armourEV) continue
@@ -347,7 +373,7 @@ function pickCorrectVariant (item: ParserState) {
 
     if (cond.sectionText && !item.rawText.includes(cond.sectionText)) continue
 
-    item.info = variant
+    return variant
   }
 
   // it may happen that we don't find correct variant
@@ -1266,6 +1292,28 @@ function parseStatsFromMod (lines: string[], item: ParsedItem, modifier: ParsedM
   })))
 }
 
+function augmentModifiers (item: ParsedItem) {
+  for (const mod of item.newMods) {
+    if (item.isSynthesised && mod.info.type === ModifierType.Implicit) {
+      mod.info.mechanic ??= ModifierMechanic.Synthesised
+    }
+
+    for (const stat of mod.stats) {
+      if (stat.roll?.generation !== 'legacy' || stat.roll.unscalable) continue
+
+      // Clipboard text cannot distinguish an old roll from a currency-enhanced roll.
+      // Keep the bound fact intact; hints are only for explanatory UI.
+      if (item.rarity === ItemRarity.Unique && item.isCorrupted) {
+        stat.roll.mechanicHint = 'volatile'
+      } else if (item.rarity === ItemRarity.Rare && item.isMirrored &&
+        (item.category === ItemCategory.Ring || item.category === ItemCategory.Amulet)
+      ) {
+        stat.roll.mechanicHint = 'reflecting'
+      }
+    }
+  }
+}
+
 /**
  * @deprecated
  */
@@ -1274,9 +1322,7 @@ function transformToLegacyModifiers (item: ParsedItem) {
 }
 
 function calcBasePercentile (item: ParsedItem) {
-  const info = item.info.unique
-    ? ITEM_BY_REF('ITEM', item.info.unique.base)![0].armour
-    : item.info.armour
+  const info = item.uniqueBase?.armour ?? item.info.armour
   if (!info) return
 
   // Base percentile is the same for all defences.

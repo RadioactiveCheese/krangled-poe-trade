@@ -1,6 +1,7 @@
 import type { ItemFilters } from './interfaces'
 import { ParsedItem, ItemCategory, ItemRarity } from '@/parser'
 import { MAGIC_ONLY_OR_UNIQUE_ITEM, CONSUMABLE_CRAFTABLE_ITEM } from '@/parser/meta'
+import { getPropQuality } from '@/parser/calc-q20'
 import { tradeTag } from '../trade/common'
 import { ModifierType } from '@/parser/modifiers'
 import { BaseType, ITEM_BY_REF } from '@/assets/data'
@@ -9,9 +10,10 @@ import { PERMANENT_SC } from '../../background/Leagues'
 
 export const SPECIAL_SUPPORT_GEM = ['Empower Support', 'Enlighten Support', 'Enhance Support']
 
-interface CreateOptions {
+export interface CreateOptions {
   league: string
-  currency: string | undefined
+  merchantOnly?: boolean
+  currency?: string | null
   collapseListings: 'app' | 'api'
   activateStockFilter: boolean
   exact: boolean
@@ -27,12 +29,12 @@ export function createFilters (
     trade: {
       offline: false,
       onlineInLeague: false,
-      merchantOnly:
+      merchantOnly: (opts.merchantOnly ?? true) &&
         // these are Divination Cards, and some items at start of league
         // that are on Currency Exchange but was not added to Bulk section of site yet
         !(item.info.exchangeable && !item.info.tradeTag),
-      listed: undefined,
-      currency: opts.currency,
+      listed: null,
+      currency: opts.currency ?? null,
       league: opts.league,
       collapseListings: opts.collapseListings,
       collapseMerchant: false
@@ -43,7 +45,7 @@ export function createFilters (
     (!item.info.craftable || CONSUMABLE_CRAFTABLE_ITEM.has(item.category!)) &&
     item.rarity !== ItemRarity.Unique
   ) {
-    if (!opts.currency) {
+    if (opts.currency === undefined) {
       filters.trade.currency = 'chaos_divine'
     }
     if (item.info.refName !== 'Mercenary Warrant') {
@@ -171,7 +173,7 @@ export function createFilters (
       filters.searchExact = {
         name: item.info.name,
         nameTrade: t(opts, item.info),
-        baseTypeTrade: t(opts, ITEM_BY_REF('ITEM', item.info.unique.base)![0])
+        baseTypeTrade: t(opts, item.uniqueBase ?? ITEM_BY_REF('ITEM', item.info.unique.base)![0])
       }
     } else {
       filters.searchExact = {
@@ -180,7 +182,7 @@ export function createFilters (
       }
     }
 
-    if (item.info.refName === 'Map' || item.info.unique?.base === 'Map') {
+    if (item.info.refName === 'Map' || (item.uniqueBase?.refName ?? item.info.unique?.base) === 'Map') {
       filters.searchExact.discriminatorTrade = 'map'
     }
 
@@ -228,7 +230,7 @@ export function createFilters (
     filters.searchExact = {
       name: item.info.name,
       nameTrade: t(opts, item.info),
-      baseTypeTrade: t(opts, ITEM_BY_REF('ITEM', item.info.unique.base)![0])
+      baseTypeTrade: t(opts, item.uniqueBase ?? ITEM_BY_REF('ITEM', item.info.unique.base)![0])
     }
   } else if (item.category === ItemCategory.Chart) {
     filters.searchRelaxed = {
@@ -289,7 +291,7 @@ export function createFilters (
   if (item.quality && item.quality >= 20) {
     if (
       item.category === ItemCategory.Flask || item.category === ItemCategory.Tincture ||
-      opts.exact // for Weapons & Armour
+      getPropQuality(item) === 0 || opts.exact // for Weapons & Armour
     ) {
       filters.quality = {
         value: item.quality,

@@ -2,6 +2,7 @@ import type { ItemInfluence, ItemCategory } from '@/parser'
 import type { StatCalculated } from '@/parser/modifiers'
 import type { ParsedItem } from '@/parser/ParsedItem'
 import type { Stat } from '@/assets/data'
+import { ModifierType, ModifierMechanic } from '@/parser/modifiers'
 
 export interface FilterPreset {
   id: string
@@ -106,8 +107,8 @@ export interface ItemFilters {
     offline: boolean
     onlineInLeague: boolean
     merchantOnly: boolean
-    listed: string | undefined
-    currency: string | undefined
+    listed: string | null
+    currency: string | null
     league: string
     collapseListings: 'api' | 'app'
     collapseMerchant: boolean
@@ -125,10 +126,15 @@ export type FilterOrGroup =
   | FilterGroup
 
 export interface FilterGroup {
-  group: 'not' | 'mercenary'
+  group: 'not' | 'one' | 'mercenary'
   expanded: boolean // NOTE: mutable in UI
   meta: StatFilter
   stats: StatFilter[]
+}
+
+export function isFilterEnabled (filter: FilterOrGroup): boolean {
+  if (!filter.group) return !filter.disabled
+  return !filter.meta.disabled && (filter.group !== 'one' || filter.stats.some(stat => !stat.disabled))
 }
 
 export interface StatFilter {
@@ -161,6 +167,7 @@ export interface StatFilter {
 
 const _INTERNAL_TRADE_IDS = [
   'item.not_group',
+  'item.count_one_group',
   'item.base_percentile',
   'item.memory_strands',
   'item.armour',
@@ -203,36 +210,24 @@ export enum ItemHasEmptyModifier {
   Suffix = 2
 }
 
-export enum FilterTag {
-  Pseudo = 'pseudo',
-  Explicit = 'explicit',
-  Implicit = 'implicit',
-  Crafted = 'crafted',
-  Enchant = 'enchant',
-  Scourge = 'scourge',
-  Fractured = 'fractured',
-  Corrupted = 'corrupted',
-  Synthesised = 'synthesised',
-  Foulborn = 'foulborn',
-  Vestigial = 'vestigial',
-  Eldritch = 'eldritch',
+enum FilterTagExtra {
   Variant = 'variant',
   Property = 'property',
-  Shaper = 'explicit-shaper',
-  Elder = 'explicit-elder',
-  Crusader = 'explicit-crusader',
-  Hunter = 'explicit-hunter',
-  Redeemer = 'explicit-redeemer',
-  Warlord = 'explicit-warlord',
-  Delve = 'explicit-delve',
-  Unveiled = 'explicit-veiled',
-  Incursion = 'explicit-incursion',
-  Infamous = 'explicit-infamous',
-  Essence = 'explicit-essence',
   Brick = 'brick',
   MercenaryPrimary = 'mercenary-primary',
   MercenarySecondary = 'mercenary-secondary',
   MercenaryUtility = 'mercenary-utility',
   MercenarySupport = 'mercenary-support',
   FilterGroup = 'filter-group'
+}
+
+export type FilterTag =
+  | ModifierType
+  | ModifierMechanic
+  | FilterTagExtra
+
+export const FilterTag = {
+  ...ModifierType,
+  ...ModifierMechanic,
+  ...FilterTagExtra
 }
