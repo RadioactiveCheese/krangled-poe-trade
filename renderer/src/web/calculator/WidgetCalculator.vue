@@ -1,5 +1,5 @@
 <template>
-  <Widget :config="config" move-handles="corners" :inline-edit="false">
+  <Widget :config="config" move-handles="corners" readonly>
     <div class="widget-default-style p-1 flex flex-col gap-1" style="min-width: 15rem;">
       <div class="text-gray-100 p-1 flex items-center justify-between gap-4">
         <span>{{ t('calculator.name') }}</span>
@@ -75,7 +75,10 @@ if (props.config.wmFlags[0] === 'uninitialized') {
 }
 
 const { xchgRate, initialLoading: xchgRateLoading, queuePricesFetch } = usePoeninja()
-queuePricesFetch()
+// Widgets stay mounted while hidden, so register interest in prices whenever it's opened.
+watch(() => props.config.wmWants, (wants) => {
+  if (wants === 'show') queuePricesFetch()
+}, { immediate: true })
 
 const stableOrbCost = computed(() => (xchgRate.value) ? Math.round(xchgRate.value) : null)
 
