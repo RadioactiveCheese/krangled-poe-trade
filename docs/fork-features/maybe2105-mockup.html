@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Craft Target Mockup</title>
+<style>
+  :root {
+    --bg: #0b0b0d;
+    --panel: #1f2937;
+    --panel-2: #111827;
+    --border: #374151;
+    --text: #e5e7eb;
+    --muted: #9ca3af;
+    --gold: #c8a96a;
+    --magic: #8888ff;
+    --rare: #ffff77;
+    --ok: #4ade80;
+    --bad: #f87171;
+    --warn-bg: #3b1d0f;
+    --warn-border: #b45309;
+    --warn-text: #fcd34d;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 14px/1.45 "Segoe UI", system-ui, sans-serif;
+    padding: 24px 16px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; display: grid; gap: 16px; }
+  .banner {
+    border: 1px solid var(--warn-border); background: var(--warn-bg); color: var(--warn-text);
+    padding: 12px 14px; border-radius: 4px;
+  }
+  .banner strong { color: #fff; }
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 4px; }
+  .panel > header {
+    padding: 8px 12px; background: var(--panel-2); border-bottom: 1px solid var(--border);
+    color: var(--gold); font-family: Georgia, "Times New Roman", serif; letter-spacing: .02em;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .panel > .body { padding: 12px; display: grid; gap: 10px; }
+  .row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  input[type=text], select {
+    background: var(--panel-2); color: var(--text); border: 1px solid var(--border);
+    border-radius: 3px; padding: 6px 8px; font: inherit; min-width: 0;
+  }
+  input[type=text] { flex: 1 1 240px; }
+  button {
+    background: #374151; color: var(--text); border: 1px solid #4b5563; border-radius: 3px;
+    padding: 6px 10px; font: inherit; cursor: pointer;
+  }
+  button:hover { background: #4b5563; }
+  ul.mods { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+  ul.mods li {
+    display: flex; align-items: center; gap: 8px; padding: 6px 8px;
+    background: var(--panel-2); border: 1px solid var(--border); border-radius: 3px;
+  }
+  ul.mods li .txt { flex: 1; color: var(--magic); word-break: break-word; }
+  ul.mods li .state { font-size: 12px; width: 52px; text-align: right; }
+  .hit { color: var(--ok); } .miss { color: var(--bad); }
+  .muted { color: var(--muted); font-size: 12px; }
+  .status {
+    display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 13px;
+  }
+  .big { font-size: 20px; font-weight: 600; }
+  .item {
+    background: #000; border: 1px solid #6b5b3a; padding: 10px; text-align: center;
+    font-family: Georgia, serif; font-size: 13px;
+  }
+  .item .name { color: var(--rare); }
+  .item hr { border: 0; border-top: 1px solid #6b5b3a; margin: 6px 0; }
+  .item .mod { color: var(--magic); }
+  label.chk { display: flex; gap: 6px; align-items: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="banner">
+    <strong>MOCKUP ONLY. Not a working feature.</strong>
+    This is based on the maybe2105 fork's "automatic orb usage". That fork sends
+    many crafting clicks per hotkey press with humanised mouse movement, which
+    breaks GGG's third-party tool policy (one server action per user input, no
+    crafting macros). This mockup keeps only a read-only idea: the user lists
+    target mods, and the overlay says whether the item they just checked has hit.
+    It never clicks or sends input to the game, and it has no start or run control.
+  </div>
+
+  <section class="panel">
+    <header><span>Craft Targets</span><span class="muted">updates on price / item check</span></header>
+    <div class="body">
+      <div class="row">
+        <input type="text" id="newMod" placeholder="Target mod, e.g. +# to maximum Life" aria-label="Target mod">
+        <select id="mode" aria-label="Match mode">
+          <option value="text">Stat text</option>
+          <option value="regex">Regex</option>
+        </select>
+        <button id="add">Add</button>
+      </div>
+      <div class="row">
+        <label class="chk"><input type="checkbox" id="needAll" checked> Require all targets</label>
+        <label class="chk"><input type="checkbox" id="sound" checked> Play sound on hit</label>
+      </div>
+      <ul class="mods" id="mods"></ul>
+      <div class="muted">Targets are matched against the item text the app already reads during a price or item check. Nothing else is read from the screen.</div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <header><span>Status</span><button id="cycle" title="Demo only: show another sample item">Next sample item</button></header>
+    <div class="body">
+      <div class="status">
+        <span class="muted">Result</span><span class="big" id="verdict"></span>
+        <span class="muted">Matched</span><span id="count"></span>
+        <span class="muted">Items checked</span><span id="checked"></span>
+        <span class="muted">Last check</span><span id="when"></span>
+      </div>
+      <div class="item" id="item"></div>
+      <div class="muted">You still use every orb yourself. Price-check or item-check the item after each orb to update this panel.</div>
+    </div>
+  </section>
+
+</div>
+<script>
+  var targets = [
+    { text: '+# to maximum Life', mode: 'text' },
+    { text: '#% increased Attack Speed', mode: 'text' }
+  ];
+  var samples = [
+    { name: 'Gale Grip', base: 'Titan Gauntlets', mods: ['+21% to Cold Resistance', '+4 to Dexterity'] },
+    { name: 'Doom Paw', base: 'Titan Gauntlets', mods: ['+61 to maximum Life', '+18% to Fire Resistance'] },
+    { name: 'Rage Hand', base: 'Titan Gauntlets', mods: ['+72 to maximum Life', '9% increased Attack Speed'] }
+  ];
+  var idx = 0, checked = 1;
+  var $ = function (id) { return document.getElementById(id); };
+
+  function norm(s) { return s.replace(/[+-]?\d+(\.\d+)?/g, '#'); }
+  function matches(t, line) {
+    if (t.mode === 'regex') { try { return new RegExp(t.text).test(line); } catch (e) { return false; } }
+    return norm(line) === norm(t.text);
+  }
+  function hitFor(t, item) { return item.mods.some(function (m) { return matches(t, m); }); }
+
+  function render() {
+    var item = samples[idx];
+    var list = $('mods'); list.innerHTML = '';
+    var hits = 0;
+    targets.forEach(function (t, i) {
+      var h = hitFor(t, item); if (h) hits++;
+      var li = document.createElement('li');
+      var tx = document.createElement('span'); tx.className = 'txt';
+      tx.textContent = (t.mode === 'regex' ? '/' + t.text + '/' : t.text);
+      var st = document.createElement('span'); st.className = 'state ' + (h ? 'hit' : 'miss');
+      st.textContent = h ? 'HIT' : 'miss';
+      var rm = document.createElement('button'); rm.textContent = 'Remove';
+      rm.onclick = function () { targets.splice(i, 1); render(); };
+      li.append(tx, st, rm); list.append(li);
+    });
+    var needAll = $('needAll').checked;
+    var ok = targets.length > 0 && (needAll ? hits === targets.length : hits > 0);
+    $('verdict').textContent = ok ? 'TARGET HIT' : 'Not yet';
+    $('verdict').className = 'big ' + (ok ? 'hit' : 'miss');
+    $('count').textContent = hits + ' / ' + targets.length;
+    $('checked').textContent = checked;
+    $('when').textContent = 'just now (sample)';
+    var el = $('item'); el.innerHTML = '';
+    var n = document.createElement('div'); n.className = 'name'; n.textContent = item.name;
+    var b = document.createElement('div'); b.className = 'name'; b.textContent = item.base;
+    el.append(n, b, document.createElement('hr'));
+    item.mods.forEach(function (m) { var d = document.createElement('div'); d.className = 'mod'; d.textContent = m; el.append(d); });
+  }
+
+  $('add').onclick = function () {
+    var v = $('newMod').value.trim(); if (!v) return;
+    targets.push({ text: v, mode: $('mode').value }); $('newMod').value = ''; render();
+  };
+  $('newMod').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('add').click(); });
+  $('needAll').onchange = render;
+  $('cycle').onclick = function () { idx = (idx + 1) % samples.length; checked++; render(); };
+  render();
+</script>
+</body>
+</html>
