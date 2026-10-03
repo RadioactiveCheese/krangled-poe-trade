@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inscribed Ultimatum Mockup</title>
+<style>
+  :root {
+    --gray-200: #edf2f7; --gray-300: #e2e8f0; --gray-400: #cbd5e0; --gray-500: #a0aec0;
+    --gray-600: #718096; --gray-700: #4a5568; --gray-800: #2d3748; --gray-900: #1a202c;
+    --green-400: #68d391; --red-400: #fc8181; --red-500: #f56565; --yellow-500: #ecc94b;
+    --unique: #af6025; --currency: #aa9e82; --divcard: #0ebaff; --normal: #c8c8c8;
+    --radius: 0.25rem;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #0b0d10; color: var(--gray-200); font: 14px/1.35 "Segoe UI", system-ui, sans-serif; padding: 16px; }
+  .banner { max-width: 960px; margin: 0 auto 16px; padding: 10px 14px; border: 1px dashed var(--yellow-500); color: var(--yellow-500); border-radius: var(--radius); }
+  .banner b { color: #fff; }
+  .controls { max-width: 960px; margin: 0 auto 16px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; color: var(--gray-400); }
+  .controls select, .seg button { background: var(--gray-700); color: var(--gray-200); border: 0; border-radius: var(--radius); padding: 4px 8px; font: inherit; }
+  .seg { display: inline-flex; gap: 1px; }
+  .seg button { border-radius: 0; color: var(--gray-400); }
+  .seg button:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+  .seg button:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+  .seg button.on { background: var(--gray-600); color: #fff; }
+  .stage { max-width: 960px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; }
+
+  /* price-check window (#price-window, width 28.75rem) */
+  .window { width: 28.75rem; max-width: 100%; background: var(--gray-800); box-shadow: 0 10px 15px -3px rgba(0,0,0,.5); }
+  .titlebar { display: flex; align-items: center; justify-content: space-between; background: var(--gray-900); color: var(--gray-500); height: 28px; padding: 0 8px; font-size: 13px; }
+  .titlebar .x { color: var(--gray-500); }
+  .body { padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .filter-name { display: flex; align-items: center; gap: 4px; }
+  .filter-name .nm { padding: 0 8px; border: 1px solid var(--gray-500); border-radius: var(--radius); }
+  .trend { color: var(--gray-500); font-size: 12px; }
+  .filters { display: flex; flex-wrap: wrap; gap: 4px; }
+  .fbtn { display: inline-flex; align-items: center; background: var(--gray-900); border: 1px solid var(--gray-900); border-radius: var(--radius); color: var(--gray-500); line-height: 1.6; }
+  .fbtn.on { border-color: var(--gray-500); color: var(--gray-200); }
+  .fbtn .lbl { padding: 0 6px 0 8px; }
+  .fbtn .val { background: var(--gray-700); padding: 0 6px; border-radius: 0 var(--radius) var(--radius) 0; min-width: 2.5rem; text-align: center; }
+  .fbtn.new { outline: 1px dashed var(--green-400); outline-offset: 1px; }
+  .presets { display: flex; gap: 4px; font-size: 12px; }
+  .presets span { padding: 0 6px; border-radius: var(--radius); background: var(--gray-900); color: var(--gray-500); }
+  .presets span.on { background: var(--gray-700); color: var(--gray-200); }
+  .mods { font-size: 12px; color: var(--gray-400); border-left: 2px solid var(--gray-700); padding-left: 8px; }
+  .mods div.ml { color: var(--gray-200); }
+  .row { display: flex; justify-content: space-between; align-items: center; }
+  .btn { background: var(--gray-700); color: var(--gray-200); border: 0; border-radius: var(--radius); padding: 2px 12px; min-width: 5rem; font: inherit; }
+  .tlinks { display: inline-flex; gap: 1px; }
+  .tlinks span { background: var(--gray-700); color: var(--gray-400); padding: 0 8px; font-size: 12px; line-height: 1.7; }
+  .tlinks span:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+  .tlinks span:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+  .tlinks.broken span { text-decoration: line-through; text-decoration-color: var(--red-500); }
+  table.listing { width: 100%; border-collapse: collapse; font-size: 13px; }
+  table.listing th { color: var(--gray-500); font-weight: normal; text-align: left; padding: 2px 4px; border-bottom: 1px solid var(--gray-700); }
+  table.listing td { padding: 2px 4px; }
+  table.listing tr:nth-child(even) td { background: rgba(0,0,0,.12); }
+  .muted { color: var(--gray-600); }
+
+  /* UltimatumValue.vue box */
+  .uv { padding: 8px; border: 1px dashed var(--gray-600); border-radius: var(--radius); margin-top: 8px; }
+  .uv .r { display: flex; align-items: center; gap: 4px; color: var(--gray-400); font-size: 13px; line-height: 1; min-height: 32px; }
+  .uv .k { color: var(--gray-500); width: 4rem; flex-shrink: 0; }
+  .icon { width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+  .icon.cur { background: radial-gradient(circle at 35% 35%, #fff8d0, #c9a640 60%, #5a4612); color: #3a2c06; }
+  .icon.div { background: linear-gradient(135deg, #0a3f66, #0ebaff); color: #e8f7ff; border-radius: 3px; width: 24px; }
+  .icon.uni { background: radial-gradient(circle at 35% 35%, #ffd2a8, #af6025 65%, #3d1e08); color: #2b1203; }
+  .icon.chaos { background: radial-gradient(circle at 40% 40%, #ffe9a0, #c08a1e 70%); color: #3b2a05; width: 20px; height: 20px; font-size: 10px; }
+  .icon.divine { background: radial-gradient(circle at 40% 40%, #fff, #b8c2d6 70%); color: #2a3240; width: 20px; height: 20px; font-size: 10px; }
+  .arrow { color: var(--gray-600); padding: 0 4px; font-size: 12px; }
+  .name { font-size: 12px; color: var(--gray-400); }
+  .qty { font-size: 12px; color: var(--gray-400); }
+  .green { color: var(--green-400); } .red { color: var(--red-400); }
+  .uv .tlinks { margin-left: auto; }
+  .empty-note { font-size: 12px; color: var(--gray-600); font-style: italic; }
+
+  /* side panel */
+  .notes { flex: 1 1 300px; min-width: 0; color: var(--gray-400); font-size: 13px; }
+  .notes h3 { color: var(--gray-200); font-size: 14px; margin: 0 0 6px; }
+  .notes pre { background: var(--gray-900); color: var(--normal); padding: 8px; border-radius: var(--radius); font-size: 12px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .notes ul { padding-left: 18px; margin: 4px 0 12px; }
+  .tag { display: inline-block; font-size: 11px; padding: 0 5px; border-radius: 3px; background: var(--gray-700); color: var(--gray-300); }
+  .tag.bad { background: #742a2a; color: #fed7d7; }
+  .tag.good { background: #22543d; color: #c6f6d5; }
+</style>
+</head>
+<body>
+<div class="banner"><b>MOCKUP:</b> not a working build. This is a static sketch of the Inscribed Ultimatum price check from the
+  <code>matheussampaio/awakened-poe-trade</code> fork (commit <code>3dca23d6</code>). All prices, listings and item text are invented sample data.</div>
+
+<div class="controls">
+  <label>Sample item
+    <select id="sample">
+      <option value="currency">Currency: Divine Orb x3, doubled</option>
+      <option value="cards">Divination Cards: The Apothecary x2, doubled</option>
+      <option value="unique">Unique exchange: Shavronne's Wrappings for Ashes of the Stars</option>
+      <option value="mirror">Mirrored Rare Item (edge case)</option>
+    </select>
+  </label>
+  <span class="seg" id="mode">
+    <button data-mode="fork" class="on">Fork as committed</button>
+    <button data-mode="port">Suggested port</button>
+  </span>
+</div>
+
+<div class="stage">
+  <div class="window" id="price-window">
+    <div class="titlebar"><span>Price Check &middot; Settlers</span><span class="x">&#x2715;</span></div>
+    <div class="body" id="pc"></div>
+  </div>
+  <div class="notes" id="notes"></div>
+</div>
+
+<script>
+const DIV = 180 // sample chaos per divine
+const SAMPLES = {
+  currency: {
+    al: 83, challenge: 'Survive', challengeId: 'Survival', rewardKind: 'DoubleCurrency',
+    sac: { name: 'Divine Orb', qty: 3, icon: 'cur', chaos: DIV },
+    rewardText: 'Doubles sacrificed Currency',
+    rew: { name: 'Divine Orb', qty: 6, icon: 'cur', chaos: DIV },
+    monsterLife: 40,
+    mods: ['Ruin III', 'Stormcaller Runes II', 'Totem of Costly Might', 'Limited Arena II']
+  },
+  cards: {
+    al: 81, challenge: 'Defeat Waves of Enemies', challengeId: 'Exterminate', rewardKind: 'DoubleDivCards',
+    sac: { name: 'The Apothecary', qty: 2, icon: 'div', chaos: 1620 },
+    rewardText: 'Doubles sacrificed Divination Cards',
+    rew: { name: 'The Apothecary', qty: 4, icon: 'div', chaos: 1620 },
+    monsterLife: 30,
+    mods: ['Ruin II', 'Razor Dance II', 'Escalating Damage Taken', 'Overwhelming Monsters']
+  },
+  unique: {
+    al: 78, challenge: 'Protect the Altar', challengeId: 'Defense', rewardKind: 'ExchangeUnique',
+    sac: { name: "Shavronne's Wrappings", qty: 1, icon: 'uni', chaos: 95 },
+    rewardText: 'Ashes of the Stars',
+    rew: { name: 'Ashes of the Stars', qty: 1, icon: 'uni', chaos: 64 },
+    monsterLife: 20,
+    mods: ['Ruin', 'Lightning Damage from Mana', 'Hindering Flasks']
+  },
+  mirror: {
+    al: 83, challenge: 'Stand in the Stone Circles', challengeId: 'Conquer', rewardKind: 'MirrorRare',
+    sac: { name: 'Chaos Orb', qty: 40, icon: 'cur', chaos: 1 },
+    rewardText: 'Mirrored Rare Item',
+    rew: null,
+    monsterLife: 40,
+    mods: ['Ruin IV', 'Choking Miasma III', 'Buffs Expire Faster']
+  }
+}
+
+function money (chaos) {
+  const a = Math.abs(chaos)
+  if (a >= DIV) return { v: +(a / DIV).toFixed(a / DIV >= 10 ? 0 : 1), cur: 'divine' }
+  return { v: Math.round(a), cur: 'chaos' }
+}
+function priceHtml (chaos) {
+  const m = money(chaos)
+  return `${m.v} <span class="icon ${m.cur}">${m.cur === 'divine' ? 'D' : 'C'}</span>`
+}
+function iconHtml (it) {
+  const letter = it.icon === 'div' ? '' : it.name[0]
+  return `<span class="icon ${it.icon}">${letter}</span>`
+}
+function itemCell (it, brokenLinks) {
+  return `${it.qty > 1 ? `<span class="qty">${it.qty}</span><span> &times;</span>` : ''}
+    ${iconHtml(it)} <span class="name">${it.name}</span>
+    <span class="arrow">&rarr;</span>${priceHtml(it.chaos * it.qty)}
+    <span class="tlinks ${brokenLinks ? 'broken' : ''}"><span>Trade</span><span>&#x2197;</span></span>`
+}
+
+function render () {
+  const s = SAMPLES[document.getElementById('sample').value]
+  const mode = document.querySelector('#mode .on').dataset.mode
+  const port = mode === 'port'
+  const bracket = [1, 68, 73, 78, 81, 83].filter(b => b <= s.al).pop()
+
+  // In the fork, a "Mirrored Rare Item" reward is classified as UNIQUE; the lookup fails and the rows are hidden.
+  const forkSees = s.rew != null
+
+  const filters = [
+    `<span class="fbtn on"><span class="lbl">Area Level</span><span class="val">${bracket}</span></span>`
+  ]
+  if (port) {
+    filters.push(
+      `<span class="fbtn on new"><span class="lbl">Reward</span><span class="val">${s.rewardKind}</span></span>`,
+      s.rewardKind === 'ExchangeUnique'
+        ? `<span class="fbtn on new"><span class="lbl">Reward Unique</span><span class="val">${s.rewardText}</span></span>`
+        : '',
+      `<span class="fbtn on new"><span class="lbl">Required Item</span><span class="val">${s.sac.name}</span></span>`,
+      `<span class="fbtn new"><span class="lbl">Challenge</span><span class="val">${s.challengeId}</span></span>`,
+      `<span class="fbtn new"><span class="lbl">% more Monster Life</span><span class="val">${s.monsterLife}</span></span>`
+    )
+  }
+
+  // Sample listings: the fork's query matches any Inscribed Ultimatum at this area level, so prices are all over the place.
+  const rows = port
+    ? (s.rew ? [[1.1, 'm'], [1.15, 'm'], [1.2, 'h'], [1.25, 'h'], [1.4, 'd']] : [[0.8, 'm'], [0.85, 'h'], [0.9, 'h']])
+        .map(([f, age], i) => [Math.max(1, (s.rew ? s.sac.chaos * s.sac.qty : 120) * f * 0.12), age, i])
+    : [[3, 'm'], [5, 'm'], [8, 'h'], [15, 'h'], [60, 'd'], [240, 'd']].map(([c, age], i) => [c, age, i])
+  const listing = rows.map(([c, age, i]) => `<tr><td>${priceHtml(c)}</td><td>1</td><td class="muted">${i + 2}${age} ago</td><td class="muted">seller_${(i * 7919 % 997).toString(36)}</td></tr>`).join('')
+
+  let uv
+  if (forkSees) {
+    const cost = s.sac.chaos * s.sac.qty
+    const rew = s.rew.chaos * s.rew.qty
+    const profit = rew - cost
+    uv = `<div class="uv">
+      <div class="r"><span class="k">Cost:</span>${itemCell(s.sac, !port)}</div>
+      <div class="r"><span class="k">Reward:</span>${itemCell(s.rew, !port)}</div>
+      <div class="r"><span class="k">Profit:</span><span class="arrow">&rarr;</span>
+        <span class="${profit > 0 ? 'green' : profit < 0 ? 'red' : ''}">${profit < 0 ? '-' : profit > 0 ? '+' : ''}${money(profit).v}</span>
+        <span class="icon ${money(profit).cur}">${money(profit).cur === 'divine' ? 'D' : 'C'}</span></div>
+    </div>`
+  } else if (port) {
+    uv = `<div class="uv">
+      <div class="r"><span class="k">Cost:</span>${itemCell(s.sac, false)}</div>
+      <div class="r"><span class="k">Reward:</span><span class="name">Mirrored Rare Item (not on poe.ninja; see trade results)</span></div>
+    </div>`
+  } else {
+    uv = `<div class="empty-note">(fork: ultimatum value box not rendered, since the reward is classified as UNIQUE and the lookup fails)</div>`
+  }
+
+  document.getElementById('pc').innerHTML = `
+    <div class="filter-name"><span class="nm">Inscribed Ultimatum</span></div>
+    <div class="trend">No poe.ninja trend for this base</div>
+    <div class="presets"><span class="on">Exact</span></div>
+    <div class="filters">${filters.join('')}</div>
+    ${port ? `<div class="mods"><div class="ml">${s.challenge}: ${s.sac.name}${s.sac.qty > 1 ? ' x' + s.sac.qty : ''} &rarr; ${s.rewardText}</div>${s.mods.map(m => `<div>${m}</div>`).join('')}</div>` : ''}
+    <div class="row"><button class="btn">Search</button><span class="tlinks"><span>Trade</span><span>&#x2197;</span></span></div>
+    <table class="listing"><thead><tr><th>Price</th><th>Qty</th><th>Listed</th><th>Seller</th></tr></thead><tbody>${listing}</tbody></table>
+    ${uv}`
+
+  const clip = `Item Class: Inscribed Ultimatum
+Rarity: Normal
+Inscribed Ultimatum
+--------
+Area Level: ${s.al}
+Challenge: ${s.challenge}
+Requires Sacrifice: ${s.sac.name}${s.sac.qty > 1 ? ' x' + s.sac.qty : ''}
+Reward: ${s.rewardText}
+${s.monsterLife}% more Monster Life
+${s.mods.join('\n')}
+--------
+Can be used in a personal Map Device.`
+
+  document.getElementById('notes').innerHTML = port
+    ? `<h3>Suggested port <span class="tag good">not in fork</span></h3>
+      <ul>
+        <li>Filters dashed in green come from the live <code>ultimatum_filters</code> group:
+          <code>ultimatum_reward</code>, <code>ultimatum_input</code>, <code>ultimatum_output</code>, <code>ultimatum_challenge</code>, plus stat
+          <code>explicit.stat_95249895</code>.</li>
+        <li>With these, the listings only contain trials with the same sacrifice and reward, so prices cluster.</li>
+        <li>The value box Trade buttons open real searches, and Mirrored Rare rewards fall back gracefully.</li>
+      </ul>
+      <h3>Sample clipboard text (approximate)</h3><pre>${clip}</pre>`
+    : `<h3>Fork as committed</h3>
+      <ul>
+        <li>The search only uses base type plus <code>map_filters.area_level</code> (bracket ${bracket}), so listings mix every reward type.</li>
+        <li><code>ultimatumMonsterLife</code> is parsed into a filter but never sent to trade.</li>
+        <li>The value box Trade buttons <span class="tag bad">broken</span> build <code>/trade/exchange?q={exchange: &lt;search query&gt;}</code>.</li>
+        <li>The Mirrored Rare reward is misclassified as UNIQUE, so the box is hidden.</li>
+      </ul>
+      <h3>Sample clipboard text (approximate)</h3><pre>${clip}</pre>`
+}
+
+document.getElementById('sample').addEventListener('change', render)
+document.querySelectorAll('#mode button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#mode button').forEach(x => x.classList.toggle('on', x === b))
+  render()
+}))
+render()
+</script>
+</body>
+</html>
