@@ -306,6 +306,25 @@ Area contains 6 additional Strongboxes`)
   const implicit = filters.find(filter => filter.statRef === 'Area contains an additional Strongbox')
   assert.ok(implicit, 'fixed implicit must exist so users can still reveal hidden filters')
   assert.equal(implicit.hidden, 'filters.hide_const_roll')
+  assert.equal(implicit.disabled, true)
+})
+
+test('keeps variable unique-map implicit rolls available', () => {
+  const item = parseItem(`Item Class: Maps
+Rarity: Unique
+Vaults of Atziri
+Map
+--------
+Item Level: 83
+--------
+{ Implicit Modifier }
+Area contains 6(6-9) additional Strongboxes`)
+  const filters = runtime.createExactStatFilters(item, item.statsByType, { searchStatRange: 10 })
+  const implicit = filters.find(filter => filter.statRef === 'Area contains an additional Strongbox')
+  assert.ok(implicit)
+  assert.ok(implicit.roll.bounds)
+  assert.equal(implicit.hidden, undefined)
+  assert.equal(implicit.disabled, false)
 })
 
 test('keeps chart-crafting currency out of the Map Check path', () => {

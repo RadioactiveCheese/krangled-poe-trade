@@ -110,6 +110,13 @@ export function createExactStatFilters (
   for (const filter of ctx.filters) {
     if (filter.not) continue
     if (item.category !== ItemCategory.Map) filter.hidden = undefined
+    else if (item.rarity === ItemRarity.Unique && !item.isCorrupted &&
+      filter.tag === FilterTag.Implicit && !filter.roll?.bounds
+    ) {
+      // Exact map searches do not run the unique-property finalization path.
+      // Keep their constant ordinary implicits hidden as well.
+      filter.hidden ??= 'filters.hide_const_roll'
+    }
 
     if (filter.tag === FilterTag.Explicit) {
       filter.disabled = !filter.sources.some(source =>
@@ -117,7 +124,7 @@ export function createExactStatFilters (
         source.modifier.info.tier <= 2
       )
     } else if (filter.tag !== FilterTag.Property && filter.tag !== FilterTag.Pseudo) {
-      filter.disabled = false
+      filter.disabled = Boolean(filter.hidden)
     }
 
     if (filter.statRef === '# uses remaining') {
