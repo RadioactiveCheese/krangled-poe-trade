@@ -1,25 +1,12 @@
-import { shallowRef, watch, readonly } from 'vue'
+import { shallowRef, watch, readonly, computed } from 'vue'
 import { createGlobalState } from '@vueuse/core'
 import { Host } from '@/web/background/IPC'
 import { useLeagues } from './Leagues'
-import { splitJsonBlob, type PriceDatabase } from './split-poeninja-overviews'
-
-interface NinjaDenseInfo {
-  chaos: number
-  graph: Array<number | null>
-  name: string
-  variant?: string
-}
+import { splitJsonBlob, findDenseInfo, type PriceDatabase, type NinjaDenseInfo, type PriceDbQuery } from './split-poeninja-overviews'
 
 const RETRY_INTERVAL_MS = 4 * 60 * 1000
 const UPDATE_INTERVAL_MS = 31 * 60 * 1000
 const INTEREST_SPAN_MS = 20 * 60 * 1000
-
-interface DbQuery {
-  ns: string
-  name: string
-  variant: string | undefined
-}
 
 export interface CurrencyValue {
   min: number
@@ -34,13 +21,24 @@ export const usePoeninja = createGlobalState(() => {
 
   const isLoading = shallowRef(false)
   let PRICES_DB: PriceDatabase = []
+  // bumped whenever PRICES_DB is replaced, so consumers can recompute derived data
+  const pricesVersion = shallowRef(0)
+
+  // reading pricesVersion makes this re-evaluate after every (re)load
+  const hasPrices = computed(() => pricesVersion.value > 0 && PRICES_DB.length > 0)
+
+  // poe.ninja only tracks popular leagues on the GGG PC realm
+  const isLeagueCovered = computed(() => {
+    const league = leagues.selected.value
+    return Boolean(league && league.isPopular && league.realm === 'pc-ggg')
+  })
   let lastUpdateTime = 0
   let downloadController: AbortController | undefined
   let lastInterestTime = 0
 
   async function load (force: boolean = false) {
     const league = leagues.selected.value
-    if (!league || !league.isPopular || league.realm !== 'pc-ggg') return
+    if (!league || !isLeagueCovered.value) return
 
     if (!force && (
       (Date.now() - lastUpdateTime) < UPDATE_INTERVAL_MS ||
@@ -57,6 +55,7 @@ export const usePoeninja = createGlobalState(() => {
       const jsonBlob = await response.text()
 
       PRICES_DB = splitJsonBlob(jsonBlob)
+      pricesVersion.value++
       const divine = findPriceByQuery({ ns: 'ITEM', name: 'Divine Orb', variant: undefined })
       if (divine && divine.chaos >= 30) {
         xchgRate.value = divine.chaos
@@ -87,29 +86,14 @@ export const usePoeninja = createGlobalState(() => {
     }
   }
 
-  function findPriceByQuery (query: DbQuery) {
-    // NOTE: order of keys is important
-    const searchString = JSON.stringify({
-      name: query.name,
-      variant: query.variant,
-      chaos: 0
-    }).replace(':0}', ':')
+  function findPriceByQuery (query: PriceDbQuery) {
+    const found = findDenseInfo(PRICES_DB, query)
+    if (!found) return null
 
-    for (const { ns, url, lines } of PRICES_DB) {
-      if (ns !== query.ns) continue
-
-      const startPos = lines.indexOf(searchString)
-      if (startPos === -1) continue
-      const endPos = lines.indexOf('}', startPos)
-
-      const info: NinjaDenseInfo = JSON.parse(lines.slice(startPos, endPos + 1))
-
-      return {
-        ...info,
-        url: `https://poe.ninja/poe1/economy/${selectedLeagueToUrl()}/${url}/${denseInfoToDetailsId(info)}`
-      }
+    return {
+      ...found.info,
+      url: `https://poe.ninja/poe1/economy/${selectedLeagueToUrl()}/${found.url}/${denseInfoToDetailsId(found.info)}`
     }
-    return null
   }
 
   function autoCurrency (value: number | [number, number]): CurrencyValue {
@@ -140,6 +124,7 @@ export const usePoeninja = createGlobalState(() => {
   watch(leagues.selectedId, () => {
     xchgRate.value = undefined
     PRICES_DB = []
+    pricesVersion.value++
     load(true)
   })
 
@@ -148,7 +133,11 @@ export const usePoeninja = createGlobalState(() => {
     findPriceByQuery,
     autoCurrency,
     queuePricesFetch,
-    initialLoading: () => isLoading.value && !PRICES_DB.length
+    initialLoading: () => isLoading.value && !PRICES_DB.length,
+    isLoading: readonly(isLoading),
+    isLeagueCovered,
+    pricesVersion: readonly(pricesVersion),
+    hasPrices
   }
 })
 

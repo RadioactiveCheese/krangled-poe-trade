@@ -7,8 +7,6 @@ import { BaseType, ITEM_BY_REF } from '@/assets/data'
 import { CATEGORY_TO_TRADE_ID } from '../trade/pathofexile-trade'
 import { PERMANENT_SC } from '../../background/Leagues'
 
-export const SPECIAL_SUPPORT_GEM = ['Empower Support', 'Enlighten Support', 'Enhance Support']
-
 interface CreateOptions {
   league: string
   currency: string | undefined
