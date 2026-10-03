@@ -107,11 +107,23 @@ test('parses a Vestigial unique and classifies its inherited implicit', async ()
       assert.equal(parsed.isOk(), true)
       const roll = parsed.value.newMods.flatMap(mod => mod.stats)
         .find(stat => stat.stat.ref === '#% increased Energy Shield').roll
-      assert.equal(roll.generation, expected)
+      assert.equal(roll.generation, 'legacy')
+      assert.equal(roll.mechanicHint, expected === 'legacy' ? undefined : expected)
+      if (expected === 'volatile') {
+        const filters = initUiModFilters(parsed.value, { searchStatRange: 10 })
+        assert.ok(filters.filter(filter => !filter.hidden).length > 3, 'exercise beyond the few-filter fallback')
+        const enhanced = filters.find(filter => filter.sources.some(source => source.stat.roll?.mechanicHint === 'volatile'))
+        const constant = filters.find(filter => filter.statRef === '#% increased Light Radius')
+        assert.ok(enhanced, 'enhanced roll must contribute to a filter')
+        assert.equal(enhanced.disabled, false)
+        assert.equal(enhanced.hidden, undefined)
+        assert.equal(constant.disabled, false, 'uncertain origin cannot disable another filter')
+      }
     }
     const reflected = parseClipboard(`Item Class: Rings\nRarity: Rare\nReflection\nGold Ring\n--------\n{ Prefix Modifier "Healthy" (Tier: 1) }\n+120(50-70) to maximum Life\n--------\nMirrored`)
     assert.equal(reflected.isOk(), true)
-    assert.equal(reflected.value.newMods[0].stats[0].roll.generation, 'reflecting')
+    assert.equal(reflected.value.newMods[0].stats[0].roll.generation, 'legacy')
+    assert.equal(reflected.value.newMods[0].stats[0].roll.mechanicHint, 'reflecting')
     const ordinaryCorrupted = parseClipboard(VESTIGIAL_ZAHNDETHUS + '\n--------\nCorrupted')
     assert.equal(ordinaryCorrupted.isOk(), true)
     const constantScalable = initUiModFilters(ordinaryCorrupted.value, { searchStatRange: 10 })
@@ -119,6 +131,7 @@ test('parses a Vestigial unique and classifies its inherited implicit', async ()
     assert.equal(constantScalable.hidden, undefined)
     assert.equal(constantScalable.disabled, false)
 
+    const independentNames = JSON.parse(await fs.readFile(path.join(rendererDir, 'specs/fixtures/modifier-mechanic-affix-names.json'), 'utf8'))
     for (const fixture of [
       { lang: 'en', typeLine: "Vestigial Sage's Robe", baseType: "Sage's Robe" },
       { lang: 'ru', typeLine: 'Вырожденный: Одеяние мудреца', baseType: 'Одеяние мудреца' },
@@ -141,7 +154,7 @@ test('parses a Vestigial unique and classifies its inherited implicit', async ()
       ]
       for (let familyIndex = 0; familyIndex < families.length; familyIndex++) {
         const [key, expected] = families[familyIndex]
-        for (const name of strings[key]) {
+        for (const name of independentNames.locales[fixture.lang][key] ?? strings[key]) {
           // Some names are shared; classification intentionally uses precedence.
           if (families.slice(0, familyIndex).some(([earlier]) => strings[earlier].includes(name))) continue
           assert.equal(parseModInfoLine(`{ ${strings.PREFIX_MODIFIER} "${name}" }`).mechanic, expected,

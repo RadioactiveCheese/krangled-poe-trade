@@ -361,8 +361,7 @@ function hideNotVariableStat (filter: StatFilter, item: ParsedItem) {
   // Scalable rolls remain relevant on corrupted uniques even when their
   // uncorrupted values are constant.
   if (item.isCorrupted && filter.sources.some(source => source.stat.roll && !source.stat.roll.unscalable)) {
-    const volatile = item.newMods.some(mod => mod.stats.some(stat => stat.roll?.generation === 'volatile'))
-    if (!volatile) filter.disabled = false
+    filter.disabled = false
     return
   }
 

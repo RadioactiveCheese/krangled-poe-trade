@@ -14,7 +14,9 @@ export interface ParsedStat {
   readonly translation: StatMatcher
   roll?: {
     unscalable: boolean
-    generation?: 'legacy' | 'volatile' | 'reflecting'
+    // Outside the copied modifier bounds; this does not prove historical origin.
+    generation?: 'legacy'
+    mechanicHint?: 'volatile' | 'reflecting'
     dp: boolean
     value: number
     min: number

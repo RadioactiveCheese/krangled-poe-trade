@@ -1276,12 +1276,14 @@ function augmentModifiers (item: ParsedItem) {
     for (const stat of mod.stats) {
       if (stat.roll?.generation !== 'legacy' || stat.roll.unscalable) continue
 
+      // Clipboard text cannot distinguish an old roll from a currency-enhanced roll.
+      // Keep the bound fact intact; hints are only for explanatory UI.
       if (item.rarity === ItemRarity.Unique && item.isCorrupted) {
-        stat.roll.generation = 'volatile'
+        stat.roll.mechanicHint = 'volatile'
       } else if (item.rarity === ItemRarity.Rare && item.isMirrored &&
         (item.category === ItemCategory.Ring || item.category === ItemCategory.Amulet)
       ) {
-        stat.roll.generation = 'reflecting'
+        stat.roll.mechanicHint = 'reflecting'
       }
     }
   }

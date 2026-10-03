@@ -35,8 +35,8 @@
             class="flex items-baseline gap-x-1 shrink-0 ml-auto">
             <div v-if="showQ20Notice"
               :class="$style.qualityLabel">{{ t('item.prop_quality', [calcQuality]) }}</div>
-            <img v-for="img of rollTags"
-              :class="$style.rollTag" :src="img">
+            <img v-for="indicator of rollTags"
+              :class="$style.rollTag" :src="indicator.src" :title="indicator.title" :alt="indicator.title">
             <div class="flex gap-x-px">
               <input :class="$style['rollInput']" :placeholder="t('min')" :min="roll?.bounds?.min" :max="roll?.bounds?.max" :step="changeStep" type="number"
                 ref="inputMinEl"
@@ -302,19 +302,19 @@ export default defineComponent({
       roll: computed(() => props.filter.roll),
       isHidden: computed(() => props.filter.hidden != null),
       rollTags: computed(() => {
-        const out: string[] = []
+        const out: Array<{ src: string, title?: string }> = []
         for (const source of props.filter.sources) {
-          if (source.stat.roll?.generation === 'volatile') {
-            out.push('/images/VolatileVaalOrb.png'); break
-          } else if (source.stat.roll?.generation === 'reflecting') {
-            out.push('/images/ReflectingMist.png'); break
+          if (source.stat.roll?.mechanicHint === 'volatile') {
+            out.push({ src: '/images/VolatileVaalOrb.png', title: t('modifier_hint.volatile') }); break
+          } else if (source.stat.roll?.mechanicHint === 'reflecting') {
+            out.push({ src: '/images/ReflectingMist.png', title: t('modifier_hint.reflecting') }); break
           }
         }
         const increased = props.filter.sources.some(source =>
           source.modifier.info.rollIncr &&
           source.stat.roll && !source.stat.roll.unscalable)
         if (increased) {
-          out.push('/images/increased.png')
+          out.push({ src: '/images/increased.png' })
         }
         return out
       }),

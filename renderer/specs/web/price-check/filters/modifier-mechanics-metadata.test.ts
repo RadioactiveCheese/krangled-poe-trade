@@ -1,5 +1,23 @@
 import { expect, it } from 'vitest'
 import strings from '../../../../public/data/en/client_strings.js'
+import russian from '../../../../public/data/ru/client_strings.js'
+import korean from '../../../../public/data/ko/client_strings.js'
+import chinese from '../../../../public/data/cmn-Hant/client_strings.js'
+import snapshot from '../../../fixtures/modifier-mechanic-affix-names.json'
+
+// This fixture is independent of runtime name arrays. English is extracted from the
+// complete GGG client export; localized expected names are pinned to upstream metadata.
+for (const [language, local] of Object.entries({ en: strings, ru: russian, ko: korean, 'cmn-Hant': chinese })) {
+  it(`covers the independent affected affix names in ${language}`, () => {
+    const expected = snapshot.locales[language as keyof typeof snapshot.locales]
+    for (const [key, names] of Object.entries(expected)) {
+      const actual = new Set((local as unknown as Record<string, string[]>)[key])
+      for (const name of names) expect(actual.has(name), `${language}:${key}:${name}`).toBe(true)
+      // Localized dictionaries retain compatibility aliases alongside current names.
+      if (language === 'en') expect(actual).toEqual(new Set(names))
+    }
+  })
+}
 
 interface GameMod {
   domain: string

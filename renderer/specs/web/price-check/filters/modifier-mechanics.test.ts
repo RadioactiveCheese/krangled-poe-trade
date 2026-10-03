@@ -17,7 +17,7 @@ describe('Modifier mechanics indicators', () => {
   ])('shows the %s roll indicator and keeps increased scalable rolls distinct', (generation, image) => {
     const filter = {
       tradeId: ['explicit.life'], statRef: 'Life', text: '+# Life', tag: FilterTag.Explicit, disabled: false,
-      sources: [{ modifier: { info: { rollIncr: 10 }, stats: [] }, stat: { roll: { generation, unscalable: false } } }],
+      sources: [{ modifier: { info: { rollIncr: 10 }, stats: [] }, stat: { roll: { generation: 'legacy', mechanicHint: generation === 'legacy' ? undefined : generation, unscalable: false } } }],
       roll: { value: 120, min: 120, default: { min: 100, max: 120 }, dp: false, isNegated: false }
     } as unknown as StatFilter
     const wrapper = shallowMount(FilterModifier, { props: {
@@ -25,6 +25,7 @@ describe('Modifier mechanics indicators', () => {
     } })
     const sources = wrapper.findAll('img').map(img => img.attributes('src'))
     expect(sources).toEqual(image ? [image, '/images/increased.png'] : ['/images/increased.png'])
+    if (image) expect(wrapper.find(`img[src="${image}"]`).attributes('title')).toBe(`modifier_hint.${generation}`)
     filter.sources[0].stat.roll!.unscalable = true
     wrapper.unmount()
     const unscalable = shallowMount(FilterModifier, { props: {
