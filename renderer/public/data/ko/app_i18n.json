@@ -377,6 +377,7 @@
     "use_tooltip_hover": "가격에 커서를 가져다 대면 아이템 상세 정보 표시",
     "use_tooltip_keybind": "SHIFT + 가격에 커서를 이동",
     "use_tooltip_always": "가격에 커서를 이동",
+    "disenchanting": "인챈트 해제 (예상)",
     "use_tooltip_off": "기능 끔"
   }
 }

@@ -84,6 +84,7 @@ export interface ParsedItem {
   isFoil?: boolean
   isFoulborn?: boolean
   isVestigial?: boolean
+  dustEquivalent?: number
   statsByType: StatCalculated[]
   newMods: ParsedModifier[]
   unknownModifiers: Array<{

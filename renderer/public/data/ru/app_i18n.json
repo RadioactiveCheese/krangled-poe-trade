@@ -415,6 +415,7 @@
     "use_tooltip_hover": "Показывать предмет при наведении на цену",
     "use_tooltip_keybind": "SHIFT + наведение",
     "use_tooltip_always": "наведение",
+    "disenchanting": "Распыление (оценка)",
     "use_tooltip_off": "отключено"
   }
 }
