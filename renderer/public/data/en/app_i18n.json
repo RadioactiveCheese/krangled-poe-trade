@@ -42,6 +42,7 @@
 
   "item": {
     "not_group": "None of",
+    "count_one_group": "One of",
     "prop_quality": "Q {0}%",
     "base_percentile": "Base Percentile: {0}%",
     "armour": "Armour: {0}",
@@ -161,12 +162,23 @@
     "graft": "Graft",
     "chart": "Chart"
   },
+  "modifier_hint": {
+    "volatile": "Possible Volatile Vaal Orb effect. Clipboard text does not identify the origin of an out-of-range roll.",
+    "reflecting": "Possible Reflecting Mist effect. Clipboard text does not identify the origin of an out-of-range roll."
+  },
   "filters": {
+    "hide_unique_base_implicit": "Implicit belongs to the unique item base",
+    "hide_variable_by_base_percentile_only": "Defence varies only with base percentile",
+    "hide_redundant": "Defence filters already cover base percentile",
+    "hide_enchant_meta_stat": "Quality effect is included in item properties",
     "selected_some": "{0} of {1}, stats",
     "selected_none": "Stats ignored",
     "hidden_toggle": "Hidden",
     "collapse": "Collapse",
     "mods_toggle": "Mods",
+    "option_empty_affix": "Any",
+    "option_empty_prefix": "Prefix",
+    "option_empty_suffix": "Suffix",
     "empty": "No relevant stats were found",
     "tier": "Tier {0}",
     "tier_gilded": "Unique",
@@ -174,6 +186,7 @@
     "preset_base_item": "Base item",
     "preset_bulk": "Bulk",
     "hide_const_roll": "Roll is not variable",
+    "hide_jewellery_quality": "Quality is already reflected in jewellery modifiers",
     "hide_ele_dps": "Elemental damage is not the main source of DPS",
     "hide_phys_dps": "Physical damage is not the main source of DPS",
     "hide_ele_res": "Filtering by exact Elemental Resistance unreasonably increases the price",
@@ -386,6 +399,7 @@
   "map_check": {
     "name": "Map check",
     "has_outdated": "Wording of some stats has been changed. Check and update dangerous map mods in the settings. (This message will be hidden as soon as you remove all outdated stats)",
+    "maven_reminder": "Contains the Boss required for\nMaven's Invitation",
     "no_mods": "Item has no modifiers.",
     "profile": "Profile",
     "search_selected": "Only selected",
@@ -487,6 +501,7 @@
     "use_tooltip_hover": "Show item when hovering over price",
     "use_tooltip_keybind": "SHIFT + hover",
     "use_tooltip_always": "hover",
+    "disenchanting": "Disenchanting (estimate)",
     "use_tooltip_off": "off"
   }
 }

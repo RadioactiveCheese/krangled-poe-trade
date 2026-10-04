@@ -1,0 +1,66 @@
+{
+  "entries": [
+    {
+      "id": "pseudo.pseudo_jewellery_elemental_quality",
+      "text": "品質（元素傷害詞綴）：#%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_caster_quality",
+      "text": "品質（法術詞綴）：#%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_attack_quality",
+      "text": "品質（攻擊詞綴）：#%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_defense_quality",
+      "text": "品質（防禦詞綴）：#%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_resource_quality",
+      "text": "品質（生命和魔力詞綴）：#%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_resistance_quality",
+      "text": "品質（抗性詞綴）：#%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_attribute_quality",
+      "text": "品質（能力值詞綴）：#%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_physical_chaos_quality",
+      "text": "品質（物理和混沌傷害詞綴）：#%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_speed_quality",
+      "text": "品質（速度詞綴）：#%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_critical_quality",
+      "text": "品質（暴擊詞綴）：#%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_prefix_quality",
+      "text": "品質(前綴):#%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_suffix_quality",
+      "text": "品質(後綴):#%",
+      "type": "pseudo"
+    }
+  ],
+  "checkedAt": "2026-10-03",
+  "source": "https://pathofexile.tw/api/trade/data/stats"
+}

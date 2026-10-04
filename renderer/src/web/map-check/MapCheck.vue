@@ -13,14 +13,20 @@
         >{{ profile.text }}</button>
       </div>
     </div>
-    <FullscreenImage v-if="image" :src="image" style="height: auto;" />
-    <div v-if="!mapStats.length" class="px-8 py-2">
+    <FullscreenImage v-if="image"
+      :class="$style.screenshot" :src="image" fit="contain" />
+    <div v-if="item.mapArea && MEMORY_MAPS.includes(item.mapArea.refName)"
+      class="px-8 py-2 flex items-center gap-2 text-gray-400 italic whitespace-pre-wrap">
+      <img src="/images/maven-witness.png" class="w-8">
+      <span>{{ t('map_check.maven_reminder') }}</span>
+    </div>
+    <div v-if="!mapStats.length && !unknownModifiers.length" class="px-8 py-2">
       {{ t('map_check.no_mods') }}
     </div>
     <div v-else class="py-2 flex flex-col">
       <MapStatButton v-for="stat in mapStats" :key="stat.matcher"
         :stat="stat" :config="config" />
-      <div v-for="stat of item.unknownModifiers" :key="stat.type + '/' + stat.text"
+      <div v-for="stat of unknownModifiers" :key="stat.type + '/' + stat.text"
         class="py-1 px-8">
         <span class="text-orange-400">{{ t('Not recognized modifier') }} &mdash;</span> {{ stat.text }}
       </div>
@@ -33,6 +39,7 @@
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { ItemRarity, ParsedItem } from '@/parser'
+import { ModifierType } from '@/parser/modifiers'
 import { prepareMapStats } from './prepare-map-stats'
 import { type MapCheckConfig, isOutdated } from './common.js'
 
@@ -46,20 +53,24 @@ const props = defineProps<{
 
 const { t } = useI18n()
 
+const MEMORY_MAPS = ['Courtyard of Wasting', 'Chambers of Impurity', 'Theatre of Lies']
+
 const hasOutdatedTranslation = computed<boolean>(() => {
   const { profile } = props.config
   return props.config.selectedStats
     .some(entry => isOutdated(profile, entry))
 })
 
-const mapName = computed(() => props.item.info.name)
+const mapName = computed(() => props.item.info.area?.blighted
+  ? props.item.info.name : props.item.mapArea?.name ?? props.item.info.name)
 
 const image = computed(() =>
   (props.item.rarity === ItemRarity.Unique && props.item.isUnidentified)
     ? undefined
-    : props.item.info.area?.screenshot)
+    : props.item.info.area?.screenshot ?? props.item.mapArea?.area?.screenshot)
 
 const mapStats = computed(() => prepareMapStats(props.item))
+const unknownModifiers = computed(() => props.item.unknownModifiers.filter(mod => mod.type === ModifierType.Explicit))
 
 const profiles = computed(() => {
   const ROMAN_NUMERALS = ['I', 'II', 'III']
@@ -70,3 +81,12 @@ const profiles = computed(() => {
   }))
 })
 </script>
+
+<style lang="postcss" module>
+.screenshot {
+  aspect-ratio: 21 / 9;
+  width: 100%;
+  height: auto;
+  background: theme('colors.gray.700');
+}
+</style>

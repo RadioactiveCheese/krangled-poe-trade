@@ -14,6 +14,7 @@ export enum StatBetter {
 }
 
 export interface Stat {
+  jewelleryQuality?: { catalyst: string }
   ref: string
   dp?: true
   matchers: StatMatcher[]
@@ -97,6 +98,7 @@ export interface BaseType {
   area?: {
     screenshot?: string
     special?: true
+    blighted?: true
   }
   gem?: {
     vaal?: true
@@ -254,7 +256,7 @@ export interface TranslationDict {
   VESTIGIAL_NAME: RegExp
   VESTIGIAL_MODIFIER?: string
   VESTIGIAL_IMPLICIT?: string
-  SCRYING_MAP_AREA: string
+  MAP_AREA: string
   // ---
   CHAT_SYSTEM: RegExp
   CHAT_TRADE: RegExp

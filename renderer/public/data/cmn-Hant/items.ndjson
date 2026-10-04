@@ -1,164 +1,164 @@
 {"name":"深海平原","refName":"Abyssal Plain","namespace":"AREA","tradeDisc":"AbyssalPlain","icon":"","area":{}}
-{"name":"惡靈學院","refName":"Academy","namespace":"AREA","tradeDisc":"54575","icon":""}
-{"name":"酸岩酸嶼","refName":"Acid Caverns","namespace":"AREA","tradeDisc":"21257","icon":""}
-{"name":"危城巷弄","refName":"Alleyways","namespace":"AREA","tradeDisc":"42968","icon":""}
+{"name":"惡靈學院","refName":"Academy","namespace":"AREA","tradeDisc":"54575","icon":"","area":{}}
+{"name":"酸岩酸嶼","refName":"Acid Caverns","namespace":"AREA","tradeDisc":"21257","icon":"","area":{"screenshot":"https://i.imgur.com/vISJftF.jpg"}}
+{"name":"危城巷弄","refName":"Alleyways","namespace":"AREA","tradeDisc":"42968","icon":"","area":{"screenshot":"https://i.imgur.com/m21vNCp.jpg"}}
 {"name":"定錨點","refName":"Anchorfield","namespace":"AREA","tradeDisc":"Anchorfield","icon":"","area":{"special":true}}
-{"name":"遠古危城","refName":"Ancient City","namespace":"AREA","tradeDisc":"2545","icon":""}
-{"name":"異蛛巢穴","refName":"Arachnid Nest","namespace":"AREA","tradeDisc":"36866","icon":""}
-{"name":"異蛛墓塚","refName":"Arachnid Tomb","namespace":"AREA","tradeDisc":"7465","icon":""}
-{"name":"崩壞長廊","refName":"Arcade","namespace":"AREA","tradeDisc":"44259","icon":""}
-{"name":"競技場","refName":"Arena","namespace":"AREA","tradeDisc":"1371","icon":""}
-{"name":"乾枯湖岸","refName":"Arid Lake","namespace":"AREA","tradeDisc":"27782","icon":""}
-{"name":"軍械庫","refName":"Armoury","namespace":"AREA","tradeDisc":"15108","icon":""}
-{"name":"古兵工廠","refName":"Arsenal","namespace":"AREA","tradeDisc":"25202","icon":""}
-{"name":"旱木林地","refName":"Ashen Wood","namespace":"AREA","tradeDisc":"43927","icon":""}
-{"name":"濱海山丘","refName":"Atoll","namespace":"AREA","tradeDisc":"19776","icon":""}
-{"name":"熱林塚墓","refName":"Barrows","namespace":"AREA","tradeDisc":"49687","icon":""}
-{"name":"聖殿","refName":"Basilica","namespace":"AREA","tradeDisc":"27821","icon":""}
-{"name":"遠古市集","refName":"Bazaar","namespace":"AREA","tradeDisc":"36556","icon":""}
-{"name":"白沙灘頭","refName":"Beach","namespace":"AREA","tradeDisc":"62685","icon":""}
-{"name":"雲頂鐘樓","refName":"Belfry","namespace":"AREA","tradeDisc":"59460","icon":""}
-{"name":"瘴氣泥沼","refName":"Bog","namespace":"AREA","tradeDisc":"47614","icon":""}
-{"name":"骨跡陵墓","refName":"Bone Crypt","namespace":"AREA","tradeDisc":"23253","icon":""}
-{"name":"荊棘谷","refName":"Bramble Valley","namespace":"AREA","tradeDisc":"44170","icon":""}
+{"name":"遠古危城","refName":"Ancient City","namespace":"AREA","tradeDisc":"2545","icon":"","area":{"screenshot":"https://i.imgur.com/MThKML2.jpg"}}
+{"name":"異蛛巢穴","refName":"Arachnid Nest","namespace":"AREA","tradeDisc":"36866","icon":"","area":{"screenshot":"https://i.imgur.com/Ljh7mDh.jpg"}}
+{"name":"異蛛墓塚","refName":"Arachnid Tomb","namespace":"AREA","tradeDisc":"7465","icon":"","area":{"screenshot":"https://i.imgur.com/1IAVUXr.jpg"}}
+{"name":"崩壞長廊","refName":"Arcade","namespace":"AREA","tradeDisc":"44259","icon":"","area":{"screenshot":"https://i.imgur.com/mTl4tTm.jpg"}}
+{"name":"競技場","refName":"Arena","namespace":"AREA","tradeDisc":"1371","icon":"","area":{"screenshot":"https://i.imgur.com/EaTICR6.jpg"}}
+{"name":"乾枯湖岸","refName":"Arid Lake","namespace":"AREA","tradeDisc":"27782","icon":"","area":{"screenshot":"https://i.imgur.com/9gm7OPL.jpg"}}
+{"name":"軍械庫","refName":"Armoury","namespace":"AREA","tradeDisc":"15108","icon":"","area":{"screenshot":"https://i.imgur.com/d5Y7MBu.jpg"}}
+{"name":"古兵工廠","refName":"Arsenal","namespace":"AREA","tradeDisc":"25202","icon":"","area":{"screenshot":"https://i.imgur.com/5iGxpEn.jpg"}}
+{"name":"旱木林地","refName":"Ashen Wood","namespace":"AREA","tradeDisc":"43927","icon":"","area":{"screenshot":"https://i.imgur.com/kHvVFYI.jpg"}}
+{"name":"濱海山丘","refName":"Atoll","namespace":"AREA","tradeDisc":"19776","icon":"","area":{"screenshot":"https://i.imgur.com/ynKNdxR.jpg"}}
+{"name":"熱林塚墓","refName":"Barrows","namespace":"AREA","tradeDisc":"49687","icon":"","area":{"screenshot":"https://i.imgur.com/SwZdc6q.jpg"}}
+{"name":"聖殿","refName":"Basilica","namespace":"AREA","tradeDisc":"27821","icon":"","area":{"screenshot":"https://i.imgur.com/G6ySvIu.jpg"}}
+{"name":"遠古市集","refName":"Bazaar","namespace":"AREA","tradeDisc":"36556","icon":"","area":{"screenshot":"https://i.imgur.com/bo5223u.jpg"}}
+{"name":"白沙灘頭","refName":"Beach","namespace":"AREA","tradeDisc":"62685","icon":"","area":{"screenshot":"https://i.imgur.com/qZNQGdD.jpg"}}
+{"name":"雲頂鐘樓","refName":"Belfry","namespace":"AREA","tradeDisc":"59460","icon":"","area":{"screenshot":"https://i.imgur.com/7zjdJvN.jpg"}}
+{"name":"瘴氣泥沼","refName":"Bog","namespace":"AREA","tradeDisc":"47614","icon":"","area":{"screenshot":"https://i.imgur.com/cPWmdWr.jpg"}}
+{"name":"骨跡陵墓","refName":"Bone Crypt","namespace":"AREA","tradeDisc":"23253","icon":"","area":{"screenshot":"https://i.imgur.com/NVVVCOt.jpg"}}
+{"name":"荊棘谷","refName":"Bramble Valley","namespace":"AREA","tradeDisc":"44170","icon":"","area":{"screenshot":"https://i.imgur.com/1HM5ro5.jpg"}}
 {"name":"海洋王的領域","refName":"Brine King's Domain","namespace":"AREA","tradeDisc":"BrineKingsDomain","icon":"","area":{"special":true}}
-{"name":"旱地墓室","refName":"Burial Chambers","namespace":"AREA","tradeDisc":"43016","icon":""}
-{"name":"羈破牢籠","refName":"Cage","namespace":"AREA","tradeDisc":"3883","icon":""}
-{"name":"火山炎口","refName":"Caldera","namespace":"AREA","tradeDisc":"64414","icon":""}
-{"name":"炙陽峽谷","refName":"Canyon","namespace":"AREA","tradeDisc":"2336","icon":""}
-{"name":"惡臭屍域","refName":"Carcass","namespace":"AREA","tradeDisc":"18547","icon":""}
-{"name":"遺跡廢墟","refName":"Castle Ruins","namespace":"AREA","tradeDisc":"36357","icon":""}
-{"name":"幽魂監牢","refName":"Cells","namespace":"AREA","tradeDisc":"3775","icon":""}
-{"name":"晨曦墓地","refName":"Cemetery","namespace":"AREA","tradeDisc":"12635","icon":""}
-{"name":"秘密通道","refName":"Channel","namespace":"AREA","tradeDisc":"22278","icon":""}
-{"name":"古堡","refName":"Chateau","namespace":"AREA","tradeDisc":"39459","icon":""}
-{"name":"危城廣場","refName":"City Square","namespace":"AREA","tradeDisc":"44762","icon":""}
+{"name":"旱地墓室","refName":"Burial Chambers","namespace":"AREA","tradeDisc":"43016","icon":"","area":{"screenshot":"https://i.imgur.com/Wp5GF44.jpg"}}
+{"name":"羈破牢籠","refName":"Cage","namespace":"AREA","tradeDisc":"3883","icon":"","area":{"screenshot":"https://i.imgur.com/r20ygP0.jpg"}}
+{"name":"火山炎口","refName":"Caldera","namespace":"AREA","tradeDisc":"64414","icon":"","area":{"screenshot":"https://i.imgur.com/dAFd7cQ.jpg"}}
+{"name":"炙陽峽谷","refName":"Canyon","namespace":"AREA","tradeDisc":"2336","icon":"","area":{"screenshot":"https://i.imgur.com/8BSd3du.jpg"}}
+{"name":"惡臭屍域","refName":"Carcass","namespace":"AREA","tradeDisc":"18547","icon":"","area":{"screenshot":"https://i.imgur.com/bANX02j.jpg"}}
+{"name":"遺跡廢墟","refName":"Castle Ruins","namespace":"AREA","tradeDisc":"36357","icon":"","area":{"screenshot":"https://i.imgur.com/aFT1RlG.jpg"}}
+{"name":"幽魂監牢","refName":"Cells","namespace":"AREA","tradeDisc":"3775","icon":"","area":{"screenshot":"https://i.imgur.com/ks4E8Cs.jpg"}}
+{"name":"晨曦墓地","refName":"Cemetery","namespace":"AREA","tradeDisc":"12635","icon":"","area":{"screenshot":"https://i.imgur.com/j9OPnMf.jpg"}}
+{"name":"秘密通道","refName":"Channel","namespace":"AREA","tradeDisc":"22278","icon":"","area":{"screenshot":"https://i.imgur.com/qNjNqND.jpg"}}
+{"name":"古堡","refName":"Chateau","namespace":"AREA","tradeDisc":"39459","icon":"","area":{"screenshot":"https://i.imgur.com/9K7IyE3.jpg"}}
+{"name":"危城廣場","refName":"City Square","namespace":"AREA","tradeDisc":"44762","icon":"","area":{"screenshot":"https://i.imgur.com/dpMpwdP.jpg"}}
 {"name":"蛤蜊之架","refName":"Clam-infested Shelf","namespace":"AREA","tradeDisc":"ClamInfestedShelf","icon":"","area":{"special":true}}
-{"name":"寒河","refName":"Cold River","namespace":"AREA","tradeDisc":"38080","icon":""}
-{"name":"激戰柱廊","refName":"Colonnade","namespace":"AREA","tradeDisc":"31349","icon":""}
-{"name":"大決鬥場","refName":"Colosseum","namespace":"AREA","tradeDisc":"16355","icon":""}
-{"name":"寧逸溫房","refName":"Conservatory","namespace":"AREA","tradeDisc":"6755","icon":""}
-{"name":"破碎堡礁","refName":"Coral Ruins","namespace":"AREA","tradeDisc":"41363","icon":""}
-{"name":"核心","refName":"Core","namespace":"AREA","tradeDisc":"35484","icon":""}
-{"name":"失序教院","refName":"Courthouse","namespace":"AREA","tradeDisc":"49777","icon":""}
-{"name":"奇術之庭","refName":"Courtyard","namespace":"AREA","tradeDisc":"25370","icon":""}
-{"name":"疾風峽灣","refName":"Coves","namespace":"AREA","tradeDisc":"49159","icon":""}
-{"name":"殘破殞坑","refName":"Crater","namespace":"AREA","tradeDisc":"5132","icon":""}
-{"name":"緋紅神殿","refName":"Crimson Temple","namespace":"AREA","tradeDisc":"46612","icon":""}
-{"name":"緋紅之鎮","refName":"Crimson Township","namespace":"AREA","tradeDisc":"10687","icon":""}
-{"name":"紫晶礦山","refName":"Crystal Ore","namespace":"AREA","tradeDisc":"17684","icon":""}
-{"name":"惡咒陵墓","refName":"Cursed Crypt","namespace":"AREA","tradeDisc":"8544","icon":""}
-{"name":"夜語幽林","refName":"Dark Forest","namespace":"AREA","tradeDisc":"34447","icon":""}
-{"name":"不潔教堂","refName":"Defiled Cathedral","namespace":"AREA","tradeDisc":"47897","icon":""}
-{"name":"貧瘠之地","refName":"Desert","namespace":"AREA","tradeDisc":"34997","icon":""}
-{"name":"硫磺荒漠","refName":"Desert Spring","namespace":"AREA","tradeDisc":"10211","icon":""}
-{"name":"違禁掘坑","refName":"Dig","namespace":"AREA","tradeDisc":"43432","icon":""}
+{"name":"寒河","refName":"Cold River","namespace":"AREA","tradeDisc":"38080","icon":"","area":{"screenshot":"https://i.imgur.com/ld3HPg6.jpg"}}
+{"name":"激戰柱廊","refName":"Colonnade","namespace":"AREA","tradeDisc":"31349","icon":"","area":{"screenshot":"https://i.imgur.com/5uaNQwH.jpg"}}
+{"name":"大決鬥場","refName":"Colosseum","namespace":"AREA","tradeDisc":"16355","icon":"","area":{"screenshot":"https://i.imgur.com/LYXkjl8.jpg"}}
+{"name":"寧逸溫房","refName":"Conservatory","namespace":"AREA","tradeDisc":"6755","icon":"","area":{"screenshot":"https://i.imgur.com/VfVUpKT.jpg"}}
+{"name":"破碎堡礁","refName":"Coral Ruins","namespace":"AREA","tradeDisc":"41363","icon":"","area":{"screenshot":"https://i.imgur.com/YI4jsqt.jpg"}}
+{"name":"核心","refName":"Core","namespace":"AREA","tradeDisc":"35484","icon":"","area":{"screenshot":"https://i.imgur.com/SCCsOxV.jpg"}}
+{"name":"失序教院","refName":"Courthouse","namespace":"AREA","tradeDisc":"49777","icon":"","area":{"screenshot":"https://i.imgur.com/zg9qN4K.jpg"}}
+{"name":"奇術之庭","refName":"Courtyard","namespace":"AREA","tradeDisc":"25370","icon":"","area":{"screenshot":"https://i.imgur.com/rRYcncq.jpg"}}
+{"name":"疾風峽灣","refName":"Coves","namespace":"AREA","tradeDisc":"49159","icon":"","area":{"screenshot":"https://i.imgur.com/NB7i3Mu.jpg"}}
+{"name":"殘破殞坑","refName":"Crater","namespace":"AREA","tradeDisc":"5132","icon":"","area":{"screenshot":"https://i.imgur.com/ffRs5qU.jpg"}}
+{"name":"緋紅神殿","refName":"Crimson Temple","namespace":"AREA","tradeDisc":"46612","icon":"","area":{"screenshot":"https://i.imgur.com/4731HPd.jpg"}}
+{"name":"緋紅之鎮","refName":"Crimson Township","namespace":"AREA","tradeDisc":"10687","icon":"","area":{"screenshot":"https://i.imgur.com/OOugfbm.jpg"}}
+{"name":"紫晶礦山","refName":"Crystal Ore","namespace":"AREA","tradeDisc":"17684","icon":"","area":{"screenshot":"https://i.imgur.com/ff3kcZI.jpg"}}
+{"name":"惡咒陵墓","refName":"Cursed Crypt","namespace":"AREA","tradeDisc":"8544","icon":"","area":{"screenshot":"https://i.imgur.com/hz8a9Ea.jpg"}}
+{"name":"夜語幽林","refName":"Dark Forest","namespace":"AREA","tradeDisc":"34447","icon":"","area":{"screenshot":"https://i.imgur.com/ayyUVDP.jpg"}}
+{"name":"不潔教堂","refName":"Defiled Cathedral","namespace":"AREA","tradeDisc":"47897","icon":"","area":{"screenshot":"https://i.imgur.com/rSqf91M.jpg"}}
+{"name":"貧瘠之地","refName":"Desert","namespace":"AREA","tradeDisc":"34997","icon":"","area":{"screenshot":"https://i.imgur.com/BcaiqlN.jpg"}}
+{"name":"硫磺荒漠","refName":"Desert Spring","namespace":"AREA","tradeDisc":"10211","icon":"","area":{"screenshot":"https://i.imgur.com/aDop71B.jpg"}}
+{"name":"違禁掘坑","refName":"Dig","namespace":"AREA","tradeDisc":"43432","icon":"","area":{"screenshot":"https://i.imgur.com/E8Z9yPz.jpg"}}
 {"name":"潛水沙洲","refName":"Diving Shoals","namespace":"AREA","tradeDisc":"DivingShoals","icon":"","area":{"special":true}}
-{"name":"乾海","refName":"Dry Sea","namespace":"AREA","tradeDisc":"53637","icon":""}
-{"name":"暮色沙丘","refName":"Dunes","namespace":"AREA","tradeDisc":"53116","icon":""}
-{"name":"禁魂炎獄","refName":"Dungeon","namespace":"AREA","tradeDisc":"64256","icon":""}
+{"name":"乾海","refName":"Dry Sea","namespace":"AREA","tradeDisc":"53637","icon":"","area":{"screenshot":"https://i.imgur.com/JGfVZsB.jpg"}}
+{"name":"暮色沙丘","refName":"Dunes","namespace":"AREA","tradeDisc":"53116","icon":"","area":{"screenshot":"https://i.imgur.com/88Gm4iq.jpg"}}
+{"name":"禁魂炎獄","refName":"Dungeon","namespace":"AREA","tradeDisc":"64256","icon":"","area":{"screenshot":"https://i.imgur.com/GRI8xIf.jpg"}}
 {"name":"異能深溝","refName":"Eldritch Depths","namespace":"AREA","tradeDisc":"EldritchDepths","icon":"","area":{"special":true}}
-{"name":"熔火岩灘","refName":"Estuary","namespace":"AREA","tradeDisc":"40753","icon":""}
-{"name":"挖掘場","refName":"Excavation","namespace":"AREA","tradeDisc":"33025","icon":""}
-{"name":"鐵鏽工廠","refName":"Factory","namespace":"AREA","tradeDisc":"41763","icon":""}
-{"name":"無疆田野","refName":"Fields","namespace":"AREA","tradeDisc":"36207","icon":""}
-{"name":"洪災礦坑","refName":"Flooded Mine","namespace":"AREA","tradeDisc":"63065","icon":""}
-{"name":"禁忌之森","refName":"Forbidden Woods","namespace":"AREA","tradeDisc":"26156","icon":""}
-{"name":"岔河","refName":"Forking River","namespace":"AREA","tradeDisc":"29382","icon":""}
-{"name":"鍊金房","refName":"Foundry","namespace":"AREA","tradeDisc":"31509","icon":""}
-{"name":"凍原小屋","refName":"Frozen Cabins","namespace":"AREA","tradeDisc":"51403","icon":""}
-{"name":"毒菌魔域","refName":"Fungal Hollow","namespace":"AREA","tradeDisc":"34425","icon":""}
-{"name":"迷宮花園","refName":"Gardens","namespace":"AREA","tradeDisc":"11533","icon":""}
-{"name":"詭譎晶洞","refName":"Geode","namespace":"AREA","tradeDisc":"58981","icon":""}
-{"name":"赤貧居所","refName":"Ghetto","namespace":"AREA","tradeDisc":"14879","icon":""}
-{"name":"冰川山丘","refName":"Glacier","namespace":"AREA","tradeDisc":"4592","icon":""}
-{"name":"墓地谷","refName":"Grave Trough","namespace":"AREA","tradeDisc":"34760","icon":""}
-{"name":"墮影墓場","refName":"Graveyard","namespace":"AREA","tradeDisc":"53902","icon":""}
-{"name":"幽暗地穴","refName":"Grotto","namespace":"AREA","tradeDisc":"19420","icon":""}
-{"name":"幽魂宅邸","refName":"Haunted Mansion","namespace":"AREA","tradeDisc":"1215","icon":""}
+{"name":"熔火岩灘","refName":"Estuary","namespace":"AREA","tradeDisc":"40753","icon":"","area":{"screenshot":"https://i.imgur.com/LNLcK2Z.jpg"}}
+{"name":"挖掘場","refName":"Excavation","namespace":"AREA","tradeDisc":"33025","icon":"","area":{"screenshot":"https://i.imgur.com/A3E80Du.jpg"}}
+{"name":"鐵鏽工廠","refName":"Factory","namespace":"AREA","tradeDisc":"41763","icon":"","area":{"screenshot":"https://i.imgur.com/zOsCvpG.jpg"}}
+{"name":"無疆田野","refName":"Fields","namespace":"AREA","tradeDisc":"36207","icon":"","area":{"screenshot":"https://i.imgur.com/ZBYW0jj.jpg"}}
+{"name":"洪災礦坑","refName":"Flooded Mine","namespace":"AREA","tradeDisc":"63065","icon":"","area":{"screenshot":"https://i.imgur.com/RYNfkXJ.jpg"}}
+{"name":"禁忌之森","refName":"Forbidden Woods","namespace":"AREA","tradeDisc":"26156","icon":"","area":{"screenshot":"https://i.imgur.com/5Jl2OoA.jpg"}}
+{"name":"岔河","refName":"Forking River","namespace":"AREA","tradeDisc":"29382","icon":"","area":{"screenshot":"https://i.imgur.com/KLlqoMv.jpg"}}
+{"name":"鍊金房","refName":"Foundry","namespace":"AREA","tradeDisc":"31509","icon":"","area":{"screenshot":"https://i.imgur.com/EeefLOA.jpg"}}
+{"name":"凍原小屋","refName":"Frozen Cabins","namespace":"AREA","tradeDisc":"51403","icon":"","area":{"screenshot":"https://i.imgur.com/eAML7S2.jpg"}}
+{"name":"毒菌魔域","refName":"Fungal Hollow","namespace":"AREA","tradeDisc":"34425","icon":"","area":{"screenshot":"https://i.imgur.com/D4HiW8x.jpg"}}
+{"name":"迷宮花園","refName":"Gardens","namespace":"AREA","tradeDisc":"11533","icon":"","area":{"screenshot":"https://i.imgur.com/nnb6Fss.jpg"}}
+{"name":"詭譎晶洞","refName":"Geode","namespace":"AREA","tradeDisc":"58981","icon":"","area":{"screenshot":"https://i.imgur.com/iGJ0Ohk.jpg"}}
+{"name":"赤貧居所","refName":"Ghetto","namespace":"AREA","tradeDisc":"14879","icon":"","area":{"screenshot":"https://i.imgur.com/I8onB4N.jpg"}}
+{"name":"冰川山丘","refName":"Glacier","namespace":"AREA","tradeDisc":"4592","icon":"","area":{"screenshot":"https://i.imgur.com/t3Arfep.jpg"}}
+{"name":"墓地谷","refName":"Grave Trough","namespace":"AREA","tradeDisc":"34760","icon":"","area":{"screenshot":"https://i.imgur.com/ee5davj.jpg"}}
+{"name":"墮影墓場","refName":"Graveyard","namespace":"AREA","tradeDisc":"53902","icon":"","area":{"screenshot":"https://i.imgur.com/gm0UolB.jpg"}}
+{"name":"幽暗地穴","refName":"Grotto","namespace":"AREA","tradeDisc":"19420","icon":"","area":{"screenshot":"https://i.imgur.com/N7P59cb.jpg"}}
+{"name":"幽魂宅邸","refName":"Haunted Mansion","namespace":"AREA","tradeDisc":"1215","icon":"","area":{"screenshot":"https://i.imgur.com/TyBueyN.jpg"}}
 {"name":"危機海淵","refName":"Hazardous Depths","namespace":"AREA","tradeDisc":"HazardousDepths","icon":"","area":{"special":true}}
-{"name":"極原冰帽","refName":"Iceberg","namespace":"AREA","tradeDisc":"59084","icon":""}
+{"name":"極原冰帽","refName":"Iceberg","namespace":"AREA","tradeDisc":"59084","icon":"","area":{"screenshot":"https://i.imgur.com/9g2hpKu.jpg"}}
 {"name":"感染潛水球","refName":"Infested Bathyspheres","namespace":"AREA","tradeDisc":"InfestedBathyspheres","icon":"","area":{"special":true}}
-{"name":"病疫林谷","refName":"Infested Valley","namespace":"AREA","tradeDisc":"24414","icon":""}
-{"name":"象牙神殿","refName":"Ivory Temple","namespace":"AREA","tradeDisc":"16982","icon":""}
-{"name":"劇毒林谷","refName":"Jungle Valley","namespace":"AREA","tradeDisc":"4003","icon":""}
+{"name":"病疫林谷","refName":"Infested Valley","namespace":"AREA","tradeDisc":"24414","icon":"","area":{"screenshot":"https://i.imgur.com/9FiIb93.jpg"}}
+{"name":"象牙神殿","refName":"Ivory Temple","namespace":"AREA","tradeDisc":"16982","icon":"","area":{"screenshot":"https://i.imgur.com/gl7ODl5.jpg"}}
+{"name":"劇毒林谷","refName":"Jungle Valley","namespace":"AREA","tradeDisc":"4003","icon":"","area":{"screenshot":"https://i.imgur.com/O4q6Op8.jpg"}}
 {"name":"奇夏拉安眠地","refName":"Kishara's Rest","namespace":"AREA","tradeDisc":"KisharasRest","icon":"","area":{"special":true}}
-{"name":"實驗居所","refName":"Laboratory","namespace":"AREA","tradeDisc":"43561","icon":""}
-{"name":"餓獸巢穴","refName":"Lair","namespace":"AREA","tradeDisc":"8823","icon":""}
-{"name":"熔岩之室","refName":"Lava Chamber","namespace":"AREA","tradeDisc":"7088","icon":""}
-{"name":"岩漿熔湖","refName":"Lava Lake","namespace":"AREA","tradeDisc":"20343","icon":""}
-{"name":"荒涼牧野","refName":"Leyline","namespace":"AREA","tradeDisc":"12937","icon":""}
-{"name":"絕望燈塔","refName":"Lighthouse","namespace":"AREA","tradeDisc":"43308","icon":""}
-{"name":"如履危牆","refName":"Lookout","namespace":"AREA","tradeDisc":"48831","icon":""}
+{"name":"實驗居所","refName":"Laboratory","namespace":"AREA","tradeDisc":"43561","icon":"","area":{"screenshot":"https://i.imgur.com/3wlWzSX.jpg"}}
+{"name":"餓獸巢穴","refName":"Lair","namespace":"AREA","tradeDisc":"8823","icon":"","area":{"screenshot":"https://i.imgur.com/Uj6Ef71.jpg"}}
+{"name":"熔岩之室","refName":"Lava Chamber","namespace":"AREA","tradeDisc":"7088","icon":"","area":{"screenshot":"https://i.imgur.com/XR1YVVq.jpg"}}
+{"name":"岩漿熔湖","refName":"Lava Lake","namespace":"AREA","tradeDisc":"20343","icon":"","area":{"screenshot":"https://i.imgur.com/G85TEg5.jpg"}}
+{"name":"荒涼牧野","refName":"Leyline","namespace":"AREA","tradeDisc":"12937","icon":"","area":{"screenshot":"https://i.imgur.com/5UjUxso.jpg"}}
+{"name":"絕望燈塔","refName":"Lighthouse","namespace":"AREA","tradeDisc":"43308","icon":"","area":{"screenshot":"https://i.imgur.com/40gXcr4.jpg"}}
+{"name":"如履危牆","refName":"Lookout","namespace":"AREA","tradeDisc":"48831","icon":"","area":{"screenshot":"https://i.imgur.com/QNuOzHT.jpg"}}
 {"name":"失落遺跡","refName":"Lost Ruins","namespace":"AREA","tradeDisc":"LostRuins","icon":"","area":{"special":true}}
-{"name":"畸形亡域","refName":"Malformation","namespace":"AREA","tradeDisc":"3421","icon":""}
-{"name":"惡臭沼地","refName":"Marshes","namespace":"AREA","tradeDisc":"42115","icon":""}
-{"name":"靜縊陵墓","refName":"Mausoleum","namespace":"AREA","tradeDisc":"57831","icon":""}
-{"name":"冥神之域","refName":"Maze","namespace":"AREA","tradeDisc":"46524","icon":""}
-{"name":"平頂荒漠","refName":"Mesa","namespace":"AREA","tradeDisc":"19999","icon":""}
-{"name":"濕地礦山","refName":"Mineral Pools","namespace":"AREA","tradeDisc":"44313","icon":""}
-{"name":"嬋娟神殿","refName":"Moon Temple","namespace":"AREA","tradeDisc":"41751","icon":""}
-{"name":"陰晦泥灘","refName":"Mud Geyser","namespace":"AREA","tradeDisc":"36946","icon":""}
-{"name":"古博物館","refName":"Museum","namespace":"AREA","tradeDisc":"33220","icon":""}
-{"name":"魔影墓場","refName":"Necropolis","namespace":"AREA","tradeDisc":"2279","icon":""}
-{"name":"密林果園","refName":"Orchard","namespace":"AREA","tradeDisc":"38855","icon":""}
-{"name":"長草遺跡","refName":"Overgrown Ruin","namespace":"AREA","tradeDisc":"26732","icon":""}
-{"name":"密草神殿","refName":"Overgrown Shrine","namespace":"AREA","tradeDisc":"26468","icon":""}
-{"name":"神域之殿","refName":"Palace","namespace":"AREA","tradeDisc":"51878","icon":""}
-{"name":"園林苑","refName":"Park","namespace":"AREA","tradeDisc":"32613","icon":""}
+{"name":"畸形亡域","refName":"Malformation","namespace":"AREA","tradeDisc":"3421","icon":"","area":{"screenshot":"https://i.imgur.com/bVcvxGD.jpg"}}
+{"name":"惡臭沼地","refName":"Marshes","namespace":"AREA","tradeDisc":"42115","icon":"","area":{"screenshot":"https://i.imgur.com/25Oc1GQ.jpg"}}
+{"name":"靜縊陵墓","refName":"Mausoleum","namespace":"AREA","tradeDisc":"57831","icon":"","area":{"screenshot":"https://i.imgur.com/lppiQiQ.jpg"}}
+{"name":"冥神之域","refName":"Maze","namespace":"AREA","tradeDisc":"46524","icon":"","area":{"screenshot":"https://i.imgur.com/vPKZUFI.jpg"}}
+{"name":"平頂荒漠","refName":"Mesa","namespace":"AREA","tradeDisc":"19999","icon":"","area":{"screenshot":"https://i.imgur.com/gvpYUBQ.jpg"}}
+{"name":"濕地礦山","refName":"Mineral Pools","namespace":"AREA","tradeDisc":"44313","icon":"","area":{"screenshot":"https://i.imgur.com/AvgBb6c.jpg"}}
+{"name":"嬋娟神殿","refName":"Moon Temple","namespace":"AREA","tradeDisc":"41751","icon":"","area":{"screenshot":"https://i.imgur.com/WoUgaQp.jpg"}}
+{"name":"陰晦泥灘","refName":"Mud Geyser","namespace":"AREA","tradeDisc":"36946","icon":"","area":{"screenshot":"https://i.imgur.com/qVVPlhi.jpg"}}
+{"name":"古博物館","refName":"Museum","namespace":"AREA","tradeDisc":"33220","icon":"","area":{"screenshot":"https://i.imgur.com/oOrFsgt.jpg"}}
+{"name":"魔影墓場","refName":"Necropolis","namespace":"AREA","tradeDisc":"2279","icon":"","area":{"screenshot":"https://i.imgur.com/6cNUs2I.jpg"}}
+{"name":"密林果園","refName":"Orchard","namespace":"AREA","tradeDisc":"38855","icon":"","area":{"screenshot":"https://i.imgur.com/S5wxemk.jpg"}}
+{"name":"長草遺跡","refName":"Overgrown Ruin","namespace":"AREA","tradeDisc":"26732","icon":"","area":{"screenshot":"https://i.imgur.com/U1gMZhT.jpg"}}
+{"name":"密草神殿","refName":"Overgrown Shrine","namespace":"AREA","tradeDisc":"26468","icon":"","area":{"screenshot":"https://i.imgur.com/vXh4QKk.jpg"}}
+{"name":"神域之殿","refName":"Palace","namespace":"AREA","tradeDisc":"51878","icon":"","area":{"screenshot":"https://i.imgur.com/U7ABlGw.jpg"}}
+{"name":"園林苑","refName":"Park","namespace":"AREA","tradeDisc":"32613","icon":"","area":{"screenshot":"https://i.imgur.com/HlFwmtM.jpg"}}
 {"name":"遠洋深淵","refName":"Pelagic Abyss","namespace":"AREA","tradeDisc":"PelagicAbyss","icon":"","area":{"special":true}}
-{"name":"穢陰獄牢","refName":"Pen","namespace":"AREA","tradeDisc":"19828","icon":""}
-{"name":"乾潮林地","refName":"Peninsula","namespace":"AREA","tradeDisc":"57690","icon":""}
-{"name":"魔靈幻獄","refName":"Phantasmagoria","namespace":"AREA","tradeDisc":"47634","icon":""}
-{"name":"怒浪之港","refName":"Pier","namespace":"AREA","tradeDisc":"60732","icon":""}
-{"name":"巨坑","refName":"Pit","namespace":"AREA","tradeDisc":"11490","icon":""}
-{"name":"海風高原","refName":"Plateau","namespace":"AREA","tradeDisc":"34832","icon":""}
-{"name":"廣場","refName":"Plaza","namespace":"AREA","tradeDisc":"35076","icon":""}
-{"name":"失落城塢","refName":"Port","namespace":"AREA","tradeDisc":"47088","icon":""}
-{"name":"苦行之域","refName":"Precinct","namespace":"AREA","tradeDisc":"58250","icon":""}
-{"name":"血腥陣地","refName":"Primordial Blocks","namespace":"AREA","tradeDisc":"15595","icon":""}
-{"name":"血腥沼澤","refName":"Primordial Pool","namespace":"AREA","tradeDisc":"25302","icon":""}
-{"name":"月色迴廊","refName":"Promenade","namespace":"AREA","tradeDisc":"54757","icon":""}
-{"name":"古競速場","refName":"Racecourse","namespace":"AREA","tradeDisc":"57536","icon":""}
-{"name":"濱海堡壘","refName":"Ramparts","namespace":"AREA","tradeDisc":"52736","icon":""}
-{"name":"危機海礁","refName":"Reef","namespace":"AREA","tradeDisc":"53973","icon":""}
-{"name":"古典密室","refName":"Relic Chambers","namespace":"AREA","tradeDisc":"35162","icon":""}
-{"name":"神主居所","refName":"Residence","namespace":"AREA","tradeDisc":"4755","icon":""}
-{"name":"墓影書坊","refName":"Scriptorium","namespace":"AREA","tradeDisc":"53075","icon":""}
+{"name":"穢陰獄牢","refName":"Pen","namespace":"AREA","tradeDisc":"19828","icon":"","area":{"screenshot":"https://i.imgur.com/FYax6WD.jpg"}}
+{"name":"乾潮林地","refName":"Peninsula","namespace":"AREA","tradeDisc":"57690","icon":"","area":{"screenshot":"https://i.imgur.com/5YycEWs.jpg"}}
+{"name":"魔靈幻獄","refName":"Phantasmagoria","namespace":"AREA","tradeDisc":"47634","icon":"","area":{"screenshot":"https://i.imgur.com/yCDYKxA.jpg"}}
+{"name":"怒浪之港","refName":"Pier","namespace":"AREA","tradeDisc":"60732","icon":"","area":{"screenshot":"https://i.imgur.com/rZMXMj1.jpg"}}
+{"name":"巨坑","refName":"Pit","namespace":"AREA","tradeDisc":"11490","icon":"","area":{"screenshot":"https://i.imgur.com/PkwpOv0.jpg"}}
+{"name":"海風高原","refName":"Plateau","namespace":"AREA","tradeDisc":"34832","icon":"","area":{"screenshot":"https://i.imgur.com/0t2NnqI.jpg"}}
+{"name":"廣場","refName":"Plaza","namespace":"AREA","tradeDisc":"35076","icon":"","area":{"screenshot":"https://i.imgur.com/kYGkNDs.jpg"}}
+{"name":"失落城塢","refName":"Port","namespace":"AREA","tradeDisc":"47088","icon":"","area":{"screenshot":"https://i.imgur.com/9KprAxq.jpg"}}
+{"name":"苦行之域","refName":"Precinct","namespace":"AREA","tradeDisc":"58250","icon":"","area":{"screenshot":"https://i.imgur.com/fAJ8DcM.jpg"}}
+{"name":"血腥陣地","refName":"Primordial Blocks","namespace":"AREA","tradeDisc":"15595","icon":"","area":{"screenshot":"https://i.imgur.com/TtaIepR.jpg"}}
+{"name":"血腥沼澤","refName":"Primordial Pool","namespace":"AREA","tradeDisc":"25302","icon":"","area":{"screenshot":"https://i.imgur.com/Fxl9Naf.jpg"}}
+{"name":"月色迴廊","refName":"Promenade","namespace":"AREA","tradeDisc":"54757","icon":"","area":{"screenshot":"https://i.imgur.com/Q8E3SQ5.jpg"}}
+{"name":"古競速場","refName":"Racecourse","namespace":"AREA","tradeDisc":"57536","icon":"","area":{"screenshot":"https://i.imgur.com/tKH5lyG.jpg"}}
+{"name":"濱海堡壘","refName":"Ramparts","namespace":"AREA","tradeDisc":"52736","icon":"","area":{"screenshot":"https://i.imgur.com/Yx5UIDO.jpg"}}
+{"name":"危機海礁","refName":"Reef","namespace":"AREA","tradeDisc":"53973","icon":"","area":{"screenshot":"https://i.imgur.com/pVdQXl9.jpg"}}
+{"name":"古典密室","refName":"Relic Chambers","namespace":"AREA","tradeDisc":"35162","icon":"","area":{"screenshot":"https://i.imgur.com/jsNHNa1.jpg"}}
+{"name":"神主居所","refName":"Residence","namespace":"AREA","tradeDisc":"4755","icon":"","area":{"screenshot":"https://i.imgur.com/FF5qpbI.jpg"}}
+{"name":"墓影書坊","refName":"Scriptorium","namespace":"AREA","tradeDisc":"53075","icon":"","area":{}}
 {"name":"海洋之柱","refName":"Sea Pillars","namespace":"AREA","tradeDisc":"SeaPillars","icon":"","area":{"special":true}}
 {"name":"海底山脊","refName":"Seafloor Ridges","namespace":"AREA","tradeDisc":"SeafloorRidges","icon":"","area":{}}
-{"name":"陰暗墓塚","refName":"Sepulchre","namespace":"AREA","tradeDisc":"27716","icon":""}
-{"name":"熾炎船塢","refName":"Shipyard","namespace":"AREA","tradeDisc":"11724","icon":""}
-{"name":"暮光海灘","refName":"Shore","namespace":"AREA","tradeDisc":"22593","icon":""}
-{"name":"奇術秘殿","refName":"Shrine","namespace":"AREA","tradeDisc":"64812","icon":""}
-{"name":"禁斷圍城","refName":"Siege","namespace":"AREA","tradeDisc":"3756","icon":""}
-{"name":"儲物倉","refName":"Silo","namespace":"AREA","tradeDisc":"24497","icon":""}
-{"name":"巨蛛之林","refName":"Spider Forest","namespace":"AREA","tradeDisc":"4651","icon":""}
-{"name":"巨蛛巢穴","refName":"Spider Lair","namespace":"AREA","tradeDisc":"60607","icon":""}
-{"name":"淤塞水道","refName":"Stagnation","namespace":"AREA","tradeDisc":"3182","icon":""}
-{"name":"致命岩灘","refName":"Strand","namespace":"AREA","tradeDisc":"10021","icon":""}
-{"name":"硫磺蝕岸","refName":"Sulphur Vents","namespace":"AREA","tradeDisc":"6074","icon":""}
-{"name":"寒頂之巔","refName":"Summit","namespace":"AREA","tradeDisc":"60634","icon":""}
-{"name":"亞特蘭提斯","refName":"Sunken City","namespace":"AREA","tradeDisc":"11215","icon":""}
+{"name":"陰暗墓塚","refName":"Sepulchre","namespace":"AREA","tradeDisc":"27716","icon":"","area":{"screenshot":"https://i.imgur.com/I8et20T.jpg"}}
+{"name":"熾炎船塢","refName":"Shipyard","namespace":"AREA","tradeDisc":"11724","icon":"","area":{"screenshot":"https://i.imgur.com/J5hM5mR.jpg"}}
+{"name":"暮光海灘","refName":"Shore","namespace":"AREA","tradeDisc":"22593","icon":"","area":{"screenshot":"https://i.imgur.com/HNPAnu9.jpg"}}
+{"name":"奇術秘殿","refName":"Shrine","namespace":"AREA","tradeDisc":"64812","icon":"","area":{"screenshot":"https://i.imgur.com/wDK8KBW.jpg"}}
+{"name":"禁斷圍城","refName":"Siege","namespace":"AREA","tradeDisc":"3756","icon":"","area":{"screenshot":"https://i.imgur.com/vOwwEDe.jpg"}}
+{"name":"儲物倉","refName":"Silo","namespace":"AREA","tradeDisc":"24497","icon":"","area":{"screenshot":"https://i.imgur.com/hk740NA.jpg"}}
+{"name":"巨蛛之林","refName":"Spider Forest","namespace":"AREA","tradeDisc":"4651","icon":"","area":{"screenshot":"https://i.imgur.com/HkKHFTB.jpg"}}
+{"name":"巨蛛巢穴","refName":"Spider Lair","namespace":"AREA","tradeDisc":"60607","icon":"","area":{"screenshot":"https://i.imgur.com/s2WAMm5.jpg"}}
+{"name":"淤塞水道","refName":"Stagnation","namespace":"AREA","tradeDisc":"3182","icon":"","area":{"screenshot":"https://i.imgur.com/OJbjzlG.jpg"}}
+{"name":"致命岩灘","refName":"Strand","namespace":"AREA","tradeDisc":"10021","icon":"","area":{"screenshot":"https://i.imgur.com/7aE4Xzp.jpg"}}
+{"name":"硫磺蝕岸","refName":"Sulphur Vents","namespace":"AREA","tradeDisc":"6074","icon":"","area":{"screenshot":"https://i.imgur.com/D3sc6Dg.jpg"}}
+{"name":"寒頂之巔","refName":"Summit","namespace":"AREA","tradeDisc":"60634","icon":"","area":{"screenshot":"https://i.imgur.com/6aL5NhS.jpg"}}
+{"name":"亞特蘭提斯","refName":"Sunken City","namespace":"AREA","tradeDisc":"11215","icon":"","area":{"screenshot":"https://i.imgur.com/QAoHzcR.jpg"}}
 {"name":"沉沒圖騰","refName":"Sunken Totems","namespace":"AREA","tradeDisc":"SunkenTotems","icon":"","area":{"special":true}}
-{"name":"奪魂之殿","refName":"Temple","namespace":"AREA","tradeDisc":"45792","icon":""}
-{"name":"露台花園","refName":"Terrace","namespace":"AREA","tradeDisc":"42558","icon":""}
-{"name":"驚懼樹叢","refName":"Thicket","namespace":"AREA","tradeDisc":"737","icon":""}
-{"name":"闇獄尖塔","refName":"Tower","namespace":"AREA","tradeDisc":"54446","icon":""}
-{"name":"腐敗下水道","refName":"Toxic Sewer","namespace":"AREA","tradeDisc":"25747","icon":""}
-{"name":"晴空幽島","refName":"Tropical Island","namespace":"AREA","tradeDisc":"5647","icon":""}
-{"name":"地底之河","refName":"Underground River","namespace":"AREA","tradeDisc":"20216","icon":""}
-{"name":"濱海幽穴","refName":"Underground Sea","namespace":"AREA","tradeDisc":"18545","icon":""}
+{"name":"奪魂之殿","refName":"Temple","namespace":"AREA","tradeDisc":"45792","icon":"","area":{"screenshot":"https://i.imgur.com/g3LZ4zC.jpg"}}
+{"name":"露台花園","refName":"Terrace","namespace":"AREA","tradeDisc":"42558","icon":"","area":{"screenshot":"https://i.imgur.com/dZZGyRt.jpg"}}
+{"name":"驚懼樹叢","refName":"Thicket","namespace":"AREA","tradeDisc":"737","icon":"","area":{"screenshot":"https://i.imgur.com/rlY2iPC.jpg"}}
+{"name":"闇獄尖塔","refName":"Tower","namespace":"AREA","tradeDisc":"54446","icon":"","area":{"screenshot":"https://i.imgur.com/LqSPV6K.jpg"}}
+{"name":"腐敗下水道","refName":"Toxic Sewer","namespace":"AREA","tradeDisc":"25747","icon":"","area":{"screenshot":"https://i.imgur.com/CgSpbBl.jpg"}}
+{"name":"晴空幽島","refName":"Tropical Island","namespace":"AREA","tradeDisc":"5647","icon":"","area":{"screenshot":"https://i.imgur.com/wraPtBT.jpg"}}
+{"name":"地底之河","refName":"Underground River","namespace":"AREA","tradeDisc":"20216","icon":"","area":{"screenshot":"https://i.imgur.com/8k4Dug4.jpg"}}
+{"name":"濱海幽穴","refName":"Underground Sea","namespace":"AREA","tradeDisc":"18545","icon":"","area":{"screenshot":"https://i.imgur.com/ELUmbfz.jpg"}}
 {"name":"海底幽林","refName":"Undersea Groves","namespace":"AREA","tradeDisc":"UnderseaGroves","icon":"","area":{}}
 {"name":"平凡海床","refName":"Unremarkable Seabed","namespace":"AREA","tradeDisc":"UnremarkableSeabed","icon":"","area":{"special":true}}
-{"name":"瓦爾金字塔","refName":"Vaal Pyramid","namespace":"AREA","tradeDisc":"28018","icon":""}
-{"name":"魔金寶庫","refName":"Vault","namespace":"AREA","tradeDisc":"57839","icon":""}
-{"name":"魅影別墅","refName":"Villa","namespace":"AREA","tradeDisc":"2144","icon":""}
-{"name":"火山炎域","refName":"Volcano","namespace":"AREA","tradeDisc":"30639","icon":""}
-{"name":"死寂泥溝","refName":"Waste Pool","namespace":"AREA","tradeDisc":"42556","icon":""}
-{"name":"荒地","refName":"Wasteland","namespace":"AREA","tradeDisc":"17533","icon":""}
-{"name":"危機水道","refName":"Waterways","namespace":"AREA","tradeDisc":"28402","icon":""}
-{"name":"毒牙海港","refName":"Wharf","namespace":"AREA","tradeDisc":"54239","icon":""}
+{"name":"瓦爾金字塔","refName":"Vaal Pyramid","namespace":"AREA","tradeDisc":"28018","icon":"","area":{"screenshot":"https://i.imgur.com/RM2CNDk.jpg"}}
+{"name":"魔金寶庫","refName":"Vault","namespace":"AREA","tradeDisc":"57839","icon":"","area":{"screenshot":"https://i.imgur.com/zdIUUwN.jpg"}}
+{"name":"魅影別墅","refName":"Villa","namespace":"AREA","tradeDisc":"2144","icon":"","area":{"screenshot":"https://i.imgur.com/EB0wTDF.jpg"}}
+{"name":"火山炎域","refName":"Volcano","namespace":"AREA","tradeDisc":"30639","icon":"","area":{"screenshot":"https://i.imgur.com/kNQfYSd.jpg"}}
+{"name":"死寂泥溝","refName":"Waste Pool","namespace":"AREA","tradeDisc":"42556","icon":"","area":{"screenshot":"https://i.imgur.com/fEvrcih.jpg"}}
+{"name":"荒地","refName":"Wasteland","namespace":"AREA","tradeDisc":"17533","icon":"","area":{"screenshot":"https://i.imgur.com/ywddRfu.jpg"}}
+{"name":"危機水道","refName":"Waterways","namespace":"AREA","tradeDisc":"28402","icon":"","area":{"screenshot":"https://i.imgur.com/qAEf4WS.jpg"}}
+{"name":"毒牙海港","refName":"Wharf","namespace":"AREA","tradeDisc":"54239","icon":"","area":{"screenshot":"https://i.imgur.com/JirgJcM.jpg"}}
 {"name":"毒素滑行者","refName":"Acid Slitherer","namespace":"CAPTURED_BEAST","icon":"https://webtw.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQmVzdGlhcnlPcmJGdWxsIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/3214b44360/BestiaryOrbFull.png"}
 {"name":"成年雛鳥","refName":"Adolescent Rhex","namespace":"CAPTURED_BEAST","icon":"https://webtw.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQmVzdGlhcnlPcmJGdWxsIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/3214b44360/BestiaryOrbFull.png"}
 {"name":"高峰羊人","refName":"Alpine Devil","namespace":"CAPTURED_BEAST","icon":"https://webtw.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQmVzdGlhcnlPcmJGdWxsIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/3214b44360/BestiaryOrbFull.png"}
@@ -1813,9 +1813,9 @@
 {"name":"聖甲蟲：珍寶凋落","refName":"Blight Scarab of Bounty","namespace":"ITEM","tradeTag":"blight-scarab-of-bounty","exchangeable":true,"icon":"https://webtw.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJCbGlnaHQiLCJzY2FsZSI6MX1d/de78905e90/NormalScarabBlight.png"}
 {"name":"聖甲蟲：振奮凋落","refName":"Blight Scarab of Invigoration","namespace":"ITEM","tradeTag":"blight-scarab-of-invigoration","exchangeable":true,"icon":"https://webtw.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9BbHRUaWVyNFNjYXJhYkJsaWdodCIsInNjYWxlIjoxfV0/34e07da01c/AltTier4ScarabBlight.png"}
 {"name":"聖甲蟲：枯萎之心凋落","refName":"Blight Scarab of the Blightheart","namespace":"ITEM","tradeTag":"blight-scarab-of-the-blightheart","exchangeable":true,"icon":"https://webtw.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiQmxpZ2h0Iiwic2NhbGUiOjF9XQ/d0aa6a6d55/GreaterScarabBlight.png"}
-{"name":"Blight-ravaged Map","refName":"Blight-ravaged Map","namespace":"ITEM","icon":"/images/maps/blight2.png"}
+{"name":"Blight-ravaged Map","refName":"Blight-ravaged Map","namespace":"ITEM","icon":"/images/maps/blight2.png","craftable":{"category":"Map"},"tradeDisc":"uberblighted","area":{"blighted":true}}
 {"name":"凋落之譫妄玉","refName":"Blighted Delirium Orb","namespace":"ITEM","tradeTag":"blighted-delirium-orb","exchangeable":true,"icon":"https://webtw.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJCbGlnaHQiLCJzY2FsZSI6MX1d/e65965e8bd/DeliriumOrbBlight.png"}
-{"name":"Blighted Map","refName":"Blighted Map","namespace":"ITEM","icon":"/images/maps/blight1.png"}
+{"name":"Blighted Map","refName":"Blighted Map","namespace":"ITEM","icon":"/images/maps/blight1.png","craftable":{"category":"Map"},"tradeDisc":"blighted","area":{"blighted":true}}
 {"name":"襲眼鉤","refName":"Blinder","namespace":"ITEM","craftable":{"category":"Claw"},"icon":"https://webtw.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvV2VhcG9ucy9PbmVIYW5kV2VhcG9ucy9DbGF3cy9DbGF3NSIsInciOjIsImgiOjIsInNjYWxlIjoxfV0/1d5586ea56/Claw5.png","w":2,"h":2}
 {"name":"暴雪之冠","refName":"Blizzard Crown","namespace":"ITEM","craftable":{"category":"Helmet"},"armour":{"ev":[185,212],"es":[38,43]},"icon":"https://webtw.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9IZWxtZXRzL0hlbG1ldERleEludFIiLCJ3IjoyLCJoIjoyLCJzY2FsZSI6MX1d/9da7af13c1/HelmetDexIntR.png","w":2,"h":2}
 {"name":"血腥惡魔","refName":"Blood Demon","namespace":"ITEM","icon":"https://webtw.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQXptZXJpL0hlbGxzY2FwZURlbW9uQm9zc0NvcnBzZSIsInciOjMsImgiOjIsInNjYWxlIjoxfV0/9bcd7bb5b8/HellscapeDemonBossCorpse.png","w":3,"h":2}
@@ -4979,3 +4979,6 @@
 {"name":"薩爾的揚音","refName":"Zeel's Amplifier","namespace":"UNIQUE","unique":{"base":"Polished Spiked Shield","disenchantValue":4.13},"icon":"https://webtw.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9TaGllbGRzL1plYWxzQW1wbGlmaWVyIiwidyI6MiwiaCI6Miwic2NhbGUiOjF9XQ/d1e9af3da7/ZealsAmplifier.png"}
 {"name":"澤佛伊之心","refName":"Zerphi's Heart","namespace":"UNIQUE","unique":{"base":"Paua Amulet","disenchantValue":26.52},"icon":"https://webtw.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQW11bGV0cy9aZXJwaGlzSGVhcnQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/3e35140dfe/ZerphisHeart.png"}
 {"name":"澤佛伊的終息","refName":"Zerphi's Last Breath","namespace":"UNIQUE","unique":{"base":"Grand Mana Flask","disenchantValue":106.41},"icon":"https://webtw.poecdn.com/gen/image/WzksMTQseyJmIjoiMkRJdGVtcy9GbGFza3MvWmVycGhpc0xhc3RCcmVhdGgiLCJ3IjoxLCJoIjoyLCJzY2FsZSI6MSwibGV2ZWwiOjF9XQ/bf8cb7b943/ZerphisLastBreath.png"}
+{"name":"不淨密室","refName":"Chambers of Impurity","namespace":"AREA","icon":"","area":{}}
+{"name":"糜爛之庭","refName":"Courtyard of Wasting","namespace":"AREA","icon":"","area":{}}
+{"name":"謊言劇院","refName":"Theatre of Lies","namespace":"AREA","icon":"","area":{}}

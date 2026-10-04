@@ -24,9 +24,7 @@ export function getDetailsId (item: ParsedItem) {
   if (item.category === ItemCategory.Map) {
     return {
       ns: item.info.namespace,
-      name: (item.mapBlighted)
-        ? `${item.mapBlighted} ${item.info.refName}`
-        : item.info.refName,
+      name: item.info.refName,
       variant: variant([
         `T${(item.rarity === ItemRarity.Unique ? undefined : item.mapTier) ?? 0}`,
         (item.rarity !== ItemRarity.Unique)
@@ -81,7 +79,7 @@ function forUniqueItem (item: ParsedItem) {
       getUniqueVariant(item),
       (item.category === ItemCategory.Flask) ? null
         : (item.category === ItemCategory.SanctumRelic) ? 'Relic'
-            : item.info.unique.base,
+            : item.uniqueBase?.refName ?? item.info.unique.base,
       (item.sockets?.linked) ? `${item.sockets.linked}L` : null
     ])
   }

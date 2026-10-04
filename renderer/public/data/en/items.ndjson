@@ -1,164 +1,164 @@
 {"name":"Abyssal Plain","refName":"Abyssal Plain","namespace":"AREA","tradeDisc":"AbyssalPlain","icon":"","area":{}}
-{"name":"Academy","refName":"Academy","namespace":"AREA","tradeDisc":"54575","icon":""}
-{"name":"Acid Caverns","refName":"Acid Caverns","namespace":"AREA","tradeDisc":"21257","icon":""}
-{"name":"Alleyways","refName":"Alleyways","namespace":"AREA","tradeDisc":"42968","icon":""}
+{"name":"Academy","refName":"Academy","namespace":"AREA","tradeDisc":"54575","icon":"","area":{}}
+{"name":"Acid Caverns","refName":"Acid Caverns","namespace":"AREA","tradeDisc":"21257","icon":"","area":{"screenshot":"https://i.imgur.com/vISJftF.jpg"}}
+{"name":"Alleyways","refName":"Alleyways","namespace":"AREA","tradeDisc":"42968","icon":"","area":{"screenshot":"https://i.imgur.com/m21vNCp.jpg"}}
 {"name":"Anchorfield","refName":"Anchorfield","namespace":"AREA","tradeDisc":"Anchorfield","icon":"","area":{"special":true}}
-{"name":"Ancient City","refName":"Ancient City","namespace":"AREA","tradeDisc":"2545","icon":""}
-{"name":"Arachnid Nest","refName":"Arachnid Nest","namespace":"AREA","tradeDisc":"36866","icon":""}
-{"name":"Arachnid Tomb","refName":"Arachnid Tomb","namespace":"AREA","tradeDisc":"7465","icon":""}
-{"name":"Arcade","refName":"Arcade","namespace":"AREA","tradeDisc":"44259","icon":""}
-{"name":"Arena","refName":"Arena","namespace":"AREA","tradeDisc":"1371","icon":""}
-{"name":"Arid Lake","refName":"Arid Lake","namespace":"AREA","tradeDisc":"27782","icon":""}
-{"name":"Armoury","refName":"Armoury","namespace":"AREA","tradeDisc":"15108","icon":""}
-{"name":"Arsenal","refName":"Arsenal","namespace":"AREA","tradeDisc":"25202","icon":""}
-{"name":"Ashen Wood","refName":"Ashen Wood","namespace":"AREA","tradeDisc":"43927","icon":""}
-{"name":"Atoll","refName":"Atoll","namespace":"AREA","tradeDisc":"19776","icon":""}
-{"name":"Barrows","refName":"Barrows","namespace":"AREA","tradeDisc":"49687","icon":""}
-{"name":"Basilica","refName":"Basilica","namespace":"AREA","tradeDisc":"27821","icon":""}
-{"name":"Bazaar","refName":"Bazaar","namespace":"AREA","tradeDisc":"36556","icon":""}
-{"name":"Beach","refName":"Beach","namespace":"AREA","tradeDisc":"62685","icon":""}
-{"name":"Belfry","refName":"Belfry","namespace":"AREA","tradeDisc":"59460","icon":""}
-{"name":"Bog","refName":"Bog","namespace":"AREA","tradeDisc":"47614","icon":""}
-{"name":"Bone Crypt","refName":"Bone Crypt","namespace":"AREA","tradeDisc":"23253","icon":""}
-{"name":"Bramble Valley","refName":"Bramble Valley","namespace":"AREA","tradeDisc":"44170","icon":""}
+{"name":"Ancient City","refName":"Ancient City","namespace":"AREA","tradeDisc":"2545","icon":"","area":{"screenshot":"https://i.imgur.com/MThKML2.jpg"}}
+{"name":"Arachnid Nest","refName":"Arachnid Nest","namespace":"AREA","tradeDisc":"36866","icon":"","area":{"screenshot":"https://i.imgur.com/Ljh7mDh.jpg"}}
+{"name":"Arachnid Tomb","refName":"Arachnid Tomb","namespace":"AREA","tradeDisc":"7465","icon":"","area":{"screenshot":"https://i.imgur.com/1IAVUXr.jpg"}}
+{"name":"Arcade","refName":"Arcade","namespace":"AREA","tradeDisc":"44259","icon":"","area":{"screenshot":"https://i.imgur.com/mTl4tTm.jpg"}}
+{"name":"Arena","refName":"Arena","namespace":"AREA","tradeDisc":"1371","icon":"","area":{"screenshot":"https://i.imgur.com/EaTICR6.jpg"}}
+{"name":"Arid Lake","refName":"Arid Lake","namespace":"AREA","tradeDisc":"27782","icon":"","area":{"screenshot":"https://i.imgur.com/9gm7OPL.jpg"}}
+{"name":"Armoury","refName":"Armoury","namespace":"AREA","tradeDisc":"15108","icon":"","area":{"screenshot":"https://i.imgur.com/d5Y7MBu.jpg"}}
+{"name":"Arsenal","refName":"Arsenal","namespace":"AREA","tradeDisc":"25202","icon":"","area":{"screenshot":"https://i.imgur.com/5iGxpEn.jpg"}}
+{"name":"Ashen Wood","refName":"Ashen Wood","namespace":"AREA","tradeDisc":"43927","icon":"","area":{"screenshot":"https://i.imgur.com/kHvVFYI.jpg"}}
+{"name":"Atoll","refName":"Atoll","namespace":"AREA","tradeDisc":"19776","icon":"","area":{"screenshot":"https://i.imgur.com/ynKNdxR.jpg"}}
+{"name":"Barrows","refName":"Barrows","namespace":"AREA","tradeDisc":"49687","icon":"","area":{"screenshot":"https://i.imgur.com/SwZdc6q.jpg"}}
+{"name":"Basilica","refName":"Basilica","namespace":"AREA","tradeDisc":"27821","icon":"","area":{"screenshot":"https://i.imgur.com/G6ySvIu.jpg"}}
+{"name":"Bazaar","refName":"Bazaar","namespace":"AREA","tradeDisc":"36556","icon":"","area":{"screenshot":"https://i.imgur.com/bo5223u.jpg"}}
+{"name":"Beach","refName":"Beach","namespace":"AREA","tradeDisc":"62685","icon":"","area":{"screenshot":"https://i.imgur.com/qZNQGdD.jpg"}}
+{"name":"Belfry","refName":"Belfry","namespace":"AREA","tradeDisc":"59460","icon":"","area":{"screenshot":"https://i.imgur.com/7zjdJvN.jpg"}}
+{"name":"Bog","refName":"Bog","namespace":"AREA","tradeDisc":"47614","icon":"","area":{"screenshot":"https://i.imgur.com/cPWmdWr.jpg"}}
+{"name":"Bone Crypt","refName":"Bone Crypt","namespace":"AREA","tradeDisc":"23253","icon":"","area":{"screenshot":"https://i.imgur.com/NVVVCOt.jpg"}}
+{"name":"Bramble Valley","refName":"Bramble Valley","namespace":"AREA","tradeDisc":"44170","icon":"","area":{"screenshot":"https://i.imgur.com/1HM5ro5.jpg"}}
 {"name":"Brine King's Domain","refName":"Brine King's Domain","namespace":"AREA","tradeDisc":"BrineKingsDomain","icon":"","area":{"special":true}}
-{"name":"Burial Chambers","refName":"Burial Chambers","namespace":"AREA","tradeDisc":"43016","icon":""}
-{"name":"Cage","refName":"Cage","namespace":"AREA","tradeDisc":"3883","icon":""}
-{"name":"Caldera","refName":"Caldera","namespace":"AREA","tradeDisc":"64414","icon":""}
-{"name":"Canyon","refName":"Canyon","namespace":"AREA","tradeDisc":"2336","icon":""}
-{"name":"Carcass","refName":"Carcass","namespace":"AREA","tradeDisc":"18547","icon":""}
-{"name":"Castle Ruins","refName":"Castle Ruins","namespace":"AREA","tradeDisc":"36357","icon":""}
-{"name":"Cells","refName":"Cells","namespace":"AREA","tradeDisc":"3775","icon":""}
-{"name":"Cemetery","refName":"Cemetery","namespace":"AREA","tradeDisc":"12635","icon":""}
-{"name":"Channel","refName":"Channel","namespace":"AREA","tradeDisc":"22278","icon":""}
-{"name":"Chateau","refName":"Chateau","namespace":"AREA","tradeDisc":"39459","icon":""}
-{"name":"City Square","refName":"City Square","namespace":"AREA","tradeDisc":"44762","icon":""}
+{"name":"Burial Chambers","refName":"Burial Chambers","namespace":"AREA","tradeDisc":"43016","icon":"","area":{"screenshot":"https://i.imgur.com/Wp5GF44.jpg"}}
+{"name":"Cage","refName":"Cage","namespace":"AREA","tradeDisc":"3883","icon":"","area":{"screenshot":"https://i.imgur.com/r20ygP0.jpg"}}
+{"name":"Caldera","refName":"Caldera","namespace":"AREA","tradeDisc":"64414","icon":"","area":{"screenshot":"https://i.imgur.com/dAFd7cQ.jpg"}}
+{"name":"Canyon","refName":"Canyon","namespace":"AREA","tradeDisc":"2336","icon":"","area":{"screenshot":"https://i.imgur.com/8BSd3du.jpg"}}
+{"name":"Carcass","refName":"Carcass","namespace":"AREA","tradeDisc":"18547","icon":"","area":{"screenshot":"https://i.imgur.com/bANX02j.jpg"}}
+{"name":"Castle Ruins","refName":"Castle Ruins","namespace":"AREA","tradeDisc":"36357","icon":"","area":{"screenshot":"https://i.imgur.com/aFT1RlG.jpg"}}
+{"name":"Cells","refName":"Cells","namespace":"AREA","tradeDisc":"3775","icon":"","area":{"screenshot":"https://i.imgur.com/ks4E8Cs.jpg"}}
+{"name":"Cemetery","refName":"Cemetery","namespace":"AREA","tradeDisc":"12635","icon":"","area":{"screenshot":"https://i.imgur.com/j9OPnMf.jpg"}}
+{"name":"Channel","refName":"Channel","namespace":"AREA","tradeDisc":"22278","icon":"","area":{"screenshot":"https://i.imgur.com/qNjNqND.jpg"}}
+{"name":"Chateau","refName":"Chateau","namespace":"AREA","tradeDisc":"39459","icon":"","area":{"screenshot":"https://i.imgur.com/9K7IyE3.jpg"}}
+{"name":"City Square","refName":"City Square","namespace":"AREA","tradeDisc":"44762","icon":"","area":{"screenshot":"https://i.imgur.com/dpMpwdP.jpg"}}
 {"name":"Clam-infested Shelf","refName":"Clam-infested Shelf","namespace":"AREA","tradeDisc":"ClamInfestedShelf","icon":"","area":{"special":true}}
-{"name":"Cold River","refName":"Cold River","namespace":"AREA","tradeDisc":"38080","icon":""}
-{"name":"Colonnade","refName":"Colonnade","namespace":"AREA","tradeDisc":"31349","icon":""}
-{"name":"Colosseum","refName":"Colosseum","namespace":"AREA","tradeDisc":"16355","icon":""}
-{"name":"Conservatory","refName":"Conservatory","namespace":"AREA","tradeDisc":"6755","icon":""}
-{"name":"Coral Ruins","refName":"Coral Ruins","namespace":"AREA","tradeDisc":"41363","icon":""}
-{"name":"Core","refName":"Core","namespace":"AREA","tradeDisc":"35484","icon":""}
-{"name":"Courthouse","refName":"Courthouse","namespace":"AREA","tradeDisc":"49777","icon":""}
-{"name":"Courtyard","refName":"Courtyard","namespace":"AREA","tradeDisc":"25370","icon":""}
-{"name":"Coves","refName":"Coves","namespace":"AREA","tradeDisc":"49159","icon":""}
-{"name":"Crater","refName":"Crater","namespace":"AREA","tradeDisc":"5132","icon":""}
-{"name":"Crimson Temple","refName":"Crimson Temple","namespace":"AREA","tradeDisc":"46612","icon":""}
-{"name":"Crimson Township","refName":"Crimson Township","namespace":"AREA","tradeDisc":"10687","icon":""}
-{"name":"Crystal Ore","refName":"Crystal Ore","namespace":"AREA","tradeDisc":"17684","icon":""}
-{"name":"Cursed Crypt","refName":"Cursed Crypt","namespace":"AREA","tradeDisc":"8544","icon":""}
-{"name":"Dark Forest","refName":"Dark Forest","namespace":"AREA","tradeDisc":"34447","icon":""}
-{"name":"Defiled Cathedral","refName":"Defiled Cathedral","namespace":"AREA","tradeDisc":"47897","icon":""}
-{"name":"Desert","refName":"Desert","namespace":"AREA","tradeDisc":"34997","icon":""}
-{"name":"Desert Spring","refName":"Desert Spring","namespace":"AREA","tradeDisc":"10211","icon":""}
-{"name":"Dig","refName":"Dig","namespace":"AREA","tradeDisc":"43432","icon":""}
+{"name":"Cold River","refName":"Cold River","namespace":"AREA","tradeDisc":"38080","icon":"","area":{"screenshot":"https://i.imgur.com/ld3HPg6.jpg"}}
+{"name":"Colonnade","refName":"Colonnade","namespace":"AREA","tradeDisc":"31349","icon":"","area":{"screenshot":"https://i.imgur.com/5uaNQwH.jpg"}}
+{"name":"Colosseum","refName":"Colosseum","namespace":"AREA","tradeDisc":"16355","icon":"","area":{"screenshot":"https://i.imgur.com/LYXkjl8.jpg"}}
+{"name":"Conservatory","refName":"Conservatory","namespace":"AREA","tradeDisc":"6755","icon":"","area":{"screenshot":"https://i.imgur.com/VfVUpKT.jpg"}}
+{"name":"Coral Ruins","refName":"Coral Ruins","namespace":"AREA","tradeDisc":"41363","icon":"","area":{"screenshot":"https://i.imgur.com/YI4jsqt.jpg"}}
+{"name":"Core","refName":"Core","namespace":"AREA","tradeDisc":"35484","icon":"","area":{"screenshot":"https://i.imgur.com/SCCsOxV.jpg"}}
+{"name":"Courthouse","refName":"Courthouse","namespace":"AREA","tradeDisc":"49777","icon":"","area":{"screenshot":"https://i.imgur.com/zg9qN4K.jpg"}}
+{"name":"Courtyard","refName":"Courtyard","namespace":"AREA","tradeDisc":"25370","icon":"","area":{"screenshot":"https://i.imgur.com/rRYcncq.jpg"}}
+{"name":"Coves","refName":"Coves","namespace":"AREA","tradeDisc":"49159","icon":"","area":{"screenshot":"https://i.imgur.com/NB7i3Mu.jpg"}}
+{"name":"Crater","refName":"Crater","namespace":"AREA","tradeDisc":"5132","icon":"","area":{"screenshot":"https://i.imgur.com/ffRs5qU.jpg"}}
+{"name":"Crimson Temple","refName":"Crimson Temple","namespace":"AREA","tradeDisc":"46612","icon":"","area":{"screenshot":"https://i.imgur.com/4731HPd.jpg"}}
+{"name":"Crimson Township","refName":"Crimson Township","namespace":"AREA","tradeDisc":"10687","icon":"","area":{"screenshot":"https://i.imgur.com/OOugfbm.jpg"}}
+{"name":"Crystal Ore","refName":"Crystal Ore","namespace":"AREA","tradeDisc":"17684","icon":"","area":{"screenshot":"https://i.imgur.com/ff3kcZI.jpg"}}
+{"name":"Cursed Crypt","refName":"Cursed Crypt","namespace":"AREA","tradeDisc":"8544","icon":"","area":{"screenshot":"https://i.imgur.com/hz8a9Ea.jpg"}}
+{"name":"Dark Forest","refName":"Dark Forest","namespace":"AREA","tradeDisc":"34447","icon":"","area":{"screenshot":"https://i.imgur.com/ayyUVDP.jpg"}}
+{"name":"Defiled Cathedral","refName":"Defiled Cathedral","namespace":"AREA","tradeDisc":"47897","icon":"","area":{"screenshot":"https://i.imgur.com/rSqf91M.jpg"}}
+{"name":"Desert","refName":"Desert","namespace":"AREA","tradeDisc":"34997","icon":"","area":{"screenshot":"https://i.imgur.com/BcaiqlN.jpg"}}
+{"name":"Desert Spring","refName":"Desert Spring","namespace":"AREA","tradeDisc":"10211","icon":"","area":{"screenshot":"https://i.imgur.com/aDop71B.jpg"}}
+{"name":"Dig","refName":"Dig","namespace":"AREA","tradeDisc":"43432","icon":"","area":{"screenshot":"https://i.imgur.com/E8Z9yPz.jpg"}}
 {"name":"Diving Shoals","refName":"Diving Shoals","namespace":"AREA","tradeDisc":"DivingShoals","icon":"","area":{"special":true}}
-{"name":"Dry Sea","refName":"Dry Sea","namespace":"AREA","tradeDisc":"53637","icon":""}
-{"name":"Dunes","refName":"Dunes","namespace":"AREA","tradeDisc":"53116","icon":""}
-{"name":"Dungeon","refName":"Dungeon","namespace":"AREA","tradeDisc":"64256","icon":""}
+{"name":"Dry Sea","refName":"Dry Sea","namespace":"AREA","tradeDisc":"53637","icon":"","area":{"screenshot":"https://i.imgur.com/JGfVZsB.jpg"}}
+{"name":"Dunes","refName":"Dunes","namespace":"AREA","tradeDisc":"53116","icon":"","area":{"screenshot":"https://i.imgur.com/88Gm4iq.jpg"}}
+{"name":"Dungeon","refName":"Dungeon","namespace":"AREA","tradeDisc":"64256","icon":"","area":{"screenshot":"https://i.imgur.com/GRI8xIf.jpg"}}
 {"name":"Eldritch Depths","refName":"Eldritch Depths","namespace":"AREA","tradeDisc":"EldritchDepths","icon":"","area":{"special":true}}
-{"name":"Estuary","refName":"Estuary","namespace":"AREA","tradeDisc":"40753","icon":""}
-{"name":"Excavation","refName":"Excavation","namespace":"AREA","tradeDisc":"33025","icon":""}
-{"name":"Factory","refName":"Factory","namespace":"AREA","tradeDisc":"41763","icon":""}
-{"name":"Fields","refName":"Fields","namespace":"AREA","tradeDisc":"36207","icon":""}
-{"name":"Flooded Mine","refName":"Flooded Mine","namespace":"AREA","tradeDisc":"63065","icon":""}
-{"name":"Forbidden Woods","refName":"Forbidden Woods","namespace":"AREA","tradeDisc":"26156","icon":""}
-{"name":"Forking River","refName":"Forking River","namespace":"AREA","tradeDisc":"29382","icon":""}
-{"name":"Foundry","refName":"Foundry","namespace":"AREA","tradeDisc":"31509","icon":""}
-{"name":"Frozen Cabins","refName":"Frozen Cabins","namespace":"AREA","tradeDisc":"51403","icon":""}
-{"name":"Fungal Hollow","refName":"Fungal Hollow","namespace":"AREA","tradeDisc":"34425","icon":""}
-{"name":"Gardens","refName":"Gardens","namespace":"AREA","tradeDisc":"11533","icon":""}
-{"name":"Geode","refName":"Geode","namespace":"AREA","tradeDisc":"58981","icon":""}
-{"name":"Ghetto","refName":"Ghetto","namespace":"AREA","tradeDisc":"14879","icon":""}
-{"name":"Glacier","refName":"Glacier","namespace":"AREA","tradeDisc":"4592","icon":""}
-{"name":"Grave Trough","refName":"Grave Trough","namespace":"AREA","tradeDisc":"34760","icon":""}
-{"name":"Graveyard","refName":"Graveyard","namespace":"AREA","tradeDisc":"53902","icon":""}
-{"name":"Grotto","refName":"Grotto","namespace":"AREA","tradeDisc":"19420","icon":""}
-{"name":"Haunted Mansion","refName":"Haunted Mansion","namespace":"AREA","tradeDisc":"1215","icon":""}
+{"name":"Estuary","refName":"Estuary","namespace":"AREA","tradeDisc":"40753","icon":"","area":{"screenshot":"https://i.imgur.com/LNLcK2Z.jpg"}}
+{"name":"Excavation","refName":"Excavation","namespace":"AREA","tradeDisc":"33025","icon":"","area":{"screenshot":"https://i.imgur.com/A3E80Du.jpg"}}
+{"name":"Factory","refName":"Factory","namespace":"AREA","tradeDisc":"41763","icon":"","area":{"screenshot":"https://i.imgur.com/zOsCvpG.jpg"}}
+{"name":"Fields","refName":"Fields","namespace":"AREA","tradeDisc":"36207","icon":"","area":{"screenshot":"https://i.imgur.com/ZBYW0jj.jpg"}}
+{"name":"Flooded Mine","refName":"Flooded Mine","namespace":"AREA","tradeDisc":"63065","icon":"","area":{"screenshot":"https://i.imgur.com/RYNfkXJ.jpg"}}
+{"name":"Forbidden Woods","refName":"Forbidden Woods","namespace":"AREA","tradeDisc":"26156","icon":"","area":{"screenshot":"https://i.imgur.com/5Jl2OoA.jpg"}}
+{"name":"Forking River","refName":"Forking River","namespace":"AREA","tradeDisc":"29382","icon":"","area":{"screenshot":"https://i.imgur.com/KLlqoMv.jpg"}}
+{"name":"Foundry","refName":"Foundry","namespace":"AREA","tradeDisc":"31509","icon":"","area":{"screenshot":"https://i.imgur.com/EeefLOA.jpg"}}
+{"name":"Frozen Cabins","refName":"Frozen Cabins","namespace":"AREA","tradeDisc":"51403","icon":"","area":{"screenshot":"https://i.imgur.com/eAML7S2.jpg"}}
+{"name":"Fungal Hollow","refName":"Fungal Hollow","namespace":"AREA","tradeDisc":"34425","icon":"","area":{"screenshot":"https://i.imgur.com/D4HiW8x.jpg"}}
+{"name":"Gardens","refName":"Gardens","namespace":"AREA","tradeDisc":"11533","icon":"","area":{"screenshot":"https://i.imgur.com/nnb6Fss.jpg"}}
+{"name":"Geode","refName":"Geode","namespace":"AREA","tradeDisc":"58981","icon":"","area":{"screenshot":"https://i.imgur.com/iGJ0Ohk.jpg"}}
+{"name":"Ghetto","refName":"Ghetto","namespace":"AREA","tradeDisc":"14879","icon":"","area":{"screenshot":"https://i.imgur.com/I8onB4N.jpg"}}
+{"name":"Glacier","refName":"Glacier","namespace":"AREA","tradeDisc":"4592","icon":"","area":{"screenshot":"https://i.imgur.com/t3Arfep.jpg"}}
+{"name":"Grave Trough","refName":"Grave Trough","namespace":"AREA","tradeDisc":"34760","icon":"","area":{"screenshot":"https://i.imgur.com/ee5davj.jpg"}}
+{"name":"Graveyard","refName":"Graveyard","namespace":"AREA","tradeDisc":"53902","icon":"","area":{"screenshot":"https://i.imgur.com/gm0UolB.jpg"}}
+{"name":"Grotto","refName":"Grotto","namespace":"AREA","tradeDisc":"19420","icon":"","area":{"screenshot":"https://i.imgur.com/N7P59cb.jpg"}}
+{"name":"Haunted Mansion","refName":"Haunted Mansion","namespace":"AREA","tradeDisc":"1215","icon":"","area":{"screenshot":"https://i.imgur.com/TyBueyN.jpg"}}
 {"name":"Hazardous Depths","refName":"Hazardous Depths","namespace":"AREA","tradeDisc":"HazardousDepths","icon":"","area":{"special":true}}
-{"name":"Iceberg","refName":"Iceberg","namespace":"AREA","tradeDisc":"59084","icon":""}
+{"name":"Iceberg","refName":"Iceberg","namespace":"AREA","tradeDisc":"59084","icon":"","area":{"screenshot":"https://i.imgur.com/9g2hpKu.jpg"}}
 {"name":"Infested Bathyspheres","refName":"Infested Bathyspheres","namespace":"AREA","tradeDisc":"InfestedBathyspheres","icon":"","area":{"special":true}}
-{"name":"Infested Valley","refName":"Infested Valley","namespace":"AREA","tradeDisc":"24414","icon":""}
-{"name":"Ivory Temple","refName":"Ivory Temple","namespace":"AREA","tradeDisc":"16982","icon":""}
-{"name":"Jungle Valley","refName":"Jungle Valley","namespace":"AREA","tradeDisc":"4003","icon":""}
+{"name":"Infested Valley","refName":"Infested Valley","namespace":"AREA","tradeDisc":"24414","icon":"","area":{"screenshot":"https://i.imgur.com/9FiIb93.jpg"}}
+{"name":"Ivory Temple","refName":"Ivory Temple","namespace":"AREA","tradeDisc":"16982","icon":"","area":{"screenshot":"https://i.imgur.com/gl7ODl5.jpg"}}
+{"name":"Jungle Valley","refName":"Jungle Valley","namespace":"AREA","tradeDisc":"4003","icon":"","area":{"screenshot":"https://i.imgur.com/O4q6Op8.jpg"}}
 {"name":"Kishara's Rest","refName":"Kishara's Rest","namespace":"AREA","tradeDisc":"KisharasRest","icon":"","area":{"special":true}}
-{"name":"Laboratory","refName":"Laboratory","namespace":"AREA","tradeDisc":"43561","icon":""}
-{"name":"Lair","refName":"Lair","namespace":"AREA","tradeDisc":"8823","icon":""}
-{"name":"Lava Chamber","refName":"Lava Chamber","namespace":"AREA","tradeDisc":"7088","icon":""}
-{"name":"Lava Lake","refName":"Lava Lake","namespace":"AREA","tradeDisc":"20343","icon":""}
-{"name":"Leyline","refName":"Leyline","namespace":"AREA","tradeDisc":"12937","icon":""}
-{"name":"Lighthouse","refName":"Lighthouse","namespace":"AREA","tradeDisc":"43308","icon":""}
-{"name":"Lookout","refName":"Lookout","namespace":"AREA","tradeDisc":"48831","icon":""}
+{"name":"Laboratory","refName":"Laboratory","namespace":"AREA","tradeDisc":"43561","icon":"","area":{"screenshot":"https://i.imgur.com/3wlWzSX.jpg"}}
+{"name":"Lair","refName":"Lair","namespace":"AREA","tradeDisc":"8823","icon":"","area":{"screenshot":"https://i.imgur.com/Uj6Ef71.jpg"}}
+{"name":"Lava Chamber","refName":"Lava Chamber","namespace":"AREA","tradeDisc":"7088","icon":"","area":{"screenshot":"https://i.imgur.com/XR1YVVq.jpg"}}
+{"name":"Lava Lake","refName":"Lava Lake","namespace":"AREA","tradeDisc":"20343","icon":"","area":{"screenshot":"https://i.imgur.com/G85TEg5.jpg"}}
+{"name":"Leyline","refName":"Leyline","namespace":"AREA","tradeDisc":"12937","icon":"","area":{"screenshot":"https://i.imgur.com/5UjUxso.jpg"}}
+{"name":"Lighthouse","refName":"Lighthouse","namespace":"AREA","tradeDisc":"43308","icon":"","area":{"screenshot":"https://i.imgur.com/40gXcr4.jpg"}}
+{"name":"Lookout","refName":"Lookout","namespace":"AREA","tradeDisc":"48831","icon":"","area":{"screenshot":"https://i.imgur.com/QNuOzHT.jpg"}}
 {"name":"Lost Ruins","refName":"Lost Ruins","namespace":"AREA","tradeDisc":"LostRuins","icon":"","area":{"special":true}}
-{"name":"Malformation","refName":"Malformation","namespace":"AREA","tradeDisc":"3421","icon":""}
-{"name":"Marshes","refName":"Marshes","namespace":"AREA","tradeDisc":"42115","icon":""}
-{"name":"Mausoleum","refName":"Mausoleum","namespace":"AREA","tradeDisc":"57831","icon":""}
-{"name":"Maze","refName":"Maze","namespace":"AREA","tradeDisc":"46524","icon":""}
-{"name":"Mesa","refName":"Mesa","namespace":"AREA","tradeDisc":"19999","icon":""}
-{"name":"Mineral Pools","refName":"Mineral Pools","namespace":"AREA","tradeDisc":"44313","icon":""}
-{"name":"Moon Temple","refName":"Moon Temple","namespace":"AREA","tradeDisc":"41751","icon":""}
-{"name":"Mud Geyser","refName":"Mud Geyser","namespace":"AREA","tradeDisc":"36946","icon":""}
-{"name":"Museum","refName":"Museum","namespace":"AREA","tradeDisc":"33220","icon":""}
-{"name":"Necropolis","refName":"Necropolis","namespace":"AREA","tradeDisc":"2279","icon":""}
-{"name":"Orchard","refName":"Orchard","namespace":"AREA","tradeDisc":"38855","icon":""}
-{"name":"Overgrown Ruin","refName":"Overgrown Ruin","namespace":"AREA","tradeDisc":"26732","icon":""}
-{"name":"Overgrown Shrine","refName":"Overgrown Shrine","namespace":"AREA","tradeDisc":"26468","icon":""}
-{"name":"Palace","refName":"Palace","namespace":"AREA","tradeDisc":"51878","icon":""}
-{"name":"Park","refName":"Park","namespace":"AREA","tradeDisc":"32613","icon":""}
+{"name":"Malformation","refName":"Malformation","namespace":"AREA","tradeDisc":"3421","icon":"","area":{"screenshot":"https://i.imgur.com/bVcvxGD.jpg"}}
+{"name":"Marshes","refName":"Marshes","namespace":"AREA","tradeDisc":"42115","icon":"","area":{"screenshot":"https://i.imgur.com/25Oc1GQ.jpg"}}
+{"name":"Mausoleum","refName":"Mausoleum","namespace":"AREA","tradeDisc":"57831","icon":"","area":{"screenshot":"https://i.imgur.com/lppiQiQ.jpg"}}
+{"name":"Maze","refName":"Maze","namespace":"AREA","tradeDisc":"46524","icon":"","area":{"screenshot":"https://i.imgur.com/vPKZUFI.jpg"}}
+{"name":"Mesa","refName":"Mesa","namespace":"AREA","tradeDisc":"19999","icon":"","area":{"screenshot":"https://i.imgur.com/gvpYUBQ.jpg"}}
+{"name":"Mineral Pools","refName":"Mineral Pools","namespace":"AREA","tradeDisc":"44313","icon":"","area":{"screenshot":"https://i.imgur.com/AvgBb6c.jpg"}}
+{"name":"Moon Temple","refName":"Moon Temple","namespace":"AREA","tradeDisc":"41751","icon":"","area":{"screenshot":"https://i.imgur.com/WoUgaQp.jpg"}}
+{"name":"Mud Geyser","refName":"Mud Geyser","namespace":"AREA","tradeDisc":"36946","icon":"","area":{"screenshot":"https://i.imgur.com/qVVPlhi.jpg"}}
+{"name":"Museum","refName":"Museum","namespace":"AREA","tradeDisc":"33220","icon":"","area":{"screenshot":"https://i.imgur.com/oOrFsgt.jpg"}}
+{"name":"Necropolis","refName":"Necropolis","namespace":"AREA","tradeDisc":"2279","icon":"","area":{"screenshot":"https://i.imgur.com/6cNUs2I.jpg"}}
+{"name":"Orchard","refName":"Orchard","namespace":"AREA","tradeDisc":"38855","icon":"","area":{"screenshot":"https://i.imgur.com/S5wxemk.jpg"}}
+{"name":"Overgrown Ruin","refName":"Overgrown Ruin","namespace":"AREA","tradeDisc":"26732","icon":"","area":{"screenshot":"https://i.imgur.com/U1gMZhT.jpg"}}
+{"name":"Overgrown Shrine","refName":"Overgrown Shrine","namespace":"AREA","tradeDisc":"26468","icon":"","area":{"screenshot":"https://i.imgur.com/vXh4QKk.jpg"}}
+{"name":"Palace","refName":"Palace","namespace":"AREA","tradeDisc":"51878","icon":"","area":{"screenshot":"https://i.imgur.com/U7ABlGw.jpg"}}
+{"name":"Park","refName":"Park","namespace":"AREA","tradeDisc":"32613","icon":"","area":{"screenshot":"https://i.imgur.com/HlFwmtM.jpg"}}
 {"name":"Pelagic Abyss","refName":"Pelagic Abyss","namespace":"AREA","tradeDisc":"PelagicAbyss","icon":"","area":{"special":true}}
-{"name":"Pen","refName":"Pen","namespace":"AREA","tradeDisc":"19828","icon":""}
-{"name":"Peninsula","refName":"Peninsula","namespace":"AREA","tradeDisc":"57690","icon":""}
-{"name":"Phantasmagoria","refName":"Phantasmagoria","namespace":"AREA","tradeDisc":"47634","icon":""}
-{"name":"Pier","refName":"Pier","namespace":"AREA","tradeDisc":"60732","icon":""}
-{"name":"Pit","refName":"Pit","namespace":"AREA","tradeDisc":"11490","icon":""}
-{"name":"Plateau","refName":"Plateau","namespace":"AREA","tradeDisc":"34832","icon":""}
-{"name":"Plaza","refName":"Plaza","namespace":"AREA","tradeDisc":"35076","icon":""}
-{"name":"Port","refName":"Port","namespace":"AREA","tradeDisc":"47088","icon":""}
-{"name":"Precinct","refName":"Precinct","namespace":"AREA","tradeDisc":"58250","icon":""}
-{"name":"Primordial Blocks","refName":"Primordial Blocks","namespace":"AREA","tradeDisc":"15595","icon":""}
-{"name":"Primordial Pool","refName":"Primordial Pool","namespace":"AREA","tradeDisc":"25302","icon":""}
-{"name":"Promenade","refName":"Promenade","namespace":"AREA","tradeDisc":"54757","icon":""}
-{"name":"Racecourse","refName":"Racecourse","namespace":"AREA","tradeDisc":"57536","icon":""}
-{"name":"Ramparts","refName":"Ramparts","namespace":"AREA","tradeDisc":"52736","icon":""}
-{"name":"Reef","refName":"Reef","namespace":"AREA","tradeDisc":"53973","icon":""}
-{"name":"Relic Chambers","refName":"Relic Chambers","namespace":"AREA","tradeDisc":"35162","icon":""}
-{"name":"Residence","refName":"Residence","namespace":"AREA","tradeDisc":"4755","icon":""}
-{"name":"Scriptorium","refName":"Scriptorium","namespace":"AREA","tradeDisc":"53075","icon":""}
+{"name":"Pen","refName":"Pen","namespace":"AREA","tradeDisc":"19828","icon":"","area":{"screenshot":"https://i.imgur.com/FYax6WD.jpg"}}
+{"name":"Peninsula","refName":"Peninsula","namespace":"AREA","tradeDisc":"57690","icon":"","area":{"screenshot":"https://i.imgur.com/5YycEWs.jpg"}}
+{"name":"Phantasmagoria","refName":"Phantasmagoria","namespace":"AREA","tradeDisc":"47634","icon":"","area":{"screenshot":"https://i.imgur.com/yCDYKxA.jpg"}}
+{"name":"Pier","refName":"Pier","namespace":"AREA","tradeDisc":"60732","icon":"","area":{"screenshot":"https://i.imgur.com/rZMXMj1.jpg"}}
+{"name":"Pit","refName":"Pit","namespace":"AREA","tradeDisc":"11490","icon":"","area":{"screenshot":"https://i.imgur.com/PkwpOv0.jpg"}}
+{"name":"Plateau","refName":"Plateau","namespace":"AREA","tradeDisc":"34832","icon":"","area":{"screenshot":"https://i.imgur.com/0t2NnqI.jpg"}}
+{"name":"Plaza","refName":"Plaza","namespace":"AREA","tradeDisc":"35076","icon":"","area":{"screenshot":"https://i.imgur.com/kYGkNDs.jpg"}}
+{"name":"Port","refName":"Port","namespace":"AREA","tradeDisc":"47088","icon":"","area":{"screenshot":"https://i.imgur.com/9KprAxq.jpg"}}
+{"name":"Precinct","refName":"Precinct","namespace":"AREA","tradeDisc":"58250","icon":"","area":{"screenshot":"https://i.imgur.com/fAJ8DcM.jpg"}}
+{"name":"Primordial Blocks","refName":"Primordial Blocks","namespace":"AREA","tradeDisc":"15595","icon":"","area":{"screenshot":"https://i.imgur.com/TtaIepR.jpg"}}
+{"name":"Primordial Pool","refName":"Primordial Pool","namespace":"AREA","tradeDisc":"25302","icon":"","area":{"screenshot":"https://i.imgur.com/Fxl9Naf.jpg"}}
+{"name":"Promenade","refName":"Promenade","namespace":"AREA","tradeDisc":"54757","icon":"","area":{"screenshot":"https://i.imgur.com/Q8E3SQ5.jpg"}}
+{"name":"Racecourse","refName":"Racecourse","namespace":"AREA","tradeDisc":"57536","icon":"","area":{"screenshot":"https://i.imgur.com/tKH5lyG.jpg"}}
+{"name":"Ramparts","refName":"Ramparts","namespace":"AREA","tradeDisc":"52736","icon":"","area":{"screenshot":"https://i.imgur.com/Yx5UIDO.jpg"}}
+{"name":"Reef","refName":"Reef","namespace":"AREA","tradeDisc":"53973","icon":"","area":{"screenshot":"https://i.imgur.com/pVdQXl9.jpg"}}
+{"name":"Relic Chambers","refName":"Relic Chambers","namespace":"AREA","tradeDisc":"35162","icon":"","area":{"screenshot":"https://i.imgur.com/jsNHNa1.jpg"}}
+{"name":"Residence","refName":"Residence","namespace":"AREA","tradeDisc":"4755","icon":"","area":{"screenshot":"https://i.imgur.com/FF5qpbI.jpg"}}
+{"name":"Scriptorium","refName":"Scriptorium","namespace":"AREA","tradeDisc":"53075","icon":"","area":{}}
 {"name":"Sea Pillars","refName":"Sea Pillars","namespace":"AREA","tradeDisc":"SeaPillars","icon":"","area":{"special":true}}
 {"name":"Seafloor Ridges","refName":"Seafloor Ridges","namespace":"AREA","tradeDisc":"SeafloorRidges","icon":"","area":{}}
-{"name":"Sepulchre","refName":"Sepulchre","namespace":"AREA","tradeDisc":"27716","icon":""}
-{"name":"Shipyard","refName":"Shipyard","namespace":"AREA","tradeDisc":"11724","icon":""}
-{"name":"Shore","refName":"Shore","namespace":"AREA","tradeDisc":"22593","icon":""}
-{"name":"Shrine","refName":"Shrine","namespace":"AREA","tradeDisc":"64812","icon":""}
-{"name":"Siege","refName":"Siege","namespace":"AREA","tradeDisc":"3756","icon":""}
-{"name":"Silo","refName":"Silo","namespace":"AREA","tradeDisc":"24497","icon":""}
-{"name":"Spider Forest","refName":"Spider Forest","namespace":"AREA","tradeDisc":"4651","icon":""}
-{"name":"Spider Lair","refName":"Spider Lair","namespace":"AREA","tradeDisc":"60607","icon":""}
-{"name":"Stagnation","refName":"Stagnation","namespace":"AREA","tradeDisc":"3182","icon":""}
-{"name":"Strand","refName":"Strand","namespace":"AREA","tradeDisc":"10021","icon":""}
-{"name":"Sulphur Vents","refName":"Sulphur Vents","namespace":"AREA","tradeDisc":"6074","icon":""}
-{"name":"Summit","refName":"Summit","namespace":"AREA","tradeDisc":"60634","icon":""}
-{"name":"Sunken City","refName":"Sunken City","namespace":"AREA","tradeDisc":"11215","icon":""}
+{"name":"Sepulchre","refName":"Sepulchre","namespace":"AREA","tradeDisc":"27716","icon":"","area":{"screenshot":"https://i.imgur.com/I8et20T.jpg"}}
+{"name":"Shipyard","refName":"Shipyard","namespace":"AREA","tradeDisc":"11724","icon":"","area":{"screenshot":"https://i.imgur.com/J5hM5mR.jpg"}}
+{"name":"Shore","refName":"Shore","namespace":"AREA","tradeDisc":"22593","icon":"","area":{"screenshot":"https://i.imgur.com/HNPAnu9.jpg"}}
+{"name":"Shrine","refName":"Shrine","namespace":"AREA","tradeDisc":"64812","icon":"","area":{"screenshot":"https://i.imgur.com/wDK8KBW.jpg"}}
+{"name":"Siege","refName":"Siege","namespace":"AREA","tradeDisc":"3756","icon":"","area":{"screenshot":"https://i.imgur.com/vOwwEDe.jpg"}}
+{"name":"Silo","refName":"Silo","namespace":"AREA","tradeDisc":"24497","icon":"","area":{"screenshot":"https://i.imgur.com/hk740NA.jpg"}}
+{"name":"Spider Forest","refName":"Spider Forest","namespace":"AREA","tradeDisc":"4651","icon":"","area":{"screenshot":"https://i.imgur.com/HkKHFTB.jpg"}}
+{"name":"Spider Lair","refName":"Spider Lair","namespace":"AREA","tradeDisc":"60607","icon":"","area":{"screenshot":"https://i.imgur.com/s2WAMm5.jpg"}}
+{"name":"Stagnation","refName":"Stagnation","namespace":"AREA","tradeDisc":"3182","icon":"","area":{"screenshot":"https://i.imgur.com/OJbjzlG.jpg"}}
+{"name":"Strand","refName":"Strand","namespace":"AREA","tradeDisc":"10021","icon":"","area":{"screenshot":"https://i.imgur.com/7aE4Xzp.jpg"}}
+{"name":"Sulphur Vents","refName":"Sulphur Vents","namespace":"AREA","tradeDisc":"6074","icon":"","area":{"screenshot":"https://i.imgur.com/D3sc6Dg.jpg"}}
+{"name":"Summit","refName":"Summit","namespace":"AREA","tradeDisc":"60634","icon":"","area":{"screenshot":"https://i.imgur.com/6aL5NhS.jpg"}}
+{"name":"Sunken City","refName":"Sunken City","namespace":"AREA","tradeDisc":"11215","icon":"","area":{"screenshot":"https://i.imgur.com/QAoHzcR.jpg"}}
 {"name":"Sunken Totems","refName":"Sunken Totems","namespace":"AREA","tradeDisc":"SunkenTotems","icon":"","area":{"special":true}}
-{"name":"Temple","refName":"Temple","namespace":"AREA","tradeDisc":"45792","icon":""}
-{"name":"Terrace","refName":"Terrace","namespace":"AREA","tradeDisc":"42558","icon":""}
-{"name":"Thicket","refName":"Thicket","namespace":"AREA","tradeDisc":"737","icon":""}
-{"name":"Tower","refName":"Tower","namespace":"AREA","tradeDisc":"54446","icon":""}
-{"name":"Toxic Sewer","refName":"Toxic Sewer","namespace":"AREA","tradeDisc":"25747","icon":""}
-{"name":"Tropical Island","refName":"Tropical Island","namespace":"AREA","tradeDisc":"5647","icon":""}
-{"name":"Underground River","refName":"Underground River","namespace":"AREA","tradeDisc":"20216","icon":""}
-{"name":"Underground Sea","refName":"Underground Sea","namespace":"AREA","tradeDisc":"18545","icon":""}
+{"name":"Temple","refName":"Temple","namespace":"AREA","tradeDisc":"45792","icon":"","area":{"screenshot":"https://i.imgur.com/g3LZ4zC.jpg"}}
+{"name":"Terrace","refName":"Terrace","namespace":"AREA","tradeDisc":"42558","icon":"","area":{"screenshot":"https://i.imgur.com/dZZGyRt.jpg"}}
+{"name":"Thicket","refName":"Thicket","namespace":"AREA","tradeDisc":"737","icon":"","area":{"screenshot":"https://i.imgur.com/rlY2iPC.jpg"}}
+{"name":"Tower","refName":"Tower","namespace":"AREA","tradeDisc":"54446","icon":"","area":{"screenshot":"https://i.imgur.com/LqSPV6K.jpg"}}
+{"name":"Toxic Sewer","refName":"Toxic Sewer","namespace":"AREA","tradeDisc":"25747","icon":"","area":{"screenshot":"https://i.imgur.com/CgSpbBl.jpg"}}
+{"name":"Tropical Island","refName":"Tropical Island","namespace":"AREA","tradeDisc":"5647","icon":"","area":{"screenshot":"https://i.imgur.com/wraPtBT.jpg"}}
+{"name":"Underground River","refName":"Underground River","namespace":"AREA","tradeDisc":"20216","icon":"","area":{"screenshot":"https://i.imgur.com/8k4Dug4.jpg"}}
+{"name":"Underground Sea","refName":"Underground Sea","namespace":"AREA","tradeDisc":"18545","icon":"","area":{"screenshot":"https://i.imgur.com/ELUmbfz.jpg"}}
 {"name":"Undersea Groves","refName":"Undersea Groves","namespace":"AREA","tradeDisc":"UnderseaGroves","icon":"","area":{}}
 {"name":"Unremarkable Seabed","refName":"Unremarkable Seabed","namespace":"AREA","tradeDisc":"UnremarkableSeabed","icon":"","area":{"special":true}}
-{"name":"Vaal Pyramid","refName":"Vaal Pyramid","namespace":"AREA","tradeDisc":"28018","icon":""}
-{"name":"Vault","refName":"Vault","namespace":"AREA","tradeDisc":"57839","icon":""}
-{"name":"Villa","refName":"Villa","namespace":"AREA","tradeDisc":"2144","icon":""}
-{"name":"Volcano","refName":"Volcano","namespace":"AREA","tradeDisc":"30639","icon":""}
-{"name":"Waste Pool","refName":"Waste Pool","namespace":"AREA","tradeDisc":"42556","icon":""}
-{"name":"Wasteland","refName":"Wasteland","namespace":"AREA","tradeDisc":"17533","icon":""}
-{"name":"Waterways","refName":"Waterways","namespace":"AREA","tradeDisc":"28402","icon":""}
-{"name":"Wharf","refName":"Wharf","namespace":"AREA","tradeDisc":"54239","icon":""}
+{"name":"Vaal Pyramid","refName":"Vaal Pyramid","namespace":"AREA","tradeDisc":"28018","icon":"","area":{"screenshot":"https://i.imgur.com/RM2CNDk.jpg"}}
+{"name":"Vault","refName":"Vault","namespace":"AREA","tradeDisc":"57839","icon":"","area":{"screenshot":"https://i.imgur.com/zdIUUwN.jpg"}}
+{"name":"Villa","refName":"Villa","namespace":"AREA","tradeDisc":"2144","icon":"","area":{"screenshot":"https://i.imgur.com/EB0wTDF.jpg"}}
+{"name":"Volcano","refName":"Volcano","namespace":"AREA","tradeDisc":"30639","icon":"","area":{"screenshot":"https://i.imgur.com/kNQfYSd.jpg"}}
+{"name":"Waste Pool","refName":"Waste Pool","namespace":"AREA","tradeDisc":"42556","icon":"","area":{"screenshot":"https://i.imgur.com/fEvrcih.jpg"}}
+{"name":"Wasteland","refName":"Wasteland","namespace":"AREA","tradeDisc":"17533","icon":"","area":{"screenshot":"https://i.imgur.com/ywddRfu.jpg"}}
+{"name":"Waterways","refName":"Waterways","namespace":"AREA","tradeDisc":"28402","icon":"","area":{"screenshot":"https://i.imgur.com/qAEf4WS.jpg"}}
+{"name":"Wharf","refName":"Wharf","namespace":"AREA","tradeDisc":"54239","icon":"","area":{"screenshot":"https://i.imgur.com/JirgJcM.jpg"}}
 {"name":"Acid Slitherer","refName":"Acid Slitherer","namespace":"CAPTURED_BEAST","icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQmVzdGlhcnlPcmJGdWxsIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/3214b44360/BestiaryOrbFull.png"}
 {"name":"Adolescent Rhex","refName":"Adolescent Rhex","namespace":"CAPTURED_BEAST","icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQmVzdGlhcnlPcmJGdWxsIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/3214b44360/BestiaryOrbFull.png"}
 {"name":"Alpine Devil","refName":"Alpine Devil","namespace":"CAPTURED_BEAST","icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQmVzdGlhcnlPcmJGdWxsIiwidyI6MSwiaCI6MSwic2NhbGUiOjF9XQ/3214b44360/BestiaryOrbFull.png"}
@@ -1812,9 +1812,9 @@
 {"name":"Blight Scarab of Bounty","refName":"Blight Scarab of Bounty","namespace":"ITEM","tradeTag":"blight-scarab-of-bounty","exchangeable":true,"icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9Ob3JtYWxTY2FyYWJCbGlnaHQiLCJzY2FsZSI6MX1d/de78905e90/NormalScarabBlight.png"}
 {"name":"Blight Scarab of Invigoration","refName":"Blight Scarab of Invigoration","namespace":"ITEM","tradeTag":"blight-scarab-of-invigoration","exchangeable":true,"icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9BbHRUaWVyNFNjYXJhYkJsaWdodCIsInNjYWxlIjoxfV0/34e07da01c/AltTier4ScarabBlight.png"}
 {"name":"Blight Scarab of the Blightheart","refName":"Blight Scarab of the Blightheart","namespace":"ITEM","tradeTag":"blight-scarab-of-the-blightheart","exchangeable":true,"icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvU2NhcmFicy9HcmVhdGVyU2NhcmFiQmxpZ2h0Iiwic2NhbGUiOjF9XQ/d0aa6a6d55/GreaterScarabBlight.png"}
-{"name":"Blight-ravaged Map","refName":"Blight-ravaged Map","namespace":"ITEM","icon":"/images/maps/blight2.png"}
+{"name":"Blight-ravaged Map","refName":"Blight-ravaged Map","namespace":"ITEM","icon":"/images/maps/blight2.png","craftable":{"category":"Map"},"tradeDisc":"uberblighted","area":{"blighted":true}}
 {"name":"Blighted Delirium Orb","refName":"Blighted Delirium Orb","namespace":"ITEM","tradeTag":"blighted-delirium-orb","exchangeable":true,"icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvRGVsaXJpdW0vRGVsaXJpdW1PcmJCbGlnaHQiLCJzY2FsZSI6MX1d/e65965e8bd/DeliriumOrbBlight.png"}
-{"name":"Blighted Map","refName":"Blighted Map","namespace":"ITEM","icon":"/images/maps/blight1.png"}
+{"name":"Blighted Map","refName":"Blighted Map","namespace":"ITEM","icon":"/images/maps/blight1.png","craftable":{"category":"Map"},"tradeDisc":"blighted","area":{"blighted":true}}
 {"name":"Blinder","refName":"Blinder","namespace":"ITEM","craftable":{"category":"Claw"},"icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvV2VhcG9ucy9PbmVIYW5kV2VhcG9ucy9DbGF3cy9DbGF3NSIsInciOjIsImgiOjIsInNjYWxlIjoxfV0/1d5586ea56/Claw5.png","w":2,"h":2}
 {"name":"Blizzard Crown","refName":"Blizzard Crown","namespace":"ITEM","craftable":{"category":"Helmet"},"armour":{"ev":[185,212],"es":[38,43]},"icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9IZWxtZXRzL0hlbG1ldERleEludFIiLCJ3IjoyLCJoIjoyLCJzY2FsZSI6MX1d/9da7af13c1/HelmetDexIntR.png","w":2,"h":2}
 {"name":"Blood Demon","refName":"Blood Demon","namespace":"ITEM","icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQ3VycmVuY3kvQXptZXJpL0hlbGxzY2FwZURlbW9uQm9zc0NvcnBzZSIsInciOjMsImgiOjIsInNjYWxlIjoxfV0/9bcd7bb5b8/HellscapeDemonBossCorpse.png","w":3,"h":2}
@@ -4974,3 +4974,6 @@
 {"name":"Zeel's Amplifier","refName":"Zeel's Amplifier","namespace":"UNIQUE","unique":{"base":"Polished Spiked Shield","disenchantValue":4.13},"icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQXJtb3Vycy9TaGllbGRzL1plYWxzQW1wbGlmaWVyIiwidyI6MiwiaCI6Miwic2NhbGUiOjF9XQ/d1e9af3da7/ZealsAmplifier.png"}
 {"name":"Zerphi's Heart","refName":"Zerphi's Heart","namespace":"UNIQUE","unique":{"base":"Paua Amulet","disenchantValue":26.52},"icon":"https://web.poecdn.com/gen/image/WzI1LDE0LHsiZiI6IjJESXRlbXMvQW11bGV0cy9aZXJwaGlzSGVhcnQiLCJ3IjoxLCJoIjoxLCJzY2FsZSI6MX1d/3e35140dfe/ZerphisHeart.png"}
 {"name":"Zerphi's Last Breath","refName":"Zerphi's Last Breath","namespace":"UNIQUE","unique":{"base":"Grand Mana Flask","disenchantValue":106.41},"icon":"https://web.poecdn.com/gen/image/WzksMTQseyJmIjoiMkRJdGVtcy9GbGFza3MvWmVycGhpc0xhc3RCcmVhdGgiLCJ3IjoxLCJoIjoyLCJzY2FsZSI6MSwibGV2ZWwiOjF9XQ/bf8cb7b943/ZerphisLastBreath.png"}
+{"name":"Chambers of Impurity","refName":"Chambers of Impurity","namespace":"AREA","icon":"","area":{}}
+{"name":"Courtyard of Wasting","refName":"Courtyard of Wasting","namespace":"AREA","icon":"","area":{}}
+{"name":"Theatre of Lies","refName":"Theatre of Lies","namespace":"AREA","icon":"","area":{}}

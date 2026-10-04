@@ -1,6 +1,7 @@
 import type { ItemFilters } from './interfaces'
 import { ParsedItem, ItemCategory, ItemRarity } from '@/parser'
-import { MAGIC_ONLY_OR_UNIQUE_ITEM, CONSUMABLE_CRAFTABLE_ITEM } from '@/parser/meta'
+import { MAGIC_ONLY_OR_UNIQUE_ITEM, CONSUMABLE_CRAFTABLE_ITEM, ACCESSORY } from '@/parser/meta'
+import { getPropQuality } from '@/parser/calc-q20'
 import { tradeTag } from '../trade/common'
 import { ModifierType } from '@/parser/modifiers'
 import { BaseType, ITEM_BY_REF } from '@/assets/data'
@@ -166,11 +167,23 @@ export function createFilters (
   }
 
   if (item.category === ItemCategory.Map) {
-    if (item.rarity === ItemRarity.Unique && item.info.unique) {
+    if (item.info.area?.blighted) {
+      filters.searchExact = {
+        baseType: item.info.name,
+        baseTypeTrade: t(opts, ITEM_BY_REF('ITEM', 'Map')![0]),
+        discriminatorTrade: 'map',
+        sub: {
+          baseType: item.mapArea!.name,
+          baseTypeTrade: item.mapArea!.tradeDisc!,
+          discriminatorTrade: item.info.tradeDisc!,
+          disabled: false
+        }
+      }
+    } else if (item.rarity === ItemRarity.Unique && item.info.unique) {
       filters.searchExact = {
         name: item.info.name,
         nameTrade: t(opts, item.info),
-        baseTypeTrade: t(opts, ITEM_BY_REF('ITEM', item.info.unique.base)![0])
+        baseTypeTrade: t(opts, item.uniqueBase ?? ITEM_BY_REF('ITEM', item.info.unique.base)![0])
       }
     } else {
       filters.searchExact = {
@@ -179,12 +192,16 @@ export function createFilters (
       }
     }
 
-    if (item.info.refName === 'Map' || item.info.unique?.base === 'Map') {
+    if (item.info.refName === 'Map' || (item.uniqueBase?.refName ?? item.info.unique?.base) === 'Map') {
       filters.searchExact.discriminatorTrade = 'map'
     }
 
-    if (item.mapBlighted) {
-      filters.mapBlighted = { value: item.mapBlighted }
+    if (item.info.refName === 'Blighted Map') {
+      filters.mapBlighted = { value: 'Blighted' }
+    } else if (item.info.refName === 'Blight-ravaged Map') {
+      filters.mapBlighted = { value: 'Blight-ravaged' }
+    } else if (item.info.refName === 'Map') {
+      filters.mapBlighted = { value: false }
     }
 
     if (item.mapCompletionReward) {
@@ -227,7 +244,7 @@ export function createFilters (
     filters.searchExact = {
       name: item.info.name,
       nameTrade: t(opts, item.info),
-      baseTypeTrade: t(opts, ITEM_BY_REF('ITEM', item.info.unique.base)![0])
+      baseTypeTrade: t(opts, item.uniqueBase ?? ITEM_BY_REF('ITEM', item.info.unique.base)![0])
     }
   } else if (item.category === ItemCategory.Chart) {
     filters.searchRelaxed = {
@@ -285,10 +302,10 @@ export function createFilters (
     }
   }
 
-  if (item.quality && item.quality >= 20) {
+  if (item.quality && item.quality >= 20 && !ACCESSORY.has(item.category!)) {
     if (
       item.category === ItemCategory.Flask || item.category === ItemCategory.Tincture ||
-      opts.exact // for Weapons & Armour
+      getPropQuality(item) === 0 || opts.exact // for Weapons & Armour
     ) {
       filters.quality = {
         value: item.quality,

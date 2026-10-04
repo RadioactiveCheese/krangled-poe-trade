@@ -1,0 +1,66 @@
+{
+  "entries": [
+    {
+      "id": "pseudo.pseudo_jewellery_elemental_quality",
+      "text": "Качество (свойства стихийного урона): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_caster_quality",
+      "text": "Качество (свойства чар): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_attack_quality",
+      "text": "Качество (свойства атак): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_defense_quality",
+      "text": "Качество (свойства защиты): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_resource_quality",
+      "text": "Качество (свойства здоровья и маны): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_resistance_quality",
+      "text": "Качество (свойства сопротивлений): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_attribute_quality",
+      "text": "Качество (свойства характеристик): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_physical_chaos_quality",
+      "text": "Качество (свойства физического урона и урона хаосом): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_speed_quality",
+      "text": "Качество (свойства скорости): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_critical_quality",
+      "text": "Качество (свойства критического удара): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_prefix_quality",
+      "text": "Качество (свойства-префиксы): #%",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_jewellery_suffix_quality",
+      "text": "Качество (свойства-суффиксы): #%",
+      "type": "pseudo"
+    }
+  ],
+  "checkedAt": "2026-10-03",
+  "source": "https://ru.pathofexile.com/api/trade/data/stats"
+}

@@ -39,6 +39,7 @@
       {{ t('item.complexity_hint') }}
     </p>
     <stack-value :filters="itemFilters" :item="item"/>
+    <dust-value v-if="item.dustEquivalent !== undefined" :item="item"/>
     <div v-if="showSupportLinks" class="mt-auto border border-dashed p-2">
       <i18n-t keypath="app.thanks_3rd_party" tag="div">
         <a href="https://poe.ninja/support" target="_blank" class="bg-gray-900 px-1 rounded">poe.ninja</a>
@@ -59,6 +60,7 @@ import PriceTrend from './trends/PriceTrend.vue'
 import FiltersBlock from './filters/FiltersBlock.vue'
 import { createPresets } from './filters/create-presets'
 import StackValue from './stack-value/StackValue.vue'
+import DustValue from './expected-value/DustValue.vue'
 import FilterName from './filters/FilterName.vue'
 import { CATEGORY_TO_TRADE_ID, createTradeRequest } from './trade/pathofexile-trade'
 import { AppConfig } from '@/web/Config'
@@ -77,7 +79,8 @@ export default defineComponent({
     PriceTrend,
     FiltersBlock,
     FilterName,
-    StackValue
+    StackValue,
+    DustValue
   },
   props: {
     item: {
