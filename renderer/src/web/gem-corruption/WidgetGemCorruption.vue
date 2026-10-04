@@ -137,7 +137,8 @@
               <div v-if="kind === 'single'" class="col-span-3 border-t border-gray-700 mt-0.5 pt-1">
                 <div class="flex items-center gap-2">
                   <button class="rounded px-2 py-0.5 bg-gray-700 text-gray-100 hover:bg-gray-600 disabled:opacity-50"
-                    :disabled="validation(row)?.running" :title="t(':validate_hint', [REQUESTS_PER_VALIDATION])"
+                    :disabled="activeValidation != null"
+                    :title="(activeValidation != null && !validation(row)?.running) ? t(':validate_busy') : t(':validate_hint', [REQUESTS_PER_VALIDATION])"
                     @click="runValidation(row)">
                     <i class="fas" :class="validation(row)?.running ? 'fa-spinner fa-spin' : 'fa-search-dollar'" />
                     {{ t(validation(row)?.result ? ':validate_again' : ':validate') }}
@@ -197,7 +198,7 @@
 </template>
 
 <script lang="ts">
-import { reactive } from 'vue'
+import { reactive, shallowRef as sharedRef } from 'vue'
 import type { WidgetSpec } from '../overlay/interfaces.js'
 
 export default {
@@ -218,6 +219,8 @@ interface ValidationState {
 // Validations are kept for the session, shared by every gem corruption widget. A deep
 // reactive Map: Map.set stores the raw object, so entries are only reactive when read back.
 const validations = reactive(new Map<string, ValidationState>())
+// Key of the validation in flight, across every row and widget: only one runs at a time.
+const activeValidation = sharedRef<string | null>(null)
 </script>
 
 <script setup lang="ts">
@@ -438,9 +441,10 @@ function formatTime (at: number) {
 
 async function runValidation (row: GemFlipRow) {
   const key = validationKey(row)
-  if (validations.get(key)?.running) return
+  if (activeValidation.value != null) return
   const league = leagues.selectedId.value
   if (!league) return
+  activeValidation.value = key
   const prev = validations.get(key)
   validations.set(key, { running: true, progress: t(':validate_buy'), result: prev?.result })
   const state = validations.get(key)!
@@ -472,6 +476,7 @@ async function runValidation (row: GemFlipRow) {
     state.error = t(':validate_error', [(e as Error).message])
   } finally {
     state.running = false
+    activeValidation.value = null
   }
 }
 

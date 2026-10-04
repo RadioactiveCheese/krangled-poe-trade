@@ -342,12 +342,24 @@ function gemPrice (item: ParsedItem, lookup: PriceLookup) {
 export function vaalVersion (gem: BaseType, resolve: GemResolver = resolveFromItems): { base: BaseType, ninjaName: string } | undefined {
   const normalName = gem.gem?.transfigured ? gem.gem.normalVariant : gem.refName
   if (!normalName) return undefined
-  const base = resolve(`Vaal ${normalName}`)
+  const base = resolve(VAAL_RENAMED[normalName] ?? `Vaal ${normalName}`)
   if (!base?.gem?.vaal) return undefined
   return {
     base,
-    ninjaName: gem.gem?.transfigured ? `Vaal ${normalName} (${gem.refName})` : base.refName
+    ninjaName: gem.gem?.transfigured ? `${base.refName} (${gem.refName})` : base.refName
   }
+}
+
+/**
+ * Vaal gems whose name isn't "Vaal " + the gem's name. Checked against every Vaal gem in
+ * items.ndjson by the tests, and against poe.ninja's names (e.g. "Vaal Domination
+ * (Dominating Blow of Inspiring)") on 2026-10-04.
+ */
+export const VAAL_RENAMED: Readonly<Record<string, string>> = {
+  'Dominating Blow': 'Vaal Domination',
+  'Purity of Fire': 'Vaal Impurity of Fire',
+  'Purity of Ice': 'Vaal Impurity of Ice',
+  'Purity of Lightning': 'Vaal Impurity of Lightning'
 }
 
 function withoutVaal (table: readonly OutcomeSpec[]): OutcomeSpec[] {

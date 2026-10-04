@@ -327,6 +327,7 @@
     "validate": "Validate prices",
     "validate_again": "Validate again",
     "validate_hint": "Runs up to {0} trade searches and fetches for this gem (buy side, corrupted +1, corrupted +1 at 23%; league and price check settings apply), through the app's rate limiter, and compares the cheapest listings with poe.ninja.",
+    "validate_busy": "Another gem is being validated; wait for it to finish",
     "validate_buy": "Searching the buy side…",
     "validate_sell": "Searching the sell side…",
     "validate_sell23": "Searching 23% corrupted gems…",

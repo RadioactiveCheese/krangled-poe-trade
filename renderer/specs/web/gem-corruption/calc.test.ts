@@ -6,7 +6,7 @@ import { splitJsonBlob, findDenseInfo } from '@/web/background/split-poeninja-ov
 import { forSkillGem } from '@/web/price-check/trends/gem-variant'
 import {
   evaluateGem as evaluateGemWith, evaluateGems as evaluateGemsWith, filterRows, buyItem, buyQuality,
-  isQualityIrrelevant, sellItem, lookupCurrency, sortRows, vaalVersion, chanceOfLevelUp, chanceOfProfit,
+  isQualityIrrelevant, sellItem, lookupCurrency, sortRows, vaalVersion, VAAL_RENAMED, chanceOfLevelUp, chanceOfProfit,
   MAX_PRICE_MULTIPLE, DEFAULT_MIN_RATIO, DEFAULT_ATTEMPTS, VAAL_ORB_GEM_OUTCOMES, LEVEL_UP_CHANCE,
   DOUBLE_CORRUPTION_GEM_OUTCOMES_UNVERIFIED, DOUBLE_LEVEL_UP_CHANCE, DOUBLE_CORRUPT_TEMPLE,
   type PriceLookup, type PriceQuery, type ExclusionReason, type GemFlipRow, type CurrencyPrices, type OutcomeValue
@@ -299,10 +299,10 @@ describe('coverage of every gem against live poe.ninja data', () => {
   it('knows every skill gem name in the fixture', () => {
     const local = new Set(GEMS.map(g => g.refName))
     const ninjaNames = new Set((JSON.parse(FIXTURE).itemOverviews.find((o: { type: string }) => o.type === 'SkillGem').lines as Array<{ name: string }>).map(l => l.name))
-    // Vaal versions of transfigured gems only exist on poe.ninja, as "Vaal <gem> (<transfigured gem>)"
+    // Vaal versions of transfigured gems only exist on poe.ninja, as "<Vaal gem> (<transfigured gem>)"
     const vaalTransfigured = (name: string) => {
-      const m = /^Vaal (.+) \((.+)\)$/.exec(name)
-      return m != null && local.has(`Vaal ${m[1]}`) && GEM_BY_NAME.get(m[2])?.gem?.normalVariant === m[1]
+      const transfigured = GEM_BY_NAME.get(/\(([^)]+)\)$/.exec(name)?.[1] ?? '')
+      return transfigured != null && vaalVersion(transfigured, resolve)?.ninjaName === name
     }
     expect([...ninjaNames].filter(name => !local.has(name) && !vaalTransfigured(name))).toEqual([])
   })
@@ -328,6 +328,23 @@ describe('Vaal Orb outcome table', () => {
     expect(vaalVersion(gem('Arc'), resolve)?.ninjaName).toBe('Vaal Arc')
     expect(vaalVersion(gem('Arc of Oscillating'), resolve)?.ninjaName).toBe('Vaal Arc (Arc of Oscillating)')
     expect(vaalVersion(gem('Added Fire Damage Support'), resolve)).toBeUndefined()
+  })
+
+  it('finds Vaal versions whose names differ from the gem', () => {
+    expect(vaalVersion(gem('Dominating Blow'), resolve)?.ninjaName).toBe('Vaal Domination')
+    expect(vaalVersion(gem('Dominating Blow of Inspiring'), resolve)?.ninjaName).toBe('Vaal Domination (Dominating Blow of Inspiring)')
+    expect(vaalVersion(gem('Purity of Fire'), resolve)?.ninjaName).toBe('Vaal Impurity of Fire')
+  })
+
+  it('maps every Vaal gem in items.ndjson back to a gem that can corrupt into it', () => {
+    const reached = new Set(GEMS.filter(g => !g.gem?.vaal).map(g => vaalVersion(g, resolve)?.base.refName))
+    const vaalGems = GEMS.filter(g => g.gem?.vaal).map(g => g.refName)
+    expect(vaalGems.length).toBeGreaterThan(0)
+    expect(vaalGems.filter(name => !reached.has(name))).toEqual([])
+    for (const [normal, vaal] of Object.entries(VAAL_RENAMED)) {
+      expect(gem(normal).gem?.vaal, normal).toBeFalsy()
+      expect(gem(vaal).gem?.vaal, vaal).toBe(true)
+    }
   })
 })
 
@@ -530,7 +547,7 @@ describe('Vaal Orb results in the live data', () => {
     expect({
       incomplete: rows.filter(r => r.evIncomplete).length,
       positive: rows.filter(r => r.ev > 0).length
-    }).toEqual({ incomplete: 281, positive: 157 })
+    }).toEqual({ incomplete: 282, positive: 157 })
   })
 })
 
