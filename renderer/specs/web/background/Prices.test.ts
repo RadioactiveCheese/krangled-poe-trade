@@ -78,6 +78,16 @@ describe('poe.ninja dense overviews', () => {
     }])
   })
 
+  it('indexes Incursion temples under their own namespace', () => {
+    const overview = '{"type":"IncursionTemple","lines":[{"name":"Doryani\'s Institute (Tier 3)","variant":"Temple","chaos":224,"graph":[]}]}'
+
+    expect(splitJsonBlob(overview)).toEqual([{
+      ns: 'TEMPLE',
+      url: 'temples',
+      lines: overview
+    }])
+  })
+
   it('indexes Ducats as items', () => {
     const overview = '{"type":"Ducat","lines":[{"name":"Brinehook\'s Ducat","chaos":0.5029,"graph":[]}]}'
 

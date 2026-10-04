@@ -1,5 +1,38 @@
 export type PriceDatabase = Array<{ ns: string, url: string, lines: string }>
 
+export interface NinjaDenseInfo {
+  chaos: number
+  graph: Array<number | null>
+  name: string
+  variant?: string
+}
+
+export interface PriceDbQuery {
+  ns: string
+  name: string
+  variant: string | undefined
+}
+
+export function findDenseInfo (database: PriceDatabase, query: PriceDbQuery): { info: NinjaDenseInfo, url: string } | null {
+  // NOTE: order of keys is important
+  const searchString = JSON.stringify({
+    name: query.name,
+    variant: query.variant,
+    chaos: 0
+  }).replace(':0}', ':')
+
+  for (const { ns, url, lines } of database) {
+    if (ns !== query.ns) continue
+
+    const startPos = lines.indexOf(searchString)
+    if (startPos === -1) continue
+    const endPos = lines.indexOf('}', startPos)
+
+    return { info: JSON.parse(lines.slice(startPos, endPos + 1)), url }
+  }
+  return null
+}
+
 export function splitJsonBlob (jsonBlob: string): PriceDatabase {
   const NINJA_OVERVIEW = '{"type":"'
   const NAMESPACE_MAP: Array<{ ns: string, url: string, type: string }> = [
@@ -39,7 +72,8 @@ export function splitJsonBlob (jsonBlob: string): PriceDatabase {
     { ns: 'UNIQUE', url: 'unique-maps', type: 'UniqueMap' },
     { ns: 'UNIQUE', url: 'unique-relics', type: 'UniqueRelic' },
     { ns: 'UNIQUE', url: 'unique-tinctures', type: 'UniqueTincture' },
-    { ns: 'GEM', url: 'skill-gems', type: 'SkillGem' }
+    { ns: 'GEM', url: 'skill-gems', type: 'SkillGem' },
+    { ns: 'TEMPLE', url: 'temples', type: 'IncursionTemple' }
   ]
 
   const database: PriceDatabase = []

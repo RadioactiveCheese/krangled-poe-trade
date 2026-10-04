@@ -1,5 +1,6 @@
 import { ParsedItem, ItemRarity, ItemCategory } from '@/parser'
-import { SPECIAL_SUPPORT_GEM, floorToBracket } from '../filters/create-item-filters'
+import { floorToBracket } from '../filters/create-item-filters'
+import { forSkillGem } from './gem-variant'
 import { ACCESSORY, ARMOUR, WEAPON } from '@/parser/meta'
 
 export function isValuableBasetype (item: ParsedItem): boolean {
@@ -52,40 +53,6 @@ export function getDetailsId (item: ParsedItem) {
     ns: item.info.namespace,
     name: item.info.refName,
     variant: undefined
-  }
-}
-
-function forSkillGem (item: ParsedItem) {
-  let variant = ''
-  if (
-    SPECIAL_SUPPORT_GEM.includes(item.info.refName) ||
-    item.info.refName === 'Portal' ||
-    item.info.refName === 'Brand Recall' ||
-    item.info.refName === 'Blood and Sand' ||
-    item.gemLevel! >= 20
-  ) {
-    variant += `${item.gemLevel}`
-  } else {
-    variant += '1'
-  }
-  if (
-    item.quality &&
-    !SPECIAL_SUPPORT_GEM.includes(item.info.refName) &&
-    !(item.info.refName === 'Brand Recall' && item.isCorrupted)
-    // @TODO(poe.ninja blocking): !(item.info.refName === 'Blood and Sand' && item.isCorrupted)
-  ) {
-    // Gem Q20 with up to 4xGCP (TODO: should this rule apply to corrupted gems?)
-    const q = (item.quality >= 16 && item.quality <= 20) ? 20 : item.quality
-    variant += `/${q}`
-  }
-  if (item.isCorrupted && item.info.refName !== 'Portal') {
-    variant += 'c'
-  }
-
-  return {
-    ns: item.info.namespace,
-    name: item.info.refName,
-    variant
   }
 }
 
