@@ -9,6 +9,9 @@
     "Search": "搜尋",
     "min": "最小",
     "max": " 最大",
+    "map_check": {
+      "maven_reminder": "包含釋界之邀所需的頭目"
+    },
     "Restart required": "需要重啟",
     "Save": "保存",
     "Cancel": "取消",

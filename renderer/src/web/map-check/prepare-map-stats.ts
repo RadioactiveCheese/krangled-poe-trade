@@ -1,4 +1,4 @@
-import { statSourcesTotal, translateStatWithRoll } from '@/parser/modifiers'
+import { ModifierType, statSourcesTotal, translateStatWithRoll } from '@/parser/modifiers'
 import { ParsedItem } from '@/parser/ParsedItem'
 import { roundRoll } from '../price-check/filters/util'
 
@@ -12,7 +12,8 @@ const HIDDEN_MAP_CHECK_STATS = new Set([
 ])
 
 export function prepareMapStats (item: ParsedItem): PreparedStat[] {
-  const visibleStats = item.statsByType.filter(calc => !HIDDEN_MAP_CHECK_STATS.has(calc.stat.ref))
+  const visibleStats = item.statsByType.filter(calc =>
+    calc.type === ModifierType.Explicit && !HIDDEN_MAP_CHECK_STATS.has(calc.stat.ref))
 
   return visibleStats.map(calc => {
     const roll = statSourcesTotal(calc.sources)

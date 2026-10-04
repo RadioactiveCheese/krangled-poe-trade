@@ -13,8 +13,6 @@
         :filter="filters.areaLevel" :name="t('item.area_level')" />
       <filter-btn-logical v-if="filters.chartShape" raw
         :filter="filters.chartShape" :text="t('item.chart_shape', [filters.chartShape.name])" />
-      <filter-btn-logical v-if="filters.mapBlighted" readonly
-        :filter="{ disabled: false }" :text="filters.mapBlighted.value" />
       <filter-btn-logical v-if="filters.discriminator?.value && !filters.mercenaryBuild" readonly
         :filter="{ disabled: false }" :text="filters.discriminator.value" />
       <template v-if="filters.mercenaryBuild">
