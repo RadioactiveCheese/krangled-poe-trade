@@ -22,7 +22,7 @@ vi.mock('@/assets/data', async (importOriginal) => ({
 }))
 
 const {
-  buySearchRequest, sellSearchRequest, validateRow, normalizeListings, bucketBuy, bucketSell,
+  buySearchRequest, sellSearchRequest, sell23SearchRequest, needs23Search, validateRow, normalizeListings, bucketBuy, bucketSell,
   priceCheck, currencyToChaos, REQUESTS_PER_VALIDATION
 } = await import('@/web/gem-corruption/validate')
 const { evaluateGem } = await import('@/web/gem-corruption/calc')
@@ -82,6 +82,40 @@ describe('validation searches', () => {
       },
       sort: { price: 'asc' }
     })
+  })
+
+  it('searches the 23% sell side: corrupted, max level + 1 or more, quality 23 or more', () => {
+    expect(sell23SearchRequest(gem('Arc'), OPTS)).toEqual({
+      query: {
+        status: { option: 'securable' },
+        stats: [{ type: 'and', filters: [] }],
+        filters: {
+          trade_filters: { filters: { collapse: { option: 'true' } } },
+          misc_filters: {
+            filters: {
+              corrupted: { option: 'true' },
+              gem_imbued: { option: 'false' },
+              gem_level: { min: 21 },
+              quality: { min: 23 }
+            }
+          }
+        },
+        type: 'Arc'
+      },
+      sort: { price: 'asc' }
+    })
+    const exceptional = sell23SearchRequest(gem('Greater Multistrike Support'), OPTS).query.filters.misc_filters!.filters
+    expect(exceptional.gem_level).toEqual({ min: 4 })
+    expect(exceptional.quality).toEqual({ min: 23 })
+    expect(sell23SearchRequest(gem('Arc of Oscillating'), OPTS).query.type)
+      .toEqual({ option: 'Arc', discriminator: gem('Arc of Oscillating').tradeDisc })
+  })
+
+  it('skips the 23% search only where quality doesn\'t matter', () => {
+    expect(needs23Search(gem('Arc'))).toBe(true)
+    expect(needs23Search(gem('Greater Multistrike Support'))).toBe(true)
+    expect(needs23Search(gem('Enlighten Support'))).toBe(false)
+    expect(needs23Search(gem('Awakened Empower Support'))).toBe(false)
   })
 
   it('uses the transfigured discriminator and the gem\'s own max level', () => {
@@ -157,6 +191,15 @@ describe('bucketing', () => {
     expect(sell.quality23).toMatchObject({ trade: 3000, ninja: 900, mismatch: true })
     expect(sell.lowQuality).toMatchObject({ trade: 140, ninja: 150 })
   })
+
+  it('adds the 23% search to the 23% bucket only', () => {
+    const sell = bucketSell(arc, [{ chaos: 420, quality: 20, level: 21 }], [
+      { chaos: 1200, quality: 23, level: 21 },
+      { chaos: 1500, quality: 23, level: 22 }
+    ])
+    expect(sell.quality23).toMatchObject({ trade: 1200, count: 2, ninja: 900, mismatch: false })
+    expect(sell.quality20).toMatchObject({ trade: 420, count: 1 })
+  })
 })
 
 describe('a validation', () => {
@@ -176,15 +219,17 @@ describe('a validation', () => {
           throw new Error('Retry after 3 seconds')
         }
         const corrupted = body.query.filters.misc_filters?.filters.corrupted?.option === 'true'
-        calls.push(corrupted ? 'search:sell' : 'search:buy')
-        return { id: corrupted ? 'S' : 'B', result: Array.from({ length: 25 }, (_, i) => `${corrupted ? 's' : 'b'}${i}`), total: corrupted ? 31 : 120 }
+        const q23 = body.query.filters.misc_filters?.filters.quality?.min === 23
+        const id = q23 ? 'Q' : corrupted ? 'S' : 'B'
+        calls.push(q23 ? 'search:sell23' : corrupted ? 'search:sell' : 'search:buy')
+        return { id, result: Array.from({ length: 25 }, (_, i) => `${id}${i}`), total: q23 ? 4 : corrupted ? 31 : 120 }
       },
       async fetch (queryId, ids) {
         calls.push(`fetch:${queryId}:${ids.length}`)
         return ids.map((_, i) => ({
-          priceAmount: (queryId === 'B' ? 90 : 380) + i,
+          priceAmount: (queryId === 'B' ? 90 : queryId === 'Q' ? 2000 : 380) + i,
           priceCurrency: 'chaos',
-          quality: '+20%',
+          quality: queryId === 'Q' ? '+23%' : '+20%',
           level: queryId === 'B' ? '20' : '21'
         } as unknown as PricingResult))
       }
@@ -192,15 +237,30 @@ describe('a validation', () => {
     return { client, calls }
   }
 
-  it(`makes ${REQUESTS_PER_VALIDATION} requests: one search and one fetch of 10 per side`, async () => {
+  it(`makes ${REQUESTS_PER_VALIDATION} requests: one search and one fetch of 10 per search`, async () => {
     const { client, calls } = fakeClient()
     const res = await validateRow(row, OPTS, { client, toChaos: () => 1, now: () => 1234 })
-    expect(calls).toEqual(['search:buy', 'fetch:B:10', 'search:sell', 'fetch:S:10'])
+    expect(calls).toEqual(['search:buy', 'fetch:B:10', 'search:sell', 'fetch:S:10', 'search:sell23', 'fetch:Q:10'])
     expect(res.requests).toBe(REQUESTS_PER_VALIDATION)
-    expect(REQUESTS_PER_VALIDATION).toBeLessThanOrEqual(4)
+    expect(REQUESTS_PER_VALIDATION).toBeLessThanOrEqual(6)
+    expect(res.sell.total23).toBe(4)
+    expect(res.sell.quality23).toMatchObject({ trade: 2000, count: 10 })
     expect(res).toMatchObject({ at: 1234, league: 'Allflame', buy: { total: 120 }, sell: { total: 31 } })
     expect(res.buy.fullQuality).toMatchObject({ trade: 90, count: 10, ninja: 100 })
     expect(res.sell.quality20).toMatchObject({ trade: 380, count: 10, ninja: 400 })
+  })
+
+  it('makes 4 requests for a gem where quality doesn\'t matter', async () => {
+    const enlighten = evaluateGem(gem('Enlighten Support'), (q) => {
+      const table: Record<string, number> = { 'Vaal Orb|': 1, "Gemcutter's Prism|": 2, 'Enlighten Support|3': 800, 'Enlighten Support|4c': 5000 }
+      const chaos = table[`${q.name}|${q.variant ?? ''}`]
+      return chaos === undefined ? null : { chaos }
+    }, { vaalOrb: 1, gemcutter: 2 }, (name) => GEM_BY_NAME.get(name)).row!
+    const { client, calls } = fakeClient()
+    const res = await validateRow(enlighten, OPTS, { client, toChaos: () => 1 })
+    expect(calls).toEqual(['search:buy', 'fetch:B:10', 'search:sell', 'fetch:S:10'])
+    expect(res.requests).toBe(4)
+    expect(res.sell.total23).toBeUndefined()
   })
 
   it('waits out a rate limit instead of failing, and says so', async () => {
@@ -227,8 +287,8 @@ describe('a validation', () => {
       async fetch () { calls.push('fetch'); return [] }
     }
     const res = await validateRow(row, OPTS, { client, toChaos: () => 1 })
-    expect(calls).toEqual(['search', 'search'])
-    expect(res.requests).toBe(2)
+    expect(calls).toEqual(['search', 'search', 'search'])
+    expect(res.requests).toBe(3)
     expect(res.sell.quality20).toMatchObject({ trade: undefined, count: 0 })
   })
 

@@ -464,7 +464,7 @@ async function runValidation (row: GemFlipRow) {
       onProgress: (step, wait) => {
         state.progress = (step === 'waiting')
           ? t(':validate_waiting', [wait ?? 0])
-          : t(step === 'buy' ? ':validate_buy' : ':validate_sell')
+          : t(step === 'buy' ? ':validate_buy' : step === 'sell' ? ':validate_sell' : ':validate_sell23')
       }
     })
     state.error = undefined
@@ -482,7 +482,13 @@ function validationLines (row: GemFlipRow, res: ValidationResult) {
   if (!isQualityIrrelevant(row.gem)) {
     lines.push({ key: 'buyGcp', label: t(':validate_buy_prisms', [`${row.buyLevel}`]), check: res.buy.viaPrisms })
     lines.push({ key: 'sell20', label: `${row.sellLevel}/20c`, check: res.sell.quality20 })
-    lines.push({ key: 'sell23', label: `${row.sellLevel}/23c`, check: res.sell.quality23 })
+    lines.push({
+      key: 'sell23',
+      label: (res.sell.total23 !== undefined)
+        ? t(':validate_listed', [`${row.sellLevel}/23c`, res.sell.total23])
+        : `${row.sellLevel}/23c`,
+      check: res.sell.quality23
+    })
     lines.push({ key: 'sellLow', label: `${row.sellLevel}c (<16%)`, check: res.sell.lowQuality })
   } else {
     lines.push({ key: 'sell20', label: `${row.sellLevel}c`, check: res.sell.quality20 })

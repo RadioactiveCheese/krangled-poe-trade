@@ -21,19 +21,22 @@ import { buyItem, sellItem, isQualityIrrelevant, GEMCUTTER_COUNT, type GemFlipRo
  * requestTradeResultList / requestResults, i.e. the app's RateLimiter, which starts at
  * 1 request / 5s per policy and then follows the headers (common.ts adjustRateLimits).
  *
- * Design: 4 trade API calls per validation, 2 per policy.
+ * Design: up to 6 trade API calls per validation, 3 per policy: 3 of the 5 searches per
+ * search window and 3 of the 12 fetches per fetch window. A search that finds nothing skips
+ * its fetch.
  * - Buy search: the gem at max level, uncorrupted, any quality, cheapest first. One fetch
  *   of the 10 cheapest covers both buy routes: a 20% gem, and a lower-quality gem plus
  *   Gemcutter's Prisms. The search's `total` is the number of listings.
  * - Sell search: the gem corrupted at max level + 1 or more, any quality, cheapest first.
- *   One fetch of the 10 cheapest covers the +1 results the EV leans on most (L+1/20c and,
- *   if any are among the cheapest, L+1/23c); the search's `total` shows how liquid they are.
+ *   One fetch of the 10 cheapest covers L+1/20c and L+1c; `total` shows how liquid they are.
+ * - 23% sell search: the same with quality >= 23 (L+1/23c, or 4/23c for exceptional gems),
+ *   which is far pricier and rarely among the cheapest listings of the search above. Skipped
+ *   for Enlighten/Empower/Enhance and their awakened versions, where quality doesn't matter
+ *   and poe.ninja has no 23% listing to compare with (4 calls for those).
  * Not searched: Vaal versions (a different item, often thinly listed) and same-level
- * corrupted results (20/20c, 20/23c), to keep each validation to one search + one fetch per
- * side. Fewer than 4 calls would mean dropping one side's prices, or one fetch mixing
- * listing ids from two searches, which the trade API doesn't document.
+ * corrupted results (20/20c, 20/23c).
  */
-export const REQUESTS_PER_VALIDATION = 4
+export const REQUESTS_PER_VALIDATION = 6
 const FETCH_SIZE = 10
 
 /** Quality a listing has to reach before it counts as a 20% gem, like poe.ninja's 16-20 bucket. */
@@ -63,6 +66,20 @@ export function sellSearchRequest (gem: BaseType, opts: TradeOptions) {
   filters.corrupted = { value: true, exact: true }
   delete filters.quality
   return createTradeRequest(filters, [])
+}
+
+/** Corrupted, max level + 1 or more, 23% quality or more. */
+export function sell23SearchRequest (gem: BaseType, opts: TradeOptions) {
+  const filters = gemFilters(sellItem(gem), opts)
+  filters.gemLevel = { value: gem.gem!.maxLevel + 1, disabled: false }
+  filters.corrupted = { value: true, exact: true }
+  filters.quality = { value: 23, disabled: false }
+  return createTradeRequest(filters, [])
+}
+
+/** Whether the 23% sell search is worth running for this gem. */
+export function needs23Search (gem: BaseType) {
+  return !isQualityIrrelevant(gem)
 }
 
 export interface TradeClient {
@@ -127,6 +144,9 @@ export interface ValidationResult {
   sell: {
     total: number
     listings: ValidatedListing[]
+    /** listings found by the 23% sell search; undefined when it wasn't run */
+    total23: number | undefined
+    listings23: ValidatedListing[]
     /** +1 level at 20% (16-22%) */
     quality20: PriceCheck
     /** +1 level at 23% */
@@ -185,7 +205,11 @@ export function bucketBuy (row: GemFlipRow, listings: readonly ValidatedListing[
   }
 }
 
-export function bucketSell (row: GemFlipRow, listings: readonly ValidatedListing[]) {
+/**
+ * `listings` come from the any-quality sell search, `listings23` from the 23% one. 23%
+ * listings from either count towards L+1/23c.
+ */
+export function bucketSell (row: GemFlipRow, listings: readonly ValidatedListing[], listings23: readonly ValidatedListing[] = []) {
   const at = (id: string) => row.outcomes.find(o => o.id === id)?.listedPrice ??
     row.doubleOutcomes.find(o => o.id === id)?.listedPrice
   if (isQualityIrrelevant(row.gem)) {
@@ -197,12 +221,12 @@ export function bucketSell (row: GemFlipRow, listings: readonly ValidatedListing
   }
   return {
     quality20: priceCheck(listings.filter(l => l.quality >= 16 && l.quality < 23).map(l => l.chaos), row.sellPrice),
-    quality23: priceCheck(listings.filter(l => l.quality >= 23).map(l => l.chaos), at('level-up+quality-23')),
+    quality23: priceCheck([...listings, ...listings23].filter(l => l.quality >= 23).map(l => l.chaos), at('level-up+quality-23')),
     lowQuality: priceCheck(listings.filter(l => l.quality < 16).map(l => l.chaos), at('level-up+quality-10-15'))
   }
 }
 
-export type ValidationProgress = (step: 'buy' | 'sell' | 'waiting', waitSeconds?: number) => void
+export type ValidationProgress = (step: 'buy' | 'sell' | 'sell23' | 'waiting', waitSeconds?: number) => void
 
 const RETRY_AFTER = /Retry after (\d+) seconds/
 const MAX_WAITS = 5
@@ -242,7 +266,7 @@ export async function validateRow (
   const sleep = deps.sleep ?? (async (ms: number) => { await new Promise(resolve => setTimeout(resolve, ms)) })
   let requests = 0
 
-  const side = async (step: 'buy' | 'sell', body: ReturnType<typeof createTradeRequest>) => {
+  const side = async (step: 'buy' | 'sell' | 'sell23', body: ReturnType<typeof createTradeRequest>) => {
     onProgress(step)
     const search = await searchWithWait(deps.client, body, opts.league, onProgress, sleep)
     requests++
@@ -258,13 +282,22 @@ export async function validateRow (
 
   const buy = await side('buy', buySearchRequest(row.gem, opts))
   const sell = await side('sell', sellSearchRequest(row.gem, opts))
+  const sell23 = needs23Search(row.gem)
+    ? await side('sell23', sell23SearchRequest(row.gem, opts))
+    : undefined
 
   return {
     at: (deps.now ?? Date.now)(),
     league: opts.league,
     requests,
     buy: { total: buy.total, listings: buy.listings, ...bucketBuy(row, buy.listings) },
-    sell: { total: sell.total, listings: sell.listings, ...bucketSell(row, sell.listings) },
-    unconverted: buy.unconverted + sell.unconverted
+    sell: {
+      total: sell.total,
+      listings: sell.listings,
+      total23: sell23?.total,
+      listings23: sell23?.listings ?? [],
+      ...bucketSell(row, sell.listings, sell23?.listings)
+    },
+    unconverted: buy.unconverted + sell.unconverted + (sell23?.unconverted ?? 0)
   }
 }
