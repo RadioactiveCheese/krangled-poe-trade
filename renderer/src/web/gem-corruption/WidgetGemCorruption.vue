@@ -134,6 +134,50 @@
                 <i class="fas fa-exclamation-triangle" /> {{ t(':ev_incomplete_note') }}
               </div>
               <div v-if="kind === 'double'" class="col-span-3 text-gray-500 pt-0.5">{{ t(':double_model_note') }}</div>
+              <div v-if="kind === 'single'" class="col-span-3 border-t border-gray-700 mt-0.5 pt-1">
+                <div class="flex items-center gap-2">
+                  <button class="rounded px-2 py-0.5 bg-gray-700 text-gray-100 hover:bg-gray-600 disabled:opacity-50"
+                    :disabled="validation(row)?.running" :title="t(':validate_hint', [REQUESTS_PER_VALIDATION])"
+                    @click="runValidation(row)">
+                    <i class="fas" :class="validation(row)?.running ? 'fa-spinner fa-spin' : 'fa-search-dollar'" />
+                    {{ t(validation(row)?.result ? ':validate_again' : ':validate') }}
+                  </button>
+                  <span v-if="validation(row)?.running" class="text-gray-400">{{ validation(row)!.progress }}</span>
+                  <span v-else-if="validation(row)?.result" class="text-gray-500">
+                    {{ t(':validated_at', [formatTime(validation(row)!.result!.at)]) }}
+                  </span>
+                </div>
+                <div v-if="validation(row)?.error" class="text-red-400 pt-0.5">{{ validation(row)!.error }}</div>
+                <div v-if="validation(row)?.result" :class="$style.validation">
+                  <span class="text-gray-500">{{ t(':validate_item') }}</span>
+                  <span class="text-gray-500 text-right">{{ t(':validate_trade') }}</span>
+                  <span class="text-gray-500 text-right">{{ t(':validate_ninja') }}</span>
+                  <template v-for="line in validationLines(row, validation(row)!.result!)" :key="line.key">
+                    <span class="text-gray-300">{{ line.label }}</span>
+                    <span class="flex items-center justify-end gap-1" :class="line.check.mismatch ? 'text-orange-400' : 'text-gray-100'"
+                      :title="line.check.mismatch ? t(':validate_mismatch') : undefined">
+                      <i v-if="line.check.mismatch" class="fas fa-not-equal" />
+                      <template v-if="line.check.trade !== undefined">
+                        {{ fmt(line.check.trade).text }}<img :src="fmt(line.check.trade).icon" :class="$style.inlineIcon" alt="">
+                      </template>
+                      <span v-else class="text-gray-500">{{ t(':validate_none') }}</span>
+                    </span>
+                    <span class="flex items-center justify-end gap-1 text-gray-400">
+                      <template v-if="line.check.ninja !== undefined">
+                        {{ fmt(line.check.ninja).text }}<img :src="fmt(line.check.ninja).icon" :class="$style.inlineIcon" alt="">
+                      </template>
+                      <template v-else>&ndash;</template>
+                    </span>
+                  </template>
+                </div>
+                <div v-if="validation(row)?.result" class="text-gray-500 pt-0.5">
+                  {{ t(':validate_totals', [validation(row)!.result!.buy.total, validation(row)!.result!.sell.total]) }}
+                  <template v-if="validation(row)!.result!.unconverted">
+                    {{ t(':validate_unconverted', [validation(row)!.result!.unconverted]) }}
+                  </template>
+                  {{ t(':validate_scope') }}
+                </div>
+              </div>
             </div>
           </div>
           <div v-if="!rows.length" :class="$style.message">{{ t(':no_matches') }}</div>
@@ -153,6 +197,7 @@
 </template>
 
 <script lang="ts">
+import { reactive } from 'vue'
 import type { WidgetSpec } from '../overlay/interfaces.js'
 
 export default {
@@ -162,21 +207,38 @@ export default {
     trNameKey: 'gem_corruption.name'
   } satisfies WidgetSpec
 }
+
+interface ValidationState {
+  running: boolean
+  progress: string
+  result?: import('./validate').ValidationResult
+  error?: string
+}
+
+// Validations are kept for the session, shared by every gem corruption widget. A deep
+// reactive Map: Map.set stores the raw object, so entries are only reactive when read back.
+const validations = reactive(new Map<string, ValidationState>())
 </script>
 
 <script setup lang="ts">
 import { inject, computed, shallowRef, watch, onUnmounted } from 'vue'
 import { useI18nNs } from '@/web/i18n'
 import { usePoeninja, displayRounding } from '@/web/background/Prices'
+import { useLeagues } from '@/web/background/Leagues'
 import { Host } from '@/web/background/IPC'
+import { AppConfig } from '@/web/Config'
 import { ITEM_BY_REF, ITEMS_ITERATOR } from '@/assets/data'
 import type { ParsedItem } from '@/parser'
-import type { WidgetManager } from '../overlay/interfaces.js'
+import type { WidgetManager, PriceCheckWidget } from '../overlay/interfaces.js'
 import { GEM_CORRUPTION_DEFAULTS, type GemCorruptionWidget } from './widget.js'
 import {
   evaluateGems, filterRows, sortRows, buyItem, buyQuality, sellItem, chanceOfLevelUp, chanceOfProfit,
-  MAX_ATTEMPTS, DOUBLE_LEVEL_UP_CHANCE, type GemFlipRow, type OutcomeValue, type SortKey
+  isQualityIrrelevant, MAX_ATTEMPTS, DOUBLE_LEVEL_UP_CHANCE, type GemFlipRow, type OutcomeValue, type SortKey
 } from './calc'
+import {
+  validateRow, appTradeClient, currencyToChaos, REQUESTS_PER_VALIDATION,
+  type ValidationResult, type PriceCheck
+} from './validate'
 
 import Widget from '../overlay/Widget.vue'
 
@@ -202,9 +264,10 @@ if (props.config.wmFlags[0] === 'uninitialized') {
 
 const { t } = useI18nNs('gem_corruption')
 const {
-  findPriceByQuery, autoCurrency, queuePricesFetch,
+  findPriceByQuery, autoCurrency, queuePricesFetch, xchgRate,
   isLoading, isLeagueCovered, hasPrices, pricesVersion
 } = usePoeninja()
+const leagues = useLeagues()
 
 const isShown = computed(() => props.config.wmWants === 'show')
 
@@ -360,6 +423,73 @@ function outcomeLabel (row: GemFlipRow, o: OutcomeValue) {
   return parts.length ? parts.join(', ') : t(':outcome_unchanged')
 }
 
+// --- Validate prices: one click = one validation, through the app's rate-limited trade code
+function validationKey (row: GemFlipRow) {
+  return `${leagues.selectedId.value ?? ''}|${row.gem.refName}`
+}
+
+function validation (row: GemFlipRow) {
+  return validations.get(validationKey(row))
+}
+
+function formatTime (at: number) {
+  return new Date(at).toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
+}
+
+async function runValidation (row: GemFlipRow) {
+  const key = validationKey(row)
+  if (validations.get(key)?.running) return
+  const league = leagues.selectedId.value
+  if (!league) return
+  const prev = validations.get(key)
+  validations.set(key, { running: true, progress: t(':validate_buy'), result: prev?.result })
+  const state = validations.get(key)!
+
+  const priceCheck = AppConfig<PriceCheckWidget>('price-check')!
+  const toChaos = currencyToChaos(
+    xchgRate.value,
+    tag => ITEMS_ITERATOR(`"tradeTag":"${tag}"`).next().value?.refName,
+    name => findPriceByQuery({ ns: 'ITEM', name, variant: undefined })?.chaos
+  )
+  try {
+    state.result = await validateRow(row, {
+      league,
+      merchantOnly: priceCheck.merchantOnly,
+      currency: priceCheck.defaultCurrency,
+      collapseListings: priceCheck.collapseListings,
+      useEn: AppConfig().useIntlSite
+    }, {
+      client: appTradeClient(AppConfig().accountName),
+      toChaos,
+      onProgress: (step, wait) => {
+        state.progress = (step === 'waiting')
+          ? t(':validate_waiting', [wait ?? 0])
+          : t(step === 'buy' ? ':validate_buy' : ':validate_sell')
+      }
+    })
+    state.error = undefined
+  } catch (e) {
+    state.error = t(':validate_error', [(e as Error).message])
+  } finally {
+    state.running = false
+  }
+}
+
+function validationLines (row: GemFlipRow, res: ValidationResult) {
+  const lines: Array<{ key: string, label: string, check: PriceCheck }> = [
+    { key: 'buy20', label: t(':validate_buy_full', [`${row.buyLevel}/20`]), check: res.buy.fullQuality }
+  ]
+  if (!isQualityIrrelevant(row.gem)) {
+    lines.push({ key: 'buyGcp', label: t(':validate_buy_prisms', [`${row.buyLevel}`]), check: res.buy.viaPrisms })
+    lines.push({ key: 'sell20', label: `${row.sellLevel}/20c`, check: res.sell.quality20 })
+    lines.push({ key: 'sell23', label: `${row.sellLevel}/23c`, check: res.sell.quality23 })
+    lines.push({ key: 'sellLow', label: `${row.sellLevel}c (<16%)`, check: res.sell.lowQuality })
+  } else {
+    lines.push({ key: 'sell20', label: `${row.sellLevel}c`, check: res.sell.quality20 })
+  }
+  return lines
+}
+
 function openBuy (row: GemFlipRow, e: MouseEvent) {
   dispatchPriceCheck(buyItem(row.gem, buyQuality(row)), e)
 }
@@ -452,6 +582,13 @@ function dispatchPriceCheck (item: ParsedItem, e: MouseEvent) {
   max-height: 22rem;
   overflow-y: auto;
   @apply rounded bg-gray-900 px-2 py-1 text-sm;
+}
+
+.validation {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  column-gap: theme('spacing.3');
+  @apply pt-1;
 }
 
 .currencyIcon {

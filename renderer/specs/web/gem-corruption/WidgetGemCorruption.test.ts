@@ -22,7 +22,13 @@ vi.mock('@/web/background/Prices', () => ({
 }))
 vi.mock('@/web/i18n', () => ({ useI18nNs: () => ({ t: (key: string) => key }) }))
 vi.mock('@/web/background/IPC', () => ({ Host: {} }))
-vi.mock('@/assets/data', () => ({ ITEM_BY_REF: () => undefined, ITEMS_ITERATOR: () => [] }))
+vi.mock('@/assets/data', async (importOriginal) => ({
+  // the widget's "Validate prices" code pulls in the parser, which needs the real exports
+  ...(await importOriginal<typeof import('@/assets/data')>()),
+  ITEM_BY_REF: () => undefined,
+  ITEMS_ITERATOR: () => []
+}))
+vi.mock('@/web/background/Leagues', () => ({ useLeagues: () => ({ selectedId: ref('Allflame') }) }))
 
 const RENEW_MS = (5 * 60 + 11) * 1000
 
