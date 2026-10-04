@@ -43,8 +43,8 @@ export const MAX_ATTEMPTS = 20
  * yields Vaal gems. No later patch note we found (through 3.27.0) changes gem corruption.
  * poewiki.net could not be read (bot check).
  *
- * UNVERIFIED: how the quality change is distributed within "up to 10%". It is modelled as
- * a uniform 1-10, which is what splits the two quality halves into the rows below.
+ * USER-CONFIRMED (not found in a source): the quality change within "up to 10%" is evenly
+ * weighted, 1-10, which is what splits the two quality halves into the rows below.
  */
 /** Quality after corrupting a 20% gem. */
 export type QualityRange = '20' | '23' | '21-22' | '16-19' | '10-15'
@@ -67,10 +67,10 @@ const CORRUPTION_KINDS: ReadonlyArray<readonly Effect[]> = [
     { id: 'level-down', chance: 0.5, levelDelta: -1 }
   ],
   [
-    // +1..+10 from 20% (UNVERIFIED uniform split): +3 or more hits the 23% cap
+    // +1..+10 from 20% (user-confirmed even split): +3 or more hits the 23% cap
     { id: 'quality-23', chance: 0.5 * 0.8, quality: '23' },
     { id: 'quality-21-22', chance: 0.5 * 0.2, quality: '21-22' },
-    // -1..-10 from 20% (UNVERIFIED uniform split)
+    // -1..-10 from 20% (user-confirmed even split)
     { id: 'quality-16-19', chance: 0.5 * 0.4, quality: '16-19' },
     { id: 'quality-10-15', chance: 0.5 * 0.6, quality: '10-15' }
   ]
@@ -422,7 +422,10 @@ export function outcomeValues (
     if (listedPrice === undefined) {
       return { ...base, ...pricedAsLevel1, status: rarelyListed(spec) ? 'not-listed' : 'missing', value: 0 }
     }
-    if (outlierCap !== undefined && listedPrice > outlierCap) {
+    // Level +1 at 23% (e.g. 21/23c) is the jackpot and really can be worth over 16x the gem,
+    // so it's never treated as an outlier (user's call).
+    const jackpot = spec.levelDelta > 0 && spec.quality === '23' && !vaalName
+    if (!jackpot && outlierCap !== undefined && listedPrice > outlierCap) {
       // A Vaal version is a different item and can be worth far more than the gem; count
       // its listed price but flag it, since it may be a single ask.
       if (vaalName) {

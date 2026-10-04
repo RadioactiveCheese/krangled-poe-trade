@@ -534,7 +534,7 @@ describe('Vaal Orb results in the live data', () => {
   })
 })
 
-const DOUBLE_COUNTS = { incomplete: 500, positive: 46, aboveCap: 45 }
+const DOUBLE_COUNTS = { incomplete: 394, positive: 75, aboveCap: 45 }
 
 describe('double corruption (Lapidary Lens)', () => {
   const table = DOUBLE_CORRUPTION_GEM_OUTCOMES_UNVERIFIED
@@ -596,6 +596,17 @@ describe('double corruption (Lapidary Lens)', () => {
     expect(v['level-down+quality-23']).toMatchObject({ status: 'not-listed', value: 0, pricedAsLevel1: true })
   })
 
+  it('counts level +1 at 23% at its listed price even far above 8x the 20/20 price', () => {
+    const row = run({ ...ARC, 'Arc|21/23c': 5000 }, 224)
+    const o = row.doubleOutcomes.find(o => o.id === 'level-up+quality-23')!
+    expect(o).toMatchObject({ status: 'priced', value: 5000 })
+    expect(o.aboveCap).toBeUndefined()
+    expect(row.doubleEvIncomplete).toBe(false)
+    // the 8x rule still applies to other results, e.g. 20/23c
+    const other = run({ ...ARC, 'Arc|20/23c': 5000 }, 224)
+    expect(other.doubleOutcomes.find(o => o.id === 'quality-23')).toMatchObject({ status: 'outlier', value: 0 })
+  })
+
   it('shows EV before the temple cost when the temple has no price', () => {
     const row = run(ARC, undefined)
     expect(row.doubleCost).toBeUndefined()
@@ -620,8 +631,9 @@ describe('double corruption (Lapidary Lens)', () => {
     const { rows } = evaluateGems(GEMS, fixtureLookup)
     const byName = new Map(rows.map(r => [r.gem.refName, r]))
     const status = (name: string, id: string) => byName.get(name)!.doubleOutcomes.find(o => o.id === id)!.status
-    // 21/23c for a normal gem (Molten Shell's is above the outlier cap)
-    expect(status('Molten Shell', 'level-up+quality-23')).toBe('outlier')
+    // 21/23c is never an outlier: Molten Shell's is 3,070c against a 90c 20/20 gem
+    expect(byName.get('Molten Shell')!.doubleOutcomes.find(o => o.id === 'level-up+quality-23'))
+      .toMatchObject({ status: 'priced', value: 3070 })
     expect(rows.filter(r => r.doubleOutcomes.find(o => o.id === 'level-up+quality-23')!.status === 'priced').length).toBeGreaterThan(50)
     // Vaal 21/20c and Vaal 20/23c
     expect(status('Molten Shell', 'vaal+level-up')).toBe('priced')
