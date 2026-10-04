@@ -279,6 +279,7 @@
   "map_check": {
     "name": "지도 체크",
     "has_outdated": "몇몇 모드의 표기가 달라졌습니다. 환경 설정에서 위험한 모드를 업데이트해주세요. (오래된 모드를 제거하면 이 메세지는 사라집니다.)",
+    "maven_reminder": "메이븐의 초대에 필요한 보스가 있습니다",
     "no_mods": "모드가 없습니다.",
     "profile": "Profile",
     "search_selected": "선택된 항목만",
