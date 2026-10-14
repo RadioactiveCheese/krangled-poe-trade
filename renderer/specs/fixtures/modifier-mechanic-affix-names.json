@@ -121,6 +121,51 @@
         "Усиленный Элреоном",
         "Хиллока",
         "Януса"
+      ],
+      "DELVE_MODS": [
+        "Подземная",
+        "Подземное",
+        "Подземные",
+        "Подземный",
+        "подземелья"
+      ],
+      "ESSENCE_MODS": [
+        "Сущностная",
+        "Сущностное",
+        "Сущностные",
+        "Сущностный",
+        "сущности"
+      ],
+      "INCURSION_MODS": [
+        "Буревая",
+        "Буревое",
+        "Буревой",
+        "Буревые",
+        "Гвателитзи",
+        "Духовная",
+        "Духовное",
+        "Духовные",
+        "Духовный",
+        "Мататля",
+        "Плодовитая",
+        "Плодовитое",
+        "Плодовитые",
+        "Плодовитый",
+        "Прозрачная",
+        "Прозрачное",
+        "Прозрачные",
+        "Прозрачный",
+        "Пухварте",
+        "Ситаквалотля",
+        "Такати",
+        "Токсичная",
+        "Токсичное",
+        "Токсичные",
+        "Токсичный",
+        "Церемониальная",
+        "Церемониальное",
+        "Церемониальные",
+        "Церемониальный"
       ]
     },
     "ko": {
@@ -243,7 +288,45 @@
         "被選召的",
         "西拉克之",
         "里歐的"
+      ],
+      "DELVE_MODS": [
+        "地下之",
+        "地下的"
+      ],
+      "ESSENCE_MODS": [
+        "精髓",
+        "精髓之",
+        "精髓的"
+      ],
+      "INCURSION_MODS": [
+        "塔普塔特的",
+        "希特克拉多之",
+        "希特克拉多的",
+        "普希瓦爾之",
+        "柔派克的",
+        "特卡蒂之",
+        "特卡蒂的",
+        "瓜特利斯之",
+        "瓜特利斯的",
+        "麥塔爾之",
+        "麥塔爾的"
       ]
+    }
+  },
+  "localizedSources": {
+    "fetchedAt": "2026-10-14",
+    "ru": "https://repoe-fork.github.io/Russian/mods.json",
+    "cmn-Hant": "https://repoe-fork.github.io/Traditional%20Chinese/mods.json",
+    "note": "Russian names are gender templates (<if:MS>{..}<elif:FS>{..}...); every branch is a name the client can display, so each branch is pinned."
+  },
+  "excluded": {
+    "cmn-Hant": {
+      "DELVE_MODS": {
+        "地底之": "only names Sentinel-domain \"of the Underground\" suffixes; no delve-domain affix uses it"
+      },
+      "ESSENCE_MODS": {
+        "結冰的": "names the essence-only quiver mod AddedColdDamageQuiverEssence10, but also 15 regular cold-damage affixes (Icy/Chilled); name-only matching would mis-tag ordinary mods as essence"
+      }
     }
   }
 }
