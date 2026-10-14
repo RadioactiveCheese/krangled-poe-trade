@@ -73,10 +73,14 @@ function displayedNames (name: string): string[] {
   return name.startsWith('<if') ? [...name.matchAll(/\{([^}]*)\}/g)].map(match => match[1]) : [name]
 }
 
-it.skipIf(!process.env.TEST_LIVE_MODIFIER_METADATA)('covers complete current delve, essence and incursion affix names in ru and cmn-Hant', async () => {
+it.skipIf(!process.env.TEST_LIVE_MODIFIER_METADATA)('covers complete current influence, delve, essence and incursion affix names in ru and cmn-Hant', async () => {
   const english = await (await fetch('https://repoe-fork.github.io/mods.json')).json() as Record<string, GameMod>
   const checks = [
     ['DELVE_MODS', 'delve'], ['ESSENCE_MODS', 'item'], ['INCURSION_MODS', 'item']
+  ] as const
+  const families = [
+    ['SHAPER_MODS', 'shaper'], ['ELDER_MODS', 'elder'], ['CRUSADER_MODS', 'crusader'],
+    ['HUNTER_MODS', 'basilisk'], ['REDEEMER_MODS', 'eyrie'], ['WARLORD_MODS', 'adjudicator']
   ] as const
   for (const language of ['ru', 'cmn-Hant'] as const) {
     const response = await fetch(snapshot.localizedSources[language])
@@ -88,6 +92,18 @@ it.skipIf(!process.env.TEST_LIVE_MODIFIER_METADATA)('covers complete current del
       const expected = new Set<string>()
       for (const [id, mod] of Object.entries(english)) {
         if (mod.domain !== domain || !englishNames.has(mod.name)) continue
+        for (const name of displayedNames(localized[id].name)) {
+          if (!(name in (excluded[key] ?? {}))) expected.add(name)
+        }
+      }
+      const actual = new Set(locales[language][key])
+      for (const name of expected) expect(actual.has(name), `${language}:${key}:${name}`).toBe(true)
+    }
+    for (const [key, tag] of families) {
+      const expected = new Set<string>()
+      for (const [id, mod] of Object.entries(english)) {
+        if (mod.domain !== 'item' || !['prefix', 'suffix'].includes(mod.generation_type)) continue
+        if (!mod.spawn_weights.some(weight => weight.tag.endsWith(`_${tag}`))) continue
         for (const name of displayedNames(localized[id].name)) {
           if (!(name in (excluded[key] ?? {}))) expected.add(name)
         }
