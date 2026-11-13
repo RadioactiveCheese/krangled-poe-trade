@@ -140,14 +140,12 @@ an empty patch from reaching `main` in the first place.
   [Release](./.github/workflows/release.yml). The tag must match the version in
   `main/package.json`. Windows, Linux, and macOS packages and updater metadata
   are published to the matching GitHub Release.
-- [Sync upstream](./.github/workflows/sync-upstream.yml) runs every Monday and
-  can also be started from the Actions tab. Around a league launch, enable
-  [Sync upstream (launch cadence)](./.github/workflows/sync-upstream-launch.yml)
-  to run the same sync every four hours, then disable it after the one- or
-  two-week launch window. Keeping the launch workflow disabled between leagues
-  avoids filling the Actions history with skipped runs. The sync merges the
-  original project's `master` branch into `chore/sync-upstream` based on this
-  fork's `main` branch and opens or refreshes a pull request for review.
+- [Sync upstream](./.github/workflows/sync-upstream.yml) runs daily and can
+  also be started from the Actions tab. It never merges upstream code: upstream
+  changes are ported by hand in focused pull requests. Instead it keeps an
+  issue labelled `upstream-sync` listing every upstream commit and open
+  upstream pull request that is not yet settled, and closes it when nothing is
+  left.
 
 For the sync workflow to open pull requests, enable **Allow GitHub Actions to
 create and approve pull requests** under **Settings > Actions > General >
@@ -156,3 +154,26 @@ access only to the release and sync jobs that need it.
 
 The packaged app checks the releases from `RadioactiveCheese/krangled-poe-trade`
 because that publisher is configured in `main/electron-builder.yml`.
+
+## Recording upstream decisions
+
+Settle upstream work in either of two ways:
+
+- **Cite it.** A merged pull request whose description names an upstream commit
+  SHA (at least seven characters, e.g. `Adapted from upstream 1cd83787`) or an
+  upstream pull request (`upstream #1816` or its URL) counts as adopting it.
+- **Record it** in [`.github/upstream-ledger.json`](./.github/upstream-ledger.json),
+  keyed by upstream commit SHA under `commits` or upstream PR number under
+  `pulls`. `adopted` and `rejected` settle an item; `partial` and `deferred` keep
+  it in the report. A ledger entry overrides a citation, so mark a commit
+  `partial` when a pull request cited it but ported only some of it.
+
+A decision on an upstream pull request carries over to its commits when
+upstream squashes or merges it, unless a `commits` entry says otherwise.
+
+When every upstream commit up to some point is settled, the workflow opens a
+`chore/upstream-baseline` pull request containing `git merge -s ours` of that
+commit. It changes no files; it makes git treat those commits as merged so they
+leave the report. **Merge it with "Create a merge commit"**: squash and rebase
+merges discard the upstream parent, and the next report will warn if that
+happens.

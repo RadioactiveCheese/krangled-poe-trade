@@ -1,0 +1,34 @@
+{
+  "$comment": "Decisions about upstream SnosMe/awakened-poe-trade work. Statuses: adopted and rejected settle an item; partial and deferred keep it listed. Merged fork PRs citing an upstream SHA or 'upstream #N' count as adopted without an entry here. See .github/scripts/upstream_sync.py.",
+  "commits": {
+    "543423ab": {
+      "status": "partial",
+      "note": "Data refresh adopted narrowly; item-drop.json and ru/cmn-Hant stat matchers still to port",
+      "fork_pr": [57, 60, 61, 65]
+    },
+    "6e73f2fe": {
+      "status": "adopted",
+      "note": "Fork's own poedb slug handling in poedb-mods.ts"
+    },
+    "ce551eb7": {
+      "status": "rejected",
+      "note": "Upstream docs site version; the fork's docs are versioned separately"
+    }
+  },
+  "pulls": {
+    "1094": {
+      "status": "adopted",
+      "note": "Currency calculator ported from the PR's commit 7ff1be35",
+      "fork_pr": 50
+    },
+    "1477": { "status": "rejected", "note": "Upstream issue-template docs" },
+    "1518": { "status": "rejected", "note": "POESESSID login; not wanted for now" },
+    "1612": { "status": "rejected", "note": "Unfinished WIP" },
+    "1739": { "status": "rejected", "note": "Upstream DEVELOPING.md step" },
+    "1820": { "status": "rejected", "note": "External browser button; small value" },
+    "1821": { "status": "rejected", "note": "Per-item auto-search toggle; small value" },
+    "1825": { "status": "rejected", "note": "Inscribed Ultimatum support; too large for the value" },
+    "1830": { "status": "deferred", "note": "Facetor's Lens; skipped for now. Needs non-English item entries" },
+    "1899": { "status": "rejected", "note": "Theme; the fork has its own UI direction" }
+  }
+}
