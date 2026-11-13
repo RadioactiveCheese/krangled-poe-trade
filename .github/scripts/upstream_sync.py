@@ -37,6 +37,9 @@ UPSTREAM_PR_REF = re.compile(
     r'(?:github\.com/SnosMe/awakened-poe-trade/pull/|upstream\s+(?:PR\s+)?#)(\d+)',
     re.IGNORECASE,
 )
+# How GitHub records a merged pull request in upstream history.
+SQUASHED_PR = re.compile(r'\(#(\d+)\)$')
+MERGED_PR = re.compile(r'^Merge pull request #(\d+) from ')
 
 
 class LedgerError(ValueError):
@@ -165,23 +168,71 @@ def resolve_ledger_commits(
     return resolved, warnings
 
 
+def upstream_pull_commits(
+    base: str, upstream: str, candidates: list[str], cwd: str | None = None
+) -> dict[str, int]:
+    """Map candidate commits to the upstream pull request that merged them.
+
+    Reads GitHub's squash subjects (`title (#N)`) and merge subjects
+    (`Merge pull request #N from ...`). Rebase merges leave no trace.
+    """
+    wanted = set(candidates)
+    owner: dict[str, int] = {}
+    log = git('log', '--format=%H %P%x09%s', f'{base}..{upstream}', cwd=cwd)
+    for line in log.splitlines():
+        head, _, subject = line.partition('	')
+        sha, *parents = head.split()
+        if len(parents) == 1:
+            squashed = SQUASHED_PR.search(subject)
+            if squashed and sha in wanted:
+                owner[sha] = int(squashed.group(1))
+            continue
+        merged = MERGED_PR.match(subject)
+        if merged and len(parents) == 2:
+            brought = git('rev-list', '--no-merges', f'{parents[0]}..{parents[1]}', cwd=cwd).split()
+            for commit in brought:
+                if commit in wanted:
+                    owner.setdefault(commit, int(merged.group(1)))
+    return owner
+
+
+def decide_pull(number: int, ledger_pulls: dict[str, Decision], detected: dict[int, list[int]]) -> Decision:
+    if str(number) in ledger_pulls:
+        return ledger_pulls[str(number)]
+    if number in detected:
+        return Decision('adopted', '', detected[number], 'detected')
+    return Decision('pending')
+
+
 def classify_commits(
     candidates: list[str],
     ledger_commits: dict[str, Decision],
     detected: dict[str, list[int]],
+    pull_of: dict[str, int] | None = None,
+    pull_decisions: dict[int, Decision] | None = None,
 ) -> dict[str, Decision]:
+    """Precedence: commit ledger, PR ledger, commit citation, PR citation."""
+    pull_of = pull_of or {}
+    pull_decisions = pull_decisions or {}
     decisions = {}
     for sha in candidates:
+        cited = detected.get(sha, [])
+        via_pull = pull_decisions.get(pull_of.get(sha, 0))
         if sha in ledger_commits:
             decision = ledger_commits[sha]
-            extra = [n for n in detected.get(sha, []) if n not in decision.fork_prs]
-            decisions[sha] = Decision(
-                decision.status, decision.note, decision.fork_prs + extra, 'ledger'
-            )
-        elif sha in detected:
-            decisions[sha] = Decision('adopted', '', detected[sha], 'detected')
+        elif via_pull and via_pull.source == 'ledger':
+            decision = via_pull
+        elif cited:
+            decision = Decision('adopted', '', [], 'detected')
+        elif via_pull and via_pull.status != 'pending':
+            decision = via_pull
         else:
             decisions[sha] = Decision('pending')
+            continue
+        extra = [n for n in cited if n not in decision.fork_prs]
+        decisions[sha] = Decision(
+            decision.status, decision.note, decision.fork_prs + extra, decision.source
+        )
     return decisions
 
 
@@ -190,16 +241,7 @@ def classify_pulls(
     ledger_pulls: dict[str, Decision],
     detected: dict[int, list[int]],
 ) -> dict[int, Decision]:
-    decisions = {}
-    for pr in open_pulls:
-        number = pr['number']
-        if str(number) in ledger_pulls:
-            decisions[number] = ledger_pulls[str(number)]
-        elif number in detected:
-            decisions[number] = Decision('adopted', '', detected[number], 'detected')
-        else:
-            decisions[number] = Decision('pending')
-    return decisions
+    return {pr['number']: decide_pull(pr['number'], ledger_pulls, detected) for pr in open_pulls}
 
 
 def find_baseline(
@@ -351,7 +393,10 @@ def main(argv: list[str] | None = None) -> int:
         print(f'::error::Invalid upstream ledger: {error}', file=sys.stderr)
         return 1
     detected_commits, detected_pulls = detect_adoptions(landed, candidates)
-    commits = classify_commits(candidates, ledger_commits, detected_commits)
+    # A decision on an upstream PR still applies once upstream merges it.
+    pull_of = upstream_pull_commits(args.base, args.upstream, candidates)
+    pull_decisions = {n: decide_pull(n, ledger['pulls'], detected_pulls) for n in set(pull_of.values())}
+    commits = classify_commits(candidates, ledger_commits, detected_commits, pull_of, pull_decisions)
     pulls = classify_pulls(open_pulls, ledger['pulls'], detected_pulls)
     baseline = find_baseline(args.base, args.upstream, commits)
     warnings += lost_baselines(fork_prs, args.baseline_branch, args.base)

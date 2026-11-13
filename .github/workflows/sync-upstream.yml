@@ -64,11 +64,25 @@ jobs:
             --github-output "$GITHUB_OUTPUT"
 
       - name: Propose upstream baseline
-        if: steps.ledger.outputs.baseline != ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BASELINE: ${{ steps.ledger.outputs.baseline }}
         run: |
+          PR_NUMBER=$(gh api --method GET "repos/$GITHUB_REPOSITORY/pulls" \
+            -f state=open -f head="$GITHUB_REPOSITORY_OWNER:$BASELINE_BRANCH" -f base=main \
+            --jq '.[0].number // empty')
+
+          if [ -z "$BASELINE" ]; then
+            # A ledger edit can unsettle commits that an open baseline PR covers.
+            # Merging it then would hide them, so withdraw it.
+            if [ -n "$PR_NUMBER" ]; then
+              gh pr close "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --delete-branch \
+                --comment 'Withdrawn: some upstream commits this baseline covered are no longer settled. A new baseline PR opens once they are.'
+            fi
+            echo 'No upstream baseline to record.'
+            exit 0
+          fi
+
           SHORT=${BASELINE:0:8}
           if git ls-remote --exit-code --heads origin "$BASELINE_BRANCH" >/dev/null 2>&1; then
             git fetch origin "$BASELINE_BRANCH:refs/remotes/origin/$BASELINE_BRANCH"
@@ -100,9 +114,6 @@ jobs:
             echo "<!-- upstream-baseline: $BASELINE -->"
           } > "$RUNNER_TEMP/baseline-body.md"
 
-          PR_NUMBER=$(gh api --method GET "repos/$GITHUB_REPOSITORY/pulls" \
-            -f state=open -f head="$GITHUB_REPOSITORY_OWNER:$BASELINE_BRANCH" -f base=main \
-            --jq '.[0].number // empty')
           if [ -n "$PR_NUMBER" ]; then
             gh api --method PATCH "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" \
               --raw-field title="chore: record upstream baseline $SHORT" \

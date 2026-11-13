@@ -168,6 +168,9 @@ Settle upstream work in either of two ways:
   it in the report. A ledger entry overrides a citation, so mark a commit
   `partial` when a pull request cited it but ported only some of it.
 
+A decision on an upstream pull request carries over to its commits when
+upstream squashes or merges it, unless a `commits` entry says otherwise.
+
 When every upstream commit up to some point is settled, the workflow opens a
 `chore/upstream-baseline` pull request containing `git merge -s ours` of that
 commit. It changes no files; it makes git treat those commits as merged so they

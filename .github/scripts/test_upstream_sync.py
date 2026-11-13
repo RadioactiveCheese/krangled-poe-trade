@@ -200,6 +200,63 @@ class Baseline(InRepo):
         self.assertIsNone(us.find_baseline('main', 'upstream', {}))
 
 
+class MergedUpstreamPulls(InRepo):
+    """Decisions on an upstream PR survive upstream merging it."""
+
+    def merged_pull(self) -> tuple[str, str, str]:
+        """Upstream squashes #12 and merges #13 (two commits) on top of main's root."""
+        root = self.repo.run('rev-list', '--max-parents=0', 'main')
+        self.repo.checkout('upstream', create=True, start=root)
+        (self.repo.root / 'squash.txt').write_text('s', encoding='utf-8')
+        self.repo.run('add', '-A')
+        self.repo.run('commit', '-q', '-m', 'Add a feature (#12)')
+        squashed = self.repo.run('rev-parse', 'HEAD')
+        self.repo.checkout('topic', create=True)
+        t1, t2 = self.repo.commit('t1'), self.repo.commit('t2')
+        self.repo.checkout('upstream')
+        self.repo.run('merge', '-q', '--no-ff', '-m', 'Merge pull request #13 from someone/topic', 'topic')
+        self.repo.checkout('main')
+        return squashed, t1, t2
+
+    def test_maps_squash_and_merge_subjects(self):
+        squashed, t1, t2 = self.merged_pull()
+        pull_of = us.upstream_pull_commits('main', 'upstream', self.candidates())
+        self.assertEqual(pull_of, {squashed: 12, t1: 13, t2: 13})
+
+    def test_pull_decisions_settle_their_commits(self):
+        squashed, t1, t2 = self.merged_pull()
+        pull_of = us.upstream_pull_commits('main', 'upstream', self.candidates())
+        pulls = {
+            12: us.decide_pull(12, {'12': us.Decision('rejected', source='ledger')}, {}),
+            13: us.decide_pull(13, {}, {13: [70]}),
+        }
+        decisions = us.classify_commits(self.candidates(), {}, {}, pull_of, pulls)
+        self.assertEqual(decisions[squashed].status, 'rejected')
+        self.assertEqual((decisions[t1].status, decisions[t1].fork_prs), ('adopted', [70]))
+        self.assertEqual(us.find_baseline('main', 'upstream', decisions), self.repo.run('rev-parse', 'upstream'))
+
+    def test_commit_entries_and_pull_ledger_take_precedence(self):
+        squashed, t1, t2 = self.merged_pull()
+        pull_of = us.upstream_pull_commits('main', 'upstream', self.candidates())
+        pulls = {
+            12: us.Decision('deferred', source='ledger'),
+            13: us.Decision('adopted', fork_prs=[70], source='detected'),
+        }
+        decisions = us.classify_commits(
+            self.candidates(), {t1: us.Decision('partial', source='ledger')}, {squashed: [71]},
+            pull_of, pulls,
+        )
+        self.assertEqual(decisions[squashed].status, 'deferred')  # PR ledger beats a citation
+        self.assertEqual(decisions[t1].status, 'partial')         # commit ledger beats the PR
+        self.assertEqual(decisions[t2].status, 'adopted')
+
+    def test_undecided_pull_leaves_commits_pending(self):
+        squashed, _, _ = self.merged_pull()
+        pull_of = us.upstream_pull_commits('main', 'upstream', self.candidates())
+        decisions = us.classify_commits(self.candidates(), {}, {}, pull_of, {12: us.Decision('pending')})
+        self.assertEqual(decisions[squashed].status, 'pending')
+
+
 class MergedInto(InRepo):
     def test_only_prs_that_reached_the_base_count(self):
         on_main = self.repo.commit('feature')
