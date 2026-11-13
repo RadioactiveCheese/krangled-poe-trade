@@ -1,18 +1,25 @@
 name: Sync upstream
 
+# Upstream work is ported by hand in focused pull requests, so this job never
+# merges upstream code. It reports what is still unhandled and, once a stretch
+# of upstream history is fully settled, proposes a no-op merge that records it.
+# Decisions live in .github/upstream-ledger.json.
+
 on:
   schedule:
-    - cron: '0 6 * * 1' # Mondays 06:00 UTC
+    - cron: '37 9 * * *' # Daily
   workflow_dispatch:
-  workflow_call:
 
 permissions:
   contents: write
   pull-requests: write
+  issues: write
 
 env:
   UPSTREAM: https://github.com/SnosMe/awakened-poe-trade.git
-  SYNC_BRANCH: chore/sync-upstream
+  UPSTREAM_REPO: SnosMe/awakened-poe-trade
+  BASELINE_BRANCH: chore/upstream-baseline
+  REPORT_LABEL: upstream-sync
 
 jobs:
   sync:
@@ -31,229 +38,106 @@ jobs:
           git remote add upstream "$UPSTREAM"
           git fetch upstream master
 
-      - name: Count new upstream commits
-        id: check
+      - name: Collect pull requests
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          BEHIND=$(git rev-list --count origin/main..upstream/master)
-          echo "behind=$BEHIND" >> "$GITHUB_OUTPUT"
-          echo "$BEHIND new upstream commit(s)"
+          gh api --paginate "repos/$GITHUB_REPOSITORY/pulls?state=closed&per_page=100" \
+            --jq '.[] | select(.merged_at) | {number, body, head: .head.ref, merge_commit_sha}' \
+            > "$RUNNER_TEMP/fork-prs.jsonl"
+          gh api --paginate "repos/$UPSTREAM_REPO/pulls?state=open&per_page=100" \
+            --jq '.[] | {number, title}' \
+            > "$RUNNER_TEMP/upstream-prs.jsonl"
 
-          NEEDS_SYNC=false
-          if [ "$BEHIND" != "0" ]; then
-            if git ls-remote --exit-code --heads origin "$SYNC_BRANCH" >/dev/null 2>&1; then
-              git fetch origin "$SYNC_BRANCH:refs/remotes/origin/$SYNC_BRANCH"
-              if git merge-base --is-ancestor upstream/master "origin/$SYNC_BRANCH"; then
-                OPEN_PRS=$(gh api --method GET "repos/$GITHUB_REPOSITORY/pulls" \
-                  -f state=open \
-                  -f head="$GITHUB_REPOSITORY_OWNER:$SYNC_BRANCH" \
-                  -f base=main \
-                  --jq 'length')
-                if [ "$OPEN_PRS" = "0" ]; then
-                  echo 'The sync branch is current but its pull request is missing; rebuilding it.'
-                  NEEDS_SYNC=true
-                else
-                  echo 'The sync branch and its pull request already contain the latest upstream commit.'
-                fi
-              else
-                STATUS=$?
-                if [ "$STATUS" -eq 1 ]; then
-                  NEEDS_SYNC=true
-                else
-                  echo "::error::Could not compare upstream with the sync branch (status $STATUS)."
-                  exit "$STATUS"
-                fi
-              fi
-            else
-              STATUS=$?
-              if [ "$STATUS" -eq 2 ]; then
-                NEEDS_SYNC=true
-              else
-                echo "::error::Could not query the remote sync branch (status $STATUS)."
-                exit "$STATUS"
-              fi
-            fi
-          fi
-          echo "needs_sync=$NEEDS_SYNC" >> "$GITHUB_OUTPUT"
-
-      - name: Merge upstream into sync branch
-        if: steps.check.outputs.needs_sync == 'true'
-        id: merge
+      - name: Classify upstream work
+        id: ledger
         run: |
-          git config user.name  'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git checkout -B "$SYNC_BRANCH" origin/main
+          python3 .github/scripts/upstream_sync.py \
+            --base origin/main \
+            --upstream upstream/master \
+            --ledger .github/upstream-ledger.json \
+            --fork-prs "$RUNNER_TEMP/fork-prs.jsonl" \
+            --upstream-prs "$RUNNER_TEMP/upstream-prs.jsonl" \
+            --baseline-branch "$BASELINE_BRANCH" \
+            --repo "$GITHUB_REPOSITORY" \
+            --report "$RUNNER_TEMP/report.md" \
+            --github-output "$GITHUB_OUTPUT"
 
-          # First make a disposable merge attempt so the draft can report exactly
-          # which paths required policy-based conflict resolution.
-          if git merge --no-commit --no-ff upstream/master; then
-            : > /tmp/upstream-conflicts.txt
-            git merge --abort
+      - name: Propose upstream baseline
+        if: steps.ledger.outputs.baseline != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BASELINE: ${{ steps.ledger.outputs.baseline }}
+        run: |
+          SHORT=${BASELINE:0:8}
+          if git ls-remote --exit-code --heads origin "$BASELINE_BRANCH" >/dev/null 2>&1; then
+            git fetch origin "$BASELINE_BRANCH:refs/remotes/origin/$BASELINE_BRANCH"
+            CURRENT=$(git rev-parse "origin/$BASELINE_BRANCH^2" 2>/dev/null || true)
+            CURRENT_BASE=$(git rev-parse "origin/$BASELINE_BRANCH^1")
+          fi
+          if [ "${CURRENT:-}" = "$BASELINE" ] && [ "${CURRENT_BASE:-}" = "$(git rev-parse origin/main)" ]; then
+            echo "The baseline branch already records $SHORT on current main."
           else
-            git diff --name-only --diff-filter=U | sort > /tmp/upstream-conflicts.txt
-            git merge --abort
+            git config user.name  'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git checkout -B "$BASELINE_BRANCH" origin/main
+            # -s ours keeps main's files exactly; only the ancestry changes.
+            git merge -s ours --no-ff "$BASELINE" \
+              -m "chore: record upstream baseline $SHORT" \
+              -m "Every upstream commit up to SnosMe/awakened-poe-trade@$BASELINE is adopted or rejected in .github/upstream-ledger.json. This merge changes no files."
+            test -z "$(git diff origin/main HEAD)"
+            git push --force origin "$BASELINE_BRANCH"
           fi
-
-          # Keep the fork's side of overlapping hunks. Clean upstream changes are
-          # still accepted, and every affected path is called out in the draft PR.
-          if ! git merge --no-commit --no-ff -X ours upstream/master; then
-            while IFS= read -r -d '' path; do
-              if git cat-file -e ":2:$path" 2>/dev/null; then
-                git checkout --ours -- "$path"
-                git add -- "$path"
-              else
-                git rm -- "$path"
-              fi
-            done < <(git diff --name-only --diff-filter=U -z)
-          fi
-
-          if git diff --name-only --diff-filter=U | grep -q .; then
-            echo '::error::Policy-based conflict resolution left unmerged paths.'
-            git diff --name-only --diff-filter=U
-            exit 1
-          fi
-
-          # These files describe the fork and its automation, not upstream code.
-          # Never let an upstream sync rename or remove them.
-          git checkout origin/main -- .github docs/.vitepress/config.js
-
-          # Accept dependency updates while retaining fork package names and
-          # release versions. Those versions are advanced only by our releases.
-          python - <<'PY'
-          import json
-          import subprocess
-          from pathlib import Path
-
-          for directory in ('main', 'renderer'):
-              package_path = Path(directory) / 'package.json'
-              lock_path = Path(directory) / 'package-lock.json'
-              if not package_path.exists():
-                  subprocess.run(
-                      ['git', 'checkout', 'origin/main', '--', package_path.as_posix()],
-                      check=True,
-                  )
-              original_bytes = subprocess.check_output(
-                  ['git', 'show', f'origin/main:{package_path.as_posix()}']
-              )
-              original = json.loads(original_bytes)
-              package = json.loads(package_path.read_text(encoding='utf-8'))
-              for key in ('name', 'productName', 'version', 'repository'):
-                  if key in original:
-                      package[key] = original[key]
-              if package == original:
-                  subprocess.run(
-                      ['git', 'checkout', 'origin/main', '--', package_path.as_posix()],
-                      check=True,
-                  )
-              else:
-                  newline = '\r\n' if original_bytes.count(b'\r\n') else '\n'
-                  package_path.write_bytes(
-                      (json.dumps(package, indent=2) + '\n').replace('\n', newline).encode()
-                  )
-
-              if not lock_path.exists():
-                  subprocess.run(
-                      ['git', 'checkout', 'origin/main', '--', lock_path.as_posix()],
-                      check=True,
-                  )
-              original_lock_bytes = subprocess.check_output(
-                  ['git', 'show', f'origin/main:{lock_path.as_posix()}']
-              )
-              original_lock = json.loads(original_lock_bytes)
-              lock = json.loads(lock_path.read_text(encoding='utf-8'))
-              for key in ('name', 'version'):
-                  if key in original_lock:
-                      lock[key] = original_lock[key]
-              original_root = original_lock.get('packages', {}).get('', {})
-              root = lock.get('packages', {}).get('', {})
-              for key in ('name', 'version'):
-                  if key in original_root:
-                      root[key] = original_root[key]
-              if lock == original_lock:
-                  subprocess.run(
-                      ['git', 'checkout', 'origin/main', '--', lock_path.as_posix()],
-                      check=True,
-                  )
-              else:
-                  newline = '\r\n' if original_lock_bytes.count(b'\r\n') else '\n'
-                  lock_path.write_bytes(
-                      (json.dumps(lock, indent=2) + '\n').replace('\n', newline).encode()
-                  )
-          PY
-
-          git add --all
-          # An ancestry-only sync can intentionally have the same tree as main.
-          git commit --no-edit --allow-empty
-          git push --force origin "$SYNC_BRANCH"
 
           {
-            echo 'conflicts<<EOF'
-            cat /tmp/upstream-conflicts.txt
-            echo EOF
-          } >> "$GITHUB_OUTPUT"
-
-      - name: Open or update pull request
-        if: steps.check.outputs.needs_sync == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CONFLICTS: ${{ steps.merge.outputs.conflicts }}
-        run: |
-          UPSTREAM_SHA=$(git rev-parse upstream/master)
-          COMMIT_COUNT=$(git rev-list --count origin/main..upstream/master)
-          CONFLICT_COUNT=$(printf '%s\n' "$CONFLICTS" | sed '/^$/d' | wc -l | tr -d ' ')
-
-          {
-            echo '## Upstream changes'
+            echo "Records upstream \`SnosMe/awakened-poe-trade@$BASELINE\` as merged. Every upstream commit up to it is adopted or rejected, so they stop being reported."
             echo
-            echo "Draft sync of **$COMMIT_COUNT commit(s)** through \`SnosMe/awakened-poe-trade@$UPSTREAM_SHA\`."
+            echo 'This merge changes no files.'
             echo
-            git log --format='- `%h` %s' origin/main..upstream/master
+            echo '> [!IMPORTANT]'
+            echo '> Merge with **Create a merge commit**. Squash and rebase merges drop the upstream parent, which is the only thing this pull request adds.'
             echo
-            echo '## Automated curation'
-            echo
-            echo '- Preserved this fork’s `.github/` workflows and documentation branding.'
-            echo '- Preserved package names, repository metadata, and release version numbers.'
-            echo '- Accepted clean upstream changes.'
-            if [ "$CONFLICT_COUNT" = "0" ]; then
-              echo '- No textual merge conflicts were detected.'
-            else
-              echo "- Resolved **$CONFLICT_COUNT** textual conflict(s) by retaining the fork side of overlapping hunks:"
-              printf '%s\n' "$CONFLICTS" | sed '/^$/d; s/^/  - `/' | sed 's/$/`/'
-            fi
-            echo
-            echo '## Diff summary'
-            echo
-            echo '```text'
-            git diff --stat origin/main...HEAD
-            echo '```'
-            echo
-            echo '## Review required'
-            echo
-            echo '@RadioactiveCheese: please review the excluded fork metadata and every auto-resolved conflict before marking this PR ready. Clean merges can still conflict semantically with fork-only features.'
-            echo
-            echo '<!-- sync-upstream-summary -->'
-          } > /tmp/pr-body.md
+            echo "<!-- upstream-baseline: $BASELINE -->"
+          } > "$RUNNER_TEMP/baseline-body.md"
 
           PR_NUMBER=$(gh api --method GET "repos/$GITHUB_REPOSITORY/pulls" \
-            -f state=open \
-            -f head="$GITHUB_REPOSITORY_OWNER:$SYNC_BRANCH" \
-            -f base=main \
+            -f state=open -f head="$GITHUB_REPOSITORY_OWNER:$BASELINE_BRANCH" -f base=main \
             --jq '.[0].number // empty')
           if [ -n "$PR_NUMBER" ]; then
-            IS_DRAFT=$(gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" --jq '.draft')
             gh api --method PATCH "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" \
-              --raw-field body="$(cat /tmp/pr-body.md)" >/dev/null
-            if [ "$IS_DRAFT" != 'true' ]; then
-              gh pr ready "$PR_NUMBER" --undo --repo "$GITHUB_REPOSITORY"
-            fi
-            echo "Updated upstream sync PR #$PR_NUMBER."
+              --raw-field title="chore: record upstream baseline $SHORT" \
+              --raw-field body="$(cat "$RUNNER_TEMP/baseline-body.md")" >/dev/null
+            echo "Updated baseline PR #$PR_NUMBER."
           else
             gh api --method POST "repos/$GITHUB_REPOSITORY/pulls" \
-              --raw-field title="chore: sync upstream ($(date -u +%Y-%m-%d))" \
-              --raw-field head="$SYNC_BRANCH" \
+              --raw-field title="chore: record upstream baseline $SHORT" \
+              --raw-field head="$BASELINE_BRANCH" \
               --raw-field base=main \
-              --raw-field body="$(cat /tmp/pr-body.md)" \
-              -F draft=true \
+              --raw-field body="$(cat "$RUNNER_TEMP/baseline-body.md")" \
               --jq '.html_url'
+          fi
+
+      - name: Publish report
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPEN_ITEMS: ${{ steps.ledger.outputs.open_items }}
+          WARNINGS: ${{ steps.ledger.outputs.warnings }}
+        run: |
+          gh label create "$REPORT_LABEL" --color C5DEF5 \
+            --description 'Upstream sync status report' --repo "$GITHUB_REPOSITORY" 2>/dev/null || true
+          ISSUE=$(gh issue list --repo "$GITHUB_REPOSITORY" --label "$REPORT_LABEL" \
+            --state open --json number --jq '.[0].number // empty')
+
+          if [ "$OPEN_ITEMS" = '0' ] && [ "$WARNINGS" = '0' ]; then
+            if [ -n "$ISSUE" ]; then
+              gh issue close "$ISSUE" --repo "$GITHUB_REPOSITORY" \
+                --comment 'Every upstream commit and open upstream pull request is settled.'
+            fi
+            echo 'Nothing upstream needs a decision.'
+          elif [ -n "$ISSUE" ]; then
+            gh issue edit "$ISSUE" --repo "$GITHUB_REPOSITORY" --body-file "$RUNNER_TEMP/report.md"
+            echo "Updated report issue #$ISSUE."
+          else
+            gh issue create --repo "$GITHUB_REPOSITORY" --label "$REPORT_LABEL" \
+              --title 'Upstream sync status' --body-file "$RUNNER_TEMP/report.md"
           fi

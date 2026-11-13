@@ -37,6 +37,14 @@ jobs:
       - run: npm run build
         working-directory: ./renderer
 
+  automation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      # Validates the upstream ledger and the sync workflow's classification,
+      # using the runner's system Python like the sync workflow does.
+      - run: python3 -m unittest discover -s .github/scripts -v
+
   main:
     runs-on: ubuntu-latest
     steps:
