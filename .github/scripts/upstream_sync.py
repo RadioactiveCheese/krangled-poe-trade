@@ -178,7 +178,9 @@ def upstream_pull_commits(
     """
     wanted = set(candidates)
     owner: dict[str, int] = {}
-    log = git('log', '--format=%H %P%x09%s', f'{base}..{upstream}', cwd=cwd)
+    # Oldest first, so a PR merged into a branch that a later PR merges keeps
+    # its own commits rather than ceding them to the outer PR.
+    log = git('log', '--topo-order', '--reverse', '--format=%H %P%x09%s', f'{base}..{upstream}', cwd=cwd)
     for line in log.splitlines():
         head, _, subject = line.partition('	')
         sha, *parents = head.split()

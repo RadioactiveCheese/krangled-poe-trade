@@ -223,6 +223,21 @@ class MergedUpstreamPulls(InRepo):
         pull_of = us.upstream_pull_commits('main', 'upstream', self.candidates())
         self.assertEqual(pull_of, {squashed: 12, t1: 13, t2: 13})
 
+    def test_nested_pull_keeps_its_commits(self):
+        root = self.repo.run('rev-list', '--max-parents=0', 'main')
+        self.repo.checkout('upstream', create=True, start=root)
+        self.repo.checkout('release', create=True)
+        self.repo.checkout('inner', create=True)
+        i1 = self.repo.commit('i1')
+        self.repo.checkout('release')
+        self.repo.run('merge', '-q', '--no-ff', '-m', 'Merge pull request #13 from someone/inner', 'inner')
+        r1 = self.repo.commit('r1')
+        self.repo.checkout('upstream')
+        self.repo.run('merge', '-q', '--no-ff', '-m', 'Merge pull request #15 from someone/release', 'release')
+        self.repo.checkout('main')
+        pull_of = us.upstream_pull_commits('main', 'upstream', self.candidates())
+        self.assertEqual(pull_of, {i1: 13, r1: 15})
+
     def test_pull_decisions_settle_their_commits(self):
         squashed, t1, t2 = self.merged_pull()
         pull_of = us.upstream_pull_commits('main', 'upstream', self.candidates())
