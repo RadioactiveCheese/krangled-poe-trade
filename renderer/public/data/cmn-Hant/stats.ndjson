@@ -867,7 +867,7 @@
 {"ref":"#% increased Effect of Freeze on you","better":-1,"matchers":[{"string":"增加 #% 你身上的冰凍效果"},{"string":"減少 #% 你身上的冰凍效果","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2069161757"],"crafted":["crafted.stat_2069161757"]}}}
 {"ref":"#% increased Effect of Herald Buffs on you","better":1,"matchers":[{"string":"增加 #% 你身上捷光環的效果"},{"string":"減少 #% 你身上捷光環的效果","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_870531513"],"enchant":["enchant.stat_870531513"]}}}
 {"ref":"#% increased Effect of Impales inflicted with Spells","better":1,"matchers":[{"string":"增加 #% 法術造成的穿刺效果"},{"string":"減少 #% 法術造成的穿刺效果","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1480595847"]}}}
-{"ref":"#% increased Effect of Jewel Socket Passive Skills containing Corrupted Magic Jewels","better":1,"matchers":[{"string":"增加 #% 天賦樹珠寶插槽的效果，包含已汙染魔法珠寶"},{"string":"減少 #% 天賦樹珠寶插槽的效果，包含已汙染魔法珠寶","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_461663422"]}}}
+{"ref":"#% increased Effect of Jewel Socket Passive Skills containing Corrupted Magic Jewels","better":1,"matchers":[{"string":"增加#%天賦樹插槽內的已汙染魔法珠寶效果"},{"string":"減少#%天賦樹插槽內的已汙染魔法珠寶效果","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_461663422"]}}}
 {"ref":"#% increased Effect of Lightning Ailments","better":1,"matchers":[{"string":"增加 #% 閃電異常狀態效果"},{"string":"減少 #% 閃電異常狀態效果","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3081816887"],"implicit":["implicit.stat_3081816887"],"fractured":["fractured.stat_3081816887"]}}}
 {"ref":"#% increased effect of Non-Curse Auras from your Skills","better":1,"matchers":[{"string":"增加 #% 你技能的非詛咒光環效果"},{"string":"減少 #% 你技能的非詛咒光環效果","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1880071428"],"implicit":["implicit.stat_1880071428"],"fractured":["fractured.stat_1880071428"]}}}
 {"ref":"#% increased Effect of Non-Curse Auras from your Skills on Enemies","better":1,"matchers":[{"string":"增加 #% 你技能在敵人身上非詛咒光環的效果"},{"string":"減少 #% 你技能在敵人身上非詛咒光環的效果","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1636209393"],"fractured":["fractured.stat_1636209393"]}}}
@@ -2199,7 +2199,7 @@
 {"ref":"+#% chance to Suppress Spell Damage per Endurance Charge","better":1,"matchers":[{"string":"每顆耐力球 #% 壓抑法術傷害率"}],"trade":{"ids":{"explicit":["explicit.stat_161741084"]}}}
 {"ref":"+#% chance to Suppress Spell Damage per Fortification","better":1,"matchers":[{"string":"每層護體有 #% 壓抑法術傷害率"}],"trade":{"ids":{"explicit":["explicit.stat_2731261141"]}}}
 {"ref":"+#% chance to Suppress Spell Damage per Frenzy Charge","better":1,"matchers":[{"string":"每顆狂怒球有 #% 壓抑法術傷害率"}],"trade":{"ids":{"explicit":["explicit.stat_482967934"]}}}
-{"ref":"+#% chance to Suppress Spell Damage per Power Charge","better":1,"matchers":[{"string":"每顆報擊球 #% 壓抑法術傷害率"}],"trade":{"ids":{"explicit":["explicit.stat_1309947938"]}}}
+{"ref":"+#% chance to Suppress Spell Damage per Power Charge","better":1,"matchers":[{"string":"每顆暴擊球 #% 壓抑法術傷害率"}],"trade":{"ids":{"explicit":["explicit.stat_1309947938"]}}}
 {"ref":"+#% chance to Suppress Spell Damage while affected by Grace","better":1,"matchers":[{"string":"被優雅影響時，#% 壓抑法術傷害率"}],"trade":{"ids":{"explicit":["explicit.stat_4071658793"]}}}
 {"ref":"+#% chance to Suppress Spell Damage while affected by Haste","better":1,"matchers":[{"string":"被迅捷影響時，#% 壓抑法術傷害率"}],"trade":{"ids":{"explicit":["explicit.stat_2170859717"]}}}
 {"ref":"+#% chance to Suppress Spell Damage while Channelling","better":1,"matchers":[{"string":"引導時 #% 壓抑法術傷害率"}],"trade":{"ids":{"explicit":["explicit.stat_4108186648"],"implicit":["implicit.stat_4108186648"]}}}
@@ -2207,8 +2207,8 @@
 {"ref":"+#% Chaos Resistance against Damage Over Time","better":1,"matchers":[{"string":"對持續傷害有 #% 混沌抗性"}],"trade":{"ids":{"explicit":["explicit.stat_2266636761"],"crafted":["crafted.stat_2266636761"]}}}
 {"ref":"+#% Critical Strike Chance while at maximum Power Charges","dp":true,"better":1,"matchers":[{"string":"當獲得最大暴擊球時 #% 暴擊率"}],"trade":{"ids":{"explicit":["explicit.stat_1166971727"]}}}
 {"ref":"+#% Critical Strike Multiplier while a Rare or Unique Enemy is Nearby","better":1,"matchers":[{"string":"當附近有稀有或傳奇敵人時，#% 暴擊加成"}],"trade":{"ids":{"explicit":["explicit.stat_3992439283"],"fractured":["fractured.stat_3992439283"],"crafted":["crafted.stat_3992439283"]}}}
-{"ref":"+#% Global Critical Strike Chance","better":1,"matchers":[{"string":"+#% Global Critical Strike Chance "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_global_critical_strike_chance"]}}}
-{"ref":"+#% Global Critical Strike Multiplier","better":1,"matchers":[{"string":"+#% Global Critical Strike Multiplier "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_global_critical_strike_multiplier"]}}}
+{"ref":"+#% Global Critical Strike Chance","better":1,"matchers":[{"string":"+#% 全域暴擊率 "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_global_critical_strike_chance"]}}}
+{"ref":"+#% Global Critical Strike Multiplier","better":1,"matchers":[{"string":"+#% 全域暴擊傷害加成 "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_global_critical_strike_multiplier"]}}}
 {"ref":"+#% Global Critical Strike Multiplier while you have a Frenzy Charge","better":1,"matchers":[{"string":"你有狂怒球時 #% 全域暴擊加成"}],"trade":{"ids":{"explicit":["explicit.stat_3375516056"]}}}
 {"ref":"+#% Global Critical Strike Multiplier while you have no Frenzy Charges","better":1,"matchers":[{"string":"當你沒有狂怒球時，#% 全域暴擊加成"}],"trade":{"ids":{"explicit":["explicit.stat_3062763405"]}}}
 {"ref":"+#% Item Quantity","better":1,"fromAreaMods":"yes","matchers":[{"string":"#% 物品數量"}],"trade":{"ids":{"implicit":["implicit.stat_2023217031"]}}}
@@ -2290,21 +2290,21 @@
 {"ref":"+#% to Critical Strike Multiplier while affected by Precision","better":1,"matchers":[{"string":"被精準影響時，#% 暴擊加成"}],"trade":{"ids":{"explicit":["explicit.stat_1817023621"]}}}
 {"ref":"+#% to Critical Strike Multiplier while area is not in Lockdown\nPlayers have +#% to Critical Strike Multiplier while area is not in Lockdown","better":1,"matchers":[{"string":"區域沒有被封鎖時，#% 暴擊加成\n玩家在區域沒有被封鎖時 #% 暴擊加成"}],"trade":{"ids":{"explicit":["explicit.stat_3128272024"],"fractured":["fractured.stat_3128272024"]}}}
 {"ref":"+#% to Critical Strike Multiplier while Dual Wielding","better":1,"matchers":[{"string":"雙持時 #% 暴擊加成"}],"trade":{"ids":{"explicit":["explicit.stat_2546185479"],"fractured":["fractured.stat_2546185479"]}}}
-{"ref":"+#% to Critical Strike Multiplier with Axes","better":1,"matchers":[{"string":"持斧時 #% 暴擊加成"}],"trade":{"ids":{"implicit":["implicit.stat_4219746989"]}}}
-{"ref":"+#% to Critical Strike Multiplier with Bows","better":1,"matchers":[{"string":"持弓時 #% 暴擊加成"}],"trade":{"ids":{"explicit":["explicit.stat_1712221299"],"implicit":["implicit.stat_1712221299"],"fractured":["fractured.stat_1712221299"]}}}
-{"ref":"+#% to Critical Strike Multiplier with Claws","better":1,"matchers":[{"string":"持爪時 #% 暴擊加成"}],"trade":{"ids":{"implicit":["implicit.stat_2811834828"]}}}
+{"ref":"+#% to Critical Strike Multiplier with Axes","better":1,"matchers":[{"string":"#% 斧暴擊加成"}],"trade":{"ids":{"implicit":["implicit.stat_4219746989"]}}}
+{"ref":"+#% to Critical Strike Multiplier with Bows","better":1,"matchers":[{"string":"#% 弓暴擊加成"}],"trade":{"ids":{"explicit":["explicit.stat_1712221299"],"implicit":["implicit.stat_1712221299"],"fractured":["fractured.stat_1712221299"]}}}
+{"ref":"+#% to Critical Strike Multiplier with Claws","better":1,"matchers":[{"string":"#% 爪暴擊加成"}],"trade":{"ids":{"implicit":["implicit.stat_2811834828"]}}}
 {"ref":"+#% to Critical Strike Multiplier with Cold Skills","better":1,"matchers":[{"string":"#% 冰冷技能暴擊加成"}],"trade":{"ids":{"explicit":["explicit.stat_915908446"],"fractured":["fractured.stat_915908446"]}}}
-{"ref":"+#% to Critical Strike Multiplier with Daggers","better":1,"matchers":[{"string":"持匕首時 #% 暴擊加成"}],"trade":{"ids":{"implicit":["implicit.stat_3998601568"]}}}
+{"ref":"+#% to Critical Strike Multiplier with Daggers","better":1,"matchers":[{"string":"#% 匕首暴擊加成"}],"trade":{"ids":{"implicit":["implicit.stat_3998601568"]}}}
 {"ref":"+#% to Critical Strike Multiplier with Elemental Skills","better":1,"matchers":[{"string":"#% 元素技能暴擊加成"}],"trade":{"ids":{"explicit":["explicit.stat_1569407745"],"fractured":["fractured.stat_1569407745"]}}}
 {"ref":"+#% to Critical Strike Multiplier with Fire Skills","better":1,"matchers":[{"string":"#% 火焰技能暴擊加成"}],"trade":{"ids":{"explicit":["explicit.stat_2307547323"],"fractured":["fractured.stat_2307547323"]}}}
 {"ref":"+#% to Critical Strike Multiplier with Lightning Skills","better":1,"matchers":[{"string":"#% 閃電技能暴擊加成"}],"trade":{"ids":{"explicit":["explicit.stat_2441475928"],"fractured":["fractured.stat_2441475928"]}}}
-{"ref":"+#% to Critical Strike Multiplier with Maces or Sceptres","better":1,"matchers":[{"string":"錘和權杖 #% 暴擊加成"}],"trade":{"ids":{"implicit":["implicit.stat_458899422"]}}}
-{"ref":"+#% to Critical Strike Multiplier with One Handed Melee Weapons","better":1,"matchers":[{"string":"持單手近戰武器時 #% 暴擊加成"}],"trade":{"ids":{"explicit":["explicit.stat_670153687"],"fractured":["fractured.stat_670153687"]}}}
-{"ref":"+#% to Critical Strike Multiplier with Staves","better":1,"matchers":[{"string":"持長杖時 #% 暴擊加成"}],"trade":{"ids":{"implicit":["implicit.stat_1474913037"]}}}
-{"ref":"+#% to Critical Strike Multiplier with Swords","better":1,"matchers":[{"string":"持劍時 #% 暴擊加成"}],"trade":{"ids":{"implicit":["implicit.stat_3114492047"]}}}
+{"ref":"+#% to Critical Strike Multiplier with Maces or Sceptres","better":1,"matchers":[{"string":"#% 錘和權杖暴擊加成"}],"trade":{"ids":{"implicit":["implicit.stat_458899422"]}}}
+{"ref":"+#% to Critical Strike Multiplier with One Handed Melee Weapons","better":1,"matchers":[{"string":"#% 單手近戰武器暴擊加成"}],"trade":{"ids":{"explicit":["explicit.stat_670153687"],"fractured":["fractured.stat_670153687"]}}}
+{"ref":"+#% to Critical Strike Multiplier with Staves","better":1,"matchers":[{"string":"#% 長杖暴擊加成"}],"trade":{"ids":{"implicit":["implicit.stat_1474913037"]}}}
+{"ref":"+#% to Critical Strike Multiplier with Swords","better":1,"matchers":[{"string":"#% 劍暴擊加成"}],"trade":{"ids":{"implicit":["implicit.stat_3114492047"]}}}
 {"ref":"+#% to Critical Strike Multiplier with Two Handed Melee Weapons","better":1,"matchers":[{"string":"使用雙手近戰武器時 #% 暴擊加成"}],"trade":{"ids":{"explicit":["explicit.stat_252507949"],"fractured":["fractured.stat_252507949"]}}}
 {"ref":"+#% to Critical Strike Multiplier with Unarmed Melee Attacks","better":1,"matchers":[{"string":"空手近戰攻擊 #% 暴擊加成"}],"trade":{"ids":{"explicit":["explicit.stat_468580269"]}}}
-{"ref":"+#% to Critical Strike Multiplier with Wands","better":1,"matchers":[{"string":"持法杖時 #% 暴擊加成"}],"trade":{"ids":{"implicit":["implicit.stat_1241396104"]}}}
+{"ref":"+#% to Critical Strike Multiplier with Wands","better":1,"matchers":[{"string":"#% 法杖暴擊加成"}],"trade":{"ids":{"implicit":["implicit.stat_1241396104"]}}}
 {"ref":"+#% to Damage over Time Multiplier","better":1,"matchers":[{"string":"#% 持續傷害加成"}],"trade":{"ids":{"explicit":["explicit.stat_3988349707"],"implicit":["implicit.stat_3988349707"],"fractured":["fractured.stat_3988349707"],"enchant":["enchant.stat_3988349707"]}}}
 {"ref":"+#% to Damage over Time Multiplier for Ailments from Critical Strikes","better":1,"matchers":[{"string":"來自暴擊的異常狀態 #% 持續傷害加成"}],"trade":{"ids":{"enchant":["enchant.stat_1781630546"]}}}
 {"ref":"+#% to Damage over Time Multiplier for Ailments per Elder Item Equipped","better":1,"matchers":[{"string":"每件裝備的的尊師之物 #% 異常狀態持續傷害加成"}],"trade":{"ids":{"explicit":["explicit.stat_2212731469"],"implicit":["implicit.stat_2212731469"]}}}
@@ -4143,7 +4143,7 @@
 {"ref":"Catarina's Veiled","better":0,"matchers":[{"string":"卡塔莉娜的隱匿"}],"trade":{"ids":{"veiled":["veiled.mod_63772"]}}}
 {"ref":"Caustic Arrow","better":0,"mercenary":{"icon":"https://webtw.poecdn.com/gen/image/WzIxLDE0LHsiayI6IjJEQXJ0L1NraWxsSWNvbnMvcG9pc29uYXJyb3cifV0/96ee42955b/poisonarrow.png","supports":["Multiple Projectiles","Increased Area of Effect","More Duration","DoT Multiplier","Physical as Extra Chaos","Faster Attacks","Wither on Hit","Mirage Archer","Gilded Caustic Conversion","Pierce","Greater Fork"]},"matchers":[{"string":"腐化箭矢"}],"trade":{"ids":{"pseudo":["mercenary.skill_58174"]}}}
 {"ref":"Celestial Footprints","better":1,"matchers":[{"string":"絢麗眾星"}],"trade":{"ids":{"explicit":["explicit.stat_50381303"]}}}
-{"ref":"Chain","better":1,"modFamily":["Lesser Chain","Chain"],"mercenary":{"tier":2,"canonical":"Chain"},"matchers":[{"string":"連鎖","advanced":"連鎖(階層：2)"}],"trade":{"ids":{"pseudo":["mercenary.support_31052"]}}}
+{"ref":"Chain","better":1,"modFamily":["Lesser Chain","Chain"],"mercenary":{"tier":2,"maxTier":true,"canonical":"Chain"},"matchers":[{"string":"連鎖","advanced":"連鎖(階層：2)"}],"trade":{"ids":{"pseudo":["mercenary.support_31052"]}}}
 {"ref":"Chain Hook of Trarthus","better":0,"mercenary":{"icon":"https://webtw.poecdn.com/gen/image/WzIxLDE0LHsiayI6IjJEQXJ0L1NraWxsSWNvbnMvQ2hhaW5TdHJpa2UifV0/4804a47fa0/ChainStrike.png","supports":["Increased Area of Effect","Rage on Hit","Faster Attacks","Brutality","Pulverise","Concentrated Effect"]},"matchers":[{"string":"特拉特斯奪魂勾索"}],"trade":{"ids":{"pseudo":["mercenary.skill_7182"]}}}
 {"ref":"Chance to Bleed","better":1,"modFamily":["Lesser Chance to Bleed","Chance to Bleed","Greater Chance to Bleed"],"mercenary":{"tier":2,"canonical":"Chance to Bleed"},"matchers":[{"string":"流血機率","advanced":"流血機率(階層：2)"}],"trade":{"ids":{"pseudo":["mercenary.support_38948"]}}}
 {"ref":"Chance to Block Attack Damage is Unlucky","better":1,"matchers":[{"string":"攻擊傷害格擋率很不幸","value":-1},{"string":"攻擊傷害格擋率很幸運","value":1}],"trade":{"ids":{"explicit":["explicit.stat_3776150692"]}}}
@@ -5199,7 +5199,7 @@
 {"ref":"Has Room: Splinter Research Lab (Tier 1)","better":1,"matchers":[{"string":"有房間：裂界研究室（階級 1） "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_temple_breach_room_1"]}}}
 {"ref":"Has Room: Storage Room (Tier 1)","better":0,"matchers":[{"string":"儲物室 (階級 1)"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_temple_chests_1"]},"option":true}}
 {"ref":"Has Room: Storm of Corruption (Tier 3)","better":0,"matchers":[{"string":"腐敗風暴 (階級 3)"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_temple_storm_room_3"]},"option":true}}
-{"ref":"Has Room: Strongbox Chamber (Tier 1)","better":0,"matchers":[{"string":"寶箱之殿 (階級 1)"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_temple_strongbox_1"]},"option":true}}
+{"ref":"Has Room: Strongbox Chamber (Tier 1)","better":0,"matchers":[{"string":"保險箱之殿 (階級 1)"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_temple_strongbox_1"]},"option":true}}
 {"ref":"Has Room: Surveyor's Study (Tier 1)","better":0,"matchers":[{"string":"研究書房 (階級 1)"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_temple_cartography_room_1"]},"option":true}}
 {"ref":"Has Room: Tempest Generator (Tier 1)","better":0,"matchers":[{"string":"暴雷發電室 (階級 1)"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_temple_storm_room_1"]},"option":true}}
 {"ref":"Has Room: Temple Defense Workshop (Tier 2)","better":0,"matchers":[{"string":"神殿禦防室 (階級 2)"}],"trade":{"ids":{"pseudo":["pseudo.pseudo_temple_trap_room_2"]},"option":true}}
@@ -5469,7 +5469,7 @@
 {"ref":"Kinetic Blast of Clustering","better":0,"mercenary":{"icon":"https://webtw.poecdn.com/gen/image/WzIxLDE0LHsiayI6IjJEQXJ0L1NraWxsSWNvbnMvY2x1c3RlcmJ1cnN0In1d/6bf59249ac/clusterburst.png","supports":["Faster Attacks","Multiple Projectiles","Greater Sacred Wisps","Elemental Damage with Attacks","Pierce","Chain","Added Cold","Added Lightning","Critical Chance","Critical Damage","Greater Fork","Return"]},"matchers":[{"string":"力量爆破．聚集"}],"trade":{"ids":{"pseudo":["mercenary.skill_16356"]}}}
 {"ref":"Kinetic Bolt","better":0,"mercenary":{"icon":"https://webtw.poecdn.com/gen/image/WzIxLDE0LHsiayI6IjJEQXJ0L1NraWxsSWNvbnMvWmlnWmFnV2FuZCJ9XQ/c3a2e82f8b/ZigZagWand.png","supports":["Faster Attacks","Multiple Projectiles","Greater Sacred Wisps","Elemental Damage with Attacks","Pierce","Chain","Added Cold","Added Lightning","Critical Chance","Critical Damage"]},"matchers":[{"string":"力量穿引"}],"trade":{"ids":{"pseudo":["mercenary.skill_12583"]}}}
 {"ref":"Kinetic Rain of Impact","better":0,"mercenary":{"icon":"https://webtw.poecdn.com/gen/image/WzIxLDE0LHsiayI6IjJEQXJ0L1NraWxsSWNvbnMvS2luZXRpY1JhaW4ifV0/d44538c8cd/KineticRain.png","supports":["Faster Attacks","Multiple Projectiles","Greater Sacred Wisps","Elemental Damage with Attacks","Added Cold","Added Lightning","Critical Chance","Critical Damage","Increased Area of Effect"]},"matchers":[{"string":"力量驟雨．衝擊"}],"trade":{"ids":{"pseudo":["mercenary.skill_32089"]}}}
-{"ref":"Knockback","better":1,"mercenary":{"tier":1},"matchers":[{"string":"擊退","advanced":"擊退(階層：1)"}],"trade":{"ids":{"pseudo":["mercenary.support_65002"]}}}
+{"ref":"Knockback","better":1,"mercenary":{"tier":1,"maxTier":true},"matchers":[{"string":"擊退","advanced":"擊退(階層：1)"}],"trade":{"ids":{"pseudo":["mercenary.support_65002"]}}}
 {"ref":"Knockback direction is reversed","better":1,"matchers":[{"string":"擊退方向顛倒"}],"trade":{"ids":{"explicit":["explicit.stat_281201999"],"implicit":["implicit.stat_281201999"]}}}
 {"ref":"Knocks Back Enemies in an Area when you use a Flask","better":1,"matchers":[{"string":"使用藥劑時將區域內敵人擊退"}],"trade":{"ids":{"explicit":["explicit.stat_3591397930"]}}}
 {"ref":"Korell's Veiled","better":0,"matchers":[{"string":"庫歐的隱匿"}],"trade":{"ids":{"veiled":["veiled.mod_44855"]}}}
@@ -5870,7 +5870,7 @@
 {"ref":"Monsters cannot be Stunned","better":1,"fromAreaMods":"yes","matchers":[{"string":"怪物不會被暈眩"}],"trade":{"ids":{"explicit":["explicit.stat_1041951480"],"fractured":["fractured.stat_1041951480"]}}}
 {"ref":"Monsters cannot be Taunted","better":1,"fromAreaMods":"yes","matchers":[{"string":"怪物不能被嘲諷"}],"trade":{"ids":{"explicit":["explicit.stat_1106651798"],"fractured":["fractured.stat_1106651798"]}}}
 {"ref":"Monsters cannot Block your Attacks","better":1,"matchers":[{"string":"怪物不能格擋你的攻擊"}],"trade":{"ids":{"explicit":["explicit.stat_4136294199"]}}}
-{"ref":"Monsters cannot steal or remove your Power, Frenzy or Endurance charges on Hit","better":1,"matchers":[{"string":"Monsters cannot steal or remove your Power, Frenzy or Endurance charges on Hit"}],"trade":{"ids":{"explicit":["explicit.stat_1455353008"]}}}
+{"ref":"Monsters cannot steal or remove your Power, Frenzy or Endurance charges on Hit","better":1,"matchers":[{"string":"怪物擊中時無法偷取或移除你的暴擊、狂怒、或耐力球"}],"trade":{"ids":{"explicit":["explicit.stat_1455353008"]}}}
 {"ref":"Monsters cannot Suppress your Spells","better":1,"matchers":[{"string":"怪物無法壓抑你的法術"}],"trade":{"ids":{"explicit":["explicit.stat_870219767"]}}}
 {"ref":"Monsters deal #% extra Physical Damage as Cold","better":1,"fromAreaMods":"yes","matchers":[{"string":"怪物造成 #% 額外物理傷害視為冰冷"}],"trade":{"ids":{"explicit":["explicit.stat_3448216135"],"fractured":["fractured.stat_3448216135"]}}}
 {"ref":"Monsters deal #% extra Physical Damage as Fire","better":1,"fromAreaMods":"yes","matchers":[{"string":"怪物造成 #% 額外物理傷害視為火焰"}],"trade":{"ids":{"explicit":["explicit.stat_1497673356"],"fractured":["fractured.stat_1497673356"]}}}
