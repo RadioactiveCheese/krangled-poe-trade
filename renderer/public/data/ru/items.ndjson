@@ -4687,164 +4687,164 @@
 {"name":"Трупная роза","refName":"Corpse Rose","namespace":"UNIQUE","unique":{"base":"Imbued Wand"},"icon":""}
 {"name":"Алчная тьма","refName":"The Covetous Dark","namespace":"UNIQUE","unique":{"base":"Eye Gouger"},"icon":""}
 {"name":"Эпохальный меч","refName":"The Sword of Ages","namespace":"UNIQUE","unique":{"base":"Exquisite Blade"},"icon":""}
-{"name":"Пламенное козье копыто","refName":"Flaming Goat Hoof","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Ступня примата","refName":"Primate Foot","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Аль-Хезмина","refName":"Al-Hezmin's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова ведьмы","refName":"Bandit Witch's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Электрическое щупальце","refName":"Galvanic Tentacle","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Медвежья голова","refName":"Bear Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Кабанья голова","refName":"Boar Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Оленья голова","refName":"Stag Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова царицы пауков","refName":"Spider Queen's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Череп жреца","refName":"Templar Skull","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Окровавленная рука","refName":"Bloodied Arm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Искусственная нога","refName":"Prosthetic Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Чемпионское знамя","refName":"Champion's Banner","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Бэрана","refName":"Baran's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Сердце гладиатора","refName":"Gladiator's Heart","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Глаз ящера","refName":"Chimeral Eye","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Жвалы арахнида","refName":"Arachnid Fangs","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Костяная коса","refName":"Osseous Scythe","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Хитиновая нога","refName":"Chitinous Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Маска некроманта","refName":"Necromancer's Mask","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Рёбра костяка","refName":"Bonestalker's Ribcage","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Каменный таз","refName":"Lithic Haunches","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Пустой череп","refName":"Hollowed Skull","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Шлем бойца ям","refName":"Pit Fighter's Helm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Щупальце морской ведьмы","refName":"Sea Witch's Tentacle","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Рука тюремщика","refName":"Warden's Arm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Окостеневшая нога","refName":"Calcified Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова головореза","refName":"Cutthroat's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Торс аристократа","refName":"Aristocrat's Torso","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова солдата","refName":"Soldier's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Еретический том","refName":"Heretical Tome","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Рука скелета-воина","refName":"Skeletal Warrior's Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Студёные когти","refName":"Gelid Fangs","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Химеры","refName":"Chimera's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Сгущённая сущность","refName":"Coagulated Essence","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Угнетателя","refName":"Constrictor's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Корона Владычицы ковена","refName":"Coven Queen's Crown","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Клинок мастера мечей","refName":"Swordmaster's Blade","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова яги","refName":"Hag's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова инквизитора","refName":"Inquisitor's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова ведьмы","refName":"Witch's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Лук разведчицы","refName":"Scout's Bow","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Желудок яги","refName":"Hag's Stomach","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Кулак деспота","refName":"Despot's Fist","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Освежёванная рука","refName":"Flayed Arm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Дрокса","refName":"Drox's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Клешня ракообразного","refName":"Crustacean's Claw","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Пожирателя миров","refName":"Eater of Worlds' Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Вилы пугала","refName":"Scarecrow's Pitchfork","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Древнего","refName":"Elder's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Поработителя","refName":"Enslaver's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Искоренителя","refName":"Eradicator's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Треуголка моряка","refName":"Mariner's Tricorne","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Отсечённое жало","refName":"Severed Stinger","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Обугленная рука","refName":"Scorched Arm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Колесо скелета","refName":"Skeleton Wheel","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Корона царицы пустыни","refName":"Desert Queen's Crown","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Торс каменита","refName":"Gemling Torso","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Гальванический череп","refName":"Voltaic Skull","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова генерала","refName":"General's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Камень голема","refName":"Golemic Stone","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Нога учёного","refName":"Scholar's Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Электрический аппарат","refName":"Voltaic Apparatus","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Громадные когти","refName":"Gargantuan Claws","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Разукрашенный торс","refName":"Ornate Torso","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Почерневшие лёгкие","refName":"Blackened Lungs","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Нога капитана","refName":"Captain's Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Рябая рука","refName":"Pocked Arm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Лунный лук","refName":"Lunar Bow","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Ослепительный скипетр","refName":"Resplendent Sceptre","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Расплавленное ядро","refName":"Molten Core","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Нога в доспехах","refName":"Armoured Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Кишащий торс","refName":"Infested Torso","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Кишки стервятника","refName":"Vulture's Gut","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Гидры","refName":"Hydra's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Воплощения ужаса","refName":"Incarnation of Dread's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Воплощения страха","refName":"Incarnation of Fear's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Воплощения забвения","refName":"Incarnation of Neglect's Cube","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Рука скелета-лучника","refName":"Skeletal Archer's Arm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Шлем юстициара","refName":"Justicar's Helm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Горящий череп","refName":"Blazing Skull","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Ненасытный череп","refName":"Ravenous Skull","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Рука громилы","refName":"Brute's Arm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова бандита","refName":"Bandit Rogue's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Тотемный образ","refName":"Totemic Visage","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Сломанный бюст","refName":"Broken Bust","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Клинок-полумесяц","refName":"Crescent Blade","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Осквернённый панцирь","refName":"Corrupted Carapace","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Коготь инквизитора","refName":"Inquisitor's Claw","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Обезображенный бюст","refName":"Defaced Bust","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Пылающая жаровня","refName":"Flaming Furnace","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Планетарий Мейвен","refName":"Maven's Orrery","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Щупальце сирены","refName":"Siren's Tentacle","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Пустынный меч","refName":"Desert Sword","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Минотавра","refName":"Minotaur's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Сердце голема хаоса","refName":"Chaos Golem's Core","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Нога чёрного стражника","refName":"Blackguard's Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Кошмарные крылья Катарины","refName":"Nightmarish Wings of Catarina","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Кошмарная книга порока","refName":"Nightmarish Book of Depravity","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Кошмарные крылья Люции","refName":"Nightmarish Wings of Lycia","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Кошмарная голова Утреда","refName":"Nightmarish Head of Uhtred","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Кошмарное ядро Нерушимого","refName":"Nightmarish Core of the Unbreakable","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова воеводы","refName":"Bandit Warrior's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Призрачный коготь","refName":"Ghostly Claw","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Отсечённая голова роа","refName":"Severed Rhoa Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Кнут надзирателя","refName":"Overseer's Whip","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Костяные когти","refName":"Spined Claws","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Феникса","refName":"Phoenix's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова волшебницы","refName":"Thaumaturge's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Налитый глаз","refName":"Engorged Eye","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Рябая нога","refName":"Pocked Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Заражённая нога","refName":"Infected Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Больное крыло","refName":"Diseased Wing","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Корона приверженца","refName":"Adherent's Crown","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Искупителя","refName":"Purifier's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Плоть медведя","refName":"Ursine Flesh","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Сдвоенная голова гончей","refName":"Conjoined Hound Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Обугленная нога","refName":"Charred Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова аристократа","refName":"Noble's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Яйцевой мешок арахнида","refName":"Arachnid Egg Sac","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Познание Пламенного экзарха","refName":"Searing Exarch's Descry","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Хвост кобры","refName":"Cobra Tail","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Скорпионье жало","refName":"Scorpion Stinger","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Создателя","refName":"Shaper's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Освежёванный лик","refName":"Flayed Visage","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Когти льва","refName":"Lion's Claws","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Крылья летучей мыши","refName":"Bat's Wings","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Сируса","refName":"Sirus' Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Костяной хвост","refName":"Skeletal Tail","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Окаменевший коготь","refName":"Osseous Talon","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Солнечный щит","refName":"Solar Shield","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Сущность стихии","refName":"Elemental Essence","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Выжженный нагрудник","refName":"Sun-bleached Breastplate","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Нога браконьера","refName":"Poacher's Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Слившийся с плотью фонарь","refName":"Flesh-fused Lantern","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Призрачный капюшон","refName":"Spectral Hood","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Нога статуи","refName":"Statue Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Пылающая лента","refName":"Flaming Ribbon","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Нога носителя пустоты","refName":"Voidbearer's Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Когти вендиго","refName":"Vendigo Claws","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Золотой анкх","refName":"Golden Ankh","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Резной таз","refName":"Carved Haunches","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Иссушенная голова","refName":"Dessicated Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Рука учёного","refName":"Scholar's Arm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Клешня королевского краба","refName":"King Crab's Claw","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Дубина предка","refName":"Ancestor's Club","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Усик пожирателя","refName":"Devourer's Antenna","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Нога скелета-монстра","refName":"Skeletal Beast Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Раздутый живот","refName":"Distended Stomach","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Рог козерога","refName":"Goatman's Horn","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Конечность ваал","refName":"Vaal Appendage","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Искусственная конечность","refName":"Artificial Appendage","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова конструкта","refName":"Construct's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Рукопись Венария","refName":"Venarius' Scripture","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Голова Веритании","refName":"Veritania's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Тлеющая нога","refName":"Smouldering Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Жреческое знамя","refName":"Templar Banner","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Призрачные когти","refName":"Wraith Claws","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Кисть контрабандиста","refName":"Smuggler's Hand","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Нога арахнида","refName":"Arachnid Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Ужасающая пасть","refName":"Terrifying Maw","namespace":"ITEM","icon":"","w":2,"h":2}
+{"name":"Пламенное козье копыто","refName":"Flaming Goat Hoof","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Ступня примата","refName":"Primate Foot","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Аль-Хезмина","refName":"Al-Hezmin's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова ведьмы","refName":"Bandit Witch's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Электрическое щупальце","refName":"Galvanic Tentacle","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Медвежья голова","refName":"Bear Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Кабанья голова","refName":"Boar Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Оленья голова","refName":"Stag Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова царицы пауков","refName":"Spider Queen's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Череп жреца","refName":"Templar Skull","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Окровавленная рука","refName":"Bloodied Arm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Искусственная нога","refName":"Prosthetic Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Чемпионское знамя","refName":"Champion's Banner","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Бэрана","refName":"Baran's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Сердце гладиатора","refName":"Gladiator's Heart","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Глаз ящера","refName":"Chimeral Eye","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Жвалы арахнида","refName":"Arachnid Fangs","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Костяная коса","refName":"Osseous Scythe","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Хитиновая нога","refName":"Chitinous Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Маска некроманта","refName":"Necromancer's Mask","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Рёбра костяка","refName":"Bonestalker's Ribcage","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Каменный таз","refName":"Lithic Haunches","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Пустой череп","refName":"Hollowed Skull","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Шлем бойца ям","refName":"Pit Fighter's Helm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Щупальце морской ведьмы","refName":"Sea Witch's Tentacle","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Рука тюремщика","refName":"Warden's Arm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Окостеневшая нога","refName":"Calcified Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова головореза","refName":"Cutthroat's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Торс аристократа","refName":"Aristocrat's Torso","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова солдата","refName":"Soldier's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Еретический том","refName":"Heretical Tome","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Рука скелета-воина","refName":"Skeletal Warrior's Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Студёные когти","refName":"Gelid Fangs","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Химеры","refName":"Chimera's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Сгущённая сущность","refName":"Coagulated Essence","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Угнетателя","refName":"Constrictor's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Корона Владычицы ковена","refName":"Coven Queen's Crown","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Клинок мастера мечей","refName":"Swordmaster's Blade","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова яги","refName":"Hag's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова инквизитора","refName":"Inquisitor's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова ведьмы","refName":"Witch's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Лук разведчицы","refName":"Scout's Bow","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Желудок яги","refName":"Hag's Stomach","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Кулак деспота","refName":"Despot's Fist","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Освежёванная рука","refName":"Flayed Arm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Дрокса","refName":"Drox's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Клешня ракообразного","refName":"Crustacean's Claw","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Пожирателя миров","refName":"Eater of Worlds' Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Вилы пугала","refName":"Scarecrow's Pitchfork","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Древнего","refName":"Elder's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Поработителя","refName":"Enslaver's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Искоренителя","refName":"Eradicator's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Треуголка моряка","refName":"Mariner's Tricorne","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Отсечённое жало","refName":"Severed Stinger","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Обугленная рука","refName":"Scorched Arm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Колесо скелета","refName":"Skeleton Wheel","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Корона царицы пустыни","refName":"Desert Queen's Crown","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Торс каменита","refName":"Gemling Torso","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Гальванический череп","refName":"Voltaic Skull","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова генерала","refName":"General's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Камень голема","refName":"Golemic Stone","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Нога учёного","refName":"Scholar's Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Электрический аппарат","refName":"Voltaic Apparatus","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Громадные когти","refName":"Gargantuan Claws","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Разукрашенный торс","refName":"Ornate Torso","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Почерневшие лёгкие","refName":"Blackened Lungs","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Нога капитана","refName":"Captain's Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Рябая рука","refName":"Pocked Arm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Лунный лук","refName":"Lunar Bow","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Ослепительный скипетр","refName":"Resplendent Sceptre","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Расплавленное ядро","refName":"Molten Core","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Нога в доспехах","refName":"Armoured Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Кишащий торс","refName":"Infested Torso","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Кишки стервятника","refName":"Vulture's Gut","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Гидры","refName":"Hydra's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Воплощения ужаса","refName":"Incarnation of Dread's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Воплощения страха","refName":"Incarnation of Fear's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Воплощения забвения","refName":"Incarnation of Neglect's Cube","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Рука скелета-лучника","refName":"Skeletal Archer's Arm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Шлем юстициара","refName":"Justicar's Helm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Горящий череп","refName":"Blazing Skull","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Ненасытный череп","refName":"Ravenous Skull","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Рука громилы","refName":"Brute's Arm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова бандита","refName":"Bandit Rogue's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Тотемный образ","refName":"Totemic Visage","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Сломанный бюст","refName":"Broken Bust","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Клинок-полумесяц","refName":"Crescent Blade","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Осквернённый панцирь","refName":"Corrupted Carapace","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Коготь инквизитора","refName":"Inquisitor's Claw","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Обезображенный бюст","refName":"Defaced Bust","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Пылающая жаровня","refName":"Flaming Furnace","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Планетарий Мейвен","refName":"Maven's Orrery","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Щупальце сирены","refName":"Siren's Tentacle","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Пустынный меч","refName":"Desert Sword","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Минотавра","refName":"Minotaur's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Сердце голема хаоса","refName":"Chaos Golem's Core","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Нога чёрного стражника","refName":"Blackguard's Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Кошмарные крылья Катарины","refName":"Nightmarish Wings of Catarina","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Кошмарная книга порока","refName":"Nightmarish Book of Depravity","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Кошмарные крылья Люции","refName":"Nightmarish Wings of Lycia","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Кошмарная голова Утреда","refName":"Nightmarish Head of Uhtred","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Кошмарное ядро Нерушимого","refName":"Nightmarish Core of the Unbreakable","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова воеводы","refName":"Bandit Warrior's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Призрачный коготь","refName":"Ghostly Claw","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Отсечённая голова роа","refName":"Severed Rhoa Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Кнут надзирателя","refName":"Overseer's Whip","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Костяные когти","refName":"Spined Claws","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Феникса","refName":"Phoenix's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова волшебницы","refName":"Thaumaturge's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Налитый глаз","refName":"Engorged Eye","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Рябая нога","refName":"Pocked Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Заражённая нога","refName":"Infected Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Больное крыло","refName":"Diseased Wing","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Корона приверженца","refName":"Adherent's Crown","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Искупителя","refName":"Purifier's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Плоть медведя","refName":"Ursine Flesh","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Сдвоенная голова гончей","refName":"Conjoined Hound Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Обугленная нога","refName":"Charred Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова аристократа","refName":"Noble's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Яйцевой мешок арахнида","refName":"Arachnid Egg Sac","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Познание Пламенного экзарха","refName":"Searing Exarch's Descry","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Хвост кобры","refName":"Cobra Tail","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Скорпионье жало","refName":"Scorpion Stinger","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Создателя","refName":"Shaper's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Освежёванный лик","refName":"Flayed Visage","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Когти льва","refName":"Lion's Claws","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Крылья летучей мыши","refName":"Bat's Wings","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Сируса","refName":"Sirus' Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Костяной хвост","refName":"Skeletal Tail","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Окаменевший коготь","refName":"Osseous Talon","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Солнечный щит","refName":"Solar Shield","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Сущность стихии","refName":"Elemental Essence","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Выжженный нагрудник","refName":"Sun-bleached Breastplate","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Нога браконьера","refName":"Poacher's Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Слившийся с плотью фонарь","refName":"Flesh-fused Lantern","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Призрачный капюшон","refName":"Spectral Hood","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Нога статуи","refName":"Statue Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Пылающая лента","refName":"Flaming Ribbon","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Нога носителя пустоты","refName":"Voidbearer's Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Когти вендиго","refName":"Vendigo Claws","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Золотой анкх","refName":"Golden Ankh","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Резной таз","refName":"Carved Haunches","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Иссушенная голова","refName":"Dessicated Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Рука учёного","refName":"Scholar's Arm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Клешня королевского краба","refName":"King Crab's Claw","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Дубина предка","refName":"Ancestor's Club","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Усик пожирателя","refName":"Devourer's Antenna","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Нога скелета-монстра","refName":"Skeletal Beast Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Раздутый живот","refName":"Distended Stomach","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Рог козерога","refName":"Goatman's Horn","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Конечность ваал","refName":"Vaal Appendage","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Искусственная конечность","refName":"Artificial Appendage","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова конструкта","refName":"Construct's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Рукопись Венария","refName":"Venarius' Scripture","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Голова Веритании","refName":"Veritania's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Тлеющая нога","refName":"Smouldering Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Жреческое знамя","refName":"Templar Banner","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Призрачные когти","refName":"Wraith Claws","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Кисть контрабандиста","refName":"Smuggler's Hand","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Нога арахнида","refName":"Arachnid Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Ужасающая пасть","refName":"Terrifying Maw","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}

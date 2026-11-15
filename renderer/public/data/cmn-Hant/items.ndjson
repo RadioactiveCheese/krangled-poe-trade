@@ -4692,164 +4692,164 @@
 {"name":"屍綻血玫","refName":"Corpse Rose","namespace":"UNIQUE","unique":{"base":"Imbued Wand"},"icon":""}
 {"name":"貪婪之暗","refName":"The Covetous Dark","namespace":"UNIQUE","unique":{"base":"Eye Gouger"},"icon":""}
 {"name":"萬世之劍","refName":"The Sword of Ages","namespace":"UNIQUE","unique":{"base":"Exquisite Blade"},"icon":""}
-{"name":"烈焰羊蹄","refName":"Flaming Goat Hoof","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"靈長類足部","refName":"Primate Foot","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"奧赫茲明．頭顱","refName":"Al-Hezmin's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"匪徒女巫之首","refName":"Bandit Witch's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"電極觸手","refName":"Galvanic Tentacle","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"熊首","refName":"Bear Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"豬首","refName":"Boar Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"鹿首","refName":"Stag Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"蛛后之首","refName":"Spider Queen's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"聖宗之首","refName":"Templar Skull","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"沾血手臂","refName":"Bloodied Arm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"義肢腿骨","refName":"Prosthetic Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"勇士戰旗","refName":"Champion's Banner","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"巴倫．頭顱","refName":"Baran's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"角鬥士之心","refName":"Gladiator's Heart","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"奇美拉之眼","refName":"Chimeral Eye","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"巨蛛毒牙","refName":"Arachnid Fangs","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"骨質鐮刀","refName":"Osseous Scythe","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"幾丁之腿","refName":"Chitinous Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"死靈面具","refName":"Necromancer's Mask","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"獵骨者肋胸","refName":"Bonestalker's Ribcage","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"石化大腿","refName":"Lithic Haunches","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"鏤空頭骨","refName":"Hollowed Skull","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"角鬥士之盔","refName":"Pit Fighter's Helm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"海巫的觸手","refName":"Sea Witch's Tentacle","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"典獄長手臂","refName":"Warden's Arm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"鈣化之腿","refName":"Calcified Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"割喉者頭顱","refName":"Cutthroat's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"貴族軀幹","refName":"Aristocrat's Torso","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"士兵之首","refName":"Soldier's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"異端禁典","refName":"Heretical Tome","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"骷髏戰士腿骨","refName":"Skeletal Warrior's Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"極寒銳牙","refName":"Gelid Fangs","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"奇美拉．頭顱","refName":"Chimera's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"凝結精華","refName":"Coagulated Essence","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"干擾．頭顱","refName":"Constrictor's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"巫會之后冠","refName":"Coven Queen's Crown","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"劍聖之刃","refName":"Swordmaster's Blade","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"鬼婆頭顱","refName":"Hag's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"審判官頭顱","refName":"Inquisitor's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"女巫頭顱","refName":"Witch's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"斥侯之弓","refName":"Scout's Bow","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"鬼婆之胃","refName":"Hag's Stomach","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"霸主之拳","refName":"Despot's Fist","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"剝皮手臂","refName":"Flayed Arm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"圖拉克斯．頭顱","refName":"Drox's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"甲殼鉗","refName":"Crustacean's Claw","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"吞噬天地．頭顱","refName":"Eater of Worlds' Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"稻草人草叉","refName":"Scarecrow's Pitchfork","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"異界尊師．頭顱","refName":"Elder's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"奴役．頭顱","refName":"Enslaver's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"根除．頭顱","refName":"Eradicator's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"水手的三角帽","refName":"Mariner's Tricorne","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"斬獲毒刺","refName":"Severed Stinger","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"焦黑手臂","refName":"Scorched Arm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"骸骨車輪","refName":"Skeleton Wheel","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"沙漠女王之冠","refName":"Desert Queen's Crown","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"古靈軀幹","refName":"Gemling Torso","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"電能頭骨","refName":"Voltaic Skull","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"將軍首級","refName":"General's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"魔像石","refName":"Golemic Stone","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"學者之腿","refName":"Scholar's Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"電能儀器","refName":"Voltaic Apparatus","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"巨像利爪","refName":"Gargantuan Claws","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"華麗軀幹","refName":"Ornate Torso","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"焦黑肺臟","refName":"Blackened Lungs","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"船長之腿","refName":"Captain's Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"坑漥之臂","refName":"Pocked Arm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"月光長弓","refName":"Lunar Bow","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"璀璨權杖","refName":"Resplendent Sceptre","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"熔岩之核","refName":"Molten Core","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"重甲腿骨","refName":"Armoured Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"感染軀幹","refName":"Infested Torso","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"禽臟","refName":"Vulture's Gut","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"九頭蛇．頭顱","refName":"Hydra's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"恐慌化身．頭顱","refName":"Incarnation of Dread's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"恐懼化身．頭顱","refName":"Incarnation of Fear's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"漠視化身．方塊","refName":"Incarnation of Neglect's Cube","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"骷髏弓手手臂","refName":"Skeletal Archer's Arm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"判官之盔","refName":"Justicar's Helm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"燃火頭骨","refName":"Blazing Skull","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"貪婪頭骨","refName":"Ravenous Skull","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"蠻兵手臂","refName":"Brute's Arm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"匪徒盜賊之首","refName":"Bandit Rogue's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"圖騰面具","refName":"Totemic Visage","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"破碎胸像","refName":"Broken Bust","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"新月刀刃","refName":"Crescent Blade","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"腐化甲殼","refName":"Corrupted Carapace","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"審判官之爪","refName":"Inquisitor's Claw","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"破損半身像","refName":"Defaced Bust","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"灼燃鍛爐","refName":"Flaming Furnace","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"釋界．天體儀","refName":"Maven's Orrery","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"塞壬的觸手","refName":"Siren's Tentacle","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"沙漠之劍","refName":"Desert Sword","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"牛頭人．頭顱","refName":"Minotaur's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"混沌魔像核心","refName":"Chaos Golem's Core","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"烏旗守衛腿骨","refName":"Blackguard's Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"夢魘．卡塔莉娜之翼","refName":"Nightmarish Wings of Catarina","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"夢魘．墮落之書","refName":"Nightmarish Book of Depravity","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"夢魘．利西亞之翼","refName":"Nightmarish Wings of Lycia","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"夢魘．烏特雷之首","refName":"Nightmarish Head of Uhtred","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"夢魘．不滅之核","refName":"Nightmarish Core of the Unbreakable","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"匪徒戰士之首","refName":"Bandit Warrior's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"幽靈鬼爪","refName":"Ghostly Claw","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"恐喙鳥之首","refName":"Severed Rhoa Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"監工之鞭","refName":"Overseer's Whip","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"脊骨巨爪","refName":"Spined Claws","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"鳳凰．頭顱","refName":"Phoenix's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"奇術師之首","refName":"Thaumaturge's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"腫脹之眼","refName":"Engorged Eye","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"坑漥之腿","refName":"Pocked Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"感染的腿","refName":"Infected Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"染病之翼","refName":"Diseased Wing","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"追隨者之冠","refName":"Adherent's Crown","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"淨化．頭顱","refName":"Purifier's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"熊怪血肉","refName":"Ursine Flesh","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"連體獵犬之首","refName":"Conjoined Hound Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"焦黑腿骨","refName":"Charred Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"貴族之首","refName":"Noble's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"截肢卵囊","refName":"Arachnid Egg Sac","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"灼烙總督．眼界","refName":"Searing Exarch's Descry","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"毒蛇之尾","refName":"Cobra Tail","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"蠍尾釘刺","refName":"Scorpion Stinger","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"塑界者．頭顱","refName":"Shaper's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"剝皮面容","refName":"Flayed Visage","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"雄獅．利爪","refName":"Lion's Claws","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"蝙蝠．翅膀","refName":"Bat's Wings","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"賽勒斯．頭顱","refName":"Sirus' Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"骸骨之尾","refName":"Skeletal Tail","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"骨質利爪","refName":"Osseous Talon","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"日光之盾","refName":"Solar Shield","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"元素精華","refName":"Elemental Essence","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"日浸胸甲","refName":"Sun-bleached Breastplate","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"盜獵者斷腿","refName":"Poacher's Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"燃軀燈籠","refName":"Flesh-fused Lantern","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"幽魂兜帽","refName":"Spectral Hood","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"雕像之腿","refName":"Statue Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"灼燃緞帶","refName":"Flaming Ribbon","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"虛影炎獸之腿","refName":"Voidbearer's Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"溫迪戈之爪","refName":"Vendigo Claws","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"黃金聖環","refName":"Golden Ankh","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"雕刻後腰","refName":"Carved Haunches","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"乾癟頭顱","refName":"Dessicated Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"學者之臂","refName":"Scholar's Arm","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"帝王蟹之爪","refName":"King Crab's Claw","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"先祖棍棒","refName":"Ancestor's Club","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"吞噬者觸角","refName":"Devourer's Antenna","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"骨獸之腿","refName":"Skeletal Beast Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"腫脹腹部","refName":"Distended Stomach","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"羊人之角","refName":"Goatman's Horn","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"瓦爾附肢","refName":"Vaal Appendage","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"人造附肢","refName":"Artificial Appendage","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"構裝體之首","refName":"Construct's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"維那利斯．經典","refName":"Venarius' Scripture","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"維羅提尼亞．頭顱","refName":"Veritania's Head","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"餘燼腿骨","refName":"Smouldering Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"聖宗旗幟","refName":"Templar Banner","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"狂怒之爪","refName":"Wraith Claws","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"走私者之手","refName":"Smuggler's Hand","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"蜘蛛步足","refName":"Arachnid Leg","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"駭人巨口","refName":"Terrifying Maw","namespace":"ITEM","icon":"","w":2,"h":2}
+{"name":"烈焰羊蹄","refName":"Flaming Goat Hoof","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"靈長類足部","refName":"Primate Foot","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"奧赫茲明．頭顱","refName":"Al-Hezmin's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"匪徒女巫之首","refName":"Bandit Witch's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"電極觸手","refName":"Galvanic Tentacle","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"熊首","refName":"Bear Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"豬首","refName":"Boar Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"鹿首","refName":"Stag Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"蛛后之首","refName":"Spider Queen's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"聖宗之首","refName":"Templar Skull","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"沾血手臂","refName":"Bloodied Arm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"義肢腿骨","refName":"Prosthetic Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"勇士戰旗","refName":"Champion's Banner","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"巴倫．頭顱","refName":"Baran's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"角鬥士之心","refName":"Gladiator's Heart","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"奇美拉之眼","refName":"Chimeral Eye","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"巨蛛毒牙","refName":"Arachnid Fangs","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"骨質鐮刀","refName":"Osseous Scythe","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"幾丁之腿","refName":"Chitinous Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"死靈面具","refName":"Necromancer's Mask","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"獵骨者肋胸","refName":"Bonestalker's Ribcage","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"石化大腿","refName":"Lithic Haunches","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"鏤空頭骨","refName":"Hollowed Skull","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"角鬥士之盔","refName":"Pit Fighter's Helm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"海巫的觸手","refName":"Sea Witch's Tentacle","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"典獄長手臂","refName":"Warden's Arm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"鈣化之腿","refName":"Calcified Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"割喉者頭顱","refName":"Cutthroat's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"貴族軀幹","refName":"Aristocrat's Torso","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"士兵之首","refName":"Soldier's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"異端禁典","refName":"Heretical Tome","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"骷髏戰士腿骨","refName":"Skeletal Warrior's Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"極寒銳牙","refName":"Gelid Fangs","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"奇美拉．頭顱","refName":"Chimera's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"凝結精華","refName":"Coagulated Essence","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"干擾．頭顱","refName":"Constrictor's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"巫會之后冠","refName":"Coven Queen's Crown","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"劍聖之刃","refName":"Swordmaster's Blade","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"鬼婆頭顱","refName":"Hag's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"審判官頭顱","refName":"Inquisitor's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"女巫頭顱","refName":"Witch's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"斥侯之弓","refName":"Scout's Bow","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"鬼婆之胃","refName":"Hag's Stomach","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"霸主之拳","refName":"Despot's Fist","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"剝皮手臂","refName":"Flayed Arm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"圖拉克斯．頭顱","refName":"Drox's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"甲殼鉗","refName":"Crustacean's Claw","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"吞噬天地．頭顱","refName":"Eater of Worlds' Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"稻草人草叉","refName":"Scarecrow's Pitchfork","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"異界尊師．頭顱","refName":"Elder's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"奴役．頭顱","refName":"Enslaver's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"根除．頭顱","refName":"Eradicator's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"水手的三角帽","refName":"Mariner's Tricorne","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"斬獲毒刺","refName":"Severed Stinger","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"焦黑手臂","refName":"Scorched Arm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"骸骨車輪","refName":"Skeleton Wheel","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"沙漠女王之冠","refName":"Desert Queen's Crown","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"古靈軀幹","refName":"Gemling Torso","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"電能頭骨","refName":"Voltaic Skull","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"將軍首級","refName":"General's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"魔像石","refName":"Golemic Stone","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"學者之腿","refName":"Scholar's Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"電能儀器","refName":"Voltaic Apparatus","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"巨像利爪","refName":"Gargantuan Claws","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"華麗軀幹","refName":"Ornate Torso","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"焦黑肺臟","refName":"Blackened Lungs","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"船長之腿","refName":"Captain's Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"坑漥之臂","refName":"Pocked Arm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"月光長弓","refName":"Lunar Bow","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"璀璨權杖","refName":"Resplendent Sceptre","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"熔岩之核","refName":"Molten Core","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"重甲腿骨","refName":"Armoured Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"感染軀幹","refName":"Infested Torso","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"禽臟","refName":"Vulture's Gut","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"九頭蛇．頭顱","refName":"Hydra's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"恐慌化身．頭顱","refName":"Incarnation of Dread's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"恐懼化身．頭顱","refName":"Incarnation of Fear's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"漠視化身．方塊","refName":"Incarnation of Neglect's Cube","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"骷髏弓手手臂","refName":"Skeletal Archer's Arm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"判官之盔","refName":"Justicar's Helm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"燃火頭骨","refName":"Blazing Skull","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"貪婪頭骨","refName":"Ravenous Skull","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"蠻兵手臂","refName":"Brute's Arm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"匪徒盜賊之首","refName":"Bandit Rogue's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"圖騰面具","refName":"Totemic Visage","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"破碎胸像","refName":"Broken Bust","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"新月刀刃","refName":"Crescent Blade","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"腐化甲殼","refName":"Corrupted Carapace","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"審判官之爪","refName":"Inquisitor's Claw","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"破損半身像","refName":"Defaced Bust","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"灼燃鍛爐","refName":"Flaming Furnace","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"釋界．天體儀","refName":"Maven's Orrery","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"塞壬的觸手","refName":"Siren's Tentacle","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"沙漠之劍","refName":"Desert Sword","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"牛頭人．頭顱","refName":"Minotaur's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"混沌魔像核心","refName":"Chaos Golem's Core","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"烏旗守衛腿骨","refName":"Blackguard's Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"夢魘．卡塔莉娜之翼","refName":"Nightmarish Wings of Catarina","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"夢魘．墮落之書","refName":"Nightmarish Book of Depravity","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"夢魘．利西亞之翼","refName":"Nightmarish Wings of Lycia","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"夢魘．烏特雷之首","refName":"Nightmarish Head of Uhtred","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"夢魘．不滅之核","refName":"Nightmarish Core of the Unbreakable","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"匪徒戰士之首","refName":"Bandit Warrior's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"幽靈鬼爪","refName":"Ghostly Claw","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"恐喙鳥之首","refName":"Severed Rhoa Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"監工之鞭","refName":"Overseer's Whip","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"脊骨巨爪","refName":"Spined Claws","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"鳳凰．頭顱","refName":"Phoenix's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"奇術師之首","refName":"Thaumaturge's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"腫脹之眼","refName":"Engorged Eye","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"坑漥之腿","refName":"Pocked Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"感染的腿","refName":"Infected Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"染病之翼","refName":"Diseased Wing","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"追隨者之冠","refName":"Adherent's Crown","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"淨化．頭顱","refName":"Purifier's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"熊怪血肉","refName":"Ursine Flesh","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"連體獵犬之首","refName":"Conjoined Hound Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"焦黑腿骨","refName":"Charred Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"貴族之首","refName":"Noble's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"截肢卵囊","refName":"Arachnid Egg Sac","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"灼烙總督．眼界","refName":"Searing Exarch's Descry","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"毒蛇之尾","refName":"Cobra Tail","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"蠍尾釘刺","refName":"Scorpion Stinger","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"塑界者．頭顱","refName":"Shaper's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"剝皮面容","refName":"Flayed Visage","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"雄獅．利爪","refName":"Lion's Claws","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"蝙蝠．翅膀","refName":"Bat's Wings","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"賽勒斯．頭顱","refName":"Sirus' Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"骸骨之尾","refName":"Skeletal Tail","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"骨質利爪","refName":"Osseous Talon","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"日光之盾","refName":"Solar Shield","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"元素精華","refName":"Elemental Essence","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"日浸胸甲","refName":"Sun-bleached Breastplate","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"盜獵者斷腿","refName":"Poacher's Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"燃軀燈籠","refName":"Flesh-fused Lantern","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"幽魂兜帽","refName":"Spectral Hood","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"雕像之腿","refName":"Statue Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"灼燃緞帶","refName":"Flaming Ribbon","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"虛影炎獸之腿","refName":"Voidbearer's Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"溫迪戈之爪","refName":"Vendigo Claws","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"黃金聖環","refName":"Golden Ankh","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"雕刻後腰","refName":"Carved Haunches","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"乾癟頭顱","refName":"Dessicated Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"學者之臂","refName":"Scholar's Arm","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"帝王蟹之爪","refName":"King Crab's Claw","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"先祖棍棒","refName":"Ancestor's Club","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"吞噬者觸角","refName":"Devourer's Antenna","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"骨獸之腿","refName":"Skeletal Beast Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"腫脹腹部","refName":"Distended Stomach","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"羊人之角","refName":"Goatman's Horn","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"瓦爾附肢","refName":"Vaal Appendage","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"人造附肢","refName":"Artificial Appendage","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"構裝體之首","refName":"Construct's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"維那利斯．經典","refName":"Venarius' Scripture","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"維羅提尼亞．頭顱","refName":"Veritania's Head","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"餘燼腿骨","refName":"Smouldering Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"聖宗旗幟","refName":"Templar Banner","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"狂怒之爪","refName":"Wraith Claws","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"走私者之手","refName":"Smuggler's Hand","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"蜘蛛步足","refName":"Arachnid Leg","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"駭人巨口","refName":"Terrifying Maw","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}

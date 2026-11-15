@@ -23,6 +23,7 @@ export enum ItemInfluence {
 
 export interface ParsedItem {
   rarity?: ItemRarity
+  visceraName?: string
   itemLevel?: number
 
   armourAR?: number

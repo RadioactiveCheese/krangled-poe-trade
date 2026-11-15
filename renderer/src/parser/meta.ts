@@ -50,6 +50,7 @@ export enum ItemCategory {
   Charm = 'Charm',
   Idol = 'Idol',
   Graft = 'Graft',
+  Viscera = 'Viscera',
   Chart = 'Chart',
   MercenaryWarrant = 'Mercenary Warrant'
 }

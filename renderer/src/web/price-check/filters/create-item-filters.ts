@@ -286,7 +286,8 @@ export function createFilters (
       if (
         item.category === ItemCategory.ClusterJewel ||
         item.category === ItemCategory.Idol ||
-        item.category === ItemCategory.Graft
+        item.category === ItemCategory.Graft ||
+        item.category === ItemCategory.Viscera
       ) {
         disabled = true
       } else if (
@@ -300,6 +301,10 @@ export function createFilters (
         disabled: disabled
       }
     }
+  }
+
+  if (item.category === ItemCategory.Viscera && item.visceraName) {
+    filters.searchExact.baseType = item.visceraName
   }
 
   if (item.quality && item.quality >= 20 && !ACCESSORY.has(item.category!)) {
@@ -406,6 +411,7 @@ export function createFilters (
       item.category !== ItemCategory.SanctumRelic &&
       item.category !== ItemCategory.Charm &&
       item.category !== ItemCategory.Idol &&
+      item.category !== ItemCategory.Viscera &&
       item.info.refName !== 'Expedition Logbook'
     ) {
       if (item.category === ItemCategory.ClusterJewel) {

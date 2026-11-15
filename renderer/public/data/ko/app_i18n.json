@@ -145,7 +145,8 @@
     "heistequipment_heistutility": "강탈 망토",
     "accessory_trinket": "도둑 장신구",
     "sanctum_relic": "성역 유물",
-    "tincture": "팅크"
+    "tincture": "팅크",
+    "viscera": "내장"
   },
   "modifier_hint": {
     "volatile": "불안정한 바알 오브 효과일 수 있습니다. 클립보드 텍스트만으로 범위 밖 수치의 원인을 확인할 수 없습니다.",

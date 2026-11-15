@@ -250,6 +250,7 @@ describe('PoEDB base modifier pages', () => {
       ItemCategory.Sentinel,
       ItemCategory.SanctumRelic,
       ItemCategory.Graft,
+      ItemCategory.Viscera,
       ItemCategory.Chart,
       ItemCategory.MercenaryWarrant
     ])

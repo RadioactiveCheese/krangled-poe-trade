@@ -1,0 +1,489 @@
+{
+  "source": "https://www.pathofexile.com/api/trade/data/items",
+  "retrievedAt": "2026-11-15",
+  "entries": [
+    {
+      "type": "Flaming Goat Hoof"
+    },
+    {
+      "type": "Primate Foot"
+    },
+    {
+      "type": "Al-Hezmin's Head"
+    },
+    {
+      "type": "Bandit Witch's Head"
+    },
+    {
+      "type": "Galvanic Tentacle"
+    },
+    {
+      "type": "Bear Head"
+    },
+    {
+      "type": "Boar Head"
+    },
+    {
+      "type": "Stag Head"
+    },
+    {
+      "type": "Spider Queen's Head"
+    },
+    {
+      "type": "Templar Skull"
+    },
+    {
+      "type": "Bloodied Arm"
+    },
+    {
+      "type": "Prosthetic Leg"
+    },
+    {
+      "type": "Champion's Banner"
+    },
+    {
+      "type": "Baran's Head"
+    },
+    {
+      "type": "Gladiator's Heart"
+    },
+    {
+      "type": "Chimeral Eye"
+    },
+    {
+      "type": "Arachnid Fangs"
+    },
+    {
+      "type": "Osseous Scythe"
+    },
+    {
+      "type": "Chitinous Leg"
+    },
+    {
+      "type": "Necromancer's Mask"
+    },
+    {
+      "type": "Bonestalker's Ribcage"
+    },
+    {
+      "type": "Lithic Haunches"
+    },
+    {
+      "type": "Hollowed Skull"
+    },
+    {
+      "type": "Pit Fighter's Helm"
+    },
+    {
+      "type": "Sea Witch's Tentacle"
+    },
+    {
+      "type": "Warden's Arm"
+    },
+    {
+      "type": "Calcified Leg"
+    },
+    {
+      "type": "Cutthroat's Head"
+    },
+    {
+      "type": "Aristocrat's Torso"
+    },
+    {
+      "type": "Soldier's Head"
+    },
+    {
+      "type": "Heretical Tome"
+    },
+    {
+      "type": "Skeletal Warrior's Leg"
+    },
+    {
+      "type": "Gelid Fangs"
+    },
+    {
+      "type": "Chimera's Head"
+    },
+    {
+      "type": "Coagulated Essence"
+    },
+    {
+      "type": "Constrictor's Head"
+    },
+    {
+      "type": "Coven Queen's Crown"
+    },
+    {
+      "type": "Swordmaster's Blade"
+    },
+    {
+      "type": "Hag's Head"
+    },
+    {
+      "type": "Inquisitor's Head"
+    },
+    {
+      "type": "Witch's Head"
+    },
+    {
+      "type": "Scout's Bow"
+    },
+    {
+      "type": "Hag's Stomach"
+    },
+    {
+      "type": "Despot's Fist"
+    },
+    {
+      "type": "Flayed Arm"
+    },
+    {
+      "type": "Drox's Head"
+    },
+    {
+      "type": "Crustacean's Claw"
+    },
+    {
+      "type": "Eater of Worlds' Head"
+    },
+    {
+      "type": "Scarecrow's Pitchfork"
+    },
+    {
+      "type": "Elder's Head"
+    },
+    {
+      "type": "Enslaver's Head"
+    },
+    {
+      "type": "Eradicator's Head"
+    },
+    {
+      "type": "Mariner's Tricorne"
+    },
+    {
+      "type": "Severed Stinger"
+    },
+    {
+      "type": "Scorched Arm"
+    },
+    {
+      "type": "Skeleton Wheel"
+    },
+    {
+      "type": "Desert Queen's Crown"
+    },
+    {
+      "type": "Gemling Torso"
+    },
+    {
+      "type": "Voltaic Skull"
+    },
+    {
+      "type": "General's Head"
+    },
+    {
+      "type": "Golemic Stone"
+    },
+    {
+      "type": "Scholar's Leg"
+    },
+    {
+      "type": "Voltaic Apparatus"
+    },
+    {
+      "type": "Gargantuan Claws"
+    },
+    {
+      "type": "Ornate Torso"
+    },
+    {
+      "type": "Blackened Lungs"
+    },
+    {
+      "type": "Captain's Leg"
+    },
+    {
+      "type": "Pocked Arm"
+    },
+    {
+      "type": "Lunar Bow"
+    },
+    {
+      "type": "Resplendent Sceptre"
+    },
+    {
+      "type": "Molten Core"
+    },
+    {
+      "type": "Armoured Leg"
+    },
+    {
+      "type": "Infested Torso"
+    },
+    {
+      "type": "Vulture's Gut"
+    },
+    {
+      "type": "Hydra's Head"
+    },
+    {
+      "type": "Incarnation of Dread's Head"
+    },
+    {
+      "type": "Incarnation of Fear's Head"
+    },
+    {
+      "type": "Incarnation of Neglect's Cube"
+    },
+    {
+      "type": "Skeletal Archer's Arm"
+    },
+    {
+      "type": "Justicar's Helm"
+    },
+    {
+      "type": "Blazing Skull"
+    },
+    {
+      "type": "Ravenous Skull"
+    },
+    {
+      "type": "Brute's Arm"
+    },
+    {
+      "type": "Bandit Rogue's Head"
+    },
+    {
+      "type": "Totemic Visage"
+    },
+    {
+      "type": "Broken Bust"
+    },
+    {
+      "type": "Crescent Blade"
+    },
+    {
+      "type": "Corrupted Carapace"
+    },
+    {
+      "type": "Inquisitor's Claw"
+    },
+    {
+      "type": "Defaced Bust"
+    },
+    {
+      "type": "Flaming Furnace"
+    },
+    {
+      "type": "Maven's Orrery"
+    },
+    {
+      "type": "Siren's Tentacle"
+    },
+    {
+      "type": "Desert Sword"
+    },
+    {
+      "type": "Minotaur's Head"
+    },
+    {
+      "type": "Chaos Golem's Core"
+    },
+    {
+      "type": "Blackguard's Leg"
+    },
+    {
+      "type": "Nightmarish Wings of Catarina"
+    },
+    {
+      "type": "Nightmarish Book of Depravity"
+    },
+    {
+      "type": "Nightmarish Wings of Lycia"
+    },
+    {
+      "type": "Nightmarish Head of Uhtred"
+    },
+    {
+      "type": "Nightmarish Core of the Unbreakable"
+    },
+    {
+      "type": "Bandit Warrior's Head"
+    },
+    {
+      "type": "Ghostly Claw"
+    },
+    {
+      "type": "Severed Rhoa Head"
+    },
+    {
+      "type": "Overseer's Whip"
+    },
+    {
+      "type": "Spined Claws"
+    },
+    {
+      "type": "Phoenix's Head"
+    },
+    {
+      "type": "Thaumaturge's Head"
+    },
+    {
+      "type": "Engorged Eye"
+    },
+    {
+      "type": "Pocked Leg"
+    },
+    {
+      "type": "Infected Leg"
+    },
+    {
+      "type": "Diseased Wing"
+    },
+    {
+      "type": "Adherent's Crown"
+    },
+    {
+      "type": "Purifier's Head"
+    },
+    {
+      "type": "Ursine Flesh"
+    },
+    {
+      "type": "Conjoined Hound Head"
+    },
+    {
+      "type": "Charred Leg"
+    },
+    {
+      "type": "Noble's Head"
+    },
+    {
+      "type": "Arachnid Egg Sac"
+    },
+    {
+      "type": "Searing Exarch's Descry"
+    },
+    {
+      "type": "Cobra Tail"
+    },
+    {
+      "type": "Scorpion Stinger"
+    },
+    {
+      "type": "Shaper's Head"
+    },
+    {
+      "type": "Flayed Visage"
+    },
+    {
+      "type": "Lion's Claws"
+    },
+    {
+      "type": "Bat's Wings"
+    },
+    {
+      "type": "Sirus' Head"
+    },
+    {
+      "type": "Skeletal Tail"
+    },
+    {
+      "type": "Osseous Talon"
+    },
+    {
+      "type": "Solar Shield"
+    },
+    {
+      "type": "Elemental Essence"
+    },
+    {
+      "type": "Sun-bleached Breastplate"
+    },
+    {
+      "type": "Poacher's Leg"
+    },
+    {
+      "type": "Flesh-fused Lantern"
+    },
+    {
+      "type": "Spectral Hood"
+    },
+    {
+      "type": "Statue Leg"
+    },
+    {
+      "type": "Flaming Ribbon"
+    },
+    {
+      "type": "Voidbearer's Leg"
+    },
+    {
+      "type": "Vendigo Claws"
+    },
+    {
+      "type": "Golden Ankh"
+    },
+    {
+      "type": "Carved Haunches"
+    },
+    {
+      "type": "Dessicated Head"
+    },
+    {
+      "type": "Scholar's Arm"
+    },
+    {
+      "type": "King Crab's Claw"
+    },
+    {
+      "type": "Ancestor's Club"
+    },
+    {
+      "type": "Devourer's Antenna"
+    },
+    {
+      "type": "Skeletal Beast Leg"
+    },
+    {
+      "type": "Distended Stomach"
+    },
+    {
+      "type": "Goatman's Horn"
+    },
+    {
+      "type": "Vaal Appendage"
+    },
+    {
+      "type": "Artificial Appendage"
+    },
+    {
+      "type": "Construct's Head"
+    },
+    {
+      "type": "Venarius' Scripture"
+    },
+    {
+      "type": "Veritania's Head"
+    },
+    {
+      "type": "Smouldering Leg"
+    },
+    {
+      "type": "Templar Banner"
+    },
+    {
+      "type": "Wraith Claws"
+    },
+    {
+      "type": "Smuggler's Hand"
+    },
+    {
+      "type": "Arachnid Leg"
+    },
+    {
+      "type": "Terrifying Maw"
+    }
+  ]
+}

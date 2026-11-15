@@ -1,0 +1,11 @@
+Item Class: Viscera
+Lesser Lunar Bow
+--------
+Upper Limb
+--------
+Item Level: 59
+--------
+{ Implicit Modifier }
+15(10-15)% of Physical Damage Converted to Cold Damage
+--------
+Take this to the Wickerman in a town or hideout to attach it.
