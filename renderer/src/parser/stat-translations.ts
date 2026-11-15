@@ -139,7 +139,9 @@ export function tryParseTranslation (
   modType: ModifierType,
   itemCategory: ItemCategory | undefined
 ): ParsedStat | undefined {
-  for (const combination of _statPlaceholderGenerator(stat.string)) {
+  // Game effect descriptions insert zero-width spaces before linked gem names.
+  // The trade API's text has no such formatting characters.
+  for (const combination of _statPlaceholderGenerator(stat.string.replace(/\u200b/g, ''))) {
     const found = findAndResolveTranslation({
       matchStr: combination.stat,
       modType: modType,

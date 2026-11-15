@@ -1,0 +1,1146 @@
+{
+  "source": "https://www.pathofexile.com/api/trade/data/stats",
+  "retrievedAt": "2026-11-15",
+  "entries": [
+    {
+      "id": "explicit.effect_1059201360",
+      "text": "Socketed Gems are Supported by Level # Physical to Lightning Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1115172759",
+      "text": "Socketed Gems are Supported by Level # Swift Affliction Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1134484173",
+      "text": "Socketed Gems are Supported by Level # Awakened Unbound Ailments Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_115345895",
+      "text": "Socketed Gems are Supported by Level # Awakened Multistrike Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1153652646",
+      "text": "Socketed Gems are Supported by Level # Multiple Projectiles Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1199731147",
+      "text": "Socketed Gems are Supported by Level # Immolate Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1200122555",
+      "text": "Socketed Gems are Supported by Level # Burning Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1214076534",
+      "text": "Socketed Gems are Supported by Level # Hypothermia Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1243416714",
+      "text": "Socketed Gems are Supported by Level # Maim Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1263906374",
+      "text": "Socketed Gems are Supported by Level # Guardian's Blessing Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1276857842",
+      "text": "Socketed Gems are Supported by Level # Slower Projectiles Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1303915392",
+      "text": "Socketed Gems are Supported by Level # Infused Channelling Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1311270539",
+      "text": "Socketed Gems are Supported by Level # Awakened Chain Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1324938267",
+      "text": "Socketed Gems are Supported by Level # Faster Casting Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1329591193",
+      "text": "Socketed Gems are Supported by Level # Deadly Ailments Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1339810278",
+      "text": "Socketed Gems are Supported by Level # Generosity Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1355803435",
+      "text": "Socketed Gems are Supported by Level # Increased Critical Strikes Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1380260970",
+      "text": "Socketed Gems are Supported by Level # Awakened Minion Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1405334938",
+      "text": "Socketed Gems are Supported by Level # Arrow Nova Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_144941225",
+      "text": "Socketed Gems are Supported by Level # Endurance Charge on Melee Stun Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1505316781",
+      "text": "Socketed Gems are Supported by Level # Nightblade Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_153063788",
+      "text": "Socketed Gems are Supported by Level # Decay Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1544569957",
+      "text": "Socketed Gems are Supported by Level # More Duration Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_155410994",
+      "text": "Socketed Gems are Supported by Level # Block Chance Reduction Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1561428496",
+      "text": "Socketed Gems are Supported by Level # Chance to Bleed Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1571191461",
+      "text": "Socketed Gems are Supported by Level # Added Fire Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1602381821",
+      "text": "Socketed Gems are Supported by Level # Close Combat Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1673391040",
+      "text": "Socketed Gems are Supported by Level # Added Chaos Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1710445055",
+      "text": "Socketed Gems are Supported by Level # Unleash Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1723015380",
+      "text": "Socketed Gems are Supported by Level # Cast while Channelling Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1726066205",
+      "text": "Socketed Gems are Supported by Level # Devour Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1733367133",
+      "text": "Socketed Gems are Supported by Level # Item Quantity Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1740076026",
+      "text": "Socketed Gems are Supported by Level # Arrogance Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_174595432",
+      "text": "Socketed Gems are Supported by Level # Minion Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1749703704",
+      "text": "Socketed Gems are Supported by Level # Hextouch Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1770376530",
+      "text": "Socketed Gems are Supported by Level # Faster Projectiles Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1787679190",
+      "text": "Socketed Gems are Supported by Level # Manaforged Arrows Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1854569159",
+      "text": "Socketed Gems are Supported by Level # Trap Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1858870975",
+      "text": "Socketed Gems are Supported by Level # Spell Totem Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1865320540",
+      "text": "Socketed Gems are Supported by Level # Greater Spell Cascade Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1878151040",
+      "text": "Socketed Gems are Supported by Level # Stun Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_189485532",
+      "text": "Socketed Gems are Supported by Level # Controlled Blaze Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1899953379",
+      "text": "Socketed Gems are Supported by Level # Awakened Fork Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1933760319",
+      "text": "Socketed Gems are Supported by Level # Meat Shield Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1961292105",
+      "text": "Socketed Gems are Supported by Level # Culling Strike Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1979264894",
+      "text": "Socketed Gems are Supported by Level # Enlighten Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1994599451",
+      "text": "Socketed Gems are Supported by Level # Innervate Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2052193809",
+      "text": "Socketed Gems are Supported by Level # Awakened Added Chaos Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2100902429",
+      "text": "Socketed Gems are Supported by Level # Multistrike Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2107340112",
+      "text": "Socketed Gems are Supported by Level # Greater Multiple Projectiles Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2129634187",
+      "text": "Socketed Gems are Supported by Level # Swiftbrand Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2141384509",
+      "text": "Socketed Gems are Supported by Level # Chance to Poison Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2142007278",
+      "text": "Socketed Gems are Supported by Level # Swift Assembly Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2142148729",
+      "text": "Socketed Gems are Supported by Level # Sadism Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_222199368",
+      "text": "Socketed Gems are Supported by Level # Eternal Blessing Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2242579123",
+      "text": "Socketed Gems are Supported by Level # Trinity Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2251567057",
+      "text": "Socketed Gems are Supported by Level # Cruelty Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2260732373",
+      "text": "Socketed Gems are Supported by Level # Awakened Melee Physical Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2264294898",
+      "text": "Socketed Gems are Supported by Level # Infernal Legion Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2282649307",
+      "text": "Socketed Gems are Supported by Level # Snipe Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2307564778",
+      "text": "Socketed Gems are Supported by Level # Awakened Spell Echo Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2343871202",
+      "text": "Socketed Gems are Supported by Level # Ignite Proliferation Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2367771894",
+      "text": "Socketed Gems are Supported by Level # Awakened Brutality Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2409633913",
+      "text": "Socketed Gems are Supported by Level # Ice Bite Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2439286871",
+      "text": "Socketed Gems are Supported by Level # Summon Phantasm Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2447178998",
+      "text": "Socketed Gems are Supported by Level # Greater Volley Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2513678384",
+      "text": "Socketed Gems are Supported by Level # Awakened Elemental Focus Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2581493934",
+      "text": "Socketed Gems are Supported by Level # Cast when Damage Taken Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2594535436",
+      "text": "Socketed Gems are Supported by Level # Cast on Ward Break Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2612646353",
+      "text": "Socketed Gems are Supported by Level # Excommunicate Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2617381612",
+      "text": "Socketed Gems are Supported by Level # Minefield Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2638439725",
+      "text": "Socketed Gems are Supported by Level # Charged Mines Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2640673956",
+      "text": "Socketed Gems are Supported by Level # Cast on Melee Kill Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2653498431",
+      "text": "Socketed Gems are Supported by Level # Awakened Void Manipulation Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2653742489",
+      "text": "Socketed Gems are Supported by Level # Focused Channelling Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_265550805",
+      "text": "Socketed Gems are Supported by Level # Lifetap Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2686067790",
+      "text": "Socketed Gems are Supported by Level # Ballista Totem Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2698327786",
+      "text": "Socketed Gems are Supported by Level # Vile Toxins Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2713755048",
+      "text": "Socketed Gems are Supported by Level # Life Leech Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2714845045",
+      "text": "Socketed Gems are Supported by Level # Returning Projectiles Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2722476813",
+      "text": "Socketed Gems are Supported by Level # Elemental Focus Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2742501709",
+      "text": "Socketed Gems are Supported by Level # Void Manipulation Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2795990092",
+      "text": "Socketed Gems are Supported by Level # Efficacy Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2912209560",
+      "text": "Socketed Gems are Supported by Level # Awakened Added Cold Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2937933274",
+      "text": "Socketed Gems are Supported by Level # Mirage Archer Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2963700146",
+      "text": "Socketed Gems are Supported by Level # Archmage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3002947169",
+      "text": "Socketed Gems are Supported by Level # Awakened Increased Area of Effect Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3006785117",
+      "text": "Socketed Gems are Supported by Level # Enhance Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3009566559",
+      "text": "Socketed Gems are Supported by Level # Chain Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3022937704",
+      "text": "Socketed Gems are Supported by Level # Volley Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3024539694",
+      "text": "Socketed Gems are Supported by Level # Bonechill Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3059751250",
+      "text": "Socketed Gems are Supported by Level # Awakened Empower Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3082206530",
+      "text": "Socketed Gems are Supported by Level # Blastchain Mine Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3121158131",
+      "text": "Socketed Gems are Supported by Level # Invert the Rules Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3124293229",
+      "text": "Socketed Gems are Supported by Level # Bloodlust Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3161048706",
+      "text": "Socketed Gems are Supported by Level # Divine Blessing Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3161142268",
+      "text": "Socketed Gems are Supported by Level # Fire Penetration Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3232631539",
+      "text": "Socketed Gems are Supported by Level # Elemental Penetration Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3257625635",
+      "text": "Socketed Gems are Supported by Level # Awakened Blasphemy Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3293595800",
+      "text": "Socketed Gems are Supported by Level # Concentrated Effect Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3311634296",
+      "text": "Socketed Gems are Supported by Level # Awakened Added Lightning Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3318957131",
+      "text": "Socketed Gems are Supported by Level # Chance to Flee Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3334987531",
+      "text": "Socketed Gems are Supported by Level # Item Rarity Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3362019776",
+      "text": "Socketed Gems are Supported by Level # Added Cold Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_338557223",
+      "text": "Socketed Gems are Supported by Level # Additional Accuracy Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3419961156",
+      "text": "Socketed Gems are Supported by Level # Impale Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3431656752",
+      "text": "Socketed Gems are Supported by Level # Controlled Destruction Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3438910899",
+      "text": "Socketed Gems are Supported by Level # Arcane Surge Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3457811678",
+      "text": "Socketed Gems are Supported by Level # Pierce Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3474714415",
+      "text": "Socketed Gems are Supported by Level # Cast when Stunned Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3479500684",
+      "text": "Socketed Gems are Supported by Level # Advanced Traps Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3482292969",
+      "text": "Socketed Gems are Supported by Level # High-Impact Mine Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3498266457",
+      "text": "Socketed Gems are Supported by Level # Volatility Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3512123051",
+      "text": "Socketed Gems are Supported by Level # Rage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_351343865",
+      "text": "Socketed Gems are Supported by Level # Iron Will Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3543464371",
+      "text": "Socketed Gems are Supported by Level # Fortify Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3544093007",
+      "text": "Socketed Gems are Supported by Level # Greater Spell Echo Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3553187279",
+      "text": "Socketed Gems are Supported by Level # Fork Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_360069007",
+      "text": "Socketed Gems are Supported by Level # Empower Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3607696303",
+      "text": "Socketed Gems are Supported by Level # Added Lightning Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3628997762",
+      "text": "Socketed Gems are Supported by Level # Feeding Frenzy Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3672428602",
+      "text": "Socketed Gems are Supported by Level # Ancestral Call Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3678242906",
+      "text": "Socketed Gems are Supported by Level # Spell Cascade Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_369135889",
+      "text": "Socketed Gems are Supported by Level # Melee Physical Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3737573678",
+      "text": "Socketed Gems are Supported by Level # Point Blank Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3737592146",
+      "text": "Socketed Gems are Supported by Level # Increased Area of Effect Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3745700985",
+      "text": "Socketed Gems are Supported by Level # Awakened Swift Affliction Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3756080110",
+      "text": "Socketed Gems are Supported by Level # Cold to Fire Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3805221392",
+      "text": "Socketed Gems are Supported by Level # Barrage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3808743835",
+      "text": "Socketed Gems are Supported by Level # Cluster Traps Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3828086965",
+      "text": "Socketed Gems are Supported by Level # Elemental Proliferation Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3851855898",
+      "text": "Socketed Gems are Supported by Level # Cold Penetration Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3858590323",
+      "text": "Socketed Gems are Supported by Level # Minion Life Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3869346801",
+      "text": "Socketed Gems are Supported by Level # Brutality Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3872728076",
+      "text": "Socketed Gems are Supported by Level # Charged Traps Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3874278368",
+      "text": "Socketed Gems are Supported by Level # Awakened Lightning Penetration Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3879545743",
+      "text": "Socketed Gems are Supported by Level # Awakened Deadly Ailments Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3893320621",
+      "text": "Socketed Gems are Supported by Level # Momentum Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3897784788",
+      "text": "Socketed Gems are Supported by Level # Behead Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3921181872",
+      "text": "Socketed Gems are Supported by Level # Ruthless Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3947742455",
+      "text": "Socketed Gems are Supported by Level # Earthbreaker Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3959464467",
+      "text": "Socketed Gems are Supported by Level # Eclipse Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3960686014",
+      "text": "Socketed Gems are Supported by Level # Awakened Greater Multiple Projectiles Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3972941836",
+      "text": "Socketed Gems are Supported by Level # Blind Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3984157052",
+      "text": "Socketed Gems are Supported by Level # Cursed Ground Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3985111281",
+      "text": "Socketed Gems are Supported by Level # Combustion Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3995245401",
+      "text": "Socketed Gems are Supported by Level # Spell Echo Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_400129667",
+      "text": "Socketed Gems are Supported by Level # Elemental Army Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4028786187",
+      "text": "Socketed Gems are Supported by Level # Awakened Burning Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4055657913",
+      "text": "Socketed Gems are Supported by Level # Spellblade Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4083688802",
+      "text": "Socketed Gems are Supported by Level # Multiple Totems Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4119948431",
+      "text": "Socketed Gems are Supported by Level # Vicious Projectiles Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4154493255",
+      "text": "Socketed Gems are Supported by Level # Frigid Bond Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4174205387",
+      "text": "Socketed Gems are Supported by Level # Trap and Mine Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4185976903",
+      "text": "Socketed Gems are Supported by Level # Less Duration Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4267977279",
+      "text": "Socketed Gems are Supported by Level # Cast On Critical Strike Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4278342035",
+      "text": "Socketed Gems are Supported by Level # Increased Critical Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4282732147",
+      "text": "Socketed Gems are Supported by Level # Life Gain on Hit Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4291787627",
+      "text": "Socketed Gems are Supported by Level # Faster Attacks Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_429242364",
+      "text": "Socketed Gems are Supported by Level # Intensify Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_434885230",
+      "text": "Socketed Gems are Supported by Level # Blasphemy Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_468251502",
+      "text": "Socketed Gems are Supported by Level # Elemental Damage with Attacks Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_482188560",
+      "text": "Socketed Gems are Supported by Level # Awakened Vicious Projectiles Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_540595610",
+      "text": "Socketed Gems are Supported by Level # Minion Speed Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_548051260",
+      "text": "Socketed Gems are Supported by Level # Hex Bloom Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_602297583",
+      "text": "Socketed Gems are Supported by Level # Withering Touch Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_602948540",
+      "text": "Socketed Gems are Supported by Level # Critical Strike Affliction Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_626699959",
+      "text": "Socketed Gems are Supported by Level # Cast on Death Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_672697655",
+      "text": "Socketed Gems are Supported by Level # Awakened Melee Splash Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_682681978",
+      "text": "Socketed Gems are Supported by Level # Melee Splash Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_707288393",
+      "text": "Socketed Gems are Supported by Level # Overcharge Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_724848072",
+      "text": "Socketed Gems are Supported by Level # Lightning Penetration Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_786034009",
+      "text": "Socketed Gems are Supported by Level # Awakened Elemental Damage with Attacks Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_813521895",
+      "text": "Socketed Gems are Supported by Level # Fist of War Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_838736469",
+      "text": "Socketed Gems are Supported by Level # Knockback Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_859488427",
+      "text": "Socketed Gems are Supported by Level # Inspiration Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_865121484",
+      "text": "Socketed Gems are Supported by Level # Iron Grip Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_876810709",
+      "text": "Socketed Gems are Supported by Level # Second Wind Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_880096186",
+      "text": "Socketed Gems are Supported by Level # Unbound Ailments Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_907088360",
+      "text": "Socketed Gems are Supported by Level # Greater Multistrike Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_918792330",
+      "text": "Socketed Gems are Supported by Level # Damage on Full Life Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_9279802",
+      "text": "Socketed Gems are Supported by Level # Energy Leech Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_949715883",
+      "text": "Socketed Gems are Supported by Level # Power Charge On Critical Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_952649073",
+      "text": "Socketed Gems are Supported by Level # Mana Leech Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_967395006",
+      "text": "Socketed Gems are Supported by Level # Fresh Meat Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_971650107",
+      "text": "Socketed Gems are Supported by Level # Pulverise Support",
+      "type": "explicit"
+    },
+    {
+      "id": "implicit.effect_1153652646",
+      "text": "Socketed Gems are Supported by Level # Multiple Projectiles Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1324938267",
+      "text": "Socketed Gems are Supported by Level # Faster Casting Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1571191461",
+      "text": "Socketed Gems are Supported by Level # Added Fire Damage Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1673391040",
+      "text": "Socketed Gems are Supported by Level # Added Chaos Damage Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1710445055",
+      "text": "Socketed Gems are Supported by Level # Unleash Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1770376530",
+      "text": "Socketed Gems are Supported by Level # Faster Projectiles Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1858870975",
+      "text": "Socketed Gems are Supported by Level # Spell Totem Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1878151040",
+      "text": "Socketed Gems are Supported by Level # Stun Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2100902429",
+      "text": "Socketed Gems are Supported by Level # Multistrike Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2141384509",
+      "text": "Socketed Gems are Supported by Level # Chance to Poison Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2251567057",
+      "text": "Socketed Gems are Supported by Level # Cruelty Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_265550805",
+      "text": "Socketed Gems are Supported by Level # Lifetap Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2698327786",
+      "text": "Socketed Gems are Supported by Level # Vile Toxins Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2713755048",
+      "text": "Socketed Gems are Supported by Level # Life Leech Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3009566559",
+      "text": "Socketed Gems are Supported by Level # Chain Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3232631539",
+      "text": "Socketed Gems are Supported by Level # Elemental Penetration Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3293595800",
+      "text": "Socketed Gems are Supported by Level # Concentrated Effect Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3362019776",
+      "text": "Socketed Gems are Supported by Level # Added Cold Damage Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_338557223",
+      "text": "Socketed Gems are Supported by Level # Additional Accuracy Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3419961156",
+      "text": "Socketed Gems are Supported by Level # Impale Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3457811678",
+      "text": "Socketed Gems are Supported by Level # Pierce Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3474714415",
+      "text": "Socketed Gems are Supported by Level # Cast when Stunned Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3512123051",
+      "text": "Socketed Gems are Supported by Level # Rage Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3543464371",
+      "text": "Socketed Gems are Supported by Level # Fortify Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3553187279",
+      "text": "Socketed Gems are Supported by Level # Fork Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3607696303",
+      "text": "Socketed Gems are Supported by Level # Added Lightning Damage Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3737592146",
+      "text": "Socketed Gems are Supported by Level # Increased Area of Effect Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3828086965",
+      "text": "Socketed Gems are Supported by Level # Elemental Proliferation Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3893320621",
+      "text": "Socketed Gems are Supported by Level # Momentum Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3972941836",
+      "text": "Socketed Gems are Supported by Level # Blind Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_4267977279",
+      "text": "Socketed Gems are Supported by Level # Cast On Critical Strike Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_4278342035",
+      "text": "Socketed Gems are Supported by Level # Increased Critical Damage Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_4282732147",
+      "text": "Socketed Gems are Supported by Level # Life Gain on Hit Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_4291787627",
+      "text": "Socketed Gems are Supported by Level # Faster Attacks Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_434885230",
+      "text": "Socketed Gems are Supported by Level # Blasphemy Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_468251502",
+      "text": "Socketed Gems are Supported by Level # Elemental Damage with Attacks Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_626699959",
+      "text": "Socketed Gems are Supported by Level # Cast on Death Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_682681978",
+      "text": "Socketed Gems are Supported by Level # Melee Splash Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_859488427",
+      "text": "Socketed Gems are Supported by Level # Inspiration Support",
+      "type": "implicit"
+    },
+    {
+      "id": "scourge.effect_1673391040",
+      "text": "Socketed Gems are Supported by Level # Added Chaos Damage Support",
+      "type": "scourge"
+    },
+    {
+      "id": "scourge.effect_3362019776",
+      "text": "Socketed Gems are Supported by Level # Added Cold Damage Support",
+      "type": "scourge"
+    },
+    {
+      "id": "scourge.effect_3607696303",
+      "text": "Socketed Gems are Supported by Level # Added Lightning Damage Support",
+      "type": "scourge"
+    }
+  ]
+}
