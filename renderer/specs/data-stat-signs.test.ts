@@ -49,7 +49,12 @@ describe('stat matcher signs', () => {
     const expected: Array<[ref: string, string: string, value: number]> = [
       ['#% increased Physical Damage', 'No Physical Damage', -100],
       ['#% chance to Trigger Level 1 Create Lesser Shrine when you Kill an Enemy', 'Trigger Level 1 Create Lesser Shrine when you Kill an Enemy', 100],
-      ['With at least 40 Dexterity in Radius, Ice Shot Pierces an additional Target', 'With at least 40 Dexterity in Radius, Ice Shot Pierces an additional Target', 1]
+      ['With at least 40 Dexterity in Radius, Ice Shot Pierces an additional Target', 'With at least 40 Dexterity in Radius, Ice Shot Pierces an additional Target', 1],
+      // the game stores these in milliseconds, per mille or tenths; the app's value is what's printed
+      ['Gain a Void Charge every # seconds', 'Gain a Void Charge every second', 1],
+      ['Effects of Consecrated Ground you create Linger for 1 second', 'Effects of Consecrated Ground you create Linger for 1 second', 1],
+      ['Socketed Gems have +#% Critical Strike Chance', 'Socketed Gems have +3.5% Critical Strike Chance', 3.5],
+      ['Tier 1-15 Maps found have #% chance to become 1 tier higher', 'Tier 1-15 Maps found are 1 tier higher', 100]
     ]
     for (const [ref, string, value] of expected) {
       expect(STATS.en.get(ref)?.matchers.find(m => m.string === string)?.value, ref).toBe(value)
