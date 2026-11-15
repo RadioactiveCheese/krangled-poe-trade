@@ -11,6 +11,7 @@ let originalFetch
 let parseClipboard
 let initUiModFilters
 let createExactStatFilters
+let tryParseTranslation
 let Data
 
 test.before(async () => {
@@ -37,6 +38,7 @@ test.before(async () => {
   await Data.init('en')
   ;({ parseClipboard } = await server.ssrLoadModule('/src/parser/index.ts'))
   ;({ initUiModFilters, createExactStatFilters } = await server.ssrLoadModule('/src/web/price-check/filters/create-stat-filters.ts'))
+  ;({ tryParseTranslation } = await server.ssrLoadModule('/src/parser/stat-translations.ts'))
 })
 test.after(async () => { await server?.close(); globalThis.fetch = originalFetch })
 
@@ -50,6 +52,78 @@ function parse (text) {
 function ring (name, base, mods, ending = '') {
   return parse(`Item Class: Rings\nRarity: Unique\n${name}\n${base}\n--------\nItem Level: 83\n--------\n${mods}${ending}`)
 }
+
+test('recognizes both legacy and current single-line support wording', () => {
+  for (const wording of ['Spell Echo', 'Spell Echo Support', '\u200bSpell Echo Support']) {
+    const item = parse(`Item Class: Wands\nRarity: Unique\nReverberation Rod\nSpiraled Wand\n--------\n{ Unique Modifier — Gem }\nSocketed Gems are Supported by Level 10 ${wording} — Unscalable Value`)
+    assert.deepEqual(item.unknownModifiers, [], wording)
+  }
+})
+
+test('recognizes Reverberation Rod support modifiers copied from the game', () => {
+  const item = parse(`Item Class: Wands
+Rarity: Unique
+Reverberation Rod
+Spiraled Wand
+--------
+Wand
+Physical Damage: 11-32
+Critical Strike Chance: 8.00%
+Attacks per Second: 1.45
+--------
+Requirements:
+Level: 24
+Int: 83
+--------
+Sockets: W-W-W\u0020
+--------
+Item Level: 55
+--------
+{ Implicit Modifier — Damage, Elemental, Lightning, Attack, Caster }
+Adds 2(1-2) to 10(9-11) Lightning Damage to Spells and Attacks
+--------
+{ Unique Modifier — Gem }
++2 to Level of Socketed Gems
+{ Unique Modifier — Gem }
+Socketed Gems are Supported by Level 10 \u200bSpell Echo Support — Unscalable Value
+{ Unique Modifier — Gem }
+Socketed Gems are Supported by Level 10 \u200bControlled Destruction Support — Unscalable Value
+{ Unique Modifier — Gem }
+Socketed Gems are Supported by Level 10 \u200bArcane Surge Support — Unscalable Value
+{ Unique Modifier — Attribute }
++26(10-30) to Intelligence
+--------
+If it's worth doing once, it's worth doing twice.`)
+  assert.deepEqual(item.unknownModifiers, [])
+  const supportIds = {
+    'Spell Echo': 'explicit.effect_3995245401',
+    'Controlled Destruction': 'explicit.effect_3431656752',
+    'Arcane Surge': 'explicit.effect_3438910899'
+  }
+  const filters = initUiModFilters(item, { searchStatRange: 10 })
+  for (const [support, id] of Object.entries(supportIds)) {
+    const stat = item.statsByType.find(stat => stat.stat.ref === `Socketed Gems are Supported by Level # ${support} Support`)
+    assert.ok(stat, support)
+    assert.equal(stat.sources[0].stat.roll.value, 10)
+    assert.equal(stat.sources[0].stat.roll.unscalable, true)
+    const filter = filters.find(filter => filter.statRef === stat.stat.ref)
+    assert.deepEqual(filter.tradeId, [id])
+    assert.equal(filter.hidden, 'filters.hide_const_roll')
+  }
+})
+
+test('parses every current English support effect using real indexes and official trade IDs', async () => {
+  const snapshot = JSON.parse(await fs.readFile(path.join(ROOT, 'specs/fixtures/trade-support-effects-2026-11-15.json'), 'utf8'))
+  for (const entry of snapshot.entries) {
+    for (const text of [entry.text, entry.text.replace('Level # ', 'Level # \u200b')]) {
+      const parsed = tryParseTranslation({ string: text.replace('#', '10'), unscalable: true }, entry.type, undefined)
+      assert.ok(parsed, entry.id)
+      assert.deepEqual(parsed.stat.trade.ids[entry.type], [entry.id])
+      assert.equal(parsed.roll.value, 10, entry.id)
+      assert.equal(parsed.roll.unscalable, true, entry.id)
+    }
+  }
+})
 
 test('resolves the exact Two-Stone Ring base variant of a unique', () => {
   const item = ring("Berek's Grip", 'Two-Stone Ring', '{ Implicit Modifier }\n+15(12-16)% to Cold and Lightning Resistances')
