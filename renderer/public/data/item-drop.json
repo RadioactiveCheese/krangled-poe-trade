@@ -1,42 +1,6 @@
 [
   {
     "query": [
-      "ITEM::Sacrifice at Dawn",
-      "ITEM::Sacrifice at Midnight",
-      "ITEM::Sacrifice at Noon",
-      "ITEM::Sacrifice at Dusk"
-    ],
-    "items": [
-      "UNIQUE::Atziri's Promise",
-      "UNIQUE::Doryani's Catalyst // Vaal Sceptre",
-      "ITEM::Mortal Ignorance",
-      "ITEM::Mortal Hope",
-      "ITEM::Mortal Rage",
-      "ITEM::Mortal Grief",
-      "DIVINATION_CARD::Alluring Bounty",
-      "DIVINATION_CARD::The Ethereal"
-    ]
-  },
-  {
-    "query": [
-      "ITEM::Mortal Ignorance",
-      "ITEM::Mortal Hope",
-      "ITEM::Mortal Rage",
-      "ITEM::Mortal Grief"
-    ],
-    "items": [
-      "UNIQUE::Atziri's Acuity // Vaal Gauntlets",
-      "UNIQUE::Atziri's Disfavour // Vaal Axe",
-      "UNIQUE::The Vertex // Vaal Mask",
-      "UNIQUE::Atziri's Splendour // ES, Sacrificial Garb",
-      "UNIQUE::Atziri's Splendour // Evasion/ES/Life, Sacrificial Garb",
-      "UNIQUE::Beauty // Vaal Aspect",
-      "DIVINATION_CARD::Alluring Bounty",
-      "DIVINATION_CARD::House of Mirrors"
-    ]
-  },
-  {
-    "query": [
       "ITEM::Vaal Temple Map // T0, Atlas"
     ],
     "items": [
@@ -83,8 +47,7 @@
       "UNIQUE::Khatal's Weeping // Lapis Amulet",
       "UNIQUE::The Bane of Hope // Maraketh Bow",
       "UNIQUE::Saresh's Darkness // Chain Belt",
-      "UNIQUE::The Desecrated Chalice // Coronal Maul",
-      "ITEM::Coin of Restoration"
+      "UNIQUE::The Desecrated Chalice // Coronal Maul"
     ],
     "items": [
       "UNIQUE::Skysunder // Exquisite Blade",
@@ -100,8 +63,7 @@
       "UNIQUE::Khatal's Geyser // Lapis Amulet",
       "UNIQUE::The Flame of Hope // Maraketh Bow",
       "UNIQUE::Solerai's Radiance // Chain Belt",
-      "UNIQUE::The Sacred Chalice // Coronal Maul",
-      "ITEM::Coin of Desecration"
+      "UNIQUE::The Sacred Chalice // Coronal Maul"
     ],
     "items": [
       "UNIQUE::Fleshrender // Exquisite Blade",
@@ -766,7 +728,6 @@
     "query": [
       "ITEM::Orb of Fusing",
       "ITEM::Omen of Connections",
-      "ITEM::Bestiary Scarab of the Shadowed Crow",
       "CAPTURED_BEAST::Black Mórrigan",
       "CAPTURED_BEAST::Craicic Sand Spitter"
     ],
@@ -888,14 +849,6 @@
       "UNIQUE::Leadership's Price // Onyx Amulet"
     ]
   },
-
-
-
-
-
-
-
-
   {
     "query": [
       "UNIQUE::Curio of Absorption // Primordial Fragment",
@@ -1261,21 +1214,6 @@
       "UNIQUE::Soul Ripper"
     ]
   },
-  {
-    "query": [
-      "ITEM::Trarthan Scarab",
-      "ITEM::Trarthan Scarab of Renown"
-    ],
-    "items": [
-      "UNIQUE::Hand of Heresy // Martyr Gloves",
-      "UNIQUE::Binds of Bloody Vengeance // Vanguard Belt",
-      "UNIQUE::Azadi Crest // Lacquered Buckler",
-      "UNIQUE::The Ghastly Theatre // Teak Round Shield",
-      "UNIQUE::Howlcrack // Ezomyte Burgonet",
-      "UNIQUE::Scornflux // Satin Slippers"
-    ]
-  },
-
   {
     "query": [
       "ITEM::Deafening Essence of Greed",
