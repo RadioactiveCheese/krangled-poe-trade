@@ -1,0 +1,250 @@
+{
+  "_source": "www.pathofexile.com/api/trade/data/items, group \"gem\", entries whose type is a Vaal gem and that carry a transfigured discriminator. Fetched 2026-11-14 (3.30.0.1.4).",
+  "entries": [
+    {
+      "type": "Vaal Animate Weapon",
+      "text": "Vaal Animate Weapon (Animate Weapon of Ranged Arms)",
+      "disc": "alt_y"
+    },
+    {
+      "type": "Vaal Arc",
+      "text": "Vaal Arc (Arc of Oscillating)",
+      "disc": "alt_y"
+    },
+    {
+      "type": "Vaal Blight",
+      "text": "Vaal Blight (Blight of Atrophy)",
+      "disc": "alt_y"
+    },
+    {
+      "type": "Vaal Detonate Dead",
+      "text": "Vaal Detonate Dead (Detonate Dead of Chain Reaction)",
+      "disc": "alt_y"
+    },
+    {
+      "type": "Vaal Double Strike",
+      "text": "Vaal Double Strike (Double Strike of Momentum)",
+      "disc": "alt_y"
+    },
+    {
+      "type": "Vaal Firestorm",
+      "text": "Vaal Firestorm (Firestorm of Pelting)",
+      "disc": "alt_y"
+    },
+    {
+      "type": "Vaal Flameblast",
+      "text": "Vaal Flameblast (Flameblast of Contraction)",
+      "disc": "alt_y"
+    },
+    {
+      "type": "Vaal Ice Nova",
+      "text": "Vaal Ice Nova (Ice Nova of Deep Freeze)",
+      "disc": "alt_y"
+    },
+    {
+      "type": "Vaal Rain of Arrows",
+      "text": "Vaal Rain of Arrows (Rain of Arrows of Saturation)",
+      "disc": "alt_y"
+    },
+    {
+      "type": "Vaal Spark",
+      "text": "Vaal Spark (Spark of Unpredictability)",
+      "disc": "alt_y"
+    },
+    {
+      "type": "Vaal Summon Skeletons",
+      "text": "Vaal Summon Skeletons (Summon Skeletons of Mages)",
+      "disc": "alt_y"
+    },
+    {
+      "type": "Vaal Spectral Throw",
+      "text": "Vaal Spectral Throw (Spectral Throw of Trarthus)",
+      "disc": "alt_y"
+    },
+    {
+      "type": "Vaal Absolution",
+      "text": "Vaal Absolution (Absolution of Inspiring)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Animate Weapon",
+      "text": "Vaal Animate Weapon (Animate Weapon of Self Reflection)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Arc",
+      "text": "Vaal Arc (Arc of Surging)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Blade Vortex",
+      "text": "Vaal Blade Vortex (Blade Vortex of the Scythe)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Blight",
+      "text": "Vaal Blight (Blight of Contagion)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Burning Arrow",
+      "text": "Vaal Burning Arrow (Burning Arrow of Vigour)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Caustic Arrow",
+      "text": "Vaal Caustic Arrow (Caustic Arrow of Poison)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Blade Flurry",
+      "text": "Vaal Blade Flurry (Blade Flurry of Incision)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Cleave",
+      "text": "Vaal Cleave (Cleave of Rage)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Cold Snap",
+      "text": "Vaal Cold Snap (Cold Snap of Power)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Cyclone",
+      "text": "Vaal Cyclone (Cyclone of Tumult)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Detonate Dead",
+      "text": "Vaal Detonate Dead (Detonate Dead of Scavenging)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Domination",
+      "text": "Vaal Domination (Dominating Blow of Inspiring)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Double Strike",
+      "text": "Vaal Double Strike (Double Strike of Impaling)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Earthquake",
+      "text": "Vaal Earthquake (Earthquake of Amplification)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Firestorm",
+      "text": "Vaal Firestorm (Firestorm of Meteors)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Flameblast",
+      "text": "Vaal Flameblast (Flameblast of Celerity)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Flicker Strike",
+      "text": "Vaal Flicker Strike (Flicker Strike of Power)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Glacial Hammer",
+      "text": "Vaal Glacial Hammer (Glacial Hammer of Shattering)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Ground Slam",
+      "text": "Vaal Ground Slam (Ground Slam of Earthshaking)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Ice Nova",
+      "text": "Vaal Ice Nova (Ice Nova of Frostbolts)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Ice Shot",
+      "text": "Vaal Ice Shot (Ice Shot of Penetration)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Lightning Arrow",
+      "text": "Vaal Lightning Arrow (Lightning Arrow of Electrocution)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Lightning Strike",
+      "text": "Vaal Lightning Strike (Lightning Strike of Arcing)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Lightning Trap",
+      "text": "Vaal Lightning Trap (Lightning Trap of Sparking)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Molten Strike",
+      "text": "Vaal Molten Strike (Molten Strike of the Zenith)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Power Siphon",
+      "text": "Vaal Power Siphon (Power Siphon of the Archmage)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Rain of Arrows",
+      "text": "Vaal Rain of Arrows (Rain of Arrows of Artillery)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Reap",
+      "text": "Vaal Reap (Reap of Butchery)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Reave",
+      "text": "Vaal Reave (Reave of Refraction)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Righteous Fire",
+      "text": "Vaal Righteous Fire (Righteous Fire of Arcane Devotion)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Smite",
+      "text": "Vaal Smite (Smite of Divine Judgement)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Spark",
+      "text": "Vaal Spark (Spark of the Nova)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Storm Call",
+      "text": "Vaal Storm Call (Storm Call of Trarthus)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Summon Skeletons",
+      "text": "Vaal Summon Skeletons (Summon Skeletons of Archers)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Spectral Throw",
+      "text": "Vaal Spectral Throw (Spectral Throw of Materialising)",
+      "disc": "alt_x"
+    },
+    {
+      "type": "Vaal Volcanic Fissure",
+      "text": "Vaal Volcanic Fissure (Volcanic Fissure of Snaking)",
+      "disc": "alt_x"
+    }
+  ]
+}

@@ -519,9 +519,10 @@ function parseVaalGem (section: string[], item: ParserState) {
   if (item.category !== ItemCategory.Gem) return 'PARSER_SKIPPED'
 
   if (section.length === 1) {
-    const gemInfo = ITEM_BY_TRANSLATED('GEM', section[0])
-    if (gemInfo) {
-      item.vaalGem = gemInfo[0]
+    // only a Vaal gem's name: any other one-line section must not mark the gem as Vaal
+    const vaalGem = ITEM_BY_TRANSLATED('GEM', section[0])?.find(gem => gem.gem?.vaal)
+    if (vaalGem) {
+      item.vaalGem = vaalGem
       return 'SECTION_PARSED'
     }
   }
