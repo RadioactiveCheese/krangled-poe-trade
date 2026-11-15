@@ -1,0 +1,12 @@
+Item Class: Viscera
+Greater Solar Shield
+--------
+Upper Limb
+--------
+Item Level: 83
+--------
+{ Implicit Modifier }
+13(10-15)% of Cold Damage from Hits taken as Fire Damage
+12(10-15)% of Lightning Damage from Hits taken as Fire Damage
+--------
+Take this to the Wickerman in a town or hideout to attach it.

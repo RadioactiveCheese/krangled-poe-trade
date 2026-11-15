@@ -57,7 +57,7 @@ const weaponDPS = computed(() => {
   return { phys: pdps, elem: edps, total: pdps + edps }
 })
 
-const itemName = computed(() => props.item.info.name)
+const itemName = computed(() => props.item.visceraName ?? props.item.info.name)
 </script>
 
 <style lang="postcss" module>

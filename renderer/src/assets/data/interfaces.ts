@@ -75,6 +75,8 @@ export interface BaseType {
   tradeTag?: string
   exchangeable?: true
   tradeDisc?: string
+  // Non-craftable equipment can still have a price-check category.
+  category?: ItemCategory
   disc?: {
     propAR?: true
     propEV?: true

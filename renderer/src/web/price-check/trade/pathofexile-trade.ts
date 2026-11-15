@@ -57,7 +57,8 @@ export const CATEGORY_TO_TRADE_ID = new Map([
   // searches send no category filter.
   [ItemCategory.Idol, 'idol'],
   [ItemCategory.Chart, 'chart'],
-  [ItemCategory.Graft, 'graft']
+  [ItemCategory.Graft, 'graft'],
+  [ItemCategory.Viscera, 'viscera']
 ])
 
 const TOTAL_MODS_TEXT = {

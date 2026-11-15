@@ -186,6 +186,16 @@ function itemTextToSections (text: string) {
 }
 
 function normalizeName (item: ParserState) {
+  // The trade API lists Viscera by base name, without the in-game tier prefix.
+  // Only strip a tier when the remaining name is a known Viscera base.
+  const viscera = /^(?:Lesser|Greater) (.+)$/.exec(item.name)
+  if (!item.baseType && !item.rarity && viscera &&
+    ITEM_BY_TRANSLATED('ITEM', viscera[1])?.some(info => info.category === ItemCategory.Viscera)
+  ) {
+    item.visceraName = item.name
+    item.name = viscera[1]
+  }
+
   if (item.rarity === ItemRarity.Magic) {
     const baseType = magicBasetype(item.name)
     if (baseType) {
@@ -240,7 +250,9 @@ function findInDatabase (item: ParserState) {
   item.info = info[0]
   // same for every variant
   if (!item.category) {
-    if (item.info.craftable) {
+    if (item.info.category) {
+      item.category = item.info.category
+    } else if (item.info.craftable) {
       item.category = item.info.craftable.category
     } else if (item.info.unique) {
       item.category = ITEM_BY_REF('ITEM',
@@ -852,7 +864,8 @@ function parseModifiers (section: string[], item: ParsedItem) {
     item.rarity !== ItemRarity.Normal &&
     item.rarity !== ItemRarity.Magic &&
     item.rarity !== ItemRarity.Rare &&
-    item.rarity !== ItemRarity.Unique
+    item.rarity !== ItemRarity.Unique &&
+    item.category !== ItemCategory.Viscera
   ) {
     return 'PARSER_SKIPPED'
   }
