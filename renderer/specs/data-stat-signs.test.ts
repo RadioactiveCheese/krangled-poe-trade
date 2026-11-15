@@ -54,11 +54,24 @@ describe('stat matcher signs', () => {
       ['Gain a Void Charge every # seconds', 'Gain a Void Charge every second', 1],
       ['Effects of Consecrated Ground you create Linger for 1 second', 'Effects of Consecrated Ground you create Linger for 1 second', 1],
       ['Socketed Gems have +#% Critical Strike Chance', 'Socketed Gems have +3.5% Critical Strike Chance', 3.5],
-      ['Tier 1-15 Maps found have #% chance to become 1 tier higher', 'Tier 1-15 Maps found are 1 tier higher', 100]
+      ['Tier 1-15 Maps found have #% chance to become 1 tier higher', 'Tier 1-15 Maps found are 1 tier higher', 100],
+      // 3.30 wording of existing stats
+      ['Nearby stationary Enemies gain a Grasping Vine every second', 'Stationary Enemies within 6 metres gain a Grasping Vine every second', 1],
+      ['You and nearby Allies have 30% increased Mana Regeneration Rate', 'You and Allies within 7.5 metres have 30% reduced Mana Regeneration Rate', -1]
     ]
     for (const [ref, string, value] of expected) {
-      expect(STATS.en.get(ref)?.matchers.find(m => m.string === string)?.value, ref).toBe(value)
+      const matcher = STATS.en.get(ref)?.matchers.find(m => m.string === string)
+      expect(matcher?.value, `${ref}: ${string}`).toBe(value)
+      expect(matcher?.negate, `${ref}: ${string}`).toBeUndefined()
     }
+  })
+
+  it('does not read lines of a description\'s other stat', () => {
+    // "{0}% chance to gain Unholy Might on Block for {1} seconds": {0} is the chance, not the duration
+    expect(STATS.en.get('Gain Unholy Might on Block for # seconds')?.matchers.map(m => m.string))
+      .toEqual(['Gain Unholy Might on Block for # seconds'])
+    expect(STATS.en.get('Monsters fire # additional Projectiles')?.matchers.map(m => m.string))
+      .not.toContain('Players fire # additional Projectiles')
   })
 
   it.each(languages.filter(l => l !== 'en'))('gives %s the same signs and values as English', (language) => {
