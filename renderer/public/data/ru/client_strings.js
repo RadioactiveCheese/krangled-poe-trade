@@ -14,7 +14,7 @@ export default {
   MAP_ITEM_RARITY: 'Редкость предметов: ',
   MAP_MONSTER_PACK_SIZE: 'Размер групп монстров: ',
   MAP_MORE_MAPS: 'Больше карт: ',
-  MAP_MORE_SCARABS: 'Больше скарабеев: ',
+  MAP_MORE_THREADS: 'Больше нитей: ',
   MAP_MORE_CURRENCY: 'Больше валюты: ',
   MAP_MORE_DIVINATION_CARDS: 'Больше гадальных карт: ',
   MAP_COMPLETION_REWARD: /^Награда: Особая (.*)$/,

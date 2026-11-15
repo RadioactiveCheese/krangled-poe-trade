@@ -287,8 +287,8 @@ function parseMap (section: string[], item: ParsedItem) {
     } else if (line.startsWith(_$.MAP_MORE_MAPS)) {
       item.mapMoreMaps = parseInt(line.slice(_$.MAP_MORE_MAPS.length), 10)
       isParsed = 'SECTION_PARSED'
-    } else if (line.startsWith(_$.MAP_MORE_SCARABS)) {
-      item.mapMoreScarabs = parseInt(line.slice(_$.MAP_MORE_SCARABS.length), 10)
+    } else if (line.startsWith(_$.MAP_MORE_THREADS)) {
+      item.mapMoreThreads = parseInt(line.slice(_$.MAP_MORE_THREADS.length), 10)
       isParsed = 'SECTION_PARSED'
     } else if (line.startsWith(_$.MAP_MORE_CURRENCY)) {
       item.mapMoreCurrency = parseInt(line.slice(_$.MAP_MORE_CURRENCY.length), 10)
@@ -519,9 +519,10 @@ function parseVaalGem (section: string[], item: ParserState) {
   if (item.category !== ItemCategory.Gem) return 'PARSER_SKIPPED'
 
   if (section.length === 1) {
-    const gemInfo = ITEM_BY_TRANSLATED('GEM', section[0])
-    if (gemInfo) {
-      item.vaalGem = gemInfo[0]
+    // only a Vaal gem's name: any other one-line section must not mark the gem as Vaal
+    const vaalGem = ITEM_BY_TRANSLATED('GEM', section[0])?.find(gem => gem.gem?.vaal)
+    if (vaalGem) {
+      item.vaalGem = vaalGem
       return 'SECTION_PARSED'
     }
   }

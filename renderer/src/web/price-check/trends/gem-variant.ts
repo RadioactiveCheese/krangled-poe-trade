@@ -40,7 +40,19 @@ export function forSkillGem (item: ParsedItem) {
 
   return {
     ns: item.info.namespace,
-    name: item.info.refName,
+    name: ninjaGemName(item),
     variant
   }
+}
+
+/**
+ * A gem a Vaal Orb turned into its Vaal version keeps its own name in the copied text and
+ * names the Vaal gem in a section of its own. poe.ninja lists it under the Vaal gem, and a
+ * transfigured one under both names, e.g. "Vaal Spark (Spark of the Nova)".
+ */
+function ninjaGemName (item: ParsedItem) {
+  if (!item.vaalGem) return item.info.refName
+  return item.info.gem?.transfigured
+    ? `${item.vaalGem.refName} (${item.info.refName})`
+    : item.vaalGem.refName
 }

@@ -516,7 +516,10 @@ function createGemFilters (
 
   if (item.vaalGem) {
     filters.searchExact.sub = {
-      baseType: item.vaalGem.name,
+      // "Vaal Spark (Spark of the Nova)": the Vaal name alone reads like the plain Vaal gem
+      baseType: item.info.gem!.transfigured
+        ? `${item.vaalGem.name} (${item.info.name})`
+        : item.vaalGem.name,
       baseTypeTrade: t(opts, item.vaalGem),
       discriminatorTrade: item.info.tradeDisc,
       disabled: false

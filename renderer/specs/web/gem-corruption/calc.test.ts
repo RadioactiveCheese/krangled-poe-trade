@@ -251,7 +251,7 @@ describe('coverage of every gem against live poe.ninja data', () => {
     expect({ rows: rows.length, ...counts }).toEqual({
       rows: 543,
       'vaal-gem': 50,
-      'no-buy-price': 67,
+      'no-buy-price': 69,
       'no-sell-price': 30,
       'sell-outlier': 134
     })

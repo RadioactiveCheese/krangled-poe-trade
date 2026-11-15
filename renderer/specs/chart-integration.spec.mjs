@@ -87,15 +87,9 @@ Take this item to Valerie aboard the Sovereign to Chart this area.`
 
 const DUCAT_TEXT = `Item Class: Stackable Currency
 Rarity: Currency
-The Genteel's Ducat
+Merrick's Ducat
 --------
-Stack Size: 1/10
---------
-Changes a modifier that grants a single Attribute to grant a different Attribute
---------
-A noble Eternal who gave up his name to join the Brinerots. He climbed the ranks with calculated savagery like Pondium had never seen.
---------
-Can be used as part of Allflame Crafting aboard The Sovereign.`
+Stack Size: 1/10`
 
 const INCOMPLETE_SCRYING_ORB_TEXT = `Item Class: Stackable Currency
 Rarity: Currency
@@ -190,6 +184,22 @@ test('parses reworked Blighted Maps with localized area lines after aggregate pr
       assert.equal(runtime.parseClipboard(header).isErr(), true,
         'Blighted Maps without an area must fail closed')
     }
+  }
+  await runtime.Data.init('en')
+})
+
+test('parses the 3.30 "More Threads" map line, which replaced "More Scarabs"', async () => {
+  // Game ClientStrings ItemDisplayMapScarabDropBonus in 3.30.0.1.4, [Thread|…] markup resolved.
+  const labels = { en: 'More Threads', ru: 'Больше нитей', ko: '실낱 더 많음', 'cmn-Hant': '更多 綢帶' }
+  for (const [language, label] of Object.entries(labels)) {
+    await runtime.Data.init(language)
+    const strings = runtime.Data.CLIENT_STRINGS
+    assert.equal(strings.MAP_MORE_THREADS, `${label}: `)
+    const base = runtime.Data.ITEM_BY_REF('ITEM', 'Blighted Map')[0]
+    const area = runtime.Data.ITEM_BY_REF('AREA', 'Strand')[0]
+    const item = parseItem(`${strings.ITEM_CLASS}Maps\n${strings.RARITY}${strings.RARITY_NORMAL}\n${base.name}\n--------\n` +
+      `${strings.MAP_ITEM_QUANTITY}+12%\n${label}: +25%\n${strings.MAP_AREA}${area.name}`)
+    assert.equal(item.mapMoreThreads, 25, language)
   }
   await runtime.Data.init('en')
 })
@@ -329,7 +339,8 @@ Area contains 6(6-9) additional Strongboxes`)
 
 test('keeps chart-crafting currency out of the Map Check path', () => {
   const item = parseItem(DUCAT_TEXT)
-  assert.equal(item.info.refName, "The Genteel's Ducat")
+  // The other Ducats were league content and left in 3.30; Merrick's Ducat stayed.
+  assert.equal(item.info.refName, "Merrick's Ducat")
   assert.notEqual(item.category, runtime.ItemCategory.Chart)
   assert.equal(runtime.isMapLikeItem(item), false)
 })

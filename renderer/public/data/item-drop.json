@@ -1,42 +1,6 @@
 [
   {
     "query": [
-      "ITEM::Sacrifice at Dawn",
-      "ITEM::Sacrifice at Midnight",
-      "ITEM::Sacrifice at Noon",
-      "ITEM::Sacrifice at Dusk"
-    ],
-    "items": [
-      "UNIQUE::Atziri's Promise",
-      "UNIQUE::Doryani's Catalyst // Vaal Sceptre",
-      "ITEM::Mortal Ignorance",
-      "ITEM::Mortal Hope",
-      "ITEM::Mortal Rage",
-      "ITEM::Mortal Grief",
-      "DIVINATION_CARD::Alluring Bounty",
-      "DIVINATION_CARD::The Ethereal"
-    ]
-  },
-  {
-    "query": [
-      "ITEM::Mortal Ignorance",
-      "ITEM::Mortal Hope",
-      "ITEM::Mortal Rage",
-      "ITEM::Mortal Grief"
-    ],
-    "items": [
-      "UNIQUE::Atziri's Acuity // Vaal Gauntlets",
-      "UNIQUE::Atziri's Disfavour // Vaal Axe",
-      "UNIQUE::The Vertex // Vaal Mask",
-      "UNIQUE::Atziri's Splendour // ES, Sacrificial Garb",
-      "UNIQUE::Atziri's Splendour // Evasion/ES/Life, Sacrificial Garb",
-      "UNIQUE::Beauty // Vaal Aspect",
-      "DIVINATION_CARD::Alluring Bounty",
-      "DIVINATION_CARD::House of Mirrors"
-    ]
-  },
-  {
-    "query": [
       "ITEM::Vaal Temple Map // T0, Atlas"
     ],
     "items": [
@@ -83,8 +47,7 @@
       "UNIQUE::Khatal's Weeping // Lapis Amulet",
       "UNIQUE::The Bane of Hope // Maraketh Bow",
       "UNIQUE::Saresh's Darkness // Chain Belt",
-      "UNIQUE::The Desecrated Chalice // Coronal Maul",
-      "ITEM::Coin of Restoration"
+      "UNIQUE::The Desecrated Chalice // Coronal Maul"
     ],
     "items": [
       "UNIQUE::Skysunder // Exquisite Blade",
@@ -100,8 +63,7 @@
       "UNIQUE::Khatal's Geyser // Lapis Amulet",
       "UNIQUE::The Flame of Hope // Maraketh Bow",
       "UNIQUE::Solerai's Radiance // Chain Belt",
-      "UNIQUE::The Sacred Chalice // Coronal Maul",
-      "ITEM::Coin of Desecration"
+      "UNIQUE::The Sacred Chalice // Coronal Maul"
     ],
     "items": [
       "UNIQUE::Fleshrender // Exquisite Blade",
@@ -684,9 +646,10 @@
     ],
     "items": [
       "UNIQUE::Headhunter // Leather Belt",
-      "UNIQUE::Mageblood // Heavy Belt",
+      "UNIQUE::Mageblood // 4 Flasks, Heavy Belt",
       "UNIQUE::Defiance of Destiny // Paua Amulet",
-      "UNIQUE::The Squire // Elegant Round Shield"
+      "UNIQUE::The Squire // Elegant Round Shield",
+      "UNIQUE::Soul Taker // Siege Axe"
     ]
   },
   {
@@ -765,7 +728,6 @@
     "query": [
       "ITEM::Orb of Fusing",
       "ITEM::Omen of Connections",
-      "ITEM::Bestiary Scarab of the Shadowed Crow",
       "CAPTURED_BEAST::Black Mórrigan",
       "CAPTURED_BEAST::Craicic Sand Spitter"
     ],
@@ -780,7 +742,8 @@
   },
   {
     "query": [
-      "UNIQUE::Cortex // T0"
+      "UNIQUE::Cortex // T0",
+      "UNIQUE::Replica Cortex // T0"
     ],
     "items": [
       "UNIQUE::Bottled Faith",
@@ -819,6 +782,31 @@
       "UNIQUE::Circle of Regret // Topaz Ring",
       "UNIQUE::Cortex // T0"
     ]
+  },
+  {
+    "query": [
+      "UNIQUE::The Twilight Temple // T0"
+    ],
+    "items": [
+      "UNIQUE::Vix Lunaris // Cardinal Round Shield",
+      "UNIQUE::Invictus Solaris // Archon Kite Shield"
+    ]
+  },
+  {
+    "query": [
+      "UNIQUE::The Vinktar Square // T0"
+    ],
+    "items": [
+      "UNIQUE::Vessel of Vinktar"
+    ]
+  },
+  {
+    "query": [
+      "UNIQUE::The Coward's Trial // T0",
+      "UNIQUE::Replica Poorjoy's Asylum // T0",
+      "UNIQUE::Poorjoy's Asylum // T0"
+    ],
+    "items": []
   },
   {
     "query": [
@@ -861,14 +849,6 @@
       "UNIQUE::Leadership's Price // Onyx Amulet"
     ]
   },
-
-
-
-
-
-
-
-
   {
     "query": [
       "UNIQUE::Curio of Absorption // Primordial Fragment",
@@ -1149,106 +1129,6 @@
       "UNIQUE::Xoph's Blood // Amber Amulet"
     ]
   },
-  {
-    "query": [
-      "ITEM::Vial of Awakening",
-      "UNIQUE::Apep's Slumber // Vaal Spirit Shield"
-    ],
-    "items": [
-      "UNIQUE::Apep's Supremacy // Vaal Spirit Shield"
-    ]
-  },
-  {
-    "query": [
-      "ITEM::Vial of Consequence",
-      "UNIQUE::Coward's Chains // Chain Belt"
-    ],
-    "items": [
-      "UNIQUE::Coward's Legacy // Chain Belt"
-    ]
-  },
-  {
-    "query": [
-      "ITEM::Vial of Dominance",
-      "UNIQUE::Architect's Hand // Ambush Mitts"
-    ],
-    "items": [
-      "UNIQUE::Slavedriver's Hand // Ambush Mitts"
-    ]
-  },
-  {
-    "query": [
-      "ITEM::Vial of Fate",
-      "UNIQUE::Story of the Vaal // Gemstone Sword"
-    ],
-    "items": [
-      "UNIQUE::Fate of the Vaal // Gemstone Sword"
-    ]
-  },
-  {
-    "query": [
-      "ITEM::Vial of Summoning",
-      "UNIQUE::Mask of the Spirit Drinker // Magistrate Crown"
-    ],
-    "items": [
-      "UNIQUE::Mask of the Stitched Demon // Magistrate Crown"
-    ]
-  },
-  {
-    "query": [
-      "ITEM::Vial of the Ritual",
-      "UNIQUE::Dance of the Offered // Carnal Boots"
-    ],
-    "items": [
-      "UNIQUE::Omeyocan // Carnal Boots"
-    ]
-  },
-  {
-    "query": [
-      "UNIQUE::Tempered Flesh // Crimson Jewel",
-      "UNIQUE::Tempered Spirit // Viridian Jewel",
-      "UNIQUE::Tempered Mind // Cobalt Jewel",
-      "ITEM::Vial of Transcendence"
-    ],
-    "items": [
-      "UNIQUE::Transcendent Flesh // Crimson Jewel",
-      "UNIQUE::Transcendent Spirit // Viridian Jewel",
-      "UNIQUE::Transcendent Mind // Cobalt Jewel"
-    ]
-  },
-  {
-    "query": [
-      "ITEM::Vial of Sacrifice",
-      "UNIQUE::Sacrificial Heart // Paua Amulet"
-    ],
-    "items": [
-      "UNIQUE::Zerphi's Heart // Paua Amulet"
-    ]
-  },
-  {
-    "query": [
-      "ITEM::Vial of the Ghost",
-      "UNIQUE::Soul Catcher"
-    ],
-    "items": [
-      "UNIQUE::Soul Ripper"
-    ]
-  },
-  {
-    "query": [
-      "ITEM::Trarthan Scarab",
-      "ITEM::Trarthan Scarab of Renown"
-    ],
-    "items": [
-      "UNIQUE::Hand of Heresy // Martyr Gloves",
-      "UNIQUE::Binds of Bloody Vengeance // Vanguard Belt",
-      "UNIQUE::Azadi Crest // Lacquered Buckler",
-      "UNIQUE::The Ghastly Theatre // Teak Round Shield",
-      "UNIQUE::Howlcrack // Ezomyte Burgonet",
-      "UNIQUE::Scornflux // Satin Slippers"
-    ]
-  },
-
   {
     "query": [
       "ITEM::Deafening Essence of Greed",

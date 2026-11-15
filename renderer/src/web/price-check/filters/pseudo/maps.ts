@@ -7,7 +7,8 @@ import { noSourcePseudoToFilter, propToFilter } from './item-property'
 import { findAndResolveByRef, statToNotFilter } from './utils'
 
 const PSEUDO = {
-  MORE_SCARABS: stat('More Scarabs: #%'),
+  // Maps say "More Threads" since 3.30; the trade site still names the pseudo stat after Scarabs.
+  MORE_THREADS: stat('More Scarabs: #%'),
   MORE_MAPS: stat('More Maps: #%'),
   MORE_DIVINATION_CARDS: stat('More Divination Cards: #%'),
   MORE_CURRENCY: stat('More Currency: #%'),
@@ -58,7 +59,7 @@ export function mapProps (bulk: boolean, ctx: FiltersCreationContext): void {
   if (item.category !== ItemCategory.Map || item.mapCompletionReward || item.rarity === ItemRarity.Unique) return
 
   if (!bulk) {
-    const hasValuableDrops = Boolean(item.mapMoreScarabs || item.mapMoreCurrency || item.mapMoreDivCards)
+    const hasValuableDrops = Boolean(item.mapMoreThreads || item.mapMoreCurrency || item.mapMoreDivCards)
 
     areaProps({
       disabled: {
@@ -75,10 +76,10 @@ export function mapProps (bulk: boolean, ctx: FiltersCreationContext): void {
         disabled: true
       }, ctx))
     }
-    if (item.mapMoreScarabs) {
+    if (item.mapMoreThreads) {
       ctx.filters.push(noSourcePseudoToFilter({
-        pseudo: pseudoStatByRef(PSEUDO.MORE_SCARABS)!,
-        roll: { min: 0, max: Number.MAX_SAFE_INTEGER, value: item.mapMoreScarabs },
+        pseudo: pseudoStatByRef(PSEUDO.MORE_THREADS)!,
+        roll: { min: 0, max: Number.MAX_SAFE_INTEGER, value: item.mapMoreThreads },
         disabled: false
       }, ctx))
     }
