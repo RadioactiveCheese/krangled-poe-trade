@@ -5919,7 +5919,7 @@
 {"ref":"More Divination Cards: #%","better":1,"matchers":[{"string":"점술 카드 더 많음: #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_map_more_card_drops"]}}}
 {"ref":"More Duration","better":1,"modFamily":["Lesser More Duration","More Duration","Greater More Duration"],"mercenary":{"tier":2,"canonical":"More Duration"},"matchers":[{"string":"지속시간 증폭","advanced":"지속시간 증폭 (등급: 2)"}],"trade":{"ids":{"pseudo":["mercenary.support_50222"]}}}
 {"ref":"More Maps: #%","better":1,"matchers":[{"string":"지도 더 많음: #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_map_more_map_drops"]}}}
-{"ref":"More Scarabs: #%","better":1,"matchers":[{"string":"갑충석 더 많음: #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_map_more_scarab_drops"]}}}
+{"ref":"More Scarabs: #%","better":1,"matchers":[{"string":"실낱 더 많음: #% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_map_more_scarab_drops"]}}}
 {"ref":"Movement Speed cannot be modified to below Base Value","better":1,"matchers":[{"string":"이동 속도가 기본 수치 밑으로 내려가지 않음"}],"trade":{"ids":{"explicit":["explicit.stat_3875592188"],"fractured":["fractured.stat_3875592188"]}}}
 {"ref":"Moving while Bleeding doesn't cause you to take extra Damage","better":1,"matchers":[{"string":"출혈 상태에서 이동해도 추가 피해를 받지 않음"}],"trade":{"ids":{"explicit":["explicit.stat_935326447"],"implicit":["implicit.stat_935326447"],"fractured":["fractured.stat_935326447"],"crafted":["crafted.stat_935326447"]}}}
 {"ref":"Multiple Projectiles","better":1,"modFamily":["Multiple Projectiles","Greater Multiple Projectiles"],"mercenary":{"tier":1,"canonical":"Multiple Projectiles"},"matchers":[{"string":"다중 투사체","advanced":"다중 투사체 (등급: 1)"}],"trade":{"ids":{"pseudo":["mercenary.support_12054"]}}}

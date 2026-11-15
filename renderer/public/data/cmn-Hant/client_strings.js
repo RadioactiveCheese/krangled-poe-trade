@@ -14,7 +14,7 @@ export default {
   MAP_ITEM_RARITY: '物品稀有度: ',
   MAP_MONSTER_PACK_SIZE: '怪物群大小: ',
   MAP_MORE_MAPS: '更多地圖: ',
-  MAP_MORE_SCARABS: '更多聖甲蟲: ',
+  MAP_MORE_THREADS: '更多 綢帶: ',
   MAP_MORE_CURRENCY: '更多通貨: ',
   MAP_MORE_DIVINATION_CARDS: '更多命運卡: ',
   MAP_COMPLETION_REWARD: /^獎勵: 貼模 \((.*)\)$/,

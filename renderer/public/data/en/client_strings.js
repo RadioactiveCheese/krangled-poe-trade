@@ -14,7 +14,7 @@ export default {
   MAP_ITEM_RARITY: 'Item Rarity: ',
   MAP_MONSTER_PACK_SIZE: 'Monster Pack Size: ',
   MAP_MORE_MAPS: 'More Maps: ',
-  MAP_MORE_SCARABS: 'More Scarabs: ',
+  MAP_MORE_THREADS: 'More Threads: ',
   MAP_MORE_CURRENCY: 'More Currency: ',
   MAP_MORE_DIVINATION_CARDS: 'More Divination Cards: ',
   MAP_COMPLETION_REWARD: /^Reward: Foil (.*)$/,

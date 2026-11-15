@@ -137,7 +137,7 @@ export interface TranslationDict {
   MAP_ITEM_RARITY: string
   MAP_MONSTER_PACK_SIZE: string
   MAP_MORE_MAPS: string
-  MAP_MORE_SCARABS: string
+  MAP_MORE_THREADS: string
   MAP_MORE_CURRENCY: string
   MAP_MORE_DIVINATION_CARDS: string
   MAP_COMPLETION_REWARD: RegExp

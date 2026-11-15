@@ -287,8 +287,8 @@ function parseMap (section: string[], item: ParsedItem) {
     } else if (line.startsWith(_$.MAP_MORE_MAPS)) {
       item.mapMoreMaps = parseInt(line.slice(_$.MAP_MORE_MAPS.length), 10)
       isParsed = 'SECTION_PARSED'
-    } else if (line.startsWith(_$.MAP_MORE_SCARABS)) {
-      item.mapMoreScarabs = parseInt(line.slice(_$.MAP_MORE_SCARABS.length), 10)
+    } else if (line.startsWith(_$.MAP_MORE_THREADS)) {
+      item.mapMoreThreads = parseInt(line.slice(_$.MAP_MORE_THREADS.length), 10)
       isParsed = 'SECTION_PARSED'
     } else if (line.startsWith(_$.MAP_MORE_CURRENCY)) {
       item.mapMoreCurrency = parseInt(line.slice(_$.MAP_MORE_CURRENCY.length), 10)

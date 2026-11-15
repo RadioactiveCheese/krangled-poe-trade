@@ -5924,7 +5924,7 @@
 {"ref":"More Divination Cards: #%","better":1,"matchers":[{"string":"額外命運卡：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_map_more_card_drops"]}}}
 {"ref":"More Duration","better":1,"modFamily":["Lesser More Duration","More Duration","Greater More Duration"],"mercenary":{"tier":2,"canonical":"More Duration"},"matchers":[{"string":"更多持續時間","advanced":"更多持續時間(階層：2)"}],"trade":{"ids":{"pseudo":["mercenary.support_50222"]}}}
 {"ref":"More Maps: #%","better":1,"matchers":[{"string":"更多地圖：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_map_more_map_drops"]}}}
-{"ref":"More Scarabs: #%","better":1,"matchers":[{"string":"更多聖甲蟲：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_map_more_scarab_drops"]}}}
+{"ref":"More Scarabs: #%","better":1,"matchers":[{"string":"更多 綢帶：#% "}],"trade":{"ids":{"pseudo":["pseudo.pseudo_map_more_scarab_drops"]}}}
 {"ref":"Movement Speed cannot be modified to below Base Value","better":1,"matchers":[{"string":"你的移動速度加成不會讓你降至基礎速度以下"}],"trade":{"ids":{"explicit":["explicit.stat_3875592188"],"fractured":["fractured.stat_3875592188"]}}}
 {"ref":"Moving while Bleeding doesn't cause you to take extra Damage","better":1,"matchers":[{"string":"流血狀態下移動不再承受額外的傷害"}],"trade":{"ids":{"explicit":["explicit.stat_935326447"],"implicit":["implicit.stat_935326447"],"fractured":["fractured.stat_935326447"],"crafted":["crafted.stat_935326447"]}}}
 {"ref":"Multiple Projectiles","better":1,"modFamily":["Multiple Projectiles","Greater Multiple Projectiles"],"mercenary":{"tier":1,"canonical":"Multiple Projectiles"},"matchers":[{"string":"多重投射物","advanced":"多重投射物(階層：1)"}],"trade":{"ids":{"pseudo":["mercenary.support_12054"]}}}

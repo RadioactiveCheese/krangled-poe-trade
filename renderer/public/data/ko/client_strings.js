@@ -14,7 +14,7 @@ export default {
   MAP_ITEM_RARITY: '아이템 희귀도: ',
   MAP_MONSTER_PACK_SIZE: '몬스터 무리 규모: ',
   MAP_MORE_MAPS: '지도 더 많음: ',
-  MAP_MORE_SCARABS: '갑충석 더 많음: ',
+  MAP_MORE_THREADS: '실낱 더 많음: ',
   MAP_MORE_CURRENCY: '화폐 더 많음: ',
   MAP_MORE_DIVINATION_CARDS: '점술 카드 증폭: ',
   MAP_COMPLETION_REWARD: /^보상: 반짝이 (.*)$/,

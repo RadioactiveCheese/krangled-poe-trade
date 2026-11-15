@@ -44,7 +44,7 @@ export interface ParsedItem {
   mapCompletionReward?: BaseType
   mapTier?: number
   mapMoreMaps?: number
-  mapMoreScarabs?: number
+  mapMoreThreads?: number
   mapMoreCurrency?: number
   mapMoreDivCards?: number
   logbookAreaMods?: ParsedModifier[][]
