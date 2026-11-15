@@ -66,6 +66,14 @@ describe('stat matcher signs', () => {
     }
   })
 
+  it('keeps pre-3.30 wording of stats that share a ref', () => {
+    // "#% increased Dead Man's Sulphur found in this Area" exists twice with the same trade ID
+    const lines = (language: string) => readFileSync(new URL(`../public/data/${language}/stats.ndjson`, import.meta.url), 'utf8')
+      .split(/\r?\n/u).filter(line => line.includes('"ref":"#% increased Dead Man\'s Sulphur found in this Area"')).join('\n')
+    expect(lines('ru')).toContain('"#% увеличение количества находимой в этой области Серы Мертвеца"')
+    expect(lines('cmn-Hant')).toContain('"增加 #% 相鄰區域內找到的亡者硫酸"')
+  })
+
   it('does not read lines of a description\'s other stat', () => {
     // "{0}% chance to gain Unholy Might on Block for {1} seconds": {0} is the chance, not the duration
     expect(STATS.en.get('Gain Unholy Might on Block for # seconds')?.matchers.map(m => m.string))
