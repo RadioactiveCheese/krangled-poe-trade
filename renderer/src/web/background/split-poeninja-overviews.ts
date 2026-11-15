@@ -45,7 +45,6 @@ export function splitJsonBlob (jsonBlob: string): PriceDatabase {
     { ns: 'ITEM', url: 'resonators', type: 'Resonator' },
     { ns: 'ITEM', url: 'incubators', type: 'Incubator' },
     { ns: 'ITEM', url: 'oils', type: 'Oil' },
-    { ns: 'ITEM', url: 'vials', type: 'Vial' },
     { ns: 'ITEM', url: 'invitations', type: 'Invitation' },
     { ns: 'ITEM', url: 'blighted-maps', type: 'BlightedMap' },
     { ns: 'ITEM', url: 'blight-ravaged-maps', type: 'BlightRavagedMap' },
