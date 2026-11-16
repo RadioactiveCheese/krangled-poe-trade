@@ -89,7 +89,7 @@ export default {
   HEIST_TARGET_PRICELESS: '환산 불가능한 가치',
   MIRRORED: '복제',
   SPLIT: '분할됨',
-  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]*)")?(?:\s+\(등급: (?<tier>\d+)\))?(?:\s+\(단계: (?<rank>\d+)\))?$/,
+  MODIFIER_LINE: /^(?<type>[^"]+?)(?:\s+"(?<name>[^"]*)")?(?:\s+\(등급: (?<tier>\d+)\))?(?:\s+\(단계: (?<rank>\d+)\))?$/,
   PREFIX_MODIFIER: '접두어 속성 부여',
   SUFFIX_MODIFIER: '접미어 속성 부여',
   CRAFTED_PREFIX: '대가의 제작 접두어 속성 부여',

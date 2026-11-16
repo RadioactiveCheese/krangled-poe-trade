@@ -89,7 +89,7 @@ export default {
   HEIST_TARGET_PRICELESS: 'бесценный',
   MIRRORED: 'Отражено',
   SPLIT: 'Разделено',
-  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]*)")?(?:\s+\(Уровень: (?<tier>\d+)\))?(?:\s+\(Ранг: (?<rank>\d+)\))?$/,
+  MODIFIER_LINE: /^(?<type>[^"]+?)(?:\s+"(?<name>[^"]*)")?(?:\s+\(Уровень: (?<tier>\d+)\))?(?:\s+\(Ранг: (?<rank>\d+)\))?$/,
   PREFIX_MODIFIER: 'Свойство-префикс',
   SUFFIX_MODIFIER: 'Свойство-суффикс',
   CRAFTED_PREFIX: 'Ремесленное Свойство-префикс',
