@@ -89,7 +89,7 @@ export default {
   HEIST_TARGET_PRICELESS: '無價',
   MIRRORED: '已複製',
   SPLIT: '分化',
-  MODIFIER_LINE: /^(?<type>[^"]+)(?:\s+"(?<name>[^"]*)")?(?:\s*\(階層：(?<tier>\d+)\))?(?:\s*\(階級：(?<rank>\d+)\))?$/,
+  MODIFIER_LINE: /^(?<type>[^"]+?)(?:\s+"(?<name>[^"]*)")?(?:\s*\(階層：(?<tier>\d+)\))?(?:\s*\(階級：(?<rank>\d+)\))?$/,
   PREFIX_MODIFIER: '前綴',
   SUFFIX_MODIFIER: '後綴',
   CRAFTED_PREFIX: '已大師工藝 前綴',
