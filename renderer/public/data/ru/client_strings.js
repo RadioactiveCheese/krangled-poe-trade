@@ -11,6 +11,7 @@ export default {
   RARITY_QUEST: 'Задание',
   MAP_TIER: / \(Ур. (\d+)\)$/,
   MAP_ITEM_QUANTITY: 'Количество предметов: ',
+  MAP_ATLAS_DROPS: 'Награды в Атласе: ',
   MAP_ITEM_RARITY: 'Редкость предметов: ',
   MAP_MONSTER_PACK_SIZE: 'Размер групп монстров: ',
   MAP_MORE_MAPS: 'Больше карт: ',

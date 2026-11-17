@@ -11,6 +11,7 @@ export default {
   RARITY_QUEST: '퀘스트',
   MAP_TIER: / \((\d+)등급\)$/,
   MAP_ITEM_QUANTITY: '아이템 수량: ',
+  MAP_ATLAS_DROPS: '아틀라스 획득물: ',
   MAP_ITEM_RARITY: '아이템 희귀도: ',
   MAP_MONSTER_PACK_SIZE: '몬스터 무리 규모: ',
   MAP_MORE_MAPS: '지도 더 많음: ',

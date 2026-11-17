@@ -11,6 +11,7 @@ export default {
   RARITY_QUEST: '任務',
   MAP_TIER: /（階級 (\d+)）$/,
   MAP_ITEM_QUANTITY: '物品數量: ',
+  MAP_ATLAS_DROPS: '輿圖掉落物: ',
   MAP_ITEM_RARITY: '物品稀有度: ',
   MAP_MONSTER_PACK_SIZE: '怪物群大小: ',
   MAP_MORE_MAPS: '更多地圖: ',

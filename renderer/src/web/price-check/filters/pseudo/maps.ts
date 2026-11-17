@@ -34,6 +34,15 @@ function areaProps (
       disabled: disabled.itemQuantity
     }, ctx))
   }
+  if (item.areaAtlasDrops) {
+    ctx.filters.push(propToFilter({
+      ref: 'Atlas Drops: +#%',
+      tradeId: 'item.map_atlas_drops',
+      roll: { min: 0, max: Number.MAX_SAFE_INTEGER, value: item.areaAtlasDrops },
+      sources: [],
+      disabled: disabled.itemQuantity // reuse quant
+    }, ctx))
+  }
   if (item.areaItemRarity) {
     ctx.filters.push(propToFilter({
       ref: 'Item Rarity: +#%',

@@ -136,6 +136,7 @@ export interface TranslationDict {
   RARITY_QUEST: string
   MAP_TIER: RegExp
   MAP_ITEM_QUANTITY: string
+  MAP_ATLAS_DROPS: string
   MAP_ITEM_RARITY: string
   MAP_MONSTER_PACK_SIZE: string
   MAP_MORE_MAPS: string

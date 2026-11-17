@@ -11,6 +11,7 @@ export default {
   RARITY_QUEST: 'Quest',
   MAP_TIER: / \(Tier (\d+)\)$/,
   MAP_ITEM_QUANTITY: 'Item Quantity: ',
+  MAP_ATLAS_DROPS: 'Atlas Drops: ',
   MAP_ITEM_RARITY: 'Item Rarity: ',
   MAP_MONSTER_PACK_SIZE: 'Monster Pack Size: ',
   MAP_MORE_MAPS: 'More Maps: ',
