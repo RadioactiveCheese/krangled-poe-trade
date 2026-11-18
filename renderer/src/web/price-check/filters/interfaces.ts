@@ -64,6 +64,9 @@ export interface ItemFilters {
     disabled: boolean
     hidden: boolean
   }
+  notCatalysed?: {
+    disabled: boolean
+  }
   foil?: {
     disabled: boolean
   }

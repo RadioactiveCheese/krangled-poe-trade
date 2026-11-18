@@ -307,6 +307,10 @@ export function createFilters (
     filters.searchExact.baseType = item.visceraName
   }
 
+  if (ACCESSORY.has(item.category!) && !item.quality) {
+    filters.notCatalysed = { disabled: false }
+  }
+
   if (item.quality && item.quality >= 20 && !ACCESSORY.has(item.category!)) {
     if (
       item.category === ItemCategory.Flask || item.category === ItemCategory.Tincture ||

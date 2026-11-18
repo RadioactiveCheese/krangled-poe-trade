@@ -118,6 +118,7 @@
     "not_mirrored": "Not Mirrored",
     "split": "Split",
     "not_split": "Not Split",
+    "not_catalysed": "Not Catalysed",
     "map_foil_reward": "Foil {0}"
   },
   "item_category": {
