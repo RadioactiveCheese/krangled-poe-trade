@@ -42,6 +42,7 @@ export default {
   TAG_WARD: 'Барьер: ',
   BLOCK_CHANCE: 'Шанс заблокировать удар: ',
   CORRUPTED: 'Осквернено',
+  TWICE_CORRUPTED: 'Дважды осквернено',
   UNIDENTIFIED: 'Неопознано',
   ITEM_SUPERIOR: /^(.*) высокого качества$/,
   MAP_BLIGHTED: /^Заражённая (.*)$/,

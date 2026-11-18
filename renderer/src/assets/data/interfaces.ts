@@ -169,6 +169,7 @@ export interface TranslationDict {
   TAG_WARD: string
   BLOCK_CHANCE: string
   CORRUPTED: string
+  TWICE_CORRUPTED: string
   UNIDENTIFIED: string
   ITEM_SUPERIOR: RegExp
   MAP_BLIGHTED: RegExp
