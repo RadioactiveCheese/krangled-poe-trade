@@ -148,6 +148,7 @@ export interface StatFilter {
   tag: FilterTag
   oils?: string[]
   mercenary?: { icon?: string, tier?: number, maxTier?: boolean, supportFamilies?: Stat[][] }
+  reminderText?: string
   sources: StatCalculated['sources']
   not?: true
   roll?: {
