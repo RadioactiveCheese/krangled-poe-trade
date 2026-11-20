@@ -70,7 +70,6 @@ function chartItem (): ParsedItem {
     unknownModifiers: [],
     newMods: [],
     isUnidentified: false,
-    isCorrupted: false,
     isMirrored: false,
     isSplit: false,
     isFractured: false,

@@ -298,6 +298,17 @@ test('map checker shows the Rare-only modifier of a reported map', () => {
   assert.equal(prefix.info.tier, 1)
 })
 
+test('price check keeps Rare-only map modifiers under the current and the pre-3.30.0.3 English header', () => {
+  // 3.30.0.3 changed "{ Rare-only (Tier: 1) }" to "{ Rare-only Prefix Modifier (Tier: 1) }".
+  for (const header of ['{ Rare-only (Tier: 1) }', '{ Rare-only Prefix Modifier (Tier: 1) }']) {
+    const item = parseItem(RARE_ONLY_MAP_TEXT.replace('{ Rare-only (Tier: 1) }', header))
+    const mirage = item.newMods.find(mod => mod.stats.some(stat => stat.stat.ref === RARE_ONLY_STATS[0][0]))
+    assert.equal(mirage?.info.mechanic, 'explicit-rareonly', header)
+    const filters = runtime.createExactStatFilters(item, item.statsByType, { searchStatRange: 0 })
+    assert.ok(filters.some(filter => filter.statRef === RARE_ONLY_STATS[0][0]), `${header}: the Mirage must be a price filter`)
+  }
+})
+
 test('every Rare-only map modifier is checkable in every language', async () => {
   try {
     for (const [language, { header, lines }] of Object.entries(RARE_ONLY_MAP_MODS)) {
@@ -308,6 +319,8 @@ test('every Rare-only map modifier is checkable in every language', async () => 
         `--------\n${strings.ITEM_LEVEL}75\n--------\n${lines.map(line => `${header}\n${line}`).join('\n')}`)
       assert.deepEqual(item.unknownModifiers, [], language)
       assert.deepEqual(item.newMods.map(mod => [mod.info.type, mod.info.tier]), lines.map(() => ['explicit', 1]), language)
+      // These headers do not say prefix or suffix, so the side stays unknown.
+      assert.deepEqual(item.newMods.map(mod => [mod.info.mechanic, mod.info.generation]), lines.map(() => ['explicit-rareonly', undefined]), language)
       assert.deepEqual(item.statsByType.map(calc => [calc.stat.ref, calc.stat.trade.ids.explicit?.[0], calc.stat.fromAreaMods]),
         RARE_ONLY_STATS.map(([ref, id]) => [ref, id, 'yes']), `${language}: stats must be explicit and listed in Map Check settings`)
       assert.deepEqual(runtime.prepareMapStats(item).map(entry => entry.matcher), lines, language)

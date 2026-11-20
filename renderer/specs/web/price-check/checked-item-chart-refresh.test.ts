@@ -87,7 +87,6 @@ function chart (refName: 'Sandy Seabed Chart' | 'Coral Reef Chart') {
     unknownModifiers: [],
     newMods: [],
     isUnidentified: false,
-    isCorrupted: false,
     isMirrored: false,
     isSplit: false,
     isFractured: false,

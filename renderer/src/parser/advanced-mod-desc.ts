@@ -63,6 +63,9 @@ export function parseModInfoLine (line: string): ModifierInfo {
       type = ModifierType.Implicit
       mechanic = ModifierMechanic.Vestigial
     }
+    if (_$.RARE_ONLY_AFFIX !== undefined && modifierType === _$.RARE_ONLY_AFFIX) {
+      mechanic = ModifierMechanic.RareOnly
+    }
 
     switch (modifierType) {
       case _$.IMPLICIT_MODIFIER:
@@ -74,16 +77,21 @@ export function parseModInfoLine (line: string): ModifierInfo {
       case _$.CRAFTED_PREFIX:
       case _$.CRAFTED_SUFFIX:
         type = ModifierType.Crafted; break
+      case _$.RARE_ONLY_PREFIX:
+      case _$.RARE_ONLY_SUFFIX:
+        mechanic = ModifierMechanic.RareOnly; break
     }
 
     switch (modifierType) {
       case _$.PREFIX_MODIFIER:
       case _$.FRACTURED_PREFIX:
       case _$.CRAFTED_PREFIX:
+      case _$.RARE_ONLY_PREFIX:
         generation = 'prefix'; break
       case _$.SUFFIX_MODIFIER:
       case _$.FRACTURED_SUFFIX:
       case _$.CRAFTED_SUFFIX:
+      case _$.RARE_ONLY_SUFFIX:
         generation = 'suffix'; break
       case _$.CORRUPTED_IMPLICIT:
         mechanic = ModifierMechanic.Corruption; break

@@ -40,6 +40,7 @@ export interface ParsedItem {
   mapArea?: BaseType
   areaLevel?: number
   areaItemQuantity?: number
+  areaAtlasDrops?: number
   areaItemRarity?: number
   areaPackSize?: number
   mapCompletionReward?: BaseType
@@ -73,7 +74,7 @@ export interface ParsedItem {
   }
   stackSize?: { value: number, max: number }
   isUnidentified: boolean
-  isCorrupted: boolean
+  isCorrupted?: { twice?: boolean }
   isUnmodifiable?: boolean
   isMirrored?: boolean
   isSplit?: boolean
@@ -120,7 +121,6 @@ export function createVirtualItem (
   return {
     ...props,
     isUnidentified: props.isUnidentified ?? false,
-    isCorrupted: props.isCorrupted ?? false,
     newMods: props.newMods ?? [],
     statsByType: props.statsByType ?? [],
     unknownModifiers: props.unknownModifiers ?? [],

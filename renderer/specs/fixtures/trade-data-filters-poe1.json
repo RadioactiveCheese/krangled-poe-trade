@@ -1,6 +1,6 @@
 {
   "source": "https://www.pathofexile.com/api/trade/data/filters",
-  "fetched": "2026-10-03",
+  "fetched": "2026-11-20",
   "result": [
     { "id": "status_filters", "filters": [
       {"id": "status", "options": ["available", "securable", "onlineleague", "online", "any"]}
@@ -41,14 +41,12 @@
       {"id": "map_packsize"},
       {"id": "map_iiq"},
       {"id": "map_iir"},
-      {"id": "map_gold"},
-      {"id": "chart_sulphur"},
-      {"id": "chart_shape", "options": ["", "1", "2", "3", "4", "5"]},
+      {"id": "map_bonus"},
       {"id": "area_level"},
-      {"id": "map_series"},
       {"id": "map_blighted"},
       {"id": "map_uberblighted"},
-      {"id": "map_completion_reward"}
+      {"id": "map_completion_reward"},
+      {"id": "map_series"}
     ] },
     { "id": "heist_filters", "filters": [
       {"id": "heist_wings"},
@@ -87,13 +85,16 @@
       {"id": "gem_level_progress"},
       {"id": "gem_transfigured"},
       {"id": "gem_vaal"},
-      {"id": "fractured_item"},
       {"id": "gem_imbued"},
+      {"id": "fractured_item"},
       {"id": "synthesised_item"},
       {"id": "searing_item"},
       {"id": "tangled_item"},
       {"id": "identified"},
+      {"id": "unidentified_tier"},
+      {"id": "fated"},
       {"id": "corrupted"},
+      {"id": "twice_corrupted"},
       {"id": "mirrored"},
       {"id": "split"},
       {"id": "crafted"},

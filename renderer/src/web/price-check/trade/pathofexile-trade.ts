@@ -135,6 +135,7 @@ interface TradeRequest {
           quality?: FilterRange
           gem_level?: FilterRange
           corrupted?: FilterBoolean
+          twice_corrupted?: FilterBoolean
           fractured_item?: FilterBoolean
           gem_imbued?: FilterBoolean
           mirrored?: FilterBoolean
@@ -169,6 +170,7 @@ interface TradeRequest {
         filters: {
           map_tier?: FilterRange
           map_iiq?: FilterRange
+          map_bonus?: FilterRange
           map_iir?: FilterRange
           map_packsize?: FilterRange
           chart_shape?: { option?: string }
@@ -341,6 +343,9 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
   if (filters.corrupted?.value === false || filters.corrupted?.exact) {
     propSet(query.filters, 'misc_filters.filters.corrupted.option', String(filters.corrupted.value))
   }
+  if (filters.corrupted?.value === true && filters.corrupted.twice === false) {
+    propSet(query.filters, 'misc_filters.filters.twice_corrupted.option', String(filters.corrupted.twice))
+  }
   if (filters.fractured?.value === false) {
     propSet(query.filters, 'misc_filters.filters.fractured_item.option', String(false))
   }
@@ -358,6 +363,9 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
   }
   if (filters.mirrored?.disabled) {
     propSet(query.filters, 'misc_filters.filters.mirrored.option', String(false))
+  }
+  if (filters.notCatalysed && !filters.notCatalysed.disabled) {
+    propSet(query.filters, 'misc_filters.filters.quality.max', 0)
   }
 
   if (filters.gemLevel && !filters.gemLevel.disabled) {
@@ -509,6 +517,10 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
       case 'item.map_item_quantity':
         propSet(query.filters, 'map_filters.filters.map_iiq.min', typeof input.min === 'number' ? input.min : undefined)
         propSet(query.filters, 'map_filters.filters.map_iiq.max', typeof input.max === 'number' ? input.max : undefined)
+        break
+      case 'item.map_atlas_drops':
+        propSet(query.filters, 'map_filters.filters.map_bonus.min', typeof input.min === 'number' ? input.min : undefined)
+        propSet(query.filters, 'map_filters.filters.map_bonus.max', typeof input.max === 'number' ? input.max : undefined)
         break
       case 'item.map_item_rarity':
         propSet(query.filters, 'map_filters.filters.map_iir.min', typeof input.min === 'number' ? input.min : undefined)

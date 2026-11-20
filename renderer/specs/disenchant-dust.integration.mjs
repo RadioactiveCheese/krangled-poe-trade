@@ -119,7 +119,7 @@ Item Level: 84
 +2 to Level of Socketed AoE Gems (implicit)
 --------
 Corrupted`)
-  assert.equal(item.isCorrupted, true)
+  assert.deepEqual(item.isCorrupted, {})
   const corruptions = item.newMods.filter(mod => mod.info.mechanic === 'corrupted')
   assert.equal(corruptions.length, 2)
   assert.ok(corruptions.every(mod => mod.info.generation === undefined))

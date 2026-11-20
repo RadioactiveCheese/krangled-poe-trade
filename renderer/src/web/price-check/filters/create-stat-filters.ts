@@ -1,6 +1,6 @@
 import { ParsedItem, ItemRarity, ItemCategory } from '@/parser'
 import { ACCESSORY } from '@/parser/meta'
-import { ModifierType, StatCalculated, statSourcesTotal, translateStatWithRoll } from '@/parser/modifiers'
+import { ModifierType, ModifierMechanic, StatCalculated, statSourcesTotal, translateStatWithRoll } from '@/parser/modifiers'
 import { getPropQuality, QUALITY_CHANGING_ENCHANT } from '@/parser/calc-q20'
 import { percentRoll, percentRollDelta, roundRoll } from './util'
 import { FilterTag, ItemHasEmptyModifier, StatFilter, FilterOrGroup } from './interfaces'
@@ -70,7 +70,9 @@ export function createExactStatFilters (
       ? Math.min(2, opts.searchStatRange)
       : opts.searchStatRange,
     filters: [],
-    statsByType: statsByType.filter(calc => keepByType.includes(calc.type))
+    statsByType: statsByType.filter(calc =>
+      keepByType.includes(calc.type) ||
+      calc.sources.some(({ modifier }) => modifier.info.mechanic === ModifierMechanic.RareOnly))
   }
 
   if (isChart) {
@@ -224,6 +226,7 @@ export function calculatedStatToFilter (
       tag: (type === ModifierType.Enchant)
         ? FilterTag.Enchant
         : FilterTag.Variant,
+      reminderText: sources[0].stat.stat.reminderText,
       sources: sources,
       option: {
         value: sources[0].contributes!.value
@@ -244,6 +247,7 @@ export function calculatedStatToFilter (
     text: translation.string,
     tag: type,
     oils: decodeOils(calc),
+    reminderText: sources.find(({ stat }) => stat.stat.reminderText != null)?.stat.stat.reminderText,
     sources: sources,
     roll: undefined,
     disabled: true

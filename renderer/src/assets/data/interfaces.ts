@@ -20,6 +20,7 @@ export interface Stat {
   matchers: StatMatcher[]
   better: StatBetter
   modFamily?: string[]
+  reminderText?: string
   fromAreaMods?: 'yes' | 'ubermap_exclusive' | 'heist_exclusive'
   anointments?: Array<{ roll: number, oils: string }>
   mercenary?: { icon?: string, supports?: string[], tier?: number, canonical?: string, syntheticFamily?: true }
@@ -136,6 +137,7 @@ export interface TranslationDict {
   RARITY_QUEST: string
   MAP_TIER: RegExp
   MAP_ITEM_QUANTITY: string
+  MAP_ATLAS_DROPS: string
   MAP_ITEM_RARITY: string
   MAP_MONSTER_PACK_SIZE: string
   MAP_MORE_MAPS: string
@@ -168,6 +170,7 @@ export interface TranslationDict {
   TAG_WARD: string
   BLOCK_CHANCE: string
   CORRUPTED: string
+  TWICE_CORRUPTED: string
   UNIDENTIFIED: string
   ITEM_SUPERIOR: RegExp
   MAP_BLIGHTED: RegExp
@@ -224,6 +227,11 @@ export interface TranslationDict {
   IMPLICIT_MODIFIER: string
   FRACTURED_PREFIX: string
   FRACTURED_SUFFIX: string
+  /** English only: its header names the side ("Rare-only Prefix Modifier"). */
+  RARE_ONLY_PREFIX?: string
+  RARE_ONLY_SUFFIX?: string
+  /** A header that does not name the side: other languages, and English before 3.30.0.3 ("{ Rare-only (Tier: 1) }"). */
+  RARE_ONLY_AFFIX?: string
   UNSCALABLE_VALUE: string
   CORRUPTED_IMPLICIT: string
   MODIFIER_INCREASED: RegExp

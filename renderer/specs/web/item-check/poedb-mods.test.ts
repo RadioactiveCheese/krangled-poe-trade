@@ -53,7 +53,6 @@ function item (
       ...info
     },
     isUnidentified: false,
-    isCorrupted: false,
     influences: [],
     statsByType: [],
     newMods: [],

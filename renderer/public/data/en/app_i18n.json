@@ -56,6 +56,7 @@
     "crit": "Critical Strike Chance: {0}%",
     "aps": "Attacks per Second: {0}",
     "map_item_quantity": "Item Quantity: {0}%",
+    "map_atlas_drops": "Atlas Drops: {0}%",
     "map_item_rarity": "Item Rarity: {0}%",
     "map_pack_size": "Monster Pack Size: {0}%",
     "has_empty_modifier": "1 Empty or Crafted Modifier",
@@ -100,6 +101,7 @@
     "open_on_craftofexile": "Open base item on Craft of Exile",
     "info": "Item info",
     "corrupted": "Corrupted",
+    "twice_corrupted": "Twice Corrupted",
     "not_corrupted": "Not Corrupted",
     "mod_tier": "Tier: {0}",
     "mod_rank": "Rank: {0}",
@@ -116,6 +118,7 @@
     "not_mirrored": "Not Mirrored",
     "split": "Split",
     "not_split": "Not Split",
+    "not_catalysed": "Not Catalysed",
     "map_foil_reward": "Foil {0}"
   },
   "item_category": {
@@ -224,6 +227,7 @@
     "tag_explicit_incursion": "Incursion",
     "tag_explicit_infamous": "Mercenary",
     "tag_explicit_essence": "Essence",
+    "tag_explicit_rareonly": "rare-only",
     "tag_brick": "brick",
     "tag_mercenary_primary": "primary",
     "tag_mercenary_secondary": "secondary",

@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import type { Stat, StatOrGroup } from '@/assets/data'
 
 interface OfficialStat { id: string, text: string, type: string }
-const snapshot = JSON.parse(readFileSync('specs/fixtures/trade-support-effects-2026-11-15.json', 'utf8')) as {
+const snapshot = JSON.parse(readFileSync('specs/fixtures/trade-support-effects-2026-11-20.json', 'utf8')) as {
   source: string
   entries: OfficialStat[]
 }

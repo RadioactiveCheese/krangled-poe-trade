@@ -1,6 +1,6 @@
 {
   "source": "https://www.pathofexile.com/api/trade/data/stats",
-  "retrievedAt": "2026-11-15",
+  "retrievedAt": "2026-11-20",
   "entries": [
     {
       "id": "explicit.effect_1059201360",
@@ -1141,6 +1141,16 @@
       "id": "scourge.effect_3607696303",
       "text": "Socketed Gems are Supported by Level # Added Lightning Damage Support",
       "type": "scourge"
+    },
+    {
+      "id": "explicit.effect_3136470162",
+      "text": "Socketed Gems are Supported by Level # Congregation Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_603124590",
+      "text": "Socketed Gems are Supported by Level # Greater Unleash Support",
+      "type": "explicit"
     }
   ]
 }
