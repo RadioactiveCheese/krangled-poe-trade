@@ -92,7 +92,7 @@ describe('3.30 wording', () => {
     const en = byRef('en')
     expect(en.has('Grants Level # Aspect of the Cat Skill')).toBe(false)
     expect(en.get('Grants Level # Aspect of the Cat')!.matchers.map(m => m.string)).toContain('Grants Level # Aspect of the Cat Skill')
-    // Spell Echo's old line belongs to a group (by item category) whose fallback is the 3.30 stat.
+    // Spell Echo's old line belongs to a trivial-merge group, which searches the 3.30 stat's trade ID.
     expect(stats.en.some(s => s.ref === 'Socketed Gems are Supported by Level # Spell Echo Support' &&
       s.matchers.some(m => m.string === 'Socketed Gems are Supported by Level # Spell Echo'))).toBe(true)
   })
