@@ -1,0 +1,527 @@
+{
+  "source": "https://www.pathofexile.com/api/trade/data/stats",
+  "retrievedAt": "2026-11-20",
+  "note": "Temple of Atzoatl room pseudo stats, and the stats ported from upstream's 3.30.0.3 data update (e5371540).",
+  "entries": [
+    {
+      "id": "explicit.effect_603124590",
+      "text": "Socketed Gems are Supported by Level # Greater Unleash Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.stat_1248307887",
+      "text": "You are affected by Delirium Fog",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.stat_1871805225",
+      "text": "+#% Surpassing Chance for Remnants to have an additional Suffix Modifier",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.stat_1871805225",
+      "text": "+#% Surpassing Chance for Remnants in your Maps to have an additional Suffix Modifier",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.stat_2105061711",
+      "text": "Minions convert #% of Physical Damage to Lightning Damage",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.stat_2188905761",
+      "text": "#% increased Attack Speed if you've changed Stance Recently",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.stat_2421436896",
+      "text": "Arrows Fork",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.stat_2529155377",
+      "text": "#% increased Damage with Claws against Enemies that are on Low Life",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.stat_68673913",
+      "text": "Adds # to # Fire Damage to Attacks per 10 Strength",
+      "type": "explicit"
+    },
+    {
+      "id": "fractured.stat_1248307887",
+      "text": "You are affected by Delirium Fog",
+      "type": "fractured"
+    },
+    {
+      "id": "fractured.stat_2105061711",
+      "text": "Minions convert #% of Physical Damage to Lightning Damage",
+      "type": "fractured"
+    },
+    {
+      "id": "fractured.stat_68673913",
+      "text": "Adds # to # Fire Damage to Attacks per 10 Strength",
+      "type": "fractured"
+    },
+    {
+      "id": "implicit.stat_1871805225",
+      "text": "+#% Surpassing Chance for Remnants to have an additional Suffix Modifier",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.stat_1871805225",
+      "text": "+#% Surpassing Chance for Remnants in your Maps to have an additional Suffix Modifier",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.stat_190157226",
+      "text": "Killing Blows Consume corpses to Recover #% of Life",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.stat_2188905761",
+      "text": "#% increased Attack Speed if you've changed Stance Recently",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.stat_2421436896",
+      "text": "Arrows Fork",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.stat_68673913",
+      "text": "Adds # to # Fire Damage to Attacks per 10 Strength",
+      "type": "implicit"
+    },
+    {
+      "id": "pseudo.pseudo_temple_antechamber",
+      "text": "Has Room: Antechamber",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_apex",
+      "text": "Has Room: Apex of Atzoatl",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_armour_room_1",
+      "text": "Has Room: Armourer's Workshop (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_armour_room_2",
+      "text": "Has Room: Armoury (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_armour_room_3",
+      "text": "Has Room: Chamber of Iron (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_banquet_hall",
+      "text": "Has Room: Banquet Hall",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_boss_fire_1",
+      "text": "Has Room: Flame Workshop (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_boss_fire_2",
+      "text": "Has Room: Omnitect Forge (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_boss_fire_3",
+      "text": "Has Room: Crucible of Flame (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_boss_lightning_1",
+      "text": "Has Room: Lightning Workshop (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_boss_lightning_2",
+      "text": "Has Room: Omnitect Reactor Plant (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_boss_lightning_3",
+      "text": "Has Room: Conduit of Lightning (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_boss_minions_1",
+      "text": "Has Room: Hatchery (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_boss_minions_2",
+      "text": "Has Room: Automaton Lab (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_boss_minions_3",
+      "text": "Has Room: Hybridisation Chamber (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_breach_room_1",
+      "text": "Has Room: Splinter Research Lab (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_breach_room_2",
+      "text": "Has Room: Breach Containment Chamber (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_breach_room_3",
+      "text": "Has Room: House of the Others (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_breeding_room_1",
+      "text": "Has Room: Guardhouse (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_breeding_room_2",
+      "text": "Has Room: Barracks (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_breeding_room_3",
+      "text": "Has Room: Hall of War (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_cartography_room_1",
+      "text": "Has Room: Surveyor's Study (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_cartography_room_2",
+      "text": "Has Room: Office of Cartography (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_cartography_room_3",
+      "text": "Has Room: Atlas of Worlds (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_cellar",
+      "text": "Has Room: Cellar",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_chasm_room",
+      "text": "Has Room: Chasm",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_chests_1",
+      "text": "Has Room: Storage Room (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_chests_2",
+      "text": "Has Room: Warehouses (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_chests_3",
+      "text": "Has Room: Museum of Artefacts (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_cloister",
+      "text": "Has Room: Cloister",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_corruption_room_1",
+      "text": "Has Room: Corruption Chamber (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_corruption_room_2",
+      "text": "Has Room: Catalyst of Corruption (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_corruption_room_3",
+      "text": "Has Room: Locus of Corruption (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_currency_vault_1",
+      "text": "Has Room: Vault (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_currency_vault_2",
+      "text": "Has Room: Treasury (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_currency_vault_3",
+      "text": "Has Room: Wealth of the Vaal (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_empowering_room_1",
+      "text": "Has Room: Shrine of Empowerment (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_empowering_room_2",
+      "text": "Has Room: Sanctum of Unity (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_empowering_room_3",
+      "text": "Has Room: Temple Nexus (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_explosives_room_1",
+      "text": "Has Room: Explosives Room (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_explosives_room_2",
+      "text": "Has Room: Demolition Lab (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_explosives_room_3",
+      "text": "Has Room: Shrine of Unmaking (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_gem_room_1",
+      "text": "Has Room: Gemcutter's Workshop (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_gem_room_2",
+      "text": "Has Room: Department of Thaumaturgy (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_gem_room_3",
+      "text": "Has Room: Doryani's Institute (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_halls",
+      "text": "Has Room: Halls",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_healing_room_1",
+      "text": "Has Room: Pools of Restoration (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_healing_room_2",
+      "text": "Has Room: Sanctum of Vitality (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_healing_room_3",
+      "text": "Has Room: Sanctum of Immortality (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_legion_1",
+      "text": "Has Room: Hall of Mettle (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_legion_2",
+      "text": "Has Room: Hall of Heroes (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_legion_3",
+      "text": "Has Room: Hall of Legends (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_passageways",
+      "text": "Has Room: Passageways",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_poison_room_1",
+      "text": "Has Room: Poison Garden (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_poison_room_2",
+      "text": "Has Room: Cultivar Chamber (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_poison_room_3",
+      "text": "Has Room: Toxic Grove (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_queens_chambers_1",
+      "text": "Has Room: Cradle of Creation (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_queens_chambers_2",
+      "text": "Has Room: Cradle of Creation (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_queens_chambers_3",
+      "text": "Has Room: Cradle of Creation (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_sacrifice_room_1",
+      "text": "Has Room: Sacrificial Chamber (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_sacrifice_room_2",
+      "text": "Has Room: Hall of Offerings (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_sacrifice_room_3",
+      "text": "Has Room: Apex of Ascension (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_storm_room_1",
+      "text": "Has Room: Tempest Generator (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_storm_room_2",
+      "text": "Has Room: Hurricane Engine (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_storm_room_3",
+      "text": "Has Room: Storm of Corruption (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_strongbox_1",
+      "text": "Has Room: Strongbox Chamber (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_strongbox_2",
+      "text": "Has Room: Hall of Locks (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_strongbox_3",
+      "text": "Has Room: Court of Sealed Death (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_the_pits",
+      "text": "Has Room: Pits",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_tombs",
+      "text": "Has Room: Tombs",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_torment_1",
+      "text": "Has Room: Torment Cells (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_torment_2",
+      "text": "Has Room: Torture Cages (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_torment_3",
+      "text": "Has Room: Sadist's Den (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_trap_room_1",
+      "text": "Has Room: Trap Workshop (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_trap_room_2",
+      "text": "Has Room: Temple Defense Workshop (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_trap_room_3",
+      "text": "Has Room: Defense Research Lab (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_trinket_room_1",
+      "text": "Has Room: Jeweller's Workshop (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_trinket_room_2",
+      "text": "Has Room: Jewellery Forge (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_trinket_room_3",
+      "text": "Has Room: Glittering Halls (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_tunnels",
+      "text": "Has Room: Tunnels",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_weapon_room_1",
+      "text": "Has Room: Sparring Room (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_weapon_room_2",
+      "text": "Has Room: Arena of Valour (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_weapon_room_3",
+      "text": "Has Room: Hall of Champions (Tier 3)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_workshop_1",
+      "text": "Has Room: Workshop (Tier 1)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_workshop_2",
+      "text": "Has Room: Engineering Department (Tier 2)",
+      "type": "pseudo"
+    },
+    {
+      "id": "pseudo.pseudo_temple_workshop_3",
+      "text": "Has Room: Factory (Tier 3)",
+      "type": "pseudo"
+    }
+  ]
+}

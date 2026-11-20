@@ -221,3 +221,30 @@ describe('filters without a live trade equivalent', () => {
     expect(request.query.filters.type_filters?.filters.category).toBeUndefined()
   })
 })
+
+describe('filters ported from upstream 3.30', () => {
+  it('a once-corrupted item excludes twice-corrupted listings (upstream 158843e1)', () => {
+    const item = parsedItem(ItemCategory.Ring, 'Sapphire Ring', { isCorrupted: {} })
+    const request = createTradeRequest(createFilters(item, CREATE_OPTS), [])
+    expect(request.query.filters.misc_filters?.filters.twice_corrupted).toEqual({ option: 'false' })
+  })
+
+  it('a twice-corrupted item does not filter on it', () => {
+    const item = parsedItem(ItemCategory.Ring, 'Sapphire Ring', { isCorrupted: { twice: true } })
+    const request = createTradeRequest(createFilters(item, CREATE_OPTS), [])
+    expect(createFilters(item, CREATE_OPTS).corrupted).toEqual({ value: true, twice: true, exact: false })
+    expect(request.query.filters.misc_filters?.filters.twice_corrupted).toBeUndefined()
+  })
+
+  it('an uncatalysed ring searches quality 0 (upstream 35b967e5)', () => {
+    const filters = createFilters(parsedItem(ItemCategory.Ring, 'Sapphire Ring'), CREATE_OPTS)
+    expect(filters.notCatalysed).toEqual({ disabled: false })
+    const request = createTradeRequest(filters, [])
+    expect(request.query.filters.misc_filters?.filters.quality).toEqual({ max: 0 })
+  })
+
+  it('a catalysed ring or a non-accessory gets no Not Catalysed filter', () => {
+    expect(createFilters(parsedItem(ItemCategory.Ring, 'Sapphire Ring', { quality: 12 }), CREATE_OPTS).notCatalysed).toBeUndefined()
+    expect(createFilters(parsedItem(ItemCategory.Gloves, 'Iron Gauntlets'), CREATE_OPTS).notCatalysed).toBeUndefined()
+  })
+})
