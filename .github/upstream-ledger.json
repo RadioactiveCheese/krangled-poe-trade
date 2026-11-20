@@ -15,8 +15,8 @@
       "note": "Upstream docs site version; the fork's docs are versioned separately"
     },
     "57b313cf": {
-      "status": "deferred",
-      "note": "Upstream's full 3.30 data refresh. The fork built its own from the game files and live trade API; the two differ by design and have not been reconciled",
+      "status": "adopted",
+      "note": "Covered by the fork's own 3.30.0.4 regeneration from the game files and live trade API. Remaining differences are deliberate: no pre-3.30 legacy entries, no scourge IDs, retired items stay out, curated values kept",
       "fork_pr": 76
     },
     "8a058baa": {
@@ -29,8 +29,8 @@
       "fork_pr": 80
     },
     "e5371540": {
-      "status": "partial",
-      "note": "Temple rooms, new and changed stats and the Cursed Poppet group ported; 29 fork-curated ko lines and the Harbinger of Directions, ko Mirage and ko Mazcotl refs not reconciled"
+      "status": "adopted",
+      "note": "Ported, then superseded by the fork's 3.30.0.4 regeneration. The 29 Korean Timeless and trigger lines and the Harbinger, ko Mirage and Mazcotl refs differ on purpose: the fork follows the live trade text"
     },
     "2498730b": {
       "status": "rejected",
