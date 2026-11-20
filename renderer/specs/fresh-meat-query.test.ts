@@ -25,32 +25,36 @@ vi.mock('@/assets/data', async (original) => {
   }
 })
 
-describe('Fresh Meat duplicate official IDs', () => {
+// Until 3.30 the trade site listed Fresh Meat under both |149 and |150 (snapshot of
+// 2026-10-03), so the app searched both. On 2026-11-20 it lists |150 as Greater Multiple
+// Projectiles (whose old |1 IDs are gone), and Fresh Meat under |149 only.
+describe('embedded Fresh Meat and Greater Multiple Projectiles official IDs', () => {
   for (const lang of ['en', 'ru', 'ko', 'cmn-Hant']) {
     for (const slot of [1, 2, 3, 4]) {
-      it(`${lang} parses normal and advanced slot ${slot} modifiers into both searchable IDs`, () => {
-        locale.value = lang
-        const expected = [149, 150].map(support => `explicit.stat_4089743927|${slot}|${support}`)
-        const matches = rows(lang).filter(stat => stat.trade.ids.explicit?.some(id => expected.includes(id)))
-        expect(matches).toHaveLength(1)
-        const stat = matches[0]
-        for (const text of [stat.matchers[0].string, stat.matchers[0].advanced!]) {
-          const parsed = tryParseTranslation({ string: text.replace('#', '20'), unscalable: false }, ModifierType.Explicit, ItemCategory.Helmet)!
-          expect(parsed.stat.trade.ids.explicit).toEqual(expected)
-          expect(parsed.roll?.value).toBe(20)
-          const calc = sumStatsByModType([{ info: { type: ModifierType.Explicit, tags: [] }, stats: [parsed] }])[0]
-          const item = { rarity: ItemRarity.Rare, category: ItemCategory.Helmet, info: { refName: 'Iron Hat' } } as unknown as ParsedItem
-          const filter = calculatedStatToFilter(calc, 10, item)
-          filter.disabled = false
-          filter.roll!.min = filter.roll!.default.min
-          const request = createTradeRequest({ searchExact: { name: 'Iron Hat' }, trade: { league: 'Standard', currency: 'chaos', collapseListings: 'app' } } as ItemFilters, [filter])
-          const count = request.query.stats.find(group => group.type === 'count')!
-          expect(count.value).toEqual({ min: 1 })
-          expect(count.disabled).toBe(false)
-          expect(count.filters.map(filter => filter.id)).toEqual(expected)
-          expect(count.filters.every(filter => filter.value?.min === 20 && !filter.disabled)).toBe(true)
-        }
-      })
+      for (const [support, name] of [[149, 'Fresh Meat'], [150, 'Greater Multiple Projectiles']] as const) {
+        it(`${lang} parses normal and advanced slot ${slot} ${name} modifiers into its one searchable ID`, () => {
+          locale.value = lang
+          const expected = [`explicit.stat_4089743927|${slot}|${support}`]
+          const matches = rows(lang).filter(stat => stat.trade.ids.explicit?.some(id => expected.includes(id)))
+          expect(matches).toHaveLength(1)
+          const stat = matches[0]
+          expect(stat.ref).toMatch(new RegExp(`level # ${name}$`, 'u'))
+          for (const text of [stat.matchers[0].string, stat.matchers[0].advanced!]) {
+            const parsed = tryParseTranslation({ string: text.replace('#', '20'), unscalable: false }, ModifierType.Explicit, ItemCategory.Helmet)!
+            expect(parsed.stat.trade.ids.explicit).toEqual(expected)
+            expect(parsed.roll?.value).toBe(20)
+            const calc = sumStatsByModType([{ info: { type: ModifierType.Explicit, tags: [] }, stats: [parsed] }])[0]
+            const item = { rarity: ItemRarity.Rare, category: ItemCategory.Helmet, info: { refName: 'Iron Hat' } } as unknown as ParsedItem
+            const filter = calculatedStatToFilter(calc, 10, item)
+            filter.disabled = false
+            filter.roll!.min = filter.roll!.default.min
+            const request = createTradeRequest({ searchExact: { name: 'Iron Hat' }, trade: { league: 'Standard', currency: 'chaos', collapseListings: 'app' } } as ItemFilters, [filter])
+            const sent = request.query.stats.flatMap(group => group.filters)
+            expect(sent.map(filter => filter.id)).toEqual(expected)
+            expect(sent.every(filter => filter.value?.min === 20 && !filter.disabled)).toBe(true)
+          }
+        })
+      }
     }
   }
 })

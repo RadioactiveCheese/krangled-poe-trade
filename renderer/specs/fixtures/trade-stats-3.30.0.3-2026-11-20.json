@@ -9,11 +9,6 @@
       "type": "explicit"
     },
     {
-      "id": "explicit.stat_1248307887",
-      "text": "You are affected by Delirium Fog",
-      "type": "explicit"
-    },
-    {
       "id": "explicit.stat_1871805225",
       "text": "+#% Surpassing Chance for Remnants to have an additional Suffix Modifier",
       "type": "explicit"
@@ -29,29 +24,9 @@
       "type": "explicit"
     },
     {
-      "id": "explicit.stat_2188905761",
-      "text": "#% increased Attack Speed if you've changed Stance Recently",
-      "type": "explicit"
-    },
-    {
-      "id": "explicit.stat_2421436896",
-      "text": "Arrows Fork",
-      "type": "explicit"
-    },
-    {
       "id": "explicit.stat_2529155377",
       "text": "#% increased Damage with Claws against Enemies that are on Low Life",
       "type": "explicit"
-    },
-    {
-      "id": "explicit.stat_68673913",
-      "text": "Adds # to # Fire Damage to Attacks per 10 Strength",
-      "type": "explicit"
-    },
-    {
-      "id": "fractured.stat_1248307887",
-      "text": "You are affected by Delirium Fog",
-      "type": "fractured"
     },
     {
       "id": "fractured.stat_2105061711",
@@ -59,8 +34,8 @@
       "type": "fractured"
     },
     {
-      "id": "fractured.stat_68673913",
-      "text": "Adds # to # Fire Damage to Attacks per 10 Strength",
+      "id": "fractured.stat_2529155377",
+      "text": "#% increased Damage with Claws against Enemies that are on Low Life",
       "type": "fractured"
     },
     {
@@ -76,21 +51,6 @@
     {
       "id": "implicit.stat_190157226",
       "text": "Killing Blows Consume corpses to Recover #% of Life",
-      "type": "implicit"
-    },
-    {
-      "id": "implicit.stat_2188905761",
-      "text": "#% increased Attack Speed if you've changed Stance Recently",
-      "type": "implicit"
-    },
-    {
-      "id": "implicit.stat_2421436896",
-      "text": "Arrows Fork",
-      "type": "implicit"
-    },
-    {
-      "id": "implicit.stat_68673913",
-      "text": "Adds # to # Fire Damage to Attacks per 10 Strength",
       "type": "implicit"
     },
     {

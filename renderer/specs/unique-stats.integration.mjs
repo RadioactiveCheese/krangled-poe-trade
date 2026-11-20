@@ -175,7 +175,7 @@ test('recognizes prefix/suffix rolls on uniques as enabled variants and retains 
 test('retains exact property filters for unidentified uniques', () => {
   const item = parse('Item Class: Rings\nRarity: Unique\nGold Ring\n--------\nItem Level: 83\n--------\n{ Implicit Modifier — Drop }\n15(6-15)% increased Rarity of Items found\n--------\nUnidentified')
   const filters = createExactStatFilters(item, item.statsByType, { searchStatRange: 10 })
-  assert.ok(filters.some(stat => stat.statRef === '#% increased Rarity of Items found'))
+  assert.ok(filters.some(stat => stat.statRef === '+#% to Item Rarity'))
 })
 
 test('preserves armour bounds and quality-changing enchant searches on rare items', () => {

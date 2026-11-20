@@ -1,0 +1,4127 @@
+{
+  "source": "https://www.pathofexile.com/api/trade/data/stats",
+  "retrievedAt": "2026-11-20",
+  "note": "Passive notable enchants (\"1 added passive skill is X\") and granted skills/supports (effect_ IDs) new since the pre-3.30 trade API.",
+  "entries": [
+    {
+      "id": "enchant.effect_2236653998",
+      "text": "Grants Level # Envy",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|10016",
+      "text": "1 added passive skill is Executioner",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|1006",
+      "text": "1 added passive skill is Potency of Will",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|10115",
+      "text": "1 added passive skill is Prodigal Perfection",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|10511",
+      "text": "1 added passive skill is Tolerance",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|10542",
+      "text": "1 added passive skill is Spiked Bulwark",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|10835",
+      "text": "1 added passive skill is Dreamer",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|11420",
+      "text": "1 added passive skill is Arcanist's Dominion",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|11645",
+      "text": "1 added passive skill is Breath of Lightning",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|11730",
+      "text": "1 added passive skill is Endurance",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|11784",
+      "text": "1 added passive skill is Vampirism",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|11820",
+      "text": "1 added passive skill is Anointed Flesh",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|11924",
+      "text": "1 added passive skill is Breath of Flames",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|12033",
+      "text": "1 added passive skill is Wicked Blade",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|12143",
+      "text": "1 added passive skill is Influence",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|12702",
+      "text": "1 added passive skill is Path of the Warrior",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|12795",
+      "text": "1 added passive skill is Versatility",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|12809",
+      "text": "1 added passive skill is Berserking",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|12878",
+      "text": "1 added passive skill is Retaliation",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|13164",
+      "text": "1 added passive skill is Divine Judgement",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|1325",
+      "text": "1 added passive skill is Golem's Blood",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|13375",
+      "text": "1 added passive skill is Multishot",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|1340",
+      "text": "1 added passive skill is Rampart",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|1365",
+      "text": "1 added passive skill is Knowledge Barrier",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|13703",
+      "text": "1 added passive skill is Defiant Stand",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|13739",
+      "text": "1 added passive skill is Always Angry",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|1382",
+      "text": "1 added passive skill is Spirit Void",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|13922",
+      "text": "1 added passive skill is Steadfast",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|13935",
+      "text": "1 added passive skill is Thrill of Battle",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|14001",
+      "text": "1 added passive skill is Unfaltering",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|1405",
+      "text": "1 added passive skill is From the Shadows",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|14079",
+      "text": "1 added passive skill is Wood, Stone, and Spell",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|14587",
+      "text": "1 added passive skill is Adaptive Steel",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|14606",
+      "text": "1 added passive skill is Butchery",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|14665",
+      "text": "1 added passive skill is Divine Wrath",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|14813",
+      "text": "1 added passive skill is Revelry",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|15046",
+      "text": "1 added passive skill is Redemption",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|15085",
+      "text": "1 added passive skill is Ambidexterity",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|15226",
+      "text": "1 added passive skill is Cruel Retort",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|15290",
+      "text": "1 added passive skill is Watchtowers",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|15344",
+      "text": "1 added passive skill is Freedom of Movement",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|15400",
+      "text": "1 added passive skill is Skittering Runes",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|15437",
+      "text": "1 added passive skill is Deflection",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|15614",
+      "text": "1 added passive skill is Claws of the Hawk",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|1568",
+      "text": "1 added passive skill is Fatal Blade",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|15711",
+      "text": "1 added passive skill is Blast Radius",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|15842",
+      "text": "1 added passive skill is One With Nature",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|15852",
+      "text": "1 added passive skill is Ethereal Feast",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|16236",
+      "text": "1 added passive skill is Toxic Strikes",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|16243",
+      "text": "1 added passive skill is Fusillade",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|16246",
+      "text": "1 added passive skill is Tranquility",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|16703",
+      "text": "1 added passive skill is Skull Cracking",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|17171",
+      "text": "1 added passive skill is Flash Freeze",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|17608",
+      "text": "1 added passive skill is Silent Steps",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|18174",
+      "text": "1 added passive skill is Mystic Bulwark",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|18357",
+      "text": "1 added passive skill is Feline Swiftness",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|18703",
+      "text": "1 added passive skill is Graceful Assault",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|18707",
+      "text": "1 added passive skill is Perfectionist",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|18769",
+      "text": "1 added passive skill is Written in Blood",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|18865",
+      "text": "1 added passive skill is Melding",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|19069",
+      "text": "1 added passive skill is Thick Skin",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|19103",
+      "text": "1 added passive skill is Righteous Army",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|19144",
+      "text": "1 added passive skill is Sentinel",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|19506",
+      "text": "1 added passive skill is Path of the Hunter",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|19730",
+      "text": "1 added passive skill is Assured Strike",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|19794",
+      "text": "1 added passive skill is Concussive Force",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|19858",
+      "text": "1 added passive skill is Herbalism",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|19897",
+      "text": "1 added passive skill is Death Attunement",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|20261",
+      "text": "1 added passive skill is Contemplative Meditation",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|203",
+      "text": "1 added passive skill is Vinespike Cordial",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|20528",
+      "text": "1 added passive skill is Instability",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|20605",
+      "text": "1 added passive skill is No Forgiveness",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|20832",
+      "text": "1 added passive skill is Sanctuary",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|20835",
+      "text": "1 added passive skill is Brinkmanship",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|21228",
+      "text": "1 added passive skill is Piercing Shots",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|21297",
+      "text": "1 added passive skill is High Explosives",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|21330",
+      "text": "1 added passive skill is Quick Recovery",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|21389",
+      "text": "1 added passive skill is Runesmith",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|21413",
+      "text": "1 added passive skill is Combat Stamina",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|21435",
+      "text": "1 added passive skill is Cloth and Chain",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|21460",
+      "text": "1 added passive skill is Breath of Rime",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|21602",
+      "text": "1 added passive skill is Destructive Apparatus",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|21634",
+      "text": "1 added passive skill is Arcane Chemistry",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|21958",
+      "text": "1 added passive skill is Cruel Preparation",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|21973",
+      "text": "1 added passive skill is Decay Ward",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|22133",
+      "text": "1 added passive skill is Invigorating Blaze",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|2225",
+      "text": "1 added passive skill is Eagle Eye",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|22356",
+      "text": "1 added passive skill is Hematophagy",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|22535",
+      "text": "1 added passive skill is Whispers of Doom",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|22702",
+      "text": "1 added passive skill is Serpent Stance",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|22706",
+      "text": "1 added passive skill is Savage Intensity",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|2275",
+      "text": "1 added passive skill is Nature's Concoction",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|22972",
+      "text": "1 added passive skill is Wandslinger",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|23038",
+      "text": "1 added passive skill is Slaughter",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|23066",
+      "text": "1 added passive skill is Savagery",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|23549",
+      "text": "1 added passive skill is Incorporeal",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|23690",
+      "text": "1 added passive skill is Essence Infusion",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|24050",
+      "text": "1 added passive skill is Coldhearted Calculation",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|24067",
+      "text": "1 added passive skill is Instinct",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|24133",
+      "text": "1 added passive skill is Survivalist",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|24256",
+      "text": "1 added passive skill is Dynamo",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|24324",
+      "text": "1 added passive skill is Explosive Impact",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|24358",
+      "text": "1 added passive skill is Selective Precision",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|24362",
+      "text": "1 added passive skill is Deep Thoughts",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|24383",
+      "text": "1 added passive skill is Warrior's Blood",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|24716",
+      "text": "1 added passive skill is Battle Trance",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|24721",
+      "text": "1 added passive skill is Ribcage Crusher",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|24858",
+      "text": "1 added passive skill is Harpooner",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|25058",
+      "text": "1 added passive skill is Blood Siphon",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|25178",
+      "text": "1 added passive skill is Primal Spirit",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|25367",
+      "text": "1 added passive skill is Blade Master",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|25409",
+      "text": "1 added passive skill is Indomitable Army",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|25411",
+      "text": "1 added passive skill is Infused",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|25439",
+      "text": "1 added passive skill is Undertaker",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|25456",
+      "text": "1 added passive skill is Dervish",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|2550",
+      "text": "1 added passive skill is Arsonist",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|25738",
+      "text": "1 added passive skill is Relentless Pursuit",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|25970",
+      "text": "1 added passive skill is Acrimony",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|25989",
+      "text": "1 added passive skill is Nomadic Teachings",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|2599",
+      "text": "1 added passive skill is Prepared Response",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|26023",
+      "text": "1 added passive skill is Savage Wounds",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|26096",
+      "text": "1 added passive skill is Hatchet Master",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|26294",
+      "text": "1 added passive skill is Bloodletting",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|26557",
+      "text": "1 added passive skill is Static Blows",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|26564",
+      "text": "1 added passive skill is Vanquisher",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|26620",
+      "text": "1 added passive skill is Corruption",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|26763",
+      "text": "1 added passive skill is Perfected Formula",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|26866",
+      "text": "1 added passive skill is Sanctity",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|26960",
+      "text": "1 added passive skill is Forethought",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|27119",
+      "text": "1 added passive skill is Tribal Fury",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|27137",
+      "text": "1 added passive skill is Sanctum of Thought",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|2715",
+      "text": "1 added passive skill is Quickstep",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|27163",
+      "text": "1 added passive skill is Arcane Will",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|27190",
+      "text": "1 added passive skill is Overprepared",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|27203",
+      "text": "1 added passive skill is Heart and Soul",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|27301",
+      "text": "1 added passive skill is Martial Experience",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|27308",
+      "text": "1 added passive skill is Gravepact",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|27422",
+      "text": "1 added passive skill is Spirit of War",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|27611",
+      "text": "1 added passive skill is Lord of the Dead",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|27623",
+      "text": "1 added passive skill is Harsh Lessons",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|27781",
+      "text": "1 added passive skill is Worship the Blightheart",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|27788",
+      "text": "1 added passive skill is Blood Drinker",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|27806",
+      "text": "1 added passive skill is As The Thunder",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|27929",
+      "text": "1 added passive skill is Deep Wisdom",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|28034",
+      "text": "1 added passive skill is Empowered Bond",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|28449",
+      "text": "1 added passive skill is Surge of Vigour",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|28503",
+      "text": "1 added passive skill is Life Raker",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|28754",
+      "text": "1 added passive skill is Assassination",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|28878",
+      "text": "1 added passive skill is Relentless",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|29049",
+      "text": "1 added passive skill is Holy Fire",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|29381",
+      "text": "1 added passive skill is Ravenous Horde",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|29522",
+      "text": "1 added passive skill is Dance of Blades",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|2959",
+      "text": "1 added passive skill is Season of Ice",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|29861",
+      "text": "1 added passive skill is Explosive Runes",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|30160",
+      "text": "1 added passive skill is Fending",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|30225",
+      "text": "1 added passive skill is Lightning Walker",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|30302",
+      "text": "1 added passive skill is Hearty",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|30439",
+      "text": "1 added passive skill is Lava Lash",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|30471",
+      "text": "1 added passive skill is True Strike",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|30693",
+      "text": "1 added passive skill is Divine Fervour",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|30974",
+      "text": "1 added passive skill is Expert Hunter",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|31033",
+      "text": "1 added passive skill is Robust",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|31257",
+      "text": "1 added passive skill is Natural Authority",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|31359",
+      "text": "1 added passive skill is Fatal Toxins",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|31473",
+      "text": "1 added passive skill is Master of Wounds",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|31508",
+      "text": "1 added passive skill is Aspect of the Lynx",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|31513",
+      "text": "1 added passive skill is Adjacent Animosity",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|31585",
+      "text": "1 added passive skill is Careful Conservationist",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|3195",
+      "text": "1 added passive skill is Legacy of the Wilds",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|32059",
+      "text": "1 added passive skill is Titanic Impacts",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|32176",
+      "text": "1 added passive skill is Soul Thief",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|32227",
+      "text": "1 added passive skill is Adder's Touch",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|32455",
+      "text": "1 added passive skill is Storm Weaver",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|32681",
+      "text": "1 added passive skill is Mark the Prey",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|32738",
+      "text": "1 added passive skill is Wall of Steel",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|32853",
+      "text": "1 added passive skill is Sione's Ambition",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|32932",
+      "text": "1 added passive skill is Sovereignty",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|33082",
+      "text": "1 added passive skill is Razor's Edge",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|3309",
+      "text": "1 added passive skill is Fleetfoot",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|33287",
+      "text": "1 added passive skill is Juggernaut",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|33435",
+      "text": "1 added passive skill is Holy Dominion",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|33545",
+      "text": "1 added passive skill is Harrier",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|33582",
+      "text": "1 added passive skill is Forceful Skewering",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|33718",
+      "text": "1 added passive skill is Champion of the Cause",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|33722",
+      "text": "1 added passive skill is Hollow Effigy",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|33725",
+      "text": "1 added passive skill is Swagger",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|33777",
+      "text": "1 added passive skill is Devastating Devices",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|33903",
+      "text": "1 added passive skill is Will of Blades",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|34009",
+      "text": "1 added passive skill is Master of the Arena",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|34173",
+      "text": "1 added passive skill is Overcharge",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|34284",
+      "text": "1 added passive skill is Seasoned Swordplay",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|34506",
+      "text": "1 added passive skill is Golem Commander",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|3452",
+      "text": "1 added passive skill is Foresight",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|34591",
+      "text": "1 added passive skill is Malicious Intent",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|34661",
+      "text": "1 added passive skill is Fire Walker",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|34666",
+      "text": "1 added passive skill is Destroyer",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|34973",
+      "text": "1 added passive skill is Measured Fury",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|34978",
+      "text": "1 added passive skill is Colloidal Mixture",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|35233",
+      "text": "1 added passive skill is Discord Artisan",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|35436",
+      "text": "1 added passive skill is Kinetic Impacts",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|35663",
+      "text": "1 added passive skill is Strong Arm",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|35685",
+      "text": "1 added passive skill is Fearsome Force",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|35894",
+      "text": "1 added passive skill is Trickery",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|35958",
+      "text": "1 added passive skill is Faith and Steel",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|36281",
+      "text": "1 added passive skill is Primeval Force",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|36490",
+      "text": "1 added passive skill is Flaying",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|36687",
+      "text": "1 added passive skill is Avatar of the Hunt",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|36736",
+      "text": "1 added passive skill is Burning Brutality",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|36859",
+      "text": "1 added passive skill is Steelwood Stance",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|36915",
+      "text": "1 added passive skill is Sacrifice",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|36949",
+      "text": "1 added passive skill is Devotion",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|37078",
+      "text": "1 added passive skill is Path of the Savant",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|37326",
+      "text": "1 added passive skill is Stamina",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|37403",
+      "text": "1 added passive skill is Infused Flesh",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|37425",
+      "text": "1 added passive skill is Practised Reapplication",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|37504",
+      "text": "1 added passive skill is Intuition",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|37512",
+      "text": "1 added passive skill is Bastion of Faith",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|37647",
+      "text": "1 added passive skill is Dismembering",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|38246",
+      "text": "1 added passive skill is Presage",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|38516",
+      "text": "1 added passive skill is Righteous Decree",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|38706",
+      "text": "1 added passive skill is Way of the Warrior",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|38849",
+      "text": "1 added passive skill is Searing Heat",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|38922",
+      "text": "1 added passive skill is Goliath",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|39530",
+      "text": "1 added passive skill is Vitality Void",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|39657",
+      "text": "1 added passive skill is Pain Forger",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|39743",
+      "text": "1 added passive skill is Dark Arts",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|39761",
+      "text": "1 added passive skill is Counterweight",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|39904",
+      "text": "1 added passive skill is Brutal Skewering",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|39986",
+      "text": "1 added passive skill is Defiled Forces",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|40619",
+      "text": "1 added passive skill is Awe and Terror",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|40645",
+      "text": "1 added passive skill is Bone Breaker",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|40743",
+      "text": "1 added passive skill is Crystal Skin",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|40849",
+      "text": "1 added passive skill is Persistence",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|41119",
+      "text": "1 added passive skill is Lethality",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|41137",
+      "text": "1 added passive skill is Field Medicine",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|41169",
+      "text": "1 added passive skill is Jagged Wounds",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|41305",
+      "text": "1 added passive skill is Crushing Reply",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|41307",
+      "text": "1 added passive skill is Deadly Inclinations",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|41420",
+      "text": "1 added passive skill is Natural Remedies",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|41472",
+      "text": "1 added passive skill is Discipline and Training",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|41476",
+      "text": "1 added passive skill is Elder Power",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|41595",
+      "text": "1 added passive skill is Marked for Death",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|4177",
+      "text": "1 added passive skill is Spiritual Aid",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|41870",
+      "text": "1 added passive skill is Winter's Embrace",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|41989",
+      "text": "1 added passive skill is Resourcefulness",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|42009",
+      "text": "1 added passive skill is Soul of Steel",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|42041",
+      "text": "1 added passive skill is Profane Chemistry",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|4207",
+      "text": "1 added passive skill is Window of Opportunity",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|42443",
+      "text": "1 added passive skill is Frenetic",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|42649",
+      "text": "1 added passive skill is Snowforged",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|42686",
+      "text": "1 added passive skill is Elemental Focus",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|42720",
+      "text": "1 added passive skill is Heavy Draw",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|42795",
+      "text": "1 added passive skill is Arcane Focus",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|42804",
+      "text": "1 added passive skill is Mind Drinker",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|42917",
+      "text": "1 added passive skill is Whirling Barrier",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|43385",
+      "text": "1 added passive skill is Winter Spirit",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|4354",
+      "text": "1 added passive skill is Beacon of Hope",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|43689",
+      "text": "1 added passive skill is Spiritual Command",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|44102",
+      "text": "1 added passive skill is Efficient Explosives",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|44103",
+      "text": "1 added passive skill is Reflexes",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|44191",
+      "text": "1 added passive skill is As The Mountain",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|44207",
+      "text": "1 added passive skill is Testudo",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|44347",
+      "text": "1 added passive skill is Divine Fury",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|44562",
+      "text": "1 added passive skill is Shaman's Dominion",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|44788",
+      "text": "1 added passive skill is Potent Connections",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|4481",
+      "text": "1 added passive skill is Forces of Nature",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|44824",
+      "text": "1 added passive skill is Mysticism",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|44955",
+      "text": "1 added passive skill is Frost Walker",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|44988",
+      "text": "1 added passive skill is Wasting",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|45067",
+      "text": "1 added passive skill is Thrill Killer",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|45283",
+      "text": "1 added passive skill is Cornered Prey",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|45317",
+      "text": "1 added passive skill is Ash, Frost and Storm",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|45329",
+      "text": "1 added passive skill is Trick Shot",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|45350",
+      "text": "1 added passive skill is Glory of Command",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|45608",
+      "text": "1 added passive skill is Successive Detonations",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|45657",
+      "text": "1 added passive skill is Trial of the Faith",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|45803",
+      "text": "1 added passive skill is Veteran Soldier",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|45945",
+      "text": "1 added passive skill is Conjured Barrier",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|46408",
+      "text": "1 added passive skill is Fangs of the Viper",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|46471",
+      "text": "1 added passive skill is Powerful Bond",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|46842",
+      "text": "1 added passive skill is Arcane Potency",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|46904",
+      "text": "1 added passive skill is Arcane Sanctuary",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|46965",
+      "text": "1 added passive skill is Saboteur",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|47065",
+      "text": "1 added passive skill is Master of Blades",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|47306",
+      "text": "1 added passive skill is Throatseeker",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|47471",
+      "text": "1 added passive skill is Overcharged",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|47484",
+      "text": "1 added passive skill is Depth Perception",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|47743",
+      "text": "1 added passive skill is Farsight",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|48298",
+      "text": "1 added passive skill is Insightfulness",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|4833",
+      "text": "1 added passive skill is Vigour",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|48438",
+      "text": "1 added passive skill is Bravery",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|4854",
+      "text": "1 added passive skill is Asylum",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|48556",
+      "text": "1 added passive skill is Heart of Darkness",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|48614",
+      "text": "1 added passive skill is Fervour",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|48698",
+      "text": "1 added passive skill is Void Barrier",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|48807",
+      "text": "1 added passive skill is Art of the Gladiator",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|48823",
+      "text": "1 added passive skill is Deadly Draw",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|4918",
+      "text": "1 added passive skill is Indiscriminate Revenge",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|49254",
+      "text": "1 added passive skill is Retribution",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|49318",
+      "text": "1 added passive skill is Wrecking Ball",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|49379",
+      "text": "1 added passive skill is Hired Killer",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|4940",
+      "text": "1 added passive skill is Cleaving",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|49416",
+      "text": "1 added passive skill is Adamant",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|49445",
+      "text": "1 added passive skill is Deep Breaths",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|49459",
+      "text": "1 added passive skill is King of the Hill",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|49538",
+      "text": "1 added passive skill is Defiance",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|49621",
+      "text": "1 added passive skill is Acuity",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|49645",
+      "text": "1 added passive skill is Cauterisation",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|49772",
+      "text": "1 added passive skill is Utmost Might",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|49969",
+      "text": "1 added passive skill is Courage",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|50029",
+      "text": "1 added passive skill is Unnatural Calm",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|50338",
+      "text": "1 added passive skill is Ballistics",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|50690",
+      "text": "1 added passive skill is Replenishing Remedies",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|50842",
+      "text": "1 added passive skill is Veteran's Wrath",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|50858",
+      "text": "1 added passive skill is Admonisher",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|51108",
+      "text": "1 added passive skill is Arcane Capacitor",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|51212",
+      "text": "1 added passive skill is Entropy",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|5126",
+      "text": "1 added passive skill is Spinecruncher",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|51360",
+      "text": "1 added passive skill is Mixed Munitions",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|51440",
+      "text": "1 added passive skill is Druidic Rite",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|51559",
+      "text": "1 added passive skill is Smashing Strikes",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|51748",
+      "text": "1 added passive skill is Last Rites",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|51881",
+      "text": "1 added passive skill is Master Fletcher",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|52030",
+      "text": "1 added passive skill is Burst of Energy",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|52031",
+      "text": "1 added passive skill is Disintegration",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|52090",
+      "text": "1 added passive skill is Feller of Foes",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|52157",
+      "text": "1 added passive skill is Soul Siphon",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|52230",
+      "text": "1 added passive skill is Weathered Hunter",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|52282",
+      "text": "1 added passive skill is Tenacity",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|52742",
+      "text": "1 added passive skill is Hasty Demise",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|52789",
+      "text": "1 added passive skill is Circle of Life",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|5289",
+      "text": "1 added passive skill is Battle Rouse",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|529",
+      "text": "1 added passive skill is Poisonous Fangs",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|53013",
+      "text": "1 added passive skill is Atrophy",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|53042",
+      "text": "1 added passive skill is Exceptional Performance",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|53114",
+      "text": "1 added passive skill is Revenge of the Hunted",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|53118",
+      "text": "1 added passive skill is Barbarism",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|53493",
+      "text": "1 added passive skill is Annihilation",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|53573",
+      "text": "1 added passive skill is Arcane Expanse",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|53652",
+      "text": "1 added passive skill is Steeped in the Profane",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|53757",
+      "text": "1 added passive skill is Shamanistic Fury",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|53759",
+      "text": "1 added passive skill is Cleansed Thoughts",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|53802",
+      "text": "1 added passive skill is Essence Extraction",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|53840",
+      "text": "1 added passive skill is Vengeance",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|54142",
+      "text": "1 added passive skill is Finesse",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|54268",
+      "text": "1 added passive skill is Blade Barrier",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|5430",
+      "text": "1 added passive skill is Magmatic Strikes",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|544",
+      "text": "1 added passive skill is Surveillance",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|54629",
+      "text": "1 added passive skill is Inexorable",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|54694",
+      "text": "1 added passive skill is Light of Divinity",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|54713",
+      "text": "1 added passive skill is Force Shaper",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|54776",
+      "text": "1 added passive skill is Mana Flows",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|54791",
+      "text": "1 added passive skill is Claws of the Magpie",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|55002",
+      "text": "1 added passive skill is Righteous Fury",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|55027",
+      "text": "1 added passive skill is Shining Justice",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|55114",
+      "text": "1 added passive skill is Utmost Intellect",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|55194",
+      "text": "1 added passive skill is Settling Ash",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|55380",
+      "text": "1 added passive skill is Clever Construction",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|55381",
+      "text": "1 added passive skill is Arcane Retaliation",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|55485",
+      "text": "1 added passive skill is Constitution",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|5574",
+      "text": "1 added passive skill is Force of Darkness",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|55772",
+      "text": "1 added passive skill is Blacksmith's Clout",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|56094",
+      "text": "1 added passive skill is One with the River",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|56146",
+      "text": "1 added passive skill is Deliberate Brutality",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|56207",
+      "text": "1 added passive skill is Hardened Scars",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|5624",
+      "text": "1 added passive skill is Crusader",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|56274",
+      "text": "1 added passive skill is Lasting Tempest",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|56276",
+      "text": "1 added passive skill is Nightstalker",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|56330",
+      "text": "1 added passive skill is Flow of Battle",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|56359",
+      "text": "1 added passive skill is Cannibalistic Rite",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|56648",
+      "text": "1 added passive skill is Claws of the Falcon",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|56716",
+      "text": "1 added passive skill is Heart of Thunder",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|570",
+      "text": "1 added passive skill is Dazzling Strikes",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|57006",
+      "text": "1 added passive skill is Vengeant Cascade",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|57199",
+      "text": "1 added passive skill is Fangs of Frost",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|57839",
+      "text": "1 added passive skill is Blade of Cunning",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|57900",
+      "text": "1 added passive skill is Command of Steel",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|58032",
+      "text": "1 added passive skill is Serpentine Spellslinger",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|58168",
+      "text": "1 added passive skill is High Voltage",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|58198",
+      "text": "1 added passive skill is Fingers of Frost",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|58218",
+      "text": "1 added passive skill is Purity of Flesh",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|5823",
+      "text": "1 added passive skill is Coordination",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|58382",
+      "text": "1 added passive skill is Renowned Deeds",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|58449",
+      "text": "1 added passive skill is Born to Fight",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|58831",
+      "text": "1 added passive skill is Disemboweling",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|58851",
+      "text": "1 added passive skill is Leader of the Pack",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|58921",
+      "text": "1 added passive skill is Disciple of the Slaughter",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|59151",
+      "text": "1 added passive skill is Brutal Blade",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|59423",
+      "text": "1 added passive skill is Escalation",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|59556",
+      "text": "1 added passive skill is Expeditious Munitions",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|59605",
+      "text": "1 added passive skill is Unstable Munitions",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|59766",
+      "text": "1 added passive skill is Dirty Techniques",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|59866",
+      "text": "1 added passive skill is Entrench",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|59976",
+      "text": "1 added passive skill is Careful Counterattack",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|6",
+      "text": "1 added passive skill is Twin Terrors",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|60002",
+      "text": "1 added passive skill is Fury Bolts",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|60031",
+      "text": "1 added passive skill is Prismatic Skin",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|60085",
+      "text": "1 added passive skill is Arcane Conservation",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|60501",
+      "text": "1 added passive skill is Heart of Flame",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|60619",
+      "text": "1 added passive skill is Galvanic Hammer",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|60737",
+      "text": "1 added passive skill is Sleight of Hand",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|60781",
+      "text": "1 added passive skill is Inspiring Bond",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|61039",
+      "text": "1 added passive skill is Wild Hunger",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|61190",
+      "text": "1 added passive skill is Rallying Icon",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|61198",
+      "text": "1 added passive skill is Heart of the Warrior",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|61308",
+      "text": "1 added passive skill is Amplify",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|61689",
+      "text": "1 added passive skill is Explosive Elements",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|61981",
+      "text": "1 added passive skill is Doom Cast",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|61982",
+      "text": "1 added passive skill is Grave Intentions",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|62094",
+      "text": "1 added passive skill is Taste for Blood",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|6233",
+      "text": "1 added passive skill is Blast Waves",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|6237",
+      "text": "1 added passive skill is Precision",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|62577",
+      "text": "1 added passive skill is Essence Surge",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|62596",
+      "text": "1 added passive skill is Mystic Talents",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|62802",
+      "text": "1 added passive skill is Brink of Death",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|62849",
+      "text": "1 added passive skill is Glacial Cage",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|6289",
+      "text": "1 added passive skill is Bloodless",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|63033",
+      "text": "1 added passive skill is Bannerman",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|63150",
+      "text": "1 added passive skill is Ironwood",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|63207",
+      "text": "1 added passive skill is Tempest Blast",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|63251",
+      "text": "1 added passive skill is Inveterate",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|63422",
+      "text": "1 added passive skill is Lust for Carnage",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|63453",
+      "text": "1 added passive skill is Excess Sustenance",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|63635",
+      "text": "1 added passive skill is Primal Manifestation",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|63727",
+      "text": "1 added passive skill is Gladiator's Perseverance",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|63921",
+      "text": "1 added passive skill is Utmost Swiftness",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|63933",
+      "text": "1 added passive skill is Totemic Zeal",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|63944",
+      "text": "1 added passive skill is Prism Weave",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|63976",
+      "text": "1 added passive skill is Shaper",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|64077",
+      "text": "1 added passive skill is Warrior Training",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|64217",
+      "text": "1 added passive skill is Aspect of Stone",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|64226",
+      "text": "1 added passive skill is Roaring Challenge",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|64355",
+      "text": "1 added passive skill is Brand Equity",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|64395",
+      "text": "1 added passive skill is Blunt Trauma",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|64882",
+      "text": "1 added passive skill is Disciple of the Unyielding",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|65053",
+      "text": "1 added passive skill is Essence Sap",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|65093",
+      "text": "1 added passive skill is Bladedancer",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|65097",
+      "text": "1 added passive skill is Leadership",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|65107",
+      "text": "1 added passive skill is Bastion Breaker",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|65108",
+      "text": "1 added passive skill is Tireless",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|65210",
+      "text": "1 added passive skill is Heart of Oak",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|65224",
+      "text": "1 added passive skill is Aspect of the Eagle",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|65273",
+      "text": "1 added passive skill is Enigmatic Reach",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|65308",
+      "text": "1 added passive skill is Diamond Skin",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|65502",
+      "text": "1 added passive skill is Heartseeker",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|6615",
+      "text": "1 added passive skill is Arcing Blows",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|6770",
+      "text": "1 added passive skill is Arcane Guarding",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|6783",
+      "text": "1 added passive skill is Savage Skewering",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|6799",
+      "text": "1 added passive skill is Charisma",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|6967",
+      "text": "1 added passive skill is Safeguard",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|7069",
+      "text": "1 added passive skill is Split Shot",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|7085",
+      "text": "1 added passive skill is Weapon Artistry",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|7136",
+      "text": "1 added passive skill is Master Sapper",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|7263",
+      "text": "1 added passive skill is Swift Venoms",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|7440",
+      "text": "1 added passive skill is Harvester of Foes",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|7555",
+      "text": "1 added passive skill is Crackling Speed",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|7688",
+      "text": "1 added passive skill is Enduring Bond",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|7918",
+      "text": "1 added passive skill is Enigmatic Defence",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|8001",
+      "text": "1 added passive skill is Clever Thief",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|8135",
+      "text": "1 added passive skill is Practical Application",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|8458",
+      "text": "1 added passive skill is Longshot",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|861",
+      "text": "1 added passive skill is Aggressive Bastion",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|8833",
+      "text": "1 added passive skill is Heart of Ice",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|8920",
+      "text": "1 added passive skill is Backstabbing",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|9015",
+      "text": "1 added passive skill is Dire Torment",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|9055",
+      "text": "1 added passive skill is Volatile Mines",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|9194",
+      "text": "1 added passive skill is Merciless Skewering",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|9261",
+      "text": "1 added passive skill is Disciple of the Forbidden",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|9432",
+      "text": "1 added passive skill is Mental Rapidity",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|9535",
+      "text": "1 added passive skill is Hunter's Gambit",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|9567",
+      "text": "1 added passive skill is Light Eater",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|9788",
+      "text": "1 added passive skill is Nimbleness",
+      "type": "enchant"
+    },
+    {
+      "id": "enchant.stat_3599615742|9864",
+      "text": "1 added passive skill is Growth and Decay",
+      "type": "enchant"
+    },
+    {
+      "id": "explicit.effect_1059201360",
+      "text": "Socketed Gems are Supported by Level # Physical to Lightning Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1115172759",
+      "text": "Socketed Gems are Supported by Level # Swift Affliction Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1134484173",
+      "text": "Socketed Gems are Supported by Level # Awakened Unbound Ailments Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1149451356",
+      "text": "Grants Level # Vaal Impurity of Ice",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_115345895",
+      "text": "Socketed Gems are Supported by Level # Awakened Multistrike Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1153652646",
+      "text": "Socketed Gems are Supported by Level # Multiple Projectiles Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1199731147",
+      "text": "Socketed Gems are Supported by Level # Immolate Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1200122555",
+      "text": "Socketed Gems are Supported by Level # Burning Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1214076534",
+      "text": "Socketed Gems are Supported by Level # Hypothermia Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1243416714",
+      "text": "Socketed Gems are Supported by Level # Maim Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1255519432",
+      "text": "Grants Level # Enduring Cry",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1263906374",
+      "text": "Socketed Gems are Supported by Level # Guardian's Blessing Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1276857842",
+      "text": "Socketed Gems are Supported by Level # Slower Projectiles Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1303915392",
+      "text": "Socketed Gems are Supported by Level # Infused Channelling Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1306984944",
+      "text": "Grants Level # Unhinge",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1311270539",
+      "text": "Socketed Gems are Supported by Level # Awakened Chain Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1315696378",
+      "text": "Grants Summon Harbinger of Time",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1324938267",
+      "text": "Socketed Gems are Supported by Level # Faster Casting Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1329591193",
+      "text": "Socketed Gems are Supported by Level # Deadly Ailments Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1339810278",
+      "text": "Socketed Gems are Supported by Level # Generosity Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1355803435",
+      "text": "Socketed Gems are Supported by Level # Increased Critical Strikes Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1380260970",
+      "text": "Socketed Gems are Supported by Level # Awakened Minion Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1389174793",
+      "text": "Grants Level # Smite",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1405334938",
+      "text": "Socketed Gems are Supported by Level # Arrow Nova Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_144941225",
+      "text": "Socketed Gems are Supported by Level # Endurance Charge on Melee Stun Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1463464665",
+      "text": "Grants Level # Petrification Statue",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_149184016",
+      "text": "Grants Level # Aspect of the Spider",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1505316781",
+      "text": "Socketed Gems are Supported by Level # Nightblade Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_153063788",
+      "text": "Socketed Gems are Supported by Level # Decay Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1543118831",
+      "text": "Grants Level # Death Wish",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1544569957",
+      "text": "Socketed Gems are Supported by Level # More Duration Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_155410994",
+      "text": "Socketed Gems are Supported by Level # Block Chance Reduction Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1561428496",
+      "text": "Socketed Gems are Supported by Level # Chance to Bleed Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1571191461",
+      "text": "Socketed Gems are Supported by Level # Added Fire Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1602381821",
+      "text": "Socketed Gems are Supported by Level # Close Combat Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1633788232",
+      "text": "Grants Summon Greater Harbinger of Time",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1659491511",
+      "text": "Grants Level # Herald of Ice",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1659734482",
+      "text": "Grants Summon Harbinger of Brutality",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1673391040",
+      "text": "Socketed Gems are Supported by Level # Added Chaos Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1702053472",
+      "text": "Grants Level # Rallying Cry",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1708392771",
+      "text": "Grants Level # Herald of the Hive",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1710445055",
+      "text": "Socketed Gems are Supported by Level # Unleash Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1723015380",
+      "text": "Socketed Gems are Supported by Level # Cast while Channelling Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1726066205",
+      "text": "Socketed Gems are Supported by Level # Devour Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1733367133",
+      "text": "Socketed Gems are Supported by Level # Item Quantity Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1740076026",
+      "text": "Socketed Gems are Supported by Level # Arrogance Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_174595432",
+      "text": "Socketed Gems are Supported by Level # Minion Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1749703704",
+      "text": "Socketed Gems are Supported by Level # Hextouch Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1770376530",
+      "text": "Socketed Gems are Supported by Level # Faster Projectiles Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1787679190",
+      "text": "Socketed Gems are Supported by Level # Manaforged Arrows Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1795027869",
+      "text": "Grants Summon Greater Harbinger of Focus",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1825763431",
+      "text": "Grants Level # Witchhunter's Pyre",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1854569159",
+      "text": "Socketed Gems are Supported by Level # Trap Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1858870975",
+      "text": "Socketed Gems are Supported by Level # Spell Totem Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1865320540",
+      "text": "Socketed Gems are Supported by Level # Greater Spell Cascade Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1878151040",
+      "text": "Socketed Gems are Supported by Level # Stun Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_189485532",
+      "text": "Socketed Gems are Supported by Level # Controlled Blaze Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1899953379",
+      "text": "Socketed Gems are Supported by Level # Awakened Fork Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_192206434",
+      "text": "Grants Level # Vaal Impurity of Fire",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1931234481",
+      "text": "Grants Level # Thirst for Blood",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1933760319",
+      "text": "Socketed Gems are Supported by Level # Meat Shield Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1954139129",
+      "text": "Grants Summon Harbinger of the Arcane",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1961292105",
+      "text": "Socketed Gems are Supported by Level # Culling Strike Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1974816132",
+      "text": "Grants Level # Pacify",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1979264894",
+      "text": "Socketed Gems are Supported by Level # Enlighten Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_1994599451",
+      "text": "Socketed Gems are Supported by Level # Innervate Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2014162730",
+      "text": "Grants Level # Anger",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2052193809",
+      "text": "Socketed Gems are Supported by Level # Awakened Added Chaos Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2092916684",
+      "text": "Grants Level # Summon Bestial Ursa",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2100902429",
+      "text": "Socketed Gems are Supported by Level # Multistrike Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2107340112",
+      "text": "Socketed Gems are Supported by Level # Greater Multiple Projectiles Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2109649836",
+      "text": "Grants Level # Blood Offering",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2128724272",
+      "text": "Grants Level # Herald of Thunder",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2129634187",
+      "text": "Socketed Gems are Supported by Level # Swiftbrand Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2141384509",
+      "text": "Socketed Gems are Supported by Level # Chance to Poison Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2142007278",
+      "text": "Socketed Gems are Supported by Level # Swift Assembly Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2142148729",
+      "text": "Socketed Gems are Supported by Level # Sadism Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2174769737",
+      "text": "Grants Level # Purity of Elements",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2190102120",
+      "text": "Grants Level # Clarity",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_222199368",
+      "text": "Socketed Gems are Supported by Level # Eternal Blessing Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2236653998",
+      "text": "Grants Level # Envy",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2242579123",
+      "text": "Socketed Gems are Supported by Level # Trinity Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2251567057",
+      "text": "Socketed Gems are Supported by Level # Cruelty Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2260732373",
+      "text": "Socketed Gems are Supported by Level # Awakened Melee Physical Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2264294898",
+      "text": "Socketed Gems are Supported by Level # Infernal Legion Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2282649307",
+      "text": "Socketed Gems are Supported by Level # Snipe Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2307564778",
+      "text": "Socketed Gems are Supported by Level # Awakened Spell Echo Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2338856567",
+      "text": "Grants Embrace Madness",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_234218186",
+      "text": "Grants Level # Convocation",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2343871202",
+      "text": "Socketed Gems are Supported by Level # Ignite Proliferation Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2360840648",
+      "text": "Grants Level # Brandsurge",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2367771894",
+      "text": "Socketed Gems are Supported by Level # Awakened Brutality Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2377502094",
+      "text": "Grants Level # Summon Bestial Snake",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2409633913",
+      "text": "Socketed Gems are Supported by Level # Ice Bite Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2439286871",
+      "text": "Socketed Gems are Supported by Level # Summon Phantasm Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2447178998",
+      "text": "Socketed Gems are Supported by Level # Greater Volley Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2455845502",
+      "text": "Grants Level # Frostbite",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2461314210",
+      "text": "Grants Level # Wrath",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2496940419",
+      "text": "Grants Level # Precision",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2513678384",
+      "text": "Socketed Gems are Supported by Level # Awakened Elemental Focus Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2559654739",
+      "text": "Grants Level # Haste",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2579976590",
+      "text": "Grants Level # Will of the Lords",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2581493934",
+      "text": "Socketed Gems are Supported by Level # Cast when Damage Taken Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2589518277",
+      "text": "Grants Level # Bear Trap",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2594535436",
+      "text": "Socketed Gems are Supported by Level # Cast on Ward Break Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2612646353",
+      "text": "Socketed Gems are Supported by Level # Excommunicate Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2617381612",
+      "text": "Socketed Gems are Supported by Level # Minefield Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2638439725",
+      "text": "Socketed Gems are Supported by Level # Charged Mines Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2640673956",
+      "text": "Socketed Gems are Supported by Level # Cast on Melee Kill Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2649350521",
+      "text": "Grants Level # Vitality",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2653498431",
+      "text": "Socketed Gems are Supported by Level # Awakened Void Manipulation Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2653742489",
+      "text": "Socketed Gems are Supported by Level # Focused Channelling Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_265550805",
+      "text": "Socketed Gems are Supported by Level # Lifetap Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2686067790",
+      "text": "Socketed Gems are Supported by Level # Ballista Totem Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2698327786",
+      "text": "Socketed Gems are Supported by Level # Vile Toxins Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2713755048",
+      "text": "Socketed Gems are Supported by Level # Life Leech Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2714845045",
+      "text": "Socketed Gems are Supported by Level # Returning Projectiles Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2722476813",
+      "text": "Socketed Gems are Supported by Level # Elemental Focus Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_273196120",
+      "text": "Grants Level # Frostblink",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2742501709",
+      "text": "Socketed Gems are Supported by Level # Void Manipulation Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2753888557",
+      "text": "Grants Level # Doryani's Touch",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2758343153",
+      "text": "Grants Level # Crushing Fist",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2795990092",
+      "text": "Socketed Gems are Supported by Level # Efficacy Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2820548076",
+      "text": "Grants Level # Illusory Warp",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2912209560",
+      "text": "Socketed Gems are Supported by Level # Awakened Added Cold Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2937199581",
+      "text": "Grants Level # Dash",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2937933274",
+      "text": "Socketed Gems are Supported by Level # Mirage Archer Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_293985888",
+      "text": "Grants Summon Greater Harbinger of the Arcane",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2959432267",
+      "text": "Grants Summon Harbinger of Directions",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2963700146",
+      "text": "Socketed Gems are Supported by Level # Archmage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_299595248",
+      "text": "Grants Level # Blood Sacrament",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_2998965359",
+      "text": "Grants Level # Summon Stone Golem",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3002947169",
+      "text": "Socketed Gems are Supported by Level # Awakened Increased Area of Effect Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3006785117",
+      "text": "Socketed Gems are Supported by Level # Enhance Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3009566559",
+      "text": "Socketed Gems are Supported by Level # Chain Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3022937704",
+      "text": "Socketed Gems are Supported by Level # Volley Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3024539694",
+      "text": "Socketed Gems are Supported by Level # Bonechill Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3051142611",
+      "text": "Grants Level # Hatred",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3059751250",
+      "text": "Socketed Gems are Supported by Level # Awakened Empower Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3082206530",
+      "text": "Socketed Gems are Supported by Level # Blastchain Mine Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3115071909",
+      "text": "Grants Level # Aspect of the Avian",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3121158131",
+      "text": "Socketed Gems are Supported by Level # Invert the Rules Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3124293229",
+      "text": "Socketed Gems are Supported by Level # Bloodlust Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3136470162",
+      "text": "Socketed Gems are Supported by Level # Congregation Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3161048706",
+      "text": "Socketed Gems are Supported by Level # Divine Blessing Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3161142268",
+      "text": "Socketed Gems are Supported by Level # Fire Penetration Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3184099572",
+      "text": "Grants Summon Greater Harbinger of Brutality",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3188237829",
+      "text": "Grants Level # Penance Mark",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3232631539",
+      "text": "Socketed Gems are Supported by Level # Elemental Penetration Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3257625635",
+      "text": "Socketed Gems are Supported by Level # Awakened Blasphemy Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3293595800",
+      "text": "Socketed Gems are Supported by Level # Concentrated Effect Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3311634296",
+      "text": "Socketed Gems are Supported by Level # Awakened Added Lightning Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3318957131",
+      "text": "Socketed Gems are Supported by Level # Chance to Flee Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3334987531",
+      "text": "Socketed Gems are Supported by Level # Item Rarity Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3337525114",
+      "text": "Grants Level # Intimidating Cry",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3362019776",
+      "text": "Socketed Gems are Supported by Level # Added Cold Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3385179923",
+      "text": "Grants Level # Aspect of the Crab",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_338557223",
+      "text": "Socketed Gems are Supported by Level # Additional Accuracy Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3419961156",
+      "text": "Socketed Gems are Supported by Level # Impale Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3431656752",
+      "text": "Socketed Gems are Supported by Level # Controlled Destruction Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3438910899",
+      "text": "Socketed Gems are Supported by Level # Arcane Surge Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3457811678",
+      "text": "Socketed Gems are Supported by Level # Pierce Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3460970428",
+      "text": "Grants Level # Vaal Impurity of Lightning",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3467858890",
+      "text": "Grants Call of Steel",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3474714415",
+      "text": "Socketed Gems are Supported by Level # Cast when Stunned Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3479500684",
+      "text": "Socketed Gems are Supported by Level # Advanced Traps Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3482292969",
+      "text": "Socketed Gems are Supported by Level # High-Impact Mine Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3498266457",
+      "text": "Socketed Gems are Supported by Level # Volatility Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3512123051",
+      "text": "Socketed Gems are Supported by Level # Rage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_351343865",
+      "text": "Socketed Gems are Supported by Level # Iron Will Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3543464371",
+      "text": "Socketed Gems are Supported by Level # Fortify Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3544093007",
+      "text": "Socketed Gems are Supported by Level # Greater Spell Echo Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3553187279",
+      "text": "Socketed Gems are Supported by Level # Fork Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3568418482",
+      "text": "Grants Level # Grace",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_360069007",
+      "text": "Socketed Gems are Supported by Level # Empower Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3607696303",
+      "text": "Socketed Gems are Supported by Level # Added Lightning Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3628997762",
+      "text": "Socketed Gems are Supported by Level # Feeding Frenzy Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3654111757",
+      "text": "Grants Level # Aspect of Solaris",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3672428602",
+      "text": "Socketed Gems are Supported by Level # Ancestral Call Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3676299820",
+      "text": "Grants Level # Aspect of Arakaali",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3678242906",
+      "text": "Socketed Gems are Supported by Level # Spell Cascade Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_369135889",
+      "text": "Socketed Gems are Supported by Level # Melee Physical Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3737573678",
+      "text": "Socketed Gems are Supported by Level # Point Blank Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3737592146",
+      "text": "Socketed Gems are Supported by Level # Increased Area of Effect Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3745700985",
+      "text": "Socketed Gems are Supported by Level # Awakened Swift Affliction Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3756080110",
+      "text": "Socketed Gems are Supported by Level # Cold to Fire Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3805221392",
+      "text": "Socketed Gems are Supported by Level # Barrage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3808743835",
+      "text": "Socketed Gems are Supported by Level # Cluster Traps Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3828086965",
+      "text": "Socketed Gems are Supported by Level # Elemental Proliferation Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3850673820",
+      "text": "Grants Summon Greater Harbinger of Storms",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3851855898",
+      "text": "Socketed Gems are Supported by Level # Cold Penetration Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3858590323",
+      "text": "Socketed Gems are Supported by Level # Minion Life Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3869346801",
+      "text": "Socketed Gems are Supported by Level # Brutality Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3872728076",
+      "text": "Socketed Gems are Supported by Level # Charged Traps Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3874278368",
+      "text": "Socketed Gems are Supported by Level # Awakened Lightning Penetration Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3879545743",
+      "text": "Socketed Gems are Supported by Level # Awakened Deadly Ailments Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3880597684",
+      "text": "Grants Level # Snipe",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_388828889",
+      "text": "Grants Level # Ravenous",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3893320621",
+      "text": "Socketed Gems are Supported by Level # Momentum Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3897784788",
+      "text": "Socketed Gems are Supported by Level # Behead Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3921181872",
+      "text": "Socketed Gems are Supported by Level # Ruthless Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3947742455",
+      "text": "Socketed Gems are Supported by Level # Earthbreaker Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3952702255",
+      "text": "Grants Level # Icestorm",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3959464467",
+      "text": "Socketed Gems are Supported by Level # Eclipse Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3960686014",
+      "text": "Socketed Gems are Supported by Level # Awakened Greater Multiple Projectiles Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3963374775",
+      "text": "Grants Level # Aspect of the Brine King",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3972941836",
+      "text": "Socketed Gems are Supported by Level # Blind Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3984157052",
+      "text": "Socketed Gems are Supported by Level # Cursed Ground Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3985111281",
+      "text": "Socketed Gems are Supported by Level # Combustion Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_3995245401",
+      "text": "Socketed Gems are Supported by Level # Spell Echo Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_400129667",
+      "text": "Socketed Gems are Supported by Level # Elemental Army Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4004746559",
+      "text": "Grants Level # Scorching Ray",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4028786187",
+      "text": "Socketed Gems are Supported by Level # Awakened Burning Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4055657913",
+      "text": "Socketed Gems are Supported by Level # Spellblade Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_405979710",
+      "text": "Grants Level # Savage Barnacle",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4083688802",
+      "text": "Socketed Gems are Supported by Level # Multiple Totems Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4119948431",
+      "text": "Socketed Gems are Supported by Level # Vicious Projectiles Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4121000032",
+      "text": "Grants Summon Harbinger of Focus",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_415209642",
+      "text": "Grants Level # Herald of Ash",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4154493255",
+      "text": "Socketed Gems are Supported by Level # Frigid Bond Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4154731776",
+      "text": "Grants Level # Purity of Ice",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4174205387",
+      "text": "Socketed Gems are Supported by Level # Trap and Mine Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4185976903",
+      "text": "Socketed Gems are Supported by Level # Less Duration Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4195991223",
+      "text": "Grants Level # Summon Bestial Rhoa",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4211392390",
+      "text": "Grants Level # Lightning Warp",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_426005818",
+      "text": "Grants Level # Purity of Lightning",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4267977279",
+      "text": "Socketed Gems are Supported by Level # Cast On Critical Strike Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4273541898",
+      "text": "Grants Level # Aspect of Lunaris",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4278342035",
+      "text": "Socketed Gems are Supported by Level # Increased Critical Damage Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4282732147",
+      "text": "Socketed Gems are Supported by Level # Life Gain on Hit Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_4291787627",
+      "text": "Socketed Gems are Supported by Level # Faster Attacks Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_429242364",
+      "text": "Socketed Gems are Supported by Level # Intensify Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_434885230",
+      "text": "Socketed Gems are Supported by Level # Blasphemy Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_442407318",
+      "text": "Grants Level # Gluttony of Elements",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_459241192",
+      "text": "Grants Level # Affliction",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_468251502",
+      "text": "Socketed Gems are Supported by Level # Elemental Damage with Attacks Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_476766308",
+      "text": "Grants Level # Decoy Totem",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_482188560",
+      "text": "Socketed Gems are Supported by Level # Awakened Vicious Projectiles Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_540595610",
+      "text": "Socketed Gems are Supported by Level # Minion Speed Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_548051260",
+      "text": "Socketed Gems are Supported by Level # Hex Bloom Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_582742716",
+      "text": "Grants Level # Wintertide Brand",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_599791292",
+      "text": "Grants Level # Discipline",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_602297583",
+      "text": "Socketed Gems are Supported by Level # Withering Touch Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_602948540",
+      "text": "Socketed Gems are Supported by Level # Critical Strike Affliction Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_603124590",
+      "text": "Socketed Gems are Supported by Level # Greater Unleash Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_603152644",
+      "text": "Grants Summon Greater Harbinger of Directions",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_626699959",
+      "text": "Socketed Gems are Supported by Level # Cast on Death Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_668260863",
+      "text": "Grants Summon Harbinger of Storms",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_669480840",
+      "text": "Grants Level # Queen's Demand",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_672697655",
+      "text": "Socketed Gems are Supported by Level # Awakened Melee Splash Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_682681978",
+      "text": "Socketed Gems are Supported by Level # Melee Splash Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_694876310",
+      "text": "Grants Level # Approaching Flames",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_707288393",
+      "text": "Socketed Gems are Supported by Level # Overcharge Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_723113949",
+      "text": "Grants Level # Determination",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_724848072",
+      "text": "Socketed Gems are Supported by Level # Lightning Penetration Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_771254875",
+      "text": "Grants Level # Aspect of the Cat",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_786034009",
+      "text": "Socketed Gems are Supported by Level # Awakened Elemental Damage with Attacks Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_813521895",
+      "text": "Socketed Gems are Supported by Level # Fist of War Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_838736469",
+      "text": "Socketed Gems are Supported by Level # Knockback Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_859488427",
+      "text": "Socketed Gems are Supported by Level # Inspiration Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_865121484",
+      "text": "Socketed Gems are Supported by Level # Iron Grip Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_876810709",
+      "text": "Socketed Gems are Supported by Level # Second Wind Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_880096186",
+      "text": "Socketed Gems are Supported by Level # Unbound Ailments Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_907088360",
+      "text": "Socketed Gems are Supported by Level # Greater Multistrike Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_918792330",
+      "text": "Socketed Gems are Supported by Level # Damage on Full Life Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_9279802",
+      "text": "Socketed Gems are Supported by Level # Energy Leech Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_949715883",
+      "text": "Socketed Gems are Supported by Level # Power Charge On Critical Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_952649073",
+      "text": "Socketed Gems are Supported by Level # Mana Leech Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_967395006",
+      "text": "Socketed Gems are Supported by Level # Fresh Meat Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_971650107",
+      "text": "Socketed Gems are Supported by Level # Pulverise Support",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_994349216",
+      "text": "Grants Level # Purity of Fire",
+      "type": "explicit"
+    },
+    {
+      "id": "explicit.effect_994816571",
+      "text": "Grants Level # Blight",
+      "type": "explicit"
+    },
+    {
+      "id": "implicit.effect_1061473510",
+      "text": "Grants Level # Malevolence",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1153652646",
+      "text": "Socketed Gems are Supported by Level # Multiple Projectiles Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_120392055",
+      "text": "Grants Level # Vulnerability",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1270291096",
+      "text": "Grants Level # Pride",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1324938267",
+      "text": "Socketed Gems are Supported by Level # Faster Casting Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1463464665",
+      "text": "Grants Level # Petrification Statue",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_149184016",
+      "text": "Grants Level # Aspect of the Spider",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1571191461",
+      "text": "Socketed Gems are Supported by Level # Added Fire Damage Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1576376285",
+      "text": "Grants Level # Assassin's Mark",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1673391040",
+      "text": "Socketed Gems are Supported by Level # Added Chaos Damage Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1710445055",
+      "text": "Socketed Gems are Supported by Level # Unleash Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1770376530",
+      "text": "Socketed Gems are Supported by Level # Faster Projectiles Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1795027869",
+      "text": "Grants Summon Greater Harbinger of Focus",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1858870975",
+      "text": "Socketed Gems are Supported by Level # Spell Totem Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_1878151040",
+      "text": "Socketed Gems are Supported by Level # Stun Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2014162730",
+      "text": "Grants Level # Anger",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2092916684",
+      "text": "Grants Level # Summon Bestial Ursa",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2100902429",
+      "text": "Socketed Gems are Supported by Level # Multistrike Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2109649836",
+      "text": "Grants Level # Blood Offering",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2141384509",
+      "text": "Socketed Gems are Supported by Level # Chance to Poison Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2174769737",
+      "text": "Grants Level # Purity of Elements",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2190102120",
+      "text": "Grants Level # Clarity",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2251567057",
+      "text": "Socketed Gems are Supported by Level # Cruelty Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2377502094",
+      "text": "Grants Level # Summon Bestial Snake",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2455845502",
+      "text": "Grants Level # Frostbite",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2461314210",
+      "text": "Grants Level # Wrath",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2559654739",
+      "text": "Grants Level # Haste",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2579976590",
+      "text": "Grants Level # Will of the Lords",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2649350521",
+      "text": "Grants Level # Vitality",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_265550805",
+      "text": "Socketed Gems are Supported by Level # Lifetap Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2698327786",
+      "text": "Socketed Gems are Supported by Level # Vile Toxins Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2713755048",
+      "text": "Socketed Gems are Supported by Level # Life Leech Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2753888557",
+      "text": "Grants Level # Doryani's Touch",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2765861847",
+      "text": "Grants Level # Despair",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2851059126",
+      "text": "Grants Level # Zealotry",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2867330025",
+      "text": "Grants Level # Conductivity",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_2890244883",
+      "text": "Grants Level # Sniper's Mark",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3009566559",
+      "text": "Socketed Gems are Supported by Level # Chain Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3051142611",
+      "text": "Grants Level # Hatred",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3115071909",
+      "text": "Grants Level # Aspect of the Avian",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3232631539",
+      "text": "Socketed Gems are Supported by Level # Elemental Penetration Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3293595800",
+      "text": "Socketed Gems are Supported by Level # Concentrated Effect Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3362019776",
+      "text": "Socketed Gems are Supported by Level # Added Cold Damage Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_338557223",
+      "text": "Socketed Gems are Supported by Level # Additional Accuracy Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3419961156",
+      "text": "Socketed Gems are Supported by Level # Impale Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3457811678",
+      "text": "Socketed Gems are Supported by Level # Pierce Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3474714415",
+      "text": "Socketed Gems are Supported by Level # Cast when Stunned Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3512123051",
+      "text": "Socketed Gems are Supported by Level # Rage Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3543464371",
+      "text": "Socketed Gems are Supported by Level # Fortify Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3553187279",
+      "text": "Socketed Gems are Supported by Level # Fork Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3568418482",
+      "text": "Grants Level # Grace",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3607696303",
+      "text": "Socketed Gems are Supported by Level # Added Lightning Damage Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3636926002",
+      "text": "Grants Level # Temporal Chains",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3737592146",
+      "text": "Socketed Gems are Supported by Level # Increased Area of Effect Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3828086965",
+      "text": "Socketed Gems are Supported by Level # Elemental Proliferation Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3850673820",
+      "text": "Grants Summon Greater Harbinger of Storms",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_388828889",
+      "text": "Grants Level # Ravenous",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3893320621",
+      "text": "Socketed Gems are Supported by Level # Momentum Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_3972941836",
+      "text": "Socketed Gems are Supported by Level # Blind Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_405979710",
+      "text": "Grants Level # Savage Barnacle",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_4121000032",
+      "text": "Grants Summon Harbinger of Focus",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_4154731776",
+      "text": "Grants Level # Purity of Ice",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_4195991223",
+      "text": "Grants Level # Summon Bestial Rhoa",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_426005818",
+      "text": "Grants Level # Purity of Lightning",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_4267977279",
+      "text": "Socketed Gems are Supported by Level # Cast On Critical Strike Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_4278342035",
+      "text": "Socketed Gems are Supported by Level # Increased Critical Damage Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_4282732147",
+      "text": "Socketed Gems are Supported by Level # Life Gain on Hit Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_4291787627",
+      "text": "Socketed Gems are Supported by Level # Faster Attacks Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_434885230",
+      "text": "Socketed Gems are Supported by Level # Blasphemy Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_468251502",
+      "text": "Socketed Gems are Supported by Level # Elemental Damage with Attacks Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_479399165",
+      "text": "Grants Level # Flammability",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_599791292",
+      "text": "Grants Level # Discipline",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_603152644",
+      "text": "Grants Summon Greater Harbinger of Directions",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_626699959",
+      "text": "Socketed Gems are Supported by Level # Cast on Death Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_682681978",
+      "text": "Socketed Gems are Supported by Level # Melee Splash Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_723113949",
+      "text": "Grants Level # Determination",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_771254875",
+      "text": "Grants Level # Aspect of the Cat",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_859488427",
+      "text": "Socketed Gems are Supported by Level # Inspiration Support",
+      "type": "implicit"
+    },
+    {
+      "id": "implicit.effect_994349216",
+      "text": "Grants Level # Purity of Fire",
+      "type": "implicit"
+    }
+  ]
+}
