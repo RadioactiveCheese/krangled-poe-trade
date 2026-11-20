@@ -1,11 +1,7 @@
 {
   "source": "https://www.pathofexile.com/api/trade/data/stats",
-  "retrievedAt": "2026-10-03",
+  "retrievedAt": "2026-11-20",
   "entries": [
-    {
-      "id": "explicit.stat_4089743927|1|1",
-      "text": "Skills Socketed in your Helmet are Supported by level # Greater Multiple Projectiles"
-    },
     {
       "id": "explicit.stat_4089743927|1|10",
       "text": "Skills Socketed in your Helmet are Supported by level # Summon Phantasm"
@@ -232,7 +228,7 @@
     },
     {
       "id": "explicit.stat_4089743927|1|150",
-      "text": "Skills Socketed in your Helmet are Supported by level # Fresh Meat"
+      "text": "Skills Socketed in your Helmet are Supported by level # Greater Multiple Projectiles"
     },
     {
       "id": "explicit.stat_4089743927|1|151",
@@ -659,10 +655,6 @@
       "text": "Skills Socketed in your Helmet are Supported by level # Cluster Traps"
     },
     {
-      "id": "explicit.stat_4089743927|2|1",
-      "text": "Skills Socketed in your Gloves are Supported by level # Greater Multiple Projectiles"
-    },
-    {
       "id": "explicit.stat_4089743927|2|10",
       "text": "Skills Socketed in your Gloves are Supported by level # Summon Phantasm"
     },
@@ -888,7 +880,7 @@
     },
     {
       "id": "explicit.stat_4089743927|2|150",
-      "text": "Skills Socketed in your Gloves are Supported by level # Fresh Meat"
+      "text": "Skills Socketed in your Gloves are Supported by level # Greater Multiple Projectiles"
     },
     {
       "id": "explicit.stat_4089743927|2|151",
@@ -1315,10 +1307,6 @@
       "text": "Skills Socketed in your Gloves are Supported by level # Cluster Traps"
     },
     {
-      "id": "explicit.stat_4089743927|3|1",
-      "text": "Skills Socketed in your Boots are Supported by level # Greater Multiple Projectiles"
-    },
-    {
       "id": "explicit.stat_4089743927|3|10",
       "text": "Skills Socketed in your Boots are Supported by level # Summon Phantasm"
     },
@@ -1544,7 +1532,7 @@
     },
     {
       "id": "explicit.stat_4089743927|3|150",
-      "text": "Skills Socketed in your Boots are Supported by level # Fresh Meat"
+      "text": "Skills Socketed in your Boots are Supported by level # Greater Multiple Projectiles"
     },
     {
       "id": "explicit.stat_4089743927|3|151",
@@ -1971,10 +1959,6 @@
       "text": "Skills Socketed in your Boots are Supported by level # Cluster Traps"
     },
     {
-      "id": "explicit.stat_4089743927|4|1",
-      "text": "Skills granted by your Passive Tree are Supported by level # Greater Multiple Projectiles"
-    },
-    {
       "id": "explicit.stat_4089743927|4|10",
       "text": "Skills granted by your Passive Tree are Supported by level # Summon Phantasm"
     },
@@ -2200,7 +2184,7 @@
     },
     {
       "id": "explicit.stat_4089743927|4|150",
-      "text": "Skills granted by your Passive Tree are Supported by level # Fresh Meat"
+      "text": "Skills granted by your Passive Tree are Supported by level # Greater Multiple Projectiles"
     },
     {
       "id": "explicit.stat_4089743927|4|151",

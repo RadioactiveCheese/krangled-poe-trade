@@ -56,8 +56,8 @@ describe('stat matcher signs', () => {
       ['Socketed Gems have +#% Critical Strike Chance', 'Socketed Gems have +3.5% Critical Strike Chance', 3.5],
       ['Tier 1-15 Maps found have #% chance to become 1 tier higher', 'Tier 1-15 Maps found are 1 tier higher', 100],
       // 3.30 wording of existing stats
-      ['Nearby stationary Enemies gain a Grasping Vine every second', 'Stationary Enemies within 6 metres gain a Grasping Vine every second', 1],
-      ['You and nearby Allies have 30% increased Mana Regeneration Rate', 'You and Allies within 7.5 metres have 30% reduced Mana Regeneration Rate', -1]
+      ['Stationary Enemies within 6 metres gain a Grasping Vine every second', 'Stationary Enemies within 6 metres gain a Grasping Vine every second', 1],
+      ['You and Allies within 7.5 metres have 30% increased Mana Regeneration Rate', 'You and Allies within 7.5 metres have 30% reduced Mana Regeneration Rate', -1]
     ]
     for (const [ref, string, value] of expected) {
       const matcher = STATS.en.get(ref)?.matchers.find(m => m.string === string)

@@ -126,7 +126,7 @@ export interface Config {
 }
 
 export const defaultConfig = (): Config => ({
-  configVersion: 23,
+  configVersion: 24,
   overlayKey: 'Shift + Space',
   overlayBackground: 'rgba(129, 139, 149, 0.15)',
   overlayBackgroundClose: true,
@@ -464,6 +464,18 @@ function upgradeConfig (_config: Config): Config {
     const itemCheck = config.widgets.find(w => w.wmType === 'item-check') as ItemCheckWidget
     itemCheck.poedbModsKey = null
     config.configVersion = 23
+  }
+
+  if (config.configVersion < 24) {
+    // 3.30.0.4 renamed the Korean Mirage. Map Check shows the new name, so a saved
+    // decision for the old one follows it (the old text still parses).
+    const itemCheck = config.widgets.find(w => w.wmType === 'item-check') as ItemCheckWidget
+    const saved = itemCheck.maps.selectedStats
+    for (const [from, to] of [['지역에 신기루 등장', '지역에 허상 등장']]) {
+      const entry = saved.find(stat => stat.matcher === from)
+      if (entry && !saved.some(stat => stat.matcher === to)) entry.matcher = to
+    }
+    config.configVersion = 24
   }
   /* eslint-enable */
 

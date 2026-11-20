@@ -117,7 +117,7 @@ Travel to a Map of this tier or lower by using this in a personal Map Device. Ma
 // map_contains_buried_{pandemonium,apex,stalker}_sentinel and
 // map_beyond_spawn_initiator_{pale,flesh,demon}_faction, with keyword markup resolved.
 const RARE_ONLY_STATS = [
-  ['Area contains an Empowered Mirage which covers the entire Map', 'explicit.stat_2436559047'],
+  ['Area contains a Mirage', 'explicit.stat_2436559047'],
   ['Areas contain a Mirror of Delirium', 'explicit.stat_2398157267'],
   ['Area contains the Viridian Wildwood', 'explicit.stat_1975119765'],
   ['Area contains a buried Pandemonium Sentinel', 'explicit.stat_70969043'],
@@ -145,7 +145,8 @@ const RARE_ONLY_MAP_MODS = {
   },
   'ko': {
     header: '{ 희귀만 (등급: 1) }',
-    lines: ['지역에 신기루 등장', '지역에 환영의 거울 1개 등장', '지역에 취록의 야생림 등장', '지역에 묻힌 대혼란 파수꾼 등장',
+    // 3.30.0.4 renamed the Korean Mirage from 신기루 to 허상; the older text still parses (see below).
+    lines: ['지역에 허상 등장', '지역에 환영의 거울 1개 등장', '지역에 취록의 야생림 등장', '지역에 묻힌 대혼란 파수꾼 등장',
       '지역에 묻힌 거물 파수꾼 등장', '지역에 묻힌 추적자 파수꾼 등장', '지역에 베이다트의 환기자 1마리 등장',
       '지역에 고르의 환기자 1마리 등장', '지역에 크타쉬의 환기자 1마리 등장']
   },
@@ -325,6 +326,28 @@ test('every Rare-only map modifier is checkable in every language', async () => 
         RARE_ONLY_STATS.map(([ref, id]) => [ref, id, 'yes']), `${language}: stats must be explicit and listed in Map Check settings`)
       assert.deepEqual(runtime.prepareMapStats(item).map(entry => entry.matcher), lines, language)
     }
+  } finally {
+    await runtime.Data.init('en')
+  }
+})
+
+test('the pre-3.30.0.4 Korean Mirage wording still parses', async () => {
+  try {
+    await runtime.Data.init('ko')
+    const strings = runtime.Data.CLIENT_STRINGS
+    const base = runtime.Data.ITEM_BY_REF('ITEM', 'Map')[0]
+    const item = parseItem(`${strings.ITEM_CLASS}Maps
+${strings.RARITY}${strings.RARITY_RARE}
+Damned Grind
+${base.name}
+` +
+      `--------
+${strings.ITEM_LEVEL}75
+--------
+${RARE_ONLY_MAP_MODS.ko.header}
+지역에 신기루 등장`)
+    assert.deepEqual(item.unknownModifiers, [])
+    assert.equal(item.statsByType[0].stat.ref, 'Area contains a Mirage')
   } finally {
     await runtime.Data.init('en')
   }

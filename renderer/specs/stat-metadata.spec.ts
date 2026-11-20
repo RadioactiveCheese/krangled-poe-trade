@@ -11,7 +11,7 @@ interface OfficialStat { id: string, text: string }
 
 const languages = ['en', 'ru', 'ko', 'cmn-Hant']
 const supportPrefix = 'explicit.stat_4089743927|'
-const snapshot = JSON.parse(readFileSync(new URL('./fixtures/trade-embedded-supports-2026-10-03.json', import.meta.url), 'utf8')) as { source: string, entries: OfficialStat[] }
+const snapshot = JSON.parse(readFileSync(new URL('./fixtures/trade-embedded-supports-2026-11-20.json', import.meta.url), 'utf8')) as { source: string, entries: OfficialStat[] }
 
 function readStats (language: string): MetadataStat[] {
   return readFileSync(new URL(`../public/data/${language}/stats.ndjson`, import.meta.url), 'utf8')
