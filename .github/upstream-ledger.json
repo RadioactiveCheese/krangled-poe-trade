@@ -13,6 +13,28 @@
     "ce551eb7": {
       "status": "rejected",
       "note": "Upstream docs site version; the fork's docs are versioned separately"
+    },
+    "57b313cf": {
+      "status": "deferred",
+      "note": "Upstream's full 3.30 data refresh. The fork built its own from the game files and live trade API; the two differ by design and have not been reconciled",
+      "fork_pr": 76
+    },
+    "8a058baa": {
+      "status": "rejected",
+      "note": "Upstream docs site version; the fork's docs are versioned separately"
+    },
+    "844442d1": {
+      "status": "rejected",
+      "note": "Superseded by the fork's own Viscera support, which searches the exact base rather than the body-slot category",
+      "fork_pr": 80
+    },
+    "e5371540": {
+      "status": "partial",
+      "note": "Temple rooms, new and changed stats and the Cursed Poppet group ported; 29 fork-curated ko lines and the Harbinger of Directions, ko Mirage and ko Mazcotl refs not reconciled"
+    },
+    "2498730b": {
+      "status": "rejected",
+      "note": "Upstream docs site version; the fork's docs are versioned separately"
     }
   },
   "pulls": {
