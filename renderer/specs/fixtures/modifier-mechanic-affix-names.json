@@ -1,6 +1,6 @@
 {
   "source": "https://repoe-fork.github.io/mods.json",
-  "fetchedAt": "2026-10-03",
+  "fetchedAt": "2026-11-20",
   "localizedSourceCommit": "543423ab",
   "locales": {
     "en": {
@@ -55,11 +55,14 @@
         "Tora's",
         "Vagan's",
         "Vorici's",
+        "Zorath's",
         "of Aisling",
         "of Cameria",
+        "of Catarina",
         "of Hillock",
         "of Janus",
         "of Riker",
+        "of Zorath",
         "of the Order"
       ]
     },

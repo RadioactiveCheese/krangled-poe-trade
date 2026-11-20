@@ -57,7 +57,7 @@ for (const [language, markers] of Object.entries(snapshot.languages)) {
         const result = parseClipboard(text)
         assert.equal(result.isOk(), true, result.error)
         assert.equal(result.value.rawText, text)
-        assert.equal(result.value.isCorrupted, status === 'CORRUPTED')
+        assert.equal(Boolean(result.value.isCorrupted), status === 'CORRUPTED')
         assert.equal(Boolean(result.value.isMirrored), status === 'MIRRORED')
         assert.equal(result.value.unknownModifiers.length, 0)
         assert.equal(result.value.statsByType.find(calc => calc.stat.ref === '+# to maximum Life').sources[0].stat.roll.value, 50)

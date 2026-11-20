@@ -47,7 +47,8 @@ export interface ItemFilters {
   whiteSockets?: FilterNumeric
   corrupted?: {
     value: boolean
-    twice: boolean
+    // Unset leaves twice-corrupted items in the results.
+    twice?: boolean
     exact?: boolean
   }
   fractured?: {

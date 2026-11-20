@@ -319,7 +319,7 @@ export function sellItem (gem: BaseType): ParsedItem {
     info: gem,
     gemLevel: gem.gem!.maxLevel + 1,
     quality: 20,
-    isCorrupted: true
+    isCorrupted: {}
   })
 }
 
@@ -384,7 +384,7 @@ function variantLevel (variant: string) {
 }
 
 function corruptedGem (info: BaseType, level: number, quality: number) {
-  return createVirtualItem({ category: ItemCategory.Gem, info, gemLevel: level, quality, isCorrupted: true })
+  return createVirtualItem({ category: ItemCategory.Gem, info, gemLevel: level, quality, isCorrupted: {} })
 }
 
 /**

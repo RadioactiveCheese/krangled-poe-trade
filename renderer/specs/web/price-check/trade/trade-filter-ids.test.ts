@@ -53,9 +53,22 @@ function typedFilterPaths (): string[] {
   return paths.sort()
 }
 
-function isLive (path: string) {
+function isListed (path: string) {
   const [group, id] = path.split('.')
   return LIVE.get(group)?.has(id) ?? false
+}
+
+// 3.30 dropped the voyage chart filters from the filter list, but searches still
+// honour them: on 2026-11-20 a Coral Reef Chart search in Standard returned 3036
+// results, 0 with chart_sulphur.min = 9999 and 709 with chart_shape = 5.
+const UNLISTED_BUT_HONOURED = new Map([
+  ['map_filters.chart_shape', ['1', '2', '3', '4', '5']],
+  ['map_filters.chart_sulphur', undefined],
+  ['map_filters.map_gold', undefined]
+])
+
+function isLive (path: string) {
+  return isListed(path) || UNLISTED_BUT_HONOURED.has(path)
 }
 
 function baseFilters (): ItemFilters {
@@ -92,7 +105,6 @@ function parsedItem (category: ItemCategory, name: string, extra: Partial<Parsed
     unknownModifiers: [],
     newMods: [],
     isUnidentified: false,
-    isCorrupted: false,
     isMirrored: false,
     isSplit: false,
     isFractured: false,
@@ -139,7 +151,6 @@ describe('trade filter IDs match the live /api/trade/data/filters dataset', () =
     ['type_filters', 'rarity', ['magic', 'nonunique', 'uniquefoil']],
     ['trade_filters', 'collapse', ['true']],
     ['heist_filters', 'heist_objective_value', ['priceless']],
-    ['map_filters', 'chart_shape', [...new Set(Object.values(CHART_SHAPE_OPTIONS))]],
     ['trade_filters', 'indexed', uiOptions('listed')],
     ['trade_filters', 'price', uiOptions('currency')]
   ])('%s.%s option values sent by the app are live options', (group, id, values) => {
@@ -147,6 +158,17 @@ describe('trade filter IDs match the live /api/trade/data/filters dataset', () =
     const options = liveOptions(group, id)
     for (const value of values) {
       expect(options.has(value), `${group}.${id} = ${value}`).toBe(true)
+    }
+  })
+
+  it.each([...UNLISTED_BUT_HONOURED.keys()])('%s is still unlisted (drop its exemption once it is listed again)', (path) => {
+    expect(isListed(path)).toBe(false)
+  })
+
+  it('sends only the chart shapes the trade site honours', () => {
+    const honoured = new Set(UNLISTED_BUT_HONOURED.get('map_filters.chart_shape'))
+    for (const value of new Set(Object.values(CHART_SHAPE_OPTIONS))) {
+      expect(honoured.has(value), `chart_shape = ${value}`).toBe(true)
     }
   })
 

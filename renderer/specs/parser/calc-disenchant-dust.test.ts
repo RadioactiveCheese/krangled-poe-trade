@@ -38,7 +38,7 @@ describe('unique disenchant dust estimates', () => {
     expect(calcDisenchantDust(item({ quality: 20 }))).toBe(35000)
     expect(calcDisenchantDust(item({ influences: [ItemInfluence.Shaper, ItemInfluence.Elder, ItemInfluence.Shaper] }))).toBe(50000)
     const mods = [corrupted(), corrupted(), { info: { type: ModifierType.Implicit, mechanic: ModifierMechanic.Eldritch, tags: [] }, stats: [] }]
-    expect(calcDisenchantDust(item({ quality: 20, influences: [ItemInfluence.Shaper], isCorrupted: true, newMods: mods }))).toBe(72500)
+    expect(calcDisenchantDust(item({ quality: 20, influences: [ItemInfluence.Shaper], isCorrupted: {}, newMods: mods }))).toBe(72500)
     expect(calcDisenchantDust(item({ newMods: mods }))).toBe(25000)
   })
 

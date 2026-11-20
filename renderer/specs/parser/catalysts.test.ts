@@ -39,7 +39,7 @@ function fixedRollFilter (category = ItemCategory.Ring, quality = 20, unscalable
   }] }
   const item = createVirtualItem({
     info: { name: 'Test', refName: 'Test', namespace: 'UNIQUE', unique: { base: 'Gold Ring', fixedStats: [stat.ref] } },
-    rarity: ItemRarity.Unique, category, quality, isCorrupted, newMods: [modifier]
+    rarity: ItemRarity.Unique, category, quality, isCorrupted: isCorrupted ? {} : undefined, newMods: [modifier]
   })
   item.statsByType = sumStatsByModType(item.newMods)
   return initUiModFilters(item, { searchStatRange: 10 }).find(filter => filter.statRef === stat.ref)!
