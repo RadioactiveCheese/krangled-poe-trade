@@ -227,9 +227,10 @@ export interface TranslationDict {
   IMPLICIT_MODIFIER: string
   FRACTURED_PREFIX: string
   FRACTURED_SUFFIX: string
-  RARE_ONLY_PREFIX: string
-  RARE_ONLY_SUFFIX: string
-  /** Header word before 3.30.0.3 split it into prefix and suffix ("{ Rare-only (Tier: 1) }"). */
+  /** English only: its header names the side ("Rare-only Prefix Modifier"). */
+  RARE_ONLY_PREFIX?: string
+  RARE_ONLY_SUFFIX?: string
+  /** A header that does not name the side: other languages, and English before 3.30.0.3 ("{ Rare-only (Tier: 1) }"). */
   RARE_ONLY_AFFIX?: string
   UNSCALABLE_VALUE: string
   CORRUPTED_IMPLICIT: string

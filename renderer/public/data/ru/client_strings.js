@@ -99,8 +99,8 @@ export default {
   IMPLICIT_MODIFIER: 'Собственное свойство',
   FRACTURED_PREFIX: 'Расколотое Свойство-префикс',
   FRACTURED_SUFFIX: 'Расколотое Свойство-суффикс',
-  RARE_ONLY_PREFIX: 'Только редкое',
-  RARE_ONLY_SUFFIX: 'Только редкое',
+  // The game's header does not say prefix or suffix here (ClientStrings ModDescriptionLineRareOnly).
+  RARE_ONLY_AFFIX: 'Только редкое',
   UNSCALABLE_VALUE: ' — Неизменяемое значение',
   CORRUPTED_IMPLICIT: 'Осквернённое собственное свойство',
   MODIFIER_INCREASED: /^(.+?)% увеличение$/,

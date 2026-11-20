@@ -319,6 +319,8 @@ test('every Rare-only map modifier is checkable in every language', async () => 
         `--------\n${strings.ITEM_LEVEL}75\n--------\n${lines.map(line => `${header}\n${line}`).join('\n')}`)
       assert.deepEqual(item.unknownModifiers, [], language)
       assert.deepEqual(item.newMods.map(mod => [mod.info.type, mod.info.tier]), lines.map(() => ['explicit', 1]), language)
+      // These headers do not say prefix or suffix, so the side stays unknown.
+      assert.deepEqual(item.newMods.map(mod => [mod.info.mechanic, mod.info.generation]), lines.map(() => ['explicit-rareonly', undefined]), language)
       assert.deepEqual(item.statsByType.map(calc => [calc.stat.ref, calc.stat.trade.ids.explicit?.[0], calc.stat.fromAreaMods]),
         RARE_ONLY_STATS.map(([ref, id]) => [ref, id, 'yes']), `${language}: stats must be explicit and listed in Map Check settings`)
       assert.deepEqual(runtime.prepareMapStats(item).map(entry => entry.matcher), lines, language)
