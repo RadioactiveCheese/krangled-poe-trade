@@ -4865,6 +4865,6 @@
 {"name":"신성한 성배","refName":"The Sacred Chalice","namespace":"UNIQUE","unique":{"base":"Coronal Maul","disenchantValue":9.33},"icon":""}
 {"name":"시간의 모래","refName":"The Sands of Time","namespace":"UNIQUE","unique":{"base":"Tyrant's Sekhem","disenchantValue":32.35},"icon":""}
 {"name":"휩싸인 화살통","refName":"Enshrouded Quiver","namespace":"ITEM","icon":"","w":2,"h":3}
-{"name":"잘린 낫손","refName":"Severed Scythe-hand","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"거룩한 성표","refName":"Hallowed Descry","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"가시 박힌 등딱지","refName":"Spiked Carapace","namespace":"ITEM","icon":"","w":2,"h":2}
+{"name":"잘린 낫손","refName":"Severed Scythe-hand","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"거룩한 성표","refName":"Hallowed Descry","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"가시 박힌 등딱지","refName":"Spiked Carapace","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}

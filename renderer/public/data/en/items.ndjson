@@ -4864,6 +4864,6 @@
 {"name":"The Sacred Chalice","refName":"The Sacred Chalice","namespace":"UNIQUE","unique":{"base":"Coronal Maul","disenchantValue":9.33},"icon":""}
 {"name":"The Sands of Time","refName":"The Sands of Time","namespace":"UNIQUE","unique":{"base":"Tyrant's Sekhem","disenchantValue":32.35},"icon":""}
 {"name":"Enshrouded Quiver","refName":"Enshrouded Quiver","namespace":"ITEM","icon":"","w":2,"h":3}
-{"name":"Severed Scythe-hand","refName":"Severed Scythe-hand","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Hallowed Descry","refName":"Hallowed Descry","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Spiked Carapace","refName":"Spiked Carapace","namespace":"ITEM","icon":"","w":2,"h":2}
+{"name":"Severed Scythe-hand","refName":"Severed Scythe-hand","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Hallowed Descry","refName":"Hallowed Descry","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Spiked Carapace","refName":"Spiked Carapace","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}

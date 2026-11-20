@@ -4864,6 +4864,6 @@
 {"name":"Священная чаша","refName":"The Sacred Chalice","namespace":"UNIQUE","unique":{"base":"Coronal Maul","disenchantValue":9.33},"icon":""}
 {"name":"Пески времени","refName":"The Sands of Time","namespace":"UNIQUE","unique":{"base":"Tyrant's Sekhem","disenchantValue":32.35},"icon":""}
 {"name":"Затуманенный колчан","refName":"Enshrouded Quiver","namespace":"ITEM","icon":"","w":2,"h":3}
-{"name":"Отсечённая рука-коса","refName":"Severed Scythe-hand","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Священный символ","refName":"Hallowed Descry","namespace":"ITEM","icon":"","w":2,"h":2}
-{"name":"Шипастый панцирь","refName":"Spiked Carapace","namespace":"ITEM","icon":"","w":2,"h":2}
+{"name":"Отсечённая рука-коса","refName":"Severed Scythe-hand","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Священный символ","refName":"Hallowed Descry","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}
+{"name":"Шипастый панцирь","refName":"Spiked Carapace","namespace":"ITEM","icon":"","w":2,"h":2,"category":"Viscera"}

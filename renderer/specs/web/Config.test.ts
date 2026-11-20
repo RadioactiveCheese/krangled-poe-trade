@@ -71,12 +71,28 @@ describe('configured theme', () => {
   })
 })
 
+describe('Map Check selections', () => {
+  it('moves a saved decision for the pre-3.30.0.4 Korean Mirage to its new name', async () => {
+    const savedConfig = defaultConfig()
+    savedConfig.configVersion = 23
+    const itemCheck = savedConfig.widgets.find(widget => widget.wmType === 'item-check') as ItemCheckWidget
+    itemCheck.maps.selectedStats = [{ matcher: '지역에 신기루 등장', decision: 'd--' }, { matcher: '지역에 환영의 거울 1개 등장', decision: 'w--' }]
+    getConfig.mockResolvedValue(JSON.stringify(savedConfig))
+
+    await initConfig()
+
+    expect((AppConfig('item-check') as ItemCheckWidget).maps.selectedStats).toEqual([
+      { matcher: '지역에 허상 등장', decision: 'd--' }, { matcher: '지역에 환영의 거울 1개 등장', decision: 'w--' }
+    ])
+  })
+})
+
 describe('PoEDB base modifiers hotkey', () => {
   it('is present and unassigned in new configurations', () => {
     const config = defaultConfig()
     const itemCheck = config.widgets.find(widget => widget.wmType === 'item-check') as ItemCheckWidget
 
-    expect(config.configVersion).toBe(23)
+    expect(config.configVersion).toBe(24)
     expect(itemCheck.poedbModsKey).toBeNull()
   })
 
@@ -89,7 +105,7 @@ describe('PoEDB base modifiers hotkey', () => {
 
     await initConfig()
 
-    expect(AppConfig().configVersion).toBe(23)
+    expect(AppConfig().configVersion).toBe(24)
     expect((AppConfig('item-check') as ItemCheckWidget).poedbModsKey).toBeNull()
   })
 

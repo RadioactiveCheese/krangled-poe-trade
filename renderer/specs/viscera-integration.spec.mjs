@@ -74,7 +74,7 @@ test('parses the reported Lesser Lunar Bow with its implicit roll', async () => 
 })
 
 test('recognizes all official English Viscera bases with or without a tier prefix', async () => {
-  const snapshot = JSON.parse(await fs.readFile(path.join(ROOT, 'specs/fixtures/trade-viscera-2026-11-15.json'), 'utf8'))
+  const snapshot = JSON.parse(await fs.readFile(path.join(ROOT, 'specs/fixtures/trade-viscera-2026-11-20.json'), 'utf8'))
   for (const entry of snapshot.entries) {
     for (const prefix of ['', 'Lesser ', 'Greater ']) {
       const item = parse(`Item Class: Viscera\n${prefix}${entry.type}`)
@@ -89,7 +89,7 @@ test('recognizes all official English Viscera bases with or without a tier prefi
 })
 
 test('classifies the complete Viscera base set in every supported language', async () => {
-  const snapshot = JSON.parse(await fs.readFile(path.join(ROOT, 'specs/fixtures/trade-viscera-2026-11-15.json'), 'utf8'))
+  const snapshot = JSON.parse(await fs.readFile(path.join(ROOT, 'specs/fixtures/trade-viscera-2026-11-20.json'), 'utf8'))
   for (const language of ['en', 'ru', 'ko', 'cmn-Hant']) {
     await Data.init(language)
     const actual = [...Data.ITEMS_ITERATOR('')].filter(item => item.category === 'Viscera')
@@ -106,7 +106,7 @@ test('classifies the complete Viscera base set in every supported language', asy
 })
 
 test('covers the complete live official Viscera item set', { skip: !process.env.TEST_LIVE_TRADE_API }, async () => {
-  const snapshot = JSON.parse(await fs.readFile(path.join(ROOT, 'specs/fixtures/trade-viscera-2026-11-15.json'), 'utf8'))
+  const snapshot = JSON.parse(await fs.readFile(path.join(ROOT, 'specs/fixtures/trade-viscera-2026-11-20.json'), 'utf8'))
   const response = await originalFetch(snapshot.source, {
     headers: { 'User-Agent': 'Krangled-PoE-Trade metadata test' },
     signal: AbortSignal.timeout(15_000)

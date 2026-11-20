@@ -1,6 +1,6 @@
 {
   "source": "https://www.pathofexile.com/api/trade/data/items",
-  "retrievedAt": "2026-11-15",
+  "retrievedAt": "2026-11-20",
   "entries": [
     {
       "type": "Flaming Goat Hoof"
@@ -484,6 +484,15 @@
     },
     {
       "type": "Terrifying Maw"
+    },
+    {
+      "type": "Severed Scythe-hand"
+    },
+    {
+      "type": "Hallowed Descry"
+    },
+    {
+      "type": "Spiked Carapace"
     }
   ]
 }
