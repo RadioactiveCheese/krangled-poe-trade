@@ -11,6 +11,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: write # start CI on the baseline branch
   contents: write
   pull-requests: write
   issues: write
@@ -101,6 +102,8 @@ jobs:
               -m "Every upstream commit up to SnosMe/awakened-poe-trade@$BASELINE is adopted or rejected in .github/upstream-ledger.json. This merge changes no files."
             test -z "$(git diff origin/main HEAD)"
             git push --force origin "$BASELINE_BRANCH"
+            # A GITHUB_TOKEN push doesn't trigger CI, and main requires its checks.
+            gh workflow run ci.yml --repo "$GITHUB_REPOSITORY" --ref "$BASELINE_BRANCH"
           fi
 
           {
