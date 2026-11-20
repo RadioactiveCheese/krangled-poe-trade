@@ -2,9 +2,9 @@
   "$comment": "Decisions about upstream SnosMe/awakened-poe-trade work. Statuses: adopted and rejected settle an item; partial and deferred keep it listed. Merged fork PRs citing an upstream SHA or 'upstream #N' count as adopted without an entry here. See .github/scripts/upstream_sync.py.",
   "commits": {
     "543423ab": {
-      "status": "partial",
-      "note": "Data refresh adopted narrowly; item-drop.json and ru/cmn-Hant stat matchers still to port",
-      "fork_pr": [57, 60, 61, 65]
+      "status": "adopted",
+      "note": "Ported across these PRs; the item-drop.json groups and ru/cmn-Hant matcher fixes landed in e28dc8a5. Kept on purpose: the fork's longer Timeless mod families, extra catalyst-quality matchers and unique-map dust values, and Fresh Meat on |149, which the live trade API confirms",
+      "fork_pr": [57, 60, 61, 65, 76]
     },
     "6e73f2fe": {
       "status": "adopted",
