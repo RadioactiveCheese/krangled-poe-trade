@@ -71,6 +71,12 @@ describe('upstream 3.30.0.3 data sync', () => {
       }
     })
 
+    it(`${language} stores no zero-width spaces, which the parser strips from item text`, () => {
+      for (const stat of stats) {
+        for (const m of stat.matchers) expect(m.string.includes('\u200b'), stat.ref!).toBe(false)
+      }
+    })
+
     it(`${language} folds the pre-3.30.0.3 Remnants stats into the reworded ones`, () => {
       for (const [ref, oldRef] of Object.entries(REWORDED)) {
         expect(byRef.has(oldRef), oldRef).toBe(false)

@@ -298,6 +298,17 @@ test('map checker shows the Rare-only modifier of a reported map', () => {
   assert.equal(prefix.info.tier, 1)
 })
 
+test('price check keeps Rare-only map modifiers under the current and the pre-3.30.0.3 English header', () => {
+  // 3.30.0.3 changed "{ Rare-only (Tier: 1) }" to "{ Rare-only Prefix Modifier (Tier: 1) }".
+  for (const header of ['{ Rare-only (Tier: 1) }', '{ Rare-only Prefix Modifier (Tier: 1) }']) {
+    const item = parseItem(RARE_ONLY_MAP_TEXT.replace('{ Rare-only (Tier: 1) }', header))
+    const mirage = item.newMods.find(mod => mod.stats.some(stat => stat.stat.ref === RARE_ONLY_STATS[0][0]))
+    assert.equal(mirage?.info.mechanic, 'explicit-rareonly', header)
+    const filters = runtime.createExactStatFilters(item, item.statsByType, { searchStatRange: 0 })
+    assert.ok(filters.some(filter => filter.statRef === RARE_ONLY_STATS[0][0]), `${header}: the Mirage must be a price filter`)
+  }
+})
+
 test('every Rare-only map modifier is checkable in every language', async () => {
   try {
     for (const [language, { header, lines }] of Object.entries(RARE_ONLY_MAP_MODS)) {

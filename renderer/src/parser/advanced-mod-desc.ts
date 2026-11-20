@@ -63,6 +63,9 @@ export function parseModInfoLine (line: string): ModifierInfo {
       type = ModifierType.Implicit
       mechanic = ModifierMechanic.Vestigial
     }
+    if (_$.RARE_ONLY_AFFIX !== undefined && modifierType === _$.RARE_ONLY_AFFIX) {
+      mechanic = ModifierMechanic.RareOnly
+    }
 
     switch (modifierType) {
       case _$.IMPLICIT_MODIFIER:

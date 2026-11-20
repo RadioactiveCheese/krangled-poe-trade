@@ -103,6 +103,7 @@ export default {
   FRACTURED_SUFFIX: 'Fractured Suffix Modifier',
   RARE_ONLY_PREFIX: 'Rare-only Prefix Modifier',
   RARE_ONLY_SUFFIX: 'Rare-only Suffix Modifier',
+  RARE_ONLY_AFFIX: 'Rare-only',
   UNSCALABLE_VALUE: ' — Unscalable Value',
   CORRUPTED_IMPLICIT: 'Corruption Implicit Modifier',
   MODIFIER_INCREASED: /^(.+?)% Increased$/,
