@@ -10,6 +10,10 @@ on:
     paths-ignore:
       - 'docs/**'
       - README.md
+  # The upstream sync job starts this for its baseline branch. Pushes made with
+  # GITHUB_TOKEN don't trigger workflows, so its PR would otherwise never get
+  # the checks main requires.
+  workflow_dispatch:
 
 # A newer push to the same branch makes the in-flight run obsolete.
 concurrency:

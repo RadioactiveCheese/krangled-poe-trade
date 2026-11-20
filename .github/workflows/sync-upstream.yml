@@ -11,6 +11,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: write # start CI on the baseline branch
   contents: write
   pull-requests: write
   issues: write
@@ -64,6 +65,7 @@ jobs:
             --github-output "$GITHUB_OUTPUT"
 
       - name: Propose upstream baseline
+        id: propose
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BASELINE: ${{ steps.ledger.outputs.baseline }}
@@ -151,4 +153,22 @@ jobs:
           else
             gh issue create --repo "$GITHUB_REPOSITORY" --label "$REPORT_LABEL" \
               --title 'Upstream sync status' --body-file "$RUNNER_TEMP/report.md"
+          fi
+
+      # Last, so a failed dispatch can't keep the PR or report from updating. A GITHUB_TOKEN
+      # push doesn't trigger CI, and main requires its checks, so CI is started whenever the
+      # baseline branch head has no CI run yet; the next daily run retries a failed dispatch.
+      - name: Start CI on the baseline branch
+        # Also after a failed report, as long as the baseline PR is up to date.
+        if: ${{ !cancelled() && steps.propose.outcome == 'success' && steps.ledger.outputs.baseline != '' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          HEAD_SHA=$(git ls-remote --exit-code origin "refs/heads/$BASELINE_BRANCH" | cut -f1)
+          test -n "$HEAD_SHA"
+          CI_RUNS=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs?head_sha=$HEAD_SHA" --jq '.total_count')
+          if [ "$CI_RUNS" = '0' ]; then
+            gh workflow run ci.yml --repo "$GITHUB_REPOSITORY" --ref "$BASELINE_BRANCH"
+          else
+            echo "CI already ran on $HEAD_SHA."
           fi
