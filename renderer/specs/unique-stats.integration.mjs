@@ -113,7 +113,7 @@ If it's worth doing once, it's worth doing twice.`)
 })
 
 test('parses every current English support effect using real indexes and official trade IDs', async () => {
-  const snapshot = JSON.parse(await fs.readFile(path.join(ROOT, 'specs/fixtures/trade-support-effects-2026-11-15.json'), 'utf8'))
+  const snapshot = JSON.parse(await fs.readFile(path.join(ROOT, 'specs/fixtures/trade-support-effects-2026-11-20.json'), 'utf8'))
   for (const entry of snapshot.entries) {
     for (const text of [entry.text, entry.text.replace('Level # ', 'Level # \u200b')]) {
       const parsed = tryParseTranslation({ string: text.replace('#', '10'), unscalable: true }, entry.type, undefined)
