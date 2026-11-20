@@ -65,6 +65,7 @@ jobs:
             --github-output "$GITHUB_OUTPUT"
 
       - name: Propose upstream baseline
+        id: propose
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BASELINE: ${{ steps.ledger.outputs.baseline }}
@@ -158,7 +159,8 @@ jobs:
       # push doesn't trigger CI, and main requires its checks, so CI is started whenever the
       # baseline branch head has no CI run yet; the next daily run retries a failed dispatch.
       - name: Start CI on the baseline branch
-        if: steps.ledger.outputs.baseline != ''
+        # Also after a failed report, as long as the baseline PR is up to date.
+        if: ${{ !cancelled() && steps.propose.outcome == 'success' && steps.ledger.outputs.baseline != '' }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
