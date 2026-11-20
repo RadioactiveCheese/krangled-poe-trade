@@ -7,10 +7,12 @@ const snapshot = JSON.parse(readFileSync('specs/fixtures/trade-support-effects-2
   source: string
   entries: OfficialStat[]
 }
+// Groups hold pre-3.30 wording ("…Supported by Level # Spell Echo") that resolves to the
+// 3.30 stat; the stat itself, under its current name, is a row of its own.
 const stats = readFileSync('public/data/en/stats.ndjson', 'utf8')
   .trim().split(/\r?\n/u).flatMap(line => {
     const row = JSON.parse(line) as StatOrGroup
-    return 'stats' in row ? row.stats : [row]
+    return 'stats' in row ? [] : [row]
   })
 
 function supportEffects (stats: Stat[]): OfficialStat[] {

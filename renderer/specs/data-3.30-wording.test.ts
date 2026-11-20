@@ -92,8 +92,9 @@ describe('3.30 wording', () => {
     const en = byRef('en')
     expect(en.has('Grants Level # Aspect of the Cat Skill')).toBe(false)
     expect(en.get('Grants Level # Aspect of the Cat')!.matchers.map(m => m.string)).toContain('Grants Level # Aspect of the Cat Skill')
-    expect(en.get('Socketed Gems are Supported by Level # Spell Echo Support')!.matchers.map(m => m.string))
-      .toContain('Socketed Gems are Supported by Level # Spell Echo')
+    // Spell Echo's old line belongs to a group (by item category) whose fallback is the 3.30 stat.
+    expect(stats.en.some(s => s.ref === 'Socketed Gems are Supported by Level # Spell Echo Support' &&
+      s.matchers.some(m => m.string === 'Socketed Gems are Supported by Level # Spell Echo'))).toBe(true)
   })
 
   it('drops stats whose trade IDs 3.30 retired with their content', () => {

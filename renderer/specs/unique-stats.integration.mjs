@@ -215,3 +215,22 @@ test('retains variable unique base implicits and hides constant base implicits',
     }
   }
 })
+
+test('a pre-3.30 aura grant searches the Heist stat on Heist gear and the 3.30 stat elsewhere', () => {
+  const line = { string: 'Grants Level 20 Anger Skill', unscalable: true }
+  assert.deepEqual(tryParseTranslation(line, 'explicit', 'Heist Gear').stat.trade.ids.explicit, ['explicit.stat_449494711'])
+  const other = tryParseTranslation(line, 'explicit', 'Amulet')
+  assert.equal(other.stat.ref, 'Grants Level # Anger')
+  assert.deepEqual(other.stat.trade.ids.explicit, ['explicit.effect_2014162730'])
+})
+
+test('notables that share a localized name search every trade ID they could be', async () => {
+  try {
+    await Data.init('ru')
+    // Relentless and Inexorable are both "Безжалостный" in Russian.
+    const parsed = tryParseTranslation({ string: '1 добавленное пассивное умение - Безжалостный', unscalable: true }, 'enchant', 'Amulet')
+    assert.deepEqual([...parsed.stat.trade.ids.enchant].sort(), ['enchant.stat_3599615742|28878', 'enchant.stat_3599615742|54629'])
+  } finally {
+    await Data.init('en')
+  }
+})
