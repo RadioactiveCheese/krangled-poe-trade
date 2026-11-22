@@ -1,0 +1,11 @@
+Item Class: Viscera
+Greater Warden's Arm
+--------
+Upper Limb
+--------
+Item Level: 83
+--------
+{ Implicit Modifier }
+7(5-7)% more Maximum Life
+--------
+Take this to the Wickerman in a town or hideout to attach it.

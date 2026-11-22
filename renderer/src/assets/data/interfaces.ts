@@ -262,6 +262,8 @@ export interface TranslationDict {
   FOIL_UNIQUE: string
   UNMODIFIABLE: string
   FOULBORN_NAME: RegExp
+  FATED_NAME: RegExp
+  UNIDENTIFIED_TIER: RegExp
   FOULBORN_MODIFIER: string
   VESTIGIAL_NAME: RegExp
   VESTIGIAL_MODIFIER?: string

@@ -131,6 +131,8 @@ export default {
   FOIL_UNIQUE: '貼模傳奇',
   UNMODIFIABLE: '不可調整的',
   FOULBORN_NAME: /^穢生 (.*)$/,
+  FATED_NAME: /^命運 (.*)$/,
+  UNIDENTIFIED_TIER: /^未鑑定\s*[(（]階級 (\d+)[)）]$/,
   FOULBORN_MODIFIER: 'Foulborn Unique Modifier',
   VESTIGIAL_NAME: /^殘存 (.*)$/,
   VESTIGIAL_IMPLICIT: '殘存固定詞綴',

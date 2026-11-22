@@ -35,6 +35,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseUnidentified,
   { virtual: parseSuperior },
   { virtual: parseFoulborn },
+  { virtual: parseFated },
   { virtual: parseVestigial },
   parseSynthesised,
   parseCategoryByHelpText,
@@ -502,7 +503,8 @@ function parseFoil (section: string[], item: ParsedItem) {
 }
 
 function parseUnidentified (section: string[], item: ParsedItem) {
-  if (section[0] === _$.UNIDENTIFIED) {
+  // 3.30 adds the item's unidentified tier: "Unidentified (Tier 5)"
+  if (section[0] === _$.UNIDENTIFIED || _$.UNIDENTIFIED_TIER.test(section[0])) {
     item.isUnidentified = true
     return 'SECTION_PARSED'
   }
@@ -1019,6 +1021,17 @@ function parseFoulborn (item: ParserState) {
   if (_$.FOULBORN_NAME.test(item.name)) {
     item.name = _$.FOULBORN_NAME.exec(item.name)![1]
     item.isFoulborn = true
+  }
+}
+
+// 3.30 "Fated" equipment: the trade site lists it under the plain base type.
+function parseFated (item: ParserState) {
+  if (item.baseType) {
+    const match = _$.FATED_NAME.exec(item.baseType)
+    if (match) item.baseType = match[1]
+  } else {
+    const match = _$.FATED_NAME.exec(item.name)
+    if (match) item.name = match[1]
   }
 }
 

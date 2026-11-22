@@ -131,6 +131,8 @@ export default {
   FOIL_UNIQUE: '반짝이 버전 고유 아이템',
   UNMODIFIABLE: '속성 부여 불가',
   FOULBORN_NAME: /^삿된 (.*)$/,
+  FATED_NAME: /^예견된 (.*)$/,
+  UNIDENTIFIED_TIER: /^미확인 \((\d+)등급\)$/,
   FOULBORN_MODIFIER: '삿된 고유 속성',
   VESTIGIAL_NAME: /^흔적 (.*)$/,
   VESTIGIAL_IMPLICIT: '흔적 고정 속성',

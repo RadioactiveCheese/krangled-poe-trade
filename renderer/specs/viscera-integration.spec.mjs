@@ -73,6 +73,33 @@ test('parses the reported Lesser Lunar Bow with its implicit roll', async () => 
   assert.equal(item.statsByType[0].sources[0].stat.roll.value, 15)
 })
 
+test('parses the reported Greater Warden\'s Arm "more Maximum Life" implicit', async () => {
+  const item = parse(await fs.readFile(path.join(ROOT, 'specs/fixtures/viscera-greater-wardens-arm.txt'), 'utf8'))
+  assert.equal(item.info.refName, 'Warden\'s Arm')
+  assert.deepEqual(item.unknownModifiers, [])
+  assert.equal(item.statsByType.length, 1)
+  assert.equal(item.statsByType[0].sources[0].stat.roll.value, 7)
+  const [filter] = createExactStatFilters(item, item.statsByType, { searchStatRange: 10 })
+  assert.equal(filter.tag, 'implicit')
+  // Viscera use stat_1214601201; Coven Queen's Crown uses stat_137377270 for the same text.
+  assert.deepEqual(filter.tradeId, ['implicit.stat_1214601201', 'implicit.stat_137377270'])
+})
+
+test('maps every live Viscera implicit trade ID to its stat in every supported language', async () => {
+  const snapshot = JSON.parse(await fs.readFile(path.join(ROOT, 'specs/fixtures/trade-viscera-implicit-stats-2026-11-22.json'), 'utf8'))
+  for (const language of ['en', 'ru', 'ko', 'cmn-Hant']) {
+    await Data.init(language)
+    for (const entry of snapshot.entries) {
+      const stat = Data.STAT_BY_REF_V2(entry.ref)
+      assert.ok(stat?.trade?.ids.implicit?.includes(entry.id), `${language}: ${entry.id} ${entry.text}`)
+    }
+  }
+  await Data.init('en')
+  for (const entry of snapshot.entries) {
+    assert.ok(Data.STAT_BY_MATCH_STR(entry.text)?.stat.trade.ids.implicit?.includes(entry.id), entry.text)
+  }
+})
+
 test('recognizes all official English Viscera bases with or without a tier prefix', async () => {
   const snapshot = JSON.parse(await fs.readFile(path.join(ROOT, 'specs/fixtures/trade-viscera-2026-11-20.json'), 'utf8'))
   for (const entry of snapshot.entries) {

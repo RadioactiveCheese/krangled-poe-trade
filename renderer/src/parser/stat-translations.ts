@@ -79,16 +79,22 @@ const PLACEHOLDER_MAP = [
   [[0, 1, 2, 3], [1, 2, 3], [0, 2, 3], [0, 1, 3], [0, 1, 2], [2, 3], [1, 3], [1, 2], [0, 3], [0, 2], [0, 1]]
 ]
 
-function * _statPlaceholderGenerator (stat: string) {
+const TEXTUAL_RANGE = '(...)'
+
+function * _statPlaceholderGenerator (stat: string, keepTextualRanges = false) {
   const matches: Array<{
     roll: number
     rollStr: string
     decimal: boolean
     bounds?: { min: number, max: number }
   }> = []
-  const withPlaceholders = stat
+  let withPlaceholders = stat
     .replaceAll('()', '') // when GGG didn't provide advanced desc, like in "Passives in Radius of Wicked Ward() can be Allocated"
-    .replaceAll('(...)', '') // remove stat value ranges which are described textually
+  if (!keepTextualRanges) {
+    // remove stat value ranges which are described textually
+    withPlaceholders = withPlaceholders.replaceAll(TEXTUAL_RANGE, '')
+  }
+  withPlaceholders = withPlaceholders
     .replaceAll(/(?<value>(?<!\d|\))[+-]?\d+(?:\.\d+)?)(?:\((?<min>.[^)-]*)(?:-(?<max>[^)]+))?\))?/g, (_, roll: string, min?: string, max?: string) => {
       if (min != null && max == null) {
         // example: Sextant "# uses remaining", legacy rolls
@@ -135,6 +141,16 @@ function * _statPlaceholderGenerator (stat: string) {
   yield { stat, values: [] }
 }
 
+// Since 3.30 the advanced copy shows a textual range as "(...)", e.g. the random gem
+// in "+3 to Level of all Ground Slam(...) Gems". The marker is what tells that stat
+// apart from the fixed one with the same plain text, so match it first as written.
+function * _statCombinations (text: string) {
+  if (text.includes(TEXTUAL_RANGE)) {
+    yield * _statPlaceholderGenerator(text, true)
+  }
+  yield * _statPlaceholderGenerator(text)
+}
+
 export function tryParseTranslation (
   stat: StatString,
   modType: ModifierType,
@@ -142,7 +158,8 @@ export function tryParseTranslation (
 ): ParsedStat | undefined {
   // Game effect descriptions insert zero-width spaces before linked gem names.
   // The trade API's text has no such formatting characters.
-  for (const combination of _statPlaceholderGenerator(stat.string.replace(/\u200b/g, ''))) {
+  const text = stat.string.replace(/\u200b/g, '')
+  for (const combination of _statCombinations(text)) {
     const found = findAndResolveTranslation({
       matchStr: combination.stat,
       modType: modType,

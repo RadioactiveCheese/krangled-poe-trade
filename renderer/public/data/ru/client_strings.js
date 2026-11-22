@@ -148,6 +148,8 @@ export default {
   FOIL_UNIQUE: 'Особый уникальный предмет',
   UNMODIFIABLE: 'Неизменяемый',
   FOULBORN_NAME: /^(?:Нечестивый|Нечестивая|Нечестивое|Нечестивые) (.*)$/,
+  FATED_NAME: /^Судьбоносный: (.*)$/,
+  UNIDENTIFIED_TIER: /^Неопознано \((\d+) уровень\)$/,
   FOULBORN_MODIFIER: 'Нечестивое уникальное свойство',
   VESTIGIAL_NAME: /^Вырожденный: (.*)$/,
   VESTIGIAL_IMPLICIT: 'Собственное свойство вояжа',

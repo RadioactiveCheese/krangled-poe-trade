@@ -134,6 +134,8 @@ export default {
   FOIL_UNIQUE: 'Foil Unique',
   UNMODIFIABLE: 'Unmodifiable',
   FOULBORN_NAME: /^Foulborn (.*)$/,
+  FATED_NAME: /^Fated (.*)$/,
+  UNIDENTIFIED_TIER: /^Unidentified \(Tier (\d+)\)$/,
   FOULBORN_MODIFIER: 'Foulborn Unique Modifier',
   VESTIGIAL_NAME: /^Vestigial (.*)$/,
   VESTIGIAL_MODIFIER: 'Vestigial Implicit Modifier',

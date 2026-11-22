@@ -1,0 +1,13 @@
+Item Class: Rings
+Rarity: Rare
+Fated Geodesic Ring
+--------
+Item Level: 86
+--------
+{ Implicit Modifier }
++1 Prefix Modifier allowed
+-1 Suffix Modifier allowed
+Implicit Modifiers Cannot Be Changed — Unscalable Value
+25% increased Prefix Modifier magnitudes — Unscalable Value
+--------
+Unidentified (Tier 5)

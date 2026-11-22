@@ -1,0 +1,377 @@
+{
+  "source": "https://www.pathofexile.com/api/trade/data/stats",
+  "retrievedAt": "2026-11-22",
+  "note": "Implicit trade IDs whose text matches a local stat and that return results for a Covens trade search limited to the viscera category.",
+  "entries": [
+    {
+      "id": "implicit.stat_3094222195",
+      "text": "#% chance to Impale on Spell Hit",
+      "ref": "#% chance to Impale on Spell Hit"
+    },
+    {
+      "id": "implicit.stat_586568910",
+      "text": "Corpses you Spawn have #% increased Maximum Life",
+      "ref": "Corpses you Spawn have #% increased Maximum Life"
+    },
+    {
+      "id": "implicit.stat_2957407601",
+      "text": "Offering Skills have #% increased Duration",
+      "ref": "Offering Skills have #% increased Duration"
+    },
+    {
+      "id": "implicit.stat_1642347505",
+      "text": "#% of Cold Damage taken as Fire Damage",
+      "ref": "#% of Cold Damage taken as Fire Damage"
+    },
+    {
+      "id": "implicit.stat_2137878565",
+      "text": "#% increased Damage with Hits against Rare monsters",
+      "ref": "#% increased Damage with Hits against Rare monsters"
+    },
+    {
+      "id": "implicit.stat_1480595847",
+      "text": "#% increased Effect of Impales inflicted with Spells",
+      "ref": "#% increased Effect of Impales inflicted with Spells"
+    },
+    {
+      "id": "implicit.stat_417188801",
+      "text": "#% chance to gain an Endurance Charge when you Block",
+      "ref": "#% chance to gain an Endurance Charge when you Block"
+    },
+    {
+      "id": "implicit.stat_1818773442",
+      "text": "#% increased Damage with Hits and Ailments per Curse on Enemy",
+      "ref": "#% increased Damage with Hits and Ailments per Curse on Enemy"
+    },
+    {
+      "id": "implicit.stat_3101897388",
+      "text": "#% increased Maximum Recovery per Life Leech",
+      "ref": "#% increased Maximum Recovery per Life Leech"
+    },
+    {
+      "id": "implicit.stat_1504513372",
+      "text": "Skills Supported by Unleash have #% increased Seal gain frequency",
+      "ref": "Skills Supported by Unleash have #% increased Seal gain frequency"
+    },
+    {
+      "id": "implicit.stat_1840985759",
+      "text": "#% increased Area of Effect for Attacks",
+      "ref": "#% increased Area of Effect for Attacks"
+    },
+    {
+      "id": "implicit.stat_2138799639",
+      "text": "Arrows Pierce all Targets after Forking",
+      "ref": "Arrows Pierce all Targets after Forking"
+    },
+    {
+      "id": "implicit.stat_2201614328",
+      "text": "Regenerate #% of Life per second if you have been Hit Recently",
+      "ref": "Regenerate #% of Life per second if you have been Hit Recently"
+    },
+    {
+      "id": "implicit.stat_1019020209",
+      "text": "#% increased Damage per Curse on you",
+      "ref": "#% increased Damage per Curse on you"
+    },
+    {
+      "id": "implicit.stat_491450213",
+      "text": "Minions have #% increased Critical Strike Chance",
+      "ref": "Minions have #% increased Critical Strike Chance"
+    },
+    {
+      "id": "implicit.stat_2370748292",
+      "text": "Minions gain added Resistances equal to #% of your Resistances",
+      "ref": "Minions gain added Resistances equal to #% of your Resistances"
+    },
+    {
+      "id": "implicit.stat_3682839745",
+      "text": "#% chance to gain a Brine Charge instead of an Endurance Charge",
+      "ref": "#% chance to gain a Brine Charge instead of an Endurance Charge"
+    },
+    {
+      "id": "implicit.stat_2474564741",
+      "text": "Consecrated Ground you create applies #% increased Damage taken to Enemies",
+      "ref": "Consecrated Ground you create applies #% increased Damage taken to Enemies"
+    },
+    {
+      "id": "implicit.stat_2841618445",
+      "text": "Regenerate #% of Life per second for each Raised Zombie",
+      "ref": "Regenerate #% of Life per second for each Raised Zombie"
+    },
+    {
+      "id": "implicit.stat_1214601201",
+      "text": "#% more Maximum Life",
+      "ref": "#% more Maximum Life"
+    },
+    {
+      "id": "implicit.stat_1302845655",
+      "text": "#% chance to gain a Frenzy Charge for each Enemy you hit with a Critical Strike",
+      "ref": "#% chance to gain a Frenzy Charge for each Enemy you hit with a Critical Strike"
+    },
+    {
+      "id": "implicit.stat_3442107889",
+      "text": "Gain Maddening Presence for 10 seconds when you Kill a Rare or Unique Enemy",
+      "ref": "Gain Maddening Presence for 10 seconds when you Kill a Rare or Unique Enemy"
+    },
+    {
+      "id": "implicit.stat_1309492287",
+      "text": "Regenerate #% of Mana per second if you've Consumed a corpse Recently",
+      "ref": "Regenerate #% of Mana per second if you've Consumed a corpse Recently"
+    },
+    {
+      "id": "implicit.stat_3835522656",
+      "text": "Adds # to # Lightning Damage to Unarmed Melee Hits",
+      "ref": "Adds # to # Lightning Damage to Unarmed Melee Hits"
+    },
+    {
+      "id": "implicit.stat_137377270",
+      "text": "#% more Maximum Life",
+      "ref": "#% more Maximum Life"
+    },
+    {
+      "id": "implicit.stat_2994988431",
+      "text": "#% more Maximum Physical Attack Damage",
+      "ref": "#% more Maximum Physical Attack Damage"
+    },
+    {
+      "id": "implicit.stat_581625445",
+      "text": "#% increased Movement Speed while Ignited",
+      "ref": "#% increased Movement Speed while Ignited"
+    },
+    {
+      "id": "implicit.stat_2736829661",
+      "text": "When you Kill a Rare Monster, #% chance to gain one of its Modifiers for 10 seconds",
+      "ref": "When you Kill a Rare Monster, #% chance to gain one of its Modifiers for 10 seconds"
+    },
+    {
+      "id": "implicit.stat_2918708827",
+      "text": "#% chance to gain Phasing for 4 seconds on Kill",
+      "ref": "#% chance to gain Phasing for 4 seconds on Kill"
+    },
+    {
+      "id": "implicit.stat_4224978303",
+      "text": "#% chance to deal Double Damage if you have Stunned an Enemy Recently",
+      "ref": "#% chance to deal Double Damage if you have Stunned an Enemy Recently"
+    },
+    {
+      "id": "implicit.stat_3376335115",
+      "text": "#% more Maximum Physical Attack Damage",
+      "ref": "#% more Maximum Physical Attack Damage"
+    },
+    {
+      "id": "implicit.stat_3115319277",
+      "text": "Gain #% of Lightning Damage as Extra Chaos Damage per Power Charge",
+      "ref": "Gain #% of Lightning Damage as Extra Chaos Damage per Power Charge"
+    },
+    {
+      "id": "implicit.stat_3769211656",
+      "text": "#% chance to gain a Frenzy Charge when you Block",
+      "ref": "#% chance to gain a Frenzy Charge when you Block"
+    },
+    {
+      "id": "implicit.stat_2545584555",
+      "text": "#% increased Effect of Withered",
+      "ref": "#% increased Effect of Withered"
+    },
+    {
+      "id": "implicit.stat_927817294",
+      "text": "Raised Zombies have #% increased maximum Life",
+      "ref": "Raised Zombies have #% increased maximum Life"
+    },
+    {
+      "id": "implicit.stat_1244494473",
+      "text": "#% of Lightning Damage taken as Fire Damage",
+      "ref": "#% of Lightning Damage taken as Fire Damage"
+    },
+    {
+      "id": "implicit.stat_752930724",
+      "text": "Items and Gems have #% increased Attribute Requirements",
+      "ref": "Items and Gems have #% increased Attribute Requirements"
+    },
+    {
+      "id": "implicit.stat_253956903",
+      "text": "#% increased Quantity of Gold Dropped by Slain Enemies",
+      "ref": "#% increased Quantity of Gold Dropped by Slain Enemies"
+    },
+    {
+      "id": "implicit.stat_3120620173",
+      "text": "Pact Skills have #% increased Cast Speed",
+      "ref": "Pact Skills have #% increased Cast Speed"
+    },
+    {
+      "id": "implicit.stat_1870732546",
+      "text": "Skills that Summon a Totem have #% chance to Summon two Totems instead of one",
+      "ref": "Skills that Summon a Totem have #% chance to Summon two Totems instead of one"
+    },
+    {
+      "id": "implicit.stat_1107877645",
+      "text": "Regenerate #% of Life per second if you've Consumed a corpse Recently",
+      "ref": "Regenerate #% of Life per second if you've Consumed a corpse Recently"
+    },
+    {
+      "id": "implicit.stat_4113372195",
+      "text": "Effects of Consecrated Ground you create Linger for 1 second",
+      "ref": "Effects of Consecrated Ground you create Linger for 1 second"
+    },
+    {
+      "id": "implicit.stat_3119292058",
+      "text": "Enemies Chilled by your Hits can be Shattered as though Frozen",
+      "ref": "Enemies Chilled by your Hits can be Shattered as though Frozen"
+    },
+    {
+      "id": "implicit.stat_3098087057",
+      "text": "#% increased Damage on Burning Ground",
+      "ref": "#% increased Damage on Burning Ground"
+    },
+    {
+      "id": "implicit.stat_2567919918",
+      "text": "Utility Flasks gain # Charge every 3 seconds",
+      "ref": "Utility Flasks gain # Charge every 3 seconds"
+    },
+    {
+      "id": "implicit.stat_1217730254",
+      "text": "Enemies take #% increased Damage for each type of Ailment you have inflicted on them",
+      "ref": "Enemies take #% increased Damage for each type of Ailment you have inflicted on them"
+    },
+    {
+      "id": "implicit.stat_1144742318",
+      "text": "Pact Skills have #% increased Cooldown Recovery Rate",
+      "ref": "Pact Skills have #% increased Cooldown Recovery Rate"
+    },
+    {
+      "id": "implicit.stat_2337295272",
+      "text": "Minions deal #% increased Damage if you've Hit Recently",
+      "ref": "Minions deal #% increased Damage if you've Hit Recently"
+    },
+    {
+      "id": "implicit.stat_2415497478",
+      "text": "#% chance to Avoid Physical Damage from Hits",
+      "ref": "#% chance to Avoid Physical Damage from Hits"
+    },
+    {
+      "id": "implicit.stat_3493440964",
+      "text": "Gain a random Shrine Buff for # seconds when you Kill a Rare or Unique Enemy",
+      "ref": "Gain a random Shrine Buff for # seconds when you Kill a Rare or Unique Enemy"
+    },
+    {
+      "id": "implicit.stat_440826461",
+      "text": "#% more Maximum Lightning Damage",
+      "ref": "#% more Maximum Lightning Damage"
+    },
+    {
+      "id": "implicit.stat_2602664175",
+      "text": "Minions Recover #% of Life on Killing a Poisoned Enemy",
+      "ref": "Minions Recover #% of Life on Killing a Poisoned Enemy"
+    },
+    {
+      "id": "implicit.stat_3633399302",
+      "text": "#% of Fire Damage Leeched as Life while Ignited",
+      "ref": "#% of Fire Damage Leeched as Life while Ignited"
+    },
+    {
+      "id": "implicit.stat_1698276268",
+      "text": "Projectiles that have Chained gain #% of Non-Chaos Damage as extra Chaos Damage",
+      "ref": "Projectiles that have Chained gain #% of Non-Chaos Damage as extra Chaos Damage"
+    },
+    {
+      "id": "implicit.stat_988207959",
+      "text": "Skills fire an additional Projectile if you've been Hit Recently",
+      "ref": "Skills fire an additional Projectile if you've been Hit Recently"
+    },
+    {
+      "id": "implicit.stat_4249220643",
+      "text": "#% increased Attack Speed while Dual Wielding",
+      "ref": "#% increased Attack Speed while Dual Wielding"
+    },
+    {
+      "id": "implicit.stat_2809802678",
+      "text": "Skills fire an additional Projectile if you've used a Movement Skill Recently",
+      "ref": "Skills fire an additional Projectile if you've used a Movement Skill Recently"
+    },
+    {
+      "id": "implicit.stat_2920230984",
+      "text": "#% chance for Slain monsters to drop an additional Scroll of Wisdom",
+      "ref": "#% chance for Slain monsters to drop an additional Scroll of Wisdom"
+    },
+    {
+      "id": "implicit.stat_4058190193",
+      "text": "#% increased Effect of Consecrated Ground you create",
+      "ref": "#% increased Effect of Consecrated Ground you create"
+    },
+    {
+      "id": "implicit.stat_298173317",
+      "text": "#% increased Impale Effect",
+      "ref": "#% increased Impale Effect"
+    },
+    {
+      "id": "implicit.stat_3913936991",
+      "text": "#% of Damage taken from Stunning Hits is Recovered as Life",
+      "ref": "#% of Damage taken from Stunning Hits is Recovered as Life"
+    },
+    {
+      "id": "implicit.stat_2805714016",
+      "text": "#% increased Damage with Hits against Chilled Enemies",
+      "ref": "#% increased Damage with Hits against Chilled Enemies"
+    },
+    {
+      "id": "implicit.stat_755922799",
+      "text": "Minions have #% chance to deal Double Damage",
+      "ref": "Minions have #% chance to deal Double Damage"
+    },
+    {
+      "id": "implicit.stat_1453197917",
+      "text": "#% chance to gain a Power Charge on Hit",
+      "ref": "#% chance to gain a Power Charge on Hit"
+    },
+    {
+      "id": "implicit.stat_514698677",
+      "text": "#% chance to inflict an additional Poison on the same Target when you inflict Poison",
+      "ref": "#% chance to inflict an additional Poison on the same Target when you inflict Poison"
+    },
+    {
+      "id": "implicit.stat_2216127021",
+      "text": "#% increased Area of Effect while Unarmed",
+      "ref": "#% increased Area of Effect while Unarmed"
+    },
+    {
+      "id": "implicit.stat_1450081919",
+      "text": "#% more Damage against Undead Monsters",
+      "ref": "#% more Damage against Undead Monsters"
+    },
+    {
+      "id": "implicit.stat_2831922878",
+      "text": "#% increased Attack and Cast Speed if you've used a Movement Skill Recently",
+      "ref": "#% increased Attack and Cast Speed if you've used a Movement Skill Recently"
+    },
+    {
+      "id": "implicit.stat_3764198549",
+      "text": "Every 3 seconds, Consume a Corpse within 5 metres to Recover #% of Life",
+      "ref": "Every 3 seconds, Consume a Corpse within 5 metres to Recover #% of Life"
+    },
+    {
+      "id": "implicit.stat_1091613629",
+      "text": "Gain Shaper's Presence for 10 seconds when you kill a Rare or Unique Enemy",
+      "ref": "Gain Shaper's Presence for 10 seconds when you kill a Rare or Unique Enemy"
+    },
+    {
+      "id": "implicit.stat_1631195850",
+      "text": "Damaging Retaliation Skills become Usable every # seconds",
+      "ref": "Damaging Retaliation Skills become Usable every # seconds"
+    },
+    {
+      "id": "implicit.stat_1195319608",
+      "text": "#% increased Energy Shield from Equipped Body Armour",
+      "ref": "#% increased Energy Shield from Equipped Body Armour"
+    },
+    {
+      "id": "implicit.stat_2118708619",
+      "text": "#% increased Damage if you have Consumed a corpse Recently",
+      "ref": "#% increased Damage if you have Consumed a corpse Recently"
+    },
+    {
+      "id": "implicit.stat_2973498992",
+      "text": "Your Chaos Damage can Freeze",
+      "ref": "Your Chaos Damage can Freeze"
+    }
+  ]
+}
