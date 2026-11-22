@@ -1399,8 +1399,8 @@
 {"ref":"#% more Life cost of Skills while on Low Life","better":1,"matchers":[{"string":"貧血狀態時，技能有 #% 更多生命消耗"},{"string":"貧血狀態時，技能有 #% 更少生命消耗","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3452986510"],"fractured":["fractured.stat_3452986510"]}}}
 {"ref":"#% more Main Hand attack speed","better":1,"matchers":[{"string":"#% 更多主手攻擊速度"},{"string":"#% 更少主手攻擊速度","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_56401364"]}}}
 {"ref":"#% more Mana cost of Lightning Skills while Shocked","better":1,"matchers":[{"string":"感電時，閃電技能有 #% 更多魔力消耗"},{"string":"感電時，閃電技能有 #% 更少魔力消耗","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3964669425"],"fractured":["fractured.stat_3964669425"]}}}
-{"ref":"#% more Maximum Life","better":1,"matchers":[{"string":"#% 更多最大生命"},{"string":"#% 更少最大生命","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2783958145"]}}}
-{"ref":"#% more Maximum Physical Attack Damage","better":1,"matchers":[{"string":"有 #% 更多最大物理攻擊傷害"},{"string":"有 #% 更少最大物理攻擊傷害","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3029185248"]}}}
+{"ref":"#% more Maximum Life","better":1,"matchers":[{"string":"#% 更多最大生命"},{"string":"#% 更少最大生命","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_2783958145"],"implicit":["implicit.stat_1214601201","implicit.stat_137377270"]}}}
+{"ref":"#% more Maximum Physical Attack Damage","better":1,"matchers":[{"string":"有 #% 更多最大物理攻擊傷害"},{"string":"有 #% 更少最大物理攻擊傷害","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_3029185248"],"implicit":["implicit.stat_2994988431","implicit.stat_3376335115"]}}}
 {"ref":"#% more Melee Damage while Burning","better":1,"matchers":[{"string":"燃燒時有 #% 更多近戰傷害"},{"string":"燃燒時有 #% 更少近戰傷害","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_1353128245"],"fractured":["fractured.stat_1353128245"]}}}
 {"ref":"#% more Melee Physical Damage during effect","better":1,"matchers":[{"string":"藥劑效果期間獲得 #% 更多近戰物理傷害"}],"trade":{"ids":{"explicit":["explicit.stat_3636096208"]}}}
 {"ref":"#% more Monster Life","better":1,"fromAreaMods":"yes","matchers":[{"string":"#% 更多怪物生命"},{"string":"#% 更少怪物生命","negate":true}],"trade":{"ids":{"explicit":["explicit.stat_95249895"],"implicit":["implicit.stat_95249895"],"fractured":["fractured.stat_95249895"]}}}
@@ -9067,7 +9067,7 @@
 {"ref":"+#% to Maximum Effect of Chill","better":1,"matchers":[{"string":"#%最大冰緩效果"}],"trade":{"ids":{"implicit":["implicit.stat_1400414838"]}}}
 {"ref":"Skills that Cost Life have #% chance to deal Double Damage","better":1,"matchers":[{"string":"擁有生命消耗的技能有#%機率造成兩倍傷害"}],"trade":{"ids":{"implicit":["implicit.stat_1183036145"]}}}
 {"ref":"Enemies near your Banner take #% increased Fire Damage","better":1,"matchers":[{"string":"位於你鬥旗周遭的敵人會增加#%承受火焰傷害"},{"string":"位於你鬥旗周遭的敵人會減少#%承受火焰傷害","negate":true}],"trade":{"ids":{"implicit":["implicit.stat_4163360392"]}}}
-{"ref":"#% more Maximum Lightning Damage","better":1,"matchers":[{"string":"#%更多最大閃電傷害"},{"string":"#%更少最大閃電傷害","negate":true}],"trade":{"ids":{"implicit":["implicit.stat_261712318"]}}}
+{"ref":"#% more Maximum Lightning Damage","better":1,"matchers":[{"string":"#%更多最大閃電傷害"},{"string":"#%更少最大閃電傷害","negate":true}],"trade":{"ids":{"implicit":["implicit.stat_261712318","implicit.stat_440826461"]}}}
 {"ref":"Curse Enemies with Frostbite on Hit if 5 Redeemer Items are Equipped","better":1,"matchers":[{"string":"若裝備 5 種救贖者之物，擊中敵人時施加凍傷"}],"trade":{"ids":{"implicit":["implicit.stat_1012433600"]}}}
 {"ref":"#% chance to avoid Corrupted Blood","better":1,"matchers":[{"string":"#% 機率避免腐化之血"}],"trade":{"ids":{"implicit":["implicit.stat_434725481"]}}}
 {"ref":"#% chance to gain an Endurance Charge when you Stun an Enemy with a Melee Hit","better":1,"matchers":[{"string":"當你使用近戰擊中暈眩敵人時，有 #% 機率獲得 1 顆耐力球"},{"string":"當你使用近戰擊中暈眩敵人時，獲得 1 顆耐力球","value":100}],"trade":{"ids":{"implicit":["implicit.stat_4067960074"]}}}
@@ -9120,7 +9120,7 @@
 {"ref":"Increases and Reductions to Light Radius also apply to Life Regeneration Rate at #% value","better":1,"matchers":[{"string":"對照明範圍的增減同時會以#%的數值套用至生命回復率"}],"trade":{"ids":{"implicit":["implicit.stat_3708520172"]}}}
 {"ref":"When you Poison a non-Poisoned target, also inflict # Withered debuffs, lasting 2 seconds","better":1,"matchers":[{"string":"當你使一名未中毒的目標中毒時，同時施加#層凋零減益，持續2秒"}],"trade":{"ids":{"implicit":["implicit.stat_2751374419"]}}}
 {"ref":"Every second, inflict Withered on Enemies within 6 metres for # seconds","dp":true,"better":1,"matchers":[{"string":"每秒對6公尺範圍內的敵人施加凋零，持續#秒"}],"trade":{"ids":{"implicit":["implicit.stat_1417918566"]}}}
-{"ref":"#% more Damage against Undead Monsters","better":1,"matchers":[{"string":"對不死怪物造成#%更多傷害"},{"string":"對不死怪物造成#%更少傷害","negate":true}],"trade":{"ids":{"implicit":["implicit.stat_2844915624"]}}}
+{"ref":"#% more Damage against Undead Monsters","better":1,"matchers":[{"string":"對不死怪物造成#%更多傷害"},{"string":"對不死怪物造成#%更少傷害","negate":true}],"trade":{"ids":{"implicit":["implicit.stat_2844915624","implicit.stat_1450081919"]}}}
 {"ref":"Minions have #% increased Movement Speed if you've used a Minion Skill Recently","better":1,"matchers":[{"string":"若你近期使用過召喚物技能，你的召喚物增加#%移動速度"},{"string":"若你近期使用過召喚物技能，你的召喚物減少#%移動速度","negate":true}],"trade":{"ids":{"implicit":["implicit.stat_1371407912"]}}}
 {"ref":"#% of Physical Damage over Time taken as Chaos Damage","better":1,"matchers":[{"string":"承受#%的物理持續傷害改為混沌傷害"}],"trade":{"ids":{"implicit":["implicit.stat_1640937241"]}}}
 {"ref":"#% increased Damage with Skills that Cost Life","better":1,"matchers":[{"string":"消耗生命的技能增加 #% 傷害"},{"string":"消耗生命的技能減少 #% 傷害","negate":true}],"trade":{"ids":{"implicit":["implicit.stat_367782342"]}}}
