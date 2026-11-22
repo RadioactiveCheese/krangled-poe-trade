@@ -1,0 +1,25 @@
+{
+  "source": "Game data ClientStrings, patch 3.30.0.4",
+  "strings": {
+    "en": {
+      "FatedItem": "Fated {0}",
+      "ItemPopupUnidentified": "Unidentified",
+      "ItemTierDisplay": " (Tier {0})"
+    },
+    "ru": {
+      "FatedItem": "Судьбоносный: {0}",
+      "ItemPopupUnidentified": "Неопознано",
+      "ItemTierDisplay": " ({0} уровень)"
+    },
+    "ko": {
+      "FatedItem": "예견된 {0}",
+      "ItemPopupUnidentified": "미확인",
+      "ItemTierDisplay": " ({0}등급)"
+    },
+    "cmn-Hant": {
+      "FatedItem": "命運 {0}",
+      "ItemPopupUnidentified": "未鑑定",
+      "ItemTierDisplay": "(階級 {0})"
+    }
+  }
+}
