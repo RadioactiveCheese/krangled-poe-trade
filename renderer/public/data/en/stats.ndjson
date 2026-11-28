@@ -7803,6 +7803,7 @@
 {"ref":"Supported by Level 1 Cast On Critical Strike","better":1,"matchers":[{"string":"Supported by Level 1 Cast On Critical Strike"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|826020281"]}}}
 {"ref":"Supported by Level 1 Cast on Death","better":1,"matchers":[{"string":"Supported by Level 1 Cast on Death"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2894953063"]}}}
 {"ref":"Supported by Level 1 Cast on Melee Kill","better":1,"matchers":[{"string":"Supported by Level 1 Cast on Melee Kill"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3582467606"]}}}
+{"ref":"Supported by Level 1 Cast when Damage Taken","better":1,"matchers":[{"string":"Supported by Level 1 Cast when Damage Taken"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2842604691"]}}}
 {"ref":"Supported by Level 1 Cast when Stunned","better":1,"matchers":[{"string":"Supported by Level 1 Cast when Stunned"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3311033584"]}}}
 {"ref":"Supported by Level 1 Cast while Channelling","better":1,"matchers":[{"string":"Supported by Level 1 Cast while Channelling"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|1089139173"]}}}
 {"ref":"Supported by Level 1 Chain","better":1,"matchers":[{"string":"Supported by Level 1 Chain"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2300092378"]}}}
@@ -7817,6 +7818,7 @@
 {"ref":"Supported by Level 1 Cold to Fire","better":1,"matchers":[{"string":"Supported by Level 1 Cold to Fire"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3990013913"]}}}
 {"ref":"Supported by Level 1 Combustion","better":1,"matchers":[{"string":"Supported by Level 1 Combustion"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3488848533"]}}}
 {"ref":"Supported by Level 1 Concentrated Effect","better":1,"matchers":[{"string":"Supported by Level 1 Concentrated Effect"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2571880157"]}}}
+{"ref":"Supported by Level 1 Constriction","better":1,"matchers":[{"string":"Supported by Level 1 Constriction"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2642139747"]}}}
 {"ref":"Supported by Level 1 Controlled Blaze","better":1,"matchers":[{"string":"Supported by Level 1 Controlled Blaze"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3498757786"]}}}
 {"ref":"Supported by Level 1 Controlled Destruction","better":1,"matchers":[{"string":"Supported by Level 1 Controlled Destruction"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|1716224442"]}}}
 {"ref":"Supported by Level 1 Corrupting Cry","better":1,"matchers":[{"string":"Supported by Level 1 Corrupting Cry"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2972801927"]}}}
@@ -7827,12 +7829,16 @@
 {"ref":"Supported by Level 1 Damage on Full Life","better":1,"matchers":[{"string":"Supported by Level 1 Damage on Full Life"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2721225790"]}}}
 {"ref":"Supported by Level 1 Deadly Ailments","better":1,"matchers":[{"string":"Supported by Level 1 Deadly Ailments"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3092222470"]}}}
 {"ref":"Supported by Level 1 Decay","better":1,"matchers":[{"string":"Supported by Level 1 Decay"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|4149556221"]}}}
+{"ref":"Supported by Level 1 Destitution","better":1,"matchers":[{"string":"Supported by Level 1 Destitution"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2208650143"]}}}
 {"ref":"Supported by Level 1 Devour","better":1,"matchers":[{"string":"Supported by Level 1 Devour"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2451084442"]}}}
+{"ref":"Supported by Level 1 Diminishment","better":1,"matchers":[{"string":"Supported by Level 1 Diminishment"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|1452519409"]}}}
+{"ref":"Supported by Level 1 Disempower","better":1,"matchers":[{"string":"Supported by Level 1 Disempower"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3192305202"]}}}
 {"ref":"Supported by Level 1 Efficacy","better":1,"matchers":[{"string":"Supported by Level 1 Efficacy"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|830701349"]}}}
 {"ref":"Supported by Level 1 Elemental Army","better":1,"matchers":[{"string":"Supported by Level 1 Elemental Army"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3849702703"]}}}
 {"ref":"Supported by Level 1 Elemental Damage with Attacks","better":1,"matchers":[{"string":"Supported by Level 1 Elemental Damage with Attacks"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|638399684"]}}}
 {"ref":"Supported by Level 1 Elemental Focus","better":1,"matchers":[{"string":"Supported by Level 1 Elemental Focus"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|770262833"]}}}
 {"ref":"Supported by Level 1 Elemental Proliferation","better":1,"matchers":[{"string":"Supported by Level 1 Elemental Proliferation"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|1666671509"]}}}
+{"ref":"Supported by Level 1 Encumbrance","better":1,"matchers":[{"string":"Supported by Level 1 Encumbrance"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3989015253"]}}}
 {"ref":"Supported by Level 1 Endurance Charge on Melee Stun","better":1,"matchers":[{"string":"Supported by Level 1 Endurance Charge on Melee Stun"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|1251682852"]}}}
 {"ref":"Supported by Level 1 Energy Leech","better":1,"matchers":[{"string":"Supported by Level 1 Energy Leech"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|1237276220"]}}}
 {"ref":"Supported by Level 1 Eternal Blessing","better":1,"matchers":[{"string":"Supported by Level 1 Eternal Blessing"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|1371874082"]}}}
@@ -7864,6 +7870,7 @@
 {"ref":"Supported by Level 1 Ignite Proliferation","better":1,"matchers":[{"string":"Supported by Level 1 Ignite Proliferation"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2520596918"]}}}
 {"ref":"Supported by Level 1 Immolate","better":1,"matchers":[{"string":"Supported by Level 1 Immolate"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|4236314787"]}}}
 {"ref":"Supported by Level 1 Impale","better":1,"matchers":[{"string":"Supported by Level 1 Impale"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|578583560"]}}}
+{"ref":"Supported by Level 1 Impotence","better":1,"matchers":[{"string":"Supported by Level 1 Impotence"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3674002686"]}}}
 {"ref":"Supported by Level 1 Increased Area of Effect","better":1,"matchers":[{"string":"Supported by Level 1 Increased Area of Effect"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|1466145569"]}}}
 {"ref":"Supported by Level 1 Increased Critical Damage","better":1,"matchers":[{"string":"Supported by Level 1 Increased Critical Damage"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|191534163"]}}}
 {"ref":"Supported by Level 1 Increased Critical Strikes","better":1,"matchers":[{"string":"Supported by Level 1 Increased Critical Strikes"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3398161162"]}}}
@@ -7877,6 +7884,7 @@
 {"ref":"Supported by Level 1 Item Rarity","better":1,"matchers":[{"string":"Supported by Level 1 Item Rarity"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|1787283513"]}}}
 {"ref":"Supported by Level 1 Knockback","better":1,"matchers":[{"string":"Supported by Level 1 Knockback"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2003102433"]}}}
 {"ref":"Supported by Level 1 Less Duration","better":1,"matchers":[{"string":"Supported by Level 1 Less Duration"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|4224789409"]}}}
+{"ref":"Supported by Level 1 Lethargy","better":1,"matchers":[{"string":"Supported by Level 1 Lethargy"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3435483009"]}}}
 {"ref":"Supported by Level 1 Life Gain on Hit","better":1,"matchers":[{"string":"Supported by Level 1 Life Gain on Hit"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|763543857"]}}}
 {"ref":"Supported by Level 1 Life Leech","better":1,"matchers":[{"string":"Supported by Level 1 Life Leech"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2811214937"]}}}
 {"ref":"Supported by Level 1 Lifetap","better":1,"matchers":[{"string":"Supported by Level 1 Lifetap"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3918067187"]}}}
@@ -7887,6 +7895,7 @@
 {"ref":"Supported by Level 1 Manaforged Arrows","better":1,"matchers":[{"string":"Supported by Level 1 Manaforged Arrows"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2816032231"]}}}
 {"ref":"Supported by Level 1 Mark On Hit","better":1,"matchers":[{"string":"Supported by Level 1 Mark On Hit"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3719049861"]}}}
 {"ref":"Supported by Level 1 Meat Shield","better":1,"matchers":[{"string":"Supported by Level 1 Meat Shield"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3535984827"]}}}
+{"ref":"Supported by Level 1 Mediocrity","better":1,"matchers":[{"string":"Supported by Level 1 Mediocrity"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3186808105"]}}}
 {"ref":"Supported by Level 1 Melee Physical Damage","better":1,"matchers":[{"string":"Supported by Level 1 Melee Physical Damage"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3626246352"]}}}
 {"ref":"Supported by Level 1 Melee Splash","better":1,"matchers":[{"string":"Supported by Level 1 Melee Splash"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2277529223"]}}}
 {"ref":"Supported by Level 1 Minefield","better":1,"matchers":[{"string":"Supported by Level 1 Minefield"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3322685172"]}}}
@@ -7901,12 +7910,15 @@
 {"ref":"Supported by Level 1 Multiple Traps","better":1,"matchers":[{"string":"Supported by Level 1 Multiple Traps"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3313613094"]}}}
 {"ref":"Supported by Level 1 Multistrike","better":1,"matchers":[{"string":"Supported by Level 1 Multistrike"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|646275157"]}}}
 {"ref":"Supported by Level 1 Nightblade","better":1,"matchers":[{"string":"Supported by Level 1 Nightblade"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3345636521"]}}}
+{"ref":"Supported by Level 1 Nullification","better":1,"matchers":[{"string":"Supported by Level 1 Nullification"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|601991273"]}}}
 {"ref":"Supported by Level 1 Overcharge","better":1,"matchers":[{"string":"Supported by Level 1 Overcharge"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|1961131194"]}}}
 {"ref":"Supported by Level 1 Overexertion","better":1,"matchers":[{"string":"Supported by Level 1 Overexertion"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3676897366"]}}}
+{"ref":"Supported by Level 1 Penance","better":1,"matchers":[{"string":"Supported by Level 1 Penance"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3870057454"]}}}
 {"ref":"Supported by Level 1 Physical to Lightning","better":1,"matchers":[{"string":"Supported by Level 1 Physical to Lightning"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|817697514"]}}}
 {"ref":"Supported by Level 1 Pierce","better":1,"matchers":[{"string":"Supported by Level 1 Pierce"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|4016557208"]}}}
 {"ref":"Supported by Level 1 Pinpoint","better":1,"matchers":[{"string":"Supported by Level 1 Pinpoint"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|734543851"]}}}
 {"ref":"Supported by Level 1 Point Blank","better":1,"matchers":[{"string":"Supported by Level 1 Point Blank"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|910857224"]}}}
+{"ref":"Supported by Level 1 Poverty","better":1,"matchers":[{"string":"Supported by Level 1 Poverty"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2327564307"]}}}
 {"ref":"Supported by Level 1 Power Charge On Critical","better":1,"matchers":[{"string":"Supported by Level 1 Power Charge On Critical"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3106835412"]}}}
 {"ref":"Supported by Level 1 Pulverise","better":1,"matchers":[{"string":"Supported by Level 1 Pulverise"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|687583659"]}}}
 {"ref":"Supported by Level 1 Rage","better":1,"matchers":[{"string":"Supported by Level 1 Rage"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|973619657"]}}}
@@ -7926,6 +7938,7 @@
 {"ref":"Supported by Level 1 Swift Affliction","better":1,"matchers":[{"string":"Supported by Level 1 Swift Affliction"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2290801007"]}}}
 {"ref":"Supported by Level 1 Swift Assembly","better":1,"matchers":[{"string":"Supported by Level 1 Swift Assembly"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|3993822420"]}}}
 {"ref":"Supported by Level 1 Swiftbrand","better":1,"matchers":[{"string":"Supported by Level 1 Swiftbrand"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|1597853541"]}}}
+{"ref":"Supported by Level 1 Taxation","better":1,"matchers":[{"string":"Supported by Level 1 Taxation"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2082748837"]}}}
 {"ref":"Supported by Level 1 Trap","better":1,"matchers":[{"string":"Supported by Level 1 Trap"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|865602902"]}}}
 {"ref":"Supported by Level 1 Trap and Mine Damage","better":1,"matchers":[{"string":"Supported by Level 1 Trap and Mine Damage"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2222630080"]}}}
 {"ref":"Supported by Level 1 Trauma","better":1,"matchers":[{"string":"Supported by Level 1 Trauma"}],"trade":{"ids":{"imbued":["imbued.pseudo_built_in_support|2380689033"]}}}

@@ -242,6 +242,7 @@ const sections = computed(() => {
         display.veiledMods
       ].flatMap(group => group ?? [])
     },
+    { key: 'additionalProps', content: display.additionalProps },
     // One section for all tags, so no separator lands between them.
     { key: 'itemTags', content: display.itemTags }
   ]
@@ -413,6 +414,7 @@ function veiledArt (line: DisplayItemLine): string | undefined {
 .number-color-8 { @apply text-unique; }
 .number-color-10 { @apply text-poe-currency; }
 .number-color-12 { @apply text-poe-divination; }
+.number-color-15 { @apply text-gray-500; }
 .number-color-8729 {
   @apply text-poe-enchant;
 }

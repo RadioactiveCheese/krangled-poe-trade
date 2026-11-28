@@ -1,0 +1,86 @@
+{
+  "source": "https://www.pathofexile.com/api/trade/data/filters",
+  "id": "ultimatum_filters",
+  "filters": [
+    {
+      "id": "ultimatum_challenge",
+      "text": "Challenge Type",
+      "fullSpan": true,
+      "option": {
+        "options": [
+          {
+            "id": null,
+            "text": "Any"
+          },
+          {
+            "id": "Exterminate",
+            "text": "Defeat Waves of Enemies"
+          },
+          {
+            "id": "Survival",
+            "text": "Survive"
+          },
+          {
+            "id": "Defense",
+            "text": "Protect the Altar"
+          },
+          {
+            "id": "Conquer",
+            "text": "Stand in the Stone Circles"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ultimatum_reward",
+      "text": "Reward Type",
+      "fullSpan": true,
+      "option": {
+        "options": [
+          {
+            "id": null,
+            "text": "Any"
+          },
+          {
+            "id": "DoubleCurrency",
+            "text": "Currency"
+          },
+          {
+            "id": "DoubleDivCards",
+            "text": "Divination Cards"
+          },
+          {
+            "id": "MirrorRare",
+            "text": "Mirrored Rare Item"
+          },
+          {
+            "id": "ExchangeUnique",
+            "text": "Unique Item"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ultimatum_input",
+      "text": "Required Item",
+      "fullSpan": true,
+      "option": {
+        "knownItem": {
+          "uniques": true,
+          "cards": true,
+          "currency": true
+        }
+      }
+    },
+    {
+      "id": "ultimatum_output",
+      "text": "Reward Unique",
+      "fullSpan": true,
+      "option": {
+        "knownItem": {
+          "uniques": true
+        }
+      }
+    }
+  ]
+}

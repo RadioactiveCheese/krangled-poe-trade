@@ -22,6 +22,8 @@ export enum TradeNumberColors {
   Unique = 8,
   Currency = 10,
   Divination = 12,
+  /* Obstructed Chronicle of Atzoatl rooms. */
+  Obstructed = 15,
   Enchant = 8729,
   Fractured = 8730,
   Crafted = 8734
@@ -130,6 +132,9 @@ export interface DisplayItem {
   symbols?: DisplayItemSymbol[]
   nameBlock?: DisplayItemLine[]
   itemProps?: DisplayItemLine[]
+  /* The API's `additionalProperties`: Chronicle of Atzoatl rooms, gem
+     experience. */
+  additionalProps?: DisplayItemLine[]
   enchantMods?: DisplayItemLine[]
   implicitMods?: DisplayItemLine[]
   fracturedMods?: DisplayItemLine[]
@@ -182,6 +187,7 @@ export interface FetchItem {
   tangled?: boolean
   sockets?: DisplaySocket[]
   properties?: TradeDataLine[]
+  additionalProperties?: TradeDataLine[]
   requirements?: TradeDataLine[]
   enchantMods?: FetchResultModLine[]
   implicitMods?: FetchResultModLine[]
@@ -229,6 +235,7 @@ export function parseFetchResult (result: FetchResultForTooltip): DisplayItem {
     itemProps: buildItemProps(result.item.ilvl, result.item.requirements),
     summary: buildItemSummary(result.item.extended),
     ...parseMods(result),
+    additionalProps: buildAdditionalProps(result.item.additionalProperties),
     veiledMods: result.item.veiledMods?.map(parseVeiledMod),
     itemTags: buildItemTags(result.item),
     sockets: result.item.sockets,
@@ -544,9 +551,30 @@ function buildNameBlock (properties: TradeDataLine[] | undefined): DisplayItemLi
   })
 }
 
+/* Section headers ("Open Rooms:") arrive with no values; room lines arrive
+   with no name. Headers take the label styling, values their own colour. */
+function buildAdditionalProps (properties: TradeDataLine[] | undefined): DisplayItemLine[] | undefined {
+  if (!properties?.length) return undefined
+  const lines = properties.flatMap((property): DisplayItemLine[] => {
+    const name = parseTradeText(property.name)
+    const values = (property.values ?? []).map(([value]) => parseTradeText(value))
+    const color = property.values?.[0]?.[1] ?? TradeNumberColors.White
+    if (!values.length) return name ? [{ text: name, value: '', color, propType: property.type }] : []
+    if (!name) return [{ text: values.join(', '), color, propType: property.type }]
+    if (name.includes('{0}')) {
+      let text = name
+      values.forEach((value, index) => { text = text.replace(`{${index}}`, value) })
+      return [{ text, color, propType: property.type }]
+    }
+    return [{ text: `${name}: `, value: values.join(', '), color, propType: property.type }]
+  })
+  return lines.length ? lines : undefined
+}
+
 function buildItemProps (itemLevel: number | undefined, requirements: TradeDataLine[] | undefined): DisplayItemLine[] | undefined {
   const block: DisplayItemLine[] = []
-  if (itemLevel != null) {
+  // Currency-like items (Chronicles, gems) report ilvl 0; the game shows none.
+  if (itemLevel) {
     block.push({ text: 'Item Level: ', value: itemLevel, color: TradeNumberColors.White })
   }
   if (requirements?.length) {

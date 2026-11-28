@@ -146,6 +146,8 @@ export interface TranslationDict {
   MAP_MORE_DIVINATION_CARDS: string
   MAP_COMPLETION_REWARD: RegExp
   CHART_SHAPE?: string
+  // Clipboard text of each Inscribed Ultimatum challenge, keyed by trade option id.
+  ULTIMATUM_CHALLENGE?: Record<'Exterminate' | 'Survival' | 'Defense' | 'Conquer', string>
   CHART_SULPHUR?: string
   CHART_GOLD?: string
   RARITY: string

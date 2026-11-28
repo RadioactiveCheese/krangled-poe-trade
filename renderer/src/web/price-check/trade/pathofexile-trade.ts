@@ -182,6 +182,14 @@ interface TradeRequest {
           map_completion_reward?: { option?: 'any' | string }
         }
       }
+      ultimatum_filters?: {
+        filters: {
+          ultimatum_challenge?: { option?: string }
+          ultimatum_reward?: { option?: string }
+          ultimatum_input?: { option?: string }
+          ultimatum_output?: { option?: string }
+        }
+      }
       heist_filters?: {
         filters: {
           heist_wings?: FilterRange
@@ -423,6 +431,22 @@ export function createTradeRequest (filters: ItemFilters, stats: FilterOrGroup[]
     propSet(query.filters, 'map_filters.filters.area_level.min', filters.areaLevel.value)
     if (filters.areaLevel.max) {
       propSet(query.filters, 'map_filters.filters.area_level.max', filters.areaLevel.max)
+    }
+  }
+
+  if (filters.ultimatum) {
+    const { challenge, reward, sacrifice } = filters.ultimatum
+    if (challenge && !challenge.disabled) {
+      propSet(query.filters, 'ultimatum_filters.filters.ultimatum_challenge.option', challenge.value)
+    }
+    if (reward && !reward.disabled) {
+      propSet(query.filters, 'ultimatum_filters.filters.ultimatum_reward.option', reward.value)
+    }
+    if (sacrifice && !sacrifice.disabled) {
+      propSet(query.filters, 'ultimatum_filters.filters.ultimatum_input.option', sacrifice.nameTrade)
+    }
+    if (reward?.uniqueTrade && !reward.disabled) {
+      propSet(query.filters, 'ultimatum_filters.filters.ultimatum_output.option', reward.uniqueTrade)
     }
   }
 

@@ -5,6 +5,10 @@ import type { BaseType } from '@/assets/data'
 import { ItemCategory } from './meta'
 import type { ChartShape } from './chart'
 
+// Option ids of the trade site's ultimatum_filters (/api/trade/data/filters).
+export type UltimatumChallenge = 'Exterminate' | 'Survival' | 'Defense' | 'Conquer'
+export type UltimatumReward = 'DoubleCurrency' | 'DoubleDivCards' | 'MirrorRare' | 'ExchangeUnique'
+
 export enum ItemRarity {
   Normal = 'Normal',
   Magic = 'Magic',
@@ -50,6 +54,16 @@ export interface ParsedItem {
   mapMoreCurrency?: number
   mapMoreDivCards?: number
   logbookAreaMods?: ParsedModifier[][]
+  ultimatum?: {
+    challenge?: UltimatumChallenge
+    challengeText: string
+    reward?: UltimatumReward
+    rewardText: string
+    sacrifice?: BaseType
+    sacrificeText: string
+    sacrificeQuantity: number
+    rewardUnique?: BaseType
+  }
   chart?: {
     areaName: string
     areaId?: string
