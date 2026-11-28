@@ -434,3 +434,22 @@ describe('PoE 1 trade listing tooltip parsing', () => {
     expectTooltipColorCss(8734, 'text-poe-crafted')
   })
 })
+
+describe('Chronicle of Atzoatl trade listing tooltip', () => {
+  // Trimmed from a live Covens trade fetch: rooms arrive in additionalProperties.
+  it('lists open and obstructed rooms under their headers, without an item level', async () => {
+    const chronicle = (await import('../../../fixtures/trade-fetch-chronicle-of-atzoatl.json')).default
+    const item = testExports.parseFetchResult(chronicle as unknown as Parameters<typeof testExports.parseFetchResult>[0])
+
+    expect(item.nameBlock).toEqual([expect.objectContaining({ text: 'Area Level: ', value: '83' })])
+    expect(item.itemProps).toBeUndefined()
+    expect(item.additionalProps?.map(line => [line.text, line.color])).toEqual([
+      ['Open Rooms:', 0],
+      ['Cultivar Chamber (Tier 2)', 0],
+      ['Obstructed Rooms:', 0],
+      ['Flame Workshop (Tier 1)', 15],
+      ['Apex of Atzoatl', 15]
+    ])
+    expectTooltipColorCss(15, 'text-gray-500')
+  })
+})

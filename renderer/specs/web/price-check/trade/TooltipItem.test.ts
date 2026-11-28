@@ -394,3 +394,27 @@ describe('Trade listing tooltip modifier lines', () => {
     }
   })
 })
+
+describe('Trade listing tooltip additional properties', () => {
+  it('renders Chronicle of Atzoatl rooms after the area level', () => {
+    const result = {
+      displayItem: {
+        title: ['Chronicle of Atzoatl'],
+        rarity: 'Currency',
+        frameType: 5,
+        influences: [],
+        nameBlock: [{ text: 'Area Level: ', value: '83', color: TradeNumberColors.White }],
+        additionalProps: [
+          { text: 'Open Rooms:', value: '', color: TradeNumberColors.White },
+          { text: 'Cultivar Chamber (Tier 2)', color: TradeNumberColors.White },
+          { text: 'Obstructed Rooms:', value: '', color: TradeNumberColors.White },
+          { text: 'Apex of Atzoatl', color: TradeNumberColors.Obstructed }
+        ]
+      }
+    } as unknown as PricingResult
+    const wrapper = mount(TooltipItem, { props: { result }, global: { stubs: { UiDetailedItemImg: true } } })
+    const lines = wrapper.findAll('[data-testid="modifier-line"]').map(line => line.text())
+    expect(lines).toEqual(['Area Level: 83', 'Open Rooms:', 'Cultivar Chamber (Tier 2)', 'Obstructed Rooms:', 'Apex of Atzoatl'])
+    expect(wrapper.html()).toContain('number-color-15')
+  })
+})

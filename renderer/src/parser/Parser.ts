@@ -10,7 +10,7 @@ import {
 import { ModifierType, ModifierMechanic, sumStatsByModType } from './modifiers'
 import { linesToStatStrings, tryParseTranslation, getRollOrMinmaxAvg, ParsedStat } from './stat-translations'
 import { ItemCategory, ACCESSORY } from './meta'
-import { IncursionRoom, ParsedItem, ItemInfluence, ItemRarity } from './ParsedItem'
+import { IncursionRoom, ParsedItem, ItemInfluence, ItemRarity, type UltimatumChallenge, type UltimatumReward } from './ParsedItem'
 import { magicBasetype } from './magic-name'
 import { isModInfoLine, groupLinesByMod, parseModInfoLine, parseModType, ModifierInfo, ParsedModifier, ENCHANT_LINE, SCOURGE_LINE, IMPLICIT_LINE } from './advanced-mod-desc'
 import { calcPropPercentile, QUALITY_STATS } from './calc-q20'
@@ -65,6 +65,7 @@ const parsers: Array<ParserFn | { virtual: VirtualParserFn }> = [
   parseChartProperties,
   parseChartShape,
   parseAreaLevel,
+  parseInscribedUltimatum,
   parseAtzoatlRooms,
   parseMirroredTablet,
   parseFilledCoffin,
@@ -567,7 +568,8 @@ function parseImbuedGem (section: string[], item: ParsedItem) {
   if (item.category !== ItemCategory.Gem) return 'PARSER_SKIPPED'
 
   if (section.length === 1) {
-    const support = STAT_BY_MATCH_STR(section[0])
+    // The game puts a zero-width space before the support's name.
+    const support = STAT_BY_MATCH_STR(section[0].replace(/\u200b/g, ''))
     if (!support) return 'SECTION_SKIPPED'
 
     item.newMods.push({
@@ -1205,6 +1207,57 @@ function parseAreaLevel (section: string[], item: ParsedItem) {
     return 'SECTION_SKIPPED'
   }
 
+  return 'SECTION_PARSED'
+}
+
+// Challenge, Area Level, Requires Sacrifice and Reward lines, in that order. Only the
+// challenge text needs a localized string: the reward kind follows from what the
+// sacrifice and reward name, which works in every language with item data.
+function parseInscribedUltimatum (section: string[], item: ParsedItem) {
+  if (item.info.refName !== 'Inscribed Ultimatum') return 'PARSER_SKIPPED'
+  if (section.length < 4 || !section[1].startsWith(_$.AREA_LEVEL)) return 'SECTION_SKIPPED'
+
+  const value = (line: string) => line.slice(line.indexOf(': ') + 2)
+  const challengeText = value(section[0])
+  const sacrificeText = value(section[2])
+  const rewardText = value(section[3])
+
+  const quantity = /^(.+) x(\d+)$/.exec(sacrificeText)
+  const sacrificeName = quantity ? quantity[1] : sacrificeText
+  const rewardUnique = ITEM_BY_TRANSLATED('UNIQUE', rewardText)?.[0]
+  const sacrifice = rewardUnique
+    ? ITEM_BY_TRANSLATED('UNIQUE', sacrificeName)?.[0]
+    : ITEM_BY_TRANSLATED('DIVINATION_CARD', sacrificeName)?.[0] ??
+      ITEM_BY_TRANSLATED('ITEM', sacrificeName)?.[0] ??
+      ITEM_BY_TRANSLATED('UNIQUE', sacrificeName)?.[0]
+
+  let reward: UltimatumReward | undefined
+  if (rewardUnique || sacrifice?.namespace === 'UNIQUE') {
+    reward = 'ExchangeUnique'
+  } else if (sacrifice?.namespace === 'DIVINATION_CARD') {
+    reward = 'DoubleDivCards'
+  } else if (sacrifice) {
+    reward = 'DoubleCurrency'
+  } else if (!quantity) {
+    // "Mirrorable, Rare Item" names no item.
+    reward = 'MirrorRare'
+  }
+
+  const challenges = _$.ULTIMATUM_CHALLENGE
+  const challenge = challenges && (Object.keys(challenges) as UltimatumChallenge[])
+    .find(id => challenges[id].toLowerCase() === challengeText.toLowerCase())
+
+  item.areaLevel = Number(value(section[1]))
+  item.ultimatum = {
+    challenge,
+    challengeText,
+    reward,
+    rewardText,
+    sacrifice,
+    sacrificeText,
+    sacrificeQuantity: quantity ? Number(quantity[2]) : 1,
+    rewardUnique
+  }
   return 'SECTION_PARSED'
 }
 

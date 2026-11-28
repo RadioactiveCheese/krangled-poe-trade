@@ -117,6 +117,34 @@ export function createFilters (
     }
     return filters
   }
+  if (item.info.refName === 'Inscribed Ultimatum') {
+    filters.searchExact = {
+      baseType: item.info.name,
+      baseTypeTrade: t(opts, item.info)
+    }
+    if (item.areaLevel) {
+      // Area level sets the trial's difficulty, not its value, so it starts unchecked.
+      filters.areaLevel = {
+        value: item.areaLevel,
+        max: item.areaLevel,
+        disabled: true
+      }
+    }
+    if (item.ultimatum) {
+      const { challenge, challengeText, reward, rewardText, rewardUnique, sacrifice, sacrificeText } = item.ultimatum
+      filters.ultimatum = {
+        challenge: challenge && { value: challenge, text: challengeText, disabled: true },
+        reward: reward && {
+          value: reward,
+          text: rewardText,
+          uniqueTrade: rewardUnique && t(opts, rewardUnique),
+          disabled: false
+        },
+        sacrifice: sacrifice && { nameTrade: t(opts, sacrifice), text: sacrificeText, disabled: false }
+      }
+    }
+    return filters
+  }
   if (item.info.refName === 'Scrying Orb') {
     filters.discriminator = {
       trade: item.info.tradeDisc!

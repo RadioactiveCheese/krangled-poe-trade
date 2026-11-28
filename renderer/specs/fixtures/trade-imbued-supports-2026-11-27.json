@@ -1,0 +1,880 @@
+{
+  "source": "https://www.pathofexile.com/api/trade/data/stats",
+  "entries": [
+    {
+      "id": "imbued.pseudo_built_in_support|1041958248",
+      "text": "Supported by Level 1 Volley",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1049046441",
+      "text": "Supported by Level 1 Faster Projectiles",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1088438448",
+      "text": "Supported by Level 1 Greater Volley",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1089139173",
+      "text": "Supported by Level 1 Cast while Channelling",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|110946631",
+      "text": "Supported by Level 1 Innervate",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|114272251",
+      "text": "Supported by Level 1 Hypothermia",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1181489488",
+      "text": "Supported by Level 1 Minion Life",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1190052435",
+      "text": "Supported by Level 1 Barrage",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1221753837",
+      "text": "Supported by Level 1 Blind",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1235991958",
+      "text": "Supported by Level 1 Rupture",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1236685577",
+      "text": "Supported by Level 1 Mana Leech",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1237276220",
+      "text": "Supported by Level 1 Energy Leech",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1246588902",
+      "text": "Supported by Level 1 Cruelty",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1251682852",
+      "text": "Supported by Level 1 Endurance Charge on Melee Stun",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1255849548",
+      "text": "Supported by Level 1 Faster Casting",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1281012522",
+      "text": "Supported by Level 1 Brutality",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1332031472",
+      "text": "Supported by Level 1 Iron Grip",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1337767102",
+      "text": "Supported by Level 1 Withering Touch",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1342846117",
+      "text": "Supported by Level 1 Spell Totem",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1371874082",
+      "text": "Supported by Level 1 Eternal Blessing",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1452519409",
+      "text": "Supported by Level 1 Diminishment",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1466145569",
+      "text": "Supported by Level 1 Increased Area of Effect",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1496371093",
+      "text": "Supported by Level 1 Blasphemy",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1584251003",
+      "text": "Supported by Level 1 Fork",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1587233226",
+      "text": "Supported by Level 1 Charged Traps",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1591272514",
+      "text": "Supported by Level 1 Sadism",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1597853541",
+      "text": "Supported by Level 1 Swiftbrand",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1660360583",
+      "text": "Supported by Level 1 Cold Penetration",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1666671509",
+      "text": "Supported by Level 1 Elemental Proliferation",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1677409971",
+      "text": "Supported by Level 1 Volatility",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1716224442",
+      "text": "Supported by Level 1 Controlled Destruction",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|172023623",
+      "text": "Supported by Level 1 Fist of War",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1787283513",
+      "text": "Supported by Level 1 Item Rarity",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1796692633",
+      "text": "Supported by Level 1 Intensify",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1826317887",
+      "text": "Supported by Level 1 Trinity",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1826945816",
+      "text": "Supported by Level 1 Added Chaos Damage",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1874477201",
+      "text": "Supported by Level 1 Blastchain Mine",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1887128856",
+      "text": "Supported by Level 1 Archmage",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1892604624",
+      "text": "Supported by Level 1 Generosity",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|191534163",
+      "text": "Supported by Level 1 Increased Critical Damage",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|1961131194",
+      "text": "Supported by Level 1 Overcharge",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|19679479",
+      "text": "Supported by Level 1 Burning Damage",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2003102433",
+      "text": "Supported by Level 1 Knockback",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2007342753",
+      "text": "Supported by Level 1 Cluster Traps",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2011379008",
+      "text": "Supported by Level 1 Cursed Ground",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2067275224",
+      "text": "Supported by Level 1 Arrow Nova",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2069099215",
+      "text": "Supported by Level 1 Bloodlust",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2082748837",
+      "text": "Supported by Level 1 Taxation",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2096466553",
+      "text": "Supported by Level 1 Frigid Bond",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2139519964",
+      "text": "Supported by Level 1 Spellblade",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|21787019",
+      "text": "Supported by Level 1 Summon Phantasm",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2208650143",
+      "text": "Supported by Level 1 Destitution",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2222630080",
+      "text": "Supported by Level 1 Trap and Mine Damage",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|22608709",
+      "text": "Supported by Level 1 Hallow",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2266469129",
+      "text": "Supported by Level 1 Expert Retaliation",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2276372010",
+      "text": "Supported by Level 1 Sacrifice",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2277529223",
+      "text": "Supported by Level 1 Melee Splash",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2290801007",
+      "text": "Supported by Level 1 Swift Affliction",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2300092378",
+      "text": "Supported by Level 1 Chain",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2327564307",
+      "text": "Supported by Level 1 Poverty",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2342654864",
+      "text": "Supported by Level 1 Returning Projectiles",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2368767632",
+      "text": "Supported by Level 1 Added Cold Damage",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2380689033",
+      "text": "Supported by Level 1 Trauma",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2392994107",
+      "text": "Supported by Level 1 Chance to Poison",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2395805465",
+      "text": "Supported by Level 1 Unleash",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2451064053",
+      "text": "Supported by Level 1 Bonechill",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2451084442",
+      "text": "Supported by Level 1 Devour",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2520596918",
+      "text": "Supported by Level 1 Ignite Proliferation",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2533131557",
+      "text": "Supported by Level 1 Critical Strike Affliction",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2554120916",
+      "text": "Supported by Level 1 Added Fire Damage",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2571880157",
+      "text": "Supported by Level 1 Concentrated Effect",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|262345857",
+      "text": "Supported by Level 1 Faster Attacks",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2632782139",
+      "text": "Supported by Level 1 Chance to Flee",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2633900295",
+      "text": "Supported by Level 1 Advanced Traps",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2642139747",
+      "text": "Supported by Level 1 Constriction",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2679148081",
+      "text": "Supported by Level 1 Vicious Projectiles",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2721225790",
+      "text": "Supported by Level 1 Damage on Full Life",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2744614343",
+      "text": "Supported by Level 1 Arcane Surge",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2763365156",
+      "text": "Supported by Level 1 Exemplar",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2811214937",
+      "text": "Supported by Level 1 Life Leech",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2816032231",
+      "text": "Supported by Level 1 Manaforged Arrows",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|282207976",
+      "text": "Supported by Level 1 Inspiration",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2842604691",
+      "text": "Supported by Level 1 Cast when Damage Taken",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2883596469",
+      "text": "Supported by Level 1 Hextouch",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2894953063",
+      "text": "Supported by Level 1 Cast on Death",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2952549466",
+      "text": "Supported by Level 1 Excommunicate",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|2972801927",
+      "text": "Supported by Level 1 Corrupting Cry",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3064536173",
+      "text": "Supported by Level 1 Vile Toxins",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3076322868",
+      "text": "Supported by Level 1 Spell Echo",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3078658653",
+      "text": "Supported by Level 1 Chance to Bleed",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3092222470",
+      "text": "Supported by Level 1 Deadly Ailments",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3106835412",
+      "text": "Supported by Level 1 Power Charge On Critical",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3128644425",
+      "text": "Supported by Level 1 Infused Channelling",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3131076360",
+      "text": "Supported by Level 1 Fresh Meat",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3186808105",
+      "text": "Supported by Level 1 Mediocrity",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|318949620",
+      "text": "Supported by Level 1 Hex Bloom",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3192305202",
+      "text": "Supported by Level 1 Disempower",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3226210172",
+      "text": "Supported by Level 1 Second Wind",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3232085103",
+      "text": "Supported by Level 1 Ice Bite",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3248757232",
+      "text": "Supported by Level 1 Lightning Penetration",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3255037645",
+      "text": "Supported by Level 1 Focused Ballista",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3277324447",
+      "text": "Supported by Level 1 Blessed Call",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3288860132",
+      "text": "Supported by Level 1 Urgent Orders",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3290360578",
+      "text": "Supported by Level 1 Bloodthirst",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3311033584",
+      "text": "Supported by Level 1 Cast when Stunned",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3313613094",
+      "text": "Supported by Level 1 Multiple Traps",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3320826005",
+      "text": "Supported by Level 1 Locus Mine",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3321425861",
+      "text": "Supported by Level 1 Added Lightning Damage",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3322685172",
+      "text": "Supported by Level 1 Minefield",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3345636521",
+      "text": "Supported by Level 1 Nightblade",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3346867338",
+      "text": "Supported by Level 1 Culling Strike",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3356250656",
+      "text": "Supported by Level 1 Additional Accuracy",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|33708788",
+      "text": "Supported by Level 1 Multiple Totems",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3373854464",
+      "text": "Supported by Level 1 Iron Will",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3376396961",
+      "text": "Supported by Level 1 Fire Penetration",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3378399298",
+      "text": "Supported by Level 1 Stun",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3398161162",
+      "text": "Supported by Level 1 Increased Critical Strikes",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3400389576",
+      "text": "Supported by Level 1 Momentum",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3435483009",
+      "text": "Supported by Level 1 Lethargy",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|344293939",
+      "text": "Supported by Level 1 Minion Damage",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3471518268",
+      "text": "Supported by Level 1 Behead",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3488848533",
+      "text": "Supported by Level 1 Combustion",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3498757786",
+      "text": "Supported by Level 1 Controlled Blaze",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3519811388",
+      "text": "Supported by Level 1 Feeding Frenzy",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3520866002",
+      "text": "Supported by Level 1 High-Impact Mine",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3535984827",
+      "text": "Supported by Level 1 Meat Shield",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3582467606",
+      "text": "Supported by Level 1 Cast on Melee Kill",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3626246352",
+      "text": "Supported by Level 1 Melee Physical Damage",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3674002686",
+      "text": "Supported by Level 1 Impotence",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3676897366",
+      "text": "Supported by Level 1 Overexertion",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3719049861",
+      "text": "Supported by Level 1 Mark On Hit",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|379055421",
+      "text": "Supported by Level 1 Ballista Totem",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3802739165",
+      "text": "Supported by Level 1 Spell Cascade",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3849702703",
+      "text": "Supported by Level 1 Elemental Army",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3870057454",
+      "text": "Supported by Level 1 Penance",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3918067187",
+      "text": "Supported by Level 1 Lifetap",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3950169394",
+      "text": "Supported by Level 1 Greater Multiple Projectiles",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3989015253",
+      "text": "Supported by Level 1 Encumbrance",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3990013913",
+      "text": "Supported by Level 1 Cold to Fire",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|3993822420",
+      "text": "Supported by Level 1 Swift Assembly",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|4016557208",
+      "text": "Supported by Level 1 Pierce",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|4029843952",
+      "text": "Supported by Level 1 Arrogance",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|4081846217",
+      "text": "Supported by Level 1 Ruthless",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|4141042029",
+      "text": "Supported by Level 1 Fortify",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|4149556221",
+      "text": "Supported by Level 1 Decay",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|4159921771",
+      "text": "Supported by Level 1 Infernal Legion",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|4224789409",
+      "text": "Supported by Level 1 Less Duration",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|4236314787",
+      "text": "Supported by Level 1 Immolate",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|4269882850",
+      "text": "Supported by Level 1 Ancestral Call",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|48249346",
+      "text": "Supported by Level 1 More Duration",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|538077215",
+      "text": "Supported by Level 1 Void Manipulation",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|544627868",
+      "text": "Supported by Level 1 Focused Channelling",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|578583560",
+      "text": "Supported by Level 1 Impale",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|601991273",
+      "text": "Supported by Level 1 Nullification",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|619178891",
+      "text": "Supported by Level 1 Charged Mines",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|638399684",
+      "text": "Supported by Level 1 Elemental Damage with Attacks",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|646275157",
+      "text": "Supported by Level 1 Multistrike",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|663883068",
+      "text": "Supported by Level 1 Slower Projectiles",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|683812711",
+      "text": "Supported by Level 1 Mirage Archer",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|687583659",
+      "text": "Supported by Level 1 Pulverise",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|695144847",
+      "text": "Supported by Level 1 Minion Speed",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|71388113",
+      "text": "Supported by Level 1 Guardian's Blessing",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|734543851",
+      "text": "Supported by Level 1 Pinpoint",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|763543857",
+      "text": "Supported by Level 1 Life Gain on Hit",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|770262833",
+      "text": "Supported by Level 1 Elemental Focus",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|796460095",
+      "text": "Supported by Level 1 Unbound Ailments",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|817697514",
+      "text": "Supported by Level 1 Physical to Lightning",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|826020281",
+      "text": "Supported by Level 1 Cast On Critical Strike",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|830701349",
+      "text": "Supported by Level 1 Efficacy",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|86502960",
+      "text": "Supported by Level 1 Maim",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|865602902",
+      "text": "Supported by Level 1 Trap",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|89542028",
+      "text": "Supported by Level 1 Multiple Projectiles",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|910857224",
+      "text": "Supported by Level 1 Point Blank",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|947240231",
+      "text": "Supported by Level 1 Close Combat",
+      "type": "imbued"
+    },
+    {
+      "id": "imbued.pseudo_built_in_support|973619657",
+      "text": "Supported by Level 1 Rage",
+      "type": "imbued"
+    }
+  ]
+}

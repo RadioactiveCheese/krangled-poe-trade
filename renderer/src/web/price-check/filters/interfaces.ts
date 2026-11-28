@@ -1,3 +1,4 @@
+import type { UltimatumChallenge, UltimatumReward } from '@/parser/ParsedItem'
 import type { ItemInfluence, ItemCategory } from '@/parser'
 import type { StatCalculated } from '@/parser/modifiers'
 import type { Stat } from '@/assets/data'
@@ -102,6 +103,11 @@ export interface ItemFilters {
     disabled: boolean
   }
   areaLevel?: FilterNumeric
+  ultimatum?: {
+    challenge?: { value: UltimatumChallenge, text: string, disabled: boolean }
+    reward?: { value: UltimatumReward, text: string, uniqueTrade?: string, disabled: boolean }
+    sacrifice?: { nameTrade: string, text: string, disabled: boolean }
+  }
   chartShape?: {
     value: string
     name: string

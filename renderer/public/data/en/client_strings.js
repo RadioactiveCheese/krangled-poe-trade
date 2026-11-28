@@ -20,6 +20,7 @@ export default {
   MAP_MORE_DIVINATION_CARDS: 'More Divination Cards: ',
   MAP_COMPLETION_REWARD: /^Reward: Foil (.*)$/,
   CHART_SHAPE: 'Chart Shape: ',
+  ULTIMATUM_CHALLENGE: { Exterminate: 'Defeat waves of enemies', Survival: 'Survive', Defense: 'Protect the Altar', Conquer: 'Stand in the Stone Circles' },
   CHART_SULPHUR: "Dead Man's Sulphur: ",
   CHART_GOLD: 'Gold Found: ',
   RARITY: 'Rarity: ',

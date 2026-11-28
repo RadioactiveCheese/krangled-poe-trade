@@ -1,0 +1,72 @@
+{
+  "id": "fixture-chronicle",
+  "item": {
+    "w": 1,
+    "h": 1,
+    "name": "",
+    "typeLine": "Chronicle of Atzoatl",
+    "baseType": "Chronicle of Atzoatl",
+    "ilvl": 0,
+    "identified": true,
+    "properties": [
+      {
+        "name": "Area Level",
+        "values": [
+          [
+            "83",
+            0
+          ]
+        ],
+        "displayMode": 0,
+        "type": 34
+      }
+    ],
+    "frameType": 5,
+    "additionalProperties": [
+      {
+        "name": "Open Rooms:",
+        "values": [],
+        "displayMode": 0
+      },
+      {
+        "name": "",
+        "values": [
+          [
+            "Cultivar Chamber (Tier 2)",
+            0
+          ]
+        ],
+        "displayMode": 0,
+        "type": 49
+      },
+      {
+        "name": "Obstructed Rooms:",
+        "values": [],
+        "displayMode": 0
+      },
+      {
+        "name": "",
+        "values": [
+          [
+            "Flame Workshop (Tier 1)",
+            15
+          ]
+        ],
+        "displayMode": 0,
+        "type": 49
+      },
+      {
+        "name": "",
+        "values": [
+          [
+            "Apex of Atzoatl",
+            15
+          ]
+        ],
+        "displayMode": 0,
+        "type": 49
+      }
+    ],
+    "icon": "https://web.poecdn.com/fixture/Chronicle.png"
+  }
+}

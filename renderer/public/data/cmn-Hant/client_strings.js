@@ -20,6 +20,7 @@ export default {
   MAP_MORE_DIVINATION_CARDS: '更多命運卡: ',
   MAP_COMPLETION_REWARD: /^獎勵: 貼模 \((.*)\)$/,
   CHART_SHAPE: '海圖形狀: ',
+  ULTIMATUM_CHALLENGE: { Exterminate: '擊敗數波怪物', Survival: '存活', Defense: '保護神壇', Conquer: '站在符文上' },
   RARITY: '稀有度: ',
   ITEM_CLASS: '物品種類: ',
   ITEM_LEVEL: '物品等級: ',

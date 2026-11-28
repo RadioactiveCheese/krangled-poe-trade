@@ -20,6 +20,7 @@ export default {
   MAP_MORE_DIVINATION_CARDS: 'Больше гадальных карт: ',
   MAP_COMPLETION_REWARD: /^Награда: Особая (.*)$/,
   CHART_SHAPE: 'Форма карты: ',
+  ULTIMATUM_CHALLENGE: { Exterminate: 'Победите волны монстров', Survival: 'Выживите', Defense: 'Защитите Алтарь', Conquer: 'Стойте на каменных кругах' },
   RARITY: 'Редкость: ',
   ITEM_CLASS: 'Класс предмета: ',
   ITEM_LEVEL: 'Уровень предмета: ',
